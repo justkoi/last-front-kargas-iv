@@ -1,0 +1,563 @@
+//============================================================
+//  KARGAS IV - 미션 1 (독립 DC 슬롯 + 터보 트리거)
+//  필요한 Location: P1~P4 Start, P5 Base, P5 Scout, P1~P4 Hunt, Player Destination
+//
+//  타이밍 공식: 12 DC tick = 1초 (터보 트리거 적용 시)
+//    60s = 720틱, 90s = 1080틱, 3min = 2160틱, 4min = 2880틱
+//
+//  DC 슬롯 (Player 8) - 각 시스템 독립 카운터:
+//    Terran Civilian     : 자원 보충 타이머 (720틱 = 60s)
+//    Terran Marine       : AI 재시동 타이머 (2160틱 = 3분)
+//    Terran Firebat      : P1 Hunt 추적 (60틱 = 5s)
+//    Terran Ghost        : P2 Hunt 추적
+//    Terran Medic        : P3 Hunt 추적
+//    Terran SCV          : P4 Hunt 추적
+//    Terran Goliath      : 정찰 오버로드 사이클 (540틱 = 45s)
+//    Terran Wraith       : 늦은 웨이브 쿨다운 (1800틱 = 150s)
+//    Terran Vulture      : 드론 회수 사이클 (240틱)
+//    Terran Battlecruiser: 오버로드 보급 사이클 (360틱 = 30s)
+//    Terran Dropship     : 늦은 웨이브 변형 인덱스 (0/1/2/3)
+//    Protoss Probe       : 정찰 회전 인덱스 (0/1/2/3)
+//    Zerg Drone          : 드론 회수 발동 플래그
+//
+//  주의: Order에서 "Men" 사용 금지 (드론 포함됨) - 전투 유닛 개별 지정
+//============================================================
+
+// 게임 시작 브리핑
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 2000);
+	Display Text Message(Always Display, " ");
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "  작전 코드명: 카르가스 IV");
+	Display Text Message(Always Display, "========== ================================");
+	Set Mission Objectives("미션 1: 북서쪽 저그 군락을 격파하고 착륙지를 확보하라");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 3);
+	Elapsed Time(At most, 5);
+Actions:
+	Display Text Message(Always Display, "[지휘부] 선봉대, 들리는가?");
+	Display Text Message(Always Display, "[지휘부] 행성 카르가스 IV에 강하 완료. 본 작전은 기지 확장이 최우선이다.");
+	Display Text Message(Always Display, "[지휘부] 북서쪽 능선에 저그 군락이 포착됐다. 즉시 제압하라.");
+}
+
+//-----------------------------------------------------------------//
+//  터보 트리거 (Hyper Trigger) - 트리거 사이클을 12cps로 가속
+//  Wait(0) 64개로 매 프레임마다 트리거 평가 → 12 DC tick = 1초 공식 성립
+//-----------------------------------------------------------------//
+
+Trigger("All Players"){
+Conditions:
+	Always();
+Actions:
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Preserve Trigger();
+}
+
+//-----------------------------------------------------------------//
+//  마스터 틱 - 모든 독립 타이머 동시 증가 (12회/초)
+//-----------------------------------------------------------------//
+
+Trigger("All Players"){
+Conditions:
+	Always();
+Actions:
+	Set Deaths("Player 8", "Terran Civilian", Add, 1);
+	Set Deaths("Player 8", "Terran Marine", Add, 1);
+	Set Deaths("Player 8", "Terran Firebat", Add, 1);
+	Set Deaths("Player 8", "Terran Ghost", Add, 1);
+	Set Deaths("Player 8", "Terran Medic", Add, 1);
+	Set Deaths("Player 8", "Terran SCV", Add, 1);
+	Set Deaths("Player 8", "Terran Goliath", Add, 1);
+	Set Deaths("Player 8", "Terran Wraith", Add, 1);
+	Set Deaths("Player 8", "Terran Vulture", Add, 1);
+	Set Deaths("Player 8", "Terran Battlecruiser", Add, 1);
+	Preserve Trigger();
+}
+
+//-----------------------------------------------------------------//
+//  저그 시작 보너스 + AI
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Resources("Player 5", Set To, 3000, ore);
+	Set Resources("Player 5", Set To, 1500, gas);
+}
+
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 5);
+Actions:
+	Run AI Script("ZSUx");
+}
+
+//-----------------------------------------------------------------//
+//  자원 주기 보충 - Terran Civilian DC (60s = 720틱)
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Civilian", At least, 720);
+	Command("Player 5", "Zerg Drone", At least, 1);
+Actions:
+	Set Resources("Player 5", Add, 400, ore);
+	Set Resources("Player 5", Add, 150, gas);
+	Set Deaths("Player 8", "Terran Civilian", Subtract, 720);
+	Preserve Trigger();
+}
+
+//-----------------------------------------------------------------//
+//  오버로드 보급 - Terran Battlecruiser DC (30s = 360틱)
+//  본진 오버로드 < 20기일 때만 1기 추가. 인구 부족 방지하되
+//  플레이어가 처치 후 충격 줄 시간을 위해 30초 간격
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Battlecruiser", At least, 360);
+	Command("Player 5", "Zerg Overlord", At most, 19);
+	Command("Player 5", "Zerg Drone", At least, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Base");
+	Set Deaths("Player 8", "Terran Battlecruiser", Subtract, 360);
+	Preserve Trigger();
+}
+
+//-----------------------------------------------------------------//
+//  오버로드 속도/시야 업그레이드 - 트리거 부여 불가
+//  → SCMDraft Player Settings → Upgrade Settings에서
+//    Player 5의 Pneumatized Carapace, Antennae를 Level 1 + Researched로 설정
+//-----------------------------------------------------------------//
+
+//-----------------------------------------------------------------//
+//  정찰 오버로드 사이클 - Terran Goliath DC (45s = 540틱)
+//  회전 인덱스 - Protoss Probe DC (0~3)
+//-----------------------------------------------------------------//
+
+// Index 0 → P1 Hunt
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Protoss Probe", Set To, 1);
+	Preserve Trigger();
+}
+
+// Index 1 → P2 Hunt
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Protoss Probe", Exactly, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Protoss Probe", Set To, 2);
+	Preserve Trigger();
+}
+
+// Index 2 → P3 Hunt
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Protoss Probe", Exactly, 2);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Protoss Probe", Set To, 3);
+	Preserve Trigger();
+}
+
+// Index 3 → P4 Hunt, 인덱스 리셋
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Protoss Probe", Exactly, 3);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Protoss Probe", Set To, 0);
+	Preserve Trigger();
+}
+
+//-----------------------------------------------------------------//
+//  웨이브 (Wait 제거 / 드론 제외 - 전투 유닛만 Order)
+//-----------------------------------------------------------------//
+
+// 웨이브 1 - 4분 후 (정찰조)
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 240);
+	Command("Player 5", "Zerg Zergling", At most, 20);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Base");
+	Order("Player 5", "Zerg Zergling", "P5 Base", "Player Destination", Patrol);
+}
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 240);
+	Elapsed Time(At most, 245);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Display Text Message(Always Display, "[정찰병] 적 정찰조 포착! 저글링 무리 접근 중!");
+	Display Text Message(Always Display, "[지휘부] 사상자 발생 전에 처리하라. 가벼운 전초전이다.");
+}
+
+// 웨이브 2 - 8분 후
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 480);
+	Command("Player 5", "Zerg Zergling", At most, 25);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 8, "P5 Base");
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Base");
+	Order("Player 5", "Zerg Zergling", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
+}
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 480);
+	Elapsed Time(At most, 485);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Display Text Message(Always Display, "[경보] 두 번째 무리 출현! 히드라리스크 확인!");
+	Display Text Message(Always Display, "[지휘부] 적의 압력이 증가하고 있다. 방어선 점검하라.");
+}
+
+// 웨이브 3 - 11분 후
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 660);
+	Command("Player 5", "Zerg Zergling", At most, 30);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 10, "P5 Base");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Base");
+	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Base");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Order("Player 5", "Zerg Zergling", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Lurker", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
+}
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 660);
+	Elapsed Time(At most, 665);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Display Text Message(Always Display, "[경보 - 코드 옐로우] 저그 본대 진격! 럴커 매복 경고!");
+	Display Text Message(Always Display, "[지휘부] 보이지 않는 적이 더 위험하다. 컴샛으로 탐지하라.");
+}
+
+//-----------------------------------------------------------------//
+//  늦은 웨이브 4종 변형 (15분 후, 150초마다 순환)
+//  Wraith DC = 쿨다운 (1800틱 = 150s)
+//  Dropship DC = 변형 인덱스 (0/1/2/3)
+//
+//  변형 A: 지상 스웜 (저글링/히드라/럴커 대량)
+//  변형 B: 공중 하라스 (뮤탈/스커지)
+//  변형 C: 중장갑 돌파 (울트라/디파일러/히드라)
+//  변형 D: 공성 공중 (가디언/디바우러/뮤탈)
+//-----------------------------------------------------------------//
+
+// 변형 A ? Index 0: 지상 스웜
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 900);
+	Deaths("Player 8", "Terran Wraith", At least, 1800);
+	Deaths("Player 8", "Terran Dropship", Exactly, 0);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 14, "P5 Base");
+	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Base");
+	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Base");
+	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
+	Order("Player 5", "Zerg Zergling", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Lurker", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
+	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 1);
+	Display Text Message(Always Display, "[경보 - 변종 A] 지상 스웜! 럴커 매복 다수!");
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Preserve Trigger();
+}
+
+// 변형 B ? Index 1: 공중 하라스
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 900);
+	Deaths("Player 8", "Terran Wraith", At least, 1800);
+	Deaths("Player 8", "Terran Dropship", Exactly, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Mutalisk", 8, "P5 Base");
+	Create Unit("Player 5", "Zerg Scourge", 6, "P5 Base");
+	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
+	Order("Player 5", "Zerg Mutalisk", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Scourge", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
+	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 2);
+	Display Text Message(Always Display, "[경보 - 변종 B] 공중 무리 출현! 스커지 자폭 경계!");
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Preserve Trigger();
+}
+
+// 변형 C ? Index 2: 중장갑 돌파
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 900);
+	Deaths("Player 8", "Terran Wraith", At least, 1800);
+	Deaths("Player 8", "Terran Dropship", Exactly, 2);
+Actions:
+	Create Unit("Player 5", "Zerg Ultralisk", 3, "P5 Base");
+	Create Unit("Player 5", "Zerg Defiler", 2, "P5 Base");
+	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Base");
+	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
+	Order("Player 5", "Zerg Ultralisk", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Defiler", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
+	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 3);
+	Display Text Message(Always Display, "[경보 - 변종 C] 울트라리스크 진격! 다크스웜 주의!");
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Preserve Trigger();
+}
+
+// 변형 D ? Index 3: 공성 공중, 인덱스 리셋
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 900);
+	Deaths("Player 8", "Terran Wraith", At least, 1800);
+	Deaths("Player 8", "Terran Dropship", Exactly, 3);
+Actions:
+	Create Unit("Player 5", "Zerg Guardian", 5, "P5 Base");
+	Create Unit("Player 5", "Zerg Devourer", 3, "P5 Base");
+	Create Unit("Player 5", "Zerg Mutalisk", 4, "P5 Base");
+	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
+	Order("Player 5", "Zerg Guardian", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Devourer", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
+	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
+	Display Text Message(Always Display, "[경보 - 변종 D] 공성 가디언 편대! 디바우러 호위!");
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Preserve Trigger();
+}
+
+// 첫 진입 안내
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 900);
+	Elapsed Time(At most, 905);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Display Text Message(Always Display, "[경보 - 코드 레드] 저그 군단 총공세 개시!");
+	Display Text Message(Always Display, "[지휘부] 변종 무리가 무한히 밀려온다. 거점을 사수하라!");
+}
+
+//-----------------------------------------------------------------//
+//  동적 건물 추적 - 각 P1~P4 독립 DC (5s = 60틱)
+//  Firebat=P1, Ghost=P2, Medic=P3, SCV=P4
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Command("Player 1", "Buildings", At least, 1);
+	Elapsed Time(At least, 60);
+	Deaths("Player 8", "Terran Firebat", At least, 60);
+Actions:
+	Move Location("Player 1", "Buildings", "Anywhere", "P1 Hunt");
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P1 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran Firebat", Subtract, 60);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Command("Player 2", "Buildings", At least, 1);
+	Elapsed Time(At least, 60);
+	Deaths("Player 8", "Terran Ghost", At least, 60);
+Actions:
+	Move Location("Player 2", "Buildings", "Anywhere", "P2 Hunt");
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P2 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran Ghost", Subtract, 60);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Command("Player 3", "Buildings", At least, 1);
+	Elapsed Time(At least, 60);
+	Deaths("Player 8", "Terran Medic", At least, 60);
+Actions:
+	Move Location("Player 3", "Buildings", "Anywhere", "P3 Hunt");
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P3 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran Medic", Subtract, 60);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Command("Player 4", "Buildings", At least, 1);
+	Elapsed Time(At least, 60);
+	Deaths("Player 8", "Terran SCV", At least, 60);
+Actions:
+	Move Location("Player 4", "Buildings", "Anywhere", "P4 Hunt");
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P4 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran SCV", Subtract, 60);
+	Preserve Trigger();
+}
+
+//-----------------------------------------------------------------//
+//  미션 클리어 / 패배
+//-----------------------------------------------------------------//
+
+Trigger("All Players"){
+Conditions:
+	Command("Foes", "Buildings", At most, 0);
+	Elapsed Time(At least, 30);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 2500);
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "  [미션 1 완료] 착륙지 확보 완료");
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "[지휘부] 첫 거점은 우리 손에 들어왔다. 잘 싸웠다, 선봉대.");
+	Display Text Message(Always Display, "[보상] 전 부대 미네랄 +200");
+	Set Resources("All Players", Add, 200, ore);
+	Wait(5000);
+	Victory();
+}
+
+Trigger("All Players"){
+Conditions:
+	Command("Current Player", "Buildings", At most, 0);
+Actions:
+	Play WAV("sound\\Misc\\PowerOff.wav", 2000);
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "  [작전 실패] 통신 두절");
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "[지휘부] ...선봉대? 응답하라... 응답하라...");
+	Wait(3000);
+	Defeat();
+}

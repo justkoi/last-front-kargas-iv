@@ -1,0 +1,46 @@
+//============================================================
+//  KARGAS IV - Mission 1 Briefing
+//============================================================
+
+Briefing("All Players"){
+	Mission Objectives("미션 1: 북서쪽 저그 군락을 격파하고 착륙지를 확보하라");
+
+	Show Portrait("Terran Marine", 1);
+	Text Message("[기밀 - 코어 통신망 / 카르가스 IV 작전실]", 2500);
+	Wait(2500);
+
+	Display Speaking Portrait(1, 5);
+	Text Message("[해병 사령관 호크] 선봉대, 잘 들어. 우리는 행성 카르가스 IV 궤도에 있다.", 5000);
+	Wait(5000);
+
+	Display Speaking Portrait(1, 6);
+	Text Message("원래 UED 잔당이 점거 중이었지만, 통신 두절 6주째다. 그 사이 뭔가가... 자라났다.", 6000);
+	Wait(6000);
+
+	Display Speaking Portrait(1, 5);
+	Text Message("궤도 스캔 결과: 저그 군락, 정체불명 프로토스 유적, 그리고 변종 생체신호.", 5000);
+	Wait(5000);
+
+	Hide Portrait(1);
+	Wait(500);
+
+	Show Portrait("Terran Ghost", 2);
+	Display Speaking Portrait(2, 5);
+	Text Message("[정보장교 노바] 추정으로는, 누군가 이 행성을 살아있는 실험실로 쓰고 있어요.", 5000);
+	Wait(5000);
+	Hide Portrait(2);
+	Wait(500);
+
+	Show Portrait("Terran Marine", 1);
+	Display Speaking Portrait(1, 5);
+	Text Message("[호크] 첫 임무는 단순하다. 북서쪽 저그 군락을 격파해 강하 지점을 확보하라.", 5000);
+	Wait(5000);
+
+	Display Speaking Portrait(1, 5);
+	Text Message("뒤에 뭐가 더 있는지는... 살아남으면 그때 얘기하지. 행운을 빈다, 선봉대.", 5000);
+	Wait(5000);
+
+	Hide Portrait(1);
+	Text Message("=== 작전 개시 ===", 2000);
+	Wait(2000);
+}

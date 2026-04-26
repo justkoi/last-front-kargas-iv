@@ -1,0 +1,120 @@
+============================================================
+  KARGAS IV - Location 배치 가이드
+  트리거 Import 전에 SCMDraft에서 만들어야 할 영역들
+============================================================
+
+[Location 만드는 법]
+1. SCMDraft 좌측 툴바 -> Location 모드 (사각형 아이콘)
+2. 맵에서 영역을 드래그해서 사각형 만들기
+3. 더블클릭 -> 이름 입력
+4. ⚠️ 이름은 트리거 파일과 정확히 일치해야 함 (대소문자/공백 포함)
+
+============================================================
+  필수 Location 목록 (총 14개)
+============================================================
+
+[본진 영역 - 4개]
+- "P1 Start"   : P1 본진 전체 (start location 포함)
+- "P2 Start"   : P2 본진 전체
+- "P3 Start"   : P3 본진 전체
+- "P4 Start"   : P4 본진 전체
+
+[컴 본진 영역 - 4개]
+- "P5 Base"    : 북서 저그 군락 영역
+- "P6 Base"    : 동부 UED 기지 영역
+- "P7 Base"    : 북동 프로토스 유적 영역
+- "P8 Base"    : 남동 보스 영역
+
+[미션 2 - 난민 호송]
+- "Mission2 Civilians" : 남서쪽 난민 시작 지점 (10명 생성됨)
+- "Mission2 Goal"      : 본진 중앙 (난민 호송 목적지, 본진 영역 안)
+
+[미션 3 - 수정탑 3개]
+- "Crystal A"  : 북동 유적 첫 번째 수정탑 (작은 영역, 5x5 정도)
+- "Crystal B"  : 북동 유적 두 번째 수정탑
+- "Crystal C"  : 북동 유적 세 번째 수정탑
+
+[미션 4 - UED 터미널]
+- "UED Terminal" : 미션4 점령 대상 건물 위치
+
+[유틸리티 - 1개]
+- "Anywhere"   : 맵 전체 (256x256 다 덮음)
+                  ⚠️ 보통 SCMDraft에 기본으로 있음. 없으면 만드세요.
+
+[영웅 등장 위치 - 1개]
+- "Hero Spawn" : 본진 중앙 (선택사항, 트리거에서 사용 안하면 생략 가능)
+
+
+============================================================
+  작업 순서
+============================================================
+
+1. 위 14개 Location 다 만들기 (10~15분)
+2. SCMDraft -> Triggers (Ctrl+T)
+3. File -> Import Text Triggers
+4. KargasIV_Triggers.txt 선택
+5. 에러 없으면 OK!
+
+[자주 발생하는 에러]
+- "Location not found" -> Location 이름 오타 확인
+- "Unit not found" -> 유닛 이름이 영문으로 정확한지 확인
+- "AI Script not found" -> 스크립트 이름 정확한지 확인
+
+
+============================================================
+  추가 필요사항
+============================================================
+
+[Players/Forces 설정]
+- P1-P4 : Human, Force 1 (Vanguard Squad), Allied Victory ON
+- P5-P8 : Computer, Force 2 (Kargas Anomaly)
+- P5: Zerg
+- P6: Terran
+- P7: Protoss
+- P8: Terran (또는 자유 - 어차피 미리 배치한 보스만 사용)
+
+[컴 본진 미리 배치할 유닛/건물]
+P5 (저그):
+  - Hatchery x1, Spawning Pool x1, Hydralisk Den x1
+  - Drone x4, Zergling x6, Hydralisk x2
+
+P6 (UED):
+  - Command Center x1, Barracks x2, Factory x1, Starport x1
+  - Bunker x3 (Marine 4기씩 채움), Missile Turret x4
+  - SCV x6, Marine x8, Siege Tank x2, Wraith x2
+
+P7 (프로토스):
+  - Nexus x1, Gateway x2, Citadel of Adun x1, Templar Archives x1
+  - Photon Cannon x4
+  - Probe x6, Zealot x4, Dragoon x3, Dark Templar x3
+
+P8 (보스):
+  - 건물 X
+  - Hero Torrasque x1 (보스), Hero Aldaris x2
+  - Zergling x4, Hydralisk x4, Zealot x4 (호위)
+
+
+============================================================
+  미션 진행 시스템 (Death Counter 사용)
+============================================================
+
+이 트리거는 "Death Counter"를 스위치 대신 사용합니다.
+"Player 8"의 "Zergling" 카운터로 미션 단계를 추적:
+
+  값 1 : 미션 1 진행중
+  값 2 : 미션 1 진행 (AI 시작 후)
+  값 3 : 미션 1 완료, 미션 2 시작 대기
+  값 4 : 미션 2 진행중
+  값 5 : 미션 2 완료, 미션 3 시작
+  값 6 : 미션 3 진행중
+  값 7 : 미션 3 완료, 미션 4 시작
+  값 8 : 미션 4 진행중
+  값 9 : 미션 4 완료, 미션 5 시작
+  값 10: 미션 5 진행중 (보스전)
+
+⚠️ 디버그 시 트리거 -> Set Deaths로 임의 변경 가능 (테스트 편함)
+
+
+============================================================
+  END
+============================================================

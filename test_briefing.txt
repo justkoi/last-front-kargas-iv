@@ -1,0 +1,4 @@
+Briefing("Player 1"){
+	Wait(1000);
+	Mission Briefing("test text");
+}

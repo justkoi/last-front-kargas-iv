@@ -1,0 +1,6 @@
+Trigger("All Players"){
+Conditions:
+	Always();
+Actions:
+	Display Text Message(Always Display, "test");
+}
