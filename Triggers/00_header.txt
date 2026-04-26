@@ -1,0 +1,25 @@
+//============================================================
+//  KARGAS IV - 미션 1 (독립 DC 슬롯 + 터보 트리거)
+//  필요한 Location: P1~P4 Start, P5 Base, P5 Scout, P1~P4 Hunt, Player Destination
+//
+//  타이밍 공식: 12 DC tick = 1초 (터보 트리거 적용 시)
+//    60s = 720틱, 90s = 1080틱, 3min = 2160틱, 4min = 2880틱
+//
+//  DC 슬롯 (Player 8) - 각 시스템 독립 카운터:
+//    Terran Civilian     : 자원 보충 타이머 (720틱 = 60s)
+//    Terran Marine       : AI 재시동 타이머 (2160틱 = 3분)
+//    Terran Firebat      : P1 Hunt 추적 (60틱 = 5s)
+//    Terran Ghost        : P2 Hunt 추적
+//    Terran Medic        : P3 Hunt 추적
+//    Terran SCV          : P4 Hunt 추적
+//    Terran Goliath      : 정찰 오버로드 사이클 (540틱 = 45s)
+//    Terran Wraith       : 늦은 웨이브 쿨다운 (1800틱 = 150s)
+//    Terran Vulture      : 드론 회수 사이클 (240틱)
+//    Terran Battlecruiser: 오버로드 보급 사이클 (360틱 = 30s)
+//    Terran Dropship     : 늦은 웨이브 변형 인덱스 (0/1/2/3)
+//    Protoss Probe       : 정찰 회전 인덱스 (0/1/2/3)
+//    Zerg Drone          : 드론 회수 발동 플래그
+//
+//  주의: Order에서 "Men" 사용 금지 (드론 포함됨) - 전투 유닛 개별 지정
+//============================================================
+

@@ -1,0 +1,21 @@
+//-----------------------------------------------------------------//
+//  마스터 틱 - 모든 독립 타이머 동시 증가 (12회/초)
+//-----------------------------------------------------------------//
+
+Trigger("All Players"){
+Conditions:
+	Always();
+Actions:
+	Set Deaths("Player 8", "Terran Civilian", Add, 1);
+	Set Deaths("Player 8", "Terran Marine", Add, 1);
+	Set Deaths("Player 8", "Terran Firebat", Add, 1);
+	Set Deaths("Player 8", "Terran Ghost", Add, 1);
+	Set Deaths("Player 8", "Terran Medic", Add, 1);
+	Set Deaths("Player 8", "Terran SCV", Add, 1);
+	Set Deaths("Player 8", "Terran Goliath", Add, 1);
+	Set Deaths("Player 8", "Terran Wraith", Add, 1);
+	Set Deaths("Player 8", "Terran Vulture", Add, 1);
+	Set Deaths("Player 8", "Terran Battlecruiser", Add, 1);
+	Preserve Trigger();
+}
+

@@ -1,0 +1,15 @@
+//-----------------------------------------------------------------//
+//  자원 주기 보충 - Terran Civilian DC (60s = 720틱)
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Civilian", At least, 720);
+	Command("Player 5", "Zerg Drone", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Civilian", Set To, 0);
+	Set Resources("Player 5", Add, 400, ore);
+	Set Resources("Player 5", Add, 150, gas);
+	Preserve Trigger();
+}
+

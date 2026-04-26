@@ -1,0 +1,22 @@
+//-----------------------------------------------------------------//
+//  저그 시작 보너스 + AI (처음엔 미네랄만 캔다)
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Resources("Player 5", Set To, 3000, ore);
+	Set Resources("Player 5", Set To, 1500, gas);
+	Run AI Script At Location("ZARx", "P5 Base");
+
+}
+
+// 여기부터 스크립트 시작
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 360);
+Actions:
+	Run AI Script("ZSUx");
+}
+

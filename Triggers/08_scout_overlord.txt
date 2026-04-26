@@ -1,0 +1,69 @@
+//-----------------------------------------------------------------//
+//  정찰 오버로드 사이클 - Terran Goliath DC (45s = 540틱)
+//  회전 인덱스 - Protoss Probe DC (0~3)
+//-----------------------------------------------------------------//
+
+//한 사이클 돌아가게 세팅
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 175);
+Actions:
+	Set Deaths("Player 8", "Terran Goliath", Set To, 2160);
+}
+
+// Index 0 → P1 Hunt
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Protoss Probe", Set To, 1);
+	Preserve Trigger();
+}
+
+// Index 1 → P2 Hunt
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Protoss Probe", Exactly, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Protoss Probe", Set To, 2);
+	Preserve Trigger();
+}
+
+// Index 2 → P3 Hunt
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Protoss Probe", Exactly, 2);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Protoss Probe", Set To, 3);
+	Preserve Trigger();
+}
+
+// Index 3 → P4 Hunt, 인덱스 리셋
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Protoss Probe", Exactly, 3);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Protoss Probe", Set To, 0);
+	Preserve Trigger();
+}
+

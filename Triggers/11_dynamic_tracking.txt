@@ -1,0 +1,93 @@
+//-----------------------------------------------------------------//
+//  동적 건물 추적 - 각 P1~P4 독립 DC (30s = 360DC)
+//  Firebat=P1, Ghost=P2, Medic=P3, SCV=P4
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Command("Player 1", "Buildings", At least, 1);
+	Elapsed Time(At least, 360);
+	Deaths("Player 8", "Terran Firebat", At least, 360);
+Actions:
+	Move Location("Player 1", "Buildings", "Anywhere", "P1 Hunt");
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P1 Hunt", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P1 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran Firebat",  Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Command("Player 2", "Buildings", At least, 1);
+	Elapsed Time(At least, 360);
+	Deaths("Player 8", "Terran Ghost", At least, 360);
+Actions:
+	Move Location("Player 2", "Buildings", "Anywhere", "P2 Hunt");
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P2 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran Ghost",  Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Command("Player 3", "Buildings", At least, 1);
+	Elapsed Time(At least, 360);
+	Deaths("Player 8", "Terran Medic", At least, 360);
+Actions:
+	Move Location("Player 3", "Buildings", "Anywhere", "P3 Hunt");
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P3 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran Medic", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Command("Player 4", "Buildings", At least, 1);
+	Elapsed Time(At least, 360);
+	Deaths("Player 8", "Terran SCV", At least, 360);
+Actions:
+	Move Location("Player 4", "Buildings", "Anywhere", "P4 Hunt");
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P4 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran SCV",  Set To, 0);
+	Preserve Trigger();
+}
+

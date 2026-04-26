@@ -1,0 +1,17 @@
+//-----------------------------------------------------------------//
+//  오버로드 보급 - Terran Battlecruiser DC (30s = 360틱)
+//  본진 오버로드 < 20기일 때만 1기 추가. 인구 부족 방지하되
+//  플레이어가 처치 후 충격 줄 시간을 위해 30초 간격
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Battlecruiser", At least, 360);
+	Command("Player 5", "Zerg Overlord", At most, 19);
+	Command("Player 5", "Zerg Drone", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Battlecruiser", Set To, 0);
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Base");
+	Preserve Trigger();
+}
+

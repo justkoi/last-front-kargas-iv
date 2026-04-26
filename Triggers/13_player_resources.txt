@@ -1,0 +1,12 @@
+//-----------------------------------------------------------------//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Elapsed Time(At least, 0);
+
+Actions:
+	Set Resources("Current Player", Add, 50, ore);
+}
+
+//-----------------------------------------------------------------//
+

@@ -1,0 +1,34 @@
+//-----------------------------------------------------------------//
+//  미션 클리어 / 패배
+//-----------------------------------------------------------------//
+
+Trigger("All Players"){
+Conditions:
+	Command("Foes", "Buildings", At most, 0);
+	Elapsed Time(At least, 30);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 2500);
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "  [미션 1 완료] 착륙지 확보 완료");
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "[지휘부] 첫 거점은 우리 손에 들어왔다. 잘 싸웠다, 선봉대.");
+	Display Text Message(Always Display, "[보상] 전 부대 미네랄 +200");
+	Set Resources("All Players", Add, 200, ore);
+	Wait(5000);
+	Victory();
+}
+
+Trigger("All Players"){
+Conditions:
+	Command("Current Player", "Buildings", At most, 0);
+Actions:
+	Play WAV("sound\\Misc\\PowerOff.wav", 2000);
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "  [작전 실패] 통신 두절");
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "[지휘부] ...선봉대? 응답하라... 응답하라...");
+	Wait(3000);
+	Defeat();
+}
+
+

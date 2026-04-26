@@ -1,0 +1,116 @@
+//-----------------------------------------------------------------//
+//  늦은 웨이브 4종 변형 (15분 후, 150초마다 순환)
+//  Wraith DC = 쿨다운 (1800틱 = 150s)
+//  Dropship DC = 변형 인덱스 (0/1/2/3)
+//
+//  변형 A: 지상 스웜 (저글링/히드라/럴커 대량)
+//  변형 B: 공중 하라스 (뮤탈/스커지)
+//  변형 C: 중장갑 돌파 (울트라/디파일러/히드라)
+//  변형 D: 공성 공중 (가디언/디바우러/뮤탈)
+//-----------------------------------------------------------------//
+
+// 변형 데스카운트 세팅 - 변종 1회 순회가능하게 7200
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 895);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Set To, 7200);
+}
+
+// 변형 A — Index 0: 지상 스웜
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 900);
+	Deaths("Player 8", "Terran Wraith", At least, 1800);
+	Deaths("Player 8", "Terran Dropship", Exactly, 0);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 24, "P5 Base");
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Base");
+	Create Unit("Player 5", "Zerg Lurker", 4, "P5 Base");
+	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
+	Order("Player 5", "Zerg Zergling", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Lurker", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
+	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 1);
+	Display Text Message(Always Display, "[경보 - 변종 A] 지상 스웜! 럴커 매복 다수!");
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Preserve Trigger();
+}
+
+// 변형 B — Index 1: 공중 하라스
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 900);
+	Deaths("Player 8", "Terran Wraith", At least, 1800);
+	Deaths("Player 8", "Terran Dropship", Exactly, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Mutalisk", 12, "P5 Base");
+	Create Unit("Player 5", "Zerg Scourge", 8, "P5 Base");
+	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
+	Order("Player 5", "Zerg Mutalisk", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Scourge", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
+	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 2);
+	Display Text Message(Always Display, "[경보 - 변종 B] 공중 무리 출현! 스커지 자폭 경계!");
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Preserve Trigger();
+}
+
+// 변형 C — Index 2: 중장갑 돌파
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 900);
+	Deaths("Player 8", "Terran Wraith", At least, 1800);
+	Deaths("Player 8", "Terran Dropship", Exactly, 2);
+Actions:
+	Create Unit("Player 5", "Zerg Ultralisk", 3, "P5 Base");
+	Create Unit with Properties("Player 5", "Zerg Defiler", 2, "P5 Base", 1);
+	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Base");
+	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
+	Order("Player 5", "Zerg Ultralisk", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Defiler", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
+	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 3);
+	Display Text Message(Always Display, "[경보 - 변종 C] 울트라리스크 진격! 다크스웜 주의!");
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Preserve Trigger();
+}
+
+// 변형 D — Index 3: 공성 공중, 인덱스 리셋
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 900);
+	Deaths("Player 8", "Terran Wraith", At least, 1800);
+	Deaths("Player 8", "Terran Dropship", Exactly, 3);
+Actions:
+	Create Unit("Player 5", "Zerg Guardian", 5, "P5 Base");
+	Create Unit("Player 5", "Zerg Devourer", 3, "P5 Base");
+	Create Unit("Player 5", "Zerg Mutalisk", 4, "P5 Base");
+	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
+	Order("Player 5", "Zerg Guardian", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Devourer", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
+	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
+	Display Text Message(Always Display, "[경보 - 변종 D] 공성 가디언 편대! 디바우러 호위!");
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Preserve Trigger();
+}
+
+// 첫 진입 안내
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 900);
+	Elapsed Time(At most, 905);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Display Text Message(Always Display, "[경보 - 코드 레드] 저그 군단 총공세 개시!");
+	Display Text Message(Always Display, "[지휘부] 변종 무리가 무한히 밀려온다. 거점을 사수하라!");
+}
+

@@ -1,0 +1,23 @@
+// 게임 시작 브리핑
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 2000);
+	Display Text Message(Always Display, " ");
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "  작전 코드명: 카르가스 IV");
+	Display Text Message(Always Display, "========== ================================");
+	Set Mission Objectives("미션 1: 북서쪽 저그 군락을 격파하고 착륙지를 확보하라");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 3);
+	Elapsed Time(At most, 5);
+Actions:
+	Display Text Message(Always Display, "[지휘부] 선봉대, 들리는가?");
+	Display Text Message(Always Display, "[지휘부] 행성 카르가스 IV에 강하 완료. 본 작전은 기지 확장이 최우선이다.");
+	Display Text Message(Always Display, "[지휘부] 북서쪽 능선에 저그 군락이 포착됐다. 즉시 제압하라.");
+}
+
