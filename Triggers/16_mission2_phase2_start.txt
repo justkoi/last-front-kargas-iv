@@ -1,0 +1,57 @@
+//-----------------------------------------------------------------//
+//  미션 2 - 페이즈 2 진입 (Valkyrie = 3, Vulture = 0 리셋 직후)
+//  알림 패키지: Countdown Timer 15분, Minimap Ping, Center View, Beacon, 경고 메시지
+//  세트피스 적 사전 배치 (P5 Lab 위치)
+//-----------------------------------------------------------------//
+
+// 페이즈2 시작 1회 - 알림 패키지 + 세트피스 스폰
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 2500);
+	Set Mission Objectives("미션 2 [페이즈 2]: 비콘에 진입해 거점 점령 (P6 방어선 돌파)");
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "  [페이즈 2] 거점 진입 작전");
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "[노바] 신호원 좌표 확정. 북쪽 중앙 폐기지입니다.");
+	Display Text Message(Always Display, "[호크] 15분 내로 진입한다. 늦어지면 변종 무리가 본진을 친다.");
+	Set Countdown Timer(Set To, 900);
+	Minimap Ping("P5 Lab Beacon");
+}
+
+// 세트피스 적 스폰 - 페이즈2 시작 시 P5 Lab에 P6 변종 무리 1회
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+Actions:
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P5 Lab");
+	Create Unit("Player 6", "Zerg Lurker", 4, "P5 Lab");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P5 Lab");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P5 Lab", 1);
+	Create Unit("Player 6", "Infested Terran", 6, "P5 Lab");
+	Create Unit("Player 6", "Zerg Sunken Colony", 3, "P5 Lab");
+	Create Unit("Player 6", "Zerg Spore Colony", 2, "P5 Lab");
+}
+
+// Minimap Ping 30초마다 반복 - Civilian DC (360틱 = 30s)
+// 페이즈2 시작 시 DC 0 리셋 (Civilian은 미션1 자원보충용이지만 미션1 끝나면 자유)
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+Actions:
+	Set Deaths("Player 8", "Terran Civilian", Set To, 0);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Countdown Timer(At least, 1);
+	Deaths("Player 8", "Terran Civilian", At least, 360);
+Actions:
+	Set Deaths("Player 8", "Terran Civilian", Set To, 0);
+	Minimap Ping("P5 Lab Beacon");
+	Preserve Trigger();
+}
+

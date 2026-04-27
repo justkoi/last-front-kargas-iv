@@ -1,0 +1,41 @@
+//-----------------------------------------------------------------//
+//  미션 2 - 페이즈 1: 정비 (300초)
+//  Valkyrie = 2 단계. Vulture DC로 경과 측정 (3600 = 300s)
+//-----------------------------------------------------------------//
+
+// 페이즈1 시작 브리핑 (Valkyrie 2 진입 직후 1회)
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+Actions:
+	Set Mission Objectives("미션 2: 통신 두절의 진실 - [페이즈 1] 정비 (300초)");
+	Display Text Message(Always Display, " ");
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "  [미션 2 개시] 통신 두절의 진실");
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "[노바] 사령관, 북쪽 중앙에서 UED 코드 신호 감지.");
+	Display Text Message(Always Display, "[노바] 살아있는 누군가가 보내고 있어요. 잔당 생존자일 수 있습니다.");
+	Display Text Message(Always Display, "[호크] 잔당 구조다. 정비하고 즉시 출발한다.");
+	Display Text Message(Always Display, "[호크] 정비 시간 5분. 병력 재편하고 보급 점검하라.");
+	Set Countdown Timer(Set To, 300);
+}
+
+// 페이즈1 150초 경과 - 중간 알림
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Countdown Timer(At most, 120);
+Actions:
+	Display Text Message(Always Display, "[호크] 정비 3분 경과. 2분 남았다.");
+}
+
+// 페이즈1 종료 - 페이즈2 진입 (Valkyrie 2→3, Vulture 0 리셋)
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Countdown Timer(At most, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Valkyrie", Set To, 3);
+	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
+}
+

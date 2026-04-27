@@ -1,0 +1,52 @@
+//-----------------------------------------------------------------//
+//  미션 2 페이즈 2 - 거점 점령 판정 / 클리어
+//  P5 Lab 안에 P5 적군 0 + 플레이어 군용 유닛 ≥ 1 → 점령
+//  점령 시: Countdown Pause, 침투 중단, Valkyrie 3→4, 카르츠 메시지
+//-----------------------------------------------------------------//
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Zealot", At least, 5);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 2500);
+	Pause Timer();
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "  [거점 점령] 폐기지 확보 완료");
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "[노바] 단말기 회수 중... 사령관, 이건...");
+	Display Text Message(Always Display, "[노바] UED 잔당이 보낸 신호가 아니에요. 자동 송출 미끼였어요.");
+	Display Text Message(Always Display, "[노바] 누군가 우리를 일부러 끌어들였습니다.");
+	Set Deaths("Player 8", "Terran Valkyrie", Set To, 4);
+	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
+}
+
+// 카르츠의 사전 녹화 메시지 (점령 5초 후)
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
+	Deaths("Player 8", "Terran Vulture", At least, 60);
+	Deaths("Player 8", "Terran Vulture", At most, 84);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Display Text Message(Always Display, "[?? - 사전 녹화] 축하한다, 선봉대.");
+	Display Text Message(Always Display, "[??] 너희는 늦었다. 그리고 너희 존재가 내 다음 데이터다.");
+	Display Text Message(Always Display, "[노바] ...박사 셀렌 카르츠. 도미니언 출신 변종 연구자.");
+	Display Text Message(Always Display, "[노바] 단말기에 프로토스 유적 좌표 - 북서쪽. 카운트다운이 걸려있어요.");
+	Display Text Message(Always Display, "[호크] 다음 좌표로 이동한다. 미션 3 - 마지막 보루.");
+	Set Mission Objectives("미션 2 완료. 다음 작전 좌표 잠금 해제: 북서쪽 프로토스 유적");
+}
+
+// 미션 2 완료 - 임시 Victory (미션 3 작성 전까지)
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
+	Deaths("Player 8", "Terran Vulture", At least, 180);
+Actions:
+	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "  [미션 2 완료] - 미션 3 작성 예정");
+	Display Text Message(Always Display, "==========================================");
+	Wait(1000);
+	Victory();
+}
+

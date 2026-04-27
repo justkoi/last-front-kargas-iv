@@ -6,6 +6,7 @@
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 240);
+	Command("Player 5", "Buildings", At least, 1);
 Actions:
 	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Base");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
@@ -25,6 +26,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 480);
+	Command("Player 5", "Buildings", At least, 1);
 Actions:
 	Create Unit("Player 5", "Zerg Zergling", 12, "P5 Base");
 	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Base");
@@ -46,6 +48,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 660);
+	Command("Player 5", "Buildings", At least, 1);
 Actions:
 	Create Unit("Player 5", "Zerg Zergling", 20, "P5 Base");
 	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Base");

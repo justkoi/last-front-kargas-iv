@@ -18,7 +18,7 @@ Conditions:
 	Deaths("Player 8", "Terran Goliath", At least, 540);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
 Actions:
-	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "P1 Hunt", Move);
 	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
 	Set Deaths("Player 8", "Protoss Probe", Set To, 1);
@@ -32,7 +32,7 @@ Conditions:
 	Deaths("Player 8", "Terran Goliath", At least, 540);
 	Deaths("Player 8", "Protoss Probe", Exactly, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "P2 Hunt", Move);
 	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
 	Set Deaths("Player 8", "Protoss Probe", Set To, 2);
@@ -46,7 +46,7 @@ Conditions:
 	Deaths("Player 8", "Terran Goliath", At least, 540);
 	Deaths("Player 8", "Protoss Probe", Exactly, 2);
 Actions:
-	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "P3 Hunt", Move);
 	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
 	Set Deaths("Player 8", "Protoss Probe", Set To, 3);
@@ -60,7 +60,7 @@ Conditions:
 	Deaths("Player 8", "Terran Goliath", At least, 540);
 	Deaths("Player 8", "Protoss Probe", Exactly, 3);
 Actions:
-	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "P4 Hunt", Move);
 	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
 	Set Deaths("Player 8", "Protoss Probe", Set To, 0);

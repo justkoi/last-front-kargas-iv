@@ -1,0 +1,49 @@
+//-----------------------------------------------------------------//
+//  미션 2 페이즈 2 - 단계적 경고 메시지
+//  Countdown Timer 잔여시간 기준. 각 메시지 1회만 발동(시간창 좁게)
+//-----------------------------------------------------------------//
+
+// 4분 잔여
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Countdown Timer(At most, 240);
+	Countdown Timer(At least, 236);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Display Text Message(Always Display, "[노바] 변종 신호 증가 중. 서두르세요.");
+}
+
+// 3분 잔여
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Countdown Timer(At most, 180);
+	Countdown Timer(At least, 176);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Display Text Message(Always Display, "[호크] 3분 남았다. 본진 방어선 약해지고 있다.");
+}
+
+// 2분 잔여 - 침투 임박 경고
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Countdown Timer(At most, 120);
+	Countdown Timer(At least, 116);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Display Text Message(Always Display, "[경보] 본진 침투 임박! 즉시 진입하라!");
+}
+
+// 1분 잔여
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Countdown Timer(At most, 60);
+	Countdown Timer(At least, 56);
+Actions:
+	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Display Text Message(Always Display, "[노바] 1분! 1분만 더 늦으면 손쓸 수 없습니다!");
+}
+
