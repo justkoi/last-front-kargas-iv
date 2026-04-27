@@ -1,11 +1,12 @@
 //-----------------------------------------------------------------//
-//  미션 2 페이즈 2 - 비콘 점령 메커니즘 + 변종 침투 (P6)
+//  미션 2 페이즈 2 - 비콘 점령 메커니즘 + 반복 침투 (P6)
 //  [점령] 비콘 진입 → 타이머 영구정지, 60초 쿨다운마다 P6 반격조 스폰,
 //         반격 1회당 점령도 +20%, 5회 = 100% → 미션2 클리어
 //         (in-fiction: 단말기 데이터 추출, 5단계 진행률)
-//  [침투] 타이머 진행 중 4개 마일스톤 1회성 침투 (점령 전에만 발동),
-//         타이머 0 + 점령 미시작 시 반복 침투 플래그 ON,
-//         비콘 진입 시 반복 플래그 OFF
+//  [반복 침투] 타이머 0 + 점령 미시작 시 반복 침투 플래그 ON,
+//              비콘 진입 시 반복 플래그 OFF
+//
+//  마일스톤 1회성 침투는 17b_milestone_infiltration.txt에 분리됨.
 //
 //  Protoss Probe DC   : 점령 시작 플래그 (0=미시작, 1=시작됨)
 //  Protoss Zealot DC  : 점령 단계 (0~5)
@@ -32,7 +33,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
 	Bring("Foes", "Men", "P5 Lab Beacon", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 2000);
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Pause Timer();
 	Display Text Message(Always Display, "[신호원 도달] 폐기지 단말기 확보.");
 	Display Text Message(Always Display, "[노바] 단말기 데이터 추출 시작. 약 5분 걸려요.");
@@ -52,7 +53,7 @@ Conditions:
 	Deaths("Player 8", "Terran Wraith", At least, 720);
 	Bring("Foes", "Men", "P5 Lab Beacon", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
 	Set Deaths("Player 8", "Protoss Zealot", Add, 1);
 	Create Unit("Player 6", "Zerg Zergling", 8, "P6 South");
@@ -96,153 +97,6 @@ Actions:
 }
 
 //-----------------------------------------------------------------//
-//  마일스톤 1회성 침투 - 타이머 진행 중 4회. 점령 시작 전에만 발동.
-//  (in-fiction: 적이 우리 이동을 감지, 본진을 분산 공격)
-//  플레이어가 충분히 성장한 시점이라 유의미한 압박이 되도록 구성.
-//-----------------------------------------------------------------//
-
-// 12분 잔여 (CT ≤ 720)
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 720);
-	Countdown Timer(At least, 716);
-Actions:
-	Create Unit("Player 6", "Zerg Zergling", 8, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P4 Hunt");
-}
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 720);
-	Countdown Timer(At least, 716);
-Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[침투] 변종 1차 본진 침투!");
-	Display Text Message(Always Display, "[노바] 사령관, 본진 외곽에 변종 다수. 우리 이동을 감지한 것 같아요.");
-	Display Text Message(Always Display, "[호크] 분산하지 마라. 진군 속도 유지한다.");
-}
-
-// 9분 잔여 (CT ≤ 540)
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 540);
-	Countdown Timer(At least, 536);
-Actions:
-	Create Unit("Player 6", "Zerg Zergling", 10, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 10, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 10, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 10, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 6, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 6, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 6, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 6, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 2, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 2, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 2, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 2, "P4 Hunt");
-}
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 540);
-	Countdown Timer(At least, 536);
-Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[침투] 변종 2차 본진 침투! 럴커 동반!");
-	Display Text Message(Always Display, "[노바] 럴커 매복 신호. 적이 우리 패턴에 적응하고 있어요.");
-	Display Text Message(Always Display, "[호크] 본진 방어대, 컴샛으로 탐지선 유지하라.");
-}
-
-// 6분 잔여 (CT ≤ 360)
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 360);
-	Countdown Timer(At least, 356);
-Actions:
-	Create Unit("Player 6", "Zerg Zergling", 12, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 12, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 12, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 12, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 3, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 3, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 3, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 3, "P4 Hunt");
-	Create Unit("Player 6", "Infested Terran", 4, "P1 Hunt");
-	Create Unit("Player 6", "Infested Terran", 4, "P2 Hunt");
-	Create Unit("Player 6", "Infested Terran", 4, "P3 Hunt");
-	Create Unit("Player 6", "Infested Terran", 4, "P4 Hunt");
-}
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 360);
-	Countdown Timer(At least, 356);
-Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[침투] 변종 3차 본진 침투! 인페스티드 동반!");
-	Display Text Message(Always Display, "[노바] 인페스티드 자폭형이에요. 본진 코앞입니다.");
-	Display Text Message(Always Display, "[호크] 자살돌격이군. 거리 두고 처리해라. 절대 들이지 마.");
-}
-
-// 3분 잔여 (CT ≤ 180) - 울트라 동반
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 180);
-	Countdown Timer(At least, 176);
-Actions:
-	Create Unit("Player 6", "Zerg Zergling", 14, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 14, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 14, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 14, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 4, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 4, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 4, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 4, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P4 Hunt");
-}
-
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 180);
-	Countdown Timer(At least, 176);
-Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[비상 침투] 변종 4차 본진 대공세! 울트라 동반!");
-	Display Text Message(Always Display, "[노바] 울트라리스크 신호! 지능형 패턴이에요. 누가 지휘하고 있어요!");
-	Display Text Message(Always Display, "[호크] ...단순한 변종이 아니야. 누가 우리를 갖고 노는 거다.");
-}
-
-//-----------------------------------------------------------------//
 //  타이머 만료 → 반복 침투 플래그 ON (점령 미시작 + CT 0 + Dropship 0)
 //-----------------------------------------------------------------//
 
@@ -253,7 +107,7 @@ Conditions:
 	Deaths("Player 8", "Terran Dropship", Exactly, 0);
 	Countdown Timer(At most, 0);
 Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "[비상] 시간 초과! 변종이 본진을 끊임없이 노립니다.");
 	Display Text Message(Always Display, "[노바] 이 패턴은 신호원에 도달해야 멈춰요. 더 늦으면 본진을 잃어요.");
 	Set Deaths("Player 8", "Terran Dropship", Set To, 1);
@@ -272,7 +126,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
 	Deaths("Player 8", "Terran Wraith", At least, 720);
 Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
 	Display Text Message(Always Display, "[반복 침투] 변종 본진 공격!");
 	Display Text Message(Always Display, "[노바] 또 들어와요. 신호원에 닿기 전엔 멈추지 않아요.");

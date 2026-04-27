@@ -9,7 +9,7 @@ Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 2500);
+	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Set Mission Objectives("미션 2 [페이즈 2]: 신호원 폐기지 진입 (15분 내 도달)");
 	Display Text Message(Always Display, "==========================================");
 	Display Text Message(Always Display, "  [페이즈 2] 신호원 추적");

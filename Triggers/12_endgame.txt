@@ -13,7 +13,7 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 2);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
-	Play WAV("sound\\Misc\\Bell.wav", 2500);
+	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Display Text Message(Always Display, "==========================================");
 	Display Text Message(Always Display, "  [미션 1 완료] 착륙지 확보 완료");
 	Display Text Message(Always Display, "==========================================");
@@ -28,13 +28,13 @@ Actions:
 //  Valkyrie ≥ 1 (게임 시작 후) + Elapsed Time 가드(전환 보호)
 //-----------------------------------------------------------------//
 
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Command("Current Player", "Buildings", At most, 0);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Elapsed Time(At least, 60);
 Actions:
-	Play WAV("sound\\Misc\\PowerOff.wav", 2000);
+	Play WAV("sound\\Misc\\OutOfGas.wav", 2000);
 	Display Text Message(Always Display, "==========================================");
 	Display Text Message(Always Display, "  [작전 실패] 통신 두절");
 	Display Text Message(Always Display, "==========================================");

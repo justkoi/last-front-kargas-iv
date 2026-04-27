@@ -11,7 +11,7 @@ Conditions:
 	Countdown Timer(At most, 240);
 	Countdown Timer(At least, 236);
 Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "[노바] 진입로 차단 임박. 서두르세요, 사령관.");
 }
 
@@ -22,7 +22,7 @@ Conditions:
 	Countdown Timer(At most, 180);
 	Countdown Timer(At least, 176);
 Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "[호크] 3분. 본진 방어대도 한계에 가까워지고 있다.");
 }
 
@@ -33,7 +33,7 @@ Conditions:
 	Countdown Timer(At most, 120);
 	Countdown Timer(At least, 116);
 Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "[경보] 변종 압력 한계 돌파! 진입 안 하면 본진 무너진다!");
 }
 
@@ -44,7 +44,7 @@ Conditions:
 	Countdown Timer(At most, 60);
 	Countdown Timer(At least, 56);
 Actions:
-	Play WAV("sound\\Misc\\Bell.wav", 1500);
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "[노바] 1분! 지금 도달 못 하면 손쓸 수 없어요!");
 }
 
