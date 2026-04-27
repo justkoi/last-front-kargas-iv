@@ -158,7 +158,7 @@ Actions:
 	Set Resources("Player 5", Set To, 3000, ore);
 	Set Resources("Player 5", Set To, 1500, gas);
 	Run AI Script At Location("ZARx", "P5 Base");
-	Set Deaths("Player 8", "Terran Valkyrie", Set To, 2); //테스트용
+	//Set Deaths("Player 8", "Terran Valkyrie", Set To, 2); //테스트용
 }
 
 // 여기부터 스크립트 시작
@@ -293,7 +293,6 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Elapsed Time(At least, 240);
-	Elapsed Time(At most, 245);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
 	Display Text Message(Always Display, "[정찰병] 적 정찰조 포착! 저글링 무리 접근 중!");
@@ -315,11 +314,10 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Elapsed Time(At least, 480);
-	Elapsed Time(At most, 485);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
 	Display Text Message(Always Display, "[경보] 두 번째 무리 출현! 히드라리스크 확인!");
-	Display Text Message(Always Display, "[지휘부] 적의 압력이 증가하고 있다. 방어선 점검하라.");
+	Display Text Message(Always Display, "[지휘부] 적의 압력이 증가하고 있다. 방어선을 점검하라.");
 }
 
 // 웨이브 3 - 11분 후
@@ -340,7 +338,6 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Elapsed Time(At least, 660);
-	Elapsed Time(At most, 665);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
 	Display Text Message(Always Display, "[경보 - 코드 옐로우] 저그 본대 진격! 럴커 매복 경고!");
@@ -650,15 +647,16 @@ Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 Actions:
-	Set Mission Objectives("미션 2: 통신 두절의 진실 - [페이즈 1] 정비 (300초)");
+	Set Mission Objectives("미션 2: 통신 두절의 진실");
 	Display Text Message(Always Display, " ");
 	Display Text Message(Always Display, "==========================================");
 	Display Text Message(Always Display, "  [미션 2 개시] 통신 두절의 진실");
 	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "[노바] 사령관, 북쪽 중앙에서 UED 코드 신호 감지.");
-	Display Text Message(Always Display, "[노바] 살아있는 누군가가 보내고 있어요. 잔당 생존자일 수 있습니다.");
-	Display Text Message(Always Display, "[호크] 잔당 구조다. 정비하고 즉시 출발한다.");
-	Display Text Message(Always Display, "[호크] 정비 시간 5분. 병력 재편하고 보급 점검하라.");
+	Display Text Message(Always Display, "[노바] 사령관, 북쪽 중앙에서 UED 암호 신호 감지.");
+	Display Text Message(Always Display, "[노바] 그런데 패턴이 이상해요. 정확히 7.3초 주기로 반복돼요.");
+	Display Text Message(Always Display, "[노바] 살아있는 송신자가 아닐 수 있습니다. 자동 송출일 가능성이 높아요.");
+	Display Text Message(Always Display, "[호크] 함정일 수도 있다는 거군. 그래도 출처는 봐야 한다.");
+	Display Text Message(Always Display, "[호크] 정비 5분. 본진 보강하고 진군 준비해라.");
 	Set Countdown Timer(Set To, 300);
 }
 
@@ -693,12 +691,13 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 2500);
-	Set Mission Objectives("미션 2 [페이즈 2]: 비콘에 진입해 거점 점령 (P6 방어선 돌파)");
+	Set Mission Objectives("미션 2 [페이즈 2]: 신호원 폐기지 진입 (15분 내 도달)");
 	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "  [페이즈 2] 거점 진입 작전");
+	Display Text Message(Always Display, "  [페이즈 2] 신호원 추적");
 	Display Text Message(Always Display, "==========================================");
 	Display Text Message(Always Display, "[노바] 신호원 좌표 확정. 북쪽 중앙 폐기지입니다.");
-	Display Text Message(Always Display, "[호크] 15분 내로 진입한다. 늦어지면 변종 무리가 본진을 친다.");
+	Display Text Message(Always Display, "[노바] 주변 변종 활동이 증가하고 있어요. 시간이 지날수록 진입로가 막힙니다.");
+	Display Text Message(Always Display, "[호크] 15분이다. 그 안에 신호원에 도달한다. 본진은 최소 인원으로 사수해라.");
 	Set Countdown Timer(Set To, 900);
 	Minimap Ping("P5 Lab Beacon");
 }
@@ -741,6 +740,7 @@ Actions:
 //-----------------------------------------------------------------//
 //  미션 2 페이즈 2 - 단계적 경고 메시지
 //  Countdown Timer 잔여시간 기준. 각 메시지 1회만 발동(시간창 좁게)
+//  점령 시작 후엔 타이머가 영구정지되므로 자동으로 침묵
 //-----------------------------------------------------------------//
 
 // 4분 잔여
@@ -751,7 +751,7 @@ Conditions:
 	Countdown Timer(At least, 236);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[노바] 변종 신호 증가 중. 서두르세요.");
+	Display Text Message(Always Display, "[노바] 진입로 차단 임박. 서두르세요, 사령관.");
 }
 
 // 3분 잔여
@@ -762,7 +762,7 @@ Conditions:
 	Countdown Timer(At least, 176);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[호크] 3분 남았다. 본진 방어선 약해지고 있다.");
+	Display Text Message(Always Display, "[호크] 3분. 본진 방어대도 한계에 가까워지고 있다.");
 }
 
 // 2분 잔여 - 침투 임박 경고
@@ -773,7 +773,7 @@ Conditions:
 	Countdown Timer(At least, 116);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[경보] 본진 침투 임박! 즉시 진입하라!");
+	Display Text Message(Always Display, "[경보] 변종 압력 한계 돌파! 진입 안 하면 본진 무너진다!");
 }
 
 // 1분 잔여
@@ -784,13 +784,14 @@ Conditions:
 	Countdown Timer(At least, 56);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[노바] 1분! 1분만 더 늦으면 손쓸 수 없습니다!");
+	Display Text Message(Always Display, "[노바] 1분! 지금 도달 못 하면 손쓸 수 없어요!");
 }
 
 //-----------------------------------------------------------------//
 //  미션 2 페이즈 2 - 비콘 점령 메커니즘 + 변종 침투 (P6)
 //  [점령] 비콘 진입 → 타이머 영구정지, 60초 쿨다운마다 P6 반격조 스폰,
 //         반격 1회당 점령도 +20%, 5회 = 100% → 미션2 클리어
+//         (in-fiction: 단말기 데이터 추출, 5단계 진행률)
 //  [침투] 타이머 진행 중 4개 마일스톤 1회성 침투 (점령 전에만 발동),
 //         타이머 0 + 점령 미시작 시 반복 침투 플래그 ON,
 //         비콘 진입 시 반복 플래그 OFF
@@ -813,7 +814,7 @@ Actions:
 	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
 }
 
-// 첫 비콘 진입 - 타이머 영구 정지 + 점령 절차 개시 + 반복 침투 OFF
+// 첫 비콘 진입 - 타이머 영구 정지 + 데이터 추출 개시 + 반복 침투 OFF
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -822,9 +823,10 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 2000);
 	Pause Timer();
-	Display Text Message(Always Display, "[점령 시작] 비콘 확보! 거점 점령 절차 개시.");
-	Display Text Message(Always Display, "[노바] 변종이 남쪽에서 반격해와요. 5번 막아내면 거점 완전 장악입니다.");
-	Set Mission Objectives("미션 2 [점령 중]: P6 반격 5회 격퇴 (점령도 0/100%)");
+	Display Text Message(Always Display, "[신호원 도달] 폐기지 단말기 확보.");
+	Display Text Message(Always Display, "[노바] 단말기 데이터 추출 시작. 약 5분 걸려요.");
+	Display Text Message(Always Display, "[노바] 그동안 남쪽 변종 무리가 추출을 막을 거예요. 5번 격퇴하면 추출 완료.");
+	Set Mission Objectives("미션 2 [추출 중]: 변종 반격 5회 격퇴 (데이터 0/100%)");
 	Set Deaths("Player 8", "Protoss Probe", Set To, 1);
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
 	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
@@ -848,38 +850,43 @@ Actions:
 	Order("Player 6", "Zerg Zergling", "P6 South", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 South", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 South", "P5 Lab Beacon", Patrol);
-	Display Text Message(Always Display, "[경보] 변종 반격조 진격! [점령도 +20%]");
+	Display Text Message(Always Display, "[경보] 변종 반격조 진격! [데이터 +20%]");
 	Preserve Trigger();
 }
 
-// 점령 단계별 Mission Objectives 갱신
+// 점령 단계별 Mission Objectives + 데이터 정체 점진 노출
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", Exactly, 1);
 Actions:
-	Set Mission Objectives("미션 2 [점령 중]: 점령도 20/100% - 4회 반격 더 격퇴");
+	Set Mission Objectives("미션 2 [추출 중]: 데이터 20/100% - 4회 반격 더 격퇴");
+	Display Text Message(Always Display, "[노바] 데이터 20%. 1차 반격 격퇴.");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", Exactly, 2);
 Actions:
-	Set Mission Objectives("미션 2 [점령 중]: 점령도 40/100% - 3회 반격 더 격퇴");
+	Set Mission Objectives("미션 2 [추출 중]: 데이터 40/100% - 3회 반격 더 격퇴");
+	Display Text Message(Always Display, "[노바] 40%. ...사령관, 이거 UED 데이터가 아니에요.");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", Exactly, 3);
 Actions:
-	Set Mission Objectives("미션 2 [점령 중]: 점령도 60/100% - 2회 반격 더 격퇴");
+	Set Mission Objectives("미션 2 [추출 중]: 데이터 60/100% - 2회 반격 더 격퇴");
+	Display Text Message(Always Display, "[노바] 60%. 도미니언 암호 패턴이 섞여 있어요. 이건...");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", Exactly, 4);
 Actions:
-	Set Mission Objectives("미션 2 [점령 중]: 점령도 80/100% - 1회 반격 더 격퇴");
+	Set Mission Objectives("미션 2 [추출 중]: 데이터 80/100% - 1회 반격 더 격퇴");
+	Display Text Message(Always Display, "[노바] 80%. 추출자 식별 중. 마지막 한 번만 더 막아주세요.");
 }
 
 //-----------------------------------------------------------------//
 //  마일스톤 1회성 침투 - 타이머 진행 중 4회. 점령 시작 전에만 발동.
+//  (in-fiction: 적이 우리 이동을 감지, 본진을 분산 공격)
 //  플레이어가 충분히 성장한 시점이라 유의미한 압박이 되도록 구성.
 //-----------------------------------------------------------------//
 
@@ -909,8 +916,8 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
 	Display Text Message(Always Display, "[침투] 변종 1차 본진 침투!");
-	Display Text Message(Always Display, "[노바] 사령관, 본진 외곽에 변종 신호 다수 포착. 빠져나가고 있어요.");
-	Display Text Message(Always Display, "[호크] 흔들리지 마라. 진군 속도를 유지한다.");
+	Display Text Message(Always Display, "[노바] 사령관, 본진 외곽에 변종 다수. 우리 이동을 감지한 것 같아요.");
+	Display Text Message(Always Display, "[호크] 분산하지 마라. 진군 속도 유지한다.");
 }
 
 // 9분 잔여 (CT ≤ 540)
@@ -943,7 +950,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
 	Display Text Message(Always Display, "[침투] 변종 2차 본진 침투! 럴커 동반!");
-	Display Text Message(Always Display, "[노바] 럴커 매복 신호 감지. 보이지 않는 적이에요.");
+	Display Text Message(Always Display, "[노바] 럴커 매복 신호. 적이 우리 패턴에 적응하고 있어요.");
 	Display Text Message(Always Display, "[호크] 본진 방어대, 컴샛으로 탐지선 유지하라.");
 }
 
@@ -980,10 +987,11 @@ Conditions:
 	Countdown Timer(At least, 356);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[침투] 변종 3차 본진 침투!!");
-	Display Text Message(Always Display, "[노바] 자폭 패턴이에요... 인페스티드 테란이 본진 코앞이에요.");
-	Display Text Message(Always Display, "[호크] 자살돌격이군. 거리 두고 처리해라.");
+	Display Text Message(Always Display, "[침투] 변종 3차 본진 침투! 인페스티드 동반!");
+	Display Text Message(Always Display, "[노바] 인페스티드 자폭형이에요. 본진 코앞입니다.");
+	Display Text Message(Always Display, "[호크] 자살돌격이군. 거리 두고 처리해라. 절대 들이지 마.");
 }
+
 // 3분 잔여 (CT ≤ 180) - 울트라 동반
 Trigger("Player 6"){
 Conditions:
@@ -1010,7 +1018,6 @@ Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P4 Hunt");
 }
 
-// 3분 잔여 (CT ≤ 180) - 울트라 동반
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -1020,8 +1027,8 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
 	Display Text Message(Always Display, "[비상 침투] 변종 4차 본진 대공세! 울트라 동반!");
-	Display Text Message(Always Display, "[노바] 울트라리스크 신호! 사령관, 본진이 무너질 수 있어요!");
-	Display Text Message(Always Display, "[호크] 빌어먹을, 카르츠 그놈... 시간을 벌어준 만큼 토해내게 해주마.");
+	Display Text Message(Always Display, "[노바] 울트라리스크 신호! 지능형 패턴이에요. 누가 지휘하고 있어요!");
+	Display Text Message(Always Display, "[호크] ...단순한 변종이 아니야. 누가 우리를 갖고 노는 거다.");
 }
 
 //-----------------------------------------------------------------//
@@ -1037,7 +1044,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
 	Display Text Message(Always Display, "[비상] 시간 초과! 변종이 본진을 끊임없이 노립니다.");
-	Display Text Message(Always Display, "[노바] 비콘에 도달하기 전엔 멈추지 않을 거예요.");
+	Display Text Message(Always Display, "[노바] 이 패턴은 신호원에 도달해야 멈춰요. 더 늦으면 본진을 잃어요.");
 	Set Deaths("Player 8", "Terran Dropship", Set To, 1);
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
 }
@@ -1057,7 +1064,7 @@ Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
 	Display Text Message(Always Display, "[반복 침투] 변종 본진 공격!");
-	Display Text Message(Always Display, "[노바] 또 들어와요. 비콘에 도달하기 전엔 이 패턴이 멈추지 않아요.");
+	Display Text Message(Always Display, "[노바] 또 들어와요. 신호원에 닿기 전엔 멈추지 않아요.");
 	Create Unit("Player 6", "Zerg Zergling", 8, "P1 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 8, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 8, "P3 Hunt");
@@ -1071,10 +1078,11 @@ Actions:
 	Create Unit("Player 6", "Zerg Lurker", 2, "P3 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 2, "P4 Hunt");
 	Preserve Trigger();
-}//-----------------------------------------------------------------//
-//  미션 2 페이즈 2 - 거점 점령 판정 / 클리어
-//  P5 Lab 안에 P5 적군 0 + 플레이어 군용 유닛 ≥ 1 → 점령
-//  점령 시: Countdown Pause, 침투 중단, Valkyrie 3→4, 카르츠 메시지
+}
+//-----------------------------------------------------------------//
+//  미션 2 페이즈 2 - 데이터 추출 완료 / 클리어
+//  Zealot DC = 5 (5단계 추출 완료) → Valkyrie 3→4
+//  카르츠 사전 녹화 메시지 → 미션 3 좌표 잠금 해제
 //-----------------------------------------------------------------//
 
 Trigger("All Players"){
@@ -1085,11 +1093,10 @@ Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 2500);
 	Pause Timer();
 	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "  [거점 점령] 폐기지 확보 완료");
+	Display Text Message(Always Display, "  [데이터 추출 완료] 신호원 단말기 분석 종료");
 	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "[노바] 단말기 회수 중... 사령관, 이건...");
-	Display Text Message(Always Display, "[노바] UED 잔당이 보낸 신호가 아니에요. 자동 송출 미끼였어요.");
-	Display Text Message(Always Display, "[노바] 누군가 우리를 일부러 끌어들였습니다.");
+	Display Text Message(Always Display, "[노바] 추출 완료. 사령관... 이건 UED 잔당이 아니에요.");
+	Display Text Message(Always Display, "[노바] 신호는 처음부터 미끼였어요. 누군가 우릴 끌어들였습니다.");
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 4);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 }
@@ -1105,8 +1112,8 @@ Actions:
 	Display Text Message(Always Display, "[?? - 사전 녹화] 축하한다, 선봉대.");
 	Display Text Message(Always Display, "[??] 너희는 늦었다. 그리고 너희 존재가 내 다음 데이터다.");
 	Display Text Message(Always Display, "[노바] ...박사 셀렌 카르츠. 도미니언 출신 변종 연구자.");
-	Display Text Message(Always Display, "[노바] 단말기에 프로토스 유적 좌표 - 북서쪽. 카운트다운이 걸려있어요.");
-	Display Text Message(Always Display, "[호크] 다음 좌표로 이동한다. 미션 3 - 마지막 보루.");
+	Display Text Message(Always Display, "[노바] 데이터에 다음 좌표 - 북서쪽 프로토스 유적. 카운트다운이 걸려 있어요.");
+	Display Text Message(Always Display, "[호크] 그놈은 거기서 뭔가를 끝내려 한다. 우린 그 전에 도달해야 해.");
 	Set Mission Objectives("미션 2 완료. 다음 작전 좌표 잠금 해제: 북서쪽 프로토스 유적");
 }
 

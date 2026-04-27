@@ -10,12 +10,13 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 2500);
-	Set Mission Objectives("미션 2 [페이즈 2]: 비콘에 진입해 거점 점령 (P6 방어선 돌파)");
+	Set Mission Objectives("미션 2 [페이즈 2]: 신호원 폐기지 진입 (15분 내 도달)");
 	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "  [페이즈 2] 거점 진입 작전");
+	Display Text Message(Always Display, "  [페이즈 2] 신호원 추적");
 	Display Text Message(Always Display, "==========================================");
 	Display Text Message(Always Display, "[노바] 신호원 좌표 확정. 북쪽 중앙 폐기지입니다.");
-	Display Text Message(Always Display, "[호크] 15분 내로 진입한다. 늦어지면 변종 무리가 본진을 친다.");
+	Display Text Message(Always Display, "[노바] 주변 변종 활동이 증가하고 있어요. 시간이 지날수록 진입로가 막힙니다.");
+	Display Text Message(Always Display, "[호크] 15분이다. 그 안에 신호원에 도달한다. 본진은 최소 인원으로 사수해라.");
 	Set Countdown Timer(Set To, 900);
 	Minimap Ping("P5 Lab Beacon");
 }

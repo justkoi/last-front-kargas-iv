@@ -15,7 +15,6 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Elapsed Time(At least, 240);
-	Elapsed Time(At most, 245);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
 	Display Text Message(Always Display, "[정찰병] 적 정찰조 포착! 저글링 무리 접근 중!");
@@ -37,11 +36,10 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Elapsed Time(At least, 480);
-	Elapsed Time(At most, 485);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
 	Display Text Message(Always Display, "[경보] 두 번째 무리 출현! 히드라리스크 확인!");
-	Display Text Message(Always Display, "[지휘부] 적의 압력이 증가하고 있다. 방어선 점검하라.");
+	Display Text Message(Always Display, "[지휘부] 적의 압력이 증가하고 있다. 방어선을 점검하라.");
 }
 
 // 웨이브 3 - 11분 후
@@ -62,7 +60,6 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Elapsed Time(At least, 660);
-	Elapsed Time(At most, 665);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
 	Display Text Message(Always Display, "[경보 - 코드 옐로우] 저그 본대 진격! 럴커 매복 경고!");

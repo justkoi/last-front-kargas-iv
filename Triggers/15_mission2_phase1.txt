@@ -8,15 +8,16 @@ Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 Actions:
-	Set Mission Objectives("미션 2: 통신 두절의 진실 - [페이즈 1] 정비 (300초)");
+	Set Mission Objectives("미션 2: 통신 두절의 진실");
 	Display Text Message(Always Display, " ");
 	Display Text Message(Always Display, "==========================================");
 	Display Text Message(Always Display, "  [미션 2 개시] 통신 두절의 진실");
 	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "[노바] 사령관, 북쪽 중앙에서 UED 코드 신호 감지.");
-	Display Text Message(Always Display, "[노바] 살아있는 누군가가 보내고 있어요. 잔당 생존자일 수 있습니다.");
-	Display Text Message(Always Display, "[호크] 잔당 구조다. 정비하고 즉시 출발한다.");
-	Display Text Message(Always Display, "[호크] 정비 시간 5분. 병력 재편하고 보급 점검하라.");
+	Display Text Message(Always Display, "[노바] 사령관, 북쪽 중앙에서 UED 암호 신호 감지.");
+	Display Text Message(Always Display, "[노바] 그런데 패턴이 이상해요. 정확히 7.3초 주기로 반복돼요.");
+	Display Text Message(Always Display, "[노바] 살아있는 송신자가 아닐 수 있습니다. 자동 송출일 가능성이 높아요.");
+	Display Text Message(Always Display, "[호크] 함정일 수도 있다는 거군. 그래도 출처는 봐야 한다.");
+	Display Text Message(Always Display, "[호크] 정비 5분. 본진 보강하고 진군 준비해라.");
 	Set Countdown Timer(Set To, 300);
 }
 

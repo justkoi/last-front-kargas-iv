@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------//
 //  미션 2 페이즈 2 - 단계적 경고 메시지
 //  Countdown Timer 잔여시간 기준. 각 메시지 1회만 발동(시간창 좁게)
+//  점령 시작 후엔 타이머가 영구정지되므로 자동으로 침묵
 //-----------------------------------------------------------------//
 
 // 4분 잔여
@@ -11,7 +12,7 @@ Conditions:
 	Countdown Timer(At least, 236);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[노바] 변종 신호 증가 중. 서두르세요.");
+	Display Text Message(Always Display, "[노바] 진입로 차단 임박. 서두르세요, 사령관.");
 }
 
 // 3분 잔여
@@ -22,7 +23,7 @@ Conditions:
 	Countdown Timer(At least, 176);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[호크] 3분 남았다. 본진 방어선 약해지고 있다.");
+	Display Text Message(Always Display, "[호크] 3분. 본진 방어대도 한계에 가까워지고 있다.");
 }
 
 // 2분 잔여 - 침투 임박 경고
@@ -33,7 +34,7 @@ Conditions:
 	Countdown Timer(At least, 116);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[경보] 본진 침투 임박! 즉시 진입하라!");
+	Display Text Message(Always Display, "[경보] 변종 압력 한계 돌파! 진입 안 하면 본진 무너진다!");
 }
 
 // 1분 잔여
@@ -44,6 +45,6 @@ Conditions:
 	Countdown Timer(At least, 56);
 Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 1500);
-	Display Text Message(Always Display, "[노바] 1분! 1분만 더 늦으면 손쓸 수 없습니다!");
+	Display Text Message(Always Display, "[노바] 1분! 지금 도달 못 하면 손쓸 수 없어요!");
 }
 

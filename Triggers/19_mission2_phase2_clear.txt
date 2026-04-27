@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------//
-//  미션 2 페이즈 2 - 거점 점령 판정 / 클리어
-//  P5 Lab 안에 P5 적군 0 + 플레이어 군용 유닛 ≥ 1 → 점령
-//  점령 시: Countdown Pause, 침투 중단, Valkyrie 3→4, 카르츠 메시지
+//  미션 2 페이즈 2 - 데이터 추출 완료 / 클리어
+//  Zealot DC = 5 (5단계 추출 완료) → Valkyrie 3→4
+//  카르츠 사전 녹화 메시지 → 미션 3 좌표 잠금 해제
 //-----------------------------------------------------------------//
 
 Trigger("All Players"){
@@ -12,11 +12,10 @@ Actions:
 	Play WAV("sound\\Misc\\Bell.wav", 2500);
 	Pause Timer();
 	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "  [거점 점령] 폐기지 확보 완료");
+	Display Text Message(Always Display, "  [데이터 추출 완료] 신호원 단말기 분석 종료");
 	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "[노바] 단말기 회수 중... 사령관, 이건...");
-	Display Text Message(Always Display, "[노바] UED 잔당이 보낸 신호가 아니에요. 자동 송출 미끼였어요.");
-	Display Text Message(Always Display, "[노바] 누군가 우리를 일부러 끌어들였습니다.");
+	Display Text Message(Always Display, "[노바] 추출 완료. 사령관... 이건 UED 잔당이 아니에요.");
+	Display Text Message(Always Display, "[노바] 신호는 처음부터 미끼였어요. 누군가 우릴 끌어들였습니다.");
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 4);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 }
@@ -32,8 +31,8 @@ Actions:
 	Display Text Message(Always Display, "[?? - 사전 녹화] 축하한다, 선봉대.");
 	Display Text Message(Always Display, "[??] 너희는 늦었다. 그리고 너희 존재가 내 다음 데이터다.");
 	Display Text Message(Always Display, "[노바] ...박사 셀렌 카르츠. 도미니언 출신 변종 연구자.");
-	Display Text Message(Always Display, "[노바] 단말기에 프로토스 유적 좌표 - 북서쪽. 카운트다운이 걸려있어요.");
-	Display Text Message(Always Display, "[호크] 다음 좌표로 이동한다. 미션 3 - 마지막 보루.");
+	Display Text Message(Always Display, "[노바] 데이터에 다음 좌표 - 북서쪽 프로토스 유적. 카운트다운이 걸려 있어요.");
+	Display Text Message(Always Display, "[호크] 그놈은 거기서 뭔가를 끝내려 한다. 우린 그 전에 도달해야 해.");
 	Set Mission Objectives("미션 2 완료. 다음 작전 좌표 잠금 해제: 북서쪽 프로토스 유적");
 }
 
