@@ -1,16 +1,17 @@
 //-----------------------------------------------------------------//
-//  미션 2 페이즈 2 - 비콘 점령 메커니즘 + 반복 침투 (P6)
-//  [점령] 비콘 진입 → 타이머 영구정지, 60초 쿨다운마다 P6 반격조 스폰,
-//         반격 1회당 점령도 +20%, 5회 = 100% → 미션2 클리어
-//         (in-fiction: 단말기 데이터 추출, 5단계 진행률)
+//  미션 2 페이즈 2 - 비콘 점령 메커니즘 (시간 누적식) + 반복 침투 (P6)
+//  [점령] 비콘 진입 시 Probe=1 + 타이머 정지. 점거 중일 때 Zealot 누적 증가.
+//         총 누적 5분(3600틱) = 100% 점령 완료.
+//         10%마다 진행도 알림, 20%마다 P6 반격조 파병.
+//         60% 시점 = 거의 모든 조합 동원하는 대규모 총공세 (전복 가능).
 //  [반복 침투] 타이머 0 + 점령 미시작 시 반복 침투 플래그 ON,
-//              비콘 진입 시 반복 플래그 OFF
+//              비콘 진입 시 반복 플래그 OFF.
 //
 //  마일스톤 1회성 침투는 17b_milestone_infiltration.txt에 분리됨.
 //
-//  Protoss Probe DC   : 점령 시작 플래그 (0=미시작, 1=시작됨)
-//  Protoss Zealot DC  : 점령 단계 (0~5)
-//  Terran Wraith DC   : 반격/반복침투 쿨다운 (360틱 = 30s)
+//  Protoss Probe DC   : 비콘 점거 토글 (0=비어있음, 1=플레이어 점거 중)
+//  Protoss Zealot DC  : 누적 점령도 (0~3600, 12 tick = 1초, 3600 = 5분 = 100%)
+//  Terran Wraith DC   : 반복 침투 쿨다운 (720틱 = 60s)
 //  Terran Dropship DC : 반복 침투 플래그 (0=OFF, 1=ON)
 //-----------------------------------------------------------------//
 
@@ -26,7 +27,7 @@ Actions:
 	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
 }
 
-// 첫 비콘 진입 - 1회성 인트로 다이얼로그 + 반복 침투 OFF
+// 첫 비콘 진입 - 1회성 인트로 다이얼로그
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -35,14 +36,13 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "[신호원 도달] 폐기지 단말기 확보.");
-	Display Text Message(Always Display, "[노바] 단말기 데이터 추출 시작. 약 5분 걸려요.");
-	Display Text Message(Always Display, "[노바] 그동안 남쪽 변종 무리가 추출을 막을 거예요. 5번 격퇴하면 추출 완료.");
-	Set Mission Objectives("미션 2 [추출 중]: 변종 반격 5회 격퇴 (데이터 0/100%)");
+	Display Text Message(Always Display, "[노바] 단말기 데이터 추출 시작. 누적 5분간 비콘 사수 필요.");
+	Display Text Message(Always Display, "[노바] 추출 진행에 따라 변종 반격이 점점 강해집니다.");
+	Set Mission Objectives("미션 2 [추출 중]: 비콘 누적 점거 5분 = 100%");
 	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
 }
 
-// 비콘 점거 토글 ON - 비콘에 적(=플레이어) 있으면 Probe=1 + 타이머 정지
-// (인트로와 동시 발동, Preserve로 재진입 대응)
+// 점거 토글 ON - 비콘 점거 시 Probe=1 + 타이머 정지
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -54,7 +54,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// 비콘 점거 토글 OFF - 비콘 비면 Probe=0 + 타이머 재개
+// 점거 토글 OFF - 비콘 비면 Probe=0 + 타이머 재개
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -63,59 +63,179 @@ Conditions:
 Actions:
 	Unpause Timer();
 	Set Deaths("Player 8", "Protoss Probe", Set To, 0);
-	Display Text Message(Always Display, "[경보] 비콘 비었습니다. 데이터 추출 일시중단, 타이머 재개.");
+	Display Text Message(Always Display, "[경보] 비콘 비었습니다. 데이터 추출 일시중단.");
 	Preserve Trigger();
 }
 
-// 반격 스폰 - 점령 시작됨 + 비콘 점거 중 + 쿨다운 완료 + 미완료
+// 누적 카운터 증가 - Probe=1일 때만, 매 트리거 사이클(12회/초)
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 1);
-	Deaths("Player 8", "Protoss Zealot", At most, 4);
-	Deaths("Player 8", "Terran Wraith", At least, 360);
+	Deaths("Player 8", "Protoss Zealot", At most, 3599);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
 	Set Deaths("Player 8", "Protoss Zealot", Add, 1);
-	Create Unit("Player 6", "Zerg Zergling", 30, "P6 South");
-	Create Unit("Player 6", "Zerg Hydralisk", 18, "P6 South");
-	Create Unit("Player 6", "Zerg Lurker", 4, "P6 South");
-	Order("Player 6", "Zerg Zergling", "P6 South", "P5 Lab Beacon", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 South", "P5 Lab Beacon", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 South", "P5 Lab Beacon", Patrol);
-	Display Text Message(Always Display, "[경보] 변종 반격조 진격! [데이터 +20%]");
 	Preserve Trigger();
 }
 
-// 점령 단계별 Mission Objectives + 데이터 정체 점진 노출
+//-----------------------------------------------------------------//
+//  10% 단위 진행도 알림 (각 1회성)
+//-----------------------------------------------------------------//
+
 Trigger("All Players"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", Exactly, 1);
+	Deaths("Player 8", "Protoss Zealot", At least, 360);
 Actions:
-	Set Mission Objectives("미션 2 [추출 중]: 데이터esq 20/100% - 4회 반격 더 격퇴");
-	Display Text Message(Always Display, "[노바] 데이터 20%. 1차 반격 격퇴.");
+	Display Text Message(Always Display, "[노바] 데이터 추출 10%.");
+	Set Mission Objectives("미션 2 [추출 중]: 10% 진행 (누적 비콘 점거 시간 기준)");
 }
 Trigger("All Players"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 720);
 Actions:
-	Set Mission Objectives("미션 2 [추출 중]: 데이터 40/100% - 3회 반격 더 격퇴");
-	Display Text Message(Always Display, "[노바] 40%. ...사령관, 이거 UED 데이터가 아니에요.");
+	Display Text Message(Always Display, "[노바] 데이터 20%. 변종 1차 반격조 출발 신호 잡혔어요.");
+	Set Mission Objectives("미션 2 [추출 중]: 20% 진행");
 }
 Trigger("All Players"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", Exactly, 3);
+	Deaths("Player 8", "Protoss Zealot", At least, 1080);
 Actions:
-	Set Mission Objectives("미션 2 [추출 중]: 데이터 60/100% - 2회 반격 더 격퇴");
-	Display Text Message(Always Display, "[노바] 60%. 도미니언 암호 패턴이 섞여 있어요. 이건...");
+	Display Text Message(Always Display, "[노바] 데이터 30%.");
+	Set Mission Objectives("미션 2 [추출 중]: 30% 진행");
 }
 Trigger("All Players"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", Exactly, 4);
+	Deaths("Player 8", "Protoss Zealot", At least, 1440);
 Actions:
-	Set Mission Objectives("미션 2 [추출 중]: 데이터 80/100% - 1회 반격 더 격퇴");
-	Display Text Message(Always Display, "[노바] 80%. 추출자 식별 중. 마지막 한 번만 더 막아주세요.");
+	Display Text Message(Always Display, "[노바] 데이터 40%. ...이거 UED가 아니에요.");
+	Set Mission Objectives("미션 2 [추출 중]: 40% 진행");
+}
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 1800);
+Actions:
+	Display Text Message(Always Display, "[노바] 데이터 50%. 절반 왔습니다, 사령관.");
+	Set Mission Objectives("미션 2 [추출 중]: 50% 진행");
+}
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2160);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "[!! 비상] 데이터 60%. 변종 군단 총공세 신호! 모든 화력 집중!");
+	Display Text Message(Always Display, "[호크] 이건 우리를 비콘에서 떼어내려는 거다. 절대 양보하지 마라!");
+	Set Mission Objectives("미션 2 [추출 중]: 60% 진행 - 변종 총공세!");
+}
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2520);
+Actions:
+	Display Text Message(Always Display, "[노바] 데이터 70%. 총공세 격퇴 확인. 추출 계속.");
+	Set Mission Objectives("미션 2 [추출 중]: 70% 진행");
+}
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2880);
+Actions:
+	Display Text Message(Always Display, "[노바] 데이터 80%. 추출자 식별 중...");
+	Set Mission Objectives("미션 2 [추출 중]: 80% 진행");
+}
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 3240);
+Actions:
+	Display Text Message(Always Display, "[노바] 데이터 90%. 거의 다 됐어요!");
+	Set Mission Objectives("미션 2 [추출 중]: 90% 진행");
+}
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 3600);
+Actions:
+	Display Text Message(Always Display, "[노바] 데이터 100%. 추출 완료!");
+	Set Mission Objectives("미션 2 [추출 중]: 100% - 추출 완료");
+}
+
+//-----------------------------------------------------------------//
+//  20% 단위 P6 반격조 파병 (각 1회성)
+//  스폰 위치: P6 South → 비콘 진격
+//-----------------------------------------------------------------//
+
+// 20% 반격 - 정찰조 (가벼움)
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 720);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "[반격 1차] 변종 정찰조 진격 중!");
+	Create Unit("Player 6", "Zerg Zergling", 8, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 South");
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+}
+
+// 40% 반격 - 본대 (중규모)
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 1440);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "[반격 2차] 변종 본대 진격! 럴커 동반!");
+	Create Unit("Player 6", "Zerg Zergling", 12, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 6, "P6 South");
+	Create Unit("Player 6", "Zerg Lurker", 3, "P6 South");
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
+}
+
+// 60% 반격 - 총공세 (전복 가능. 거의 모든 조합 동원)
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2160);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2500);
+	Display Text Message(Always Display, "[!!! 총공세] 변종 군단 총공세 개시!");
+	Create Unit("Player 6", "Zerg Zergling", 30, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 20, "P6 South");
+	Create Unit("Player 6", "Zerg Lurker", 8, "P6 South");
+	Create Unit("Player 6", "Zerg Mutalisk", 12, "P6 South");
+	Create Unit("Player 6", "Zerg Scourge", 6, "P6 South");
+	Create Unit("Player 6", "Zerg Queen", 2, "P6 South");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 3, "P6 South", 1);
+	Create Unit("Player 6", "Zerg Ultralisk", 4, "P6 South");
+	Create Unit("Player 6", "Zerg Guardian", 4, "P6 South");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 South");
+	Create Unit("Player 6", "Infested Terran", 8, "P6 South");
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Scourge", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Queen", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Defiler", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Guardian", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Devourer", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Infested Terran", "Anywhere", "P5 Lab Beacon", Patrol);
+}
+
+// 80% 반격 - 잔당 정리식 (강한 후속)
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2880);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "[반격 4차] 변종 후속 압박! 추출 방해 시도!");
+	Create Unit("Player 6", "Zerg Hydralisk", 12, "P6 South");
+	Create Unit("Player 6", "Zerg Lurker", 4, "P6 South");
+	Create Unit("Player 6", "Zerg Mutalisk", 8, "P6 South");
+	Create Unit("Player 6", "Zerg Ultralisk", 3, "P6 South");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 South", 1);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Defiler", "Anywhere", "P5 Lab Beacon", Patrol);
 }
 
 //-----------------------------------------------------------------//

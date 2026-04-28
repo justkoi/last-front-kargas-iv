@@ -1,13 +1,13 @@
 //-----------------------------------------------------------------//
 //  미션 2 페이즈 2 - 데이터 추출 완료 / 클리어
-//  Zealot DC = 5 (5단계 추출 완료) → Valkyrie 3→4
+//  Zealot DC ≥ 3600 (누적 5분 점거 완료) → Valkyrie 3→4
 //  카르츠 사전 녹화 메시지 → 미션 3 좌표 잠금 해제
 //-----------------------------------------------------------------//
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Zealot", At least, 5);
+	Deaths("Player 8", "Protoss Zealot", At least, 3600);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Pause Timer();

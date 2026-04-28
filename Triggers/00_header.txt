@@ -12,7 +12,7 @@
 //    Terran Valkyrie     : 미션 단계 플래그 (1=M1, 2=M2 페이즈1, 3=M2 페이즈2, 4=M2 클리어)
 //    Terran Vulture      : 페이즈 경과 타이머 (단계 진입시 0 리셋)
 //    Protoss Probe       : (M1) 정찰 회전 / (M2 P2) 비콘 점령 시작 플래그
-//    Protoss Zealot      : (M2 P2) 점령 단계 카운터 (0~5, 5=클리어)
+//    Protoss Zealot      : (M2 P2) 누적 점령도 (0~3600, 12tick=1s, 3600=5분=100%)
 //    Terran Firebat      : P1 Hunt 추적 (60틱 = 5s)
 //    Terran Ghost        : P2 Hunt 추적
 //    Terran Medic        : P3 Hunt 추적
