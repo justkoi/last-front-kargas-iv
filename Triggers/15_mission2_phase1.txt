@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------//
 
 // 페이즈1 시작 브리핑 (Valkyrie 2 진입 직후 1회)
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 Actions:
@@ -22,7 +22,7 @@ Actions:
 }
 
 // 페이즈1 150초 경과 - 중간 알림
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Countdown Timer(At most, 120);
@@ -31,7 +31,7 @@ Actions:
 }
 
 // 페이즈1 종료 - 페이즈2 진입 (Valkyrie 2→3, Vulture 0 리셋)
-Trigger("All Players"){
+Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Countdown Timer(At most, 1);
@@ -70,15 +70,15 @@ Actions:
 }
 
 // 5초 후 Map Revealer 제거 (Vulture DC ≥ 60틱)
-Trigger("All Players"){
+Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Vulture", At least, 60);
 	Deaths("Player 8", "Terran Vulture", At most, 84);
 Actions:
-	Remove Unit("Player 1", "Map Revealer");
-	Remove Unit("Player 2", "Map Revealer");
-	Remove Unit("Player 3", "Map Revealer");
-	Remove Unit("Player 4", "Map Revealer");
+	Remove Unit At Location("Player 1", "Map Revealer", 1, "P5 Lab Vision");
+	Remove Unit At Location("Player 2", "Map Revealer", 1, "P5 Lab Vision");
+	Remove Unit At Location("Player 3", "Map Revealer", 1, "P5 Lab Vision");
+	Remove Unit At Location("Player 4", "Map Revealer", 1, "P5 Lab Vision");
 }
 

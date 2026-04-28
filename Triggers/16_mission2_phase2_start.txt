@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------//
 
 // 페이즈2 시작 1회 - 알림 패키지 + 세트피스 스폰
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 Actions:
@@ -26,13 +26,11 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P5 Lab");
+	Create Unit("Player 6", "Zerg Hydralisk", 30, "P5 Lab");
 	Create Unit("Player 6", "Zerg Lurker", 4, "P5 Lab");
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P5 Lab");
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P5 Lab", 1);
+	Create Unit("Player 6", "Zerg Ultralisk", 5, "P5 Lab");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 4, "P5 Lab", 1);
 	Create Unit("Player 6", "Infested Terran", 6, "P5 Lab");
-	Create Unit("Player 6", "Zerg Sunken Colony", 3, "P5 Lab");
-	Create Unit("Player 6", "Zerg Spore Colony", 2, "P5 Lab");
 }
 
 // Minimap Ping 30초마다 반복 - Civilian DC (360틱 = 30s)
@@ -45,7 +43,7 @@ Actions:
 	Set Deaths("Player 8", "Terran Civilian", Set To, 0);
 }
 
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Countdown Timer(At least, 1);

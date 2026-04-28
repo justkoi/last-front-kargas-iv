@@ -10,7 +10,7 @@
 //
 //  Protoss Probe DC   : 점령 시작 플래그 (0=미시작, 1=시작됨)
 //  Protoss Zealot DC  : 점령 단계 (0~5)
-//  Terran Wraith DC   : 반격/반복침투 쿨다운 (720틱 = 60s)
+//  Terran Wraith DC   : 반격/반복침투 쿨다운 (360틱 = 30s)
 //  Terran Dropship DC : 반복 침투 플래그 (0=OFF, 1=ON)
 //-----------------------------------------------------------------//
 
@@ -26,7 +26,7 @@ Actions:
 	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
 }
 
-// 첫 비콘 진입 - 타이머 영구 정지 + 데이터 추출 개시 + 반복 침투 OFF
+// 첫 비콘 진입 - 1회성 인트로 다이얼로그 + 반복 침투 OFF
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -34,14 +34,37 @@ Conditions:
 	Bring("Foes", "Men", "P5 Lab Beacon", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Pause Timer();
 	Display Text Message(Always Display, "[신호원 도달] 폐기지 단말기 확보.");
 	Display Text Message(Always Display, "[노바] 단말기 데이터 추출 시작. 약 5분 걸려요.");
 	Display Text Message(Always Display, "[노바] 그동안 남쪽 변종 무리가 추출을 막을 거예요. 5번 격퇴하면 추출 완료.");
 	Set Mission Objectives("미션 2 [추출 중]: 변종 반격 5회 격퇴 (데이터 0/100%)");
-	Set Deaths("Player 8", "Protoss Probe", Set To, 1);
-	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
 	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
+}
+
+// 비콘 점거 토글 ON - 비콘에 적(=플레이어) 있으면 Probe=1 + 타이머 정지
+// (인트로와 동시 발동, Preserve로 재진입 대응)
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+	Bring("Foes", "Men", "P5 Lab Beacon", At least, 1);
+Actions:
+	Pause Timer();
+	Set Deaths("Player 8", "Protoss Probe", Set To, 1);
+	Preserve Trigger();
+}
+
+// 비콘 점거 토글 OFF - 비콘 비면 Probe=0 + 타이머 재개
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Probe", Exactly, 1);
+	Bring("Foes", "Men", "P5 Lab Beacon", At most, 0);
+Actions:
+	Unpause Timer();
+	Set Deaths("Player 8", "Protoss Probe", Set To, 0);
+	Display Text Message(Always Display, "[경보] 비콘 비었습니다. 데이터 추출 일시중단, 타이머 재개.");
+	Preserve Trigger();
 }
 
 // 반격 스폰 - 점령 시작됨 + 비콘 점거 중 + 쿨다운 완료 + 미완료
@@ -50,15 +73,14 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 1);
 	Deaths("Player 8", "Protoss Zealot", At most, 4);
-	Deaths("Player 8", "Terran Wraith", At least, 720);
-	Bring("Foes", "Men", "P5 Lab Beacon", At least, 1);
+	Deaths("Player 8", "Terran Wraith", At least, 360);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
 	Set Deaths("Player 8", "Protoss Zealot", Add, 1);
-	Create Unit("Player 6", "Zerg Zergling", 8, "P6 South");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 South");
-	Create Unit("Player 6", "Zerg Lurker", 2, "P6 South");
+	Create Unit("Player 6", "Zerg Zergling", 30, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 18, "P6 South");
+	Create Unit("Player 6", "Zerg Lurker", 4, "P6 South");
 	Order("Player 6", "Zerg Zergling", "P6 South", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 South", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 South", "P5 Lab Beacon", Patrol);
@@ -71,7 +93,7 @@ Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", Exactly, 1);
 Actions:
-	Set Mission Objectives("미션 2 [추출 중]: 데이터 20/100% - 4회 반격 더 격퇴");
+	Set Mission Objectives("미션 2 [추출 중]: 데이터esq 20/100% - 4회 반격 더 격퇴");
 	Display Text Message(Always Display, "[노바] 데이터 20%. 1차 반격 격퇴.");
 }
 Trigger("All Players"){
@@ -130,17 +152,20 @@ Actions:
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
 	Display Text Message(Always Display, "[반복 침투] 변종 본진 공격!");
 	Display Text Message(Always Display, "[노바] 또 들어와요. 신호원에 닿기 전엔 멈추지 않아요.");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 2, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 2, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 2, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 2, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P4 Hunt");
+	Order("Player 6", "Zerg Zergling","Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
 	Preserve Trigger();
 }

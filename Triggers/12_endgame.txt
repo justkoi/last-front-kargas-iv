@@ -3,7 +3,7 @@
 //  Valkyrie DC: 1 → 2, Vulture DC 0 리셋(페이즈 타이머)
 //-----------------------------------------------------------------//
 
-Trigger("Player 5"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Bring("Player 5", "Zerg Hatchery", "P5 Base", At most, 0);
 	Bring("Player 5", "Zerg Lair", "P5 Base", At most, 0);
@@ -19,8 +19,8 @@ Actions:
 	Display Text Message(Always Display, "==========================================");
 	Display Text Message(Always Display, "[호크] 첫 거점은 우리 손에 들어왔다. 잘 싸웠다, 선봉대.");
 	Display Text Message(Always Display, "[보상] 전 부대 미네랄 +500 / 가스 +200");
-	Set Resources("All Players", Add, 500, ore);
-	Set Resources("All Players", Add, 200, gas);
+	Set Resources("Current Player", Add, 500, ore);
+	Set Resources("Current Player", Add, 200, gas);
 }
 
 //-----------------------------------------------------------------//

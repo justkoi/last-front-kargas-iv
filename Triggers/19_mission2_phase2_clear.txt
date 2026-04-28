@@ -4,7 +4,7 @@
 //  카르츠 사전 녹화 메시지 → 미션 3 좌표 잠금 해제
 //-----------------------------------------------------------------//
 
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Zealot", At least, 5);
@@ -21,7 +21,7 @@ Actions:
 }
 
 // 카르츠의 사전 녹화 메시지 (점령 5초 후)
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
 	Deaths("Player 8", "Terran Vulture", At least, 60);
@@ -37,13 +37,13 @@ Actions:
 }
 
 // 미션 2 완료 - 임시 Victory (미션 3 작성 전까지)
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
 	Deaths("Player 8", "Terran Vulture", At least, 180);
 Actions:
 	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "  [미션 2 완료] - 미션 3 작성 예정");
+	Display Text Message(Always Display, "  [미션 2 완료] - 수고하셨습니다! 미션 3 작성 예정");
 	Display Text Message(Always Display, "==========================================");
 	Wait(1000);
 	Victory();

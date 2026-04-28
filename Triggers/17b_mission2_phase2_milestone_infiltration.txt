@@ -21,8 +21,10 @@ Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 4, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Hydralisk", 4, "P3 Hunt");
 	Create Unit("Player 6", "Zerg Hydralisk", 4, "P4 Hunt");
+	Order("Player 6", "Zerg Zergling","Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 }
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
@@ -55,8 +57,11 @@ Actions:
 	Create Unit("Player 6", "Zerg Lurker", 2, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 2, "P3 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 2, "P4 Hunt");
+	Order("Player 6", "Zerg Zergling","Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
 }
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
@@ -93,8 +98,12 @@ Actions:
 	Create Unit("Player 6", "Infested Terran", 4, "P2 Hunt");
 	Create Unit("Player 6", "Infested Terran", 4, "P3 Hunt");
 	Create Unit("Player 6", "Infested Terran", 4, "P4 Hunt");
+	Order("Player 6", "Zerg Zergling","Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Infested Terran", "Anywhere", "P5 Lab Beacon", Patrol);
 }
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
@@ -131,8 +140,12 @@ Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P3 Hunt");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P4 Hunt");
+	Order("Player 6", "Zerg Zergling","Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 }
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
