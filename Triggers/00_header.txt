@@ -11,6 +11,7 @@
 //    Terran Marine       : 기지 침입 대응 쿨다운 (36틱 = 3s)
 //    Terran Valkyrie     : 미션 단계 플래그 (1=M1, 2=M2 페이즈1, 3=M2 페이즈2, 4=M2 클리어)
 //    Terran Vulture      : 페이즈 경과 타이머 (단계 진입시 0 리셋)
+//    Terran Armory      : 미션2 대기 페이즈 진행여부 (0,1)
 //    Protoss Probe       : (M1) 정찰 회전 / (M2 P2) 비콘 점령 시작 플래그
 //    Protoss Zealot      : (M2 P2) 누적 점령도 (0~3600, 12tick=1s, 3600=5분=100%)
 //    Terran Firebat      : P1 Hunt 추적 (60틱 = 5s)
@@ -19,7 +20,6 @@
 //    Terran SCV          : P4 Hunt 추적
 //    Terran Goliath      : 정찰 오버로드 사이클 (540틱 = 45s)
 //    Terran Wraith       : 늦은 웨이브 쿨다운 (1800틱 = 150s)
-//    Terran Vulture      : 드론 회수 사이클 (240틱)
 //    Terran Battlecruiser: 오버로드 보급 사이클 (360틱 = 30s)
 //    Terran Dropship     : (M1) 늦은 웨이브 변형 인덱스 / (M2 P2) 반복 침투 플래그
 //    Protoss Probe       : 정찰 회전 인덱스 (0/1/2/3)

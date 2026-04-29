@@ -16,7 +16,7 @@
 //-----------------------------------------------------------------//
 
 // 페이즈2 진입 시 점령/침투 관련 DC 0 리셋
-Trigger("Player 5"){
+Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 12);
@@ -28,7 +28,7 @@ Actions:
 }
 
 // 첫 비콘 진입 - 1회성 인트로 다이얼로그
-Trigger("Player 5"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
@@ -43,10 +43,9 @@ Actions:
 }
 
 // 점거 토글 ON - 비콘 점거 시 Probe=1 + 타이머 정지
-Trigger("Player 5"){
+Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Probe", Exactly, 0);
 	Bring("Foes", "Men", "P5 Lab Beacon", At least, 1);
 Actions:
 	Pause Timer();
@@ -55,20 +54,18 @@ Actions:
 }
 
 // 점거 토글 OFF - 비콘 비면 Probe=0 + 타이머 재개
-Trigger("Player 5"){
+Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Probe", Exactly, 1);
 	Bring("Foes", "Men", "P5 Lab Beacon", At most, 0);
 Actions:
 	Unpause Timer();
 	Set Deaths("Player 8", "Protoss Probe", Set To, 0);
-	Display Text Message(Always Display, "[경보] 비콘 비었습니다. 데이터 추출 일시중단.");
 	Preserve Trigger();
 }
 
 // 누적 카운터 증가 - Probe=1일 때만, 매 트리거 사이클(12회/초)
-Trigger("Player 5"){
+Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 1);
@@ -167,8 +164,10 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "[반격 1차] 변종 정찰조 진격 중!");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P6 South");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 South");
+	Create Unit("Player 6", "Zerg Overlord", 2, "P6 South");
+	Create Unit("Player 6", "Zerg Zergling", 22, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 16, "P6 South");
+	Order("Player 6", "Zerg Overlord", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 }
@@ -180,9 +179,11 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "[반격 2차] 변종 본대 진격! 럴커 동반!");
-	Create Unit("Player 6", "Zerg Zergling", 12, "P6 South");
-	Create Unit("Player 6", "Zerg Hydralisk", 6, "P6 South");
-	Create Unit("Player 6", "Zerg Lurker", 3, "P6 South");
+	Create Unit("Player 6", "Zerg Overlord", 2, "P6 South");
+	Create Unit("Player 6", "Zerg Zergling", 32, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 26, "P6 South");
+	Create Unit("Player 6", "Zerg Lurker", 10, "P6 South");
+	Order("Player 6", "Zerg Overlord", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
@@ -195,17 +196,19 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Display Text Message(Always Display, "[!!! 총공세] 변종 군단 총공세 개시!");
-	Create Unit("Player 6", "Zerg Zergling", 30, "P6 South");
-	Create Unit("Player 6", "Zerg Hydralisk", 20, "P6 South");
+	Create Unit("Player 6", "Zerg Overlord", 2, "P6 South");
+	Create Unit("Player 6", "Zerg Zergling", 340, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 24, "P6 South");
 	Create Unit("Player 6", "Zerg Lurker", 8, "P6 South");
-	Create Unit("Player 6", "Zerg Mutalisk", 12, "P6 South");
-	Create Unit("Player 6", "Zerg Scourge", 6, "P6 South");
+	Create Unit("Player 6", "Zerg Mutalisk", 24, "P6 South");
+	Create Unit("Player 6", "Zerg Scourge", 36, "P6 South");
 	Create Unit("Player 6", "Zerg Queen", 2, "P6 South");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 3, "P6 South", 1);
-	Create Unit("Player 6", "Zerg Ultralisk", 4, "P6 South");
-	Create Unit("Player 6", "Zerg Guardian", 4, "P6 South");
-	Create Unit("Player 6", "Zerg Devourer", 3, "P6 South");
+	Create Unit("Player 6", "Zerg Ultralisk", 412, "P6 South");
+	Create Unit("Player 6", "Zerg Guardian", 12, "P6 South");
+	Create Unit("Player 6", "Zerg Devourer", 12, "P6 South");
 	Create Unit("Player 6", "Infested Terran", 8, "P6 South");
+	Order("Player 6", "Zerg Overlord", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
@@ -226,11 +229,13 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "[반격 4차] 변종 후속 압박! 추출 방해 시도!");
+	Create Unit("Player 6", "Zerg Overlord", 2, "P6 South");
 	Create Unit("Player 6", "Zerg Hydralisk", 12, "P6 South");
 	Create Unit("Player 6", "Zerg Lurker", 4, "P6 South");
 	Create Unit("Player 6", "Zerg Mutalisk", 8, "P6 South");
 	Create Unit("Player 6", "Zerg Ultralisk", 3, "P6 South");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 South", 1);
+	Order("Player 6", "Zerg Overlord", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P5 Lab Beacon", Patrol);

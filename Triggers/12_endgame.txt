@@ -8,7 +8,6 @@ Conditions:
 	Bring("Player 5", "Zerg Hatchery", "P5 Base", At most, 0);
 	Bring("Player 5", "Zerg Lair", "P5 Base", At most, 0);
 	Bring("Player 5", "Zerg Hive", "P5 Base", At most, 0);
-	Elapsed Time(At least, 30);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 2);

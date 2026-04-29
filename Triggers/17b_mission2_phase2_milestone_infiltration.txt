@@ -13,14 +13,18 @@ Conditions:
 	Countdown Timer(At most, 720);
 	Countdown Timer(At least, 716);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P4 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 8, "P1 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 8, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 8, "P3 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 8, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P4 Hunt");
 	Order("Player 6", "Zerg Zergling","Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 }
@@ -34,7 +38,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "[침투] 변종 1차 본진 침투!");
 	Display Text Message(Always Display, "[노바] 사령관, 본진 외곽에 변종 다수. 우리 이동을 감지한 것 같아요.");
-	Display Text Message(Always Display, "[호크] 분산하지 마라. 진군 속도 유지한다.");
+	Display Text Message(Always Display, "[호크] 어서 신호원에 도달해야한다.");
 }
 
 // 9분 잔여 (CT ≤ 540)
@@ -45,14 +49,18 @@ Conditions:
 	Countdown Timer(At most, 540);
 	Countdown Timer(At least, 536);
 Actions:
-	Create Unit("Player 6", "Zerg Zergling", 10, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 10, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 10, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 10, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 6, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 6, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 6, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 6, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P4 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 2, "P1 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 2, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 2, "P3 Hunt");
@@ -82,22 +90,26 @@ Conditions:
 	Countdown Timer(At most, 360);
 	Countdown Timer(At least, 356);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P4 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 12, "P1 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 12, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 12, "P3 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 12, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 3, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 3, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 3, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 3, "P4 Hunt");
-	Create Unit("Player 6", "Infested Terran", 4, "P1 Hunt");
-	Create Unit("Player 6", "Infested Terran", 4, "P2 Hunt");
-	Create Unit("Player 6", "Infested Terran", 4, "P3 Hunt");
-	Create Unit("Player 6", "Infested Terran", 4, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 6, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 6, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 6, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 6, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Lurker", 2, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Lurker", 2, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Lurker", 2, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Lurker", 2, "P4 Hunt");
+	Create Unit("Player 6", "Infested Terran", 2, "P1 Hunt");
+	Create Unit("Player 6", "Infested Terran", 2, "P2 Hunt");
+	Create Unit("Player 6", "Infested Terran", 2, "P3 Hunt");
+	Create Unit("Player 6", "Infested Terran", 2, "P4 Hunt");
 	Order("Player 6", "Zerg Zergling","Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
@@ -124,18 +136,22 @@ Conditions:
 	Countdown Timer(At most, 180);
 	Countdown Timer(At least, 176);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P4 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 14, "P1 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 14, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 14, "P3 Hunt");
 	Create Unit("Player 6", "Zerg Zergling", 14, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 4, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 4, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 4, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 4, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Lurker", 3, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Lurker", 3, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Lurker", 3, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Lurker", 3, "P4 Hunt");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P1 Hunt");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P3 Hunt");

@@ -9,6 +9,7 @@ Actions:
 	Display Text Message(Always Display, "  작전 코드명: 카르가스 IV");
 	Display Text Message(Always Display, "========== ================================");
 	Set Mission Objectives("미션 1: 북서쪽 저그 군락을 격파하고 착륙지를 확보하라");
+	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
 }
 
 Trigger("All Players"){
