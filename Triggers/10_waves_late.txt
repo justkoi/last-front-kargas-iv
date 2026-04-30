@@ -25,9 +25,9 @@ Conditions:
 	Command("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Dropship", Exactly, 0);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 24, "P5 Base");
+	Create Unit("Player 5", "Zerg Zergling", 28, "P5 Base");
 	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Base");
-	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Base");
+	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Base");
 	Order("Player 5", "Zerg Zergling", "P5 Base", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Lurker", "P5 Base", "Player Destination", Patrol);
@@ -46,7 +46,7 @@ Conditions:
 	Command("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Dropship", Exactly, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Mutalisk", 9, "P5 Base");
+	Create Unit("Player 5", "Zerg Mutalisk", 10, "P5 Base");
 	Create Unit("Player 5", "Zerg Scourge", 8, "P5 Base");
 	Order("Player 5", "Zerg Mutalisk", "P5 Base", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Scourge", "P5 Base", "Player Destination", Patrol);
@@ -67,7 +67,7 @@ Conditions:
 Actions:
 	Create Unit("Player 5", "Zerg Ultralisk", 3, "P5 Base");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 2, "P5 Base", 1);
-	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Base");
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Base");
 	Order("Player 5", "Zerg Ultralisk", "P5 Base", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Defiler", "P5 Base", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);

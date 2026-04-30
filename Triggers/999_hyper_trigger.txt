@@ -1,7 +1,230 @@
 //-----------------------------------------------------------------//
-//  터보 트리거 (Hyper Trigger) - 트리거 사이클을 12cps로 가속
-//  Wait(0) 64개로 매 프레임마다 트리거 평가 → 12 DC tick = 1초 공식 성립
+//  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유
+//
+//  원리: Wait 액션 직전에 모든 트리거 조건을 재검사 → Wait(0) 다수로
+//        초당 ~12회 트리거 평가 강제. 12 DC tick = 1초 공식 성립.
+//
+//  4개 배치 이유 (NEO 갭 곱연산):
+//    NEO 사이클 = (Wait 개수 + 1) ^ (트리거 개수)
+//    1개: 63 사이클 ≈ 5초마다 끊김 (사실상 무효)
+//    4개: 63^4 ≈ 1575만 사이클 ≈ 15일 이상 무중단 → 어떤 게임 길이도 안전
+//
+//  Player 8 단독 소유: 다른 Wait를 사용하는 트리거가 P8에 없음을 확인.
+//  P8은 컴퓨터 중립 슬롯이라 게임 도중 이탈 위험 없음.
+//
+//  주의: P8에는 Wait를 사용하는 다른 트리거를 추가하지 말 것
+//        (Wait 블록 발생 시 hyper 효과 멈춤).
 //-----------------------------------------------------------------//
+
+Trigger("Player 8"){
+Conditions:
+	Always();
+Actions:
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Always();
+Actions:
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Always();
+Actions:
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Preserve Trigger();
+}
 
 Trigger("Player 8"){
 Conditions:

@@ -53,303 +53,9 @@ Actions:
 }
 
 //-----------------------------------------------------------------//
-//  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유
-//
-//  원리: Wait 액션 직전에 모든 트리거 조건을 재검사 → Wait(0) 다수로
-//        초당 ~12회 트리거 평가 강제. 12 DC tick = 1초 공식 성립.
-//
-//  4개 배치 이유 (NEO 갭 곱연산):
-//    NEO 사이클 = (Wait 개수 + 1) ^ (트리거 개수)
-//    1개: 63 사이클 ≈ 5초마다 끊김 (사실상 무효)
-//    4개: 63^4 ≈ 1575만 사이클 ≈ 15일 이상 무중단 → 어떤 게임 길이도 안전
-//
-//  Player 8 단독 소유: 다른 Wait를 사용하는 트리거가 P8에 없음을 확인.
-//  P8은 컴퓨터 중립 슬롯이라 게임 도중 이탈 위험 없음.
-//
-//  주의: P8에는 Wait를 사용하는 다른 트리거를 추가하지 말 것
-//        (Wait 블록 발생 시 hyper 효과 멈춤).
+//  터보 트리거는 999_hyper_trigger.txt로 이동됨 (빌드 마지막 위치).
+//  Hyper 트리거는 트리거 리스트의 맨 아래에 두는 것이 표준 패턴.
 //-----------------------------------------------------------------//
-
-Trigger("Player 8"){
-Conditions:
-	Always();
-Actions:
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Always();
-Actions:
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Always();
-Actions:
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Always();
-Actions:
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Wait(0);
-	Preserve Trigger();
-}
-
 //-----------------------------------------------------------------//
 //  마스터 틱 - 모든 독립 타이머 동시 증가 (12회/초)
 //-----------------------------------------------------------------//
@@ -409,14 +115,14 @@ Actions:
 
 //-----------------------------------------------------------------//
 //  오버로드 보급 - Terran Battlecruiser DC (30s = 360틱)
-//  본진 오버로드 < 30기일 때만 1기 추가. 인구 부족 방지하되
-//  플레이어가 처치 후 충격 줄 시간을 위해 30초 간격
+//  본진 오버로드 < 40기일 때만 1기 추가. 인구 부족 방지하되
+//  플레이어가 처치 후 충격 줄 시간을 위해 20초 간격
 //-----------------------------------------------------------------//
 
 Trigger("Player 5"){
 Conditions:
-	Deaths("Player 8", "Terran Battlecruiser", At least, 360);
-	Command("Player 5", "Zerg Overlord", At most, 29);
+	Deaths("Player 8", "Terran Battlecruiser", At least, 240);
+	Command("Player 5", "Zerg Overlord", At most, 32);
 	Command("Player 5", "Zerg Drone", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Battlecruiser", Set To, 0);
@@ -509,7 +215,7 @@ Conditions:
 	Elapsed Time(At least, 240);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Base");
+	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Base");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
 	Order("Player 5", "Zerg Zergling", "P5 Base", "Player Destination", Patrol);
 }
@@ -594,9 +300,9 @@ Conditions:
 	Command("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Dropship", Exactly, 0);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 24, "P5 Base");
+	Create Unit("Player 5", "Zerg Zergling", 28, "P5 Base");
 	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Base");
-	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Base");
+	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Base");
 	Order("Player 5", "Zerg Zergling", "P5 Base", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Lurker", "P5 Base", "Player Destination", Patrol);
@@ -615,7 +321,7 @@ Conditions:
 	Command("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Dropship", Exactly, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Mutalisk", 9, "P5 Base");
+	Create Unit("Player 5", "Zerg Mutalisk", 10, "P5 Base");
 	Create Unit("Player 5", "Zerg Scourge", 8, "P5 Base");
 	Order("Player 5", "Zerg Mutalisk", "P5 Base", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Scourge", "P5 Base", "Player Destination", Patrol);
@@ -636,7 +342,7 @@ Conditions:
 Actions:
 	Create Unit("Player 5", "Zerg Ultralisk", 3, "P5 Base");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 2, "P5 Base", 1);
-	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Base");
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Base");
 	Order("Player 5", "Zerg Ultralisk", "P5 Base", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Defiler", "P5 Base", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
@@ -1442,6 +1148,20 @@ Actions:
 //  중간 강도 구성
 //-----------------------------------------------------------------//
 
+//Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+//Conditions:
+//	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+//	Deaths("Player 8", "Terran Dropship", Exactly, 1);
+//	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+//	Deaths("Player 8", "Terran Wraith", At least, 720);
+//Actions:
+//	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+//	Display Text Message(Always Display, "[반복 침투] 변종 본진 공격!");
+//	Display Text Message(Always Display, "[노바] 또 들어와요. 신호원에 닿기 전엔 멈추지 않아요.");
+//	Preserve Trigger();
+//}
+
+
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -1451,16 +1171,14 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
-	Display Text Message(Always Display, "[반복 침투] 변종 본진 공격!");
-	Display Text Message(Always Display, "[노바] 또 들어와요. 신호원에 닿기 전엔 멈추지 않아요.");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P4 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P1 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P3 Hunt");
@@ -1522,8 +1240,21 @@ Actions:
 }
 
 //-----------------------------------------------------------------//
-//  터보 트리거 (Hyper Trigger) - 트리거 사이클을 12cps로 가속
-//  Wait(0) 64개로 매 프레임마다 트리거 평가 → 12 DC tick = 1초 공식 성립
+//  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유
+//
+//  원리: Wait 액션 직전에 모든 트리거 조건을 재검사 → Wait(0) 다수로
+//        초당 ~12회 트리거 평가 강제. 12 DC tick = 1초 공식 성립.
+//
+//  4개 배치 이유 (NEO 갭 곱연산):
+//    NEO 사이클 = (Wait 개수 + 1) ^ (트리거 개수)
+//    1개: 63 사이클 ≈ 5초마다 끊김 (사실상 무효)
+//    4개: 63^4 ≈ 1575만 사이클 ≈ 15일 이상 무중단 → 어떤 게임 길이도 안전
+//
+//  Player 8 단독 소유: 다른 Wait를 사용하는 트리거가 P8에 없음을 확인.
+//  P8은 컴퓨터 중립 슬롯이라 게임 도중 이탈 위험 없음.
+//
+//  주의: P8에는 Wait를 사용하는 다른 트리거를 추가하지 말 것
+//        (Wait 블록 발생 시 hyper 효과 멈춤).
 //-----------------------------------------------------------------//
 
 Trigger("Player 8"){
@@ -1596,40 +1327,213 @@ Actions:
 	Preserve Trigger();
 }
 
-//-----------------------------------------------------------------//
-//  [TEST MODE] 미션 2부터 시작 - 미션 1 스킵
-//
-//  이 파일이 Triggers/에 있으면 테스트 모드. 정상 게임에선 빼야 함.
-//  비활성화 방법:
-//    A. 파일 이름을 .txt가 아닌 다른 확장자로 변경 (예: .txt.off)
-//    B. 또는 이 파일을 Triggers/ 밖으로 이동
-//
-//  하는 일:
-//   1) Valkyrie DC = 2 (미션2 페이즈1 강제 진입)
-//   2) Vulture DC = 0 (페이즈 타이머 리셋)
-//   3) 미션1 클리어 보상 자원 지급
-//   4) Player 5 (미션1 저그)의 모든 유닛/건물 제거 (간섭 방지)
-//-----------------------------------------------------------------//
-
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
-	Elapsed Time(At most, 1);
+	Always();
 Actions:
-	Set Deaths("Player 8", "Terran Valkyrie", Set To, 2);
-	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
-	Set Resources("All Players", Add, 500, ore);
-	Set Resources("All Players", Add, 200, gas);
-	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "  [TEST MODE] 미션 2부터 시작");
-	Display Text Message(Always Display, "==========================================");
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Preserve Trigger();
 }
 
-// 미션1 저그(P5) 잔존 유닛/건물 제거 - 테스트 간섭 방지
-Trigger("Player 5"){
+Trigger("Player 8"){
 Conditions:
-	Elapsed Time(At most, 2);
+	Always();
 Actions:
-	Kill Unit("Player 5", "Buildings");
-	Kill Unit("Player 5", "Men");
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Always();
+Actions:
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Wait(0);
+	Preserve Trigger();
 }
 
