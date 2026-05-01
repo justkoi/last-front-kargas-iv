@@ -32,6 +32,7 @@ Conditions:
 	Command("Current Player", "Buildings", At most, 0);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Elapsed Time(At least, 60);
+	Switch("Switch1", Not Set);
 Actions:
 	Play WAV("sound\\Misc\\OutOfGas.wav", 2000);
 	Display Text Message(Always Display, "==========================================");

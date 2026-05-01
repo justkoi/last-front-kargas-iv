@@ -33,7 +33,7 @@ Actions:
 	Display Text Message(Always Display, "[노바] ...박사 셀렌 카르츠. 도미니언 출신 변종 연구자.");
 	Display Text Message(Always Display, "[노바] 데이터에 다음 좌표 - 북서쪽 프로토스 유적. 카운트다운이 걸려 있어요.");
 	Display Text Message(Always Display, "[호크] 그놈은 거기서 뭔가를 끝내려 한다. 우린 그 전에 도달해야 해.");
-	Set Mission Objectives("미션 2 완료. 다음 작전 좌표 잠금 해제: 북서쪽 프로토스 유적");
+	Set Mission Objectives("[미션 2 완료] 통신 두절의 진실\n\n▶ 신호원 데이터 추출 완료\n▶ 적 식별: 박사 셀렌 카르츠 (도미니언 출신 변종 연구자)\n▶ 다음 좌표: 북서쪽 프로토스 유적\n▶ 카운트다운 진행 중 — 다음 작전 준비");
 }
 
 // 미션 2 완료 - 임시 Victory (미션 3 작성 전까지)

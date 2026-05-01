@@ -11,7 +11,7 @@ Conditions:
 	Command("Player 5", "Zerg Drone", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Battlecruiser", Set To, 0);
-	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Base");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Spawn");
 	Preserve Trigger();
 }
 

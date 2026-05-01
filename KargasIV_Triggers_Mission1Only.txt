@@ -38,7 +38,7 @@ Actions:
 	Display Text Message(Always Display, "==========================================");
 	Display Text Message(Always Display, "  작전 코드명: 카르가스 IV");
 	Display Text Message(Always Display, "========== ================================");
-	Set Mission Objectives("미션 1: 북서쪽 저그 군락을 격파하고 착륙지를 확보하라");
+	Set Mission Objectives("[미션 1] 착륙지 확보\n\n▶ 목표: 북서쪽 저그 군락 완전 파괴\n▶ 클리어 조건: P5 진영의 모든 해처리 / 레어 / 하이브 파괴\n▶ 시간 제한: 없음\n▶ 팁: 무한 웨이브를 견디며 본진을 점진적으로 압박할 것");
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
 }
 
@@ -85,17 +85,16 @@ Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At most, 1);
 Actions:
-	Set Resources("Player 5", Set To, 3000, ore);
-	Set Resources("Player 5", Set To, 1500, gas);
-	Run AI Script At Location("ZARx", "P5 Base");
+	Set Resources("Player 5", Set To, 999999, ore);
+	Set Resources("Player 5", Set To, 999999, gas);
 }
 
 // 여기부터 스크립트 시작
 Trigger("Player 5"){
 Conditions:
-	Elapsed Time(At least, 360);
+	Elapsed Time(At least, 330);
 Actions:
-	Run AI Script("ZSUx");
+	Run AI Script At Location("ZSUx", "P5 Base");
 }
 
 //-----------------------------------------------------------------//
@@ -126,7 +125,7 @@ Conditions:
 	Command("Player 5", "Zerg Drone", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Battlecruiser", Set To, 0);
-	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Base");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Spawn");
 	Preserve Trigger();
 }
 
@@ -137,7 +136,7 @@ Actions:
 //-----------------------------------------------------------------//
 
 //-----------------------------------------------------------------//
-//  정찰 오버로드 사이클 - Terran Goliath DC (45s = 540틱)
+//  정찰 오버로드 사이클 - Terran Goliath DC (120s = 1440틱)
 //  회전 인덱스 - Protoss Probe DC (0~3)
 //-----------------------------------------------------------------//
 
@@ -153,12 +152,12 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 180);
-	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Terran Goliath", At least, 1440);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
 Actions:
 	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "P1 Hunt", Move);
-	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 1440);
 	Set Deaths("Player 8", "Protoss Probe", Set To, 1);
 	Preserve Trigger();
 }
@@ -167,12 +166,12 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 180);
-	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Terran Goliath", At least, 1440);
 	Deaths("Player 8", "Protoss Probe", Exactly, 1);
 Actions:
 	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "P2 Hunt", Move);
-	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 1440);
 	Set Deaths("Player 8", "Protoss Probe", Set To, 2);
 	Preserve Trigger();
 }
@@ -181,12 +180,12 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 180);
-	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Terran Goliath", At least, 1440);
 	Deaths("Player 8", "Protoss Probe", Exactly, 2);
 Actions:
 	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "P3 Hunt", Move);
-	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 1440);
 	Set Deaths("Player 8", "Protoss Probe", Set To, 3);
 	Preserve Trigger();
 }
@@ -195,12 +194,12 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 180);
-	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Terran Goliath", At least, 1440);
 	Deaths("Player 8", "Protoss Probe", Exactly, 3);
 Actions:
 	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "P4 Hunt", Move);
-	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 1440);
 	Set Deaths("Player 8", "Protoss Probe", Set To, 0);
 	Preserve Trigger();
 }
@@ -215,9 +214,9 @@ Conditions:
 	Elapsed Time(At least, 240);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Base");
+	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
-	Order("Player 5", "Zerg Zergling", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
 }
 Trigger("All Players"){
 Conditions:
@@ -234,11 +233,11 @@ Conditions:
 	Elapsed Time(At least, 480);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 12, "P5 Base");
-	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Base");
+	Create Unit("Player 5", "Zerg Zergling", 12, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
-	Order("Player 5", "Zerg Zergling", "P5 Base", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn", "Player Destination", Patrol);
 }
 Trigger("All Players"){
 Conditions:
@@ -255,13 +254,13 @@ Conditions:
 	Elapsed Time(At least, 660);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 20, "P5 Base");
-	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Base");
-	Create Unit("Player 5", "Zerg Lurker", 6, "P5 Base");
+	Create Unit("Player 5", "Zerg Zergling", 20, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Lurker", 6, "P5 Spawn");
 	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
-	Order("Player 5", "Zerg Zergling", "P5 Base", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Lurker", "P5 Base", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Lurker", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
 }
 Trigger("All Players"){
@@ -284,28 +283,38 @@ Actions:
 //  변형 D: 공성 공중 (가디언/디바우러/뮤탈)
 //-----------------------------------------------------------------//
 
-// 변형 데스카운트 세팅 - 변종 1회 순회가능하게 7200
+// 변형 데스카운트 세팅 - 변종 1회 순회가능하게 7200 (미션 1만)
 Trigger("Player 5"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 895);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Set To, 7200);
+	Set Deaths("Player 8", "Terran Wraith", Set To, 3600);
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 931);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Set To, 3600);
 }
 
 // 변형 A — Index 0: 지상 스웜
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 900);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 8", "Terran Wraith", At least, 1800);
 	Command("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Dropship", Exactly, 0);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 28, "P5 Base");
-	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Base");
-	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Base");
-	Order("Player 5", "Zerg Zergling", "P5 Base", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Lurker", "P5 Base", "Player Destination", Patrol);
+	Create Unit("Player 5", "Zerg Zergling", 28, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn");
+	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Lurker", "P5 Spawn", "Player Destination", Patrol);
 	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
 	Set Deaths("Player 8", "Terran Dropship", Set To, 1);
 	//Display Text Message(Always Display, "[경보 - 변종 A] 지상 스웜! 럴커 매복 다수!");
@@ -317,14 +326,15 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 900);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 8", "Terran Wraith", At least, 1800);
 	Command("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Dropship", Exactly, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Mutalisk", 10, "P5 Base");
-	Create Unit("Player 5", "Zerg Scourge", 8, "P5 Base");
-	Order("Player 5", "Zerg Mutalisk", "P5 Base", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Scourge", "P5 Base", "Player Destination", Patrol);
+	Create Unit("Player 5", "Zerg Mutalisk", 10, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Scourge", 8, "P5 Spawn");
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Scourge", "P5 Spawn", "Player Destination", Patrol);
 	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
 	Set Deaths("Player 8", "Terran Dropship", Set To, 2);
 	//Display Text Message(Always Display, "[경보 - 변종 B] 공중 무리 출현! 스커지 자폭 경계!");
@@ -336,16 +346,17 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 900);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 8", "Terran Wraith", At least, 1800);
 	Command("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Dropship", Exactly, 2);
 Actions:
-	Create Unit("Player 5", "Zerg Ultralisk", 3, "P5 Base");
-	Create Unit with Properties("Player 5", "Zerg Defiler", 2, "P5 Base", 1);
-	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Base");
-	Order("Player 5", "Zerg Ultralisk", "P5 Base", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Defiler", "P5 Base", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "P5 Base", "Player Destination", Patrol);
+	Create Unit("Player 5", "Zerg Ultralisk", 3, "P5 Spawn");
+	Create Unit with Properties("Player 5", "Zerg Defiler", 2, "P5 Spawn", 1);
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn");
+	Order("Player 5", "Zerg Ultralisk", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Defiler", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn", "Player Destination", Patrol);
 	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
 	Set Deaths("Player 8", "Terran Dropship", Set To, 3);
 	//Display Text Message(Always Display, "[경보 - 변종 C] 울트라리스크 진격! 다크스웜 주의!");
@@ -357,16 +368,17 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 900);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 8", "Terran Wraith", At least, 1800);
 	Command("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Dropship", Exactly, 3);
 Actions:
-	Create Unit("Player 5", "Zerg Guardian", 4, "P5 Base");
-	Create Unit("Player 5", "Zerg Devourer", 3, "P5 Base");
-	Create Unit("Player 5", "Zerg Mutalisk", 4, "P5 Base");
-	Order("Player 5", "Zerg Guardian", "P5 Base", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Devourer", "P5 Base", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Mutalisk", "P5 Base", "Player Destination", Patrol);
+	Create Unit("Player 5", "Zerg Guardian", 4, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Devourer", 3, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Mutalisk", 4, "P5 Spawn");
+	Order("Player 5", "Zerg Guardian", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Devourer", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn", "Player Destination", Patrol);
 	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
 	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
 	//Display Text Message(Always Display, "[경보 - 변종 D] 공성 가디언 편대! 디바우러 호위!");
@@ -374,9 +386,10 @@ Actions:
 	Preserve Trigger();
 }
 
-// 첫 진입 안내
+// 첫 진입 안내 (미션 1만)
 Trigger("All Players"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 900);
 	Elapsed Time(At most, 905);
 Actions:
@@ -386,15 +399,14 @@ Actions:
 }
 
 //-----------------------------------------------------------------//
-//  동적 건물 추적 - 각 P1~P4 독립 DC (30s = 360DC)
+//  동적 건물 추적 - 각 P1~P4 독립 DC (120s = 1440)
 //  Firebat=P1, Ghost=P2, Medic=P3, SCV=P4
 //-----------------------------------------------------------------//
 
 Trigger("Player 5"){
 Conditions:
 	Command("Player 1", "Buildings", At least, 1);
-	Elapsed Time(At least, 360);
-	Deaths("Player 8", "Terran Firebat", At least, 360);
+	Deaths("Player 8", "Terran Firebat", At least, 1440);
 Actions:
 	Move Location("Player 1", "Buildings", "Anywhere", "P1 Hunt");
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P1 Hunt", Patrol);
@@ -415,8 +427,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Command("Player 2", "Buildings", At least, 1);
-	Elapsed Time(At least, 360);
-	Deaths("Player 8", "Terran Ghost", At least, 360);
+	Deaths("Player 8", "Terran Ghost", At least, 1440);
 Actions:
 	Move Location("Player 2", "Buildings", "Anywhere", "P2 Hunt");
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
@@ -437,8 +448,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Command("Player 3", "Buildings", At least, 1);
-	Elapsed Time(At least, 360);
-	Deaths("Player 8", "Terran Medic", At least, 360);
+	Deaths("Player 8", "Terran Medic", At least, 1440);
 Actions:
 	Move Location("Player 3", "Buildings", "Anywhere", "P3 Hunt");
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
@@ -459,8 +469,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Command("Player 4", "Buildings", At least, 1);
-	Elapsed Time(At least, 360);
-	Deaths("Player 8", "Terran SCV", At least, 360);
+	Deaths("Player 8", "Terran SCV", At least, 1440);
 Actions:
 	Move Location("Player 4", "Buildings", "Anywhere", "P4 Hunt");
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);
@@ -512,6 +521,7 @@ Conditions:
 	Command("Current Player", "Buildings", At most, 0);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Elapsed Time(At least, 60);
+	Switch("Switch1", Not Set);
 Actions:
 	Play WAV("sound\\Misc\\OutOfGas.wav", 2000);
 	Display Text Message(Always Display, "==========================================");
@@ -566,43 +576,82 @@ Actions:
 }
 
 //-----------------------------------------------------------------//
-//  미션 2 - 페이즈 1: 정비 (300초)
-//  Valkyrie = 2 단계. Vulture DC로 경과 측정 (3600 = 300s)
+//  미션 2 - 페이즈 1: 정비 (120초)
+//  Valkyrie = 2 단계. Vulture DC로 경과 측정 (1440 = 120s)
 //-----------------------------------------------------------------//
 
-// 페이즈1 시작 브리핑 (Valkyrie 2 진입 직후 1회)
+// 페이즈1 시작 브리핑 (Valkyrie 2 진입 직후 1회) — 헤더 + 오브젝티브 + 타이머
+// Armory DC를 대사 진행 카운터로 사용 (1=시작, 2~5=대사 단계)
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Vulture", At least, 120);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Set Mission Objectives("미션 2: 통신 두절의 진실");
+	Set Mission Objectives("[미션 2 - 페이즈 1] 정비 단계\n\n▶ 목표: 2분간 부대 정비 및 재편성\n▶ 클리어 조건: 카운트다운 타이머 종료 (자동 진행)\n▶ 시간: 120초\n▶ 다음 단계: 페이즈 2 신호원 추적 시작\n▶ 팁: 자원 비축, 부대 구성, 본진 재정비 권장");
 	Display Text Message(Always Display, " ");
 	Display Text Message(Always Display, "==========================================");
 	Display Text Message(Always Display, "  [미션 2 개시] 통신 두절의 진실");
 	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "[노바] 사령관, 북쪽 중앙에서 UED 암호 신호 감지. 신호패턴이 수상해서 조사가 필요합니다.");
-	Display Text Message(Always Display, "[호크] 조사를 해봐야겠군. 우선 5분의 정비시간을 가지겠다.");
-	Set Countdown Timer(Set To, 300);
+	Set Countdown Timer(Set To, 120);
 	Set Deaths("Player 8", "Terran Armory", Set To, 1);
 }
 
-// 페이즈1 150초 경과 - 중간 알림
+// +3s: 노바 첫 보고
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Armory", Exactly, 1);
-	Countdown Timer(At most, 120);
+	Deaths("Player 8", "Terran Vulture", At least, 156);
 Actions:
-	Display Text Message(Always Display, "[호크] 정비 3분 경과. 2분 남았다.");
+	Display Text Message(Always Display, "[노바] 사령관, 북쪽 중앙에서 UED 암호 신호를 감지했습니다.");
+	Set Deaths("Player 8", "Terran Armory", Set To, 2);
+}
+
+// +6s: 호크 의문
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Armory", Exactly, 2);
+	Deaths("Player 8", "Terran Vulture", At least, 192);
+Actions:
+	Display Text Message(Always Display, "[호크] UED? 그쪽은 작전권 밖이다. 잘못 잡힌 거 아닌가?");
+	Set Deaths("Player 8", "Terran Armory", Set To, 3);
+}
+
+// +9s: 노바 추가 정보
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Armory", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 228);
+Actions:
+	Display Text Message(Always Display, "[노바] 그게 이상합니다. 표준 UED 암호 패턴인데... 송출 위치가 일치하지 않아요.");
+	Set Deaths("Player 8", "Terran Armory", Set To, 4);
+}
+
+// +12s: 호크 결정
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Armory", Exactly, 4);
+	Deaths("Player 8", "Terran Vulture", At least, 264);
+Actions:
+	Display Text Message(Always Display, "[호크] 직접 가서 확인한다. 좌표 분석 마칠 때까지 2분의 정비 시간을 가지겠다.");
+	Set Deaths("Player 8", "Terran Armory", Set To, 5);
+}
+
+// +15s: 호크 지시
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Armory", Exactly, 5);
+	Deaths("Player 8", "Terran Vulture", At least, 300);
+Actions:
+	Display Text Message(Always Display, "[호크] 그동안 부대를 정비하고 본진을 다지도록.");
+	Set Deaths("Player 8", "Terran Armory", Set To, 6);
 }
 
 // 페이즈1 종료 - 페이즈2 진입 (Valkyrie 2→3, Vulture 0 리셋)
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
-	Deaths("Player 8", "Terran Armory", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 1);
 	Countdown Timer(At most, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 3);
@@ -657,7 +706,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Set Mission Objectives("미션 2 [페이즈 2]: 신호원 폐기지 진입 (15분 내 도달)");
+	Set Mission Objectives("[미션 2 - 페이즈 2] 신호원 추적\n\n▶ 목표: 북쪽 프로토스 신전의 신호원 비콘 점거\n▶ 클리어 조건: 15분 내 비콘 위치 도달 + 점거 개시\n▶ 시간 제한: 15분 (Countdown Timer)\n▶ 위치: 미니맵 핑 (P5 Lab Beacon, 30초마다 갱신)\n▶ 주의: 비콘 주변에 변종 적 사전 배치 (히드라/럴커/울트라/디파일러/감염테란)\n▶ 도달 즉시: 5분 누적 점거 단계로 전환");
 	Display Text Message(Always Display, "==========================================");
 	Display Text Message(Always Display, "  [페이즈 2] 신호원 추적");
 	Display Text Message(Always Display, "==========================================");
@@ -842,14 +891,14 @@ Conditions:
 	Countdown Timer(At most, 180);
 	Countdown Timer(At least, 176);
 Actions:
-	Create Unit("Player 6", "Zerg Overlord", 1, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 14, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 14, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 14, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 14, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 2, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 2, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 2, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 2, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 18, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 18, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 18, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 18, "P4 Hunt");
 	Create Unit("Player 6", "Zerg Hydralisk", 8, "P1 Hunt");
 	Create Unit("Player 6", "Zerg Hydralisk", 8, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Hydralisk", 8, "P3 Hunt");
@@ -858,10 +907,10 @@ Actions:
 	Create Unit("Player 6", "Zerg Lurker", 3, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 3, "P3 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 3, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P4 Hunt");
 	Order("Player 6", "Zerg Zergling","Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
@@ -909,7 +958,7 @@ Actions:
 	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
 }
 
-// 첫 비콘 진입 - 1회성 인트로 다이얼로그
+// 첫 비콘 진입 - 1회성 인트로 다이얼로그 (Zealot DC로 후속 대사 페이싱)
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -918,10 +967,52 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "[신호원 도달] 폐기지 단말기 확보.");
-	Display Text Message(Always Display, "[노바] 단말기 데이터 추출 시작. 누적 5분간 비콘 사수 필요.");
-	Display Text Message(Always Display, "[노바] 추출 진행에 따라 변종 반격이 점점 강해집니다.");
-	Set Mission Objectives("미션 2 [추출 중]: 비콘 누적 점거 5분 = 100%");
+	Display Text Message(Always Display, "[노바] 단말기 데이터 추출을 시작합니다. 누적 5분간 비콘 사수가 필요해요.");
+	Set Mission Objectives("[미션 2 - 추출 시작] 0%\n\n▶ 클리어 조건: 비콘 위 누적 점거 5분 (= 100% 도달)\n▶ 위치: P5 Lab Beacon (미니맵 핑)\n▶ 비콘에서 유닛 떨어지면 추출 일시 정지\n▶ 비콘 비우면 카운트다운 타이머 재개 — 0 도달 시 임무 실패\n▶ 진행률에 따라 변종 반격 강화 (20% / 40% / 60% / 80%)\n▶ 60% 시점에 변종 군단 총공세 발생");
 	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
+}
+
+// 비콘 진입 +3s (Zealot 누적 36) - 호크 경고 1
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Zealot", At least, 36);
+	Deaths("Player 8", "Protoss Zealot", At most, 71);
+Actions:
+	Display Text Message(Always Display, "[호크] 잘 들어라. 비콘에서 유닛이 떨어지면 그 즉시 추출이 멈춘다.");
+}
+
+// 비콘 진입 +6s (Zealot 72) - 호크 경고 2
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At most, 107);
+Actions:
+	Display Text Message(Always Display, "[호크] 그리고 카운트다운이 다시 작동한다. 방치하면 적이 공격할 기회를 계속 가지게 된다.");
+}
+
+// 비콘 진입 +9s (Zealot 108) - 노바 마무리
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Zealot", At least, 108);
+	Deaths("Player 8", "Protoss Zealot", At most, 143);
+Actions:
+	Display Text Message(Always Display, "[노바] 추출이 진행될수록 변종 반격이 강해집니다. 비콘 사수가 최우선이에요.");
+}
+
+// 첫 비콘 이탈 경고 (1회 한정) - 추출 시작 후 비콘 비면 발동
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "[!! 경고] 비콘 점거가 끊겼습니다 — 추출 일시 정지!");
+	Display Text Message(Always Display, "[노바] 카운트다운 재개. 변종이 단말기 쪽으로 접근 중!");
+	Display Text Message(Always Display, "[호크] 누구든 즉시 비콘으로 이동! 신호원을 빼앗기면 임무 실패다!");
 }
 
 // 점거 토글 ON - 비콘 점거 시 Probe=1 + 타이머 정지
@@ -966,35 +1057,35 @@ Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 360);
 Actions:
 	Display Text Message(Always Display, "[노바] 데이터 추출 10%.");
-	Set Mission Objectives("미션 2 [추출 중]: 10% 진행 (누적 비콘 점거 시간 기준)");
+	Set Mission Objectives("[미션 2 - 추출 중] 10%\n\n▶ 클리어 조건: 비콘 누적 점거 5분 (= 100%)\n▶ 현재 진행: 10%, 남은 시간 약 4분 30초\n▶ 비콘 비우면 진행 일시 정지\n▶ 다음 변종 반격조: 20%");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 720);
 Actions:
 	Display Text Message(Always Display, "[노바] 데이터 20%. 변종 1차 반격조 출발 신호 잡혔어요.");
-	Set Mission Objectives("미션 2 [추출 중]: 20% 진행");
+	Set Mission Objectives("[미션 2 - 추출 중] 20%\n\n▶ 클리어 조건: 비콘 누적 점거 5분 (= 100%)\n▶ 현재 진행: 20%, 남은 시간 약 4분\n▶ ⚠ 변종 1차 반격조 진격 중 (정찰급)\n▶ 비콘 비우면 진행 일시 정지");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1080);
 Actions:
 	Display Text Message(Always Display, "[노바] 데이터 30%.");
-	Set Mission Objectives("미션 2 [추출 중]: 30% 진행");
+	Set Mission Objectives("[미션 2 - 추출 중] 30%\n\n▶ 클리어 조건: 비콘 누적 점거 5분 (= 100%)\n▶ 현재 진행: 30%, 남은 시간 약 3분 30초\n▶ 비콘 비우면 진행 일시 정지\n▶ 다음 변종 반격조: 40%");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1440);
 Actions:
 	Display Text Message(Always Display, "[노바] 데이터 40%. ...이거 UED가 아니에요.");
-	Set Mission Objectives("미션 2 [추출 중]: 40% 진행");
+	Set Mission Objectives("[미션 2 - 추출 중] 40%\n\n▶ 클리어 조건: 비콘 누적 점거 5분 (= 100%)\n▶ 현재 진행: 40%, 남은 시간 약 3분\n▶ ⚠ 변종 2차 반격조 진격 중 (본대 + 럴커)\n▶ 비콘 비우면 진행 일시 정지");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1800);
 Actions:
 	Display Text Message(Always Display, "[노바] 데이터 50%. 절반 왔습니다, 사령관.");
-	Set Mission Objectives("미션 2 [추출 중]: 50% 진행");
+	Set Mission Objectives("[미션 2 - 추출 중] 50% (절반 도달)\n\n▶ 클리어 조건: 비콘 누적 점거 5분 (= 100%)\n▶ 현재 진행: 50%, 남은 시간 약 2분 30초\n▶ 비콘 비우면 진행 일시 정지\n▶ 다음 단계: 60% — 변종 총공세 경보");
 }
 Trigger("All Players"){
 Conditions:
@@ -1003,35 +1094,35 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "[!! 비상] 데이터 60%. 변종 군단 총공세 신호! 모든 화력 집중!");
 	Display Text Message(Always Display, "[호크] 이건 우리를 비콘에서 떼어내려는 거다. 절대 양보하지 마라!");
-	Set Mission Objectives("미션 2 [추출 중]: 60% 진행 - 변종 총공세!");
+	Set Mission Objectives("[미션 2 - 추출 중] 60% — 총공세!\n\n▶ 클리어 조건: 비콘 누적 점거 5분 (= 100%)\n▶ 현재 진행: 60%, 남은 시간 약 2분\n▶ ⚠⚠ 변종 군단 총공세 진행 중\n▶ 모든 화력을 비콘 사수에 집중하라\n▶ 비콘 비우면 진행 일시 정지");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2520);
 Actions:
 	Display Text Message(Always Display, "[노바] 데이터 70%. 총공세 격퇴 확인. 추출 계속.");
-	Set Mission Objectives("미션 2 [추출 중]: 70% 진행");
+	Set Mission Objectives("[미션 2 - 추출 중] 70%\n\n▶ 클리어 조건: 비콘 누적 점거 5분 (= 100%)\n▶ 현재 진행: 70%, 남은 시간 약 1분 30초\n▶ 총공세 격퇴 확인, 추출 계속\n▶ 다음 변종 반격조: 80%");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2880);
 Actions:
 	Display Text Message(Always Display, "[노바] 데이터 80%. 추출자 식별 중...");
-	Set Mission Objectives("미션 2 [추출 중]: 80% 진행");
+	Set Mission Objectives("[미션 2 - 추출 중] 80%\n\n▶ 클리어 조건: 비콘 누적 점거 5분 (= 100%)\n▶ 현재 진행: 80%, 남은 시간 약 1분\n▶ ⚠ 변종 3차 반격조 진격 중 (정예)\n▶ 비콘 비우면 진행 일시 정지");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 3240);
 Actions:
 	Display Text Message(Always Display, "[노바] 데이터 90%. 거의 다 됐어요!");
-	Set Mission Objectives("미션 2 [추출 중]: 90% 진행");
+	Set Mission Objectives("[미션 2 - 추출 중] 90%\n\n▶ 클리어 조건: 비콘 누적 점거 5분 (= 100%)\n▶ 현재 진행: 90%, 남은 시간 약 30초\n▶ 거의 완료, 끝까지 사수\n▶ 비콘 비우면 진행 일시 정지");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 3600);
 Actions:
 	Display Text Message(Always Display, "[노바] 데이터 100%. 추출 완료!");
-	Set Mission Objectives("미션 2 [추출 중]: 100% - 추출 완료");
+	Set Mission Objectives("[미션 2 - 추출 완료] 100%\n\n▶ 데이터 추출 완료\n▶ 다음 단계 전환 대기 중...");
 }
 
 //-----------------------------------------------------------------//
@@ -1076,20 +1167,48 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2160);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Display Text Message(Always Display, "[!!! 총공세] 변종 군단 총공세 개시!");
 	Create Unit("Player 6", "Zerg Overlord", 2, "P6 South");
-	Create Unit("Player 6", "Zerg Zergling", 340, "P6 South");
-	Create Unit("Player 6", "Zerg Hydralisk", 24, "P6 South");
-	Create Unit("Player 6", "Zerg Lurker", 8, "P6 South");
-	Create Unit("Player 6", "Zerg Mutalisk", 24, "P6 South");
-	Create Unit("Player 6", "Zerg Scourge", 36, "P6 South");
+	Create Unit("Player 6", "Zerg Zergling", 18, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 12, "P6 South");
+	Create Unit("Player 6", "Zerg Lurker", 4, "P6 South");
+	Create Unit("Player 6", "Zerg Mutalisk", 12, "P6 South");
+	Create Unit("Player 6", "Zerg Scourge", 18, "P6 South");
 	Create Unit("Player 6", "Zerg Queen", 2, "P6 South");
-	Create Unit with Properties("Player 6", "Zerg Defiler", 3, "P6 South", 1);
-	Create Unit("Player 6", "Zerg Ultralisk", 412, "P6 South");
-	Create Unit("Player 6", "Zerg Guardian", 12, "P6 South");
-	Create Unit("Player 6", "Zerg Devourer", 12, "P6 South");
-	Create Unit("Player 6", "Infested Terran", 8, "P6 South");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 South", 1);
+	Create Unit("Player 6", "Zerg Ultralisk", 6, "P6 South");
+	Create Unit("Player 6", "Zerg Guardian", 6, "P6 South");
+	Create Unit("Player 6", "Zerg Devourer", 6, "P6 South");
+	Create Unit("Player 6", "Infested Terran", 3, "P6 South");
+	Order("Player 6", "Zerg Overlord", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Scourge", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Queen", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Defiler", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Guardian", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Devourer", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Infested Terran", "Anywhere", "P5 Lab Beacon", Patrol);
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2180);
+Actions:
+	Create Unit("Player 6", "Zerg Overlord", 2, "P6 South");
+	Create Unit("Player 6", "Zerg Zergling", 18, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 12, "P6 South");
+	Create Unit("Player 6", "Zerg Lurker", 4, "P6 South");
+	Create Unit("Player 6", "Zerg Mutalisk", 12, "P6 South");
+	Create Unit("Player 6", "Zerg Scourge", 18, "P6 South");
+	Create Unit("Player 6", "Zerg Queen", 2, "P6 South");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 South", 1);
+	Create Unit("Player 6", "Zerg Ultralisk", 6, "P6 South");
+	Create Unit("Player 6", "Zerg Guardian", 6, "P6 South");
+	Create Unit("Player 6", "Zerg Devourer", 6, "P6 South");
+	Create Unit("Player 6", "Infested Terran", 3, "P6 South");
 	Order("Player 6", "Zerg Overlord", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
@@ -1223,7 +1342,7 @@ Actions:
 	Display Text Message(Always Display, "[노바] ...박사 셀렌 카르츠. 도미니언 출신 변종 연구자.");
 	Display Text Message(Always Display, "[노바] 데이터에 다음 좌표 - 북서쪽 프로토스 유적. 카운트다운이 걸려 있어요.");
 	Display Text Message(Always Display, "[호크] 그놈은 거기서 뭔가를 끝내려 한다. 우린 그 전에 도달해야 해.");
-	Set Mission Objectives("미션 2 완료. 다음 작전 좌표 잠금 해제: 북서쪽 프로토스 유적");
+	Set Mission Objectives("[미션 2 완료] 통신 두절의 진실\n\n▶ 신호원 데이터 추출 완료\n▶ 적 식별: 박사 셀렌 카르츠 (도미니언 출신 변종 연구자)\n▶ 다음 좌표: 북서쪽 프로토스 유적\n▶ 카운트다운 진행 중 — 다음 작전 준비");
 }
 
 // 미션 2 완료 - 임시 Victory (미션 3 작성 전까지)

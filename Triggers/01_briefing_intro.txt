@@ -8,7 +8,7 @@ Actions:
 	Display Text Message(Always Display, "==========================================");
 	Display Text Message(Always Display, "  작전 코드명: 카르가스 IV");
 	Display Text Message(Always Display, "========== ================================");
-	Set Mission Objectives("미션 1: 북서쪽 저그 군락을 격파하고 착륙지를 확보하라");
+	Set Mission Objectives("[미션 1] 착륙지 확보\n\n▶ 목표: 북서쪽 저그 군락 완전 파괴\n▶ 클리어 조건: P5 진영의 모든 해처리 / 레어 / 하이브 파괴\n▶ 시간 제한: 없음\n▶ 팁: 무한 웨이브를 견디며 본진을 점진적으로 압박할 것");
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
 }
 

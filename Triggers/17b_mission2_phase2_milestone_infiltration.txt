@@ -136,14 +136,14 @@ Conditions:
 	Countdown Timer(At most, 180);
 	Countdown Timer(At least, 176);
 Actions:
-	Create Unit("Player 6", "Zerg Overlord", 1, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 14, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 14, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 14, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Zergling", 14, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 2, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 2, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 2, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Overlord", 2, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 18, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 18, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 18, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Zergling", 18, "P4 Hunt");
 	Create Unit("Player 6", "Zerg Hydralisk", 8, "P1 Hunt");
 	Create Unit("Player 6", "Zerg Hydralisk", 8, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Hydralisk", 8, "P3 Hunt");
@@ -152,10 +152,10 @@ Actions:
 	Create Unit("Player 6", "Zerg Lurker", 3, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 3, "P3 Hunt");
 	Create Unit("Player 6", "Zerg Lurker", 3, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P4 Hunt");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P1 Hunt");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P2 Hunt");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P3 Hunt");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P4 Hunt");
 	Order("Player 6", "Zerg Zergling","Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);

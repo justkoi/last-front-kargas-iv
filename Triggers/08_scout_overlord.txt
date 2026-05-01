@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------//
-//  정찰 오버로드 사이클 - Terran Goliath DC (45s = 540틱)
+//  정찰 오버로드 사이클 - Terran Goliath DC (120s = 1440틱)
 //  회전 인덱스 - Protoss Probe DC (0~3)
 //-----------------------------------------------------------------//
 
@@ -15,12 +15,12 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 180);
-	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Terran Goliath", At least, 1440);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
 Actions:
 	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "P1 Hunt", Move);
-	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 1440);
 	Set Deaths("Player 8", "Protoss Probe", Set To, 1);
 	Preserve Trigger();
 }
@@ -29,12 +29,12 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 180);
-	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Terran Goliath", At least, 1440);
 	Deaths("Player 8", "Protoss Probe", Exactly, 1);
 Actions:
 	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "P2 Hunt", Move);
-	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 1440);
 	Set Deaths("Player 8", "Protoss Probe", Set To, 2);
 	Preserve Trigger();
 }
@@ -43,12 +43,12 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 180);
-	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Terran Goliath", At least, 1440);
 	Deaths("Player 8", "Protoss Probe", Exactly, 2);
 Actions:
 	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "P3 Hunt", Move);
-	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 1440);
 	Set Deaths("Player 8", "Protoss Probe", Set To, 3);
 	Preserve Trigger();
 }
@@ -57,12 +57,12 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 180);
-	Deaths("Player 8", "Terran Goliath", At least, 540);
+	Deaths("Player 8", "Terran Goliath", At least, 1440);
 	Deaths("Player 8", "Protoss Probe", Exactly, 3);
 Actions:
 	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "P4 Hunt", Move);
-	Set Deaths("Player 8", "Terran Goliath", Subtract, 540);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 1440);
 	Set Deaths("Player 8", "Protoss Probe", Set To, 0);
 	Preserve Trigger();
 }

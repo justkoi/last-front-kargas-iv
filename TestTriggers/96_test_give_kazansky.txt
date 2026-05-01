@@ -1,0 +1,16 @@
+//-----------------------------------------------------------------//
+//  [TEST MODE / CHEAT] 게임 시작 시 P1에게 톰 카잔스키 36기 지급
+//
+//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
+//  끄는 법: Triggers/ 에서 제거
+//
+//  주의: 36기를 한 location에 몰아 스폰하면 stacking으로 일부 멀리
+//        밀려날 수 있음. 테스트 목적이므로 P1 본진(P1 Start 등) 사용.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Create Unit("Player 1", "Tom Kazansky (Wraith)", 36, "Anywhere");
+}
