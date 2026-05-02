@@ -70,6 +70,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Zealot", Exactly, 0);
 	Countdown Timer(At least, 1);
 	Deaths("Player 8", "Terran Civilian", At least, 360);
 Actions:
