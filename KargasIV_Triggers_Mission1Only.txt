@@ -48,23 +48,44 @@ Conditions:
 	Elapsed Time(At most, 5);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>현장 지휘관들, 교신 확인.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 7);
+	Elapsed Time(At most, 9);
+Actions:
 	Display Text Message(Always Display, "<04>오늘 목표는 돌격이 아니다. 카르가스 IV에 버틸 수 있는 첫 전선을 세운다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 11);
+	Elapsed Time(At most, 13);
+Actions:
 	Display Text Message(Always Display, "<04>기지를 안정화하고 자원권을 넓혀라. 북서쪽 군락은 준비가 끝난 뒤 친다.");
 }
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 12);
-	Elapsed Time(At most, 14);
+	Elapsed Time(At least, 16);
+	Elapsed Time(At most, 18);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 군락에서 변종 생체반응이 섞여 나옵니다.");
-	Display Text Message(Always Display, "<04>일반 저그 군락보다 반응 주기가 불규칙합니다. 초반 정찰조를 예상하세요.");
 }
 
 Trigger("All Players"){
 Conditions:
 	Elapsed Time(At least, 20);
 	Elapsed Time(At most, 22);
+Actions:
+	Display Text Message(Always Display, "<04>일반 저그 군락보다 반응 주기가 불규칙합니다. 초반 정찰조를 예상하세요.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 25);
+	Elapsed Time(At most, 27);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>방어선을 먼저 세워라. 병력을 낭비하면 다음 전투는 없다.");
 }
@@ -424,10 +445,17 @@ Conditions:
 	Elapsed Time(At most, 905);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "[경보 - 코드 레드] 저그 군단 총공세 개시!");
-	Display Text Message(Always Display, "[지휘부] 변종 무리가 무한히 밀려온다. 거점을 사수하라!");
+	Display Text Message(Always Display, "<1A>노바: <04>군락 반응이 바뀌었습니다. 단일 무리가 아니라 조합을 돌리고 있어요.");
 }
 
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 904);
+	Elapsed Time(At most, 909);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>놈들이 우리 방어선을 읽기 시작했다. 여기서 밀리면 첫 전선은 무너진다.");
+}
 //-----------------------------------------------------------------//
 //  동적 건물 추적 - 각 P1~P4 독립 DC (120s = 1440)
 //  Firebat=P1, Ghost=P2, Medic=P3, SCV=P4
@@ -1574,6 +1602,67 @@ Actions:
 	Victory();
 }
 
+//-----------------------------------------------------------------//
+//  [TEST MODE / CHEAT] 게임 시작 시 P1에게 톰 카잔스키 36기 지급
+//
+//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
+//  끄는 법: Triggers/ 에서 제거
+//
+//  주의: 36기를 한 location에 몰아 스폰하면 stacking으로 일부 멀리
+//        밀려날 수 있음. 테스트 목적이므로 P1 본진(P1 Start 등) 사용.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Create Unit("Player 1", "Tom Kazansky (Wraith)", 36, "Anywhere");
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE] 플레이어 절대 패배 방지 (스위치 방식)
+//
+//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
+//  끄는 법: Triggers/ 에서 제거
+//
+//  동작 원리:
+//    게임 시작 직후 Switch1 을 set.
+//    12_endgame.txt 의 패배 트리거에 Switch("Switch1", cleared) 조건이
+//    있으므로, 스위치가 set 상태인 한 Defeat()가 발동하지 않음.
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Switch("Switch1", set);
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE] 컴퓨터(P5, P6) → 플레이어(P1~P4) 시야 공유
+//  (플레이어가 컴퓨터의 시야를 가진다)
+//
+//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
+//  끄는 법: Triggers/ 에서 제거
+//
+//  사용 스크립트 (AI → 해당 플레이어로 시야 공유):
+//    "Turn ON Shared Vision of current player with Player 1"
+//    "Turn ON Shared Vision of current player with Player 2"
+//    "Turn ON Shared Vision of current player with Player 3"
+//    "Turn ON Shared Vision of current player with Player 4"
+//
+//  주의: 위 스크립트 이름이 SCMDraft 드롭다운에 정확히 그대로 있는지
+//        확인할 것. 표기가 다르면 적절히 교체.
+//        ("of [SHARER] with [RECEIVER]" 패턴으로 추정)
+//-----------------------------------------------------------------//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Run AI Script("+Vi4");
+	Run AI Script("+Vi5");
+	Run AI Script("+Vi6");
+	Run AI Script("+Vi7");
+}
 //-----------------------------------------------------------------//
 //  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유
 //

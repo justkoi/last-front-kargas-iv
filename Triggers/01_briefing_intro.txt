@@ -18,23 +18,44 @@ Conditions:
 	Elapsed Time(At most, 5);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>현장 지휘관들, 교신 확인.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 7);
+	Elapsed Time(At most, 9);
+Actions:
 	Display Text Message(Always Display, "<04>오늘 목표는 돌격이 아니다. 카르가스 IV에 버틸 수 있는 첫 전선을 세운다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 11);
+	Elapsed Time(At most, 13);
+Actions:
 	Display Text Message(Always Display, "<04>기지를 안정화하고 자원권을 넓혀라. 북서쪽 군락은 준비가 끝난 뒤 친다.");
 }
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 12);
-	Elapsed Time(At most, 14);
+	Elapsed Time(At least, 16);
+	Elapsed Time(At most, 18);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 군락에서 변종 생체반응이 섞여 나옵니다.");
-	Display Text Message(Always Display, "<04>일반 저그 군락보다 반응 주기가 불규칙합니다. 초반 정찰조를 예상하세요.");
 }
 
 Trigger("All Players"){
 Conditions:
 	Elapsed Time(At least, 20);
 	Elapsed Time(At most, 22);
+Actions:
+	Display Text Message(Always Display, "<04>일반 저그 군락보다 반응 주기가 불규칙합니다. 초반 정찰조를 예상하세요.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 25);
+	Elapsed Time(At most, 27);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>방어선을 먼저 세워라. 병력을 낭비하면 다음 전투는 없다.");
 }
