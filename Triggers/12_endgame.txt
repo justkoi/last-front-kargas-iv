@@ -3,7 +3,7 @@
 //  Valkyrie DC: 1 → 2, Vulture DC 0 리셋(페이즈 타이머)
 //-----------------------------------------------------------------//
 
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Trigger("Player 8"){
 Conditions:
 	Bring("Player 5", "Zerg Hatchery", "P5 Base", At most, 0);
 	Bring("Player 5", "Zerg Lair", "P5 Base", At most, 0);
@@ -12,13 +12,52 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 2);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Vulture", At most, 24);
+Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Display Text Message(Always Display, "<13><05>==========================================");
 	Display Text Message(Always Display, "<13><07>미션 1 완료: 첫 전선 구축");
 	Display Text Message(Always Display, "<13><05>==========================================");
-	Display Text Message(Always Display, "<03>호크: <04>첫 전선은 세워졌다. 잘 싸웠다, 선봉대.");
-	Display Text Message(Always Display, "<07>군수지원: <04>전 부대 미네랄 +500 / 가스 +200");
-	Set Resources("Current Player", Add, 500, ore);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Vulture", At least, 24);
+	Deaths("Player 8", "Terran Vulture", At most, 48);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>북서쪽 군락 붕괴 확인. 첫 전선은 세워졌다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Vulture", At least, 60);
+	Deaths("Player 8", "Terran Vulture", At most, 84);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>하지만 군락 반응 기록이 이상합니다. 이건 자연 발생 패턴이 아니에요.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Vulture", At least, 96);
+	Deaths("Player 8", "Terran Vulture", At most, 119);
+Actions:
+	Display Text Message(Always Display, "<07>군수지원: <04>전 부대 보급 투입. 미네랄 +800 / 가스 +200");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Vulture", At most, 24);
+Actions:
+	Set Resources("Current Player", Add, 800, ore);
 	Set Resources("Current Player", Add, 200, gas);
 }
 
@@ -35,11 +74,10 @@ Conditions:
 	Switch("Switch1", Not Set);
 Actions:
 	Play WAV("sound\\Misc\\OutOfGas.wav", 2000);
-	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "  [작전 실패] 통신 두절");
-	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "[지휘부] ...선봉대? 응답하라... 응답하라...");
+	Display Text Message(Always Display, "<13><03>==========================================");
+	Display Text Message(Always Display, "<13><06>  작전 실패: 전선 소멸");
+	Display Text Message(Always Display, "<13><03>==========================================");
+	Display Text Message(Always Display, "<03>호크: <04>전 함선, 차원 도약 엔진 가동! 절대 호위 진형을 이탈하지 말고 침착하게 섹터를 빠져나간다!");
 	Wait(1500);
 	Defeat();
 }
-

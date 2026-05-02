@@ -3,71 +3,72 @@
 //  Valkyrie = 2 단계. Vulture DC로 경과 측정 (1440 = 120s)
 //-----------------------------------------------------------------//
 
-// 페이즈1 시작 브리핑 (Valkyrie 2 진입 직후 1회) — 헤더 + 오브젝티브 + 타이머
-// Armory DC를 대사 진행 카운터로 사용 (1=시작, 2~5=대사 단계)
+// 페이즈1 시작 브리핑 (미션1 완료 후 약 20초) — 헤더 + 오브젝티브
+// 대사는 4초 간격으로 출력하고, 마지막 지시 후 2분 정비 타이머를 시작한다.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
-	Deaths("Player 8", "Terran Vulture", At least, 120);
+	Deaths("Player 8", "Terran Vulture", At least, 240);
+	Deaths("Player 8", "Terran Vulture", At most, 264);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Set Mission Objectives("[미션 2 - 페이즈 1] 정비 단계\n\n▶ 목표: 2분간 부대 정비 및 재편성\n▶ 클리어 조건: 카운트다운 타이머 종료 (자동 진행)\n▶ 시간: 120초\n▶ 다음 단계: 페이즈 2 신호원 추적 시작\n▶ 팁: 자원 비축, 부대 구성, 본진 재정비 권장");
+	Set Mission Objectives("[미션 2 - 페이즈 1] 정비 단계\n\n- 목표: 2분간 부대 정비 및 재편성\n- 클리어 조건: 카운트다운 타이머 종료 (자동 진행)\n- 시간: 120초\n- 다음 단계: 페이즈 2 비콘 추적 시작\n- 팁: 자원 비축, 부대 구성, 본진 재정비 권장");
 	Display Text Message(Always Display, " ");
-	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "  [미션 2 개시] 통신 두절의 진실");
-	Display Text Message(Always Display, "==========================================");
+	Display Text Message(Always Display, "<13><05>==========================================");
+	Display Text Message(Always Display, "<13><07>  [미션 2 - 페이즈1] 통신 두절의 진실");
+	Display Text Message(Always Display, "<13><05>==========================================");
+}
+
+// +4s: 노바 첫 보고
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Vulture", At least, 288);
+	Deaths("Player 8", "Terran Vulture", At most, 312);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>북쪽 중앙에서 UED 암호 신호 감지. 송출이 계속됩니다.");
+}
+
+// +8s: 호크 의문
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Vulture", At least, 336);
+	Deaths("Player 8", "Terran Vulture", At most, 360);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>UED? 이 행성의 마지막 교신은 6주 전에 끊겼다.");
+}
+
+// +12s: 노바 추가 정보
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Vulture", At least, 384);
+	Deaths("Player 8", "Terran Vulture", At most, 408);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>암호 패턴은 맞습니다. 하지만 좌표가 기존 기록과 맞지 않아요.");
+}
+
+// +16s: 호크 판단
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Vulture", At least, 432);
+	Deaths("Player 8", "Terran Vulture", At most, 456);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>우릴 부르는 신호라면 늦었고, 함정이라면 너무 정교하군.");
+}
+
+// +20s: 호크 지시 및 정비 타이머 시작
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Vulture", At least, 480);
+	Deaths("Player 8", "Terran Vulture", At most, 504);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>직접 확인한다. 2분간 재정비한다.");
 	Set Countdown Timer(Set To, 120);
 	Set Deaths("Player 8", "Terran Armory", Set To, 1);
-}
-
-// +3s: 노바 첫 보고
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Armory", Exactly, 1);
-	Deaths("Player 8", "Terran Vulture", At least, 156);
-Actions:
-	Display Text Message(Always Display, "[노바] 사령관, 북쪽 중앙에서 UED 암호 신호를 감지했습니다.");
-	Set Deaths("Player 8", "Terran Armory", Set To, 2);
-}
-
-// +6s: 호크 의문
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Armory", Exactly, 2);
-	Deaths("Player 8", "Terran Vulture", At least, 192);
-Actions:
-	Display Text Message(Always Display, "[호크] UED? 그쪽은 작전권 밖이다. 잘못 잡힌 거 아닌가?");
-	Set Deaths("Player 8", "Terran Armory", Set To, 3);
-}
-
-// +9s: 노바 추가 정보
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Armory", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 228);
-Actions:
-	Display Text Message(Always Display, "[노바] 그게 이상합니다. 표준 UED 암호 패턴인데... 송출 위치가 일치하지 않아요.");
-	Set Deaths("Player 8", "Terran Armory", Set To, 4);
-}
-
-// +12s: 호크 결정
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Armory", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 264);
-Actions:
-	Display Text Message(Always Display, "[호크] 직접 가서 확인한다. 좌표 분석 마칠 때까지 2분의 정비 시간을 가지겠다.");
-	Set Deaths("Player 8", "Terran Armory", Set To, 5);
-}
-
-// +15s: 호크 지시
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Armory", Exactly, 5);
-	Deaths("Player 8", "Terran Vulture", At least, 300);
-Actions:
-	Display Text Message(Always Display, "[호크] 그동안 부대를 정비하고 본진을 다지도록.");
-	Set Deaths("Player 8", "Terran Armory", Set To, 6);
 }
 
 // 페이즈1 종료 - 페이즈2 진입 (Valkyrie 2→3, Vulture 0 리셋)
@@ -88,7 +89,7 @@ Actions:
 Trigger("Player 1"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
-	Deaths("Player 8", "Terran Vulture", At least, 120);
+	Deaths("Player 8", "Terran Vulture", At least, 240);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "P5 Lab Vision");
 	Remove Unit("Player 1", "Map Revealer");
@@ -96,7 +97,7 @@ Actions:
 Trigger("Player 2"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
-	Deaths("Player 8", "Terran Vulture", At least, 120);
+	Deaths("Player 8", "Terran Vulture", At least, 240);
 Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "P5 Lab Vision");
 	Remove Unit("Player 2", "Map Revealer");
@@ -104,7 +105,7 @@ Actions:
 Trigger("Player 3"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
-	Deaths("Player 8", "Terran Vulture", At least, 120);
+	Deaths("Player 8", "Terran Vulture", At least, 240);
 Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "P5 Lab Vision");
 	Remove Unit("Player 3", "Map Revealer");
@@ -112,7 +113,7 @@ Actions:
 Trigger("Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
-	Deaths("Player 8", "Terran Vulture", At least, 120);
+	Deaths("Player 8", "Terran Vulture", At least, 240);
 Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "P5 Lab Vision");
 	Remove Unit("Player 4", "Map Revealer");

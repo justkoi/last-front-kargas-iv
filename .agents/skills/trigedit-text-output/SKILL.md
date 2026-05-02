@@ -64,6 +64,30 @@ Recommended palette:
 
 Avoid stacking many colors in one line. Usually color only the prefix or the key phrase.
 
+## StarCraft Font-Safe Symbols
+
+Classic StarCraft/Brood War text is safest when written with ASCII punctuation, Korean text, digits, spaces, and SC control codes. Do not use modern Unicode decoration symbols in any player-facing `Display Text Message`, `Set Mission Objectives`, or briefing text unless they have been tested in-game.
+
+Avoid these symbols in output strings:
+
+| Avoid | Use instead |
+|---|---|
+| `▶` | `-` |
+| `→` | `>` or `->` |
+| `—` | `-`, `.`, or `:` |
+| `★` | `!`, `[비상]`, or plain text |
+| `⚠` | `경고:` or `<06>경고:` |
+| `✓` | `완료` |
+| `·` | `/` or a space |
+
+Examples:
+
+```
+Set Mission Objectives("[미션 2]\n\n- 목표: 비콘 점령\n- 제한 시간: 15분");
+Display Text Message(Always Display, "<06>경고: <04>본진 침투.");
+Display Text Message(Always Display, "<03>호크: <04>뮤탈/디바우러 대편대다.");
+```
+
 ## Alignment And Headers
 
 Use `<13>` for centered headers instead of manually guessing spaces when a line must be visually centered.
@@ -105,7 +129,7 @@ Prefer putting detailed mechanics in `Set Mission Objectives`, then let dialogue
 
 Better:
 ```
-Set Mission Objectives("[미션 2 - 추출 시작] 0%\n\n▶ 클리어 조건: 비콘 누적 점거 5분\n▶ 비콘 이탈 시 추출 일시 정지");
+Set Mission Objectives("[미션 2 - 추출 시작] 0%\n\n- 클리어 조건: 비콘 누적 점거 5분\n- 비콘 이탈 시 추출 일시 정지");
 Display Text Message(Always Display, "[노바] 단말기 추출을 시작합니다. 비콘을 비우면 연결이 끊겨요.");
 ```
 

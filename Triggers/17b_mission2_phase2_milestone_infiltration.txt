@@ -36,9 +36,34 @@ Conditions:
 	Countdown Timer(At least, 716);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "[침투] 변종 1차 본진 침투!");
-	Display Text Message(Always Display, "[노바] 사령관, 본진 외곽에 변종 다수. 우리 이동을 감지한 것 같아요.");
-	Display Text Message(Always Display, "[호크] 어서 신호원에 도달해야한다.");
+	Display Text Message(Always Display, "<06>경보: <04>본진 외곽에 변종 침투.");
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+	Countdown Timer(At most, 715);
+	Countdown Timer(At least, 712);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>침투 신호가 비콘 쪽에서 갱신됩니다. 저걸 끊기 전엔 계속 들어옵니다.");
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+	Countdown Timer(At most, 711);
+	Countdown Timer(At least, 708);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>방어대는 버텨라. 추적대는 멈추지 않는다.");
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+	Countdown Timer(At most, 707);
+	Countdown Timer(At least, 704);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>비콘을 점령해라. 놈들의 유도 신호를 끊는다.");
 }
 
 // 9분 잔여 (CT ≤ 540)
@@ -77,9 +102,25 @@ Conditions:
 	Countdown Timer(At least, 536);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "[침투] 변종 2차 본진 침투! 럴커 동반!");
-	Display Text Message(Always Display, "[노바] 럴커 매복 신호. 적이 우리 패턴에 적응하고 있어요.");
-	Display Text Message(Always Display, "[호크] 본진 방어대, 컴샛으로 탐지선 유지하라.");
+	Display Text Message(Always Display, "<06>경보: <04>본진 침투 2차. 럴커 신호 확인.");
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+	Countdown Timer(At most, 535);
+	Countdown Timer(At least, 532);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>매복 개체가 섞였습니다. 탐지 없이 맞으면 방어선이 뚫립니다.");
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+	Countdown Timer(At most, 531);
+	Countdown Timer(At least, 528);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>탐지 유지. 입구를 밝히고 럴커부터 끊어라.");
 }
 
 // 6분 잔여 (CT ≤ 360)
@@ -123,9 +164,25 @@ Conditions:
 	Countdown Timer(At least, 356);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "[침투] 변종 3차 본진 침투! 인페스티드 동반!");
-	Display Text Message(Always Display, "[노바] 인페스티드 자폭형이에요. 본진 코앞입니다.");
-	Display Text Message(Always Display, "[호크] 자살돌격이군. 거리 두고 처리해라. 절대 들이지 마.");
+	Display Text Message(Always Display, "<06>경보: <04>본진 침투 3차. 자폭형 변종 접근.");
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+	Countdown Timer(At most, 355);
+	Countdown Timer(At least, 352);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>인페스티드 반응입니다. 밀집 병력에 붙으면 피해가 커집니다.");
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+	Countdown Timer(At most, 351);
+	Countdown Timer(At least, 348);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>거리 벌려 처리해라. 방어선 안쪽으로 들이지 마라.");
 }
 
 // 3분 잔여 (CT ≤ 180) - 울트라 동반
@@ -169,8 +226,23 @@ Conditions:
 	Countdown Timer(At least, 176);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "[비상 침투] 변종 4차 본진 대공세! 울트라 동반!");
-	Display Text Message(Always Display, "[노바] 울트라리스크 신호! 지능형 패턴이에요. 누가 지휘하고 있어요!");
-	Display Text Message(Always Display, "[호크] ...단순한 변종이 아니야. 누가 우리를 갖고 노는 거다.");
+	Display Text Message(Always Display, "<06>비상: <04>본진 대공세. 울트라리스크 동반.");
 }
-
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+	Countdown Timer(At most, 175);
+	Countdown Timer(At least, 172);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>이건 지능형 패턴입니다. 중장갑 돌파조로 방어선을 밀고 있어요.");
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+	Countdown Timer(At most, 171);
+	Countdown Timer(At least, 168);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>입구를 좁혀라. 울트라는 묶고 화력은 한 점에 집중한다.");
+}
