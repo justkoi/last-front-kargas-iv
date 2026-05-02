@@ -17,7 +17,7 @@ Conditions:
 	Elapsed Time(At least, 3);
 	Elapsed Time(At most, 5);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>현장 지휘관들, 교신 확인.");
+	Display Text Message(Always Display, "<03>카르가스 IV 작전사령관 호크: <04>현장 지휘관들, 교신 확인.");
 }
 
 Trigger("All Players"){
@@ -41,7 +41,7 @@ Conditions:
 	Elapsed Time(At least, 16);
 	Elapsed Time(At most, 18);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 군락에서 변종 생체반응이 섞여 나옵니다.");
+	Display Text Message(Always Display, "<1A>작전 정보장교 노바: <04>북서쪽 군락에서 변종 생체반응이 섞여 나옵니다.");
 }
 
 Trigger("All Players"){
