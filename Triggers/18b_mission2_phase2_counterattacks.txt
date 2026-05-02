@@ -16,7 +16,7 @@
 //    10% / 20%  - 정찰조 (가벼움)
 //    30% / 50% / 60%  - 본대 / 강한 본대
 //    40% - 총공세 1차 (공중 위주: 뮤탈 24 + 디바우러 24)
-//    70% - 총공세 2차 (모든 조합 동원)
+//    70% - 총공세 2차 (지상군 대규모 압박)
 //    80% / 90% - 후속 압박 / 마지막 압박
 //-----------------------------------------------------------------//
 
@@ -229,19 +229,19 @@ Actions:
 }
 
 
-// ===== 70% - 총공세 2차 (모든 조합 동원) =====
+// ===== 70% - 총공세 2차 (지상군 대규모 압박) =====
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2556);
 Actions:
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 South");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 South");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 14, "P6 South");
+	Create Unit("Player 6", "Zerg Zergling", 14, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 14, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 14, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 7, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 7, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 7, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 7, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Lurker", 2, "P6 South");
 	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn3");
@@ -254,14 +254,14 @@ Actions:
 	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 South");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 South", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+	Create Unit("Player 6", "Zerg Ultralisk", 3, "P6 South");
+	Create Unit("Player 6", "Zerg Ultralisk", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 3, "P6 Spawn4");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 South", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 Spawn2", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 Spawn3", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 Spawn4", 1);
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 South");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
@@ -284,6 +284,92 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Devourer", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Infested Terran", "Anywhere", "P5 Lab Beacon", Patrol);
+}
+
+// 70% 총공세 추가 지상파 1 - 시작 후 약 2초
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2580);
+Actions:
+	Create Unit("Player 6", "Zerg Zergling", 12, "P6 South");
+	Create Unit("Player 6", "Zerg Zergling", 12, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 12, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 12, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 South");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn4");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 South", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Defiler", "Anywhere", "P5 Lab Beacon", Patrol);
+}
+
+// 70% 총공세 추가 지상파 2 - 시작 후 약 4초
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2604);
+Actions:
+	Create Unit("Player 6", "Zerg Zergling", 12, "P6 South");
+	Create Unit("Player 6", "Zerg Zergling", 12, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 12, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 12, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 South");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn4");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 South", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Defiler", "Anywhere", "P5 Lab Beacon", Patrol);
+}
+
+// 70% 총공세 추가 지상파 3 - 시작 후 약 6초
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2628);
+Actions:
+	Create Unit("Player 6", "Zerg Zergling", 10, "P6 South");
+	Create Unit("Player 6", "Zerg Zergling", 10, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 10, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 10, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 South");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 South");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn4");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 South", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Defiler", "Anywhere", "P5 Lab Beacon", Patrol);
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
