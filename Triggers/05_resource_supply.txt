@@ -8,8 +8,8 @@ Conditions:
 	Command("Player 5", "Zerg Drone", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Civilian", Set To, 0);
-	Set Resources("Player 5", Add, 400, ore);
-	Set Resources("Player 5", Add, 150, gas);
+	Set Resources("Player 5", Add, 30000, ore);
+	Set Resources("Player 5", Add, 15000, gas);
 	Preserve Trigger();
 }
 

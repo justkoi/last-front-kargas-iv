@@ -103,7 +103,7 @@ Actions:
 }
 
 
-// ===== 40% - 총공세 1차 (공중 위주: 뮤탈 24 + 디바우러 24) =====
+// ===== 40% - 총공세 1차 (공중 대공세: 뮤탈 24 + 디바우러 24 + 가디언 24) =====
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1476);
@@ -112,10 +112,10 @@ Actions:
 	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 South");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 South");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Lurker", 2, "P6 South");
 	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn3");
@@ -128,6 +128,10 @@ Actions:
 	Create Unit("Player 6", "Zerg Devourer", 6, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Devourer", 6, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Devourer", 6, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 6, "P6 South");
+	Create Unit("Player 6", "Zerg Guardian", 6, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 6, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 6, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Scourge", 3, "P6 South");
 	Create Unit("Player 6", "Zerg Scourge", 3, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Scourge", 3, "P6 Spawn3");
@@ -145,6 +149,7 @@ Actions:
 	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Devourer", "Anywhere", "P5 Lab Beacon", Patrol);
+	Order("Player 6", "Zerg Guardian", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Scourge", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Defiler", "Anywhere", "P5 Lab Beacon", Patrol);
@@ -155,7 +160,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<06>비상: <04>변종 공중 군단 총공격.");
-	Display Text Message(Always Display, "<03>호크: <04>뮤탈/디바우러 대편대다. 대공 화력 집중해라.");
+	Display Text Message(Always Display, "<03>호크: <04>가디언 접근. 대공 화력을 전선 위로 끌어올려라.");
 }
 
 
@@ -266,14 +271,6 @@ Actions:
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 South");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Infested Terran", 1, "P6 South");
-	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn4");
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
@@ -282,8 +279,6 @@ Actions:
 	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Defiler", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Guardian", "Anywhere", "P5 Lab Beacon", Patrol);
-	Order("Player 6", "Zerg Devourer", "Anywhere", "P5 Lab Beacon", Patrol);
-	Order("Player 6", "Infested Terran", "Anywhere", "P5 Lab Beacon", Patrol);
 }
 
 // 70% 총공세 추가 지상파 1 - 시작 후 약 2초

@@ -77,7 +77,7 @@ Actions:
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><06>  작전 실패: 전선 소멸");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<03>호크: <04>전 함선, 차원 도약 엔진 가동! 절대 호위 진형을 이탈하지 말고 침착하게 섹터를 빠져나간다!");
+	Display Text Message(Always Display, "<03>호크: <04>전선이 무너졌다. 남은 병력은 후퇴시켜라. 여기서 더 잃을 수는 없다.");
 	Wait(1500);
 	Defeat();
 }

@@ -1,12 +1,12 @@
 //-----------------------------------------------------------------//
-//  동적 건물 추적 - 각 P1~P4 독립 DC (120s = 1440)
+//  동적 건물 추적 - 각 P1~P4 독립 DC (180s = 2160)
 //  Firebat=P1, Ghost=P2, Medic=P3, SCV=P4
 //-----------------------------------------------------------------//
 
 Trigger("Player 5"){
 Conditions:
 	Command("Player 1", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Firebat", At least, 1440);
+	Deaths("Player 8", "Terran Firebat", At least, 2160);
 Actions:
 	Move Location("Player 1", "Buildings", "Anywhere", "P1 Hunt");
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P1 Hunt", Patrol);
@@ -27,7 +27,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Command("Player 2", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Ghost", At least, 1440);
+	Deaths("Player 8", "Terran Ghost", At least, 2160);
 Actions:
 	Move Location("Player 2", "Buildings", "Anywhere", "P2 Hunt");
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
@@ -48,7 +48,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Command("Player 3", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Medic", At least, 1440);
+	Deaths("Player 8", "Terran Medic", At least, 2160);
 Actions:
 	Move Location("Player 3", "Buildings", "Anywhere", "P3 Hunt");
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
@@ -69,7 +69,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Command("Player 4", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran SCV", At least, 1440);
+	Deaths("Player 8", "Terran SCV", At least, 2160);
 Actions:
 	Move Location("Player 4", "Buildings", "Anywhere", "P4 Hunt");
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);

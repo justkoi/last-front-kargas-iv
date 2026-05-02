@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------//
 //  기지 침입 대응 - 플레이어가 P5 Base 진입 시 우선 방어
-//  Terran Marine DC = 3초 쿨다운 (36틱)
+//  Terran Marine DC = 10초 쿨다운 (120틱)
 //  Move Location으로 "P5 Intruder" 로케이션을 침입 유닛 위에 옮긴 뒤
 //  모든 P5 전투 유닛을 그 위치로 Patrol → 끝까지 추적/교전.
 //  추가 스폰 없이 기존 유닛만 재명령. 침입자가 죽거나 후퇴하면
@@ -10,7 +10,7 @@
 Trigger("Player 5"){
 Conditions:
 	Bring("Foes", "Men", "P5 Base", At least, 1);
-	Deaths("Player 8", "Terran Marine", At least, 36);
+	Deaths("Player 8", "Terran Marine", At least, 120);
 Actions:
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
 	Move Location("Foes", "Men", "P5 Base", "P5 Intruder");
@@ -27,4 +27,3 @@ Actions:
 	Order("Player 5", "Infested Terran", "Anywhere", "P5 Intruder", Patrol);
 	Preserve Trigger();
 }
-
