@@ -13,11 +13,11 @@ Actions:
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 2);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "  [미션 1 완료] 착륙지 확보 완료");
-	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "[호크] 첫 거점은 우리 손에 들어왔다. 잘 싸웠다, 선봉대.");
-	Display Text Message(Always Display, "[보상] 전 부대 미네랄 +500 / 가스 +200");
+	Display Text Message(Always Display, "<13><05>==========================================");
+	Display Text Message(Always Display, "<13><07>미션 1 완료: 첫 전선 구축");
+	Display Text Message(Always Display, "<13><05>==========================================");
+	Display Text Message(Always Display, "<03>호크: <04>첫 전선은 세워졌다. 잘 싸웠다, 선봉대.");
+	Display Text Message(Always Display, "<07>군수지원: <04>전 부대 미네랄 +500 / 가스 +200");
 	Set Resources("Current Player", Add, 500, ore);
 	Set Resources("Current Player", Add, 200, gas);
 }
@@ -42,5 +42,4 @@ Actions:
 	Wait(1500);
 	Defeat();
 }
-
 

@@ -17,8 +17,13 @@ Conditions:
 	Elapsed Time(At least, 240);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "[정찰병] 적 정찰조 포착! 저글링 무리 접근 중!");
-	Display Text Message(Always Display, "[지휘부] 사상자 발생 전에 처리하라. 가벼운 전초전이다.");
+	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 군락에서 소규모 접촉. 저글링 정찰조입니다.");
+}
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 244);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>방어선으로 끌어들여 처리해라. 첫 전선이 시험받는다.");
 }
 
 // 웨이브 2 - 8분 후
@@ -27,8 +32,8 @@ Conditions:
 	Elapsed Time(At least, 480);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 12, "P5 Spawn");
-	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Zergling", 15, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Hydralisk", 10, "P5 Spawn");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn", "Player Destination", Patrol);
@@ -38,8 +43,13 @@ Conditions:
 	Elapsed Time(At least, 480);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "[경보] 두 번째 무리 출현! 히드라리스크 확인!");
-	Display Text Message(Always Display, "[지휘부] 적의 압력이 증가하고 있다. 방어선을 점검하라.");
+	Display Text Message(Always Display, "<1A>노바: <04>두 번째 무리 접근. 히드라리스크가 섞였습니다. 반응 속도가 빨라요.");
+}
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 484);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>압박이 올라간다. 자원권을 잃지 말고 방어선을 보강해라.");
 }
 
 // 웨이브 3 - 11분 후
@@ -62,7 +72,11 @@ Conditions:
 	Elapsed Time(At least, 660);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "[경보 - 코드 옐로우] 저그 본대 진격! 럴커 매복 경고!");
-	Display Text Message(Always Display, "[지휘부] 보이지 않는 적이 더 위험하다. 컴샛으로 탐지하라.");
+	Display Text Message(Always Display, "<1A>노바: <04>럴커 신호 확인. 매복 개체가 본대와 함께 움직입니다.");
 }
-
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 664);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>탐지망 유지해라. 보이지 않는 적에게 전선을 내주지 마라.");
+}

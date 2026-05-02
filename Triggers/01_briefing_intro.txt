@@ -5,10 +5,10 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, " ");
-	Display Text Message(Always Display, "==========================================");
-	Display Text Message(Always Display, "  작전 코드명: 카르가스 IV");
-	Display Text Message(Always Display, "========== ================================");
-	Set Mission Objectives("[미션 1] 착륙지 확보\n\n▶ 목표: 북서쪽 저그 군락 완전 파괴\n▶ 클리어 조건: P5 진영의 모든 해처리 / 레어 / 하이브 파괴\n▶ 시간 제한: 없음\n▶ 팁: 무한 웨이브를 견디며 본진을 점진적으로 압박할 것");
+	Display Text Message(Always Display, "<13><05>==========================================");
+	Display Text Message(Always Display, "<13><03>작전 코드명: 카르가스 IV");
+	Display Text Message(Always Display, "<13><05>==========================================");
+	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>▶ 목표: 방어선과 자원권을 확보한 뒤 북서쪽 저그 군락 완전 파괴\n▶ 성공 조건: P5 진영의 모든 해처리 / 레어 / 하이브 파괴\n▶ 제한 시간: 없음\n▶ 지침: 기지를 안정화하고 업그레이드 후 군락을 압박할 것");
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
 }
 
@@ -17,8 +17,24 @@ Conditions:
 	Elapsed Time(At least, 3);
 	Elapsed Time(At most, 5);
 Actions:
-	Display Text Message(Always Display, "[지휘부] 선봉대, 들리는가?");
-	Display Text Message(Always Display, "[지휘부] 행성 카르가스 IV에 강하 완료. 본 작전은 기지 확장이 최우선이다.");
-	Display Text Message(Always Display, "[지휘부] 북서쪽 능선에 저그 군락이 포착됐다. 즉시 제압하라.");
+	Display Text Message(Always Display, "<03>호크: <04>현장 지휘관들, 교신 확인.");
+	Display Text Message(Always Display, "<04>오늘 목표는 돌격이 아니다. 카르가스 IV에 버틸 수 있는 첫 전선을 세운다.");
+	Display Text Message(Always Display, "<04>기지를 안정화하고 자원권을 넓혀라. 북서쪽 군락은 준비가 끝난 뒤 친다.");
 }
 
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 12);
+	Elapsed Time(At most, 14);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 군락에서 변종 생체반응이 섞여 나옵니다.");
+	Display Text Message(Always Display, "<04>일반 저그 군락보다 반응 주기가 불규칙합니다. 초반 정찰조를 예상하세요.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 20);
+	Elapsed Time(At most, 22);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>방어선을 먼저 세워라. 병력을 낭비하면 다음 전투는 없다.");
+}
