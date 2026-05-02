@@ -2,20 +2,20 @@
 //  미션 2 페이즈 2 - 비콘 점령 완료 / 클리어
 //  Zealot DC ≥ 3600 (누적 5분 점거 완료) → Valkyrie 3→4
 //
-//  엔딩 흐름 (Vulture DC 4초 간격 페이싱):
+//  엔딩 흐름 (Vulture DC 약 5초 간격 페이싱):
 //    T+0    클리어 헤더 + 작전 알림
-//    T+4s   호크 1차 칭찬 (즉각 보상)
-//    T+8s   노바 결론: UED가 아니다
-//    T+12s  카르츠 녹화 등장
-//    T+16s  카르츠: 모두 기록됐다
-//    T+20s  카르츠: 다음 단계로 간다 (떠남 암시)
-//    T+25s  노바 신원 식별: 셀렌 카르츠
-//    T+29s  호크 분노: 실험체였다는 건가
-//    T+33s  노바 역전: 우리도 좌표 땄다
-//    T+37s  호크 결의: 이번엔 우리가 끊는다
-//    T+41s  호크 마무리 칭찬 + 다음 작전 예고
-//    T+46s  미션 클리어 헤더 + 미션 오브젝티브 체크리스트
-//    T+52s  Victory()
+//    T+5s   호크 1차 칭찬 (즉각 보상)
+//    T+10s  노바 결론: UED가 아니다
+//    T+15s  카르츠 녹화 등장
+//    T+20s  카르츠: 모두 기록됐다
+//    T+25s  카르츠: 다음 단계로 간다 (떠남 암시)
+//    T+30s  노바 신원 식별: 셀렌 카르츠
+//    T+35s  호크 분노: 실험체였다는 건가
+//    T+40s  노바 역전: 우리도 좌표 땄다
+//    T+45s  호크 결의: 이번엔 우리가 끊는다
+//    T+50s  호크 마무리 칭찬 + 다음 작전 예고
+//    T+55s  미션 클리어 헤더 + 미션 오브젝티브 체크리스트
+//    T+65s  Victory()
 //-----------------------------------------------------------------//
 
 // T+0: 비콘 점령 완료 + 단계 전환 + 작전 알림
@@ -34,114 +34,114 @@ Actions:
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 }
 
-// T+4s — 호크 1차 칭찬 (구체적, 즉각 보상)
+// T+5s - 호크 1차 칭찬 (구체적, 즉각 보상)
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 48);
-	Deaths("Player 8", "Terran Vulture", At most, 72);
+	Deaths("Player 8", "Terran Vulture", At least, 60);
+	Deaths("Player 8", "Terran Vulture", At most, 84);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>잘 했다, 선봉대. 5분간 비콘을 놓지 않았어.");
 }
 
-// T+8s — 노바 결론: UED가 아니다
+// T+10s - 노바 결론: UED가 아니다
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 96);
-	Deaths("Player 8", "Terran Vulture", At most, 120);
+	Deaths("Player 8", "Terran Vulture", At least, 120);
+	Deaths("Player 8", "Terran Vulture", At most, 144);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>사령관, 발신자 신호 분석 완료. ...UED 잔당이 아니에요.");
 }
 
-// T+12s — 카르츠 사전 녹화 1
+// T+15s - 카르츠 사전 녹화 1
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 144);
-	Deaths("Player 8", "Terran Vulture", At most, 168);
+	Deaths("Player 8", "Terran Vulture", At least, 180);
+	Deaths("Player 8", "Terran Vulture", At most, 204);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<06>?? - 사전 녹화: <04>축하한다, 선봉대. 정확히 5분을 버텼군.");
 }
 
-// T+16s — 카르츠 녹화 2: 데이터 회수
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 192);
-	Deaths("Player 8", "Terran Vulture", At most, 216);
-Actions:
-	Display Text Message(Always Display, "<06>??: <04>방어 패턴, 화력 분포, 반격 속도. 모두 깨끗하게 기록됐다.");
-}
-
-// T+20s — 카르츠 녹화 3: 떠남 암시
+// T+20s - 카르츠 녹화 2: 데이터 회수
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
 	Deaths("Player 8", "Terran Vulture", At least, 240);
 	Deaths("Player 8", "Terran Vulture", At most, 264);
 Actions:
-	Display Text Message(Always Display, "<06>??: <04>이곳에서의 실험은 끝이다. 다음 단계로 넘어간다.");
+	Display Text Message(Always Display, "<06>??: <04>방어 패턴, 화력 분포, 반격 속도. 모두 깨끗하게 기록됐다.");
 }
 
-// T+25s — 노바 신원 식별
+// T+25s - 카르츠 녹화 3: 떠남 암시
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
 	Deaths("Player 8", "Terran Vulture", At least, 300);
 	Deaths("Player 8", "Terran Vulture", At most, 324);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>...셀렌 카르츠. 도미니언 변종 연구자. 7년 전 사망 처리된 인물입니다.");
+	Display Text Message(Always Display, "<06>??: <04>이곳에서의 실험은 끝이다. 다음 단계로 넘어간다.");
 }
 
-// T+29s — 호크 분노
+// T+30s - 노바 신원 식별
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 348);
-	Deaths("Player 8", "Terran Vulture", At most, 372);
+	Deaths("Player 8", "Terran Vulture", At least, 360);
+	Deaths("Player 8", "Terran Vulture", At most, 384);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>...셀렌 카르츠. 도미니언 변종 연구자. 7년 전 사망 처리된 인물입니다.");
+}
+
+// T+35s - 호크 분노
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
+	Deaths("Player 8", "Terran Vulture", At least, 420);
+	Deaths("Player 8", "Terran Vulture", At most, 444);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>...우리가 그 자식 실험체였다는 건가.");
 }
 
-// T+33s — 노바 역전: 우리도 좌표를 땄다
+// T+40s - 노바 역전: 우리도 좌표를 땄다
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 396);
-	Deaths("Player 8", "Terran Vulture", At most, 420);
+	Deaths("Player 8", "Terran Vulture", At least, 480);
+	Deaths("Player 8", "Terran Vulture", At most, 504);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>하지만 사령관, 발신 좌표는 우리가 따냈어요. 북서쪽 프로토스 유적.");
 }
 
-// T+37s — 호크 결의: 우리가 끊는다
+// T+45s - 호크 결의: 우리가 끊는다
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 444);
-	Deaths("Player 8", "Terran Vulture", At most, 468);
+	Deaths("Player 8", "Terran Vulture", At least, 540);
+	Deaths("Player 8", "Terran Vulture", At most, 564);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>좋다. 이번엔 우리가 그 자식 시간을 끝낸다.");
 }
 
-// T+41s — 호크 마무리 칭찬 + 다음 작전 예고
+// T+50s - 호크 마무리 칭찬 + 다음 작전 예고
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 492);
-	Deaths("Player 8", "Terran Vulture", At most, 516);
+	Deaths("Player 8", "Terran Vulture", At least, 600);
+	Deaths("Player 8", "Terran Vulture", At most, 624);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<03>호크: <04>선봉대, 첫 본격 작전 완수. 다음 전장은 우리가 정한다.");
 }
 
-// T+46s — 미션 클리어 헤더 + 체크리스트형 오브젝티브
+// T+55s - 미션 클리어 헤더 + 체크리스트형 오브젝티브
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 552);
-	Deaths("Player 8", "Terran Vulture", At most, 576);
+	Deaths("Player 8", "Terran Vulture", At least, 660);
+	Deaths("Player 8", "Terran Vulture", At most, 684);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Display Text Message(Always Display, "<13><03>==========================================");
@@ -151,11 +151,11 @@ Actions:
 	Set Mission Objectives("<03>[미션 2 완료] 통신 두절의 진실\n\n<04>- 비콘 5분 사수: 완료\n- 유도 신호 차단: 완료\n- 발신자 식별: 셀렌 카르츠\n  (도미니언 변종 연구자, 7년 전 사망 처리)\n- 다음 작전 좌표 확보: 북서쪽 프로토스 유적\n\n다음 작전: 미션 3 - 프로토스 유적 추격\n선봉대, 잠시 정비. 곧 다시 출격한다.");
 }
 
-// T+52s — Victory
+// T+65s - Victory
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 624);
+	Deaths("Player 8", "Terran Vulture", At least, 780);
 Actions:
 	Wait(1000);
 	Victory();

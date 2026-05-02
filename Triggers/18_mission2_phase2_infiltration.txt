@@ -44,8 +44,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Zealot", At least, 36);
-	Deaths("Player 8", "Protoss Zealot", At most, 71);
+	Deaths("Player 8", "Protoss Zealot", At least, 48);
+	Deaths("Player 8", "Protoss Zealot", At most, 83);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>비콘 접속 확인. 유도 신호 차단과 데이터 추출을 동시에 진행합니다.");
 }
@@ -54,8 +54,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Zealot", At least, 84);
-	Deaths("Player 8", "Protoss Zealot", At most, 119);
+	Deaths("Player 8", "Protoss Zealot", At least, 108);
+	Deaths("Player 8", "Protoss Zealot", At most, 143);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>5분간 비콘을 사수한다. 한 명이라도 남겨라.");
 }
@@ -64,8 +64,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Zealot", At least, 132);
-	Deaths("Player 8", "Protoss Zealot", At most, 167);
+	Deaths("Player 8", "Protoss Zealot", At least, 168);
+	Deaths("Player 8", "Protoss Zealot", At most, 203);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>비콘이 비면 차단이 풀리고 카운트다운이 재개된다.");
 }
@@ -74,8 +74,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Zealot", At least, 180);
-	Deaths("Player 8", "Protoss Zealot", At most, 215);
+	Deaths("Player 8", "Protoss Zealot", At least, 228);
+	Deaths("Player 8", "Protoss Zealot", At most, 263);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>차단이 깊어질수록 변종 반격이 강해질 겁니다.");
 }

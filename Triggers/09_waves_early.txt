@@ -21,7 +21,7 @@ Actions:
 }
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 244);
+	Elapsed Time(At least, 245);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>방어선으로 끌어들여 처리해라. 첫 전선이 시험받는다.");
 }
@@ -47,7 +47,7 @@ Actions:
 }
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 484);
+	Elapsed Time(At least, 485);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>압박이 올라간다. 자원권을 잃지 말고 방어선을 보강해라.");
 }
@@ -76,7 +76,7 @@ Actions:
 }
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 664);
+	Elapsed Time(At least, 665);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>탐지망 유지해라. 보이지 않는 적에게 전선을 내주지 마라.");
 }

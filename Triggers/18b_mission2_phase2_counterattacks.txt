@@ -2,26 +2,26 @@
 //  미션 2 페이즈 2 - 비콘 점령 진행도 반격조 (P6 저그)
 //
 //  발동 순서 (각 진행도마다):
-//    1. 노바 진행도 브리핑   (Zealot N        — 18 파일이 담당)
-//    2. P6 저그 실제 반격조 스폰 (Zealot N+36  — 약 3초 후)
-//    3. 반격 경고 대사 + WAV  (Zealot N+72   — 노바 브리핑 +6초)
+//    1. 노바 진행도 브리핑   (Zealot N        - 18 파일이 담당)
+//    2. P6 저그 실제 반격조 스폰 (Zealot N+36  - 약 3초 후)
+//    3. 반격 경고 대사 + WAV  (Zealot N+96   - 노바 브리핑 +8초)
 //
-//  ⚠ P6은 컴퓨터 슬롯이라 P6 owned 트리거의 Display Text Message /
+//  주의: P6은 컴퓨터 슬롯이라 P6 owned 트리거의 Display Text Message /
 //    Play WAV 는 인간 플레이어에게 안 보임/안 들림.
-//    → 스폰만 P6 owned, 대사/사운드는 반드시 P1~P4 owned.
+//    -> 스폰만 P6 owned, 대사/사운드는 반드시 P1~P4 owned.
 //
-//  스폰 위치: P6 South / P6 Spawn2 / P6 Spawn3 / P6 Spawn4 → 비콘 진격
+//  스폰 위치: P6 South / P6 Spawn2 / P6 Spawn3 / P6 Spawn4 -> 비콘 진격
 //
 //  웨이브 강도:
-//    10% / 20%  — 정찰조 (가벼움)
-//    30% / 50% / 60%  — 본대 / 강한 본대
-//    40% — ★ 총공세 1차 ★ (공중 위주: 뮤탈 24 + 디바우러 24)
-//    70% — ★ 총공세 2차 ★ (모든 조합 동원)
-//    80% / 90% — 후속 압박 / 마지막 압박
+//    10% / 20%  - 정찰조 (가벼움)
+//    30% / 50% / 60%  - 본대 / 강한 본대
+//    40% - 총공세 1차 (공중 위주: 뮤탈 24 + 디바우러 24)
+//    70% - 총공세 2차 (모든 조합 동원)
+//    80% / 90% - 후속 압박 / 마지막 압박
 //-----------------------------------------------------------------//
 
 
-// ===== 10% — 정찰조 (가벼움) =====
+// ===== 10% - 정찰조 (가벼움) =====
 // 스폰 (Zealot 396)
 Trigger("Player 6"){
 Conditions:
@@ -38,17 +38,17 @@ Actions:
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
 }
-// 경고 대사 (Zealot 432 — 노바 +6초)
+// 경고 대사 (Zealot 456 - 노바 +8초)
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 432);
+	Deaths("Player 8", "Protoss Zealot", At least, 456);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<06>경보: <04>변종 정찰조 진격.");
 }
 
 
-// ===== 20% — 정찰조+ =====
+// ===== 20% - 정찰조+ =====
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 756);
@@ -66,14 +66,14 @@ Actions:
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 792);
+	Deaths("Player 8", "Protoss Zealot", At least, 816);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<06>경보: <04>변종 추가 정찰조 진격.");
 }
 
 
-// ===== 30% — 본대 (럴커 동반) =====
+// ===== 30% - 본대 (럴커 동반) =====
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1116);
@@ -96,14 +96,14 @@ Actions:
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 1152);
+	Deaths("Player 8", "Protoss Zealot", At least, 1176);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<06>경보: <04>변종 본대 진격. 럴커 신호 확인.");
 }
 
 
-// ===== 40% — ★ 총공세 1차 ★ (공중 위주: 뮤탈 24 + 디바우러 24) =====
+// ===== 40% - 총공세 1차 (공중 위주: 뮤탈 24 + 디바우러 24) =====
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1476);
@@ -151,7 +151,7 @@ Actions:
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 1512);
+	Deaths("Player 8", "Protoss Zealot", At least, 1536);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<06>비상: <04>변종 공중 군단 총공격.");
@@ -159,7 +159,7 @@ Actions:
 }
 
 
-// ===== 50% — 본대 (재편 + 공중 합세) =====
+// ===== 50% - 본대 (재편 + 공중 합세) =====
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1836);
@@ -187,14 +187,14 @@ Actions:
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 1872);
+	Deaths("Player 8", "Protoss Zealot", At least, 1896);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<06>경보: <04>변종 본대 재편. 공중 합세.");
 }
 
 
-// ===== 60% — 강한 본대 =====
+// ===== 60% - 강한 본대 =====
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2196);
@@ -222,14 +222,14 @@ Actions:
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 2232);
+	Deaths("Player 8", "Protoss Zealot", At least, 2256);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<06>경보: <04>변종 강화 본대 진격.");
 }
 
 
-// ===== 70% — ★ 총공세 2차 ★ (모든 조합 동원) =====
+// ===== 70% - 총공세 2차 (모든 조합 동원) =====
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2556);
@@ -287,7 +287,7 @@ Actions:
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 2592);
+	Deaths("Player 8", "Protoss Zealot", At least, 2616);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<06>비상: <04>변종 군단 모든 화력 동원.");
@@ -295,7 +295,7 @@ Actions:
 }
 
 
-// ===== 80% — 후속 압박 =====
+// ===== 80% - 후속 압박 =====
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2916);
@@ -323,14 +323,14 @@ Actions:
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 2952);
+	Deaths("Player 8", "Protoss Zealot", At least, 2976);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<06>경보: <04>변종 후속 압박. 차단 방해 시도.");
 }
 
 
-// ===== 90% — 마지막 압박 =====
+// ===== 90% - 마지막 압박 =====
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 3276);
@@ -363,7 +363,7 @@ Actions:
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 3312);
+	Deaths("Player 8", "Protoss Zealot", At least, 3336);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<06>경보: <04>변종 마지막 발악.");

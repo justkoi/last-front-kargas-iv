@@ -126,8 +126,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 904);
-	Elapsed Time(At most, 909);
+	Elapsed Time(At least, 905);
+	Elapsed Time(At most, 910);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>놈들이 우리 방어선을 읽기 시작했다. 여기서 밀리면 첫 전선은 무너진다.");
 }

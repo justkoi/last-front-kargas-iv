@@ -19,52 +19,52 @@ Actions:
 	Display Text Message(Always Display, "<13><05>==========================================");
 }
 
-// +4s: 노바 첫 보고
+// +5s: 노바 첫 보고
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
-	Deaths("Player 8", "Terran Vulture", At least, 288);
-	Deaths("Player 8", "Terran Vulture", At most, 312);
+	Deaths("Player 8", "Terran Vulture", At least, 300);
+	Deaths("Player 8", "Terran Vulture", At most, 324);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>북쪽 중앙에서 UED 암호 신호 감지. 송출이 계속됩니다.");
 }
 
-// +8s: 호크 의문
+// +10s: 호크 의문
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
-	Deaths("Player 8", "Terran Vulture", At least, 336);
-	Deaths("Player 8", "Terran Vulture", At most, 360);
+	Deaths("Player 8", "Terran Vulture", At least, 360);
+	Deaths("Player 8", "Terran Vulture", At most, 384);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>UED? 이 행성의 마지막 교신은 6주 전에 끊겼다.");
 }
 
-// +12s: 노바 추가 정보
+// +15s: 노바 추가 정보
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
-	Deaths("Player 8", "Terran Vulture", At least, 384);
-	Deaths("Player 8", "Terran Vulture", At most, 408);
+	Deaths("Player 8", "Terran Vulture", At least, 420);
+	Deaths("Player 8", "Terran Vulture", At most, 444);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>암호 패턴은 맞습니다. 하지만 좌표가 기존 기록과 맞지 않아요.");
 }
 
-// +16s: 호크 판단
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
-	Deaths("Player 8", "Terran Vulture", At least, 432);
-	Deaths("Player 8", "Terran Vulture", At most, 456);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>우릴 부르는 신호라면 늦었고, 함정이라면 너무 정교하군.");
-}
-
-// +20s: 호크 지시 및 정비 타이머 시작
+// +20s: 호크 판단
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Vulture", At least, 480);
 	Deaths("Player 8", "Terran Vulture", At most, 504);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>우릴 부르는 신호라면 늦었고, 함정이라면 너무 정교하군.");
+}
+
+// +25s: 호크 지시 및 정비 타이머 시작
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Vulture", At least, 540);
+	Deaths("Player 8", "Terran Vulture", At most, 564);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>직접 확인한다. 2분간 재정비한다.");
 	Set Countdown Timer(Set To, 120);

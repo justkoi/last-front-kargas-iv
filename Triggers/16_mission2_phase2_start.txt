@@ -12,7 +12,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Set Mission Objectives("[미션 2 - 페이즈 2] 비콘 추적\n\n- 목표: 북쪽 프로토스 신전의 비콘 점거\n- 클리어 조건: 15분 내 비콘 위치 도달 + 점거 개시\n- 시간 제한: 15분 (Countdown Timer)\n- 위치: 미니맵 핑 (P5 Lab Beacon, 30초마다 갱신)\n- 주의: 비콘 주변에 변종 적 사전 배치 (히드라/럴커/울트라/디파일러/감염테란)\n- 도달 즉시: 5분 누적 점거 단계로 전환");
 	Display Text Message(Always Display, "<13><05>==========================================");
-	Display Text Message(Always Display, "<13><07>  [미션2 - 페이즈 2] 신호원 추적");
+	Display Text Message(Always Display, "<13><07>  [미션2 - 페이즈 2] 비콘 차단");
 	Display Text Message(Always Display, "<13><05>==========================================");
 	Set Countdown Timer(Set To, 900);
 	Minimap Ping("P5 Lab Beacon");
@@ -21,8 +21,8 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 36);
-	Deaths("Player 8", "Terran Vulture", At most, 60);
+	Deaths("Player 8", "Terran Vulture", At least, 48);
+	Deaths("Player 8", "Terran Vulture", At most, 72);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>좌표 확정. 신호는 북쪽 프로토스 신전 주변 비콘에서 나오고 있습니다.");
 }
@@ -30,8 +30,8 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 84);
-	Deaths("Player 8", "Terran Vulture", At most, 108);
+	Deaths("Player 8", "Terran Vulture", At least, 108);
+	Deaths("Player 8", "Terran Vulture", At most, 132);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>비콘에서 변종 침투 신호가 갱신됩니다. 본진 쪽 무리를 움직이고 있어요.");
 }
@@ -39,8 +39,8 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 132);
-	Deaths("Player 8", "Terran Vulture", At most, 156);
+	Deaths("Player 8", "Terran Vulture", At least, 168);
+	Deaths("Player 8", "Terran Vulture", At most, 192);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>비콘을 점령해 유도 신호를 끊는다. 본진은 비우지 마라.");
 }

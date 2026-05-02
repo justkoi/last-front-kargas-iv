@@ -42,8 +42,8 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 715);
-	Countdown Timer(At least, 712);
+	Countdown Timer(At most, 714);
+	Countdown Timer(At least, 711);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>침투 신호가 비콘 쪽에서 갱신됩니다. 저걸 끊기 전엔 계속 들어옵니다.");
 }
@@ -51,8 +51,8 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 711);
-	Countdown Timer(At least, 708);
+	Countdown Timer(At most, 708);
+	Countdown Timer(At least, 705);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>방어대는 버텨라. 추적대는 멈추지 않는다.");
 }
@@ -60,8 +60,8 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 707);
-	Countdown Timer(At least, 704);
+	Countdown Timer(At most, 702);
+	Countdown Timer(At least, 699);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>비콘을 점령해라. 놈들의 유도 신호를 끊는다.");
 }
@@ -108,8 +108,8 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 535);
-	Countdown Timer(At least, 532);
+	Countdown Timer(At most, 534);
+	Countdown Timer(At least, 531);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>매복 개체가 섞였습니다. 탐지 없이 맞으면 방어선이 뚫립니다.");
 }
@@ -117,8 +117,8 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 531);
-	Countdown Timer(At least, 528);
+	Countdown Timer(At most, 528);
+	Countdown Timer(At least, 525);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>탐지 유지. 입구를 밝히고 럴커부터 끊어라.");
 }
@@ -170,8 +170,8 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 355);
-	Countdown Timer(At least, 352);
+	Countdown Timer(At most, 354);
+	Countdown Timer(At least, 351);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>인페스티드 반응입니다. 밀집 병력에 붙으면 피해가 커집니다.");
 }
@@ -179,8 +179,8 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 351);
-	Countdown Timer(At least, 348);
+	Countdown Timer(At most, 348);
+	Countdown Timer(At least, 345);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>거리 벌려 처리해라. 방어선 안쪽으로 들이지 마라.");
 }
@@ -232,8 +232,8 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 175);
-	Countdown Timer(At least, 172);
+	Countdown Timer(At most, 174);
+	Countdown Timer(At least, 171);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>이건 지능형 패턴입니다. 중장갑 돌파조로 방어선을 밀고 있어요.");
 }
@@ -241,8 +241,8 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Countdown Timer(At most, 171);
-	Countdown Timer(At least, 168);
+	Countdown Timer(At most, 168);
+	Countdown Timer(At least, 165);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>입구를 좁혀라. 울트라는 묶고 화력은 한 점에 집중한다.");
 }
