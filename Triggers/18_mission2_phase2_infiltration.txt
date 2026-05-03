@@ -11,7 +11,7 @@
 //
 //  Protoss Probe DC   : 비콘 점거 토글 (0=비어있음, 1=플레이어 점거 중)
 //  Protoss Zealot DC  : 누적 점령도 (0~3600, 12 tick = 1초, 3600 = 5분 = 100%)
-//  Terran Wraith DC   : 반복 침투 쿨다운 (720틱 = 60s)
+//  Terran Wraith DC   : 반복 침투 쿨다운 (2160틱 = 180s)
 //  Terran Dropship DC : 반복 침투 플래그 (0=OFF, 1=ON)
 //-----------------------------------------------------------------//
 
@@ -244,7 +244,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Dropship", Exactly, 1);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Deaths("Player 8", "Terran Wraith", At least, 720);
+	Deaths("Player 8", "Terran Wraith", At least, 2160);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Lab Beacon");
@@ -259,7 +259,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Dropship", Exactly, 1);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Deaths("Player 8", "Terran Wraith", At least, 720);
+	Deaths("Player 8", "Terran Wraith", At least, 2160);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
@@ -271,12 +271,7 @@ Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 2, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Hydralisk", 2, "P3 Hunt");
 	Create Unit("Player 6", "Zerg Hydralisk", 2, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P4 Hunt");
 	Order("Player 6", "Zerg Zergling","Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
-	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
 	Preserve Trigger();
 }

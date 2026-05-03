@@ -4,7 +4,7 @@
 //
 //  Protoss Probe DC   : 비콘 점거 토글 (0=비어있음, 1=플레이어 점거 중)
 //  Protoss Zealot DC  : 누적 점거량 (1 이상이면 첫 점령 이후)
-//  Terran Civilian DC : 비콘 이탈 후 경과 타이머 (720틱 = 60초)
+//  Terran Civilian DC : 비콘 이탈 후 경과 타이머 (360틱 = 30초)
 //-----------------------------------------------------------------//
 
 // 비콘 점거 중에는 이탈 타이머를 계속 리셋
@@ -17,17 +17,17 @@ Actions:
 	Preserve Trigger();
 }
 
-// 첫 점령 이후 60초 이상 비콘을 비운 경우, 복귀 안내 반복
+// 첫 점령 이후 30초 이상 비콘을 비운 경우, 복귀 안내 반복
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Zealot", At least, 1);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Deaths("Player 8", "Terran Civilian", At least, 720);
+	Deaths("Player 8", "Terran Civilian", At least, 360);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Lab Beacon");
-	Display Text Message(Always Display, "<06>경고: <04>비콘 점령이 끊겼습니다.");
+	Display Text Message(Always Display, "<06>경고: <04>비콘 점령이 끊겼습니다. 지상 유닛을 비콘 위에 올려야 점령됩니다.");
 	Display Text Message(Always Display, "<1A>노바: <04>비콘 신호가 다시 살아납니다. 위치를 미니맵에 재표시합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>즉시 비콘을 다시 점령해라. 차단을 이어가야 한다.");
 	Set Deaths("Player 8", "Terran Civilian", Set To, 0);
