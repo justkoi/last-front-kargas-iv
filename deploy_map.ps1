@@ -1,7 +1,6 @@
 $ErrorActionPreference = "Stop"
 
-$sourceItem = Get-ChildItem -LiteralPath $PSScriptRoot -Filter "LastFront_KargasIV.scx" -File -Recurse |
-    Where-Object { $_.FullName -notmatch "\\backup\\" } |
+$sourceItem = Get-ChildItem -Path (Join-Path $PSScriptRoot "*\LastFront_KargasIV.scx") -File |
     Sort-Object FullName |
     Select-Object -First 1
 $destinationDir = "C:\Users\justk\Documents\StarCraft\Maps"
@@ -9,6 +8,7 @@ $destination = Join-Path $destinationDir "LastFront_KargasIV.scx"
 
 if ($null -eq $sourceItem) {
     Write-Host "[failed] Source map file was not found."
+    Write-Host "[root]   $PSScriptRoot"
     exit 1
 }
 

@@ -26,6 +26,13 @@ Trigger("Player 6"){
 Conditions:
 	Elapsed Time(At least, 5);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn3");
@@ -33,6 +40,12 @@ Actions:
 	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 5);
+Actions:
 	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -40,6 +53,13 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 // Slow ground support - 9s
@@ -47,6 +67,13 @@ Trigger("Player 6"){
 Conditions:
 	Elapsed Time(At least, 9);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn3");
@@ -54,6 +81,16 @@ Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn7");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+}
+
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 9);
+Actions:
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -61,10 +98,6 @@ Actions:
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -72,6 +105,13 @@ Actions:
 	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 // Air escort - 13s
@@ -79,6 +119,13 @@ Trigger("Player 6"){
 Conditions:
 	Elapsed Time(At least, 13);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn3");
@@ -86,6 +133,12 @@ Actions:
 	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 13);
+Actions:
 	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -93,6 +146,13 @@ Actions:
 	Order("Player 6", "Zerg Devourer", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Devourer", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Devourer", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 // Fast ground wave - 12s
@@ -100,6 +160,13 @@ Trigger("Player 6"){
 Conditions:
 	Elapsed Time(At least, 12);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
@@ -107,13 +174,6 @@ Actions:
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn7");
-	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
@@ -121,6 +181,23 @@ Actions:
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 12);
+Actions:
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -128,10 +205,6 @@ Actions:
 	Order("Player 6", "Zerg Lurker", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -139,6 +212,13 @@ Actions:
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 // Fast air wave - 16s
@@ -146,6 +226,13 @@ Trigger("Player 6"){
 Conditions:
 	Elapsed Time(At least, 16);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
@@ -153,13 +240,6 @@ Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn7");
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn3");
@@ -167,6 +247,19 @@ Actions:
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Scourge", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Scourge", 1, "P6 Spawn7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 16);
+Actions:
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -174,4 +267,11 @@ Actions:
 	Order("Player 6", "Zerg Scourge", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Scourge", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Scourge", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }

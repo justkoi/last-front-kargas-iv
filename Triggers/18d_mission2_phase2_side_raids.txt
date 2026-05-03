@@ -13,9 +13,9 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 4320);
 	Switch("Switch2", Not Set);
 Actions:
-	Create Unit("Player 7", "Mature Chrysalis", 1, "Raid1");
-	Create Unit("Player 7", "Mature Chrysalis", 1, "Raid2");
-	Create Unit("Player 7", "Mature Chrysalis", 1, "Raid3");
+	Create Unit("Player 7", "Mature Crysalis", 1, "Raid1");
+	Create Unit("Player 7", "Mature Crysalis", 1, "Raid2");
+	Create Unit("Player 7", "Mature Crysalis", 1, "Raid3");
 	Create Unit("Player 7", "Zerg Zergling", 12, "Raid1");
 	Create Unit("Player 7", "Zerg Zergling", 12, "Raid2");
 	Create Unit("Player 7", "Zerg Zergling", 12, "Raid3");
@@ -35,8 +35,11 @@ Conditions:
 	Switch("Switch2", set);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "Raid1");
+	Remove Unit("Player 1", "Map Revealer");
 	Create Unit("Player 1", "Map Revealer", 1, "Raid2");
+	Remove Unit("Player 1", "Map Revealer");
 	Create Unit("Player 1", "Map Revealer", 1, "Raid3");
+	Remove Unit("Player 1", "Map Revealer");
 	Minimap Ping("Raid1");
 	Minimap Ping("Raid2");
 	Minimap Ping("Raid3");
@@ -49,8 +52,11 @@ Conditions:
 	Switch("Switch2", set);
 Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "Raid1");
+	Remove Unit("Player 2", "Map Revealer");
 	Create Unit("Player 2", "Map Revealer", 1, "Raid2");
+	Remove Unit("Player 2", "Map Revealer");
 	Create Unit("Player 2", "Map Revealer", 1, "Raid3");
+	Remove Unit("Player 2", "Map Revealer");
 	Minimap Ping("Raid1");
 	Minimap Ping("Raid2");
 	Minimap Ping("Raid3");
@@ -63,8 +69,11 @@ Conditions:
 	Switch("Switch2", set);
 Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "Raid1");
+	Remove Unit("Player 3", "Map Revealer");
 	Create Unit("Player 3", "Map Revealer", 1, "Raid2");
+	Remove Unit("Player 3", "Map Revealer");
 	Create Unit("Player 3", "Map Revealer", 1, "Raid3");
+	Remove Unit("Player 3", "Map Revealer");
 	Minimap Ping("Raid1");
 	Minimap Ping("Raid2");
 	Minimap Ping("Raid3");
@@ -77,8 +86,11 @@ Conditions:
 	Switch("Switch2", set);
 Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "Raid1");
+	Remove Unit("Player 4", "Map Revealer");
 	Create Unit("Player 4", "Map Revealer", 1, "Raid2");
+	Remove Unit("Player 4", "Map Revealer");
 	Create Unit("Player 4", "Map Revealer", 1, "Raid3");
+	Remove Unit("Player 4", "Map Revealer");
 	Minimap Ping("Raid1");
 	Minimap Ping("Raid2");
 	Minimap Ping("Raid3");
@@ -104,48 +116,12 @@ Actions:
 	Display Text Message(Always Display, "<03>호크: <04>기동대가 있으면 찔러라. 저장낭만 깨면 보급으로 돌릴 수 있다.");
 }
 
-Trigger("Player 1"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 4500);
-	Switch("Switch2", set);
-Actions:
-	Remove Unit("Player 1", "Map Revealer");
-}
-
-Trigger("Player 2"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 4500);
-	Switch("Switch2", set);
-Actions:
-	Remove Unit("Player 2", "Map Revealer");
-}
-
-Trigger("Player 3"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 4500);
-	Switch("Switch2", set);
-Actions:
-	Remove Unit("Player 3", "Map Revealer");
-}
-
-Trigger("Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 4500);
-	Switch("Switch2", set);
-Actions:
-	Remove Unit("Player 4", "Map Revealer");
-}
-
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch2", set);
 	Switch("Switch3", Not Set);
-	Bring("Player 7", "Mature Chrysalis", "Raid1", At most, 0);
+	Bring("Player 7", "Mature Crysalis", "Raid1", At most, 0);
 Actions:
 	Set Resources("Player 1", Add, 2000, ore);
 	Set Resources("Player 2", Add, 2000, ore);
@@ -172,7 +148,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch2", set);
 	Switch("Switch4", Not Set);
-	Bring("Player 7", "Mature Chrysalis", "Raid2", At most, 0);
+	Bring("Player 7", "Mature Crysalis", "Raid2", At most, 0);
 Actions:
 	Set Resources("Player 1", Add, 2000, ore);
 	Set Resources("Player 2", Add, 2000, ore);
@@ -199,7 +175,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch2", set);
 	Switch("Switch5", Not Set);
-	Bring("Player 7", "Mature Chrysalis", "Raid3", At most, 0);
+	Bring("Player 7", "Mature Crysalis", "Raid3", At most, 0);
 Actions:
 	Set Resources("Player 1", Add, 2000, ore);
 	Set Resources("Player 2", Add, 2000, ore);

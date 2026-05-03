@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------//
 //  미션 2 페이즈 2 - 비콘 복귀 안내
-//  첫 점령 이후 비콘을 30초 이상 비우면 경고와 미니맵 핑을 반복한다.
+//  첫 점령 이후 비콘을 60초 이상 비우면 경고와 미니맵 핑을 반복한다.
 //
 //  Protoss Probe DC   : 비콘 점거 토글 (0=비어있음, 1=플레이어 점거 중)
 //  Protoss Zealot DC  : 누적 점거량 (1 이상이면 첫 점령 이후)
-//  Terran Civilian DC : 비콘 이탈 후 경과 타이머 (1080틱 = 90초)
+//  Terran Civilian DC : 비콘 이탈 후 경과 타이머 (720틱 = 60초)
 //-----------------------------------------------------------------//
 
 // 비콘 점거 중에는 이탈 타이머를 계속 리셋
@@ -17,13 +17,13 @@ Actions:
 	Preserve Trigger();
 }
 
-// 첫 점령 이후 90초 이상 비콘을 비운 경우, 복귀 안내 반복
+// 첫 점령 이후 60초 이상 비콘을 비운 경우, 복귀 안내 반복
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Zealot", At least, 1);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Deaths("Player 8", "Terran Civilian", At least, 1080);
+	Deaths("Player 8", "Terran Civilian", At least, 720);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Lab Beacon");

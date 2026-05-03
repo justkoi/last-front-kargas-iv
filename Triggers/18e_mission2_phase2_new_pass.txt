@@ -1,0 +1,77 @@
+//-----------------------------------------------------------------//
+//  Mission 2 Phase 2 - New Pass1 opening
+//  Fires 3 minutes after phase 2 starts. Reveals the route briefly
+//  and uses minimap pings instead of moving player camera.
+//-----------------------------------------------------------------//
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "New Pass1");
+}
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "New Pass1");
+	Remove Unit("Player 1", "Map Revealer");
+	Minimap Ping("New Pass1");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "New Pass1");
+	Remove Unit("Player 2", "Map Revealer");
+	Minimap Ping("New Pass1");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "New Pass1");
+	Remove Unit("Player 3", "Map Revealer");
+	Minimap Ping("New Pass1");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "New Pass1");
+	Remove Unit("Player 4", "Map Revealer");
+	Minimap Ping("New Pass1");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>스캔 결과, 새 통로가 열렸습니다. 주변에 탐색 가치가 있어 보입니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2208);
+	Deaths("Player 8", "Terran Vulture", At most, 2232);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>주공은 유지한다. 여유 병력이 있으면 그 통로도 확인해봐라.");
+}

@@ -8,12 +8,12 @@
 //    T+10s  노바 결론: UED가 아니다
 //    T+15s  카르츠 녹화 등장
 //    T+20s  카르츠: 모두 기록됐다
-//    T+25s  카르츠: 다음 단계로 간다 (떠남 암시)
+//    T+25s  카르츠: 통제 실패 확인
 //    T+30s  노바 신원 식별: 셀렌 카르츠
 //    T+35s  호크 분노: 실험체였다는 건가
 //    T+40s  노바 역전: 우리도 좌표 땄다
 //    T+45s  호크 결의: 이번엔 우리가 끊는다
-//    T+50s  호크 마무리 칭찬 + 다음 작전 예고
+//    T+50s  호크 마무리 칭찬
 //    T+55s  미션 클리어 헤더 + 미션 오브젝티브 체크리스트
 //    T+65s  Victory()
 //-----------------------------------------------------------------//
@@ -30,6 +30,14 @@ Actions:
 	Display Text Message(Always Display, "<13><03>  비콘 차단 완료 - 5분 사수 성공");
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<07>작전: <04>비콘 차단 완료. 발신자 분석 시작.");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Zealot", At least, 3600);
+Actions:
+	Pause Timer();
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 4);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 }
@@ -62,7 +70,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 204);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>?? - 사전 녹화: <04>축하한다, 선봉대. 정확히 5분을 버텼군.");
+	Display Text Message(Always Display, "<06>카르츠 - 사전 녹화: <04>축하한다, 선봉대. 정확히 5분을 버텼군.");
 }
 
 // T+20s - 카르츠 녹화 2: 데이터 회수
@@ -72,7 +80,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 240);
 	Deaths("Player 8", "Terran Vulture", At most, 264);
 Actions:
-	Display Text Message(Always Display, "<06>??: <04>방어 패턴, 화력 분포, 반격 속도. 모두 깨끗하게 기록됐다.");
+	Display Text Message(Always Display, "<06>카르츠: <04>방어 패턴, 화력 분포, 반격 속도. 모두 깨끗하게 기록됐다.");
 }
 
 // T+25s - 카르츠 녹화 3: 떠남 암시
@@ -82,7 +90,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 300);
 	Deaths("Player 8", "Terran Vulture", At most, 324);
 Actions:
-	Display Text Message(Always Display, "<06>??: <04>이곳에서의 실험은 끝이다. 다음 단계로 넘어간다.");
+	Display Text Message(Always Display, "<06>카르츠: <04>...기록이 끊겼군. 실험군이 통제를 벗어났다.");
 }
 
 // T+30s - 노바 신원 식별
@@ -92,7 +100,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 360);
 	Deaths("Player 8", "Terran Vulture", At most, 384);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>...셀렌 카르츠. 도미니언 변종 연구자. 7년 전 사망 처리된 인물입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>셀렌 카르츠. 도미니언 변종 연구자. 사망 기록은 조작된 겁니다.");
 }
 
 // T+35s - 호크 분노
@@ -112,7 +120,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 480);
 	Deaths("Player 8", "Terran Vulture", At most, 504);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>하지만 사령관, 발신 좌표는 우리가 따냈어요. 북서쪽 프로토스 유적.");
+	Display Text Message(Always Display, "<1A>노바: <04>하지만 발신망은 여기서 끊겼습니다. 적어도 이 전장은 끝났어요.");
 }
 
 // T+45s - 호크 결의: 우리가 끊는다
@@ -122,10 +130,10 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 540);
 	Deaths("Player 8", "Terran Vulture", At most, 564);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>좋다. 이번엔 우리가 그 자식 시간을 끝낸다.");
+	Display Text Message(Always Display, "<03>호크: <04>좋다. 오늘은 우리가 놈의 시간을 끊었다.");
 }
 
-// T+50s - 호크 마무리 칭찬 + 다음 작전 예고
+// T+50s - 호크 마무리 칭찬
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
@@ -133,7 +141,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 624);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<03>호크: <04>선봉대, 첫 본격 작전 완수. 다음 전장은 우리가 정한다.");
+	Display Text Message(Always Display, "<03>호크: <04>선봉대, 작전 완수. 카르가스 IV의 전선은 살아남았다.");
 }
 
 // T+55s - 미션 클리어 헤더 + 체크리스트형 오브젝티브
@@ -145,10 +153,10 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<13><03>  [미션 2 완료] 통신 두절의 진실");
+	Display Text Message(Always Display, "<13><03>  [작전 완료] 카르가스 IV 전선 생존");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<07>작전사령부: <04>다음 출격 좌표 잠금 해제. 카르가스 IV 미션 3 - 프로토스 유적 추격.");
-	Set Mission Objectives("<03>[미션 2 완료] 통신 두절의 진실\n\n<04>- 비콘 5분 사수: 완료\n- 유도 신호 차단: 완료\n- 발신자 식별: 셀렌 카르츠\n  (도미니언 변종 연구자, 7년 전 사망 처리)\n- 다음 작전 좌표 확보: 북서쪽 프로토스 유적\n\n다음 작전: 미션 3 - 프로토스 유적 추격\n선봉대, 잠시 정비. 곧 다시 출격한다.");
+	Display Text Message(Always Display, "<07>작전사령부: <04>비콘 차단 완료. 전 부대 생존 확인. 카르가스 IV 전선 유지.");
+	Set Mission Objectives("<03>[작전 완료] 카르가스 IV 전선 생존\n\n<04>- 비콘 5분 사수: 완료\n- 유도 신호 차단: 완료\n- 본진 침투 저지: 완료\n- 발신자 식별: 셀렌 카르츠\n- 카르가스 IV 전선 유지: 성공\n\n선봉대는 임무를 완수했다. 이 전장은 끝났다.");
 }
 
 // T+65s - Victory

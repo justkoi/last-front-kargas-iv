@@ -170,6 +170,18 @@ When adding or changing test-only triggers in `TestTriggers/` or `TestTriggersFo
 - Use direct state jumps only for narrowly named test files whose purpose is explicitly to isolate a later system, such as a counterattack timing test. Make that isolation clear in the filename and comments.
 - Keep test output minimal. If the normal production path already displays text, do not add extra visible test messages that could hide or reorder the real pacing being tested.
 
+## Trigger Action Limits
+
+SC1 TrigEdit triggers can fail compile with `Too many actions` when a large wave combines many `Create Unit` and `Order` actions in one trigger.
+
+- Keep each trigger at **64 actions or fewer**.
+- For large attacks, split the same-timing logic into separate triggers:
+  - one or more spawn triggers for `Create Unit` / `Create Unit with Properties`
+  - one or more command triggers for `Order`
+- When adding detector support such as `Zerg Overlord` to each route, count both its creation and movement/order actions.
+- After bulk wave edits, scan changed trigger files for per-trigger action counts before finalizing.
+- Apply the same split pattern to matching test triggers, especially `TestTriggers/*assault*.txt`, so test behavior matches production.
+
 ## Review Checklist
 
 Before finalizing text output, check:
