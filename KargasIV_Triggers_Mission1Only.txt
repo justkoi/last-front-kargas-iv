@@ -741,7 +741,7 @@ Conditions:
 	Elapsed Time(At least, 0);
 
 Actions:
-	Set Resources("Current Player", Add, 50, ore);
+	Set Resources("Current Player", Add, 100, ore);
 }
 
 //-----------------------------------------------------------------//
@@ -1478,7 +1478,7 @@ Actions:
 //
 //  Protoss Probe DC   : 비콘 점거 토글 (0=비어있음, 1=플레이어 점거 중)
 //  Protoss Zealot DC  : 누적 점령도 (0~3600, 12 tick = 1초, 3600 = 5분 = 100%)
-//  Terran Wraith DC   : 반복 침투 쿨다운 (720틱 = 60s)
+//  Terran Wraith DC   : 반복 침투 쿨다운 (2160틱 = 180s)
 //  Terran Dropship DC : 반복 침투 플래그 (0=OFF, 1=ON)
 //-----------------------------------------------------------------//
 
@@ -1711,7 +1711,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Dropship", Exactly, 1);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Deaths("Player 8", "Terran Wraith", At least, 720);
+	Deaths("Player 8", "Terran Wraith", At least, 2160);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Lab Beacon");
@@ -1726,7 +1726,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Dropship", Exactly, 1);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Deaths("Player 8", "Terran Wraith", At least, 720);
+	Deaths("Player 8", "Terran Wraith", At least, 2160);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
@@ -1738,13 +1738,8 @@ Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 2, "P2 Hunt");
 	Create Unit("Player 6", "Zerg Hydralisk", 2, "P3 Hunt");
 	Create Unit("Player 6", "Zerg Hydralisk", 2, "P4 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P1 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P2 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P3 Hunt");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P4 Hunt");
 	Order("Player 6", "Zerg Zergling","Anywhere", "P5 Lab Beacon", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P5 Lab Beacon", Patrol);
-	Order("Player 6", "Zerg Lurker", "Anywhere", "P5 Lab Beacon", Patrol);
 	Preserve Trigger();
 }
 //-----------------------------------------------------------------//
@@ -1753,7 +1748,7 @@ Actions:
 //
 //  Protoss Probe DC   : 비콘 점거 토글 (0=비어있음, 1=플레이어 점거 중)
 //  Protoss Zealot DC  : 누적 점거량 (1 이상이면 첫 점령 이후)
-//  Terran Civilian DC : 비콘 이탈 후 경과 타이머 (720틱 = 60초)
+//  Terran Civilian DC : 비콘 이탈 후 경과 타이머 (360틱 = 30초)
 //-----------------------------------------------------------------//
 
 // 비콘 점거 중에는 이탈 타이머를 계속 리셋
@@ -1766,17 +1761,17 @@ Actions:
 	Preserve Trigger();
 }
 
-// 첫 점령 이후 60초 이상 비콘을 비운 경우, 복귀 안내 반복
+// 첫 점령 이후 30초 이상 비콘을 비운 경우, 복귀 안내 반복
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Zealot", At least, 1);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Deaths("Player 8", "Terran Civilian", At least, 720);
+	Deaths("Player 8", "Terran Civilian", At least, 360);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Lab Beacon");
-	Display Text Message(Always Display, "<06>경고: <04>비콘 점령이 끊겼습니다.");
+	Display Text Message(Always Display, "<06>경고: <04>비콘 점령이 끊겼습니다. 지상 유닛을 비콘 위에 올려야 점령됩니다.");
 	Display Text Message(Always Display, "<1A>노바: <04>비콘 신호가 다시 살아납니다. 위치를 미니맵에 재표시합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>즉시 비콘을 다시 점령해라. 차단을 이어가야 한다.");
 	Set Deaths("Player 8", "Terran Civilian", Set To, 0);
@@ -2056,13 +2051,6 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1524);
 Actions:
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn3");
@@ -2117,13 +2105,6 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1560);
 Actions:
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
@@ -2183,13 +2164,6 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1572);
 Actions:
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn3");
@@ -2224,13 +2198,6 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1608);
 Actions:
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
@@ -2465,34 +2432,29 @@ Actions:
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn5");
 }
 
 Trigger("Player 6"){
@@ -2539,41 +2501,27 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2556);
 Actions:
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Scourge", 3, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Scourge", 3, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Scourge", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Scourge", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Scourge", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Scourge", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Scourge", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Scourge", 1, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn7");
-	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 Spawn1", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn5", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn6", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn7", 1);
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn7");
 }
 
 Trigger("Player 6"){
@@ -2622,38 +2570,26 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2580);
 Actions:
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn7");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
 }
 
 Trigger("Player 6"){
@@ -2702,38 +2638,26 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2604);
 Actions:
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn7");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
 }
 
 Trigger("Player 6"){
@@ -2782,42 +2706,28 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2628);
 Actions:
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn7");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
 }
 
 Trigger("Player 6"){
