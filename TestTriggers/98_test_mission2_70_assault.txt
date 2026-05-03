@@ -1,0 +1,332 @@
+//-----------------------------------------------------------------//
+//  TEST ONLY - 미션2 70% 총공세 확인용
+//  시작 5초 후 70% 총공세를 직접 생성한다.
+//  운영 빌드 전에는 이 파일을 제거하거나 확장자 변경으로 제외할 것.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Elapsed Time(At least, 5);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Minimap Ping("P5 Lab Beacon");
+	Center View("P5 Lab Beacon");
+	Create Unit("Current Player", "Map Revealer", 1, "P5 Lab Vision");
+	Display Text Message(Always Display, "<06>TEST: <04>미션2 70% 총공세 테스트 시작.");
+	Display Text Message(Always Display, "<03>호크: <04>테스트 교전이다. 비콘 주변으로 밀려오는 흐름을 확인해라.");
+}
+
+// 70% 총공세 첫 파도 - 시작 5초
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 5);
+Actions:
+	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn7");
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn7");
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn7");
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn7");
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+}
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 5);
+Actions:
+	Create Unit("Player 6", "Zerg Scourge", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Scourge", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn7");
+	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn7");
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 Spawn1", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn5", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn6", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn7", 1);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn7");
+	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Guardian", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Guardian", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Guardian", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+}
+
+// 70% 추가 지상파 1 - 시작 7초
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 7);
+Actions:
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn7");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+}
+
+// 70% 추가 지상파 2 - 시작 9초
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 9);
+Actions:
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn7");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+}
+
+// 70% 추가 지상파 3 - 시작 11초
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 11);
+Actions:
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn7");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+}

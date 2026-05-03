@@ -14,4 +14,8 @@ try {
 } finally {
     $fs.Close()
 }
+$builtText = [System.IO.File]::ReadAllText($outPath)
+Set-Clipboard -Value $builtText
+
 Write-Host "built: $out from $($parts.Count) parts"
+Write-Host "copied to clipboard: $out"
