@@ -160,6 +160,16 @@ Use:
 
 Avoid over-explaining every trigger implementation detail. The player needs what to do, where, how long, and what happens if they fail.
 
+## Test And Cheat Triggers
+
+When adding or changing test-only triggers in `TestTriggers/` or `TestTriggersForBuild/`, preserve the production mission flow whenever possible.
+
+- Prefer forcing the same preconditions that a real player action would create, then let the normal `Triggers/` file advance the mission state.
+- Do not jump directly to a later mission flag, reward state, objective state, or dialogue state if an existing production trigger owns that transition.
+- Example: a "start mission 2" cheat should not directly set `Terran Valkyrie` to mission 2 phase values or grant rewards. Instead, set the mission 1 flag to the expected state and remove the required enemy Hatchery/Lair/Hive at `P5 Base`, so `Triggers/12_endgame.txt` performs the normal mission 1 clear path.
+- Use direct state jumps only for narrowly named test files whose purpose is explicitly to isolate a later system, such as a counterattack timing test. Make that isolation clear in the filename and comments.
+- Keep test output minimal. If the normal production path already displays text, do not add extra visible test messages that could hide or reorder the real pacing being tested.
+
 ## Review Checklist
 
 Before finalizing text output, check:

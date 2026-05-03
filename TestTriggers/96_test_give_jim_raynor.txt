@@ -1,0 +1,11 @@
+//-----------------------------------------------------------------//
+//  [TEST MODE / CHEAT] Spawn 2 control groups of Jim Raynor at P1 Start
+//  Included for manual test builds only.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Create Unit("Player 1", "Jim Raynor (Marine)", 24, "P1 Start");
+}

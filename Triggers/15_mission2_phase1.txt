@@ -5,6 +5,14 @@
 
 // 페이즈1 시작 브리핑 (미션1 완료 후 약 20초) — 헤더 + 오브젝티브
 // 대사는 4초 간격으로 출력하고, 마지막 지시 후 2분 정비 타이머를 시작한다.
+// Mission2 gate blockers removed when mission2 starts
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+Actions:
+	Remove Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate");
+}
+
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
