@@ -5,7 +5,7 @@ Conditions:
 	Elapsed Time(At least, 0);
 
 Actions:
-	Set Resources("Current Player", Add, 50, ore);
+	Set Resources("Current Player", Add, 100, ore);
 }
 
 //-----------------------------------------------------------------//

@@ -25,6 +25,7 @@
 //    Terran Dropship     : (M1) 늦은 웨이브 변형 인덱스 / (M2 P2) 반복 침투 플래그
 //    Protoss Probe       : 정찰 회전 인덱스 (0/1/2/3)
 //    Zerg Drone          : 드론 회수 발동 플래그
+//    Switch6             : (M2 P2) 9min P7 airstrike one-time flag
 //
 //  주의: Order에서 "Men" 사용 금지 (드론 포함됨) - 전투 유닛 개별 지정
 //============================================================
@@ -96,12 +97,12 @@ Actions:
 //-----------------------------------------------------------------//
 //  플레이어 팀킬 방지 - 동맹 상태 고정
 //  P1~P4만 서로 Ally로 반복 갱신한다. 적 컴퓨터 세력(P5/P6)은 건드리지 않는다.
-//  Terran Science Vessel DC = 3초 주기 (36틱)
+//  Terran Science Vessel DC = 10초 주기 (120틱)
 //-----------------------------------------------------------------//
 
 Trigger("Player 1"){
 Conditions:
-	Deaths("Player 8", "Terran Science Vessel", At least, 36);
+	Deaths("Player 8", "Terran Science Vessel", At least, 120);
 Actions:
 	Set Alliance Status("Player 2", Ally);
 	Set Alliance Status("Player 3", Ally);
@@ -111,7 +112,7 @@ Actions:
 
 Trigger("Player 2"){
 Conditions:
-	Deaths("Player 8", "Terran Science Vessel", At least, 36);
+	Deaths("Player 8", "Terran Science Vessel", At least, 120);
 Actions:
 	Set Alliance Status("Player 1", Ally);
 	Set Alliance Status("Player 3", Ally);
@@ -121,7 +122,7 @@ Actions:
 
 Trigger("Player 3"){
 Conditions:
-	Deaths("Player 8", "Terran Science Vessel", At least, 36);
+	Deaths("Player 8", "Terran Science Vessel", At least, 120);
 Actions:
 	Set Alliance Status("Player 1", Ally);
 	Set Alliance Status("Player 2", Ally);
@@ -131,7 +132,7 @@ Actions:
 
 Trigger("Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Science Vessel", At least, 36);
+	Deaths("Player 8", "Terran Science Vessel", At least, 120);
 Actions:
 	Set Alliance Status("Player 1", Ally);
 	Set Alliance Status("Player 2", Ally);
@@ -141,7 +142,7 @@ Actions:
 
 Trigger("Player 8"){
 Conditions:
-	Deaths("Player 8", "Terran Science Vessel", At least, 36);
+	Deaths("Player 8", "Terran Science Vessel", At least, 120);
 Actions:
 	Set Deaths("Player 8", "Terran Science Vessel", Set To, 0);
 	Preserve Trigger();
@@ -466,9 +467,9 @@ Conditions:
 	Command("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Dropship", Exactly, 0);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 32, "P5 Spawn");
-	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Spawn");
-	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Zergling", 24, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Lurker", "P5 Spawn", "Player Destination", Patrol);
@@ -488,8 +489,7 @@ Conditions:
 	Command("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Dropship", Exactly, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Mutalisk", 12, "P5 Spawn");
-	Create Unit("Player 5", "Zerg Scourge", 7, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Mutalisk", 10, "P5 Spawn");
 	Order("Player 5", "Zerg Mutalisk", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Scourge", "P5 Spawn", "Player Destination", Patrol);
 	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
@@ -508,9 +508,9 @@ Conditions:
 	Command("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Dropship", Exactly, 2);
 Actions:
-	Create Unit("Player 5", "Zerg Ultralisk", 4, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Ultralisk", 3, "P5 Spawn");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 2, "P5 Spawn", 1);
-	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn");
 	Order("Player 5", "Zerg Ultralisk", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Defiler", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn", "Player Destination", Patrol);
@@ -531,8 +531,8 @@ Conditions:
 	Deaths("Player 8", "Terran Dropship", Exactly, 3);
 Actions:
 	Create Unit("Player 5", "Zerg Guardian", 4, "P5 Spawn");
-	Create Unit("Player 5", "Zerg Devourer", 4, "P5 Spawn");
-	Create Unit("Player 5", "Zerg Mutalisk", 6, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Devourer", 3, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Mutalisk", 5, "P5 Spawn");
 	Order("Player 5", "Zerg Guardian", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Devourer", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Mutalisk", "P5 Spawn", "Player Destination", Patrol);
@@ -853,56 +853,52 @@ Trigger("Player 1"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Armory", At least, 1);
-	Deaths("Player 8", "Terran Vulture", At least, 1260);
-	Deaths("Player 8", "Terran Vulture", At most, 1284);
+	Deaths("Player 8", "Terran Vulture", At least, 900);
+	Deaths("Player 8", "Terran Vulture", At most, 924);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "Mission2 Gate");
 	Minimap Ping("Mission2 Gate");
-	Center View("Mission2 Gate");
 }
 
 Trigger("Player 2"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Armory", At least, 1);
-	Deaths("Player 8", "Terran Vulture", At least, 1260);
-	Deaths("Player 8", "Terran Vulture", At most, 1284);
+	Deaths("Player 8", "Terran Vulture", At least, 900);
+	Deaths("Player 8", "Terran Vulture", At most, 924);
 Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "Mission2 Gate");
 	Minimap Ping("Mission2 Gate");
-	Center View("Mission2 Gate");
 }
 
 Trigger("Player 3"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Armory", At least, 1);
-	Deaths("Player 8", "Terran Vulture", At least, 1260);
-	Deaths("Player 8", "Terran Vulture", At most, 1284);
+	Deaths("Player 8", "Terran Vulture", At least, 900);
+	Deaths("Player 8", "Terran Vulture", At most, 924);
 Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "Mission2 Gate");
 	Minimap Ping("Mission2 Gate");
-	Center View("Mission2 Gate");
 }
 
 Trigger("Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Armory", At least, 1);
-	Deaths("Player 8", "Terran Vulture", At least, 1260);
-	Deaths("Player 8", "Terran Vulture", At most, 1284);
+	Deaths("Player 8", "Terran Vulture", At least, 900);
+	Deaths("Player 8", "Terran Vulture", At most, 924);
 Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "Mission2 Gate");
 	Minimap Ping("Mission2 Gate");
-	Center View("Mission2 Gate");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Armory", At least, 1);
-	Deaths("Player 8", "Terran Vulture", At least, 1260);
-	Deaths("Player 8", "Terran Vulture", At most, 1284);
+	Deaths("Player 8", "Terran Vulture", At least, 900);
+	Deaths("Player 8", "Terran Vulture", At most, 924);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 확인. 봉쇄선 너머에 신전으로 이어지는 협곡이 있습니다.");
@@ -912,8 +908,8 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Armory", At least, 1);
-	Deaths("Player 8", "Terran Vulture", At least, 1308);
-	Deaths("Player 8", "Terran Vulture", At most, 1332);
+	Deaths("Player 8", "Terran Vulture", At least, 948);
+	Deaths("Player 8", "Terran Vulture", At most, 972);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>좋다. 길을 열어라. 정비가 끝나면 저 통로로 진입한다.");
 }
@@ -922,17 +918,27 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Armory", At least, 1);
-	Deaths("Player 8", "Terran Vulture", At least, 1356);
-	Deaths("Player 8", "Terran Vulture", At most, 1380);
+	Deaths("Player 8", "Terran Vulture", At least, 996);
+	Deaths("Player 8", "Terran Vulture", At most, 1020);
 Actions:
-	Remove Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Armory", At least, 1);
+	Deaths("Player 8", "Terran Vulture", At least, 996);
+	Deaths("Player 8", "Terran Vulture", At most, 1020);
+Actions:
+	Minimap Ping("Mission2 Gate");
 }
 
 Trigger("Player 1"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Armory", At least, 1);
-	Deaths("Player 8", "Terran Vulture", At least, 1452);
+	Deaths("Player 8", "Terran Vulture", At least, 1092);
 Actions:
 	Remove Unit("Player 1", "Map Revealer");
 }
@@ -941,7 +947,7 @@ Trigger("Player 2"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Armory", At least, 1);
-	Deaths("Player 8", "Terran Vulture", At least, 1452);
+	Deaths("Player 8", "Terran Vulture", At least, 1092);
 Actions:
 	Remove Unit("Player 2", "Map Revealer");
 }
@@ -950,7 +956,7 @@ Trigger("Player 3"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Armory", At least, 1);
-	Deaths("Player 8", "Terran Vulture", At least, 1452);
+	Deaths("Player 8", "Terran Vulture", At least, 1092);
 Actions:
 	Remove Unit("Player 3", "Map Revealer");
 }
@@ -959,7 +965,7 @@ Trigger("Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
 	Deaths("Player 8", "Terran Armory", At least, 1);
-	Deaths("Player 8", "Terran Vulture", At least, 1452);
+	Deaths("Player 8", "Terran Vulture", At least, 1092);
 Actions:
 	Remove Unit("Player 4", "Map Revealer");
 }
@@ -1059,19 +1065,135 @@ Actions:
 }
 
 // 세트피스 적 스폰 - 페이즈2 시작 시 P5 Lab에 P6 변종 무리 1회
+// 인트루스 군 스폰 - 생성
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 30, "P5 Lab");
-	Create Unit("Player 6", "Zerg Lurker", 4, "P5 Lab");
-	Create Unit("Player 6", "Zerg Ultralisk", 5, "P5 Lab");
-	Create Unit with Properties("Player 6", "Zerg Defiler", 4, "P5 Lab", 1);
-	Create Unit("Player 6", "Infested Terran", 6, "P5 Lab");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn7");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn5", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn6", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn7", 1);
+	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn7");
+}
+
+// 인트루스 군 스폰 - 7경로 명령
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+Actions:
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Infested Terran", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Infested Terran", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Infested Terran", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Infested Terran", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Infested Terran", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Infested Terran", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Infested Terran", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 // Minimap Ping 30초마다 반복 - Civilian DC (360틱 = 30s)
 // 페이즈2 시작 시 DC 0 리셋 (Civilian은 미션1 자원보충용이지만 미션1 끝나면 자유)
+// phase start - reset beacon ping cooldown
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -1627,11 +1749,11 @@ Actions:
 }
 //-----------------------------------------------------------------//
 //  미션 2 페이즈 2 - 비콘 복귀 안내
-//  첫 점령 이후 비콘을 90초 이상 비우면 경고와 미니맵 핑을 반복한다.
+//  첫 점령 이후 비콘을 60초 이상 비우면 경고와 미니맵 핑을 반복한다.
 //
 //  Protoss Probe DC   : 비콘 점거 토글 (0=비어있음, 1=플레이어 점거 중)
 //  Protoss Zealot DC  : 누적 점거량 (1 이상이면 첫 점령 이후)
-//  Terran Civilian DC : 비콘 이탈 후 경과 타이머 (1080틱 = 90초)
+//  Terran Civilian DC : 비콘 이탈 후 경과 타이머 (720틱 = 60초)
 //-----------------------------------------------------------------//
 
 // 비콘 점거 중에는 이탈 타이머를 계속 리셋
@@ -1644,13 +1766,13 @@ Actions:
 	Preserve Trigger();
 }
 
-// 첫 점령 이후 90초 이상 비콘을 비운 경우, 복귀 안내 반복
+// 첫 점령 이후 60초 이상 비콘을 비운 경우, 복귀 안내 반복
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Zealot", At least, 1);
 	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-	Deaths("Player 8", "Terran Civilian", At least, 1080);
+	Deaths("Player 8", "Terran Civilian", At least, 720);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Lab Beacon");
@@ -1689,6 +1811,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 396);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn3");
@@ -1703,6 +1832,12 @@ Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 396);
+Actions:
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -1717,6 +1852,13 @@ Actions:
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 // 경고 대사 (Zealot 456 - 노바 +8초)
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -1733,6 +1875,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 756);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn3");
@@ -1747,6 +1896,12 @@ Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 756);
+Actions:
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -1761,6 +1916,13 @@ Actions:
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
@@ -1776,6 +1938,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1116);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
@@ -1794,6 +1963,12 @@ Actions:
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 1116);
+Actions:
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -1815,6 +1990,13 @@ Actions:
 	Order("Player 6", "Zerg Lurker", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
@@ -1833,6 +2015,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1476);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn3");
@@ -1840,6 +2029,12 @@ Actions:
 	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 1476);
+Actions:
 	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -1847,6 +2042,13 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 // 40% slow support - Zealot 1524
@@ -1854,6 +2056,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1524);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn3");
@@ -1861,6 +2070,16 @@ Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn7");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 1524);
+Actions:
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -1868,10 +2087,6 @@ Actions:
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -1879,6 +2094,13 @@ Actions:
 	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -1895,6 +2117,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1560);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
@@ -1902,13 +2131,6 @@ Actions:
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn7");
-	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
@@ -1916,6 +2138,23 @@ Actions:
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn7");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 1560);
+Actions:
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -1923,10 +2162,6 @@ Actions:
 	Order("Player 6", "Zerg Lurker", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -1934,6 +2169,13 @@ Actions:
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 // 40% air escort - Zealot 1572
@@ -1941,6 +2183,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1572);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn3");
@@ -1948,6 +2197,12 @@ Actions:
 	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 1572);
+Actions:
 	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -1955,6 +2210,13 @@ Actions:
 	Order("Player 6", "Zerg Devourer", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Devourer", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Devourer", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 // 40% fast air screen - Zealot 1608
@@ -1962,6 +2224,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1608);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
@@ -1969,13 +2238,6 @@ Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn7");
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn3");
@@ -1983,6 +2245,19 @@ Actions:
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Scourge", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Scourge", 1, "P6 Spawn7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 1608);
+Actions:
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -1990,6 +2265,13 @@ Actions:
 	Order("Player 6", "Zerg Scourge", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Scourge", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Scourge", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 // ===== 50% - 본대 (재편 + 공중 합세) =====
@@ -1997,6 +2279,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 1836);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn3");
@@ -2022,6 +2311,12 @@ Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 1836);
+Actions:
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -2050,6 +2345,13 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
@@ -2065,6 +2367,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2196);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
@@ -2093,6 +2402,12 @@ Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2196);
+Actions:
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -2121,6 +2436,13 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
@@ -2136,6 +2458,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2556);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn3");
@@ -2143,13 +2472,6 @@ Actions:
 	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn7");
-	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn3");
@@ -2157,13 +2479,6 @@ Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn7");
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
@@ -2171,13 +2486,6 @@ Actions:
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn7");
-	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn3");
@@ -2185,6 +2493,33 @@ Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2556);
+Actions:
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -2192,11 +2527,25 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2556);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Scourge", 3, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Scourge", 3, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn3");
@@ -2204,13 +2553,6 @@ Actions:
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn7");
-	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn3");
@@ -2218,13 +2560,6 @@ Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn7");
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 Spawn1", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
@@ -2232,13 +2567,6 @@ Actions:
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn5", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn6", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn7", 1);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
@@ -2246,6 +2574,33 @@ Actions:
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn5");
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn6");
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2556);
+Actions:
+	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -2253,6 +2608,13 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 // 70% 총공세 추가 지상파 1 - 시작 후 약 2초
@@ -2260,6 +2622,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2580);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn3");
@@ -2285,6 +2654,12 @@ Actions:
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2580);
+Actions:
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -2313,6 +2688,13 @@ Actions:
 	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 // 70% 총공세 추가 지상파 2 - 시작 후 약 4초
@@ -2320,6 +2702,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2604);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn3");
@@ -2345,6 +2734,12 @@ Actions:
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2604);
+Actions:
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -2373,6 +2768,13 @@ Actions:
 	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 
 // 70% 총공세 추가 지상파 3 - 시작 후 약 6초
@@ -2380,6 +2782,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2628);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn3");
@@ -2409,6 +2818,12 @@ Actions:
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2628);
+Actions:
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -2444,6 +2859,13 @@ Actions:
 	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
@@ -2460,6 +2882,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 2916);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn3");
@@ -2482,6 +2911,12 @@ Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 2916);
+Actions:
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -2510,6 +2945,13 @@ Actions:
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
@@ -2525,6 +2967,13 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 3276);
 Actions:
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
@@ -2554,6 +3003,12 @@ Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Zealot", At least, 3276);
+Actions:
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
@@ -2589,6 +3044,13 @@ Actions:
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
@@ -2611,12 +3073,12 @@ Actions:
 	Set Deaths("Player 8", "Protoss Dragoon", Set To, 0);
 }
 
-// First entry warning - 10 or more player units enter the suspicious approach.
+// First entry warning - 6 or more player units enter the suspicious approach.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Dragoon", Exactly, 0);
-	Bring("Foes", "Men", "Ambush Alert", At least, 10);
+	Bring("Foes", "Men", "Ambush Alert", At least, 6);
 Actions:
 	Set Deaths("Player 8", "Protoss Dragoon", Set To, 1);
 	Set Deaths("Player 8", "Terran Goliath", Set To, 0);
@@ -2627,7 +3089,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Dragoon", Exactly, 0);
-	Bring("Foes", "Men", "Ambush Triggers", At least, 10);
+	Bring("Foes", "Men", "Ambush Triggers", At least, 6);
 Actions:
 	Set Deaths("Player 8", "Protoss Dragoon", Set To, 1);
 	Set Deaths("Player 8", "Terran Goliath", Set To, 0);
@@ -2653,12 +3115,12 @@ Actions:
 	Display Text Message(Always Display, "<03>호크: <04>이 길목은 마음에 들지 않는다. 대열을 좁히지 말고, 만반의 태세를 갖춰라.");
 }
 
-// Main ambush - once 10 or more player units push past the midpoint.
+// Main ambush - once 6 or more player units push past the midpoint.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Dragoon", Exactly, 1);
-	Bring("Foes", "Men", "Ambush Triggers", At least, 10);
+	Bring("Foes", "Men", "Ambush Triggers", At least, 6);
 Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "Ambush Range1");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "Ambush Range2");
@@ -2724,6 +3186,361 @@ Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>양측 능선에서 생체 반응 급증. 포위망입니다!");
 }
 //-----------------------------------------------------------------//
+//  Mission 2 Phase 2 - Side Mission: Resource Raids
+//  Switch2 : raid sites revealed/spawned
+//  Switch3 : Raid1 cleared
+//  Switch4 : Raid2 cleared
+//  Switch5 : Raid3 cleared
+//-----------------------------------------------------------------//
+
+// Six minutes after phase 2 starts, reveal three defended biomass stores.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 4320);
+	Switch("Switch2", Not Set);
+Actions:
+	Create Unit("Player 7", "Mature Crysalis", 1, "Raid1");
+	Create Unit("Player 7", "Mature Crysalis", 1, "Raid2");
+	Create Unit("Player 7", "Mature Crysalis", 1, "Raid3");
+	Create Unit("Player 7", "Zerg Zergling", 12, "Raid1");
+	Create Unit("Player 7", "Zerg Zergling", 12, "Raid2");
+	Create Unit("Player 7", "Zerg Zergling", 12, "Raid3");
+	Create Unit("Player 7", "Zerg Hydralisk", 8, "Raid1");
+	Create Unit("Player 7", "Zerg Hydralisk", 8, "Raid2");
+	Create Unit("Player 7", "Zerg Hydralisk", 8, "Raid3");
+	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "Raid1", 1);
+	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "Raid2", 1);
+	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "Raid3", 1);
+	Set Switch("Switch2", set);
+}
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 4320);
+	Switch("Switch2", set);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "Raid1");
+	Remove Unit("Player 1", "Map Revealer");
+	Create Unit("Player 1", "Map Revealer", 1, "Raid2");
+	Remove Unit("Player 1", "Map Revealer");
+	Create Unit("Player 1", "Map Revealer", 1, "Raid3");
+	Remove Unit("Player 1", "Map Revealer");
+	Minimap Ping("Raid1");
+	Minimap Ping("Raid2");
+	Minimap Ping("Raid3");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 4320);
+	Switch("Switch2", set);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "Raid1");
+	Remove Unit("Player 2", "Map Revealer");
+	Create Unit("Player 2", "Map Revealer", 1, "Raid2");
+	Remove Unit("Player 2", "Map Revealer");
+	Create Unit("Player 2", "Map Revealer", 1, "Raid3");
+	Remove Unit("Player 2", "Map Revealer");
+	Minimap Ping("Raid1");
+	Minimap Ping("Raid2");
+	Minimap Ping("Raid3");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 4320);
+	Switch("Switch2", set);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "Raid1");
+	Remove Unit("Player 3", "Map Revealer");
+	Create Unit("Player 3", "Map Revealer", 1, "Raid2");
+	Remove Unit("Player 3", "Map Revealer");
+	Create Unit("Player 3", "Map Revealer", 1, "Raid3");
+	Remove Unit("Player 3", "Map Revealer");
+	Minimap Ping("Raid1");
+	Minimap Ping("Raid2");
+	Minimap Ping("Raid3");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 4320);
+	Switch("Switch2", set);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "Raid1");
+	Remove Unit("Player 4", "Map Revealer");
+	Create Unit("Player 4", "Map Revealer", 1, "Raid2");
+	Remove Unit("Player 4", "Map Revealer");
+	Create Unit("Player 4", "Map Revealer", 1, "Raid3");
+	Remove Unit("Player 4", "Map Revealer");
+	Minimap Ping("Raid1");
+	Minimap Ping("Raid2");
+	Minimap Ping("Raid3");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 4320);
+	Switch("Switch2", set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>외곽 세 곳에서 고밀도 생체 저장낭 확인. 소규모 경비가 붙어 있습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 4368);
+	Deaths("Player 8", "Terran Vulture", At most, 4392);
+	Switch("Switch2", set);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>기동대가 있으면 찔러라. 저장낭만 깨면 보급으로 돌릴 수 있다.");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch2", set);
+	Switch("Switch3", Not Set);
+	Bring("Player 7", "Mature Crysalis", "Raid1", At most, 0);
+Actions:
+	Set Resources("Player 1", Add, 2000, ore);
+	Set Resources("Player 2", Add, 2000, ore);
+	Set Resources("Player 3", Add, 2000, ore);
+	Set Resources("Player 4", Add, 2000, ore);
+	Set Resources("Player 1", Add, 800, gas);
+	Set Resources("Player 2", Add, 800, gas);
+	Set Resources("Player 3", Add, 800, gas);
+	Set Resources("Player 4", Add, 800, gas);
+	Set Switch("Switch3", set);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch3", set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<07>군수지원: <04>외곽 생체 저장낭 회수 완료. 미네랄 +2000 / 가스 +800");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch2", set);
+	Switch("Switch4", Not Set);
+	Bring("Player 7", "Mature Crysalis", "Raid2", At most, 0);
+Actions:
+	Set Resources("Player 1", Add, 2000, ore);
+	Set Resources("Player 2", Add, 2000, ore);
+	Set Resources("Player 3", Add, 2000, ore);
+	Set Resources("Player 4", Add, 2000, ore);
+	Set Resources("Player 1", Add, 800, gas);
+	Set Resources("Player 2", Add, 800, gas);
+	Set Resources("Player 3", Add, 800, gas);
+	Set Resources("Player 4", Add, 800, gas);
+	Set Switch("Switch4", set);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch4", set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<07>군수지원: <04>협곡 생체 저장낭 회수 완료. 미네랄 +2000 / 가스 +800");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch2", set);
+	Switch("Switch5", Not Set);
+	Bring("Player 7", "Mature Crysalis", "Raid3", At most, 0);
+Actions:
+	Set Resources("Player 1", Add, 2000, ore);
+	Set Resources("Player 2", Add, 2000, ore);
+	Set Resources("Player 3", Add, 2000, ore);
+	Set Resources("Player 4", Add, 2000, ore);
+	Set Resources("Player 1", Add, 800, gas);
+	Set Resources("Player 2", Add, 800, gas);
+	Set Resources("Player 3", Add, 800, gas);
+	Set Resources("Player 4", Add, 800, gas);
+	Set Switch("Switch5", set);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch5", set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<07>군수지원: <04>후방 생체 저장낭 회수 완료. 미네랄 +2000 / 가스 +800");
+}
+//-----------------------------------------------------------------//
+//  Mission 2 Phase 2 - New Pass1 opening
+//  Fires 3 minutes after phase 2 starts. Reveals the route briefly
+//  and uses minimap pings instead of moving player camera.
+//-----------------------------------------------------------------//
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "New Pass1");
+}
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "New Pass1");
+	Remove Unit("Player 1", "Map Revealer");
+	Minimap Ping("New Pass1");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "New Pass1");
+	Remove Unit("Player 2", "Map Revealer");
+	Minimap Ping("New Pass1");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "New Pass1");
+	Remove Unit("Player 3", "Map Revealer");
+	Minimap Ping("New Pass1");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "New Pass1");
+	Remove Unit("Player 4", "Map Revealer");
+	Minimap Ping("New Pass1");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>스캔 결과, 새 통로가 열렸습니다. 주변에 탐색 가치가 있어 보입니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2208);
+	Deaths("Player 8", "Terran Vulture", At most, 2232);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>주공은 유지한다. 여유 병력이 있으면 그 통로도 확인해봐라.");
+}
+//-----------------------------------------------------------------//
+//  Mission 2 Phase 2 - 9min Airstrike
+//  Switch6 : one-time P7 mutalisk airstrike fired
+//
+//  Target priority:
+//    P4 Hunt -> P3 Hunt -> P2 Hunt -> P1 Hunt
+//-----------------------------------------------------------------//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 6480);
+	Deaths("Player 8", "Terran Vulture", At most, 6504);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>고속 비행 생체 반응 다수. 후방 기지 쪽으로 꺾어 들어옵니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 6528);
+	Deaths("Player 8", "Terran Vulture", At most, 6552);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>공중 방어망을 돌려라. 주전선만 보다가 뒤를 내주지 마라.");
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 6480);
+	Switch("Switch6", Not Set);
+	Command("Player 4", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 7", "Zerg Mutalisk", 15, "P7 AirStrike Spawn");
+	Order("Player 7", "Zerg Mutalisk", "P7 AirStrike Spawn", "P4 Hunt", Patrol);
+	Set Switch("Switch6", set);
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 6480);
+	Switch("Switch6", Not Set);
+	Command("Player 4", "Buildings", At most, 0);
+	Command("Player 3", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 7", "Zerg Mutalisk", 15, "P7 AirStrike Spawn");
+	Order("Player 7", "Zerg Mutalisk", "P7 AirStrike Spawn", "P3 Hunt", Patrol);
+	Set Switch("Switch6", set);
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 6480);
+	Switch("Switch6", Not Set);
+	Command("Player 4", "Buildings", At most, 0);
+	Command("Player 3", "Buildings", At most, 0);
+	Command("Player 2", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 7", "Zerg Mutalisk", 15, "P7 AirStrike Spawn");
+	Order("Player 7", "Zerg Mutalisk", "P7 AirStrike Spawn", "P2 Hunt", Patrol);
+	Set Switch("Switch6", set);
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 6480);
+	Switch("Switch6", Not Set);
+	Command("Player 4", "Buildings", At most, 0);
+	Command("Player 3", "Buildings", At most, 0);
+	Command("Player 2", "Buildings", At most, 0);
+	Command("Player 1", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 7", "Zerg Mutalisk", 15, "P7 AirStrike Spawn");
+	Order("Player 7", "Zerg Mutalisk", "P7 AirStrike Spawn", "P1 Hunt", Patrol);
+	Set Switch("Switch6", set);
+}
+//-----------------------------------------------------------------//
 //  미션 2 페이즈 2 - 비콘 점령 완료 / 클리어
 //  Zealot DC ≥ 3600 (누적 5분 점거 완료) → Valkyrie 3→4
 //
@@ -2733,12 +3550,12 @@ Actions:
 //    T+10s  노바 결론: UED가 아니다
 //    T+15s  카르츠 녹화 등장
 //    T+20s  카르츠: 모두 기록됐다
-//    T+25s  카르츠: 다음 단계로 간다 (떠남 암시)
+//    T+25s  카르츠: 통제 실패 확인
 //    T+30s  노바 신원 식별: 셀렌 카르츠
 //    T+35s  호크 분노: 실험체였다는 건가
 //    T+40s  노바 역전: 우리도 좌표 땄다
 //    T+45s  호크 결의: 이번엔 우리가 끊는다
-//    T+50s  호크 마무리 칭찬 + 다음 작전 예고
+//    T+50s  호크 마무리 칭찬
 //    T+55s  미션 클리어 헤더 + 미션 오브젝티브 체크리스트
 //    T+65s  Victory()
 //-----------------------------------------------------------------//
@@ -2755,6 +3572,14 @@ Actions:
 	Display Text Message(Always Display, "<13><03>  비콘 차단 완료 - 5분 사수 성공");
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<07>작전: <04>비콘 차단 완료. 발신자 분석 시작.");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Zealot", At least, 3600);
+Actions:
+	Pause Timer();
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 4);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 }
@@ -2787,7 +3612,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 204);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>?? - 사전 녹화: <04>축하한다, 선봉대. 정확히 5분을 버텼군.");
+	Display Text Message(Always Display, "<06>카르츠 - 사전 녹화: <04>축하한다, 선봉대. 정확히 5분을 버텼군.");
 }
 
 // T+20s - 카르츠 녹화 2: 데이터 회수
@@ -2797,7 +3622,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 240);
 	Deaths("Player 8", "Terran Vulture", At most, 264);
 Actions:
-	Display Text Message(Always Display, "<06>??: <04>방어 패턴, 화력 분포, 반격 속도. 모두 깨끗하게 기록됐다.");
+	Display Text Message(Always Display, "<06>카르츠: <04>방어 패턴, 화력 분포, 반격 속도. 모두 깨끗하게 기록됐다.");
 }
 
 // T+25s - 카르츠 녹화 3: 떠남 암시
@@ -2807,7 +3632,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 300);
 	Deaths("Player 8", "Terran Vulture", At most, 324);
 Actions:
-	Display Text Message(Always Display, "<06>??: <04>이곳에서의 실험은 끝이다. 다음 단계로 넘어간다.");
+	Display Text Message(Always Display, "<06>카르츠: <04>...기록이 끊겼군. 실험군이 통제를 벗어났다.");
 }
 
 // T+30s - 노바 신원 식별
@@ -2817,7 +3642,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 360);
 	Deaths("Player 8", "Terran Vulture", At most, 384);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>...셀렌 카르츠. 도미니언 변종 연구자. 7년 전 사망 처리된 인물입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>셀렌 카르츠. 도미니언 변종 연구자. 사망 기록은 조작된 겁니다.");
 }
 
 // T+35s - 호크 분노
@@ -2837,7 +3662,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 480);
 	Deaths("Player 8", "Terran Vulture", At most, 504);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>하지만 사령관, 발신 좌표는 우리가 따냈어요. 북서쪽 프로토스 유적.");
+	Display Text Message(Always Display, "<1A>노바: <04>하지만 발신망은 여기서 끊겼습니다. 적어도 이 전장은 끝났어요.");
 }
 
 // T+45s - 호크 결의: 우리가 끊는다
@@ -2847,10 +3672,10 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 540);
 	Deaths("Player 8", "Terran Vulture", At most, 564);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>좋다. 이번엔 우리가 그 자식 시간을 끝낸다.");
+	Display Text Message(Always Display, "<03>호크: <04>좋다. 오늘은 우리가 놈의 시간을 끊었다.");
 }
 
-// T+50s - 호크 마무리 칭찬 + 다음 작전 예고
+// T+50s - 호크 마무리 칭찬
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
@@ -2858,7 +3683,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 624);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<03>호크: <04>선봉대, 첫 본격 작전 완수. 다음 전장은 우리가 정한다.");
+	Display Text Message(Always Display, "<03>호크: <04>선봉대, 작전 완수. 카르가스 IV의 전선은 살아남았다.");
 }
 
 // T+55s - 미션 클리어 헤더 + 체크리스트형 오브젝티브
@@ -2870,10 +3695,10 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<13><03>  [미션 2 완료] 통신 두절의 진실");
+	Display Text Message(Always Display, "<13><03>  [작전 완료] 카르가스 IV 전선 생존");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<07>작전사령부: <04>다음 출격 좌표 잠금 해제. 카르가스 IV 미션 3 - 프로토스 유적 추격.");
-	Set Mission Objectives("<03>[미션 2 완료] 통신 두절의 진실\n\n<04>- 비콘 5분 사수: 완료\n- 유도 신호 차단: 완료\n- 발신자 식별: 셀렌 카르츠\n  (도미니언 변종 연구자, 7년 전 사망 처리)\n- 다음 작전 좌표 확보: 북서쪽 프로토스 유적\n\n다음 작전: 미션 3 - 프로토스 유적 추격\n선봉대, 잠시 정비. 곧 다시 출격한다.");
+	Display Text Message(Always Display, "<07>작전사령부: <04>비콘 차단 완료. 전 부대 생존 확인. 카르가스 IV 전선 유지.");
+	Set Mission Objectives("<03>[작전 완료] 카르가스 IV 전선 생존\n\n<04>- 비콘 5분 사수: 완료\n- 유도 신호 차단: 완료\n- 본진 침투 저지: 완료\n- 발신자 식별: 셀렌 카르츠\n- 카르가스 IV 전선 유지: 성공\n\n선봉대는 임무를 완수했다. 이 전장은 끝났다.");
 }
 
 // T+65s - Victory
@@ -2884,99 +3709,6 @@ Conditions:
 Actions:
 	Wait(1000);
 	Victory();
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE / CHEAT] Spawn 2 control groups of Jim Raynor at P1 Start
-//  Included for manual test builds only.
-//-----------------------------------------------------------------//
-
-Trigger("Player 1"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Create Unit("Player 1", "Jim Raynor (Marine)", 24, "P1 Start");
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE / CHEAT] 게임 시작 시 P1에게 톰 카잔스키 36기 지급
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  주의: 36기를 한 location에 몰아 스폰하면 stacking으로 일부 멀리
-//        밀려날 수 있음. 테스트 목적이므로 P1 본진(P1 Start 등) 사용.
-//-----------------------------------------------------------------//
-
-Trigger("Player 1"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Create Unit("Player 1", "Tom Kazansky (Wraith)", 36, "Anywhere");
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] 플레이어 절대 패배 방지 (스위치 방식)
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  동작 원리:
-//    게임 시작 직후 Switch1 을 set.
-//    12_endgame.txt 의 패배 트리거에 Switch("Switch1", cleared) 조건이
-//    있으므로, 스위치가 set 상태인 한 Defeat()가 발동하지 않음.
-//-----------------------------------------------------------------//
-
-Trigger("Player 5"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Set Switch("Switch1", set);
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] 컴퓨터(P5, P6) → 플레이어(P1~P4) 시야 공유
-//  (플레이어가 컴퓨터의 시야를 가진다)
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  사용 스크립트 (AI → 해당 플레이어로 시야 공유):
-//    "Turn ON Shared Vision of current player with Player 1"
-//    "Turn ON Shared Vision of current player with Player 2"
-//    "Turn ON Shared Vision of current player with Player 3"
-//    "Turn ON Shared Vision of current player with Player 4"
-//
-//  주의: 위 스크립트 이름이 SCMDraft 드롭다운에 정확히 그대로 있는지
-//        확인할 것. 표기가 다르면 적절히 교체.
-//        ("of [SHARER] with [RECEIVER]" 패턴으로 추정)
-//-----------------------------------------------------------------//
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Run AI Script("+Vi4");
-	Run AI Script("+Vi5");
-	Run AI Script("+Vi6");
-	Run AI Script("+Vi7");
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] Trigger the normal mission 1 clear path
-//
-//  This does not set mission 2 directly. It prepares the same condition
-//  used by Triggers/12_endgame.txt:
-//    - Valkyrie DC = 1
-//    - P5 combat base is removed
-//
-//  Then 12_endgame advances Valkyrie 1 -> 2, grants rewards, and starts
-//  the normal mission 2 phase 1 flow.
-//-----------------------------------------------------------------//
-
-Trigger("Player 5"){
-Conditions:
-	Elapsed Time(At least, 5);
-Actions:
-	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
-	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
-	Kill Unit("Player 5", "Buildings");
-	Kill Unit("Player 5", "Men");
 }
 //-----------------------------------------------------------------//
 //  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유
