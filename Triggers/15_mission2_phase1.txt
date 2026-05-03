@@ -5,14 +5,6 @@
 
 // 페이즈1 시작 브리핑 (미션1 완료 후 약 20초) — 헤더 + 오브젝티브
 // 대사는 4초 간격으로 출력하고, 마지막 지시 후 2분 정비 타이머를 시작한다.
-// Mission2 gate blockers removed when mission2 starts
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
-Actions:
-	Remove Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate");
-}
-
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
@@ -77,6 +69,122 @@ Actions:
 	Display Text Message(Always Display, "<03>호크: <04>직접 확인한다. 2분간 재정비한다.");
 	Set Countdown Timer(Set To, 120);
 	Set Deaths("Player 8", "Terran Armory", Set To, 1);
+}
+
+// 정비 타이머 중간 지점 - Mission2 Gate 스캔 및 개방 안내
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Armory", At least, 1);
+	Deaths("Player 8", "Terran Vulture", At least, 1260);
+	Deaths("Player 8", "Terran Vulture", At most, 1284);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "Mission2 Gate");
+	Minimap Ping("Mission2 Gate");
+	Center View("Mission2 Gate");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Armory", At least, 1);
+	Deaths("Player 8", "Terran Vulture", At least, 1260);
+	Deaths("Player 8", "Terran Vulture", At most, 1284);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "Mission2 Gate");
+	Minimap Ping("Mission2 Gate");
+	Center View("Mission2 Gate");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Armory", At least, 1);
+	Deaths("Player 8", "Terran Vulture", At least, 1260);
+	Deaths("Player 8", "Terran Vulture", At most, 1284);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "Mission2 Gate");
+	Minimap Ping("Mission2 Gate");
+	Center View("Mission2 Gate");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Armory", At least, 1);
+	Deaths("Player 8", "Terran Vulture", At least, 1260);
+	Deaths("Player 8", "Terran Vulture", At most, 1284);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "Mission2 Gate");
+	Minimap Ping("Mission2 Gate");
+	Center View("Mission2 Gate");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Armory", At least, 1);
+	Deaths("Player 8", "Terran Vulture", At least, 1260);
+	Deaths("Player 8", "Terran Vulture", At most, 1284);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 확인. 봉쇄선 너머에 신전으로 이어지는 협곡이 있습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Armory", At least, 1);
+	Deaths("Player 8", "Terran Vulture", At least, 1308);
+	Deaths("Player 8", "Terran Vulture", At most, 1332);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>좋다. 길을 열어라. 정비가 끝나면 저 통로로 진입한다.");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Armory", At least, 1);
+	Deaths("Player 8", "Terran Vulture", At least, 1356);
+	Deaths("Player 8", "Terran Vulture", At most, 1380);
+Actions:
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate");
+}
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Armory", At least, 1);
+	Deaths("Player 8", "Terran Vulture", At least, 1452);
+Actions:
+	Remove Unit("Player 1", "Map Revealer");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Armory", At least, 1);
+	Deaths("Player 8", "Terran Vulture", At least, 1452);
+Actions:
+	Remove Unit("Player 2", "Map Revealer");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Armory", At least, 1);
+	Deaths("Player 8", "Terran Vulture", At least, 1452);
+Actions:
+	Remove Unit("Player 3", "Map Revealer");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 2);
+	Deaths("Player 8", "Terran Armory", At least, 1);
+	Deaths("Player 8", "Terran Vulture", At least, 1452);
+Actions:
+	Remove Unit("Player 4", "Map Revealer");
 }
 
 // 페이즈1 종료 - 페이즈2 진입 (Valkyrie 2→3, Vulture 0 리셋)

@@ -4,7 +4,7 @@
 //  This does not set mission 2 directly. It prepares the same condition
 //  used by Triggers/12_endgame.txt:
 //    - Valkyrie DC = 1
-//    - No P5 Hatchery/Lair/Hive remains at P5 Base
+//    - P5 combat base is removed
 //
 //  Then 12_endgame advances Valkyrie 1 -> 2, grants rewards, and starts
 //  the normal mission 2 phase 1 flow.
@@ -12,11 +12,10 @@
 
 Trigger("Player 8"){
 Conditions:
-	Elapsed Time(At most, 1);
+	Elapsed Time(At least, 5);
 Actions:
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
-	Remove Unit At Location("Player 5", "Zerg Hatchery", 64, "P5 Base");
-	Remove Unit At Location("Player 5", "Zerg Lair", 64, "P5 Base");
-	Remove Unit At Location("Player 5", "Zerg Hive", 64, "P5 Base");
+	Kill Unit("Player 5", "Buildings");
+	Kill Unit("Player 5", "Men");
 }
