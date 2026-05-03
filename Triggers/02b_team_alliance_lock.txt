@@ -1,11 +1,12 @@
 //-----------------------------------------------------------------//
 //  플레이어 팀킬 방지 - 동맹 상태 고정
 //  P1~P4만 서로 Ally로 반복 갱신한다. 적 컴퓨터 세력(P5/P6)은 건드리지 않는다.
+//  Terran Science Vessel DC = 3초 주기 (36틱)
 //-----------------------------------------------------------------//
 
 Trigger("Player 1"){
 Conditions:
-	Always();
+	Deaths("Player 8", "Terran Science Vessel", At least, 36);
 Actions:
 	Set Alliance Status("Player 2", Ally);
 	Set Alliance Status("Player 3", Ally);
@@ -15,7 +16,7 @@ Actions:
 
 Trigger("Player 2"){
 Conditions:
-	Always();
+	Deaths("Player 8", "Terran Science Vessel", At least, 36);
 Actions:
 	Set Alliance Status("Player 1", Ally);
 	Set Alliance Status("Player 3", Ally);
@@ -25,7 +26,7 @@ Actions:
 
 Trigger("Player 3"){
 Conditions:
-	Always();
+	Deaths("Player 8", "Terran Science Vessel", At least, 36);
 Actions:
 	Set Alliance Status("Player 1", Ally);
 	Set Alliance Status("Player 2", Ally);
@@ -35,10 +36,18 @@ Actions:
 
 Trigger("Player 4"){
 Conditions:
-	Always();
+	Deaths("Player 8", "Terran Science Vessel", At least, 36);
 Actions:
 	Set Alliance Status("Player 1", Ally);
 	Set Alliance Status("Player 2", Ally);
 	Set Alliance Status("Player 3", Ally);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Science Vessel", At least, 36);
+Actions:
+	Set Deaths("Player 8", "Terran Science Vessel", Set To, 0);
 	Preserve Trigger();
 }

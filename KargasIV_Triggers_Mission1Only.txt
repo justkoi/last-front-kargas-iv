@@ -21,13 +21,13 @@
 //    Terran Goliath      : 정찰 오버로드 사이클 (540틱 = 45s)
 //    Terran Wraith       : 늦은 웨이브 쿨다운 (1800틱 = 150s)
 //    Terran Battlecruiser: 오버로드 보급 사이클 (360틱 = 30s)
+//    Terran Science Vessel: 플레이어 동맹 갱신 주기 (36틱 = 3s)
 //    Terran Dropship     : (M1) 늦은 웨이브 변형 인덱스 / (M2 P2) 반복 침투 플래그
 //    Protoss Probe       : 정찰 회전 인덱스 (0/1/2/3)
 //    Zerg Drone          : 드론 회수 발동 플래그
 //
 //  주의: Order에서 "Men" 사용 금지 (드론 포함됨) - 전투 유닛 개별 지정
 //============================================================
-
 // 게임 시작 브리핑
 Trigger("All Players"){
 Conditions:
@@ -96,11 +96,12 @@ Actions:
 //-----------------------------------------------------------------//
 //  플레이어 팀킬 방지 - 동맹 상태 고정
 //  P1~P4만 서로 Ally로 반복 갱신한다. 적 컴퓨터 세력(P5/P6)은 건드리지 않는다.
+//  Terran Science Vessel DC = 3초 주기 (36틱)
 //-----------------------------------------------------------------//
 
 Trigger("Player 1"){
 Conditions:
-	Always();
+	Deaths("Player 8", "Terran Science Vessel", At least, 36);
 Actions:
 	Set Alliance Status("Player 2", Ally);
 	Set Alliance Status("Player 3", Ally);
@@ -110,7 +111,7 @@ Actions:
 
 Trigger("Player 2"){
 Conditions:
-	Always();
+	Deaths("Player 8", "Terran Science Vessel", At least, 36);
 Actions:
 	Set Alliance Status("Player 1", Ally);
 	Set Alliance Status("Player 3", Ally);
@@ -120,7 +121,7 @@ Actions:
 
 Trigger("Player 3"){
 Conditions:
-	Always();
+	Deaths("Player 8", "Terran Science Vessel", At least, 36);
 Actions:
 	Set Alliance Status("Player 1", Ally);
 	Set Alliance Status("Player 2", Ally);
@@ -130,11 +131,19 @@ Actions:
 
 Trigger("Player 4"){
 Conditions:
-	Always();
+	Deaths("Player 8", "Terran Science Vessel", At least, 36);
 Actions:
 	Set Alliance Status("Player 1", Ally);
 	Set Alliance Status("Player 2", Ally);
 	Set Alliance Status("Player 3", Ally);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Science Vessel", At least, 36);
+Actions:
+	Set Deaths("Player 8", "Terran Science Vessel", Set To, 0);
 	Preserve Trigger();
 }
 //-----------------------------------------------------------------//
@@ -155,9 +164,9 @@ Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 1);
 	Set Deaths("Player 8", "Terran Vulture", Add, 1);
 	Set Deaths("Player 8", "Terran Battlecruiser", Add, 1);
+	Set Deaths("Player 8", "Terran Science Vessel", Add, 1);
 	Preserve Trigger();
 }
-
 //-----------------------------------------------------------------//
 //  저그 시작 보너스 + AI (처음엔 미네랄만 캔다)
 //-----------------------------------------------------------------//
@@ -721,7 +730,7 @@ Actions:
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><06>  작전 실패: 전선 소멸");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<03>호크: <04>전 함선, 차원 도약 엔진 가동! 절대 호위 진형을 이탈하지 말고 침착하게 섹터를 빠져나간다!");
+	Display Text Message(Always Display, "<03>호크: <04>전선이 무너졌다. 남은 병력은 후퇴시켜라. 여기서 더 잃을 수는 없다.");
 	Wait(1500);
 	Defeat();
 }
@@ -1459,18 +1468,19 @@ Actions:
 //  중간 강도 구성
 //-----------------------------------------------------------------//
 
-//Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-//Conditions:
-//	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-//	Deaths("Player 8", "Terran Dropship", Exactly, 1);
-//	Deaths("Player 8", "Protoss Probe", Exactly, 0);
-//	Deaths("Player 8", "Terran Wraith", At least, 720);
-//Actions:
-//	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-//	Display Text Message(Always Display, "[반복 침투] 변종 본진 공격!");
-//	Display Text Message(Always Display, "[노바] 또 들어와요. 신호원에 닿기 전엔 멈추지 않아요.");
-//	Preserve Trigger();
-//}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Dropship", Exactly, 1);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+	Deaths("Player 8", "Terran Wraith", At least, 720);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Lab Beacon");
+	Display Text Message(Always Display, "<06>경고: <04>카운트다운 종료. 비콘을 점령하기 전까지 침투가 반복됩니다.");
+	Display Text Message(Always Display, "<03>호크: <04>끝난 게 아니다. 방어선을 버티고 비콘으로 한 부대를 보내라.");
+	Preserve Trigger();
+}
 
 
 Trigger("Player 6"){

@@ -16,6 +16,6 @@ Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 1);
 	Set Deaths("Player 8", "Terran Vulture", Add, 1);
 	Set Deaths("Player 8", "Terran Battlecruiser", Add, 1);
+	Set Deaths("Player 8", "Terran Science Vessel", Add, 1);
 	Preserve Trigger();
 }
-
