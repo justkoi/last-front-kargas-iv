@@ -15,15 +15,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 895);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Set To, 2700);
-}
-
-Trigger("Player 5"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 931);
-Actions:
-	Set Deaths("Player 8", "Terran Wraith", Set To, 2700);
+	Set Deaths("Player 8", "Terran Wraith", Set To, 7200);
 }
 
 // 변형 A — Index 0: 지상 스웜
