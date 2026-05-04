@@ -5,6 +5,7 @@
 
 Trigger("Player 5"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 1", "Buildings", At least, 1);
 	Deaths("Player 8", "Terran Firebat", At least, 2160);
 Actions:
@@ -26,6 +27,7 @@ Actions:
 
 Trigger("Player 5"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 2", "Buildings", At least, 1);
 	Deaths("Player 8", "Terran Ghost", At least, 2160);
 Actions:
@@ -47,6 +49,7 @@ Actions:
 
 Trigger("Player 5"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 3", "Buildings", At least, 1);
 	Deaths("Player 8", "Terran Medic", At least, 2160);
 Actions:
@@ -68,6 +71,7 @@ Actions:
 
 Trigger("Player 5"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 4", "Buildings", At least, 1);
 	Deaths("Player 8", "Terran SCV", At least, 2160);
 Actions:
@@ -86,4 +90,3 @@ Actions:
 	Set Deaths("Player 8", "Terran SCV",  Set To, 0);
 	Preserve Trigger();
 }
-

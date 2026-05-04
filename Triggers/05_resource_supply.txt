@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------//
-//  자원 주기 보충 - Terran Civilian DC (60s = 720틱)
+//  자원 주기 보급 - Terran Civilian DC (60s = 720틱)
 //-----------------------------------------------------------------//
 
 Trigger("Player 5"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 8", "Terran Civilian", At least, 720);
-	Command("Player 5", "Zerg Drone", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Civilian", Set To, 0);
 	Set Resources("Player 5", Add, 30000, ore);
@@ -13,3 +13,17 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 3);
+	Deaths("Player 8", "Terran Civilian", At least, 720);
+Actions:
+	Set Deaths("Player 8", "Terran Civilian", Set To, 0);
+	Set Resources("Player 5", Add, 30000, ore);
+	Set Resources("Player 5", Add, 15000, gas);
+	Set Resources("Player 6", Add, 30000, ore);
+	Set Resources("Player 6", Add, 15000, gas);
+	Set Resources("Player 7", Add, 30000, ore);
+	Set Resources("Player 7", Add, 15000, gas);
+	Preserve Trigger();
+}

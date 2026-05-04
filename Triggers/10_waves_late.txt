@@ -43,7 +43,7 @@ Actions:
 	Order("Player 5", "Zerg Lurker", "P5 Spawn", "Player Destination", Patrol);
 	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
 	Set Deaths("Player 8", "Terran Dropship", Set To, 1);
-	//Display Text Message(Always Display, "[경보 - 변종 A] 지상 스웜! 럴커 매복 다수!");
+	//Display Text Message(Always Display, "[경보 - 변종 A] 지상 스웜! 럴커 잠복 다수!");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Preserve Trigger();
 }
@@ -119,7 +119,41 @@ Conditions:
 	Elapsed Time(At most, 905);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Spawn");
 	Display Text Message(Always Display, "<1A>노바: <04>군락 반응이 바뀌었습니다. 단일 무리가 아니라 조합을 돌리고 있어요.");
+}
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 900);
+	Elapsed Time(At most, 905);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 900);
+	Elapsed Time(At most, 905);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 900);
+	Elapsed Time(At most, 905);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 900);
+	Elapsed Time(At most, 905);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn");
 }
 
 Trigger("All Players"){
@@ -129,4 +163,15 @@ Conditions:
 	Elapsed Time(At most, 910);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>놈들이 우리 방어선을 읽기 시작했다. 여기서 밀리면 첫 전선은 무너진다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 960);
+Actions:
+	Remove Unit("Player 1", "Map Revealer");
+	Remove Unit("Player 2", "Map Revealer");
+	Remove Unit("Player 3", "Map Revealer");
+	Remove Unit("Player 4", "Map Revealer");
 }

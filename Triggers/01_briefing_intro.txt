@@ -8,7 +8,7 @@ Actions:
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><03> 작전 코드명: 카르가스 IV");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 방어선을 세우고 자원을 확보한 뒤 북서쪽 저그 군락 완전 파괴\n- 성공 조건: P5 진영의 모든 해처리 / 레어 / 하이브 파괴\n- 제한 시간: 없음\n- 지침: 기지를 안정화하고 업그레이드 후 군락을 압박할 것");
+	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 방어선을 세우고 자원을 확보한 뒤 북서쪽 저그 군락 완전 파괴\n- 성공 조건: <11>주황색 저그<04>의 모든 해처리 / 레어 / 하이브 파괴\n- 제한 시간: 없음\n- 지침: 기지를 안정화하고 업그레이드 후 군락을 압박할 것");
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
 }
 

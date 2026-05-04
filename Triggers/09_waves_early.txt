@@ -17,6 +17,7 @@ Conditions:
 	Elapsed Time(At least, 210);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Spawn");
 	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 군락 외곽에서 빠른 소형 생체신호가 움직입니다.");
 }
 Trigger("All Players"){
@@ -109,6 +110,7 @@ Conditions:
 	Elapsed Time(At least, 450);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Spawn");
 	Display Text Message(Always Display, "<1A>노바: <04>외곽 신호가 다시 움직입니다. 첫 접촉 때보다 수가 늘고 속도도 빠릅니다.");
 }
 Trigger("All Players"){
@@ -203,7 +205,8 @@ Conditions:
 	Elapsed Time(At least, 630);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>지하 진동이 섞입니다. 매복형 개체가 본대 근처에 있는 것 같습니다.");
+	Minimap Ping("P5 Spawn");
+	Display Text Message(Always Display, "<1A>노바: <04>지하 진동이 섞입니다. 잠복형 개체가 본대 근처에 있는 것 같습니다.");
 }
 Trigger("All Players"){
 Conditions:

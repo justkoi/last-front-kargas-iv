@@ -32,7 +32,7 @@ Trigger("Player 1"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 4320);
-	Switch("Switch2", set);
+	Switch("Switch2", Set);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "Raid1");
 	Remove Unit("Player 1", "Map Revealer");
@@ -49,7 +49,7 @@ Trigger("Player 2"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 4320);
-	Switch("Switch2", set);
+	Switch("Switch2", Set);
 Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "Raid1");
 	Remove Unit("Player 2", "Map Revealer");
@@ -66,7 +66,7 @@ Trigger("Player 3"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 4320);
-	Switch("Switch2", set);
+	Switch("Switch2", Set);
 Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "Raid1");
 	Remove Unit("Player 3", "Map Revealer");
@@ -83,7 +83,7 @@ Trigger("Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 4320);
-	Switch("Switch2", set);
+	Switch("Switch2", Set);
 Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "Raid1");
 	Remove Unit("Player 4", "Map Revealer");
@@ -100,7 +100,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 4320);
-	Switch("Switch2", set);
+	Switch("Switch2", Set);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>외곽 세 곳에서 고밀도 생체 저장낭 확인. 소규모 경비가 붙어 있습니다.");
@@ -111,7 +111,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 4368);
 	Deaths("Player 8", "Terran Vulture", At most, 4392);
-	Switch("Switch2", set);
+	Switch("Switch2", Set);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>기동대가 있으면 찔러라. 저장낭만 깨면 보급으로 돌릴 수 있다.");
 }
@@ -119,7 +119,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch2", set);
+	Switch("Switch2", Set);
 	Switch("Switch3", Not Set);
 	Bring("Player 7", "Mature Crysalis", "Raid1", At most, 0);
 Actions:
@@ -137,7 +137,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch3", set);
+	Switch("Switch3", Set);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<07>군수지원: <04>외곽 생체 저장낭 회수 완료. 미네랄 +2000 / 가스 +800");
@@ -146,7 +146,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch2", set);
+	Switch("Switch2", Set);
 	Switch("Switch4", Not Set);
 	Bring("Player 7", "Mature Crysalis", "Raid2", At most, 0);
 Actions:
@@ -164,7 +164,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch4", set);
+	Switch("Switch4", Set);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<07>군수지원: <04>협곡 생체 저장낭 회수 완료. 미네랄 +2000 / 가스 +800");
@@ -173,7 +173,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch2", set);
+	Switch("Switch2", Set);
 	Switch("Switch5", Not Set);
 	Bring("Player 7", "Mature Crysalis", "Raid3", At most, 0);
 Actions:
@@ -191,7 +191,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch5", set);
+	Switch("Switch5", Set);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<07>군수지원: <04>후방 생체 저장낭 회수 완료. 미네랄 +2000 / 가스 +800");

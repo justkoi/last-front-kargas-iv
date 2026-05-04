@@ -1,169 +1,77 @@
 //-----------------------------------------------------------------//
-//  미션 2 페이즈 2 - 비콘 점령 완료 / 클리어
-//  Zealot DC ≥ 3600 (누적 5분 점거 완료) → Valkyrie 3→4
-//
-//  엔딩 흐름 (Vulture DC 약 5초 간격 페이싱):
-//    T+0    클리어 헤더 + 작전 알림
-//    T+5s   호크 1차 칭찬 (즉각 보상)
-//    T+10s  노바 결론: UED가 아니다
-//    T+15s  카르츠 녹화 등장
-//    T+20s  카르츠: 모두 기록됐다
-//    T+25s  카르츠: 통제 실패 확인
-//    T+30s  노바 신원 식별: 셀렌 카르츠
-//    T+35s  호크 분노: 실험체였다는 건가
-//    T+40s  노바 역전: 우리도 좌표 땄다
-//    T+45s  호크 결의: 이번엔 우리가 끊는다
-//    T+50s  호크 마무리 칭찬
-//    T+55s  미션 클리어 헤더 + 미션 오브젝티브 체크리스트
-//    T+65s  Victory()
+//  미션 2 클리어 - P6/P7 저그 군락 섬멸
 //-----------------------------------------------------------------//
-
-// T+0: 비콘 점령 완료 + 단계 전환 + 작전 알림
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Zealot", At least, 3600);
-Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Pause Timer();
-	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<13><03>  비콘 차단 완료 - 5분 사수 성공");
-	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<07>작전: <04>비콘 차단 완료. 발신자 분석 시작.");
-}
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Zealot", At least, 3600);
+	Command("Player 6", "Zerg Hatchery", At most, 0);
+	Command("Player 6", "Zerg Lair", At most, 0);
+	Command("Player 6", "Zerg Hive", At most, 0);
+	Command("Player 7", "Zerg Hatchery", At most, 0);
+	Command("Player 7", "Zerg Lair", At most, 0);
+	Command("Player 7", "Zerg Hive", At most, 0);
 Actions:
-	Pause Timer();
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 4);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 }
 
-// T+5s - 호크 1차 칭찬 (구체적, 즉각 보상)
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
+	Deaths("Player 8", "Terran Vulture", At most, 24);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2500);
+	Display Text Message(Always Display, "<13><03>==========================================");
+	Display Text Message(Always Display, "<13><03>  두 저그 군락 섬멸 완료");
+	Display Text Message(Always Display, "<13><03>==========================================");
+	Display Text Message(Always Display, "<07>작전: <04>갈색 저그와 하얀색 저그의 군락 반응 소실. 전선 안정화 확인.");
+}
+
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
 	Deaths("Player 8", "Terran Vulture", At least, 60);
 	Deaths("Player 8", "Terran Vulture", At most, 84);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>잘 했다, 선봉대. 5분간 비콘을 놓지 않았어.");
+	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 이제 이 전선에서 저그 생산망은 끊겼다.");
 }
 
-// T+10s - 노바 결론: UED가 아니다
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
 	Deaths("Player 8", "Terran Vulture", At least, 120);
 	Deaths("Player 8", "Terran Vulture", At most, 144);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>사령관, 발신자 신호 분석 완료. ...UED 잔당이 아니에요.");
+	Display Text Message(Always Display, "<1A>노바: <04>잔존 생체 반응은 흩어지고 있습니다. 조직적인 반격 신호는 더 이상 없습니다.");
 }
 
-// T+15s - 카르츠 사전 녹화 1
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
 	Deaths("Player 8", "Terran Vulture", At least, 180);
 	Deaths("Player 8", "Terran Vulture", At most, 204);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>카르츠 - 사전 녹화: <04>축하한다, 선봉대. 정확히 5분을 버텼군.");
+	Display Text Message(Always Display, "<03>호크: <04>방어선 재편을 시작한다. 카르가스 IV의 첫 전선은 버텼다.");
 }
 
-// T+20s - 카르츠 녹화 2: 데이터 회수
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
 	Deaths("Player 8", "Terran Vulture", At least, 240);
 	Deaths("Player 8", "Terran Vulture", At most, 264);
 Actions:
-	Display Text Message(Always Display, "<06>카르츠: <04>방어 패턴, 화력 분포, 반격 속도. 모두 깨끗하게 기록됐다.");
+	Play WAV("sound\\Misc\\TRescue.wav", 2500);
+	Display Text Message(Always Display, "<13><03>==========================================");
+	Display Text Message(Always Display, "<13><03>  [작전 완료] 카르가스 IV 전선 안정화");
+	Display Text Message(Always Display, "<13><03>==========================================");
+	Set Mission Objectives("<03>[작전 완료] 카르가스 IV 전선 안정화\n\n<04>- 주황색 저그 군락 파괴: 완료\n- 갈색 저그 군락 파괴: 완료\n- 하얀색 저그 군락 파괴: 완료\n- 아군 전선 유지: 성공\n\n선봉대는 임무를 완수했다. 이 전장은 끝났다.");
 }
 
-// T+25s - 카르츠 녹화 3: 떠남 암시
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 300);
-	Deaths("Player 8", "Terran Vulture", At most, 324);
-Actions:
-	Display Text Message(Always Display, "<06>카르츠: <04>...기록이 끊겼군. 실험군이 통제를 벗어났다.");
-}
-
-// T+30s - 노바 신원 식별
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
 	Deaths("Player 8", "Terran Vulture", At least, 360);
-	Deaths("Player 8", "Terran Vulture", At most, 384);
-Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>셀렌 카르츠. 도미니언 변종 연구자. 사망 기록은 조작된 겁니다.");
-}
-
-// T+35s - 호크 분노
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 420);
-	Deaths("Player 8", "Terran Vulture", At most, 444);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>...우리가 그 자식 실험체였다는 건가.");
-}
-
-// T+40s - 노바 역전: 우리도 좌표를 땄다
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 480);
-	Deaths("Player 8", "Terran Vulture", At most, 504);
-Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>하지만 발신망은 여기서 끊겼습니다. 적어도 이 전장은 끝났어요.");
-}
-
-// T+45s - 호크 결의: 우리가 끊는다
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 540);
-	Deaths("Player 8", "Terran Vulture", At most, 564);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>좋다. 오늘은 우리가 놈의 시간을 끊었다.");
-}
-
-// T+50s - 호크 마무리 칭찬
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 600);
-	Deaths("Player 8", "Terran Vulture", At most, 624);
-Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<03>호크: <04>선봉대, 작전 완수. 카르가스 IV의 전선은 살아남았다.");
-}
-
-// T+55s - 미션 클리어 헤더 + 체크리스트형 오브젝티브
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 660);
-	Deaths("Player 8", "Terran Vulture", At most, 684);
-Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<13><03>  [작전 완료] 카르가스 IV 전선 생존");
-	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<07>작전사령부: <04>비콘 차단 완료. 전 부대 생존 확인. 카르가스 IV 전선 유지.");
-	Set Mission Objectives("<03>[작전 완료] 카르가스 IV 전선 생존\n\n<04>- 비콘 5분 사수: 완료\n- 유도 신호 차단: 완료\n- 본진 침투 저지: 완료\n- 발신자 식별: 셀렌 카르츠\n- 카르가스 IV 전선 유지: 성공\n\n선봉대는 임무를 완수했다. 이 전장은 끝났다.");
-}
-
-// T+65s - Victory
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 780);
 Actions:
 	Wait(1000);
 	Victory();

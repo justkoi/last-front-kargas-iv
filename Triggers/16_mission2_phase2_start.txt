@@ -1,21 +1,19 @@
 //-----------------------------------------------------------------//
-//  미션 2 - 페이즈 2 진입 (Valkyrie = 3, Vulture = 0 리셋 직후)
-//  알림 패키지: Countdown Timer 15분, Minimap Ping, Center View, Beacon, 경고 메시지
-//  세트피스 적 사전 배치 (P5 Lab 위치)
+//  미션 2 진입 (Valkyrie = 3, Vulture = 0 리셋 직후)
+//  목표: P6/P7 저그 군락 섬멸
 //-----------------------------------------------------------------//
 
-// 페이즈2 시작 1회 - 알림 패키지 + 세트피스 스폰
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Set Mission Objectives("[미션 2 - 페이즈 2] 비콘 추적\n\n- 목표: 북쪽 프로토스 신전의 비콘 점거\n- 클리어 조건: 15분 내 비콘 위치 도달 + 점거 개시\n- 시간 제한: 15분 (Countdown Timer)\n- 위치: 미니맵 핑 (P5 Lab Beacon, 30초마다 갱신)\n- 주의: 비콘 주변에 변종 적 사전 배치 (히드라/럴커/울트라/디파일러/감염테란)\n- 도달 즉시: 5분 누적 점거 단계로 전환");
+	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: <15>갈색 저그<04>와 <16>하얀색 저그<04>의 모든 군락 파괴\n- 성공 조건: P6/P7의 해처리 / 레어 / 하이브 전멸\n- 위치: 미니맵 핑으로 표시된 두 저그 군락\n- 주의: 두 군락은 미션2부터 자원과 추적 공세를 재개\n- 지침: 본진 방어선을 유지하면서 병력을 모아 각 군락을 압박할 것");
 	Display Text Message(Always Display, "<13><05>==========================================");
-	Display Text Message(Always Display, "<13><07>  [미션2 - 페이즈 2] 비콘 차단");
+	Display Text Message(Always Display, "<13><07>  [미션2] 잔존 군락 섬멸");
 	Display Text Message(Always Display, "<13><05>==========================================");
-	Set Countdown Timer(Set To, 900);
-	Minimap Ping("P5 Lab Beacon");
+	Minimap Ping("P6 Base");
+	Minimap Ping("P7 Base");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -24,7 +22,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 48);
 	Deaths("Player 8", "Terran Vulture", At most, 72);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>좌표 확정. 신호는 북쪽 프로토스 신전 주변 비콘에서 나오고 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>갈색 군락과 하얀색 군락의 생산 반응이 동시에 올라옵니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -33,7 +31,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 108);
 	Deaths("Player 8", "Terran Vulture", At most, 132);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>비콘에서 변종 침투 신호가 갱신됩니다. 본진 쪽 무리를 움직이고 있어요.");
+	Display Text Message(Always Display, "<1A>노바: <04>두 군락 모두 아군 구조물 좌표를 추적하고 있습니다. 오래 두면 공세가 누적됩니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -42,155 +40,5 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 168);
 	Deaths("Player 8", "Terran Vulture", At most, 192);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>비콘을 점령해 유도 신호를 끊는다. 본진은 비우지 마라.");
-}
-
-// 세트피스 적 스폰 - 페이즈2 시작 시 P5 Lab에 P6 변종 무리 1회
-// 인트루스 군 스폰 - 생성
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-Actions:
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Hydralisk", 5, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn7");
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn5", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn6", 1);
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn7", 1);
-	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Infested Terran", 1, "P6 Spawn7");
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn5");
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn6");
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn7");
-}
-
-// 인트루스 군 스폰 - 7경로 명령
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-Actions:
-	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P5 Lab Attack 1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "P5 Lab Attack 2", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "P5 Lab Attack 3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "P5 Lab Attack 4", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn5", "P5 Lab Attack 5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn6", "P5 Lab Attack 6", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn7", "P5 Lab Attack 7", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P5 Lab Attack 1", Move);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P5 Lab Attack 2", Move);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P5 Lab Attack 3", Move);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P5 Lab Attack 4", Move);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn5", "P5 Lab Attack 5", Move);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn6", "P5 Lab Attack 6", Move);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn7", "P5 Lab Attack 7", Move);
-}
-
-// Minimap Ping 30초마다 반복 - Civilian DC (360틱 = 30s)
-// 페이즈2 시작 시 DC 0 리셋 (Civilian은 미션1 자원보충용이지만 미션1 끝나면 자유)
-// phase start - reset beacon ping cooldown
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
-Actions:
-	Set Deaths("Player 8", "Terran Civilian", Set To, 0);
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Protoss Zealot", Exactly, 0);
-	Countdown Timer(At least, 1);
-	Deaths("Player 8", "Terran Civilian", At least, 360);
-Actions:
-	Set Deaths("Player 8", "Terran Civilian", Set To, 0);
-	Minimap Ping("P5 Lab Beacon");
-	Preserve Trigger();
+	Display Text Message(Always Display, "<03>호크: <04>방어선을 유지하면서 한쪽씩 무너뜨려라. 해처리, 레어, 하이브를 남기지 마라.");
 }

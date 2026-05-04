@@ -1,5 +1,6 @@
 //-----------------------------------------------------------------//
-//  저그 시작 보너스 + AI (처음엔 미네랄만 캔다)
+//  저그 시작 보너스 + AI
+//  P6/P7은 미션1 동안 자원을 0으로 묶고, 미션2부터 활성화한다.
 //-----------------------------------------------------------------//
 
 Trigger("Player 5"){
@@ -8,9 +9,25 @@ Conditions:
 Actions:
 	Set Resources("Player 5", Set To, 999999, ore);
 	Set Resources("Player 5", Set To, 999999, gas);
+	Set Resources("Player 6", Set To, 999999, ore);
+	Set Resources("Player 6", Set To, 999999, gas);
+	Set Resources("Player 7", Set To, 999999, ore);
+	Set Resources("Player 7", Set To, 999999, gas);
 }
 
-// 여기부터 스크립트 시작
+// 미션1 동안 P6/P7은 잠복 상태로 둔다.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Resources("Player 6", Set To, 0, ore);
+	Set Resources("Player 6", Set To, 0, gas);
+	Set Resources("Player 7", Set To, 0, ore);
+	Set Resources("Player 7", Set To, 0, gas);
+	Preserve Trigger();
+}
+
+// 각 저그 진영의 기본 AI 시작
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 330);
@@ -18,3 +35,37 @@ Actions:
 	Run AI Script At Location("ZSUx", "P5 Base");
 }
 
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 330);
+Actions:
+	Run AI Script At Location("ZSUx", "P6 Base");
+}
+
+Trigger("Player 7"){
+Conditions:
+	Elapsed Time(At least, 330);
+Actions:
+	Run AI Script At Location("ZSUx", "P7 Base");
+}
+
+// 미션2 진입 시 갈색/하얀색 군락 활성화
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+Actions:
+	Set Resources("Player 6", Set To, 999999, ore);
+	Set Resources("Player 6", Set To, 999999, gas);
+	Set Resources("Player 7", Set To, 999999, ore);
+	Set Resources("Player 7", Set To, 999999, gas);
+	Run AI Script At Location("ZSUx", "P6 Base");
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+Actions:
+	Run AI Script At Location("ZSUx", "P7 Base");
+}

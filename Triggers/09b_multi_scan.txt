@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------//
 //  멀티 위치 궤도 스캔 안내
-//  11분 럴커 공습 이후, 15분 대공습 이전에 P1~P4 멀티를 30초간 정찰.
+//  11분 럴커 공습 이후, 15분 대공습 이전에 P1~P4 멀티를 2분간 정찰.
 //-----------------------------------------------------------------//
 
 // 멀티 위치 궤도 스캔 - 12분 30초
@@ -10,6 +10,10 @@ Conditions:
 	Elapsed Time(At least, 750);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P1 Multi");
+	Minimap Ping("P2 Multi");
+	Minimap Ping("P3 Multi");
+	Minimap Ping("P4 Multi");
 	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 갱신. 각 전선 외곽에 아직 확보하지 않은 자원이 있습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>본진 자원만으론 오래 못 버틴다. 여력이 생기면 추가 자원을 확보해라.");
 }
@@ -40,8 +44,8 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 780);
-	Switch("Switch7", set);
+	Elapsed Time(At least, 870);
+	Switch("Switch7", Set);
 	Switch("Switch8", Not Set);
 Actions:
 	Remove Unit("Player 1", "Map Revealer");

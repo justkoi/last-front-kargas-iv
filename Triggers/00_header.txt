@@ -1,33 +1,40 @@
 //============================================================
-//  KARGAS IV - 미션 1 (독립 DC 슬롯 + 터보 트리거)
-//  필요한 Location: P1~P4 Start, P5 Base, P5 Scout, P5 Intruder, P1~P4 Hunt,
-//                  Player Destination, P5 Lab, P5 Lab Beacon, P5 Lab Vision, P6 South
+//  KARGAS IV - Mission trigger notes
+//  Required Locations: P1~P4 Start, P5 Base, P5 Scout, P5 Intruder,
+//                      P1~P4 Hunt, Player Destination, P6 Base, P7 Base,
+//                      Mission2 Gate, New Pass1, Raid1~3
 //
-//  타이밍 공식: 12 DC tick = 1초 (터보 트리거 적용 시)
-//    60s = 720틱, 90s = 1080틱, 3min = 2160틱, 4min = 2880틱
+//  Timer rule: 12 DC tick = 1 second
+//    60s = 720, 90s = 1080, 3min = 2160, 4min = 2880
 //
-//  DC 슬롯 (Player 8) - 각 시스템 독립 카운터:
-//    Terran Civilian     : 자원 보충 타이머 (720틱 = 60s)
-//    Terran Marine       : 기지 침입 대응 쿨다운 (36틱 = 3s)
-//    Terran Valkyrie     : 미션 단계 플래그 (1=M1, 2=M2 페이즈1, 3=M2 페이즈2, 4=M2 클리어)
-//    Terran Vulture      : 페이즈 경과 타이머 (단계 진입시 0 리셋)
-//    Terran Armory      : 미션2 대기 페이즈 진행여부 (0,1)
-//    Protoss Probe       : (M1) 정찰 회전 / (M2 P2) 비콘 점령 시작 플래그
-//    Protoss Zealot      : (M2 P2) 누적 점령도 (0~3600, 12tick=1s, 3600=5분=100%)
-//    Terran Firebat      : P1 Hunt 추적 (60틱 = 5s)
-//    Terran Ghost        : P2 Hunt 추적
-//    Terran Medic        : P3 Hunt 추적
-//    Terran SCV          : P4 Hunt 추적
-//    Terran Goliath      : 정찰 오버로드 사이클 (540틱 = 45s)
-//    Terran Wraith       : 늦은 웨이브 쿨다운 (1800틱 = 150s)
-//    Terran Battlecruiser: 오버로드 보급 사이클 (360틱 = 30s)
-//    Terran Science Vessel: 플레이어 동맹 갱신 주기 (36틱 = 3s)
-//    Terran Dropship     : (M1) 늦은 웨이브 변형 인덱스 / (M2 P2) 반복 침투 플래그
-//    Protoss Probe       : 정찰 회전 인덱스 (0/1/2/3)
-//    Zerg Drone          : 드론 회수 발동 플래그
-//    Switch6             : (M2 P2) 9min P7 airstrike one-time flag
-//    Switch7             : (M1) multi scan revealers created
-//    Switch8             : (M1) multi scan revealers removed
+//  Player 8 DC roles
+//    Terran Civilian      : zerg resource supply timer
+//    Terran Marine        : P5 base defense cooldown
+//    Terran Valkyrie      : mission phase flag (1=M1, 3=M2, 4=clear)
+//    Terran Vulture       : mission2 elapsed timer
+//    Terran Armory        : mission2 waiting-phase legacy flag
+//    Protoss Probe        : mission1 scout rotation index
+//    Protoss Zealot       : unused legacy counter
+//    Terran Firebat       : P1 Hunt tracking timer
+//    Terran Ghost         : P2 Hunt tracking timer
+//    Terran Medic         : P3 Hunt tracking timer
+//    Terran SCV           : P4 Hunt tracking timer
+//    Terran Goliath       : scout overlord cycle timer
+//    Terran Wraith        : mission1 late-wave cooldown
+//    Terran Battlecruiser : overlord supply cycle timer
+//    Terran Science Vessel: player alliance refresh timer
+//    Terran Dropship      : mission1 late-wave variant index
+//    Zerg Drone           : mission2 gate-open flag
 //
-//  주의: Order에서 "Men" 사용 금지 (드론 포함됨) - 전투 유닛 개별 지정
+//  Switch roles
+//    Switch1 : defeat guard
+//    Switch2 : resource raid sites revealed/spawned
+//    Switch3 : Raid1 cleared
+//    Switch4 : Raid2 cleared
+//    Switch5 : Raid3 cleared
+//    Switch6 : mission2 P7 airstrike one-time flag
+//    Switch7 : mission1 multi scan revealers created
+//    Switch8 : mission1 multi scan revealers removed
+//
+//  Note: avoid Order("...", "Men", ...) for broad combat orders.
 //============================================================
