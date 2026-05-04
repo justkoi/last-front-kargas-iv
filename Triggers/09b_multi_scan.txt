@@ -10,14 +10,14 @@ Conditions:
 	Elapsed Time(At least, 750);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 갱신. 각 전선 외곽에 미확보 자원 지대가 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 갱신. 각 전선 외곽에 아직 확보하지 않은 자원이 있습니다.");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 755);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>본진 자원만으론 오래 못 버틴다. 여력이 생기는 즉시 그 지대를 확보해라.");
+	Display Text Message(Always Display, "<03>호크: <04>본진 자원만으론 오래 못 버틴다. 여력이 생기면 추가 자원을 확보해라.");
 }
 Trigger("Player 1"){
 Conditions:

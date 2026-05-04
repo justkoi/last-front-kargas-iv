@@ -3,7 +3,7 @@
 //============================================================
 
 Briefing("All Players"){
-	Mission Objectives("<03>미션 1: 첫 전선\n\n<04>목표: 자원권을 확보하고 북서쪽 저그 군락을 완전히 무너뜨려라");
+	Mission Objectives("<03>미션 1: 첫 전선\n\n<04>목표: 자원을 확보하고 북서쪽 저그 군락을 완전히 무너뜨려라");
 
 	Show Portrait("Terran Marine", 1);
 	Text Message("<13><03>카르가스 IV 작전실", 2500);
@@ -22,7 +22,7 @@ Briefing("All Players"){
 
 	Show Portrait("Terran Ghost", 2);
 	Display Speaking Portrait(2, 5);
-	Text Message("<1A>작전 정보장교 노바: <04>궤도 스캔 결과, 북서쪽 자원 지대에 대규모 저그 군락이 확인됩니다.", 5500);
+	Text Message("<1A>작전 정보장교 노바: <04>궤도 스캔 결과, 북서쪽 자원 지점에 대규모 저그 군락이 확인됩니다.", 5500);
 	Wait(5500);
 
 	Display Speaking Portrait(2, 5);
@@ -42,7 +42,7 @@ Briefing("All Players"){
 	Wait(5500);
 
 	Display Speaking Portrait(1, 5);
-	Text Message("<04>방어선을 세우고 자원권을 확보해라. 준비가 끝나면 북서쪽 군락을 무너뜨린다.", 5500);
+	Text Message("<04>방어선을 세우고 자원을 확보해라. 준비가 끝나면 북서쪽 군락을 무너뜨린다.", 5500);
 	Wait(5500);
 
 	Display Speaking Portrait(1, 5);
@@ -57,4 +57,3 @@ Briefing("All Players"){
 	Text Message("<13><07>작전 개시!", 2000);
 	Wait(2000);
 }
-

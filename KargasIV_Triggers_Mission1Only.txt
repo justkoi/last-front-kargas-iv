@@ -39,7 +39,7 @@ Actions:
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><03> 작전 코드명: 카르가스 IV");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 방어선과 자원권을 확보한 뒤 북서쪽 저그 군락 완전 파괴\n- 성공 조건: P5 진영의 모든 해처리 / 레어 / 하이브 파괴\n- 제한 시간: 없음\n- 지침: 기지를 안정화하고 업그레이드 후 군락을 압박할 것");
+	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 방어선을 세우고 자원을 확보한 뒤 북서쪽 저그 군락 완전 파괴\n- 성공 조건: P5 진영의 모든 해처리 / 레어 / 하이브 파괴\n- 제한 시간: 없음\n- 지침: 기지를 안정화하고 업그레이드 후 군락을 압박할 것");
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
 }
 
@@ -64,7 +64,7 @@ Conditions:
 	Elapsed Time(At least, 14);
 	Elapsed Time(At most, 16);
 Actions:
-	Display Text Message(Always Display, "<04>기지를 안정화하고 자원권을 넓혀라. 북서쪽 군락은 준비가 끝난 뒤 친다.");
+	Display Text Message(Always Display, "<04>기지를 안정화하고 자원을 확보해라. 북서쪽 군락은 준비가 끝난 뒤 친다.");
 }
 
 Trigger("All Players"){
@@ -453,85 +453,287 @@ Actions:
 
 //-----------------------------------------------------------------//
 //  웨이브 (Wait 제거 / 드론 제외 - 전투 유닛만 Order)
+//  각 웨이브는 30초 전 P5 Spawn 집결을 보여준 뒤 출발 시 MainLoad1~2를 보여준다.
 //-----------------------------------------------------------------//
 
 // 웨이브 1 - 4분 후 (정찰조)
 Trigger("Player 5"){
 Conditions:
-	Elapsed Time(At least, 240);
+	Elapsed Time(At least, 210);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
 	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
-	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
 }
 Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 210);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 군락 외곽에서 빠른 소형 생체신호가 움직입니다.");
+}
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 215);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>가벼운 접촉에도 진형이 무너지면 끝이다. 방어선을 세워라.");
+}
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At least, 210);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At least, 210);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At least, 210);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At least, 210);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 240);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
+}
+Trigger("Player 1"){
 Conditions:
 	Elapsed Time(At least, 240);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 군락에서 소규모 접촉. 저글링 정찰조입니다.");
+	Create Unit("Player 1", "Map Revealer", 1, "MainLoad1");
+	Create Unit("Player 1", "Map Revealer", 1, "MainLoad2");
+}
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At least, 240);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "MainLoad1");
+	Create Unit("Player 2", "Map Revealer", 1, "MainLoad2");
+}
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At least, 240);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "MainLoad1");
+	Create Unit("Player 3", "Map Revealer", 1, "MainLoad2");
+}
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At least, 240);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "MainLoad1");
+	Create Unit("Player 4", "Map Revealer", 1, "MainLoad2");
 }
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 245);
+	Elapsed Time(At least, 270);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>방어선으로 끌어들여 처리해라. 첫 전선이 시험받는다.");
+	Remove Unit("Player 1", "Map Revealer");
+	Remove Unit("Player 2", "Map Revealer");
+	Remove Unit("Player 3", "Map Revealer");
+	Remove Unit("Player 4", "Map Revealer");
 }
 
 // 웨이브 2 - 8분 후
 Trigger("Player 5"){
 Conditions:
-	Elapsed Time(At least, 480);
+	Elapsed Time(At least, 450);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
 	Create Unit("Player 5", "Zerg Zergling", 15, "P5 Spawn");
 	Create Unit("Player 5", "Zerg Hydralisk", 10, "P5 Spawn");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
+}
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 450);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>외곽 신호가 다시 움직입니다. 첫 접촉 때보다 수가 늘고 속도도 빠릅니다.");
+}
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 455);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>압박이 올라간다. 첫 방어선이 버틸 수 있게 미리 보강해라.");
+}
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At least, 450);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At least, 450);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At least, 450);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At least, 450);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 480);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
 	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn", "Player Destination", Patrol);
 }
-Trigger("All Players"){
+Trigger("Player 1"){
 Conditions:
 	Elapsed Time(At least, 480);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>두 번째 무리 접근. 히드라리스크가 섞였습니다. 반응 속도가 빨라요.");
+	Create Unit("Player 1", "Map Revealer", 1, "MainLoad1");
+	Create Unit("Player 1", "Map Revealer", 1, "MainLoad2");
+}
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At least, 480);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "MainLoad1");
+	Create Unit("Player 2", "Map Revealer", 1, "MainLoad2");
+}
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At least, 480);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "MainLoad1");
+	Create Unit("Player 3", "Map Revealer", 1, "MainLoad2");
+}
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At least, 480);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "MainLoad1");
+	Create Unit("Player 4", "Map Revealer", 1, "MainLoad2");
 }
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 485);
+	Elapsed Time(At least, 510);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>압박이 올라간다. 자원권을 잃지 말고 방어선을 보강해라.");
+	Remove Unit("Player 1", "Map Revealer");
+	Remove Unit("Player 2", "Map Revealer");
+	Remove Unit("Player 3", "Map Revealer");
+	Remove Unit("Player 4", "Map Revealer");
 }
 
 // 웨이브 3 - 11분 후
 Trigger("Player 5"){
 Conditions:
-	Elapsed Time(At least, 660);
+	Elapsed Time(At least, 630);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
 	Create Unit("Player 5", "Zerg Zergling", 20, "P5 Spawn");
 	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Spawn");
 	Create Unit("Player 5", "Zerg Lurker", 6, "P5 Spawn");
 	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
+}
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 630);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>지하 진동이 섞입니다. 매복형 개체가 본대 근처에 있는 것 같습니다.");
+}
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 635);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>전선을 좁게 보지 마라. 탐지를 갖추고 병력 간격을 유지해라.");
+}
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At least, 630);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At least, 630);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At least, 630);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At least, 630);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn");
+}
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 660);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
 	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Lurker", "P5 Spawn", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
 }
-Trigger("All Players"){
+Trigger("Player 1"){
 Conditions:
 	Elapsed Time(At least, 660);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>럴커 신호 확인. 매복 개체가 본대와 함께 움직입니다.");
+	Create Unit("Player 1", "Map Revealer", 1, "MainLoad1");
+	Create Unit("Player 1", "Map Revealer", 1, "MainLoad2");
+}
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At least, 660);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "MainLoad1");
+	Create Unit("Player 2", "Map Revealer", 1, "MainLoad2");
+}
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At least, 660);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "MainLoad1");
+	Create Unit("Player 3", "Map Revealer", 1, "MainLoad2");
+}
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At least, 660);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "MainLoad1");
+	Create Unit("Player 4", "Map Revealer", 1, "MainLoad2");
 }
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 665);
+	Elapsed Time(At least, 690);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>탐지망 유지해라. 보이지 않는 적에게 전선을 내주지 마라.");
+	Remove Unit("Player 1", "Map Revealer");
+	Remove Unit("Player 2", "Map Revealer");
+	Remove Unit("Player 3", "Map Revealer");
+	Remove Unit("Player 4", "Map Revealer");
 }
 //-----------------------------------------------------------------//
 //  멀티 위치 궤도 스캔 안내
@@ -545,14 +747,14 @@ Conditions:
 	Elapsed Time(At least, 750);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 갱신. 각 전선 외곽에 미확보 자원 지대가 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 갱신. 각 전선 외곽에 아직 확보하지 않은 자원이 있습니다.");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 755);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>본진 자원만으론 오래 못 버틴다. 여력이 생기는 즉시 그 지대를 확보해라.");
+	Display Text Message(Always Display, "<03>호크: <04>본진 자원만으론 오래 못 버틴다. 여력이 생기면 추가 자원을 확보해라.");
 }
 Trigger("Player 1"){
 Conditions:
@@ -3775,51 +3977,6 @@ Conditions:
 Actions:
 	Wait(1000);
 	Victory();
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] 플레이어 절대 패배 방지 (스위치 방식)
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  동작 원리:
-//    게임 시작 직후 Switch1 을 set.
-//    12_endgame.txt 의 패배 트리거에 Switch("Switch1", cleared) 조건이
-//    있으므로, 스위치가 set 상태인 한 Defeat()가 발동하지 않음.
-//-----------------------------------------------------------------//
-
-Trigger("Player 5"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Set Switch("Switch1", set);
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] 컴퓨터(P5, P6) → 플레이어(P1~P4) 시야 공유
-//  (플레이어가 컴퓨터의 시야를 가진다)
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  사용 스크립트 (AI → 해당 플레이어로 시야 공유):
-//    "Turn ON Shared Vision of current player with Player 1"
-//    "Turn ON Shared Vision of current player with Player 2"
-//    "Turn ON Shared Vision of current player with Player 3"
-//    "Turn ON Shared Vision of current player with Player 4"
-//
-//  주의: 위 스크립트 이름이 SCMDraft 드롭다운에 정확히 그대로 있는지
-//        확인할 것. 표기가 다르면 적절히 교체.
-//        ("of [SHARER] with [RECEIVER]" 패턴으로 추정)
-//-----------------------------------------------------------------//
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Run AI Script("+Vi4");
-	Run AI Script("+Vi5");
-	Run AI Script("+Vi6");
-	Run AI Script("+Vi7");
 }
 //-----------------------------------------------------------------//
 //  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유
