@@ -49,13 +49,132 @@ Conditions:
 	Elapsed Time(At least, 26);
 	Elapsed Time(At most, 28);
 Actions:
-	Display Text Message(Always Display, "<04>일반 저그 군락보다 반응 주기가 불규칙합니다. 초반 정찰조를 예상하세요.");
+	Display Text Message(Always Display, "<04>일반 저그 군락보다 반응 주기가 불규칙합니다. 본진 진입로도 다시 확인하겠습니다.");
 }
 
 Trigger("All Players"){
 Conditions:
 	Elapsed Time(At least, 33);
 	Elapsed Time(At most, 35);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 갱신. 본진 외곽과 주 진입로를 표시합니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Set Alliance Status("Player 9", Ally);
+}
+
+Trigger("Player 5", "Player 6", "Player 7", "Player 8"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Set Alliance Status("Player 9", Enemy);
+}
+
+Trigger("Player 9"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Set Alliance Status("Player 1", Ally);
+	Set Alliance Status("Player 2", Ally);
+	Set Alliance Status("Player 3", Ally);
+	Set Alliance Status("Player 4", Ally);
+	Set Alliance Status("Player 5", Enemy);
+	Set Alliance Status("Player 6", Enemy);
+	Set Alliance Status("Player 7", Enemy);
+	Set Alliance Status("Player 8", Enemy);
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 38);
+	Elapsed Time(At most, 40);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>표시된 입구가 첫 방어선이다. 저 진입로부터 막아라.");
+}
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan1");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan2");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan3");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan4");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan5");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan6");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan7");
+	Minimap Ping("BaseEntrance");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan1");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan2");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan3");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan4");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan5");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan6");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan7");
+	Minimap Ping("BaseEntrance");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan1");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan2");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan3");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan4");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan5");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan6");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan7");
+	Minimap Ping("BaseEntrance");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan1");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan2");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan3");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan4");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan5");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan6");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan7");
+	Minimap Ping("BaseEntrance");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 183);
+	Elapsed Time(At most, 185);
+Actions:
+	Remove Unit("Player 1", "Map Revealer");
+	Remove Unit("Player 2", "Map Revealer");
+	Remove Unit("Player 3", "Map Revealer");
+	Remove Unit("Player 4", "Map Revealer");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 43);
+	Elapsed Time(At most, 45);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>방어선을 먼저 세워라. 병력을 낭비하면 다음 전투는 없다.");
 }

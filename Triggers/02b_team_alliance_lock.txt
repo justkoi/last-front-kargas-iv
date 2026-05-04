@@ -1,8 +1,45 @@
 //-----------------------------------------------------------------//
 //  플레이어 팀킬 방지 - 동맹 상태 고정
-//  P1~P4만 서로 Ally로 반복 갱신한다. 적 컴퓨터 세력(P5/P6)은 건드리지 않는다.
+//  P1~P4만 서로 Ally로 반복 갱신한다.
+//  P9 입구 방어 건물 슬롯은 궤도스캔 시점에만 1회 설정한다.
 //  Terran Science Vessel DC = 10초 주기 (120틱)
 //-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 2", Ally);
+	Set Alliance Status("Player 3", Ally);
+	Set Alliance Status("Player 4", Ally);
+}
+
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 1", Ally);
+	Set Alliance Status("Player 3", Ally);
+	Set Alliance Status("Player 4", Ally);
+}
+
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 1", Ally);
+	Set Alliance Status("Player 2", Ally);
+	Set Alliance Status("Player 4", Ally);
+}
+
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 1", Ally);
+	Set Alliance Status("Player 2", Ally);
+	Set Alliance Status("Player 3", Ally);
+}
 
 Trigger("Player 1"){
 Conditions:

@@ -80,13 +80,132 @@ Conditions:
 	Elapsed Time(At least, 26);
 	Elapsed Time(At most, 28);
 Actions:
-	Display Text Message(Always Display, "<04>일반 저그 군락보다 반응 주기가 불규칙합니다. 초반 정찰조를 예상하세요.");
+	Display Text Message(Always Display, "<04>일반 저그 군락보다 반응 주기가 불규칙합니다. 본진 진입로도 다시 확인하겠습니다.");
 }
 
 Trigger("All Players"){
 Conditions:
 	Elapsed Time(At least, 33);
 	Elapsed Time(At most, 35);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 갱신. 본진 외곽과 주 진입로를 표시합니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Set Alliance Status("Player 9", Ally);
+}
+
+Trigger("Player 5", "Player 6", "Player 7", "Player 8"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Set Alliance Status("Player 9", Enemy);
+}
+
+Trigger("Player 9"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Set Alliance Status("Player 1", Ally);
+	Set Alliance Status("Player 2", Ally);
+	Set Alliance Status("Player 3", Ally);
+	Set Alliance Status("Player 4", Ally);
+	Set Alliance Status("Player 5", Enemy);
+	Set Alliance Status("Player 6", Enemy);
+	Set Alliance Status("Player 7", Enemy);
+	Set Alliance Status("Player 8", Enemy);
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 38);
+	Elapsed Time(At most, 40);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>표시된 입구가 첫 방어선이다. 저 진입로부터 막아라.");
+}
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan1");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan2");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan3");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan4");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan5");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan6");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan7");
+	Minimap Ping("BaseEntrance");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan1");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan2");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan3");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan4");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan5");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan6");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan7");
+	Minimap Ping("BaseEntrance");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan1");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan2");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan3");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan4");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan5");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan6");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan7");
+	Minimap Ping("BaseEntrance");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At least, 33);
+	Elapsed Time(At most, 35);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan1");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan2");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan3");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan4");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan5");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan6");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan7");
+	Minimap Ping("BaseEntrance");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 183);
+	Elapsed Time(At most, 185);
+Actions:
+	Remove Unit("Player 1", "Map Revealer");
+	Remove Unit("Player 2", "Map Revealer");
+	Remove Unit("Player 3", "Map Revealer");
+	Remove Unit("Player 4", "Map Revealer");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 43);
+	Elapsed Time(At most, 45);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>방어선을 먼저 세워라. 병력을 낭비하면 다음 전투는 없다.");
 }
@@ -96,9 +215,46 @@ Actions:
 //-----------------------------------------------------------------//
 //-----------------------------------------------------------------//
 //  플레이어 팀킬 방지 - 동맹 상태 고정
-//  P1~P4만 서로 Ally로 반복 갱신한다. 적 컴퓨터 세력(P5/P6)은 건드리지 않는다.
+//  P1~P4만 서로 Ally로 반복 갱신한다.
+//  P9 입구 방어 건물 슬롯은 궤도스캔 시점에만 1회 설정한다.
 //  Terran Science Vessel DC = 10초 주기 (120틱)
 //-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 2", Ally);
+	Set Alliance Status("Player 3", Ally);
+	Set Alliance Status("Player 4", Ally);
+}
+
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 1", Ally);
+	Set Alliance Status("Player 3", Ally);
+	Set Alliance Status("Player 4", Ally);
+}
+
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 1", Ally);
+	Set Alliance Status("Player 2", Ally);
+	Set Alliance Status("Player 4", Ally);
+}
+
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 1", Ally);
+	Set Alliance Status("Player 2", Ally);
+	Set Alliance Status("Player 3", Ally);
+}
 
 Trigger("Player 1"){
 Conditions:
@@ -741,7 +897,7 @@ Conditions:
 	Elapsed Time(At least, 0);
 
 Actions:
-	Set Resources("Current Player", Add, 100, ore);
+	Set Resources("Current Player", Add, 50, ore);
 }
 
 //-----------------------------------------------------------------//
@@ -3619,6 +3775,51 @@ Conditions:
 Actions:
 	Wait(1000);
 	Victory();
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE] 플레이어 절대 패배 방지 (스위치 방식)
+//
+//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
+//  끄는 법: Triggers/ 에서 제거
+//
+//  동작 원리:
+//    게임 시작 직후 Switch1 을 set.
+//    12_endgame.txt 의 패배 트리거에 Switch("Switch1", cleared) 조건이
+//    있으므로, 스위치가 set 상태인 한 Defeat()가 발동하지 않음.
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Switch("Switch1", set);
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE] 컴퓨터(P5, P6) → 플레이어(P1~P4) 시야 공유
+//  (플레이어가 컴퓨터의 시야를 가진다)
+//
+//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
+//  끄는 법: Triggers/ 에서 제거
+//
+//  사용 스크립트 (AI → 해당 플레이어로 시야 공유):
+//    "Turn ON Shared Vision of current player with Player 1"
+//    "Turn ON Shared Vision of current player with Player 2"
+//    "Turn ON Shared Vision of current player with Player 3"
+//    "Turn ON Shared Vision of current player with Player 4"
+//
+//  주의: 위 스크립트 이름이 SCMDraft 드롭다운에 정확히 그대로 있는지
+//        확인할 것. 표기가 다르면 적절히 교체.
+//        ("of [SHARER] with [RECEIVER]" 패턴으로 추정)
+//-----------------------------------------------------------------//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Run AI Script("+Vi4");
+	Run AI Script("+Vi5");
+	Run AI Script("+Vi6");
+	Run AI Script("+Vi7");
 }
 //-----------------------------------------------------------------//
 //  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유

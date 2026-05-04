@@ -53,9 +53,9 @@ description: Use this skill whenever you write, edit, or debug SCMDraft 2 TrigEd
 | `ZARx` | Zerg Area Town (확장 안 함, 미션1 P5 시작) |
 | `ZSUx` | Zerg Insane Setup (스토리 강함, 적 본진 가동) |
 | `ZMCx` | Zerg Custom Level (적극적 공격 + 확장) |
-| `+Vi#` | 시야 공유 (0-indexed: `+Vi0`=P1, `+Vi1`=P2, `+Vi2`=P3, `+Vi3`=P4, ...). AI 플레이어가 해당 번호 플레이어와 시야 공유. |
+| `+Vi#` | 현재 플레이어가 지정 플레이어의 시야를 얻는다. 0-indexed: `+Vi0`=P1 시야 획득, `+Vi1`=P2 시야 획득, `+Vi8`=P9 시야 획득. 예: P1~P4가 P9의 시야를 얻으려면 `Trigger("Player 1", "Player 2", "Player 3", "Player 4")`에서 `Run AI Script("+Vi8");`를 실행한다. |
 
-**주의:** `+Vi`는 vision share (트리거 디버그/협동 시야)이지, AI 행동 변경이 아님. `Vi1`처럼 `+` 없이 쓰면 인식 안 될 수 있음.
+**주의:** `+Vi`는 vision share (트리거 디버그/협동 시야)이지, AI 행동 변경이 아님. `Vi1`처럼 `+` 없이 쓰면 인식 안 될 수 있음. 방향을 헷갈리지 말 것: `+Vi0`을 P9가 실행하면 P9가 P1의 시야를 얻는 것이지, P1이 P9의 시야를 얻는 것이 아니다.
 
 ## 스위치 (Switch) 문법
 
