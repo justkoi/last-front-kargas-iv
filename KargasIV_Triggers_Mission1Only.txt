@@ -76,6 +76,8 @@
 //    Switch26   : mission2 first penalty assault order shuffle
 //    Switch27/28: P6 mission2 penalty assault cooldown jitter
 //    Switch29/30: P7 mission2 penalty assault cooldown jitter
+//    Switch31   : P6 MainBase tech collapse cooldown reset used
+//    Switch32   : P7 MainBase tech collapse cooldown reset used
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
@@ -3228,8 +3230,19 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 12);
 	Switch("Switch26", Not Set);
+	Switch("Switch31", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Set To, 3240);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch26", Not Set);
+	Switch("Switch32", Not Set);
+Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 2880);
 	Preserve Trigger();
 }
@@ -3239,9 +3252,48 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 12);
 	Switch("Switch26", Set);
+	Switch("Switch31", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Set To, 2880);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch26", Set);
+	Switch("Switch32", Not Set);
+Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 3240);
+	Preserve Trigger();
+}
+
+// If a colony's MainBase tech core collapses, discard its queued main-assault cooldown once.
+// This runs after the first-assault stagger setup so a collapsed colony stays at 0.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Lair", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Hive", "P6 MainBase", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
+	Set Switch("Switch31", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch32", Not Set);
+	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Lair", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Hive", "P7 MainBase", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
+	Set Switch("Switch32", set);
 	Preserve Trigger();
 }
 
@@ -6240,7 +6292,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At least, 361);
+	Deaths("Player 8", "Zerg Scourge", At least, 1441);
 Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
@@ -7135,14 +7187,13 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At least, 361);
+	Deaths("Player 8", "Zerg Guardian", At least, 1441);
 Actions:
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
-
 //-----------------------------------------------------------------//
 //  Mission 2 - hatchery tech loss accelerates main assaults
 //
