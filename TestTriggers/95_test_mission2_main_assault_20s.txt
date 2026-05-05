@@ -1,0 +1,31 @@
+//-----------------------------------------------------------------//
+//  [TEST MODE] Mission 2 main assault every 1 minute
+//
+//  This does not spawn attack waves directly. It fills the normal
+//  P6/P7 mission 2 main assault timers so production triggers fire.
+//
+//  Test timer: Player 8 Protoss Arbiter DC (60s = 720).
+//  P6 timer / ready flag: Player 8 Zerg Zergling / Zerg Lurker.
+//  P7 timer / ready flag: Player 8 Zerg Hydralisk / Zerg Mutalisk.
+//-----------------------------------------------------------------//
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Arbiter", At least, 720);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 4000);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 4000);
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 0);
+	Preserve Trigger();
+}

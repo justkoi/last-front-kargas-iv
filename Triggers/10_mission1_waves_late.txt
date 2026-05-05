@@ -1,0 +1,230 @@
+//-----------------------------------------------------------------//
+//  늦은 웨이브 4종 변형 (15분 후, 150초마다 순환)
+//  Wraith DC = 쿨다운 (1800틱 = 150s)
+//  Dropship DC = 변형 인덱스 (0/1/2/3)
+//
+//  변형 A: 지상 스웜 (저글링/히드라/럴커 대량)
+//  변형 B: 공중 하라스 (뮤탈/스커지)
+//  변형 C: 중장갑 돌파 (울트라/디파일러/히드라)
+//  변형 D: 공성 공중 (가디언/디바우러/뮤탈)
+//-----------------------------------------------------------------//
+
+// 군락 테크 건물 붕괴 반격 보정 (1순회 = 1800틱)
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 5", "Zerg Hatchery", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 1800);
+	Set Deaths("Player 5", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 5", "Zerg Lair", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 2700);
+	Set Deaths("Player 5", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 5", "Zerg Hive", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 3600);
+	Set Deaths("Player 5", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+// 변형 A — Index 0: 지상 스웜
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Wraith", At least, 1800);
+	Deaths("Player 8", "Terran Dropship", Exactly, 0);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn2");
+	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn4", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn4", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Lurker", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Lurker", "P5 Spawn2", "Player Destination", Patrol);
+	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 1);
+	//Display Text Message(Always Display, "[경보 - 변종 A] 지상 스웜! 럴커 잠복 다수!");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+
+// 변형 B — Index 1: 공중 하라스
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Wraith", At least, 1800);
+	Deaths("Player 8", "Terran Dropship", Exactly, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Mutalisk", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Mutalisk", 3, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn4");
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn4", "Player Destination", Patrol);
+	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 2);
+	//Display Text Message(Always Display, "[경보 - 변종 B] 공중 무리 출현! 스커지 자폭 경계!");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+
+// 변형 C — Index 2: 중장갑 돌파
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Wraith", At least, 1800);
+	Deaths("Player 8", "Terran Dropship", Exactly, 2);
+Actions:
+	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
+	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn1", 1);
+	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn2", 1);
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
+	Order("Player 5", "Zerg Ultralisk", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Defiler", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Defiler", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn4", "Player Destination", Patrol);
+	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 3);
+	//Display Text Message(Always Display, "[경보 - 변종 C] 울트라리스크 진격! 다크스웜 주의!");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+
+// 변형 D — Index 3: 공성 공중, 인덱스 리셋
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Wraith", At least, 1800);
+	Deaths("Player 8", "Terran Dropship", Exactly, 3);
+Actions:
+	Create Unit("Player 5", "Zerg Guardian", 1, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Guardian", 1, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Guardian", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Guardian", 1, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn4");
+	Order("Player 5", "Zerg Guardian", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Guardian", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Guardian", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Guardian", "P5 Spawn4", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Devourer", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Devourer", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Devourer", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn4", "Player Destination", Patrol);
+	Set Deaths("Player 8", "Terran Wraith", Subtract, 1800);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
+	//Display Text Message(Always Display, "[경보 - 변종 D] 공성 가디언 편대! 디바우러 호위!");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+
+// 첫 진입 안내 (미션 1만)
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 900);
+	Elapsed Time(At most, 905);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Spawn1");
+	Display Text Message(Always Display, "<1A>노바: <04>군락 반응이 바뀌었습니다. 단일 무리가 아니라 조합을 돌리고 있어요.");
+}
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 900);
+	Elapsed Time(At most, 905);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn1");
+}
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 900);
+	Elapsed Time(At most, 905);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn1");
+}
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 900);
+	Elapsed Time(At most, 905);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn1");
+}
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 900);
+	Elapsed Time(At most, 905);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn1");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 905);
+	Elapsed Time(At most, 910);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>놈들이 우리 방어선을 읽기 시작했다. 여기서 밀리면 첫 전선은 무너진다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 960);
+Actions:
+	Remove Unit("Player 1", "Map Revealer");
+	Remove Unit("Player 2", "Map Revealer");
+	Remove Unit("Player 3", "Map Revealer");
+	Remove Unit("Player 4", "Map Revealer");
+}

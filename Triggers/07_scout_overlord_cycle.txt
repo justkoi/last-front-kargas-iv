@@ -1,0 +1,184 @@
+//-----------------------------------------------------------------//
+//  정찰 오버로드 사이클 - 각 군락별 독립 DC (120s = 1440틱)
+//  P5: Terran Goliath / Protoss Probe
+//  P6: Protoss Archon / Protoss Scout
+//  P7: Protoss Dark Templar / Protoss Carrier
+//-----------------------------------------------------------------//
+
+//한 사이클 돌아가게 세팅
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 175);
+Actions:
+	Set Deaths("Player 8", "Terran Goliath", Set To, 2160);
+	Set Deaths("Player 8", "Protoss Archon", Set To, 2160);
+	Set Deaths("Player 8", "Protoss Dark Templar", Set To, 2160);
+}
+
+// Index 0 → P1 Hunt
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Terran Goliath", At least, 1440);
+	Deaths("Player 8", "Protoss Probe", Exactly, 0);
+Actions:
+	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 1440);
+	Set Deaths("Player 8", "Protoss Probe", Set To, 1);
+	Preserve Trigger();
+}
+
+// P6 Index 0 → P1 Hunt
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Protoss Archon", At least, 1440);
+	Deaths("Player 8", "Protoss Scout", Exactly, 0);
+Actions:
+	Move Unit("Player 6", "Zerg Overlord", 1, "P6 Base", "P6 Scout");
+	Order("Player 6", "Zerg Overlord", "P6 Scout", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Protoss Archon", Subtract, 1440);
+	Set Deaths("Player 8", "Protoss Scout", Set To, 1);
+	Preserve Trigger();
+}
+
+// P6 Index 1 → P2 Hunt
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Protoss Archon", At least, 1440);
+	Deaths("Player 8", "Protoss Scout", Exactly, 1);
+Actions:
+	Move Unit("Player 6", "Zerg Overlord", 1, "P6 Base", "P6 Scout");
+	Order("Player 6", "Zerg Overlord", "P6 Scout", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Protoss Archon", Subtract, 1440);
+	Set Deaths("Player 8", "Protoss Scout", Set To, 2);
+	Preserve Trigger();
+}
+
+// P6 Index 2 → P3 Hunt
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Protoss Archon", At least, 1440);
+	Deaths("Player 8", "Protoss Scout", Exactly, 2);
+Actions:
+	Move Unit("Player 6", "Zerg Overlord", 1, "P6 Base", "P6 Scout");
+	Order("Player 6", "Zerg Overlord", "P6 Scout", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Protoss Archon", Subtract, 1440);
+	Set Deaths("Player 8", "Protoss Scout", Set To, 3);
+	Preserve Trigger();
+}
+
+// P6 Index 3 → P4 Hunt, 인덱스 리셋
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Protoss Archon", At least, 1440);
+	Deaths("Player 8", "Protoss Scout", Exactly, 3);
+Actions:
+	Move Unit("Player 6", "Zerg Overlord", 1, "P6 Base", "P6 Scout");
+	Order("Player 6", "Zerg Overlord", "P6 Scout", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Protoss Archon", Subtract, 1440);
+	Set Deaths("Player 8", "Protoss Scout", Set To, 0);
+	Preserve Trigger();
+}
+
+// P7 Index 0 → P1 Hunt
+Trigger("Player 7"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Protoss Dark Templar", At least, 1440);
+	Deaths("Player 8", "Protoss Carrier", Exactly, 0);
+Actions:
+	Move Unit("Player 7", "Zerg Overlord", 1, "P7 Base", "P7 Scout");
+	Order("Player 7", "Zerg Overlord", "P7 Scout", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Protoss Dark Templar", Subtract, 1440);
+	Set Deaths("Player 8", "Protoss Carrier", Set To, 1);
+	Preserve Trigger();
+}
+
+// P7 Index 1 → P2 Hunt
+Trigger("Player 7"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Protoss Dark Templar", At least, 1440);
+	Deaths("Player 8", "Protoss Carrier", Exactly, 1);
+Actions:
+	Move Unit("Player 7", "Zerg Overlord", 1, "P7 Base", "P7 Scout");
+	Order("Player 7", "Zerg Overlord", "P7 Scout", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Protoss Dark Templar", Subtract, 1440);
+	Set Deaths("Player 8", "Protoss Carrier", Set To, 2);
+	Preserve Trigger();
+}
+
+// P7 Index 2 → P3 Hunt
+Trigger("Player 7"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Protoss Dark Templar", At least, 1440);
+	Deaths("Player 8", "Protoss Carrier", Exactly, 2);
+Actions:
+	Move Unit("Player 7", "Zerg Overlord", 1, "P7 Base", "P7 Scout");
+	Order("Player 7", "Zerg Overlord", "P7 Scout", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Protoss Dark Templar", Subtract, 1440);
+	Set Deaths("Player 8", "Protoss Carrier", Set To, 3);
+	Preserve Trigger();
+}
+
+// P7 Index 3 → P4 Hunt, 인덱스 리셋
+Trigger("Player 7"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Protoss Dark Templar", At least, 1440);
+	Deaths("Player 8", "Protoss Carrier", Exactly, 3);
+Actions:
+	Move Unit("Player 7", "Zerg Overlord", 1, "P7 Base", "P7 Scout");
+	Order("Player 7", "Zerg Overlord", "P7 Scout", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Protoss Dark Templar", Subtract, 1440);
+	Set Deaths("Player 8", "Protoss Carrier", Set To, 0);
+	Preserve Trigger();
+}
+
+// Index 1 → P2 Hunt
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Terran Goliath", At least, 1440);
+	Deaths("Player 8", "Protoss Probe", Exactly, 1);
+Actions:
+	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 1440);
+	Set Deaths("Player 8", "Protoss Probe", Set To, 2);
+	Preserve Trigger();
+}
+
+// Index 2 → P3 Hunt
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Terran Goliath", At least, 1440);
+	Deaths("Player 8", "Protoss Probe", Exactly, 2);
+Actions:
+	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 1440);
+	Set Deaths("Player 8", "Protoss Probe", Set To, 3);
+	Preserve Trigger();
+}
+
+// Index 3 → P4 Hunt, 인덱스 리셋
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 180);
+	Deaths("Player 8", "Terran Goliath", At least, 1440);
+	Deaths("Player 8", "Protoss Probe", Exactly, 3);
+Actions:
+	Move Unit("Player 5", "Zerg Overlord", 1, "P5 Base", "P5 Scout");
+	Order("Player 5", "Zerg Overlord", "P5 Scout", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Terran Goliath", Subtract, 1440);
+	Set Deaths("Player 8", "Protoss Probe", Set To, 0);
+	Preserve Trigger();
+}

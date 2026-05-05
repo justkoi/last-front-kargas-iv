@@ -1,0 +1,225 @@
+//-----------------------------------------------------------------//
+//  Base defense response
+//
+//  P5: Terran Marine DC, P6: Terran Armory DC, P7: Protoss Zealot DC
+//  Cooldown: 90s = 1080 ticks.
+//
+//  Move Location does not accept "Foes" reliably in TrigEdit, so each
+//  player intrusion is handled explicitly.
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Bring("Player 1", "Men", "P5 Area", At least, 1);
+	Deaths("Player 8", "Terran Marine", At least, 1080);
+Actions:
+	Set Deaths("Player 8", "Terran Marine", Set To, 0);
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P5 Area", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Bring("Player 2", "Men", "P5 Area", At least, 1);
+	Deaths("Player 8", "Terran Marine", At least, 1080);
+Actions:
+	Set Deaths("Player 8", "Terran Marine", Set To, 0);
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P5 Area", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Bring("Player 3", "Men", "P5 Area", At least, 1);
+	Deaths("Player 8", "Terran Marine", At least, 1080);
+Actions:
+	Set Deaths("Player 8", "Terran Marine", Set To, 0);
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P5 Area", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Bring("Player 4", "Men", "P5 Area", At least, 1);
+	Deaths("Player 8", "Terran Marine", At least, 1080);
+Actions:
+	Set Deaths("Player 8", "Terran Marine", Set To, 0);
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P5 Area", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Bring("Player 1", "Men", "P6 Area", At least, 1);
+	Deaths("Player 8", "Terran Armory", At least, 1080);
+Actions:
+	Set Deaths("Player 8", "Terran Armory", Set To, 0);
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Scourge", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Guardian", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Devourer", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Infested Terran", "Anywhere", "P6 Area", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Bring("Player 2", "Men", "P6 Area", At least, 1);
+	Deaths("Player 8", "Terran Armory", At least, 1080);
+Actions:
+	Set Deaths("Player 8", "Terran Armory", Set To, 0);
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Scourge", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Guardian", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Devourer", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Infested Terran", "Anywhere", "P6 Area", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Bring("Player 3", "Men", "P6 Area", At least, 1);
+	Deaths("Player 8", "Terran Armory", At least, 1080);
+Actions:
+	Set Deaths("Player 8", "Terran Armory", Set To, 0);
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Scourge", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Guardian", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Devourer", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Infested Terran", "Anywhere", "P6 Area", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Bring("Player 4", "Men", "P6 Area", At least, 1);
+	Deaths("Player 8", "Terran Armory", At least, 1080);
+Actions:
+	Set Deaths("Player 8", "Terran Armory", Set To, 0);
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Scourge", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Guardian", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Zerg Devourer", "Anywhere", "P6 Area", Patrol);
+	Order("Player 6", "Infested Terran", "Anywhere", "P6 Area", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Bring("Player 1", "Men", "P7 Area", At least, 1);
+	Deaths("Player 8", "Protoss Zealot", At least, 1080);
+Actions:
+	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
+	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Lurker", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Scourge", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Guardian", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Devourer", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Infested Terran", "Anywhere", "P7 Area", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Bring("Player 2", "Men", "P7 Area", At least, 1);
+	Deaths("Player 8", "Protoss Zealot", At least, 1080);
+Actions:
+	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
+	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Lurker", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Scourge", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Guardian", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Devourer", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Infested Terran", "Anywhere", "P7 Area", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Bring("Player 3", "Men", "P7 Area", At least, 1);
+	Deaths("Player 8", "Protoss Zealot", At least, 1080);
+Actions:
+	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
+	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Lurker", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Scourge", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Guardian", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Devourer", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Infested Terran", "Anywhere", "P7 Area", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Bring("Player 4", "Men", "P7 Area", At least, 1);
+	Deaths("Player 8", "Protoss Zealot", At least, 1080);
+Actions:
+	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
+	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Lurker", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Scourge", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Guardian", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Zerg Devourer", "Anywhere", "P7 Area", Patrol);
+	Order("Player 7", "Infested Terran", "Anywhere", "P7 Area", Patrol);
+	Preserve Trigger();
+}

@@ -1,15 +1,67 @@
 //-----------------------------------------------------------------//
-//  미션2 P6/P7 저그 추적 AI - 각 P1~P4 건물 DC (180s = 2160틱)
-//  Firebat=P1, Ghost=P2, Medic=P3, SCV=P4
+//  Mission 2 - dynamic building tracking and all-out attack
+//
+//  Protoss Shuttle DC = Hunt location refresh timer (10s = 120)
+//  Firebat/Ghost/Medic/SCV = P1/P2/P3/P4 attack timers (150s = 1800)
 //-----------------------------------------------------------------//
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Command("Player 1", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Firebat", At least, 2160);
+	Deaths("Player 8", "Protoss Shuttle", At least, 120);
 Actions:
 	Move Location("Player 1", "Buildings", "Anywhere", "P1 Hunt");
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Command("Player 2", "Buildings", At least, 1);
+	Deaths("Player 8", "Protoss Shuttle", At least, 120);
+Actions:
+	Move Location("Player 2", "Buildings", "Anywhere", "P2 Hunt");
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Command("Player 3", "Buildings", At least, 1);
+	Deaths("Player 8", "Protoss Shuttle", At least, 120);
+Actions:
+	Move Location("Player 3", "Buildings", "Anywhere", "P3 Hunt");
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Command("Player 4", "Buildings", At least, 1);
+	Deaths("Player 8", "Protoss Shuttle", At least, 120);
+Actions:
+	Move Location("Player 4", "Buildings", "Anywhere", "P4 Hunt");
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Shuttle", At least, 120);
+Actions:
+	Set Deaths("Player 8", "Protoss Shuttle", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Command("Player 1", "Buildings", At least, 1);
+	Deaths("Player 8", "Terran Firebat", At least, 1800);
+	Deaths("Player 8", "Zerg Lurker", At most, 1);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+Actions:
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Lurker", "Anywhere", "P1 Hunt", Patrol);
@@ -40,9 +92,10 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Command("Player 2", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Ghost", At least, 2160);
+	Deaths("Player 8", "Terran Ghost", At least, 1800);
+	Deaths("Player 8", "Zerg Lurker", At most, 1);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 Actions:
-	Move Location("Player 2", "Buildings", "Anywhere", "P2 Hunt");
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Lurker", "Anywhere", "P2 Hunt", Patrol);
@@ -73,9 +126,10 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Command("Player 3", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Medic", At least, 2160);
+	Deaths("Player 8", "Terran Medic", At least, 1800);
+	Deaths("Player 8", "Zerg Lurker", At most, 1);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 Actions:
-	Move Location("Player 3", "Buildings", "Anywhere", "P3 Hunt");
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Lurker", "Anywhere", "P3 Hunt", Patrol);
@@ -106,9 +160,10 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Command("Player 4", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran SCV", At least, 2160);
+	Deaths("Player 8", "Terran SCV", At least, 1800);
+	Deaths("Player 8", "Zerg Lurker", At most, 1);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 Actions:
-	Move Location("Player 4", "Buildings", "Anywhere", "P4 Hunt");
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Lurker", "Anywhere", "P4 Hunt", Patrol);

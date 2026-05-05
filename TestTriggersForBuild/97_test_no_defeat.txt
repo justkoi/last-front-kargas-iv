@@ -6,7 +6,7 @@
 //
 //  동작 원리:
 //    게임 시작 직후 Switch1 을 set.
-//    12_endgame.txt 의 패배 트리거에 Switch("Switch1", cleared) 조건이
+//    12_mission1_to_mission2_transition.txt 의 패배 트리거에 Switch("Switch1", cleared) 조건이
 //    있으므로, 스위치가 set 상태인 한 Defeat()가 발동하지 않음.
 //-----------------------------------------------------------------//
 

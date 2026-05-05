@@ -9,7 +9,10 @@ Conditions:
 	Elapsed Time(At least, 210);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
 }
 Trigger("All Players"){
@@ -17,7 +20,7 @@ Conditions:
 	Elapsed Time(At least, 210);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("P5 Spawn");
+	Minimap Ping("P5 Spawn1");
 	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 군락 외곽에서 빠른 소형 생체신호가 움직입니다.");
 }
 Trigger("All Players"){
@@ -30,32 +33,35 @@ Trigger("Player 1"){
 Conditions:
 	Elapsed Time(At least, 210);
 Actions:
-	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 2"){
 Conditions:
 	Elapsed Time(At least, 210);
 Actions:
-	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 3"){
 Conditions:
 	Elapsed Time(At least, 210);
 Actions:
-	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 4"){
 Conditions:
 	Elapsed Time(At least, 210);
 Actions:
-	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 240);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn4", "Player Destination", Patrol);
 }
 Trigger("Player 1"){
 Conditions:
@@ -101,8 +107,14 @@ Conditions:
 	Elapsed Time(At least, 450);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 15, "P5 Spawn");
-	Create Unit("Player 5", "Zerg Hydralisk", 10, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
 }
 Trigger("All Players"){
@@ -110,7 +122,7 @@ Conditions:
 	Elapsed Time(At least, 450);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("P5 Spawn");
+	Minimap Ping("P5 Spawn1");
 	Display Text Message(Always Display, "<1A>노바: <04>외곽 신호가 다시 움직입니다. 첫 접촉 때보다 수가 늘고 속도도 빠릅니다.");
 }
 Trigger("All Players"){
@@ -123,33 +135,39 @@ Trigger("Player 1"){
 Conditions:
 	Elapsed Time(At least, 450);
 Actions:
-	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 2"){
 Conditions:
 	Elapsed Time(At least, 450);
 Actions:
-	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 3"){
 Conditions:
 	Elapsed Time(At least, 450);
 Actions:
-	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 4"){
 Conditions:
 	Elapsed Time(At least, 450);
 Actions:
-	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 480);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn4", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn4", "Player Destination", Patrol);
 }
 Trigger("Player 1"){
 Conditions:
@@ -195,9 +213,18 @@ Conditions:
 	Elapsed Time(At least, 630);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 20, "P5 Spawn");
-	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Spawn");
-	Create Unit("Player 5", "Zerg Lurker", 6, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
 }
 Trigger("All Players"){
@@ -205,7 +232,7 @@ Conditions:
 	Elapsed Time(At least, 630);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("P5 Spawn");
+	Minimap Ping("P5 Spawn1");
 	Display Text Message(Always Display, "<1A>노바: <04>지하 진동이 섞입니다. 잠복형 개체가 본대 근처에 있는 것 같습니다.");
 }
 Trigger("All Players"){
@@ -218,34 +245,43 @@ Trigger("Player 1"){
 Conditions:
 	Elapsed Time(At least, 630);
 Actions:
-	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 2"){
 Conditions:
 	Elapsed Time(At least, 630);
 Actions:
-	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 3"){
 Conditions:
 	Elapsed Time(At least, 630);
 Actions:
-	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 4"){
 Conditions:
 	Elapsed Time(At least, 630);
 Actions:
-	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 660);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Order("Player 5", "Zerg Zergling", "P5 Spawn", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "P5 Spawn", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Lurker", "P5 Spawn", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Zergling", "P5 Spawn4", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn4", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Lurker", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Lurker", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Lurker", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Lurker", "P5 Spawn4", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
 }
 Trigger("Player 1"){

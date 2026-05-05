@@ -1,0 +1,845 @@
+//-----------------------------------------------------------------//
+//  Mission 1 - outer colony attack penalty
+//
+//  If players bypass the first colony and attack P6/P7 during mission1,
+//  destroyed outer-colony structures feed resources back into that colony.
+//-----------------------------------------------------------------//
+
+// Repeat the outer-colony intrusion warning at most once every 10 seconds.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch13", Set);
+Actions:
+	Set Deaths("Player 8", "Protoss Corsair", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch13", Set);
+	Deaths("Player 8", "Protoss Corsair", At least, 120);
+Actions:
+	Set Switch("Switch13", clear);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch13", Not Set);
+	Bring("Player 1", "Men", "P6 Base", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Move Location("Player 1", "Men", "P6 Base", "P6 Alert");
+	Minimap Ping("P6 Alert");
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Set Switch("Switch13", set);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch13", Not Set);
+	Bring("Player 2", "Men", "P6 Base", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Move Location("Player 2", "Men", "P6 Base", "P6 Alert");
+	Minimap Ping("P6 Alert");
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Set Switch("Switch13", set);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch13", Not Set);
+	Bring("Player 3", "Men", "P6 Base", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Move Location("Player 3", "Men", "P6 Base", "P6 Alert");
+	Minimap Ping("P6 Alert");
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Set Switch("Switch13", set);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch13", Not Set);
+	Bring("Player 4", "Men", "P6 Base", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Move Location("Player 4", "Men", "P6 Base", "P6 Alert");
+	Minimap Ping("P6 Alert");
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Set Switch("Switch13", set);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch13", Not Set);
+	Bring("Player 1", "Men", "P7 Base", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Move Location("Player 1", "Men", "P7 Base", "P7 Alert");
+	Minimap Ping("P7 Alert");
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Set Switch("Switch13", set);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch13", Not Set);
+	Bring("Player 2", "Men", "P7 Base", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Move Location("Player 2", "Men", "P7 Base", "P7 Alert");
+	Minimap Ping("P7 Alert");
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Set Switch("Switch13", set);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch13", Not Set);
+	Bring("Player 3", "Men", "P7 Base", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Move Location("Player 3", "Men", "P7 Base", "P7 Alert");
+	Minimap Ping("P7 Alert");
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Set Switch("Switch13", set);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch13", Not Set);
+	Bring("Player 4", "Men", "P7 Base", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Move Location("Player 4", "Men", "P7 Base", "P7 Alert");
+	Minimap Ping("P7 Alert");
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Set Switch("Switch13", set);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+}
+
+// P6 resource unlock warning.
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Sunken Colony", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Spore Colony", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Lair", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Hive", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Spawning Pool", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Hydralisk Den", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Evolution Chamber", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Spire", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Greater Spire", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Queen's Nest", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Defiler Mound", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Ultralisk Cavern", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+	Deaths("Player 6", "Zerg Nydus Canal", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch24", set);
+}
+
+// P7 resource unlock warning.
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Sunken Colony", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Spore Colony", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Lair", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Hive", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Spawning Pool", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Hydralisk Den", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Evolution Chamber", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Spire", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Greater Spire", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Queen's Nest", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Defiler Mound", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Ultralisk Cavern", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+	Deaths("Player 7", "Zerg Nydus Canal", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Set Switch("Switch25", set);
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Sunken Colony", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 500, ore);
+	Set Resources("Player 6", Add, 250, gas);
+	Set Deaths("Player 6", "Zerg Sunken Colony", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Sunken Colony", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 500, ore);
+	Set Resources("Player 7", Add, 250, gas);
+	Set Deaths("Player 7", "Zerg Sunken Colony", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Spore Colony", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 500, ore);
+	Set Resources("Player 6", Add, 250, gas);
+	Set Deaths("Player 6", "Zerg Spore Colony", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Spore Colony", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 500, ore);
+	Set Resources("Player 7", Add, 250, gas);
+	Set Deaths("Player 7", "Zerg Spore Colony", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 5000, ore);
+	Set Resources("Player 6", Add, 2500, gas);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Lair", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 5000, ore);
+	Set Resources("Player 6", Add, 2500, gas);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Hive", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 5000, ore);
+	Set Resources("Player 6", Add, 2500, gas);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 5000, ore);
+	Set Resources("Player 7", Add, 2500, gas);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Lair", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 5000, ore);
+	Set Resources("Player 7", Add, 2500, gas);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Hive", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 5000, ore);
+	Set Resources("Player 7", Add, 2500, gas);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Spawning Pool", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 10000, ore);
+	Set Resources("Player 6", Add, 5000, gas);
+	Set Deaths("Player 6", "Zerg Spawning Pool", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Spawning Pool", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 10000, ore);
+	Set Resources("Player 7", Add, 5000, gas);
+	Set Deaths("Player 7", "Zerg Spawning Pool", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Hydralisk Den", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 10000, ore);
+	Set Resources("Player 6", Add, 5000, gas);
+	Set Deaths("Player 6", "Zerg Hydralisk Den", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Hydralisk Den", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 10000, ore);
+	Set Resources("Player 7", Add, 5000, gas);
+	Set Deaths("Player 7", "Zerg Hydralisk Den", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Evolution Chamber", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 10000, ore);
+	Set Resources("Player 6", Add, 5000, gas);
+	Set Deaths("Player 6", "Zerg Evolution Chamber", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Evolution Chamber", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 10000, ore);
+	Set Resources("Player 7", Add, 5000, gas);
+	Set Deaths("Player 7", "Zerg Evolution Chamber", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Spire", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 10000, ore);
+	Set Resources("Player 6", Add, 5000, gas);
+	Set Deaths("Player 6", "Zerg Spire", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Spire", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 10000, ore);
+	Set Resources("Player 7", Add, 5000, gas);
+	Set Deaths("Player 7", "Zerg Spire", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Greater Spire", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 10000, ore);
+	Set Resources("Player 6", Add, 5000, gas);
+	Set Deaths("Player 6", "Zerg Greater Spire", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Greater Spire", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 10000, ore);
+	Set Resources("Player 7", Add, 5000, gas);
+	Set Deaths("Player 7", "Zerg Greater Spire", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Queen's Nest", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 10000, ore);
+	Set Resources("Player 6", Add, 5000, gas);
+	Set Deaths("Player 6", "Zerg Queen's Nest", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Queen's Nest", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 10000, ore);
+	Set Resources("Player 7", Add, 5000, gas);
+	Set Deaths("Player 7", "Zerg Queen's Nest", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Defiler Mound", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 10000, ore);
+	Set Resources("Player 6", Add, 5000, gas);
+	Set Deaths("Player 6", "Zerg Defiler Mound", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Defiler Mound", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 10000, ore);
+	Set Resources("Player 7", Add, 5000, gas);
+	Set Deaths("Player 7", "Zerg Defiler Mound", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Ultralisk Cavern", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 10000, ore);
+	Set Resources("Player 6", Add, 5000, gas);
+	Set Deaths("Player 6", "Zerg Ultralisk Cavern", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Ultralisk Cavern", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 10000, ore);
+	Set Resources("Player 7", Add, 5000, gas);
+	Set Deaths("Player 7", "Zerg Ultralisk Cavern", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 10000, ore);
+	Set Resources("Player 6", Add, 5000, gas);
+	Set Deaths("Player 6", "Zerg Nydus Canal", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 10000, ore);
+	Set Resources("Player 7", Add, 5000, gas);
+	Set Deaths("Player 7", "Zerg Nydus Canal", Subtract, 1);
+	Preserve Trigger();
+}

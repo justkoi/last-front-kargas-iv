@@ -1,0 +1,15 @@
+//-----------------------------------------------------------------//
+//  [TEST MODE] Player resource dashboard
+//
+//  Shows player minerals on the in-game leaderboard.
+//  StarCraft leaderboards can show one resource type at a time.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Always();
+Actions:
+	Leader Board Resources("TEST Minerals", ore);
+	Leaderboard Computer Players(enabled);
+	Preserve Trigger();
+}

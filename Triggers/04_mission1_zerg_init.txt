@@ -9,22 +9,19 @@ Conditions:
 Actions:
 	Set Resources("Player 5", Set To, 999999, ore);
 	Set Resources("Player 5", Set To, 999999, gas);
-	Set Resources("Player 6", Set To, 999999, ore);
-	Set Resources("Player 6", Set To, 999999, gas);
-	Set Resources("Player 7", Set To, 999999, ore);
-	Set Resources("Player 7", Set To, 999999, gas);
 }
 
 // 미션1 동안 P6/P7은 잠복 상태로 둔다.
-Trigger("Player 6"){
+Trigger("Player 8"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At most, 2);
 Actions:
+	Set Switch("Switch24", clear);
+	Set Switch("Switch25", clear);
 	Set Resources("Player 6", Set To, 0, ore);
 	Set Resources("Player 6", Set To, 0, gas);
 	Set Resources("Player 7", Set To, 0, ore);
 	Set Resources("Player 7", Set To, 0, gas);
-	Preserve Trigger();
 }
 
 // 각 저그 진영의 기본 AI 시작
@@ -37,16 +34,37 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Elapsed Time(At least, 330);
+	Elapsed Time(At least, 0);
 Actions:
 	Run AI Script At Location("ZSUx", "P6 Base");
 }
 
 Trigger("Player 7"){
 Conditions:
-	Elapsed Time(At least, 330);
+	Elapsed Time(At least, 0);
 Actions:
 	Run AI Script At Location("ZSUx", "P7 Base");
+}
+
+// Keep outer colonies resource-starved during mission1 until that colony is attacked.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch24", Not Set);
+Actions:
+	Set Resources("Player 6", Set To, 0, ore);
+	Set Resources("Player 6", Set To, 0, gas);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch25", Not Set);
+Actions:
+	Set Resources("Player 7", Set To, 0, ore);
+	Set Resources("Player 7", Set To, 0, gas);
+	Preserve Trigger();
 }
 
 // 미션2 진입 시 갈색/하얀색 군락 활성화
@@ -59,7 +77,6 @@ Actions:
 	Set Resources("Player 6", Set To, 999999, gas);
 	Set Resources("Player 7", Set To, 999999, ore);
 	Set Resources("Player 7", Set To, 999999, gas);
-	Run AI Script At Location("ZSUx", "P6 Base");
 }
 
 Trigger("Player 7"){
@@ -67,5 +84,4 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 12);
 Actions:
-	Run AI Script At Location("ZSUx", "P7 Base");
 }

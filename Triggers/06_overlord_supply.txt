@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------//
-//  오버로드 보급 - Terran Battlecruiser DC (30s = 360틱)
-//  본진 오버로드 < 40기일 때만 1기 추가. 인구 부족 방지하되
+//  오버로드 보급 - 각 군락별 독립 DC (20s = 240틱)
+//  군락 오버로드 < 33기일 때만 1기 추가. 인구 부족 방지하되
 //  플레이어가 처치 후 충격 줄 시간을 위해 20초 간격
 //-----------------------------------------------------------------//
 
@@ -11,7 +11,28 @@ Conditions:
 	Command("Player 5", "Zerg Drone", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Battlecruiser", Set To, 0);
-	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Spawn");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
 	Preserve Trigger();
 }
 
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Dragoon", At least, 240);
+	Command("Player 6", "Zerg Overlord", At most, 32);
+	Command("Player 6", "Zerg Drone", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Dragoon", Set To, 0);
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Base");
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss High Templar", At least, 240);
+	Command("Player 7", "Zerg Overlord", At most, 32);
+	Command("Player 7", "Zerg Drone", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss High Templar", Set To, 0);
+	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Base");
+	Preserve Trigger();
+}

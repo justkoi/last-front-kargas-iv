@@ -166,9 +166,13 @@ When adding or changing test-only triggers in `TestTriggers/` or `TestTriggersFo
 
 - Prefer forcing the same preconditions that a real player action would create, then let the normal `Triggers/` file advance the mission state.
 - Do not jump directly to a later mission flag, reward state, objective state, or dialogue state if an existing production trigger owns that transition.
-- Example: a "start mission 2" cheat should not directly set `Terran Valkyrie` to mission 2 phase values or grant rewards. Instead, set the mission 1 flag to the expected state and remove the required enemy Hatchery/Lair/Hive at `P5 Base`, so `Triggers/12_endgame.txt` performs the normal mission 1 clear path.
+- Example: a "start mission 2" cheat should not directly set `Terran Valkyrie` to mission 2 phase values or grant rewards. Instead, set the mission 1 flag to the expected state and remove the required enemy Hatchery/Lair/Hive at `P5 Base`, so `Triggers/12_mission1_to_mission2_transition.txt` performs the normal mission 1 clear path.
 - Use direct state jumps only for narrowly named test files whose purpose is explicitly to isolate a later system, such as a counterattack timing test. Make that isolation clear in the filename and comments.
 - Keep test output minimal. If the normal production path already displays text, do not add extra visible test messages that could hide or reorder the real pacing being tested.
+
+## Encoding Safety
+
+Korean TrigEdit text in this repo is UTF-8. Do not use PowerShell `Get-Content | Set-Content` or `Set-Content -Encoding UTF8` for bulk edits on Korean trigger files; Windows PowerShell can misdecode existing UTF-8 text and rewrite mojibake. Prefer `apply_patch` for small edits and Node `fs.readFileSync(..., "utf8")` / `fs.writeFileSync(..., ..., "utf8")` for mechanical rewrites. After writing, verify generated output contains the expected Korean strings and no obvious mojibake fragments such as `?몃컮`, `?명겕`, or `誘명`.
 
 ## Trigger Action Limits
 
@@ -181,6 +185,24 @@ SC1 TrigEdit triggers can fail compile with `Too many actions` when a large wave
 - When adding detector support such as `Zerg Overlord` to each route, count both its creation and movement/order actions.
 - After bulk wave edits, scan changed trigger files for per-trigger action counts before finalizing.
 - Apply the same split pattern to matching test triggers, especially `TestTriggers/*assault*.txt`, so test behavior matches production.
+
+## Location Reference Changes
+
+When adding or renaming any Location referenced by TrigEdit actions or conditions, explicitly tell the user which SCMDraft Locations must exist before import.
+
+- Update `Locations_가이드.txt` and `Triggers/00_header.txt` when adding required locations.
+- In the final response, list newly required locations under a clear "SCMDraft에 추가 필요" note.
+- Do not assume a new Location exists just because a trigger text file references it.
+- If compile errors mention `location name expected` or point at actions like `Move Unit`, `Move Location`, `Create Unit`, `Order`, `Minimap Ping`, or `Bring`, first check whether all referenced Location names exist in the map.
+- Preserve known TrigEdit argument order from existing compiling lines. For example, local files use `Move Unit("Player X", "Unit", count, "From", "To");`.
+
+## TrigEdit Syntax Verification
+
+When unsure about SCMDraft 2 TrigEdit text syntax, do not guess. Search the web immediately, prefer Staredit Network / SCMDraft examples or other StarCraft Brood War UMS references, then cite or summarize the confirmed syntax in the response.
+
+- Random switch action syntax is `Set Switch("Switch1", randomize);`.
+- Do not use `Randomize Switch("Switch1");`; SCMDraft text import can reject it.
+- Existing valid switch actions use the same form: `Set Switch("Switch1", set);`, `Set Switch("Switch1", clear);`, `Set Switch("Switch1", toggle);`.
 
 ## Review Checklist
 
