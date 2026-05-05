@@ -186,6 +186,14 @@ SC1 TrigEdit triggers can fail compile with `Too many actions` when a large wave
 - After bulk wave edits, scan changed trigger files for per-trigger action counts before finalizing.
 - Apply the same split pattern to matching test triggers, especially `TestTriggers/*assault*.txt`, so test behavior matches production.
 
+## Build Verification
+
+Use the project build scripts only when the user wants build verification or when no contrary instruction has been given.
+
+- If the user says not to run build verification, do not run `build_triggers.bat` or `build_triggers_withTest.bat` for that turn.
+- In that case, still do lightweight text checks where useful, such as inspecting diffs, counting actions, or searching for referenced location names.
+- If a test build is run, restore the normal generated trigger output afterward with `build_triggers.bat` unless the user explicitly wants the test output left active.
+
 ## Location Reference Changes
 
 When adding or renaming any Location referenced by TrigEdit actions or conditions, explicitly tell the user which SCMDraft Locations must exist before import.

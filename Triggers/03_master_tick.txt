@@ -22,12 +22,21 @@ Actions:
 	Set Deaths("Player 8", "Protoss Archon", Add, 1);
 	Set Deaths("Player 8", "Protoss Dark Templar", Add, 1);
 	Set Deaths("Player 8", "Protoss Shuttle", Add, 1);
-	Set Deaths("Player 8", "Terran Wraith", Add, 1);
 	Set Deaths("Player 8", "Terran Vulture", Add, 1);
 	Set Deaths("Player 8", "Terran Battlecruiser", Add, 1);
 	Set Deaths("Player 8", "Protoss Dragoon", Add, 1);
 	Set Deaths("Player 8", "Protoss High Templar", Add, 1);
 	Set Deaths("Player 8", "Terran Science Vessel", Add, 1);
+	Preserve Trigger();
+}
+
+// Mission 1 late-wave cooldown starts after 15 minutes.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 900);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 1);
 	Preserve Trigger();
 }
 

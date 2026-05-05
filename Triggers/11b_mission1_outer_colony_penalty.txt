@@ -30,120 +30,128 @@ Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 1", "Men", "P6 Base", At least, 1);
+	Bring("Player 1", "Men", "P6 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 1", "Men", "P6 Base", "P6 Alert");
-	Minimap Ping("P6 Alert");
+	Move Location("Player 1", "Men", "P6 Alert", "P6 Alert Ping");
+	Minimap Ping("P6 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 2", "Men", "P6 Base", At least, 1);
+	Bring("Player 2", "Men", "P6 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 2", "Men", "P6 Base", "P6 Alert");
-	Minimap Ping("P6 Alert");
+	Move Location("Player 2", "Men", "P6 Alert", "P6 Alert Ping");
+	Minimap Ping("P6 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 3", "Men", "P6 Base", At least, 1);
+	Bring("Player 3", "Men", "P6 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 3", "Men", "P6 Base", "P6 Alert");
-	Minimap Ping("P6 Alert");
+	Move Location("Player 3", "Men", "P6 Alert", "P6 Alert Ping");
+	Minimap Ping("P6 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 4", "Men", "P6 Base", At least, 1);
+	Bring("Player 4", "Men", "P6 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 4", "Men", "P6 Base", "P6 Alert");
-	Minimap Ping("P6 Alert");
+	Move Location("Player 4", "Men", "P6 Alert", "P6 Alert Ping");
+	Minimap Ping("P6 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 1", "Men", "P7 Base", At least, 1);
+	Bring("Player 1", "Men", "P7 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 1", "Men", "P7 Base", "P7 Alert");
-	Minimap Ping("P7 Alert");
+	Move Location("Player 1", "Men", "P7 Alert", "P7 Alert Ping");
+	Minimap Ping("P7 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 2", "Men", "P7 Base", At least, 1);
+	Bring("Player 2", "Men", "P7 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 2", "Men", "P7 Base", "P7 Alert");
-	Minimap Ping("P7 Alert");
+	Move Location("Player 2", "Men", "P7 Alert", "P7 Alert Ping");
+	Minimap Ping("P7 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 3", "Men", "P7 Base", At least, 1);
+	Bring("Player 3", "Men", "P7 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 3", "Men", "P7 Base", "P7 Alert");
-	Minimap Ping("P7 Alert");
+	Move Location("Player 3", "Men", "P7 Alert", "P7 Alert Ping");
+	Minimap Ping("P7 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 4", "Men", "P7 Base", At least, 1);
+	Bring("Player 4", "Men", "P7 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 4", "Men", "P7 Base", "P7 Alert");
-	Minimap Ping("P7 Alert");
+	Move Location("Player 4", "Men", "P7 Alert", "P7 Alert Ping");
+	Minimap Ping("P7 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 // P6 resource unlock warning.

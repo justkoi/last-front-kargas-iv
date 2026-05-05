@@ -2,10 +2,10 @@
 //  KARGAS IV - Mission trigger notes
 //  Required Locations: P1~P4 Start, P5 Base, P5 Area, P5 Scout, P5 Intruder,
 //                      P5 Spawn1~4, P1~P4 Hunt, Player Destination,
-//                      P6 Base, P6 Area, P6 Scout, P6 Spawn1~4,
-//                      P7 Base, P7 Area, P7 Scout, P7 Spawn1~4,
+//                      P6 Base, P6 Area, P6 Scout, P6 Intruder, P6 Spawn1~4,
+//                      P7 Base, P7 Area, P7 Scout, P7 Intruder, P7 Spawn1~4,
 //                      Mission2 Gate1~3, Raid1~3, Waypoint1~5,
-//                      P6 Alert, P7 Alert
+//                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  Timer rule: 12 DC tick = 1 second
 //    10s = 120, 60s = 720, 90s = 1080, 3min = 2160, 4min = 2880, 5min = 3600
@@ -379,12 +379,21 @@ Actions:
 	Set Deaths("Player 8", "Protoss Archon", Add, 1);
 	Set Deaths("Player 8", "Protoss Dark Templar", Add, 1);
 	Set Deaths("Player 8", "Protoss Shuttle", Add, 1);
-	Set Deaths("Player 8", "Terran Wraith", Add, 1);
 	Set Deaths("Player 8", "Terran Vulture", Add, 1);
 	Set Deaths("Player 8", "Terran Battlecruiser", Add, 1);
 	Set Deaths("Player 8", "Protoss Dragoon", Add, 1);
 	Set Deaths("Player 8", "Protoss High Templar", Add, 1);
 	Set Deaths("Player 8", "Terran Science Vessel", Add, 1);
+	Preserve Trigger();
+}
+
+// Mission 1 late-wave cooldown starts after 15 minutes.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 900);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 1);
 	Preserve Trigger();
 }
 
@@ -1539,120 +1548,128 @@ Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 1", "Men", "P6 Base", At least, 1);
+	Bring("Player 1", "Men", "P6 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 1", "Men", "P6 Base", "P6 Alert");
-	Minimap Ping("P6 Alert");
+	Move Location("Player 1", "Men", "P6 Alert", "P6 Alert Ping");
+	Minimap Ping("P6 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 2", "Men", "P6 Base", At least, 1);
+	Bring("Player 2", "Men", "P6 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 2", "Men", "P6 Base", "P6 Alert");
-	Minimap Ping("P6 Alert");
+	Move Location("Player 2", "Men", "P6 Alert", "P6 Alert Ping");
+	Minimap Ping("P6 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 3", "Men", "P6 Base", At least, 1);
+	Bring("Player 3", "Men", "P6 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 3", "Men", "P6 Base", "P6 Alert");
-	Minimap Ping("P6 Alert");
+	Move Location("Player 3", "Men", "P6 Alert", "P6 Alert Ping");
+	Minimap Ping("P6 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 4", "Men", "P6 Base", At least, 1);
+	Bring("Player 4", "Men", "P6 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 4", "Men", "P6 Base", "P6 Alert");
-	Minimap Ping("P6 Alert");
+	Move Location("Player 4", "Men", "P6 Alert", "P6 Alert Ping");
+	Minimap Ping("P6 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 1", "Men", "P7 Base", At least, 1);
+	Bring("Player 1", "Men", "P7 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 1", "Men", "P7 Base", "P7 Alert");
-	Minimap Ping("P7 Alert");
+	Move Location("Player 1", "Men", "P7 Alert", "P7 Alert Ping");
+	Minimap Ping("P7 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 2", "Men", "P7 Base", At least, 1);
+	Bring("Player 2", "Men", "P7 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 2", "Men", "P7 Base", "P7 Alert");
-	Minimap Ping("P7 Alert");
+	Move Location("Player 2", "Men", "P7 Alert", "P7 Alert Ping");
+	Minimap Ping("P7 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 3", "Men", "P7 Base", At least, 1);
+	Bring("Player 3", "Men", "P7 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 3", "Men", "P7 Base", "P7 Alert");
-	Minimap Ping("P7 Alert");
+	Move Location("Player 3", "Men", "P7 Alert", "P7 Alert Ping");
+	Minimap Ping("P7 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Bring("Player 4", "Men", "P7 Base", At least, 1);
+	Bring("Player 4", "Men", "P7 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Move Location("Player 4", "Men", "P7 Base", "P7 Alert");
-	Minimap Ping("P7 Alert");
+	Move Location("Player 4", "Men", "P7 Alert", "P7 Alert Ping");
+	Minimap Ping("P7 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Preserve Trigger();
 }
 
 // P6 resource unlock warning.
@@ -2486,16 +2503,17 @@ Actions:
 //  Base defense response
 //
 //  P5: Terran Marine DC, P6: Terran Armory DC, P7: Protoss Zealot DC
-//  Cooldown: 90s = 1080 ticks.
+//  Cooldown: 20s = 240 ticks.
 //
 //  Move Location does not accept "Foes" reliably in TrigEdit, so each
-//  player intrusion is handled explicitly.
+//  player intrusion is handled explicitly. P6/P7 move independent
+//  intruder-tracking locations before ordering their defenders.
 //-----------------------------------------------------------------//
 
 Trigger("Player 5"){
 Conditions:
 	Bring("Player 1", "Men", "P5 Area", At least, 1);
-	Deaths("Player 8", "Terran Marine", At least, 1080);
+	Deaths("Player 8", "Terran Marine", At least, 240);
 Actions:
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
@@ -2513,7 +2531,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Bring("Player 2", "Men", "P5 Area", At least, 1);
-	Deaths("Player 8", "Terran Marine", At least, 1080);
+	Deaths("Player 8", "Terran Marine", At least, 240);
 Actions:
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
@@ -2531,7 +2549,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Bring("Player 3", "Men", "P5 Area", At least, 1);
-	Deaths("Player 8", "Terran Marine", At least, 1080);
+	Deaths("Player 8", "Terran Marine", At least, 240);
 Actions:
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
@@ -2549,7 +2567,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Bring("Player 4", "Men", "P5 Area", At least, 1);
-	Deaths("Player 8", "Terran Marine", At least, 1080);
+	Deaths("Player 8", "Terran Marine", At least, 240);
 Actions:
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
@@ -2567,144 +2585,152 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Bring("Player 1", "Men", "P6 Area", At least, 1);
-	Deaths("Player 8", "Terran Armory", At least, 1080);
+	Deaths("Player 8", "Terran Armory", At least, 240);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Lurker", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Scourge", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Guardian", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Devourer", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Infested Terran", "Anywhere", "P6 Area", Patrol);
+	Move Location("Player 1", "Men", "P6 Area", "P6 Intruder");
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Scourge", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Guardian", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Devourer", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Infested Terran", "Anywhere", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Bring("Player 2", "Men", "P6 Area", At least, 1);
-	Deaths("Player 8", "Terran Armory", At least, 1080);
+	Deaths("Player 8", "Terran Armory", At least, 240);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Lurker", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Scourge", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Guardian", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Devourer", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Infested Terran", "Anywhere", "P6 Area", Patrol);
+	Move Location("Player 2", "Men", "P6 Area", "P6 Intruder");
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Scourge", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Guardian", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Devourer", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Infested Terran", "Anywhere", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Bring("Player 3", "Men", "P6 Area", At least, 1);
-	Deaths("Player 8", "Terran Armory", At least, 1080);
+	Deaths("Player 8", "Terran Armory", At least, 240);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Lurker", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Scourge", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Guardian", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Devourer", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Infested Terran", "Anywhere", "P6 Area", Patrol);
+	Move Location("Player 3", "Men", "P6 Area", "P6 Intruder");
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Scourge", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Guardian", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Devourer", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Infested Terran", "Anywhere", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Bring("Player 4", "Men", "P6 Area", At least, 1);
-	Deaths("Player 8", "Terran Armory", At least, 1080);
+	Deaths("Player 8", "Terran Armory", At least, 240);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Lurker", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Scourge", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Guardian", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Zerg Devourer", "Anywhere", "P6 Area", Patrol);
-	Order("Player 6", "Infested Terran", "Anywhere", "P6 Area", Patrol);
+	Move Location("Player 4", "Men", "P6 Area", "P6 Intruder");
+	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Lurker", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Scourge", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Guardian", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Devourer", "Anywhere", "P6 Intruder", Patrol);
+	Order("Player 6", "Infested Terran", "Anywhere", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Bring("Player 1", "Men", "P7 Area", At least, 1);
-	Deaths("Player 8", "Protoss Zealot", At least, 1080);
+	Deaths("Player 8", "Protoss Zealot", At least, 240);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Lurker", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Scourge", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Guardian", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Devourer", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Infested Terran", "Anywhere", "P7 Area", Patrol);
+	Move Location("Player 1", "Men", "P7 Area", "P7 Intruder");
+	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Lurker", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Scourge", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Guardian", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Devourer", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Infested Terran", "Anywhere", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Bring("Player 2", "Men", "P7 Area", At least, 1);
-	Deaths("Player 8", "Protoss Zealot", At least, 1080);
+	Deaths("Player 8", "Protoss Zealot", At least, 240);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Lurker", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Scourge", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Guardian", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Devourer", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Infested Terran", "Anywhere", "P7 Area", Patrol);
+	Move Location("Player 2", "Men", "P7 Area", "P7 Intruder");
+	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Lurker", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Scourge", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Guardian", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Devourer", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Infested Terran", "Anywhere", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Bring("Player 3", "Men", "P7 Area", At least, 1);
-	Deaths("Player 8", "Protoss Zealot", At least, 1080);
+	Deaths("Player 8", "Protoss Zealot", At least, 240);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Lurker", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Scourge", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Guardian", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Devourer", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Infested Terran", "Anywhere", "P7 Area", Patrol);
+	Move Location("Player 3", "Men", "P7 Area", "P7 Intruder");
+	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Lurker", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Scourge", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Guardian", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Devourer", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Infested Terran", "Anywhere", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Bring("Player 4", "Men", "P7 Area", At least, 1);
-	Deaths("Player 8", "Protoss Zealot", At least, 1080);
+	Deaths("Player 8", "Protoss Zealot", At least, 240);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Lurker", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Scourge", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Guardian", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Zerg Devourer", "Anywhere", "P7 Area", Patrol);
-	Order("Player 7", "Infested Terran", "Anywhere", "P7 Area", Patrol);
+	Move Location("Player 4", "Men", "P7 Area", "P7 Intruder");
+	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Lurker", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Scourge", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Guardian", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Devourer", "Anywhere", "P7 Intruder", Patrol);
+	Order("Player 7", "Infested Terran", "Anywhere", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 //-----------------------------------------------------------------//
@@ -7414,93 +7440,6 @@ Conditions:
 Actions:
 	Wait(1000);
 	Victory();
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] Player resource dashboard
-//
-//  Shows player minerals on the in-game leaderboard.
-//  StarCraft leaderboards can show one resource type at a time.
-//-----------------------------------------------------------------//
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Always();
-Actions:
-	Leader Board Resources("TEST Minerals", ore);
-	Leaderboard Computer Players(enabled);
-	Preserve Trigger();
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE / CHEAT] Spawn 2 control groups of Jim Raynor at P1 Start
-//  Included for manual test builds only.
-//-----------------------------------------------------------------//
-
-Trigger("Player 1"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Create Unit("Player 1", "Jim Raynor (Marine)", 24, "P1 Start");
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE / CHEAT] 게임 시작 시 P1에게 톰 카잔스키 36기 지급
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  주의: 36기를 한 location에 몰아 스폰하면 stacking으로 일부 멀리
-//        밀려날 수 있음. 테스트 목적이므로 P1 본진(P1 Start 등) 사용.
-//-----------------------------------------------------------------//
-
-Trigger("Player 1"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Create Unit("Player 1", "Tom Kazansky (Wraith)", 36, "Anywhere");
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] 플레이어 절대 패배 방지 (스위치 방식)
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  동작 원리:
-//    게임 시작 직후 Switch1 을 set.
-//    12_mission1_to_mission2_transition.txt 의 패배 트리거에 Switch("Switch1", cleared) 조건이
-//    있으므로, 스위치가 set 상태인 한 Defeat()가 발동하지 않음.
-//-----------------------------------------------------------------//
-
-Trigger("Player 5"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Set Switch("Switch1", set);
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] 컴퓨터(P5, P6) → 플레이어(P1~P4) 시야 공유
-//  (플레이어가 컴퓨터의 시야를 가진다)
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  사용 스크립트 (AI → 해당 플레이어로 시야 공유):
-//    "Turn ON Shared Vision of current player with Player 1"
-//    "Turn ON Shared Vision of current player with Player 2"
-//    "Turn ON Shared Vision of current player with Player 3"
-//    "Turn ON Shared Vision of current player with Player 4"
-//
-//  주의: 위 스크립트 이름이 SCMDraft 드롭다운에 정확히 그대로 있는지
-//        확인할 것. 표기가 다르면 적절히 교체.
-//        ("of [SHARER] with [RECEIVER]" 패턴으로 추정)
-//-----------------------------------------------------------------//
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Run AI Script("+Vi4");
-	Run AI Script("+Vi5");
-	Run AI Script("+Vi6");
-	Run AI Script("+Vi7");
 }
 //-----------------------------------------------------------------//
 //  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유
