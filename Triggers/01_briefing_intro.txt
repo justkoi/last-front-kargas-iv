@@ -6,7 +6,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, " ");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<13><03> 작전 코드명: 카르가스 IV");
+	Display Text Message(Always Display, "<13><03>작전 개시: 카르가스 IV");
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 방어선을 세우고 자원을 확보한 뒤 북서쪽 저그 군락 완전 파괴\n- 성공 조건: <11>주황색 저그<04>의 모든 해처리 / 레어 / 하이브 파괴\n- 제한 시간: 없음\n- 지침: 기지를 안정화하고 업그레이드 후 군락을 압박할 것");
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
@@ -25,7 +25,7 @@ Conditions:
 	Elapsed Time(At least, 9);
 	Elapsed Time(At most, 11);
 Actions:
-	Display Text Message(Always Display, "<04>오늘 목표는 돌격이 아니다. 카르가스 IV에 버틸 수 있는 첫 전선을 세운다.");
+	Display Text Message(Always Display, "<04>지금 상태로는 오래 못 버틴다. 기지를 세우고 전선을 구축해야 한다.");
 }
 
 Trigger("All Players"){
@@ -41,7 +41,7 @@ Conditions:
 	Elapsed Time(At least, 21);
 	Elapsed Time(At most, 23);
 Actions:
-	Display Text Message(Always Display, "<1A>작전 정보장교 노바: <04>북서쪽 군락에서 변종 생체반응이 섞여 나옵니다.");
+	Display Text Message(Always Display, "<1A>작전 정보장교 노바: <04>초기 정찰 보고입니다. 북서쪽 자원 지대에 대규모 군락이 확인됩니다.");
 }
 
 Trigger("All Players"){
@@ -49,7 +49,7 @@ Conditions:
 	Elapsed Time(At least, 26);
 	Elapsed Time(At most, 28);
 Actions:
-	Display Text Message(Always Display, "<04>일반 저그 군락보다 반응 주기가 불규칙합니다. 본진 진입로도 다시 확인하겠습니다.");
+	Display Text Message(Always Display, "<04>군락 주변 확장로가 막혀 있습니다. 그대로 두면 자원 확보가 늦어집니다.");
 }
 
 Trigger("All Players"){
@@ -58,7 +58,7 @@ Conditions:
 	Elapsed Time(At most, 35);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 갱신. 본진 외곽과 주 진입로를 표시합니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>본진 외곽과 주 진입로도 확인됐습니다. 전술 지도에 표시합니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -97,7 +97,7 @@ Conditions:
 	Elapsed Time(At least, 38);
 	Elapsed Time(At most, 40);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>표시된 입구가 첫 방어선이다. 저 진입로부터 막아라.");
+	Display Text Message(Always Display, "<03>호크: <04>표시된 입구가 첫 방어선이다. 저그가 전선을 넓히기 전에 여기서 막아라.");
 }
 
 Trigger("Player 1"){

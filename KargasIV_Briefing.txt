@@ -3,7 +3,7 @@
 //============================================================
 
 Briefing("All Players"){
-	Mission Objectives("<03>미션 1: 첫 전선\n\n<04>목표: 자원을 확보하고 북서쪽 저그 군락을 완전히 무너뜨려라");
+	Mission Objectives("<03>미션 1: 첫 전선\n\n<04>목표: 방어선을 세우고 자원을 확보한 뒤 <11>주황색 저그<04> 군락을 완전히 무너뜨려라");
 
 	Show Portrait("Terran Marine", 1);
 	Text Message("<13><03>카르가스 IV 작전실", 2500);
@@ -14,7 +14,7 @@ Briefing("All Players"){
 	Wait(5500);
 
 	Display Speaking Portrait(1, 6);
-	Text Message("<04>이곳은 UED 잔당의 전초기지였지만, 6주 전부터 모든 통신이 끊겼다.", 5000);
+	Text Message("<04>지금 상태로는 오래 못 버틴다. 기지를 세우고 전선을 구축해야 한다.", 5500);
 	Wait(5000);
 
 	Hide Portrait(1);
@@ -22,15 +22,15 @@ Briefing("All Players"){
 
 	Show Portrait("Terran Ghost", 2);
 	Display Speaking Portrait(2, 5);
-	Text Message("<1A>작전 정보장교 노바: <04>궤도 스캔 결과, 북서쪽 자원 지점에 대규모 저그 군락이 확인됩니다.", 5500);
+	Text Message("<1A>작전 정보장교 노바: <04>초기 정찰 보고입니다. 북서쪽 자원 지대에 대규모 군락이 확인됩니다.", 5500);
 	Wait(5500);
 
 	Display Speaking Portrait(2, 5);
-	Text Message("<04>변종 생체신호도 섞여 있어요. 일반 군락으로 단정하긴 어렵습니다.", 5000);
+	Text Message("<04>군락 주변 확장로가 막혀 있습니다. 그대로 두면 자원 확보가 늦어집니다.", 5500);
 	Wait(5000);
 
 	Display Speaking Portrait(2, 5);
-	Text Message("<04>프로토스 유적 반응도 미약하게 잡히지만, 지금은 군락이 확장로를 막고 있습니다.", 5500);
+	Text Message("<04>초반에는 방어선을 먼저 세우는 편이 안전합니다. 무리해서 진입하면 병력 손실이 커집니다.", 5500);
 	Wait(5500);
 
 	Hide Portrait(2);
@@ -38,15 +38,15 @@ Briefing("All Players"){
 
 	Show Portrait("Terran Marine", 1);
 	Display Speaking Portrait(1, 6);
-	Text Message("<03>호크: <04>저 군락을 남겨두면 장기 작전은 불가능하다. 너희가 첫 전선을 만든다.", 5500);
+	Text Message("<03>호크: <04>그래서 첫 전선이 필요하다. 북서쪽 군락을 치고, 다음 공세를 받아낼 발판을 만든다.", 5500);
 	Wait(5500);
 
 	Display Speaking Portrait(1, 5);
-	Text Message("<04>방어선을 세우고 자원을 확보해라. 준비가 끝나면 북서쪽 군락을 무너뜨린다.", 5500);
+	Text Message("<04>방어선을 세우고 자원을 확보해라. 준비가 끝나면 북서쪽 군락의 생산 구조를 완전히 끊는다.", 5500);
 	Wait(5500);
 
 	Display Speaking Portrait(1, 5);
-	Text Message("<04>서두르지 마라. 병력을 던지는 작전이 아니다. 살아남아야 다음 전투도 있다.", 5500);
+	Text Message("<04>병력을 낭비하지 마라. 이 전선이 버텨야 다음 작전도 이어진다.", 5500);
 	Wait(5500);
 
 	Display Speaking Portrait(1, 5);

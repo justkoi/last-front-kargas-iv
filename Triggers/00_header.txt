@@ -2,7 +2,7 @@
 //  KARGAS IV - Mission trigger notes
 //  Required Locations: P1~P4 Start, P5 Base, P5 Scout, P5 Intruder,
 //                      P1~P4 Hunt, Player Destination, P6 Base, P7 Base,
-//                      Mission2 Gate, New Pass1, Raid1~3
+//                      Mission2 Gate1~3, Raid1~3
 //
 //  Timer rule: 12 DC tick = 1 second
 //    60s = 720, 90s = 1080, 3min = 2160, 4min = 2880
@@ -12,9 +12,7 @@
 //    Terran Marine        : P5 base defense cooldown
 //    Terran Valkyrie      : mission phase flag (1=M1, 3=M2, 4=clear)
 //    Terran Vulture       : mission2 elapsed timer
-//    Terran Armory        : mission2 waiting-phase legacy flag
 //    Protoss Probe        : mission1 scout rotation index
-//    Protoss Zealot       : unused legacy counter
 //    Terran Firebat       : P1 Hunt tracking timer
 //    Terran Ghost         : P2 Hunt tracking timer
 //    Terran Medic         : P3 Hunt tracking timer
@@ -24,7 +22,11 @@
 //    Terran Battlecruiser : overlord supply cycle timer
 //    Terran Science Vessel: player alliance refresh timer
 //    Terran Dropship      : mission1 late-wave variant index
-//    Zerg Drone           : mission2 gate-open flag
+//
+//  Player 5 DC roles
+//    Zerg Hatchery        : mission1 late-wave cooldown seed
+//    Zerg Lair            : mission1 late-wave cooldown seed
+//    Zerg Hive            : mission1 late-wave cooldown seed
 //
 //  Switch roles
 //    Switch1 : defeat guard
@@ -35,6 +37,10 @@
 //    Switch6 : mission2 P7 airstrike one-time flag
 //    Switch7 : mission1 multi scan revealers created
 //    Switch8 : mission1 multi scan revealers removed
+//
+//  Map editor settings
+//    Player 5 Overlord upgrades must be configured in SCMDraft:
+//    Pneumatized Carapace and Antennae = Level 1 + Researched.
 //
 //  Note: avoid Order("...", "Men", ...) for broad combat orders.
 //============================================================
