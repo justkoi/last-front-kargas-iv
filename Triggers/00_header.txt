@@ -20,10 +20,14 @@
 //    Protoss Probe        : P5 scout rotation index
 //    Protoss Scout        : P6 scout rotation index
 //    Protoss Carrier      : P7 scout rotation index
-//    Terran Firebat       : P1 Hunt all-out attack timer
-//    Terran Ghost         : P2 Hunt all-out attack timer
-//    Terran Medic         : P3 Hunt all-out attack timer
-//    Terran SCV           : P4 Hunt all-out attack timer
+//    Terran Firebat       : P6 P1 Hunt all-out attack timer
+//    Terran Ghost         : P6 P2 Hunt all-out attack timer
+//    Terran Medic         : P6 P3 Hunt all-out attack timer
+//    Terran SCV           : P6 P4 Hunt all-out attack timer
+//    Protoss Arbiter      : P7 P1 Hunt all-out attack timer
+//    Protoss Dark Archon  : P7 P2 Hunt all-out attack timer
+//    Zerg Queen           : P7 P3 Hunt all-out attack timer
+//    Zerg Defiler         : P7 P4 Hunt all-out attack timer
 //    Terran Goliath       : P5 scout overlord cycle timer
 //    Protoss Archon       : P6 scout overlord cycle timer
 //    Protoss Dark Templar : P7 scout overlord cycle timer
@@ -43,6 +47,8 @@
 //    Zerg Devourer        : P7 mission2 penalty assault spawn step timer
 //    Zerg Scourge         : P6 mission2 penalty assault waypoint window timer
 //    Zerg Guardian        : P7 mission2 penalty assault waypoint window timer
+//    Protoss Reaver       : P6 mission2 penalty assault spawn stage index
+//    Protoss Observer     : P7 mission2 penalty assault spawn stage index
 //
 //  Player 5 DC roles
 //    Zerg Hatchery        : mission1 late-wave cooldown seed

@@ -20,10 +20,14 @@
 //    Protoss Probe        : P5 scout rotation index
 //    Protoss Scout        : P6 scout rotation index
 //    Protoss Carrier      : P7 scout rotation index
-//    Terran Firebat       : P1 Hunt all-out attack timer
-//    Terran Ghost         : P2 Hunt all-out attack timer
-//    Terran Medic         : P3 Hunt all-out attack timer
-//    Terran SCV           : P4 Hunt all-out attack timer
+//    Terran Firebat       : P6 P1 Hunt all-out attack timer
+//    Terran Ghost         : P6 P2 Hunt all-out attack timer
+//    Terran Medic         : P6 P3 Hunt all-out attack timer
+//    Terran SCV           : P6 P4 Hunt all-out attack timer
+//    Protoss Arbiter      : P7 P1 Hunt all-out attack timer
+//    Protoss Dark Archon  : P7 P2 Hunt all-out attack timer
+//    Zerg Queen           : P7 P3 Hunt all-out attack timer
+//    Zerg Defiler         : P7 P4 Hunt all-out attack timer
 //    Terran Goliath       : P5 scout overlord cycle timer
 //    Protoss Archon       : P6 scout overlord cycle timer
 //    Protoss Dark Templar : P7 scout overlord cycle timer
@@ -43,6 +47,8 @@
 //    Zerg Devourer        : P7 mission2 penalty assault spawn step timer
 //    Zerg Scourge         : P6 mission2 penalty assault waypoint window timer
 //    Zerg Guardian        : P7 mission2 penalty assault waypoint window timer
+//    Protoss Reaver       : P6 mission2 penalty assault spawn stage index
+//    Protoss Observer     : P7 mission2 penalty assault spawn stage index
 //
 //  Player 5 DC roles
 //    Zerg Hatchery        : mission1 late-wave cooldown seed
@@ -363,6 +369,10 @@ Actions:
 	Set Deaths("Player 8", "Terran Ghost", Add, 1);
 	Set Deaths("Player 8", "Terran Medic", Add, 1);
 	Set Deaths("Player 8", "Terran SCV", Add, 1);
+	Set Deaths("Player 8", "Protoss Arbiter", Add, 1);
+	Set Deaths("Player 8", "Protoss Dark Archon", Add, 1);
+	Set Deaths("Player 8", "Zerg Queen", Add, 1);
+	Set Deaths("Player 8", "Zerg Defiler", Add, 1);
 	Set Deaths("Player 8", "Terran Goliath", Add, 1);
 	Set Deaths("Player 8", "Protoss Archon", Add, 1);
 	Set Deaths("Player 8", "Protoss Dark Templar", Add, 1);
@@ -1416,7 +1426,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 1", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Firebat", At least, 1800);
+	Deaths("Player 8", "Terran Firebat", At least, 1440);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P1 Hunt", Patrol);
@@ -1437,7 +1447,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 2", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Ghost", At least, 1800);
+	Deaths("Player 8", "Terran Ghost", At least, 1440);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P2 Hunt", Patrol);
@@ -1458,7 +1468,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 3", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Medic", At least, 1800);
+	Deaths("Player 8", "Terran Medic", At least, 1440);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P3 Hunt", Patrol);
@@ -1479,7 +1489,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 4", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran SCV", At least, 1800);
+	Deaths("Player 8", "Terran SCV", At least, 1440);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P4 Hunt", Patrol);
@@ -2359,6 +2369,10 @@ Actions:
 	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
 	Set Deaths("Player 8", "Terran Medic", Set To, 0);
 	Set Deaths("Player 8", "Terran SCV", Set To, 0);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 0);
+	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
+	Set Deaths("Player 8", "Zerg Queen", Set To, 0);
+	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Kill Unit At Location("Player 5", "Zerg Sunken Colony", 64, "Anywhere");
 	Kill Unit At Location("Player 5", "Zerg Spore Colony", 64, "Anywhere");
 }
@@ -2741,7 +2755,8 @@ Actions:
 //  Mission 2 - dynamic building tracking and all-out attack
 //
 //  Protoss Shuttle DC = Hunt location refresh timer (10s = 120)
-//  Firebat/Ghost/Medic/SCV = P1/P2/P3/P4 attack timers (150s = 1800)
+//  Firebat/Ghost/Medic/SCV = P6 P1/P2/P3/P4 attack timers (60s = 720)
+//  Arbiter/Dark Archon/Queen/Defiler = P7 P1/P2/P3/P4 attack timers (60s = 720)
 //-----------------------------------------------------------------//
 
 Trigger("Player 6"){
@@ -2797,9 +2812,8 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Command("Player 1", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Firebat", At least, 1800);
+	Deaths("Player 8", "Terran Firebat", At least, 720);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
-	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P1 Hunt", Patrol);
@@ -2812,6 +2826,17 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 6", "Infested Terran", "Anywhere", "P1 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Command("Player 1", "Buildings", At least, 1);
+	Deaths("Player 8", "Protoss Arbiter", At least, 720);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+Actions:
 	Order("Player 7", "Zerg Zergling", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Lurker", "Anywhere", "P1 Hunt", Patrol);
@@ -2823,7 +2848,7 @@ Actions:
 	Order("Player 7", "Zerg Guardian", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 7", "Infested Terran", "Anywhere", "P1 Hunt", Patrol);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 0);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -2831,9 +2856,8 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Command("Player 2", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Ghost", At least, 1800);
+	Deaths("Player 8", "Terran Ghost", At least, 720);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
-	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P2 Hunt", Patrol);
@@ -2846,6 +2870,17 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 6", "Infested Terran", "Anywhere", "P2 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Command("Player 2", "Buildings", At least, 1);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 720);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+Actions:
 	Order("Player 7", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Lurker", "Anywhere", "P2 Hunt", Patrol);
@@ -2857,7 +2892,7 @@ Actions:
 	Order("Player 7", "Zerg Guardian", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 7", "Infested Terran", "Anywhere", "P2 Hunt", Patrol);
-	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
+	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -2865,9 +2900,8 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Command("Player 3", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Medic", At least, 1800);
+	Deaths("Player 8", "Terran Medic", At least, 720);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
-	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P3 Hunt", Patrol);
@@ -2880,6 +2914,17 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 6", "Infested Terran", "Anywhere", "P3 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran Medic", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Command("Player 3", "Buildings", At least, 1);
+	Deaths("Player 8", "Zerg Queen", At least, 720);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+Actions:
 	Order("Player 7", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Lurker", "Anywhere", "P3 Hunt", Patrol);
@@ -2891,7 +2936,7 @@ Actions:
 	Order("Player 7", "Zerg Guardian", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 7", "Infested Terran", "Anywhere", "P3 Hunt", Patrol);
-	Set Deaths("Player 8", "Terran Medic", Set To, 0);
+	Set Deaths("Player 8", "Zerg Queen", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -2899,9 +2944,8 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Command("Player 4", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran SCV", At least, 1800);
+	Deaths("Player 8", "Terran SCV", At least, 720);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
-	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P4 Hunt", Patrol);
@@ -2914,6 +2958,17 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 6", "Infested Terran", "Anywhere", "P4 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran SCV", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Command("Player 4", "Buildings", At least, 1);
+	Deaths("Player 8", "Zerg Defiler", At least, 720);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+Actions:
 	Order("Player 7", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Lurker", "Anywhere", "P4 Hunt", Patrol);
@@ -2925,7 +2980,7 @@ Actions:
 	Order("Player 7", "Zerg Guardian", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 7", "Infested Terran", "Anywhere", "P4 Hunt", Patrol);
-	Set Deaths("Player 8", "Terran SCV", Set To, 0);
+	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
 //-----------------------------------------------------------------//
@@ -3130,12 +3185,15 @@ Actions:
 //  Mission 2 - P6/P7 uncaptured-colony penalty assaults
 //
 //  12 DC tick = 1 second. Cooldown is 300s = 3600 ticks.
+//  Roll triggers subtract only the cooldown they consumed, so excess
+//  progress from repeated Hatchery/Lair/Hive kills stays queued.
 //  Hatchery/Lair/Hive kills add 60s worth of cooldown progress.
 //
 //  Waves may fire during mission1 or mission2, but not after victory.
-//  They are rolled randomly, then spawned across Spawn1~4 in timed
-//  batches to reduce blocked creation space. Air-heavy waves are
-//  split into smaller sub-batches. Spawned groups
+//  They are rolled randomly, then spawned across Spawn1~4 in parallel
+//  timed batches to reduce blocked creation space. Spawn timers only count up;
+//  separate stage counters prevent repeated or chained creation. Air-heavy
+//  waves are split into smaller sub-batches. Spawned groups
 //  rally to Waypoint1~5. For 30s after the final batch,
 //  P6/P7 assault units reaching the selected waypoint redirect
 //  toward the already selected P1~P4 Hunt location.
@@ -3159,7 +3217,9 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 }
 
 // First penalty assaults are staggered: one colony attacks after 1 minute, the other after 2 minutes.
@@ -3206,6 +3266,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 3);
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 3240);
 	Preserve Trigger();
 }
 
@@ -3231,6 +3293,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 3);
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 3240);
 	Preserve Trigger();
 }
 
@@ -3256,6 +3320,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 3);
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 3600);
 	Preserve Trigger();
 }
 
@@ -3281,6 +3347,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 3);
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 3600);
 	Preserve Trigger();
 }
 
@@ -3306,6 +3374,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 3);
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 3960);
 	Preserve Trigger();
 }
 
@@ -3331,6 +3401,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 3);
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 3960);
 	Preserve Trigger();
 }
 
@@ -3356,6 +3428,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 3);
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 3600);
 	Preserve Trigger();
 }
 
@@ -3381,6 +3455,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 3);
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 3600);
 	Preserve Trigger();
 }
 
@@ -3406,6 +3482,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 3);
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 3240);
 	Preserve Trigger();
 }
 
@@ -3431,6 +3509,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 3);
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 3240);
 	Preserve Trigger();
 }
 
@@ -3456,6 +3536,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 3);
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 3600);
 	Preserve Trigger();
 }
 
@@ -3481,6 +3563,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 3);
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 3600);
 	Preserve Trigger();
 }
 
@@ -3506,6 +3590,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 3);
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 3960);
 	Preserve Trigger();
 }
 
@@ -3531,6 +3617,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 3);
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 3960);
 	Preserve Trigger();
 }
 
@@ -3556,6 +3644,8 @@ Actions:
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 3);
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 3600);
 	Preserve Trigger();
 }
 
@@ -3581,18 +3671,20 @@ Actions:
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 3);
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 3600);
 	Preserve Trigger();
 }
 
 
 // Assault warnings are owned by P1-P4 so human players see text, sound, and minimap pings.
-// They fire only on the same trigger pass as the roll because the spawn timer is exactly 0.
+// They fire on the first tick after the roll so P1-P4 can see the P6/P7-owned state change.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 3);
-	Deaths("Player 8", "Zerg Ultralisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
 Actions:
 	Minimap Ping("P6 Spawn1");
 	Minimap Ping("P6 Spawn2");
@@ -3608,7 +3700,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 3);
-	Deaths("Player 8", "Zerg Devourer", Exactly, 0);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
 Actions:
 	Minimap Ping("P7 Spawn1");
 	Minimap Ping("P7 Spawn2");
@@ -4016,6 +4108,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 1);
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 1);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -4029,6 +4122,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 1);
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 1);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -4039,68 +4133,27 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
 	Deaths("Player 8", "Zerg Ultralisk", At least, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 35);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 0);
 	Switch("Switch9", Not Set);
 	Switch("Switch10", Not Set);
 Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 6, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 52, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 36);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 72);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 107);
-	Switch("Switch9", Not Set);
-	Switch("Switch10", Not Set);
-Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 6, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 52, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 108);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 144);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 179);
-	Switch("Switch9", Not Set);
-	Switch("Switch10", Not Set);
-Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 6, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Zergling", 52, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 180);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 216);
-	Switch("Switch9", Not Set);
-	Switch("Switch10", Not Set);
-Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 6, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Zergling", 52, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
 	Set Switch("Switch27", randomize);
 	Set Switch("Switch28", randomize);
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 2);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -4111,7 +4164,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
 	Deaths("Player 8", "Zerg Ultralisk", At least, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 11);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 0);
 	Switch("Switch9", Set);
 	Switch("Switch10", Not Set);
 Actions:
@@ -4119,7 +4172,19 @@ Actions:
 	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 12);
+	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 1);
 	Preserve Trigger();
 }
 
@@ -4128,32 +4193,24 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 12);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 23);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 36);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 1);
 	Switch("Switch9", Set);
 	Switch("Switch10", Not Set);
 Actions:
 	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn1");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 24);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 24);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 35);
-	Switch("Switch9", Set);
-	Switch("Switch10", Not Set);
-Actions:
-	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 36);
+	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn4");
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 2);
 	Preserve Trigger();
 }
 
@@ -4163,156 +4220,27 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
 	Deaths("Player 8", "Zerg Ultralisk", At least, 72);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 83);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 2);
 	Switch("Switch9", Set);
 	Switch("Switch10", Not Set);
 Actions:
-	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 84);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 84);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 95);
-	Switch("Switch9", Set);
-	Switch("Switch10", Not Set);
-Actions:
-	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn2");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 96);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 96);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 107);
-	Switch("Switch9", Set);
-	Switch("Switch10", Not Set);
-Actions:
+	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 108);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 144);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 155);
-	Switch("Switch9", Set);
-	Switch("Switch10", Not Set);
-Actions:
-	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 156);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 156);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 167);
-	Switch("Switch9", Set);
-	Switch("Switch10", Not Set);
-Actions:
-	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn3");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 168);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 168);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 179);
-	Switch("Switch9", Set);
-	Switch("Switch10", Not Set);
-Actions:
 	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 180);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 216);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 227);
-	Switch("Switch9", Set);
-	Switch("Switch10", Not Set);
-Actions:
-	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 228);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 228);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 239);
-	Switch("Switch9", Set);
-	Switch("Switch10", Not Set);
-Actions:
-	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn4");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 240);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 240);
-	Switch("Switch9", Set);
-	Switch("Switch10", Not Set);
-Actions:
 	Create Unit("Player 6", "Zerg Scourge", 8, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn4");
 	Set Switch("Switch27", randomize);
 	Set Switch("Switch28", randomize);
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 2);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -4323,64 +4251,23 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
 	Deaths("Player 8", "Zerg Ultralisk", At least, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 35);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 0);
 	Switch("Switch9", Not Set);
 	Switch("Switch10", Set);
 Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 50, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 36);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 72);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 107);
-	Switch("Switch9", Not Set);
-	Switch("Switch10", Set);
-Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 50, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 108);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 144);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 179);
-	Switch("Switch9", Not Set);
-	Switch("Switch10", Set);
-Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 50, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 180);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 216);
-	Switch("Switch9", Not Set);
-	Switch("Switch10", Set);
-Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 50, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
 	Set Switch("Switch27", randomize);
 	Set Switch("Switch28", randomize);
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 2);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -4391,14 +4278,23 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
 	Deaths("Player 8", "Zerg Ultralisk", At least, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 11);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 0);
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 5, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Guardian", 5, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 12);
+	Create Unit("Player 6", "Zerg Mutalisk", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 1);
 	Preserve Trigger();
 }
 
@@ -4407,30 +4303,20 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 12);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 23);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 36);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 1);
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn1");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 24);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 24);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 35);
-	Switch("Switch9", Set);
-	Switch("Switch10", Set);
-Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn1");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 36);
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn4");
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 2);
 	Preserve Trigger();
 }
 
@@ -4440,147 +4326,23 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
 	Deaths("Player 8", "Zerg Ultralisk", At least, 72);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 83);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 2);
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 5, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Guardian", 5, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 84);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 84);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 95);
-	Switch("Switch9", Set);
-	Switch("Switch10", Set);
-Actions:
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn2");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 96);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 96);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 107);
-	Switch("Switch9", Set);
-	Switch("Switch10", Set);
-Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn2");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 108);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 144);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 155);
-	Switch("Switch9", Set);
-	Switch("Switch10", Set);
-Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 156);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 156);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 167);
-	Switch("Switch9", Set);
-	Switch("Switch10", Set);
-Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn3");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 168);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 168);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 179);
-	Switch("Switch9", Set);
-	Switch("Switch10", Set);
-Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn3");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 180);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 216);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 227);
-	Switch("Switch9", Set);
-	Switch("Switch10", Set);
-Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 228);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 228);
-	Deaths("Player 8", "Zerg Ultralisk", At most, 239);
-	Switch("Switch9", Set);
-	Switch("Switch10", Set);
-Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn4");
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 240);
-	Preserve Trigger();
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", At least, 240);
-	Switch("Switch9", Set);
-	Switch("Switch10", Set);
-Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn4");
 	Set Switch("Switch27", randomize);
 	Set Switch("Switch28", randomize);
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 2);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -4591,68 +4353,27 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
 	Deaths("Player 8", "Zerg Devourer", At least, 1);
-	Deaths("Player 8", "Zerg Devourer", At most, 35);
+	Deaths("Player 8", "Protoss Observer", Exactly, 0);
 	Switch("Switch11", Not Set);
 	Switch("Switch12", Not Set);
 Actions:
 	Create Unit("Player 7", "Zerg Ultralisk", 6, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Zergling", 52, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn1");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 36);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 72);
-	Deaths("Player 8", "Zerg Devourer", At most, 107);
-	Switch("Switch11", Not Set);
-	Switch("Switch12", Not Set);
-Actions:
 	Create Unit("Player 7", "Zerg Ultralisk", 6, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Zergling", 52, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 108);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 144);
-	Deaths("Player 8", "Zerg Devourer", At most, 179);
-	Switch("Switch11", Not Set);
-	Switch("Switch12", Not Set);
-Actions:
 	Create Unit("Player 7", "Zerg Ultralisk", 6, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Zergling", 52, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 180);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 216);
-	Switch("Switch11", Not Set);
-	Switch("Switch12", Not Set);
-Actions:
 	Create Unit("Player 7", "Zerg Ultralisk", 6, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Zergling", 52, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
 	Set Switch("Switch29", randomize);
 	Set Switch("Switch30", randomize);
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 2);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -4663,7 +4384,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
 	Deaths("Player 8", "Zerg Devourer", At least, 1);
-	Deaths("Player 8", "Zerg Devourer", At most, 11);
+	Deaths("Player 8", "Protoss Observer", Exactly, 0);
 	Switch("Switch11", Set);
 	Switch("Switch12", Not Set);
 Actions:
@@ -4671,7 +4392,19 @@ Actions:
 	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn1");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 12);
+	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
+	Set Deaths("Player 8", "Protoss Observer", Set To, 1);
 	Preserve Trigger();
 }
 
@@ -4680,32 +4413,24 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 12);
-	Deaths("Player 8", "Zerg Devourer", At most, 23);
+	Deaths("Player 8", "Zerg Devourer", At least, 36);
+	Deaths("Player 8", "Protoss Observer", Exactly, 1);
 	Switch("Switch11", Set);
 	Switch("Switch12", Not Set);
 Actions:
 	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn1");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 24);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 24);
-	Deaths("Player 8", "Zerg Devourer", At most, 35);
-	Switch("Switch11", Set);
-	Switch("Switch12", Not Set);
-Actions:
-	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn1");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 36);
+	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn4");
+	Set Deaths("Player 8", "Protoss Observer", Set To, 2);
 	Preserve Trigger();
 }
 
@@ -4715,156 +4440,27 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
 	Deaths("Player 8", "Zerg Devourer", At least, 72);
-	Deaths("Player 8", "Zerg Devourer", At most, 83);
+	Deaths("Player 8", "Protoss Observer", Exactly, 2);
 	Switch("Switch11", Set);
 	Switch("Switch12", Not Set);
 Actions:
-	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 84);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 84);
-	Deaths("Player 8", "Zerg Devourer", At most, 95);
-	Switch("Switch11", Set);
-	Switch("Switch12", Not Set);
-Actions:
-	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn2");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 96);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 96);
-	Deaths("Player 8", "Zerg Devourer", At most, 107);
-	Switch("Switch11", Set);
-	Switch("Switch12", Not Set);
-Actions:
+	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn2");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 108);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 144);
-	Deaths("Player 8", "Zerg Devourer", At most, 155);
-	Switch("Switch11", Set);
-	Switch("Switch12", Not Set);
-Actions:
-	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 156);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 156);
-	Deaths("Player 8", "Zerg Devourer", At most, 167);
-	Switch("Switch11", Set);
-	Switch("Switch12", Not Set);
-Actions:
-	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn3");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 168);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 168);
-	Deaths("Player 8", "Zerg Devourer", At most, 179);
-	Switch("Switch11", Set);
-	Switch("Switch12", Not Set);
-Actions:
 	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 180);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 216);
-	Deaths("Player 8", "Zerg Devourer", At most, 227);
-	Switch("Switch11", Set);
-	Switch("Switch12", Not Set);
-Actions:
-	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 228);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 228);
-	Deaths("Player 8", "Zerg Devourer", At most, 239);
-	Switch("Switch11", Set);
-	Switch("Switch12", Not Set);
-Actions:
-	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn4");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 240);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 240);
-	Switch("Switch11", Set);
-	Switch("Switch12", Not Set);
-Actions:
 	Create Unit("Player 7", "Zerg Scourge", 8, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
 	Set Switch("Switch29", randomize);
 	Set Switch("Switch30", randomize);
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 2);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -4875,64 +4471,23 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
 	Deaths("Player 8", "Zerg Devourer", At least, 1);
-	Deaths("Player 8", "Zerg Devourer", At most, 35);
+	Deaths("Player 8", "Protoss Observer", Exactly, 0);
 	Switch("Switch11", Not Set);
 	Switch("Switch12", Set);
 Actions:
 	Create Unit("Player 7", "Zerg Hydralisk", 50, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn1");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 36);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 72);
-	Deaths("Player 8", "Zerg Devourer", At most, 107);
-	Switch("Switch11", Not Set);
-	Switch("Switch12", Set);
-Actions:
 	Create Unit("Player 7", "Zerg Hydralisk", 50, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 108);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 144);
-	Deaths("Player 8", "Zerg Devourer", At most, 179);
-	Switch("Switch11", Not Set);
-	Switch("Switch12", Set);
-Actions:
 	Create Unit("Player 7", "Zerg Hydralisk", 50, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 180);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 216);
-	Switch("Switch11", Not Set);
-	Switch("Switch12", Set);
-Actions:
 	Create Unit("Player 7", "Zerg Hydralisk", 50, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
 	Set Switch("Switch29", randomize);
 	Set Switch("Switch30", randomize);
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 2);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -4943,14 +4498,23 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
 	Deaths("Player 8", "Zerg Devourer", At least, 1);
-	Deaths("Player 8", "Zerg Devourer", At most, 11);
+	Deaths("Player 8", "Protoss Observer", Exactly, 0);
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
 	Create Unit("Player 7", "Zerg Mutalisk", 5, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Guardian", 5, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn1");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 12);
+	Create Unit("Player 7", "Zerg Mutalisk", 5, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 5, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
+	Set Deaths("Player 8", "Protoss Observer", Set To, 1);
 	Preserve Trigger();
 }
 
@@ -4959,30 +4523,20 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 12);
-	Deaths("Player 8", "Zerg Devourer", At most, 23);
+	Deaths("Player 8", "Zerg Devourer", At least, 36);
+	Deaths("Player 8", "Protoss Observer", Exactly, 1);
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn1");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 24);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 24);
-	Deaths("Player 8", "Zerg Devourer", At most, 35);
-	Switch("Switch11", Set);
-	Switch("Switch12", Set);
-Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn1");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 36);
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn4");
+	Set Deaths("Player 8", "Protoss Observer", Set To, 2);
 	Preserve Trigger();
 }
 
@@ -4992,149 +4546,26 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
 	Deaths("Player 8", "Zerg Devourer", At least, 72);
-	Deaths("Player 8", "Zerg Devourer", At most, 83);
+	Deaths("Player 8", "Protoss Observer", Exactly, 2);
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 5, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 5, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 84);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 84);
-	Deaths("Player 8", "Zerg Devourer", At most, 95);
-	Switch("Switch11", Set);
-	Switch("Switch12", Set);
-Actions:
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn2");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 96);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 96);
-	Deaths("Player 8", "Zerg Devourer", At most, 107);
-	Switch("Switch11", Set);
-	Switch("Switch12", Set);
-Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn2");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 108);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 144);
-	Deaths("Player 8", "Zerg Devourer", At most, 155);
-	Switch("Switch11", Set);
-	Switch("Switch12", Set);
-Actions:
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 156);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 156);
-	Deaths("Player 8", "Zerg Devourer", At most, 167);
-	Switch("Switch11", Set);
-	Switch("Switch12", Set);
-Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn3");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 168);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 168);
-	Deaths("Player 8", "Zerg Devourer", At most, 179);
-	Switch("Switch11", Set);
-	Switch("Switch12", Set);
-Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn3");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 180);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 216);
-	Deaths("Player 8", "Zerg Devourer", At most, 227);
-	Switch("Switch11", Set);
-	Switch("Switch12", Set);
-Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 228);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 228);
-	Deaths("Player 8", "Zerg Devourer", At most, 239);
-	Switch("Switch11", Set);
-	Switch("Switch12", Set);
-Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn4");
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 240);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
-	Deaths("Player 8", "Zerg Devourer", At least, 240);
-	Switch("Switch11", Set);
-	Switch("Switch12", Set);
-Actions:
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn4");
 	Set Switch("Switch29", randomize);
 	Set Switch("Switch30", randomize);
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 2);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
+
 
 // Random rally destination for newly spawned batches.
 Trigger("Player 6"){
@@ -6813,6 +6244,7 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -7707,6 +7139,7 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -7863,12 +7296,12 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Command("Player 6", "Zerg Hatchery", At most, 0);
-	Command("Player 6", "Zerg Lair", At most, 0);
-	Command("Player 6", "Zerg Hive", At most, 0);
-	Command("Player 7", "Zerg Hatchery", At most, 0);
-	Command("Player 7", "Zerg Lair", At most, 0);
-	Command("Player 7", "Zerg Hive", At most, 0);
+	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Lair", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Hive", "P6 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Lair", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Hive", "P7 MainBase", At most, 0);
 Actions:
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 4);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
@@ -7930,6 +7363,93 @@ Conditions:
 Actions:
 	Wait(1000);
 	Victory();
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE] Player resource dashboard
+//
+//  Shows player minerals on the in-game leaderboard.
+//  StarCraft leaderboards can show one resource type at a time.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Always();
+Actions:
+	Leader Board Resources("TEST Minerals", ore);
+	Leaderboard Computer Players(enabled);
+	Preserve Trigger();
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE / CHEAT] Spawn 2 control groups of Jim Raynor at P1 Start
+//  Included for manual test builds only.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Create Unit("Player 1", "Jim Raynor (Marine)", 24, "P1 Start");
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE / CHEAT] 게임 시작 시 P1에게 톰 카잔스키 36기 지급
+//
+//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
+//  끄는 법: Triggers/ 에서 제거
+//
+//  주의: 36기를 한 location에 몰아 스폰하면 stacking으로 일부 멀리
+//        밀려날 수 있음. 테스트 목적이므로 P1 본진(P1 Start 등) 사용.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Create Unit("Player 1", "Tom Kazansky (Wraith)", 36, "Anywhere");
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE] 플레이어 절대 패배 방지 (스위치 방식)
+//
+//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
+//  끄는 법: Triggers/ 에서 제거
+//
+//  동작 원리:
+//    게임 시작 직후 Switch1 을 set.
+//    12_mission1_to_mission2_transition.txt 의 패배 트리거에 Switch("Switch1", cleared) 조건이
+//    있으므로, 스위치가 set 상태인 한 Defeat()가 발동하지 않음.
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Switch("Switch1", set);
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE] 컴퓨터(P5, P6) → 플레이어(P1~P4) 시야 공유
+//  (플레이어가 컴퓨터의 시야를 가진다)
+//
+//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
+//  끄는 법: Triggers/ 에서 제거
+//
+//  사용 스크립트 (AI → 해당 플레이어로 시야 공유):
+//    "Turn ON Shared Vision of current player with Player 1"
+//    "Turn ON Shared Vision of current player with Player 2"
+//    "Turn ON Shared Vision of current player with Player 3"
+//    "Turn ON Shared Vision of current player with Player 4"
+//
+//  주의: 위 스크립트 이름이 SCMDraft 드롭다운에 정확히 그대로 있는지
+//        확인할 것. 표기가 다르면 적절히 교체.
+//        ("of [SHARER] with [RECEIVER]" 패턴으로 추정)
+//-----------------------------------------------------------------//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Run AI Script("+Vi4");
+	Run AI Script("+Vi5");
+	Run AI Script("+Vi6");
+	Run AI Script("+Vi7");
 }
 //-----------------------------------------------------------------//
 //  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유

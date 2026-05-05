@@ -58,7 +58,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 1", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Firebat", At least, 1800);
+	Deaths("Player 8", "Terran Firebat", At least, 1440);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P1 Hunt", Patrol);
@@ -79,7 +79,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 2", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Ghost", At least, 1800);
+	Deaths("Player 8", "Terran Ghost", At least, 1440);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P2 Hunt", Patrol);
@@ -100,7 +100,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 3", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Medic", At least, 1800);
+	Deaths("Player 8", "Terran Medic", At least, 1440);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P3 Hunt", Patrol);
@@ -121,7 +121,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 4", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran SCV", At least, 1800);
+	Deaths("Player 8", "Terran SCV", At least, 1440);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P4 Hunt", Patrol);

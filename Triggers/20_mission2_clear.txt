@@ -5,12 +5,12 @@
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Command("Player 6", "Zerg Hatchery", At most, 0);
-	Command("Player 6", "Zerg Lair", At most, 0);
-	Command("Player 6", "Zerg Hive", At most, 0);
-	Command("Player 7", "Zerg Hatchery", At most, 0);
-	Command("Player 7", "Zerg Lair", At most, 0);
-	Command("Player 7", "Zerg Hive", At most, 0);
+	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Lair", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Hive", "P6 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Lair", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Hive", "P7 MainBase", At most, 0);
 Actions:
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 4);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
