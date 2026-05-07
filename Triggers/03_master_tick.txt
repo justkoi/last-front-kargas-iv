@@ -40,12 +40,32 @@ Actions:
 	Preserve Trigger();
 }
 
-// Mission 2 main assault cooldowns only advance passively during mission2.
+// Mission 2 main assault cooldowns advance during mission2.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1);
+	Preserve Trigger();
+}
+
+// If an outer colony tech core is attacked during mission1, only that
+// colony's main-assault cooldown starts advancing early.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch33", Set);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch34", Set);
+Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1);
 	Preserve Trigger();
 }

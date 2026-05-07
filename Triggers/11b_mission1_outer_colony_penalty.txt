@@ -546,6 +546,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch33", set);
 	Set Resources("Player 6", Add, 5000, ore);
 	Set Resources("Player 6", Add, 2500, gas);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
@@ -553,6 +554,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -563,6 +565,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch33", set);
 	Set Resources("Player 6", Add, 5000, ore);
 	Set Resources("Player 6", Add, 2500, gas);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
@@ -570,6 +573,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -580,6 +584,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch33", set);
 	Set Resources("Player 6", Add, 5000, ore);
 	Set Resources("Player 6", Add, 2500, gas);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
@@ -587,6 +592,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -597,6 +603,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch34", set);
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
@@ -604,6 +611,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -614,6 +622,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch34", set);
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
@@ -621,6 +630,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -631,6 +641,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch34", set);
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
@@ -638,6 +649,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }

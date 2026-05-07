@@ -84,6 +84,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -96,6 +97,7 @@ Actions:
 	Minimap Ping("Mission2 Gate2");
 	Minimap Ping("Mission2 Gate3");
 	Minimap Ping("Mission2 Gate4");
+	Minimap Ping("Mission2 Gate5");
 	Display Text Message(Always Display, "<07>전술지도: <04>새 진입로가 개방되었습니다. 표시된 통로를 확인하십시오.");
 }
 

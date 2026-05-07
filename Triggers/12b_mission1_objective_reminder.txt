@@ -1,46 +1,8 @@
 //-----------------------------------------------------------------//
 //  Mission 1 objective reminders - P5 Home reveal pulses
-//  5:30~6:00, 9:00~9:30, 11:45~12:15
+//  9:00~9:30, 11:45~12:15
 //  Placed between existing mission1 revealer windows.
 //-----------------------------------------------------------------//
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 330);
-	Elapsed Time(At most, 332);
-	Command("Player 5", "Buildings", At least, 1);
-Actions:
-	Create Unit("Player 1", "Map Revealer", 1, "P5 Home");
-	Create Unit("Player 2", "Map Revealer", 1, "P5 Home");
-	Create Unit("Player 3", "Map Revealer", 1, "P5 Home");
-	Create Unit("Player 4", "Map Revealer", 1, "P5 Home");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 330);
-	Elapsed Time(At most, 332);
-	Command("Player 5", "Buildings", At least, 1);
-Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("P5 Home");
-	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 <11>주황색 저그<04> 군락 반응이 계속됩니다. 핵심 구조물이 아직 남아 있습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방어선이 안정됐으면 북서쪽 군락을 완전히 파괴해라. 그게 이번 작전의 목표다.");
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 360);
-	Elapsed Time(At most, 362);
-Actions:
-	Remove Unit("Player 1", "Map Revealer");
-	Remove Unit("Player 2", "Map Revealer");
-	Remove Unit("Player 3", "Map Revealer");
-	Remove Unit("Player 4", "Map Revealer");
-}
 
 Trigger("Player 8"){
 Conditions:

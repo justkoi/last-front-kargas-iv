@@ -4,7 +4,7 @@
 //                      P5 Spawn1~4, P1~P4 Hunt, Player Destination,
 //                      P6 Base, P6 Home, P6 Area, P6 Scout, P6 Intruder, P6 Spawn1~4,
 //                      P7 Base, P7 Home, P7 Area, P7 Scout, P7 Intruder, P7 Spawn1~4,
-//                      Mission2 Gate1~4, NewRoute1~15, Raid1~3, Waypoint1~5,
+//                      Mission2 Gate1~5, NewRoute1~15, Raid1~3, Waypoint1~5,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  Timer rule: 12 DC tick = 1 second
@@ -78,6 +78,8 @@
 //    Switch29/30: P7 mission2 penalty assault cooldown jitter
 //    Switch31   : P6 MainBase tech collapse cooldown reset used
 //    Switch32   : P7 MainBase tech collapse cooldown reset used
+//    Switch33   : P6 mission1 main assault cooldown enabled
+//    Switch34   : P7 mission1 main assault cooldown enabled
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
