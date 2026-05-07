@@ -64,6 +64,11 @@ Recommended palette:
 
 Avoid stacking many colors in one line. Usually color only the prefix or the key phrase.
 
+Briefing room caution:
+
+- Briefing `Mission Objectives` / `Text Message` color handling is not identical to in-game trigger text. Use only safe briefing colors when possible: `<02>` periwinkle/default, `<03>` lime-green, `<04>` yellow-green, `<05>` grey, `<06>` white, `<07>` red.
+- Do not use player-color tags such as `<11>` for orange inside briefing text; they can render unpredictably, including as blue. In briefing, write the faction color in words and use a safe color like `<06>` if emphasis is needed.
+
 ## StarCraft Font-Safe Symbols
 
 Classic StarCraft/Brood War text is safest when written with ASCII punctuation, Korean text, digits, spaces, and SC control codes. Do not use modern Unicode decoration symbols in any player-facing `Display Text Message`, `Set Mission Objectives`, or briefing text unless they have been tested in-game.

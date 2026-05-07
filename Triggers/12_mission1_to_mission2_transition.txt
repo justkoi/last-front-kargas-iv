@@ -83,6 +83,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -94,6 +95,148 @@ Actions:
 	Minimap Ping("Mission2 Gate1");
 	Minimap Ping("Mission2 Gate2");
 	Minimap Ping("Mission2 Gate3");
+	Minimap Ping("Mission2 Gate4");
+	Display Text Message(Always Display, "<07>전술지도: <04>새 진입로가 개방되었습니다. 표시된 통로를 확인하십시오.");
+}
+
+//-----------------------------------------------------------------//
+//  Mission 2 route revealers - keep newly opened routes and hive homes visible for 10 minutes.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 168);
+	Deaths("Player 8", "Terran Vulture", At most, 192);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute5");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute15");
+	Create Unit("Player 1", "Map Revealer", 1, "P6 Home");
+	Create Unit("Player 1", "Map Revealer", 1, "P7 Home");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 168);
+	Deaths("Player 8", "Terran Vulture", At most, 192);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute5");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute15");
+	Create Unit("Player 2", "Map Revealer", 1, "P6 Home");
+	Create Unit("Player 2", "Map Revealer", 1, "P7 Home");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 168);
+	Deaths("Player 8", "Terran Vulture", At most, 192);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute5");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute15");
+	Create Unit("Player 3", "Map Revealer", 1, "P6 Home");
+	Create Unit("Player 3", "Map Revealer", 1, "P7 Home");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 168);
+	Deaths("Player 8", "Terran Vulture", At most, 192);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute5");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute15");
+	Create Unit("Player 4", "Map Revealer", 1, "P6 Home");
+	Create Unit("Player 4", "Map Revealer", 1, "P7 Home");
+}
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 7368);
+	Deaths("Player 8", "Terran Vulture", At most, 7392);
+Actions:
+	Remove Unit("Player 1", "Map Revealer");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 7368);
+	Deaths("Player 8", "Terran Vulture", At most, 7392);
+Actions:
+	Remove Unit("Player 2", "Map Revealer");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 7368);
+	Deaths("Player 8", "Terran Vulture", At most, 7392);
+Actions:
+	Remove Unit("Player 3", "Map Revealer");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 7368);
+	Deaths("Player 8", "Terran Vulture", At most, 7392);
+Actions:
+	Remove Unit("Player 4", "Map Revealer");
 }
 
 //-----------------------------------------------------------------//

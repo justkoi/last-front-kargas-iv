@@ -2,9 +2,9 @@
 //  KARGAS IV - Mission trigger notes
 //  Required Locations: P1~P4 Start, P5 Base, P5 Area, P5 Scout, P5 Intruder,
 //                      P5 Spawn1~4, P1~P4 Hunt, Player Destination,
-//                      P6 Base, P6 Area, P6 Scout, P6 Intruder, P6 Spawn1~4,
-//                      P7 Base, P7 Area, P7 Scout, P7 Intruder, P7 Spawn1~4,
-//                      Mission2 Gate1~3, Raid1~3, Waypoint1~5,
+//                      P6 Base, P6 Home, P6 Area, P6 Scout, P6 Intruder, P6 Spawn1~4,
+//                      P7 Base, P7 Home, P7 Area, P7 Scout, P7 Intruder, P7 Spawn1~4,
+//                      Mission2 Gate1~4, NewRoute1~15, Raid1~3, Waypoint1~5,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  Timer rule: 12 DC tick = 1 second
@@ -832,6 +832,7 @@ Actions:
 // 웨이브 1 - 4분 후 (정찰조)
 Trigger("Player 5"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 210);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
@@ -843,6 +844,7 @@ Actions:
 }
 Trigger("All Players"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 210);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -851,36 +853,42 @@ Actions:
 }
 Trigger("All Players"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 215);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>가벼운 접촉에도 진형이 무너지면 끝이다. 방어선을 세워라.");
 }
 Trigger("Player 1"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 210);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 2"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 210);
 Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 3"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 210);
 Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 4"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 210);
 Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 5"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 240);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
@@ -891,6 +899,7 @@ Actions:
 }
 Trigger("Player 1"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 240);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "MainLoad1");
@@ -898,6 +907,7 @@ Actions:
 }
 Trigger("Player 2"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 240);
 Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "MainLoad1");
@@ -905,6 +915,7 @@ Actions:
 }
 Trigger("Player 3"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 240);
 Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "MainLoad1");
@@ -912,6 +923,7 @@ Actions:
 }
 Trigger("Player 4"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 240);
 Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "MainLoad1");
@@ -919,6 +931,7 @@ Actions:
 }
 Trigger("All Players"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 270);
 Actions:
 	Remove Unit("Player 1", "Map Revealer");
@@ -930,6 +943,7 @@ Actions:
 // 웨이브 2 - 8분 후
 Trigger("Player 5"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 450);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
@@ -945,6 +959,7 @@ Actions:
 }
 Trigger("All Players"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 450);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -953,36 +968,42 @@ Actions:
 }
 Trigger("All Players"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 455);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>압박이 올라간다. 첫 방어선이 버틸 수 있게 미리 보강해라.");
 }
 Trigger("Player 1"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 450);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 2"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 450);
 Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 3"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 450);
 Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 4"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 450);
 Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 5"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 480);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
@@ -997,6 +1018,7 @@ Actions:
 }
 Trigger("Player 1"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 480);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "MainLoad1");
@@ -1004,6 +1026,7 @@ Actions:
 }
 Trigger("Player 2"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 480);
 Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "MainLoad1");
@@ -1011,6 +1034,7 @@ Actions:
 }
 Trigger("Player 3"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 480);
 Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "MainLoad1");
@@ -1018,6 +1042,7 @@ Actions:
 }
 Trigger("Player 4"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 480);
 Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "MainLoad1");
@@ -1025,6 +1050,7 @@ Actions:
 }
 Trigger("All Players"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 510);
 Actions:
 	Remove Unit("Player 1", "Map Revealer");
@@ -1036,6 +1062,7 @@ Actions:
 // 웨이브 3 - 11분 후
 Trigger("Player 5"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 630);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
@@ -1055,6 +1082,7 @@ Actions:
 }
 Trigger("All Players"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 630);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -1063,36 +1091,42 @@ Actions:
 }
 Trigger("All Players"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 635);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>전선을 좁게 보지 마라. 탐지를 갖추고 병력 간격을 유지해라.");
 }
 Trigger("Player 1"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 630);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 2"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 630);
 Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 3"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 630);
 Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 4"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 630);
 Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "P5 Spawn1");
 }
 Trigger("Player 5"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 660);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
@@ -1112,6 +1146,7 @@ Actions:
 }
 Trigger("Player 1"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 660);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "MainLoad1");
@@ -1119,6 +1154,7 @@ Actions:
 }
 Trigger("Player 2"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 660);
 Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "MainLoad1");
@@ -1126,6 +1162,7 @@ Actions:
 }
 Trigger("Player 3"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 660);
 Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "MainLoad1");
@@ -1133,6 +1170,7 @@ Actions:
 }
 Trigger("Player 4"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 660);
 Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "MainLoad1");
@@ -1140,6 +1178,7 @@ Actions:
 }
 Trigger("All Players"){
 Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 690);
 Actions:
 	Remove Unit("Player 1", "Map Revealer");
@@ -2070,6 +2109,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2086,6 +2126,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2102,6 +2143,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2118,6 +2160,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2134,6 +2177,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2150,6 +2194,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2454,6 +2499,7 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -2465,6 +2511,148 @@ Actions:
 	Minimap Ping("Mission2 Gate1");
 	Minimap Ping("Mission2 Gate2");
 	Minimap Ping("Mission2 Gate3");
+	Minimap Ping("Mission2 Gate4");
+	Display Text Message(Always Display, "<07>전술지도: <04>새 진입로가 개방되었습니다. 표시된 통로를 확인하십시오.");
+}
+
+//-----------------------------------------------------------------//
+//  Mission 2 route revealers - keep newly opened routes and hive homes visible for 10 minutes.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 168);
+	Deaths("Player 8", "Terran Vulture", At most, 192);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute5");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute15");
+	Create Unit("Player 1", "Map Revealer", 1, "P6 Home");
+	Create Unit("Player 1", "Map Revealer", 1, "P7 Home");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 168);
+	Deaths("Player 8", "Terran Vulture", At most, 192);
+Actions:
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute5");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute15");
+	Create Unit("Player 2", "Map Revealer", 1, "P6 Home");
+	Create Unit("Player 2", "Map Revealer", 1, "P7 Home");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 168);
+	Deaths("Player 8", "Terran Vulture", At most, 192);
+Actions:
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute5");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute15");
+	Create Unit("Player 3", "Map Revealer", 1, "P6 Home");
+	Create Unit("Player 3", "Map Revealer", 1, "P7 Home");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 168);
+	Deaths("Player 8", "Terran Vulture", At most, 192);
+Actions:
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute5");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute15");
+	Create Unit("Player 4", "Map Revealer", 1, "P6 Home");
+	Create Unit("Player 4", "Map Revealer", 1, "P7 Home");
+}
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 7368);
+	Deaths("Player 8", "Terran Vulture", At most, 7392);
+Actions:
+	Remove Unit("Player 1", "Map Revealer");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 7368);
+	Deaths("Player 8", "Terran Vulture", At most, 7392);
+Actions:
+	Remove Unit("Player 2", "Map Revealer");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 7368);
+	Deaths("Player 8", "Terran Vulture", At most, 7392);
+Actions:
+	Remove Unit("Player 3", "Map Revealer");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 7368);
+	Deaths("Player 8", "Terran Vulture", At most, 7392);
+Actions:
+	Remove Unit("Player 4", "Map Revealer");
 }
 
 //-----------------------------------------------------------------//
@@ -2741,25 +2929,14 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 168);
-	Deaths("Player 8", "Terran Vulture", At most, 192);
+	Deaths("Player 8", "Terran Vulture", At least, 216);
+	Deaths("Player 8", "Terran Vulture", At most, 240);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: <15>갈색 저그<04>와 <16>하얀색 저그<04>의 모든 군락 파괴\n- 성공 조건: <15>갈색 저그<04> / <16>하얀색 저그<04>의 해처리 / 레어 / 하이브 전멸\n- 위치: 동북쪽 군락과 동남쪽 군락\n- 주의: 두 군락은 미션 2부터 자원과 추적 공세를 재개\n- 지침: 본진 방어선을 유지하면서 새 진입로를 통해 각 군락을 압박할 것");
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><03>미션 2: 잔존 군락 섬멸");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Minimap Ping("P6 Base");
-	Minimap Ping("P7 Base");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 216);
-	Deaths("Player 8", "Terran Vulture", At most, 240);
-Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>북부와 외곽의 군락 위치 확인. 새 진입로 세 곳을 전술 지도에 표시했습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -2768,7 +2945,9 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 276);
 	Deaths("Player 8", "Terran Vulture", At most, 300);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>두 군락 모두 아군 기지 방향으로 움직입니다. 방어선을 넓게 봐야 합니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>동북쪽과 동남쪽에 잔존 군락 위치 확인. 전술 지도에 표시합니다.");
+	Minimap Ping("P6 Base");
+	Minimap Ping("P7 Base");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -2776,6 +2955,15 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 336);
 	Deaths("Player 8", "Terran Vulture", At most, 360);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>두 군락 모두 아군 기지 방향으로 움직입니다. 방어선을 넓게 봐야 합니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 396);
+	Deaths("Player 8", "Terran Vulture", At most, 420);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>방어선을 유지하면서 한쪽씩 무너뜨려라. 남은 군락을 모두 섬멸한다.");
 }
@@ -3048,11 +3236,25 @@ Conditions:
 	Switch("Switch2", Set);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "Raid1");
-	Remove Unit("Player 1", "Map Revealer");
 	Create Unit("Player 1", "Map Revealer", 1, "Raid2");
-	Remove Unit("Player 1", "Map Revealer");
 	Create Unit("Player 1", "Map Revealer", 1, "Raid3");
-	Remove Unit("Player 1", "Map Revealer");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute5");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Player 1", "Map Revealer", 1, "NewRoute15");
+	Create Unit("Player 1", "Map Revealer", 1, "P6 Home");
+	Create Unit("Player 1", "Map Revealer", 1, "P7 Home");
 	Minimap Ping("Raid1");
 	Minimap Ping("Raid2");
 	Minimap Ping("Raid3");
@@ -3065,11 +3267,25 @@ Conditions:
 	Switch("Switch2", Set);
 Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "Raid1");
-	Remove Unit("Player 2", "Map Revealer");
 	Create Unit("Player 2", "Map Revealer", 1, "Raid2");
-	Remove Unit("Player 2", "Map Revealer");
 	Create Unit("Player 2", "Map Revealer", 1, "Raid3");
-	Remove Unit("Player 2", "Map Revealer");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute5");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Player 2", "Map Revealer", 1, "NewRoute15");
+	Create Unit("Player 2", "Map Revealer", 1, "P6 Home");
+	Create Unit("Player 2", "Map Revealer", 1, "P7 Home");
 	Minimap Ping("Raid1");
 	Minimap Ping("Raid2");
 	Minimap Ping("Raid3");
@@ -3082,11 +3298,25 @@ Conditions:
 	Switch("Switch2", Set);
 Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "Raid1");
-	Remove Unit("Player 3", "Map Revealer");
 	Create Unit("Player 3", "Map Revealer", 1, "Raid2");
-	Remove Unit("Player 3", "Map Revealer");
 	Create Unit("Player 3", "Map Revealer", 1, "Raid3");
-	Remove Unit("Player 3", "Map Revealer");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute5");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Player 3", "Map Revealer", 1, "NewRoute15");
+	Create Unit("Player 3", "Map Revealer", 1, "P6 Home");
+	Create Unit("Player 3", "Map Revealer", 1, "P7 Home");
 	Minimap Ping("Raid1");
 	Minimap Ping("Raid2");
 	Minimap Ping("Raid3");
@@ -3099,11 +3329,25 @@ Conditions:
 	Switch("Switch2", Set);
 Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "Raid1");
-	Remove Unit("Player 4", "Map Revealer");
 	Create Unit("Player 4", "Map Revealer", 1, "Raid2");
-	Remove Unit("Player 4", "Map Revealer");
 	Create Unit("Player 4", "Map Revealer", 1, "Raid3");
-	Remove Unit("Player 4", "Map Revealer");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute5");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Player 4", "Map Revealer", 1, "NewRoute15");
+	Create Unit("Player 4", "Map Revealer", 1, "P6 Home");
+	Create Unit("Player 4", "Map Revealer", 1, "P7 Home");
 	Minimap Ping("Raid1");
 	Minimap Ping("Raid2");
 	Minimap Ping("Raid3");
