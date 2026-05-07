@@ -62,7 +62,7 @@ Actions:
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><03>작전 완료: 카르가스 IV 전선 안정화");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Set Mission Objectives("<03>[작전 완료] 카르가스 IV 전선 안정화\n\n<04>- 주황색 저그 군락 파괴: 완료\n- 갈색 저그 군락 파괴: 완료\n- 하얀색 저그 군락 파괴: 완료\n- 아군 전선 유지: 성공\n\n선봉대는 임무를 완수했다. 이 전장은 끝났다.");
+	Set Mission Objectives("<03>[작전 완료] 카르가스 IV 전선 안정화\n\n<04>- 북서쪽 <11>주황색 저그<04> 군락 파괴: 완료\n- 동북쪽 <15>갈색 저그<04> 군락 파괴: 완료\n- 동남쪽 <16>하얀색 저그<04> 군락 파괴: 완료\n- 아군 전선 유지: 성공\n\n선봉대는 임무를 완수했다. 이 전장은 끝났다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

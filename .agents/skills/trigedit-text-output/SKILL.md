@@ -66,8 +66,8 @@ Avoid stacking many colors in one line. Usually color only the prefix or the key
 
 Briefing room caution:
 
-- Briefing `Mission Objectives` / `Text Message` color handling is not identical to in-game trigger text. Use only safe briefing colors when possible: `<02>` periwinkle/default, `<03>` lime-green, `<04>` yellow-green, `<05>` grey, `<06>` white, `<07>` red.
-- Do not use player-color tags such as `<11>` for orange inside briefing text; they can render unpredictably, including as blue. In briefing, write the faction color in words and use a safe color like `<06>` if emphasis is needed.
+- Briefing `Mission Objectives` / `Text Message` color handling is not identical to in-game trigger text. Public references list title/mission briefing colors roughly as `<02>` cyan, `<03>` green, `<04>` light green, `<05>` grey, `<06>` white, and `<07>` red.
+- Do not use player-color tags such as `<11>` for orange inside briefing text; title/mission briefing palettes do not provide a reliable orange. In briefing, write the faction color in words and avoid trying to color-code it. Use in-game trigger text/objectives for true player-color tags.
 
 ## StarCraft Font-Safe Symbols
 
