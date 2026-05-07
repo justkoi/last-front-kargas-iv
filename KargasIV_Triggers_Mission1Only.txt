@@ -80,6 +80,8 @@
 //    Switch32   : P7 MainBase tech collapse cooldown reset used
 //    Switch33   : P6 mission1 main assault cooldown enabled
 //    Switch34   : P7 mission1 main assault cooldown enabled
+//    Switch35   : P6 mission1 first tech-core assault boost used
+//    Switch36   : P7 mission1 first tech-core assault boost used
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
@@ -472,6 +474,8 @@ Conditions:
 Actions:
 	Set Switch("Switch24", clear);
 	Set Switch("Switch25", clear);
+	Set Switch("Switch35", clear);
+	Set Switch("Switch36", clear);
 	Set Resources("Player 6", Set To, 0, ore);
 	Set Resources("Player 6", Set To, 0, gas);
 	Set Resources("Player 7", Set To, 0, ore);
@@ -1591,6 +1595,8 @@ Actions:
 //
 //  If players bypass the first colony and attack P6/P7 during mission1,
 //  destroyed outer-colony structures feed resources back into that colony.
+//  If either outer colony's Hatchery/Lair/Hive collapses, both P6 and P7 wake up.
+//  The first tech-core collapse also primes one large assault from that colony only.
 //-----------------------------------------------------------------//
 
 // Repeat the outer-colony intrusion warning at most once every 10 seconds.
@@ -1785,9 +1791,10 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch25", set);
 }
 
 Trigger("All Players"){
@@ -1798,9 +1805,10 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch25", set);
 }
 
 Trigger("All Players"){
@@ -1811,9 +1819,10 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch25", set);
 }
 
 Trigger("All Players"){
@@ -1968,8 +1977,9 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
+	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
 }
 
@@ -1981,8 +1991,9 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
+	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
 }
 
@@ -1994,8 +2005,9 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
+	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
 }
 
@@ -2116,6 +2128,67 @@ Actions:
 	Set Switch("Switch25", set);
 }
 
+// First Hatchery/Lair/Hive collapse primes one large assault from that colony only.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch35", Not Set);
+	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+Actions:
+	Set Switch("Switch35", set);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 11160);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch35", Not Set);
+	Deaths("Player 6", "Zerg Lair", At least, 1);
+Actions:
+	Set Switch("Switch35", set);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 11160);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch35", Not Set);
+	Deaths("Player 6", "Zerg Hive", At least, 1);
+Actions:
+	Set Switch("Switch35", set);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 11160);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch36", Not Set);
+	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+Actions:
+	Set Switch("Switch36", set);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 11160);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch36", Not Set);
+	Deaths("Player 7", "Zerg Lair", At least, 1);
+Actions:
+	Set Switch("Switch36", set);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 11160);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch36", Not Set);
+	Deaths("Player 7", "Zerg Hive", At least, 1);
+Actions:
+	Set Switch("Switch36", set);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 11160);
+}
+
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 6", "Zerg Sunken Colony", At least, 1);
@@ -2170,10 +2243,15 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch25", set);
 	Set Switch("Switch33", set);
+	Set Switch("Switch34", set);
 	Set Resources("Player 6", Add, 5000, ore);
 	Set Resources("Player 6", Add, 2500, gas);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
+	Set Resources("Player 7", Add, 5000, ore);
+	Set Resources("Player 7", Add, 2500, gas);
+	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
+	Set Deaths("Player 8", "Zerg Zergling", Add, 3840);
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
@@ -2189,10 +2267,15 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch25", set);
 	Set Switch("Switch33", set);
+	Set Switch("Switch34", set);
 	Set Resources("Player 6", Add, 5000, ore);
 	Set Resources("Player 6", Add, 2500, gas);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
+	Set Resources("Player 7", Add, 5000, ore);
+	Set Resources("Player 7", Add, 2500, gas);
+	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
+	Set Deaths("Player 8", "Zerg Zergling", Add, 3840);
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
@@ -2208,10 +2291,15 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch25", set);
 	Set Switch("Switch33", set);
+	Set Switch("Switch34", set);
 	Set Resources("Player 6", Add, 5000, ore);
 	Set Resources("Player 6", Add, 2500, gas);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
+	Set Resources("Player 7", Add, 5000, ore);
+	Set Resources("Player 7", Add, 2500, gas);
+	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
+	Set Deaths("Player 8", "Zerg Zergling", Add, 3840);
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
@@ -2226,11 +2314,16 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
+	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
+	Set Resources("Player 6", Add, 5000, ore);
+	Set Resources("Player 6", Add, 2500, gas);
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
+	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 3840);
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
@@ -2245,11 +2338,16 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
+	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
+	Set Resources("Player 6", Add, 5000, ore);
+	Set Resources("Player 6", Add, 2500, gas);
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
+	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 3840);
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
@@ -2264,11 +2362,16 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
+	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
+	Set Resources("Player 6", Add, 5000, ore);
+	Set Resources("Player 6", Add, 2500, gas);
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
+	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 3840);
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
