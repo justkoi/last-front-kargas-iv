@@ -37,6 +37,7 @@ Actions:
 	Minimap Ping("P6 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
 	Preserve Trigger();
@@ -53,6 +54,7 @@ Actions:
 	Minimap Ping("P6 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
 	Preserve Trigger();
@@ -69,6 +71,7 @@ Actions:
 	Minimap Ping("P6 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
 	Preserve Trigger();
@@ -85,6 +88,7 @@ Actions:
 	Minimap Ping("P6 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
 	Preserve Trigger();
@@ -101,6 +105,7 @@ Actions:
 	Minimap Ping("P7 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
 	Preserve Trigger();
@@ -117,6 +122,7 @@ Actions:
 	Minimap Ping("P7 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
 	Preserve Trigger();
@@ -133,6 +139,7 @@ Actions:
 	Minimap Ping("P7 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
 	Preserve Trigger();
@@ -149,6 +156,7 @@ Actions:
 	Minimap Ping("P7 Alert Ping");
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Switch("Switch13", set);
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
 	Preserve Trigger();
@@ -164,6 +172,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -176,6 +185,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -188,6 +198,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -200,6 +211,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -212,6 +224,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -224,6 +237,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -236,6 +250,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -248,6 +263,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -260,6 +276,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -272,6 +289,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -284,6 +302,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -296,6 +315,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -308,6 +328,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -320,6 +341,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 }
 
@@ -333,6 +355,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -345,6 +368,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -357,6 +381,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -369,6 +394,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -381,6 +407,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -393,6 +420,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -405,6 +433,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -417,6 +446,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -429,6 +459,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -441,6 +472,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -453,6 +485,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -465,6 +498,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -477,6 +511,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
@@ -489,6 +524,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
 }
 
