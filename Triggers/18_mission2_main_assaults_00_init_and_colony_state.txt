@@ -1,0 +1,114 @@
+//-----------------------------------------------------------------//
+//  Mission 2 - P6/P7 uncaptured-colony penalty assaults
+//
+//  12 DC tick = 1 second. Cooldown is 960s = 11520 ticks.
+//  Roll triggers subtract only the cooldown they consumed, so excess
+//  progress from repeated Hatchery/Lair/Hive kills stays queued.
+//  Hatchery/Lair/Hive kills add 60s worth of cooldown progress.
+//
+//  Waves may fire during mission1 or mission2, but not after victory.
+//  They are rolled randomly, then spawned across Spawn1~4 in parallel
+//  timed batches to reduce blocked creation space. Spawn timers only count up;
+//  separate stage counters prevent repeated or chained creation. Air-heavy
+//  waves are split into smaller sub-batches. Spawned groups
+//  rally to Waypoint1~5. For 30s after the final batch,
+//  P6/P7 assault units reaching the selected waypoint redirect
+//  toward the already selected P1~P4 Hunt location.
+//-----------------------------------------------------------------//
+
+// Reset assault counters on mission2 entry.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", Exactly, 0);
+Actions:
+	Set Switch("Switch26", randomize);
+	Set Switch("Switch27", set);
+	Set Switch("Switch28", clear);
+	Set Switch("Switch29", set);
+	Set Switch("Switch30", clear);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+}
+
+// First penalty assaults are staggered: one colony attacks after 1 minute, the other after 7 minutes.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch26", Not Set);
+	Switch("Switch31", Not Set);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 10800);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch26", Not Set);
+	Switch("Switch32", Not Set);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 6480);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch26", Set);
+	Switch("Switch31", Not Set);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 6480);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch26", Set);
+	Switch("Switch32", Not Set);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 10800);
+	Preserve Trigger();
+}
+
+// If a colony's MainBase tech core collapses, discard its queued main-assault cooldown once.
+// This runs after the first-assault stagger setup so a collapsed colony stays at 0.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Lair", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Hive", "P6 MainBase", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
+	Set Switch("Switch31", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch32", Not Set);
+	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Lair", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Hive", "P7 MainBase", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
+	Set Switch("Switch32", set);
+	Preserve Trigger();
+}
+

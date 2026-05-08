@@ -1,0 +1,393 @@
+// Random rally destination for newly spawned batches.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch17", Not Set);
+	Switch("Switch18", Not Set);
+	Switch("Switch19", Not Set);
+Actions:
+	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn4", "Waypoint1", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch17", Set);
+	Switch("Switch18", Not Set);
+	Switch("Switch19", Not Set);
+Actions:
+	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn1", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn1", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "Waypoint2", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn1", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn2", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn2", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn2", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn2", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn2", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn2", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn2", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn2", "Waypoint2", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn2", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn3", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn3", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn3", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn3", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn3", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn3", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn3", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn3", "Waypoint2", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn3", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn4", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn4", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn4", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn4", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn4", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn4", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn4", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn4", "Waypoint2", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn4", "Waypoint2", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch17", Not Set);
+	Switch("Switch18", Set);
+	Switch("Switch19", Not Set);
+Actions:
+	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn4", "Waypoint3", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch17", Set);
+	Switch("Switch18", Set);
+	Switch("Switch19", Not Set);
+Actions:
+	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn1", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn1", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "Waypoint4", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn1", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn2", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn2", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn2", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn2", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn2", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn2", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn2", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn2", "Waypoint4", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn2", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn3", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn3", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn3", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn3", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn3", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn3", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn3", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn3", "Waypoint4", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn3", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn4", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn4", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn4", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn4", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn4", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn4", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn4", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn4", "Waypoint4", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn4", "Waypoint4", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch17", Not Set);
+	Switch("Switch18", Not Set);
+	Switch("Switch19", Set);
+Actions:
+	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn4", "Waypoint5", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch17", Set);
+	Switch("Switch18", Not Set);
+	Switch("Switch19", Set);
+Actions:
+	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn1", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn2", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn3", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn4", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn4", "Waypoint1", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch17", Not Set);
+	Switch("Switch18", Set);
+	Switch("Switch19", Set);
+Actions:
+	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn1", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn2", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn3", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn4", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn4", "Waypoint3", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch17", Set);
+	Switch("Switch18", Set);
+	Switch("Switch19", Set);
+Actions:
+	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn1", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn2", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn3", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn4", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 Spawn4", "Waypoint5", Patrol);
+	Preserve Trigger();
+}
+

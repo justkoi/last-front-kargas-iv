@@ -1,0 +1,193 @@
+// P6 Hunt target correction. Dead players are never kept as the selected target.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", At least, 1);
+	Switch("Switch20", Not Set);
+	Switch("Switch21", Not Set);
+	Command("Player 1", "Buildings", At most, 0);
+	Command("Player 2", "Buildings", At least, 1);
+Actions:
+	Set Switch("Switch20", set);
+	Set Switch("Switch21", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", At least, 1);
+	Switch("Switch20", Not Set);
+	Switch("Switch21", Not Set);
+	Command("Player 1", "Buildings", At most, 0);
+	Command("Player 2", "Buildings", At most, 0);
+	Command("Player 3", "Buildings", At least, 1);
+Actions:
+	Set Switch("Switch20", clear);
+	Set Switch("Switch21", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", At least, 1);
+	Switch("Switch20", Not Set);
+	Switch("Switch21", Not Set);
+	Command("Player 1", "Buildings", At most, 0);
+	Command("Player 2", "Buildings", At most, 0);
+	Command("Player 3", "Buildings", At most, 0);
+	Command("Player 4", "Buildings", At least, 1);
+Actions:
+	Set Switch("Switch20", set);
+	Set Switch("Switch21", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", At least, 1);
+	Switch("Switch20", Set);
+	Switch("Switch21", Not Set);
+	Command("Player 2", "Buildings", At most, 0);
+	Command("Player 1", "Buildings", At least, 1);
+Actions:
+	Set Switch("Switch20", clear);
+	Set Switch("Switch21", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", At least, 1);
+	Switch("Switch20", Set);
+	Switch("Switch21", Not Set);
+	Command("Player 1", "Buildings", At most, 0);
+	Command("Player 2", "Buildings", At most, 0);
+	Command("Player 3", "Buildings", At least, 1);
+Actions:
+	Set Switch("Switch20", clear);
+	Set Switch("Switch21", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", At least, 1);
+	Switch("Switch20", Set);
+	Switch("Switch21", Not Set);
+	Command("Player 1", "Buildings", At most, 0);
+	Command("Player 2", "Buildings", At most, 0);
+	Command("Player 3", "Buildings", At most, 0);
+	Command("Player 4", "Buildings", At least, 1);
+Actions:
+	Set Switch("Switch20", set);
+	Set Switch("Switch21", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", At least, 1);
+	Switch("Switch20", Not Set);
+	Switch("Switch21", Set);
+	Command("Player 3", "Buildings", At most, 0);
+	Command("Player 1", "Buildings", At least, 1);
+Actions:
+	Set Switch("Switch20", clear);
+	Set Switch("Switch21", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", At least, 1);
+	Switch("Switch20", Not Set);
+	Switch("Switch21", Set);
+	Command("Player 1", "Buildings", At most, 0);
+	Command("Player 3", "Buildings", At most, 0);
+	Command("Player 2", "Buildings", At least, 1);
+Actions:
+	Set Switch("Switch20", set);
+	Set Switch("Switch21", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", At least, 1);
+	Switch("Switch20", Not Set);
+	Switch("Switch21", Set);
+	Command("Player 1", "Buildings", At most, 0);
+	Command("Player 2", "Buildings", At most, 0);
+	Command("Player 3", "Buildings", At most, 0);
+	Command("Player 4", "Buildings", At least, 1);
+Actions:
+	Set Switch("Switch20", set);
+	Set Switch("Switch21", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", At least, 1);
+	Switch("Switch20", Set);
+	Switch("Switch21", Set);
+	Command("Player 4", "Buildings", At most, 0);
+	Command("Player 1", "Buildings", At least, 1);
+Actions:
+	Set Switch("Switch20", clear);
+	Set Switch("Switch21", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", At least, 1);
+	Switch("Switch20", Set);
+	Switch("Switch21", Set);
+	Command("Player 1", "Buildings", At most, 0);
+	Command("Player 4", "Buildings", At most, 0);
+	Command("Player 2", "Buildings", At least, 1);
+Actions:
+	Set Switch("Switch20", set);
+	Set Switch("Switch21", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", At least, 1);
+	Switch("Switch20", Set);
+	Switch("Switch21", Set);
+	Command("Player 1", "Buildings", At most, 0);
+	Command("Player 2", "Buildings", At most, 0);
+	Command("Player 4", "Buildings", At most, 0);
+	Command("Player 3", "Buildings", At least, 1);
+Actions:
+	Set Switch("Switch20", clear);
+	Set Switch("Switch21", set);
+	Preserve Trigger();
+}
+

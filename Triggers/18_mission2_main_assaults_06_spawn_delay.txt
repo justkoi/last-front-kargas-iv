@@ -1,0 +1,29 @@
+// Assault warning delay. Roll triggers show warning first, then spawn begins after 10 seconds.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 3);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 120);
+Actions:
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 1);
+	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 1);
+	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 3);
+	Deaths("Player 8", "Zerg Devourer", At least, 120);
+Actions:
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 1);
+	Set Deaths("Player 8", "Zerg Devourer", Set To, 1);
+	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Preserve Trigger();
+}
+

@@ -1,0 +1,34 @@
+// Assault warnings are owned by P1-P4 so human players see text, sound, and minimap pings.
+// They fire on the first tick after the roll so P1-P4 can see the P6/P7-owned state change.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 3);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+Actions:
+	Minimap Ping("P6 Spawn1");
+	Minimap Ping("P6 Spawn2");
+	Minimap Ping("P6 Spawn3");
+	Minimap Ping("P6 Spawn4");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<06>경보: <04>동북쪽 군락 대규모 공세 접근.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 3);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+Actions:
+	Minimap Ping("P7 Spawn1");
+	Minimap Ping("P7 Spawn2");
+	Minimap Ping("P7 Spawn3");
+	Minimap Ping("P7 Spawn4");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<06>경보: <04>동남쪽 군락 대규모 공세 접근.");
+	Preserve Trigger();
+}
+
