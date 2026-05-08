@@ -21,8 +21,8 @@ Actions:
 	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Queen", Set To, 0);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Kill Unit At Location("Player 5", "Zerg Sunken Colony", 64, "Anywhere");
-	Kill Unit At Location("Player 5", "Zerg Spore Colony", 64, "Anywhere");
+	Kill Unit("Player 5", "Zerg Sunken Colony");
+	Kill Unit("Player 5", "Zerg Spore Colony");
 }
 
 Trigger("All Players"){
