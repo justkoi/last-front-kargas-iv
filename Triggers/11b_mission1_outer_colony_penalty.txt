@@ -615,9 +615,6 @@ Conditions:
 	Deaths("Player 6", "Zerg Creep Colony", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
-	Set Switch("Switch24", set);
-	Set Resources("Player 6", Add, 500, ore);
-	Set Resources("Player 6", Add, 250, gas);
 	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1);
 	Set Deaths("Player 6", "Zerg Creep Colony", Subtract, 1);
 	Preserve Trigger();
@@ -628,9 +625,6 @@ Conditions:
 	Deaths("Player 7", "Zerg Creep Colony", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
-	Set Switch("Switch25", set);
-	Set Resources("Player 7", Add, 500, ore);
-	Set Resources("Player 7", Add, 250, gas);
 	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1);
 	Set Deaths("Player 7", "Zerg Creep Colony", Subtract, 1);
 	Preserve Trigger();
