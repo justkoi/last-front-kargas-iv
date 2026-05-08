@@ -66,7 +66,7 @@
 //    Switch8 : mission1 multi scan revealers removed
 //    Switch9/10 : P6 mission2 penalty assault random selector
 //    Switch11/12: P7 mission2 penalty assault random selector
-//    Switch13   : mission1 outer colony warning cooldown active
+//    Switch13   : unused
 //    Switch14~16: P6 mission2 penalty assault random waypoint selector
 //    Switch17~19: P7 mission2 penalty assault random waypoint selector
 //    Switch20/21: P6 mission2 penalty assault random Hunt selector
@@ -1599,31 +1599,20 @@ Actions:
 //  The first tech-core collapse also primes one large assault from that colony only.
 //-----------------------------------------------------------------//
 
-// Repeat the outer-colony intrusion warning at most once every 10 seconds.
+// Repeat the outer-colony intrusion warning at most once every 20 seconds.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch13", Set);
+	Deaths("Player 8", "Protoss Corsair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Protoss Corsair", Add, 1);
+	Set Deaths("Player 8", "Protoss Corsair", Subtract, 1);
 	Preserve Trigger();
 }
 
-Trigger("Player 8"){
+Trigger("Player 1"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch13", Set);
-	Deaths("Player 8", "Protoss Corsair", At least, 120);
-Actions:
-	Set Switch("Switch13", clear);
-	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch13", Not Set);
+	Deaths("Player 8", "Protoss Corsair", Exactly, 0);
 	Bring("Player 1", "Men", "P6 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -1632,15 +1621,14 @@ Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
-	Set Switch("Switch13", set);
-	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
 }
 
-Trigger("All Players"){
+Trigger("Player 2"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch13", Not Set);
+	Deaths("Player 8", "Protoss Corsair", Exactly, 0);
 	Bring("Player 2", "Men", "P6 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -1649,15 +1637,14 @@ Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
-	Set Switch("Switch13", set);
-	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
 }
 
-Trigger("All Players"){
+Trigger("Player 3"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch13", Not Set);
+	Deaths("Player 8", "Protoss Corsair", Exactly, 0);
 	Bring("Player 3", "Men", "P6 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -1666,15 +1653,14 @@ Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
-	Set Switch("Switch13", set);
-	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
 }
 
-Trigger("All Players"){
+Trigger("Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch13", Not Set);
+	Deaths("Player 8", "Protoss Corsair", Exactly, 0);
 	Bring("Player 4", "Men", "P6 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -1683,15 +1669,14 @@ Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
-	Set Switch("Switch13", set);
-	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
 }
 
-Trigger("All Players"){
+Trigger("Player 1"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch13", Not Set);
+	Deaths("Player 8", "Protoss Corsair", Exactly, 0);
 	Bring("Player 1", "Men", "P7 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -1700,15 +1685,14 @@ Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
-	Set Switch("Switch13", set);
-	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
 }
 
-Trigger("All Players"){
+Trigger("Player 2"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch13", Not Set);
+	Deaths("Player 8", "Protoss Corsair", Exactly, 0);
 	Bring("Player 2", "Men", "P7 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -1717,15 +1701,14 @@ Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
-	Set Switch("Switch13", set);
-	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
 }
 
-Trigger("All Players"){
+Trigger("Player 3"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch13", Not Set);
+	Deaths("Player 8", "Protoss Corsair", Exactly, 0);
 	Bring("Player 3", "Men", "P7 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -1734,15 +1717,14 @@ Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
-	Set Switch("Switch13", set);
-	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
 }
 
-Trigger("All Players"){
+Trigger("Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch13", Not Set);
+	Deaths("Player 8", "Protoss Corsair", Exactly, 0);
 	Bring("Player 4", "Men", "P7 Alert", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -1751,8 +1733,7 @@ Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
-	Set Switch("Switch13", set);
-	Set Deaths("Player 8", "Protoss Corsair", Set To, 0);
+	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
 }
 
@@ -2129,64 +2110,65 @@ Actions:
 }
 
 // First Hatchery/Lair/Hive collapse primes one large assault from that colony only.
-Trigger("Player 8"){
+// Own these by P6/P7 so the boost runs before their death-counter consumers below.
+Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch35", Not Set);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 11160);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 11160);
 }
 
-Trigger("Player 8"){
+Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch35", Not Set);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 11160);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 11160);
 }
 
-Trigger("Player 8"){
+Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch35", Not Set);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 11160);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 11160);
 }
 
-Trigger("Player 8"){
+Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch36", Not Set);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 11160);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 11160);
 }
 
-Trigger("Player 8"){
+Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch36", Not Set);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 11160);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 11160);
 }
 
-Trigger("Player 8"){
+Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch36", Not Set);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 11160);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 11160);
 }
 
 Trigger("Player 6"){
