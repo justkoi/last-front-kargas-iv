@@ -3709,7 +3709,7 @@ Actions:
 //  12 DC tick = 1 second. Cooldown is 960s = 11520 ticks.
 //  Roll triggers subtract only the cooldown they consumed, so excess
 //  progress from repeated Hatchery/Lair/Hive kills stays queued.
-//  Hatchery/Lair/Hive kills add 60s worth of cooldown progress.
+//  Hatchery/Lair/Hive kills add 100s worth of cooldown progress.
 //
 //  Waves may fire during mission1 or mission2, but not after victory.
 //  They are rolled randomly, then spawned across Spawn1~4 in parallel
@@ -7862,7 +7862,7 @@ Actions:
 //  Mission 2 - hatchery tech loss accelerates main assaults
 //
 //  Hatchery/Lair/Hive kills reduce that colony's own main assault
-//  cooldown by 80s. 12 DC tick = 1 second, so 80s = 960.
+//  cooldown by 100s. 12 DC tick = 1 second, so 100s = 1200.
 //-----------------------------------------------------------------//
 
 Trigger("Player 6"){
@@ -7870,7 +7870,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 960);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1200);
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -7880,7 +7880,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 960);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1200);
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -7890,7 +7890,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 960);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1200);
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -7900,7 +7900,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1200);
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -7910,7 +7910,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1200);
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -7920,7 +7920,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1200);
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
