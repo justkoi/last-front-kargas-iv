@@ -26,8 +26,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Move Location("Player 1", "Men", "P6 Alert", "P6 Alert Ping");
 	Minimap Ping("P6 Alert Ping");
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<03>호크: <04>선봉대, 이곳이 아니다. 북서쪽 <11>주황색 저그<04> 군락으로 병력을 돌려 공격해라.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
@@ -42,8 +41,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Move Location("Player 2", "Men", "P6 Alert", "P6 Alert Ping");
 	Minimap Ping("P6 Alert Ping");
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<03>호크: <04>선봉대, 이곳이 아니다. 북서쪽 <11>주황색 저그<04> 군락으로 병력을 돌려 공격해라.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
@@ -58,8 +56,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Move Location("Player 3", "Men", "P6 Alert", "P6 Alert Ping");
 	Minimap Ping("P6 Alert Ping");
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<03>호크: <04>선봉대, 이곳이 아니다. 북서쪽 <11>주황색 저그<04> 군락으로 병력을 돌려 공격해라.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
@@ -74,8 +71,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Move Location("Player 4", "Men", "P6 Alert", "P6 Alert Ping");
 	Minimap Ping("P6 Alert Ping");
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<03>호크: <04>선봉대, 이곳이 아니다. 북서쪽 <11>주황색 저그<04> 군락으로 병력을 돌려 공격해라.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
@@ -90,8 +86,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Move Location("Player 1", "Men", "P7 Alert", "P7 Alert Ping");
 	Minimap Ping("P7 Alert Ping");
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<03>호크: <04>선봉대, 이곳이 아니다. 북서쪽 <11>주황색 저그<04> 군락으로 병력을 돌려 공격해라.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
@@ -106,8 +101,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Move Location("Player 2", "Men", "P7 Alert", "P7 Alert Ping");
 	Minimap Ping("P7 Alert Ping");
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<03>호크: <04>선봉대, 이곳이 아니다. 북서쪽 <11>주황색 저그<04> 군락으로 병력을 돌려 공격해라.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
@@ -122,8 +116,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Move Location("Player 3", "Men", "P7 Alert", "P7 Alert Ping");
 	Minimap Ping("P7 Alert Ping");
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<03>호크: <04>선봉대, 이곳이 아니다. 북서쪽 <11>주황색 저그<04> 군락으로 병력을 돌려 공격해라.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
@@ -138,8 +131,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Move Location("Player 4", "Men", "P7 Alert", "P7 Alert Ping");
 	Minimap Ping("P7 Alert Ping");
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락 외곽에 아군 신호가 잡혔습니다. 반응 규모를 예측하기 어렵습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>지금은 주 전선부터 정리하는 게 낫다. 괜히 깊이 찌르면 전장 전체가 깨어난다.");
+	Display Text Message(Always Display, "<03>호크: <04>선봉대, 이곳이 아니다. 북서쪽 <11>주황색 저그<04> 군락으로 병력을 돌려 공격해라.");
 	Display Text Message(Always Display, "<06>경고: 미션1 진행중 <11>주황색 저그<06>를 제외한 적을 공격할 경우 해당 적이 깨어납니다.");
 	Set Deaths("Player 8", "Protoss Corsair", Set To, 240);
 	Preserve Trigger();
