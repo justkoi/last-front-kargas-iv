@@ -18,8 +18,10 @@ Conditions:
 Actions:
 	Set Switch("Switch24", clear);
 	Set Switch("Switch25", clear);
+	Set Switch("Switch13", clear);
 	Set Switch("Switch35", clear);
 	Set Switch("Switch36", clear);
+	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 0);
 	Set Resources("Player 6", Set To, 0, ore);
 	Set Resources("Player 6", Set To, 0, gas);
 	Set Resources("Player 7", Set To, 0, ore);

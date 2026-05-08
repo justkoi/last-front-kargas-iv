@@ -579,6 +579,63 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 9720);
 }
 
+// Count destroyed P6/P7 creep colonies together and warn every 5 kills.
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch13", Set);
+Actions:
+	Set Switch("Switch13", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch13", Not Set);
+	Deaths("Player 8", "Zerg Creep Colony", At least, 5);
+Actions:
+	Set Deaths("Player 8", "Zerg Creep Colony", Subtract, 5);
+	Set Switch("Switch13", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch13", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<03>호크: <04>선봉대, 병력 분산하지 마라. 목표는 <11>주황색 저그<04> 군락이다.");
+	Display Text Message(Always Display, "<06>경고: <04>미션1에 <11>주황색 저그<04>가 아닌 다른 적을 공격하면 난이도가 상승합니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 6", "Zerg Creep Colony", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch24", set);
+	Set Resources("Player 6", Add, 500, ore);
+	Set Resources("Player 6", Add, 250, gas);
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1);
+	Set Deaths("Player 6", "Zerg Creep Colony", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 7", "Zerg Creep Colony", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Set Switch("Switch25", set);
+	Set Resources("Player 7", Add, 500, ore);
+	Set Resources("Player 7", Add, 250, gas);
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1);
+	Set Deaths("Player 7", "Zerg Creep Colony", Subtract, 1);
+	Preserve Trigger();
+}
+
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 6", "Zerg Sunken Colony", At least, 1);
