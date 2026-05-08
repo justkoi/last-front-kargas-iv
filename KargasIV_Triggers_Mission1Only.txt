@@ -2998,7 +2998,7 @@ Actions:
 //  Base defense response
 //
 //  P5: Terran Marine DC, P6: Terran Armory DC, P7: Protoss Zealot DC
-//  Cooldown: 20s = 240 ticks.
+//  Cooldown: 10s = 120 ticks.
 //
 //  P6/P7 Ground/Air intruder locations are map-side filtered. Each response
 //  checks the filtered location, then orders defenders by what target height
@@ -3008,7 +3008,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Bring("Player 1", "Men", "P5 Area", At least, 1);
-	Deaths("Player 8", "Terran Marine", At least, 240);
+	Deaths("Player 8", "Terran Marine", At least, 120);
 Actions:
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
@@ -3026,7 +3026,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Bring("Player 2", "Men", "P5 Area", At least, 1);
-	Deaths("Player 8", "Terran Marine", At least, 240);
+	Deaths("Player 8", "Terran Marine", At least, 120);
 Actions:
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
@@ -3044,7 +3044,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Bring("Player 3", "Men", "P5 Area", At least, 1);
-	Deaths("Player 8", "Terran Marine", At least, 240);
+	Deaths("Player 8", "Terran Marine", At least, 120);
 Actions:
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
@@ -3062,7 +3062,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Bring("Player 4", "Men", "P5 Area", At least, 1);
-	Deaths("Player 8", "Terran Marine", At least, 240);
+	Deaths("Player 8", "Terran Marine", At least, 120);
 Actions:
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
@@ -3085,7 +3085,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 1", "Men", "P6 Intruder Ground", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Intruder Ground", Patrol);
@@ -3100,7 +3100,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 1", "Men", "P6 Intruder Air", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Intruder Air", Patrol);
@@ -3112,7 +3112,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 1", "Men", "P6 Intruder Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -3121,7 +3121,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 1", "Men", "P6 Intruder Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -3130,7 +3130,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 2", "Men", "P6 Intruder Ground", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Intruder Ground", Patrol);
@@ -3145,7 +3145,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 2", "Men", "P6 Intruder Air", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Intruder Air", Patrol);
@@ -3157,7 +3157,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 2", "Men", "P6 Intruder Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -3166,7 +3166,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 2", "Men", "P6 Intruder Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -3175,7 +3175,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 3", "Men", "P6 Intruder Ground", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Intruder Ground", Patrol);
@@ -3190,7 +3190,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 3", "Men", "P6 Intruder Air", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Intruder Air", Patrol);
@@ -3202,7 +3202,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 3", "Men", "P6 Intruder Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -3211,7 +3211,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 3", "Men", "P6 Intruder Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -3220,7 +3220,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 4", "Men", "P6 Intruder Ground", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Anywhere", "P6 Intruder Ground", Patrol);
@@ -3235,7 +3235,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 4", "Men", "P6 Intruder Air", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Hydralisk", "Anywhere", "P6 Intruder Air", Patrol);
@@ -3247,7 +3247,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 4", "Men", "P6 Intruder Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -3256,7 +3256,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Armory", At least, 240);
+	Deaths("Player 8", "Terran Armory", At least, 120);
 	Bring("Player 4", "Men", "P6 Intruder Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -3267,7 +3267,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 1", "Men", "P7 Intruder Ground", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Intruder Ground", Patrol);
@@ -3282,7 +3282,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 1", "Men", "P7 Intruder Air", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Intruder Air", Patrol);
@@ -3294,7 +3294,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 1", "Men", "P7 Intruder Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -3303,7 +3303,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 1", "Men", "P7 Intruder Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -3312,7 +3312,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 2", "Men", "P7 Intruder Ground", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Intruder Ground", Patrol);
@@ -3327,7 +3327,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 2", "Men", "P7 Intruder Air", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Intruder Air", Patrol);
@@ -3339,7 +3339,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 2", "Men", "P7 Intruder Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -3348,7 +3348,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 2", "Men", "P7 Intruder Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -3357,7 +3357,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 3", "Men", "P7 Intruder Ground", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Intruder Ground", Patrol);
@@ -3372,7 +3372,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 3", "Men", "P7 Intruder Air", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Intruder Air", Patrol);
@@ -3384,7 +3384,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 3", "Men", "P7 Intruder Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -3393,7 +3393,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 3", "Men", "P7 Intruder Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -3402,7 +3402,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 4", "Men", "P7 Intruder Ground", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Anywhere", "P7 Intruder Ground", Patrol);
@@ -3417,7 +3417,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 4", "Men", "P7 Intruder Air", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Hydralisk", "Anywhere", "P7 Intruder Air", Patrol);
@@ -3429,7 +3429,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 4", "Men", "P7 Intruder Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -3438,7 +3438,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Zealot", At least, 240);
+	Deaths("Player 8", "Protoss Zealot", At least, 120);
 	Bring("Player 4", "Men", "P7 Intruder Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
