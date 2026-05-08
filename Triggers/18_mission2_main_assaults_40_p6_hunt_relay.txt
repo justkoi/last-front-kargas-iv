@@ -879,17 +879,16 @@ Actions:
 	Preserve Trigger();
 }
 
-// End waypoint reaction window.
+// End assault lock tail.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At least, 1441);
+	Deaths("Player 8", "Zerg Scourge", At least, 721);
 Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
 	Preserve Trigger();
 }
-

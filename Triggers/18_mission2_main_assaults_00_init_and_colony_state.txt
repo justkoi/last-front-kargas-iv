@@ -84,7 +84,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// If a colony's MainBase tech core collapses, discard its queued main-assault cooldown once.
+// If a colony's MainBase tech core collapses, lock that colony's main assault.
 // This runs after the first-assault stagger setup so a collapsed colony stays at 0.
 Trigger("Player 6"){
 Conditions:
