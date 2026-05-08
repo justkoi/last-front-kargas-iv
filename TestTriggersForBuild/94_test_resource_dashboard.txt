@@ -1,15 +1,647 @@
 //-----------------------------------------------------------------//
-//  [TEST MODE] Player resource dashboard
+//  [TEST MODE] Mission 2 main assault DC dashboard
 //
-//  Shows player minerals on the in-game leaderboard.
-//  StarCraft leaderboards can show one resource type at a time.
+//  Standard StarCraft leaderboards cannot read death counters directly.
+//  This test dashboard mirrors the two mission 2 main-assault cooldown
+//  DCs into custom score, then restores the source DCs in the same pass.
+//
+//  P6 custom score = Player 8 / Zerg Zergling DC.
+//  P7 custom score = Player 8 / Zerg Hydralisk DC.
+//  Temp DCs: Player 8 / Zerg Spawning Pool, Zerg Evolution Chamber.
 //-----------------------------------------------------------------//
+
+Trigger("Player 8"){
+Conditions:
+	Always();
+Actions:
+	Set Score("Player 6", Set To, 0, Custom);
+	Set Score("Player 7", Set To, 0, Custom);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Set To, 0);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Set To, 0);
+	Preserve Trigger();
+}
+
+// P6 main assault timer binary copy: source DC -> Player 6 custom score.
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 32768);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 32768);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 32768);
+	Set Score("Player 6", Add, 32768, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 16384);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 16384);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 16384);
+	Set Score("Player 6", Add, 16384, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 8192);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 8192);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 8192);
+	Set Score("Player 6", Add, 8192, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 4096);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 4096);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 4096);
+	Set Score("Player 6", Add, 4096, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 2048);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 2048);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 2048);
+	Set Score("Player 6", Add, 2048, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 1024);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 1024);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 1024);
+	Set Score("Player 6", Add, 1024, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 512);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 512);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 512);
+	Set Score("Player 6", Add, 512, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 256);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 256);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 256);
+	Set Score("Player 6", Add, 256, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 128);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 128);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 128);
+	Set Score("Player 6", Add, 128, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 64);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 64);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 64);
+	Set Score("Player 6", Add, 64, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 32);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 32);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 32);
+	Set Score("Player 6", Add, 32, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 16);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 16);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 16);
+	Set Score("Player 6", Add, 16, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 8);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 8);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 8);
+	Set Score("Player 6", Add, 8, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 4);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 4);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 4);
+	Set Score("Player 6", Add, 4, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 2);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 2);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 2);
+	Set Score("Player 6", Add, 2, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Zergling", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 1);
+	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 1);
+	Set Score("Player 6", Add, 1, Custom);
+	Preserve Trigger();
+}
+
+// P6 main assault timer restore: temp DC -> source DC.
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 32768);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 32768);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 32768);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 16384);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 16384);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 16384);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 8192);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 8192);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 8192);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 4096);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 4096);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4096);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 2048);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 2048);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 2048);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 1024);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 1024);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1024);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 512);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 512);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 512);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 256);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 256);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 256);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 128);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 128);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 128);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 64);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 64);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 64);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 32);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 32);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 32);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 16);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 16);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 16);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 8);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 8);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 8);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 4);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 4);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 2);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 2);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 2);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Spawning Pool", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 1);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1);
+	Preserve Trigger();
+}
+
+// P7 main assault timer binary copy: source DC -> Player 7 custom score.
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 32768);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 32768);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 32768);
+	Set Score("Player 7", Add, 32768, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 16384);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 16384);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 16384);
+	Set Score("Player 7", Add, 16384, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 8192);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 8192);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 8192);
+	Set Score("Player 7", Add, 8192, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 4096);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 4096);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 4096);
+	Set Score("Player 7", Add, 4096, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 2048);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 2048);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 2048);
+	Set Score("Player 7", Add, 2048, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 1024);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 1024);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 1024);
+	Set Score("Player 7", Add, 1024, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 512);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 512);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 512);
+	Set Score("Player 7", Add, 512, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 256);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 256);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 256);
+	Set Score("Player 7", Add, 256, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 128);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 128);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 128);
+	Set Score("Player 7", Add, 128, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 64);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 64);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 64);
+	Set Score("Player 7", Add, 64, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 32);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 32);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 32);
+	Set Score("Player 7", Add, 32, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 16);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 16);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 16);
+	Set Score("Player 7", Add, 16, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 8);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 8);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 8);
+	Set Score("Player 7", Add, 8, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 4);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 4);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 4);
+	Set Score("Player 7", Add, 4, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 2);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 2);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 2);
+	Set Score("Player 7", Add, 2, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Hydralisk", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 1);
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 1);
+	Set Score("Player 7", Add, 1, Custom);
+	Preserve Trigger();
+}
+
+// P7 main assault timer restore: temp DC -> source DC.
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 32768);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 32768);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 32768);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 16384);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 16384);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 16384);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 8192);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 8192);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 8192);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 4096);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 4096);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4096);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 2048);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 2048);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2048);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 1024);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 1024);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1024);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 512);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 512);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 512);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 256);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 256);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 256);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 128);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 128);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 128);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 64);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 64);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 64);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 32);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 32);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 32);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 16);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 16);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 16);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 8);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 8);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 8);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 4);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 4);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 2);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 2);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Evolution Chamber", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 1);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1);
+	Preserve Trigger();
+}
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Always();
 Actions:
-	Leader Board Resources("TEST Minerals", ore);
+	Leader Board Points("TEST M2 Assault DC", Custom);
 	Leaderboard Computer Players(enabled);
 	Preserve Trigger();
 }
