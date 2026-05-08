@@ -2907,7 +2907,7 @@ Actions:
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><03>작전 실패: 전선 붕괴");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<03>호크: <04>전선이 무너졌다. 잔존 병력은 철수하라. 여기서는 더 버틸 수 없다.");
+	Display Text Message(Always Display, "<03>호크: <04>무너진 건 방어선이지, 부대가 아니다. 교신 유지하고 잔존 병력은 후방으로 빠져라.");
 	Wait(1500);
 	Defeat();
 }
