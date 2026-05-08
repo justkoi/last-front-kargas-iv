@@ -24,7 +24,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 1800);
+	Set Deaths("Player 8", "Terran Wraith", Add, 1440);
 	Set Deaths("Player 5", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -34,7 +34,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 2700);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2160);
 	Set Deaths("Player 5", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -44,7 +44,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 3600);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2880);
 	Set Deaths("Player 5", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
