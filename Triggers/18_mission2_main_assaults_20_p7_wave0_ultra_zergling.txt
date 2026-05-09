@@ -11,15 +11,19 @@ Conditions:
 Actions:
 	Create Unit("Player 7", "Zerg Ultralisk", 6, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Zergling", 52, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Defiler", 2, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Ultralisk", 6, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Zergling", 52, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Defiler", 2, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Ultralisk", 6, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Zergling", 52, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Defiler", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Ultralisk", 6, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Zergling", 52, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Defiler", 2, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
 	Set Switch("Switch29", randomize);
 	Set Switch("Switch30", randomize);
@@ -28,4 +32,3 @@ Actions:
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
-

@@ -10,16 +10,16 @@ Conditions:
 	Switch("Switch12", Set);
 Actions:
 	Create Unit("Player 7", "Zerg Mutalisk", 5, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 5, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Mutalisk", 5, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 5, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
 	Set Deaths("Player 8", "Protoss Observer", Set To, 1);
 	Preserve Trigger();
@@ -36,13 +36,13 @@ Conditions:
 	Switch("Switch12", Set);
 Actions:
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn4");
 	Set Deaths("Player 8", "Protoss Observer", Set To, 2);
 	Preserve Trigger();
 }
@@ -58,13 +58,13 @@ Conditions:
 	Switch("Switch12", Set);
 Actions:
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Guardian", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn4");
 	Set Switch("Switch29", randomize);
 	Set Switch("Switch30", randomize);
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 2);
@@ -72,5 +72,4 @@ Actions:
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
-
 
