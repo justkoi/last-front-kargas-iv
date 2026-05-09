@@ -9,7 +9,8 @@
 //                      East Area, Mission2 Gate1~5, NewRoute1~15, Raid1~3, Waypoint1~5,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
-//  P6/P7 Overmind locations require preplaced invincible Zerg Creep Colony placeholders.
+//  P6/P7 Overmind locations require preplaced invincible Overmind Cocoons
+//  owned by Player 6 / Player 7. The event disables invincibility on the selected one.
 //
 //  Timer rule: 12 DC tick = 1 second
 //    10s = 120, 60s = 720, 90s = 1080, 3min = 2160, 4min = 2880, 5min = 3600
@@ -24,6 +25,10 @@
 //    Protoss Probe        : P5 scout rotation index
 //    Protoss Scout        : P6 scout rotation index
 //    Protoss Carrier      : P7 scout rotation index
+//    Terran Barracks      : P5 P1 Hunt all-out attack timer
+//    Terran Factory       : P5 P2 Hunt all-out attack timer
+//    Terran Starport      : P5 P3 Hunt all-out attack timer
+//    Terran Engineering Bay: P5 P4 Hunt all-out attack timer
 //    Terran Firebat       : P6 P1 Hunt all-out attack timer
 //    Terran Ghost         : P6 P2 Hunt all-out attack timer
 //    Terran Medic         : P6 P3 Hunt all-out attack timer
@@ -380,6 +385,10 @@ Actions:
 	Set Deaths("Player 8", "Terran Civilian", Add, 1);
 	Set Deaths("Player 8", "Terran Marine", Add, 1);
 	Set Deaths("Player 8", "Terran Armory", Add, 1);
+	Set Deaths("Player 8", "Terran Barracks", Add, 1);
+	Set Deaths("Player 8", "Terran Factory", Add, 1);
+	Set Deaths("Player 8", "Terran Starport", Add, 1);
+	Set Deaths("Player 8", "Terran Engineering Bay", Add, 1);
 	Set Deaths("Player 8", "Protoss Zealot", Add, 1);
 	Set Deaths("Player 8", "Terran Firebat", Add, 1);
 	Set Deaths("Player 8", "Terran Ghost", Add, 1);
@@ -1236,14 +1245,14 @@ Actions:
 //  변형 D: 공성 공중 (가디언/디바우러/뮤탈)
 //-----------------------------------------------------------------//
 
-// 군락 테크 건물 붕괴 반격 보정 (1변종 = 2520틱, 시작 보정 = 7560틱)
-// Seed enough cooldown for three late-wave variants when late waves begin.
+// 군락 테크 건물 붕괴 반격 보정 (1변종 = 2520틱, 시작 보정 = 10080틱)
+// Seed enough cooldown for four late-wave variants when late waves begin.
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 895);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Set To, 7560);
+	Set Deaths("Player 8", "Terran Wraith", Set To, 10080);
 }
 
 Trigger("Player 5"){
@@ -1537,7 +1546,7 @@ Actions:
 //  Mission 1 - dynamic building tracking and all-out attack
 //
 //  Protoss Shuttle DC = Hunt location refresh timer (10s = 120)
-//  Firebat/Ghost/Medic/SCV = P1/P2/P3/P4 attack timers (120s = 1440)
+//  Barracks/Factory/Starport/Engineering Bay = P1/P2/P3/P4 attack timers (150s = 1800)
 //  Patrol priority is last-order-wins: P2 -> P4 -> P3 -> P1.
 //  Final target priority: P1 > P3 > P4 > P2.
 //-----------------------------------------------------------------//
@@ -1595,7 +1604,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 2", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Ghost", At least, 1440);
+	Deaths("Player 8", "Terran Factory", At least, 1800);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P2 Hunt", Patrol);
@@ -1608,7 +1617,7 @@ Actions:
 	Order("Player 5", "Zerg Guardian", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 5", "Zerg Devourer", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 5", "Infested Terran", "Anywhere", "P2 Hunt", Patrol);
-	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
+	Set Deaths("Player 8", "Terran Factory", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -1616,7 +1625,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 4", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran SCV", At least, 1440);
+	Deaths("Player 8", "Terran Engineering Bay", At least, 1800);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P4 Hunt", Patrol);
@@ -1629,7 +1638,7 @@ Actions:
 	Order("Player 5", "Zerg Guardian", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 5", "Zerg Devourer", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 5", "Infested Terran", "Anywhere", "P4 Hunt", Patrol);
-	Set Deaths("Player 8", "Terran SCV", Set To, 0);
+	Set Deaths("Player 8", "Terran Engineering Bay", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -1637,7 +1646,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 3", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Medic", At least, 1440);
+	Deaths("Player 8", "Terran Starport", At least, 1800);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P3 Hunt", Patrol);
@@ -1650,7 +1659,7 @@ Actions:
 	Order("Player 5", "Zerg Guardian", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 5", "Zerg Devourer", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 5", "Infested Terran", "Anywhere", "P3 Hunt", Patrol);
-	Set Deaths("Player 8", "Terran Medic", Set To, 0);
+	Set Deaths("Player 8", "Terran Starport", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -1658,7 +1667,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 1", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Firebat", At least, 1440);
+	Deaths("Player 8", "Terran Barracks", At least, 1800);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P1 Hunt", Patrol);
@@ -1671,7 +1680,7 @@ Actions:
 	Order("Player 5", "Zerg Guardian", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Devourer", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 5", "Infested Terran", "Anywhere", "P1 Hunt", Patrol);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 0);
+	Set Deaths("Player 8", "Terran Barracks", Set To, 0);
 	Preserve Trigger();
 }
 //-----------------------------------------------------------------//
@@ -2720,6 +2729,10 @@ Actions:
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 3);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 	Set Deaths("Player 8", "Protoss Shuttle", Set To, 0);
+	Set Deaths("Player 8", "Terran Barracks", Set To, 0);
+	Set Deaths("Player 8", "Terran Factory", Set To, 0);
+	Set Deaths("Player 8", "Terran Starport", Set To, 0);
+	Set Deaths("Player 8", "Terran Engineering Bay", Set To, 0);
 	Set Deaths("Player 8", "Terran Firebat", Set To, 0);
 	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
 	Set Deaths("Player 8", "Terran Medic", Set To, 0);
@@ -3095,6 +3108,7 @@ Actions:
 //  P5: Terran Marine DC, P6: Terran Armory DC, P7: Protoss Zealot DC
 //  Cooldown: 10s = 120 ticks.
 //
+//  P5 uses P5 Area for detection and P5 Intruder as the moving target.
 //  P6/P7 Area Ground/Air locations are map-side filtered. Each response
 //  moves the single Intruder location onto the detected unit, then orders
 //  the matching defenders to patrol there.
@@ -3105,16 +3119,17 @@ Conditions:
 	Bring("Player 1", "Men", "P5 Area", At least, 1);
 	Deaths("Player 8", "Terran Marine", At least, 120);
 Actions:
+	Move Location("Player 1", "Men", "P5 Area", "P5 Intruder");
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
-	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Infested Terran", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P5 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3123,16 +3138,17 @@ Conditions:
 	Bring("Player 2", "Men", "P5 Area", At least, 1);
 	Deaths("Player 8", "Terran Marine", At least, 120);
 Actions:
+	Move Location("Player 2", "Men", "P5 Area", "P5 Intruder");
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
-	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Infested Terran", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P5 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3141,16 +3157,17 @@ Conditions:
 	Bring("Player 3", "Men", "P5 Area", At least, 1);
 	Deaths("Player 8", "Terran Marine", At least, 120);
 Actions:
+	Move Location("Player 3", "Men", "P5 Area", "P5 Intruder");
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
-	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Infested Terran", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P5 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3159,16 +3176,17 @@ Conditions:
 	Bring("Player 4", "Men", "P5 Area", At least, 1);
 	Deaths("Player 8", "Terran Marine", At least, 120);
 Actions:
+	Move Location("Player 4", "Men", "P5 Area", "P5 Intruder");
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
-	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Area", Patrol);
-	Order("Player 5", "Infested Terran", "Anywhere", "P5 Area", Patrol);
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Intruder", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P5 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -4402,8 +4420,8 @@ Actions:
 //  Switch41 : next main assault from selected side is weakened
 //-----------------------------------------------------------------//
 
-// 8:00 selection. Remove the guaranteed-placement creep colonies first,
-// then create one Overmind Cocoon on a living colony side.
+// 8:00 selection. Overmind Cocoons are preplaced as invincible buildings.
+// The event removes the unselected cocoon and disables invincibility on the selected one.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -4415,11 +4433,6 @@ Conditions:
 	Switch("Switch41", Not Set);
 Actions:
 	Set Switch("Switch39", randomize);
-	Set Switch("Switch40", set);
-	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P6 Overmind");
-	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P6 Overmind");
-	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P7 Overmind");
-	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P7 Overmind");
 }
 
 Trigger("Player 8"){
@@ -4433,11 +4446,6 @@ Conditions:
 	Switch("Switch41", Not Set);
 Actions:
 	Set Switch("Switch39", clear);
-	Set Switch("Switch40", set);
-	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P6 Overmind");
-	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P6 Overmind");
-	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P7 Overmind");
-	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P7 Overmind");
 }
 
 Trigger("Player 8"){
@@ -4451,50 +4459,56 @@ Conditions:
 	Switch("Switch41", Not Set);
 Actions:
 	Set Switch("Switch39", set);
-	Set Switch("Switch40", set);
-	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P6 Overmind");
-	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P6 Overmind");
-	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P7 Overmind");
-	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P7 Overmind");
 }
 
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 5760);
-	Deaths("Player 8", "Terran Vulture", At most, 5784);
-	Switch("Switch40", Set);
+	Deaths("Player 8", "Terran Vulture", At least, 5796);
+	Deaths("Player 8", "Terran Vulture", At most, 5820);
+	Switch("Switch40", Not Set);
+	Switch("Switch41", Not Set);
 	Switch("Switch39", Not Set);
+	Switch("Switch31", Not Set);
+	Bring("Player 6", "Overmind Cocoon", "P6 Overmind", At least, 1);
 Actions:
-	Create Unit("Player 6", "Overmind Cocoon", 1, "P6 Overmind");
+	Remove Unit At Location("Player 7", "Overmind Cocoon", 1, "P7 Overmind");
+	Set Invincibility("Player 6", "Overmind Cocoon", "P6 Overmind", disabled);
 	Create Unit("Player 1", "Map Revealer", 1, "P6 Overmind");
 	Create Unit("Player 2", "Map Revealer", 1, "P6 Overmind");
 	Create Unit("Player 3", "Map Revealer", 1, "P6 Overmind");
 	Create Unit("Player 4", "Map Revealer", 1, "P6 Overmind");
+	Set Switch("Switch40", set);
 }
 
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 5760);
-	Deaths("Player 8", "Terran Vulture", At most, 5784);
-	Switch("Switch40", Set);
+	Deaths("Player 8", "Terran Vulture", At least, 5796);
+	Deaths("Player 8", "Terran Vulture", At most, 5820);
+	Switch("Switch40", Not Set);
+	Switch("Switch41", Not Set);
 	Switch("Switch39", Set);
+	Switch("Switch32", Not Set);
+	Bring("Player 7", "Overmind Cocoon", "P7 Overmind", At least, 1);
 Actions:
-	Create Unit("Player 7", "Overmind Cocoon", 1, "P7 Overmind");
+	Remove Unit At Location("Player 6", "Overmind Cocoon", 1, "P6 Overmind");
+	Set Invincibility("Player 7", "Overmind Cocoon", "P7 Overmind", disabled);
 	Create Unit("Player 1", "Map Revealer", 1, "P7 Overmind");
 	Create Unit("Player 2", "Map Revealer", 1, "P7 Overmind");
 	Create Unit("Player 3", "Map Revealer", 1, "P7 Overmind");
 	Create Unit("Player 4", "Map Revealer", 1, "P7 Overmind");
+	Set Switch("Switch40", set);
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 5760);
-	Deaths("Player 8", "Terran Vulture", At most, 5784);
+	Deaths("Player 8", "Terran Vulture", At least, 5796);
+	Deaths("Player 8", "Terran Vulture", At most, 5844);
 	Switch("Switch40", Set);
 	Switch("Switch39", Not Set);
+	Bring("Player 6", "Overmind Cocoon", "P6 Overmind", At least, 1);
 Actions:
 	Minimap Ping("P6 Overmind");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -4504,10 +4518,11 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 5760);
-	Deaths("Player 8", "Terran Vulture", At most, 5784);
+	Deaths("Player 8", "Terran Vulture", At least, 5796);
+	Deaths("Player 8", "Terran Vulture", At most, 5844);
 	Switch("Switch40", Set);
 	Switch("Switch39", Set);
+	Bring("Player 7", "Overmind Cocoon", "P7 Overmind", At least, 1);
 Actions:
 	Minimap Ping("P7 Overmind");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -4533,14 +4548,14 @@ Conditions:
 	Switch("Switch39", Not Set);
 	Bring("Player 6", "Overmind Cocoon", "P6 Overmind", At most, 0);
 Actions:
-	Set Resources("Player 1", Add, 1000, ore);
-	Set Resources("Player 2", Add, 1000, ore);
-	Set Resources("Player 3", Add, 1000, ore);
-	Set Resources("Player 4", Add, 1000, ore);
-	Set Resources("Player 1", Add, 500, gas);
-	Set Resources("Player 2", Add, 500, gas);
-	Set Resources("Player 3", Add, 500, gas);
-	Set Resources("Player 4", Add, 500, gas);
+	Set Resources("Player 1", Add, 500, ore);
+	Set Resources("Player 2", Add, 500, ore);
+	Set Resources("Player 3", Add, 500, ore);
+	Set Resources("Player 4", Add, 500, ore);
+	Set Resources("Player 1", Add, 250, gas);
+	Set Resources("Player 2", Add, 250, gas);
+	Set Resources("Player 3", Add, 250, gas);
+	Set Resources("Player 4", Add, 250, gas);
 	Create Unit("Player 1", "Map Revealer", 1, "P6 Overmind");
 	Create Unit("Player 2", "Map Revealer", 1, "P6 Overmind");
 	Create Unit("Player 3", "Map Revealer", 1, "P6 Overmind");
@@ -4556,14 +4571,14 @@ Conditions:
 	Switch("Switch39", Set);
 	Bring("Player 7", "Overmind Cocoon", "P7 Overmind", At most, 0);
 Actions:
-	Set Resources("Player 1", Add, 1000, ore);
-	Set Resources("Player 2", Add, 1000, ore);
-	Set Resources("Player 3", Add, 1000, ore);
-	Set Resources("Player 4", Add, 1000, ore);
-	Set Resources("Player 1", Add, 500, gas);
-	Set Resources("Player 2", Add, 500, gas);
-	Set Resources("Player 3", Add, 500, gas);
-	Set Resources("Player 4", Add, 500, gas);
+	Set Resources("Player 1", Add, 500, ore);
+	Set Resources("Player 2", Add, 500, ore);
+	Set Resources("Player 3", Add, 500, ore);
+	Set Resources("Player 4", Add, 500, ore);
+	Set Resources("Player 1", Add, 250, gas);
+	Set Resources("Player 2", Add, 250, gas);
+	Set Resources("Player 3", Add, 250, gas);
+	Set Resources("Player 4", Add, 250, gas);
 	Create Unit("Player 1", "Map Revealer", 1, "P7 Overmind");
 	Create Unit("Player 2", "Map Revealer", 1, "P7 Overmind");
 	Create Unit("Player 3", "Map Revealer", 1, "P7 Overmind");
@@ -4581,7 +4596,7 @@ Conditions:
 	Bring("Player 6", "Overmind Cocoon", "P6 Overmind", At most, 0);
 Actions:
 	Minimap Ping("P6 Overmind");
-	Display Text Message(Always Display, "<07>작전 보상: <04>오버마인드 고치 파괴. 미네랄 +1000 / 가스 +500. 이 군락의 다음 주공세 1회가 약화되었습니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <04>오버마인드 고치 파괴. 미네랄 +500 / 가스 +250. 이 군락의 다음 주공세 1회가 약화되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -4593,7 +4608,7 @@ Conditions:
 	Bring("Player 7", "Overmind Cocoon", "P7 Overmind", At most, 0);
 Actions:
 	Minimap Ping("P7 Overmind");
-	Display Text Message(Always Display, "<07>작전 보상: <04>오버마인드 고치 파괴. 미네랄 +1000 / 가스 +500. 이 군락의 다음 주공세 1회가 약화되었습니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <04>오버마인드 고치 파괴. 미네랄 +500 / 가스 +250. 이 군락의 다음 주공세 1회가 약화되었습니다.");
 }
 
 // Weakened roll: consume the selected side's next main assault cooldown
@@ -4855,7 +4870,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// Weakened spawn: 100 Zerglings total.
+// Weakened spawn: 70 Zerglings total.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -4863,10 +4878,10 @@ Conditions:
 	Deaths("Player 8", "Zerg Ultralisk", At least, 1);
 	Deaths("Player 8", "Protoss Reaver", Exactly, 0);
 Actions:
-	Create Unit("Player 6", "Zerg Zergling", 25, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 25, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 25, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 25, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 18, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 18, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 17, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 17, "P6 Spawn4");
 	Set Switch("Switch27", randomize);
 	Set Switch("Switch28", randomize);
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 2);
@@ -4882,10 +4897,10 @@ Conditions:
 	Deaths("Player 8", "Zerg Devourer", At least, 1);
 	Deaths("Player 8", "Protoss Observer", Exactly, 0);
 Actions:
-	Create Unit("Player 7", "Zerg Zergling", 25, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Zergling", 25, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Zergling", 25, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 25, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 18, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 18, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 17, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 17, "P7 Spawn4");
 	Set Switch("Switch29", randomize);
 	Set Switch("Switch30", randomize);
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 2);
