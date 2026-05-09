@@ -2,7 +2,7 @@
 //  Mission 1 - dynamic building tracking and all-out attack
 //
 //  Protoss Shuttle DC = Hunt location refresh timer (10s = 120)
-//  Barracks/Factory/Starport/Engineering Bay = P1/P2/P3/P4 attack timers (150s = 1800)
+//  Barracks/Factory/Starport/Engineering Bay = P1/P2/P3/P4 attack timers (60s = 720)
 //  Patrol priority is last-order-wins: P2 -> P4 -> P3 -> P1.
 //  Final target priority: P1 > P3 > P4 > P2.
 //-----------------------------------------------------------------//
@@ -60,7 +60,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 2", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Factory", At least, 1800);
+	Deaths("Player 8", "Terran Factory", At least, 720);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P2 Hunt", Patrol);
@@ -81,7 +81,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 4", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Engineering Bay", At least, 1800);
+	Deaths("Player 8", "Terran Engineering Bay", At least, 720);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P4 Hunt", Patrol);
@@ -102,7 +102,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 3", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Starport", At least, 1800);
+	Deaths("Player 8", "Terran Starport", At least, 720);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P3 Hunt", Patrol);
@@ -123,7 +123,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 1", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Barracks", At least, 1800);
+	Deaths("Player 8", "Terran Barracks", At least, 720);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P1 Hunt", Patrol);

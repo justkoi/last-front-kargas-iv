@@ -1,0 +1,21 @@
+//-----------------------------------------------------------------//
+//  [TEST MODE] Trigger the normal mission 1 clear path
+//
+//  This does not set mission 2 directly. It prepares the same condition
+//  used by Triggers/12_mission1_to_mission2_transition.txt:
+//    - Valkyrie DC = 1
+//    - P5 combat base is removed
+//
+//  Then mission1_to_mission2_transition advances Valkyrie 1 -> 2, grants rewards, and starts
+//  the normal mission 2 phase 1 flow.
+//-----------------------------------------------------------------//
+
+Trigger("Player 8"){
+Conditions:
+	Elapsed Time(At least, 5);
+Actions:
+	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
+	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
+	Kill Unit("Player 5", "Buildings");
+	Kill Unit("Player 5", "Men");
+}
