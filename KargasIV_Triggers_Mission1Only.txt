@@ -6,7 +6,7 @@
 //                      P6 Scout, P6 Intruder, P6 Spawn1~4,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Spawn1~4,
-//                      Easy Area, Mission2 Gate1~5, NewRoute1~15, Raid1~3, Waypoint1~5,
+//                      East Area, Mission2 Gate1~5, NewRoute1~15, Raid1~3, Waypoint1~5,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  Timer rule: 12 DC tick = 1 second
@@ -3180,13 +3180,13 @@ Conditions:
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Ground", "P6 Intruder");
-	Order("Player 6", "Zerg Zergling", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Lurker", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Guardian", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Infested Terran", "Easy Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3196,10 +3196,10 @@ Conditions:
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Air", "P6 Intruder");
-	Order("Player 6", "Zerg Hydralisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Scourge", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Devourer", "Easy Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3227,13 +3227,13 @@ Conditions:
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Ground", "P6 Intruder");
-	Order("Player 6", "Zerg Zergling", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Lurker", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Guardian", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Infested Terran", "Easy Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3243,10 +3243,10 @@ Conditions:
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Air", "P6 Intruder");
-	Order("Player 6", "Zerg Hydralisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Scourge", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Devourer", "Easy Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3274,13 +3274,13 @@ Conditions:
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Ground", "P6 Intruder");
-	Order("Player 6", "Zerg Zergling", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Lurker", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Guardian", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Infested Terran", "Easy Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3290,10 +3290,10 @@ Conditions:
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Air", "P6 Intruder");
-	Order("Player 6", "Zerg Hydralisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Scourge", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Devourer", "Easy Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3321,13 +3321,13 @@ Conditions:
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Ground", "P6 Intruder");
-	Order("Player 6", "Zerg Zergling", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Lurker", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Guardian", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Infested Terran", "Easy Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3337,10 +3337,10 @@ Conditions:
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Air", "P6 Intruder");
-	Order("Player 6", "Zerg Hydralisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Scourge", "Easy Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Devourer", "Easy Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3370,13 +3370,13 @@ Conditions:
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Ground", "P7 Intruder");
-	Order("Player 7", "Zerg Zergling", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Lurker", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Guardian", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Infested Terran", "Easy Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3386,10 +3386,10 @@ Conditions:
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Air", "P7 Intruder");
-	Order("Player 7", "Zerg Hydralisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Scourge", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Devourer", "Easy Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3417,13 +3417,13 @@ Conditions:
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Ground", "P7 Intruder");
-	Order("Player 7", "Zerg Zergling", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Lurker", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Guardian", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Infested Terran", "Easy Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3433,10 +3433,10 @@ Conditions:
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Air", "P7 Intruder");
-	Order("Player 7", "Zerg Hydralisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Scourge", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Devourer", "Easy Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3464,13 +3464,13 @@ Conditions:
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Ground", "P7 Intruder");
-	Order("Player 7", "Zerg Zergling", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Lurker", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Guardian", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Infested Terran", "Easy Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3480,10 +3480,10 @@ Conditions:
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Air", "P7 Intruder");
-	Order("Player 7", "Zerg Hydralisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Scourge", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Devourer", "Easy Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3511,13 +3511,13 @@ Conditions:
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Ground", "P7 Intruder");
-	Order("Player 7", "Zerg Zergling", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Lurker", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Guardian", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Infested Terran", "Easy Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -3527,10 +3527,10 @@ Conditions:
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Air", "P7 Intruder");
-	Order("Player 7", "Zerg Hydralisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Scourge", "Easy Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Devourer", "Easy Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
