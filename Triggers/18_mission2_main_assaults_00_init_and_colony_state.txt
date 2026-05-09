@@ -39,7 +39,7 @@ Actions:
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 }
 
-// First penalty assaults are staggered: one colony attacks after 1 minute, the other after 7 minutes.
+// First penalty assaults are staggered: one colony attacks after 1 minute, the other after 2 minutes.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -58,7 +58,7 @@ Conditions:
 	Switch("Switch26", Not Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 6480);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 10080);
 	Preserve Trigger();
 }
 
@@ -69,7 +69,7 @@ Conditions:
 	Switch("Switch26", Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 6480);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 10080);
 	Preserve Trigger();
 }
 
