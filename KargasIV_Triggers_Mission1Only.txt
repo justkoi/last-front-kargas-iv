@@ -1,6 +1,6 @@
 //============================================================
 //  KARGAS IV - Mission trigger notes
-//  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Area, P5 Scout, P5 Intruder,
+//  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
 //                      P5 Spawn1~4, P1~P4 Hunt, Player Destination,
 //                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
 //                      P6 Scout, P6 Intruder, P6 Spawn1~4,
@@ -399,6 +399,7 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 900);
+	Command("Player 5", "Zerg Cerebrate", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 1);
 	Preserve Trigger();
@@ -1455,6 +1456,75 @@ Actions:
 	Remove Unit("Player 2", "Map Revealer");
 	Remove Unit("Player 3", "Map Revealer");
 	Remove Unit("Player 4", "Map Revealer");
+}
+
+// 30:00 decision prompt - reveal the P5 Cerebrate as an optional pressure relief target.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 1800);
+	Elapsed Time(At most, 1802);
+	Command("Player 5", "Zerg Cerebrate", At least, 1);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Cerebrate");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Cerebrate");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Cerebrate");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Cerebrate");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 1800);
+	Elapsed Time(At most, 1802);
+	Command("Player 5", "Zerg Cerebrate", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Cerebrate");
+	Display Text Message(Always Display, "<1A>노바: <04>변형 공세의 동기화 신호를 역추적했습니다. 군락 안쪽에 별도의 지휘 개체가 있습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 1806);
+	Elapsed Time(At most, 1808);
+	Command("Player 5", "Zerg Cerebrate", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>방어선만 붙들고 있으면 계속 말라간다. 표시 지점에 타격대를 보내라.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 1812);
+	Elapsed Time(At most, 1814);
+	Command("Player 5", "Zerg Cerebrate", At least, 1);
+Actions:
+	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 방어선을 세우고 자원을 확보한 뒤 북서쪽 <11>주황색 저그<04> 군락 완전 파괴\n- 성공 조건: 북서쪽 <11>주황색 저그<04> 군락의 모든 해처리 / 레어 / 하이브 파괴\n- 보조 목표: 저그 정신체 파괴\n- 효과: 지휘체계 교란으로 후속 공세 규모 감소");
+	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체를 파괴하면 지휘체계 교란으로 공세의 규모가 감소합니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Cerebrate", At most, 0);
+Actions:
+	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체 제거 확인. 지휘체계 교란으로 후속 공세 규모가 감소합니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 정신체 파괴 보상. 미네랄 +1000 / 가스 +1000");
+	Set Resources("Current Player", Add, 1000, ore);
+	Set Resources("Current Player", Add, 1000, gas);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Elapsed Time(At least, 1890);
+	Elapsed Time(At most, 1892);
+Actions:
+	Kill Unit At Location("Player 1", "Map Revealer", 64, "P5 Cerebrate");
+	Kill Unit At Location("Player 2", "Map Revealer", 64, "P5 Cerebrate");
+	Kill Unit At Location("Player 3", "Map Revealer", 64, "P5 Cerebrate");
+	Kill Unit At Location("Player 4", "Map Revealer", 64, "P5 Cerebrate");
 }
 //-----------------------------------------------------------------//
 //  Mission 1 - dynamic building tracking and all-out attack

@@ -35,6 +35,7 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 900);
+	Command("Player 5", "Zerg Cerebrate", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 1);
 	Preserve Trigger();
