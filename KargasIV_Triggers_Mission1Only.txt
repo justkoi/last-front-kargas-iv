@@ -2664,44 +2664,44 @@ Actions:
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><03>미션 1 완료: 첫 군락 붕괴");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<1A>노바: <04>첫 군락 붕괴 확인. ...잠깐, 북부와 외곽에서 강한 생체 반응이 솟구칩니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>첫 군락 붕괴 확인. ...잠깐, 북동쪽과 남동쪽에서 생체 반응이 동시에 상승합니다.");
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 36);
-	Deaths("Player 8", "Terran Vulture", At most, 60);
+	Deaths("Player 8", "Terran Vulture", At least, 60);
+	Deaths("Player 8", "Terran Vulture", At most, 84);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>승리 보고 중지. 전 병력, 방어선으로 복귀해라. 아직 끝난 게 아니다.");
+	Display Text Message(Always Display, "<03>호크: <04>승리 보고 중지. 전 병력, 방어선으로 복귀해라. 이건 잔존 병력이 아니다.");
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 84);
-	Deaths("Player 8", "Terran Vulture", At most, 108);
-Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>두 반응 모두 아군 기지 방향으로 이동 중입니다. 접근 속도가 빠릅니다.");
-}
-
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 132);
+	Deaths("Player 8", "Terran Vulture", At least, 144);
 	Deaths("Player 8", "Terran Vulture", At most, 156);
 Actions:
-	Display Text Message(Always Display, "<07>군수지원: <04>북부 공세 대응 보급 투입. 미네랄 +800 / 가스 +200");
+	Display Text Message(Always Display, "<1A>노바: <04>지형 차단 신호가 약해집니다. 새 진입로를 전술 지도에 표시하겠습니다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 216);
+	Deaths("Player 8", "Terran Vulture", At most, 240);
+Actions:
+	Display Text Message(Always Display, "<07>군수지원: <04>전선 재정비 보급 투입. 미네랄 +2500 / 가스 +1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 132);
-	Deaths("Player 8", "Terran Vulture", At most, 156);
+	Deaths("Player 8", "Terran Vulture", At least, 216);
+	Deaths("Player 8", "Terran Vulture", At most, 240);
 Actions:
-	Set Resources("Current Player", Add, 800, ore);
-	Set Resources("Current Player", Add, 200, gas);
+	Set Resources("Current Player", Add, 2500, ore);
+	Set Resources("Current Player", Add, 1000, gas);
 }
 
 Trigger("Player 6"){
@@ -2729,6 +2729,24 @@ Actions:
 	Minimap Ping("Mission2 Gate4");
 	Minimap Ping("Mission2 Gate5");
 	Display Text Message(Always Display, "<07>전술지도: <04>새 진입로가 개방되었습니다. 표시된 통로를 확인하십시오.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 288);
+	Deaths("Player 8", "Terran Vulture", At most, 312);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>지금이 정비 시간이다. 수리하고, 병력을 모으고, 방어선을 다시 그어라.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 360);
+	Deaths("Player 8", "Terran Vulture", At most, 384);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>두 군락이 병력을 재집결시키고 있습니다. 공격 방향은 아직 고정되지 않았습니다.");
 }
 
 //-----------------------------------------------------------------//
@@ -3469,11 +3487,13 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 216);
-	Deaths("Player 8", "Terran Vulture", At most, 240);
+	Deaths("Player 8", "Terran Vulture", At least, 432);
+	Deaths("Player 8", "Terran Vulture", At most, 456);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 동북쪽 <15>갈색 저그<04> 군락과 동남쪽 <16>하얀색 저그<04> 군락 파괴\n- 성공 조건: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락의 해처리 / 레어 / 하이브 파괴\n- 위치: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락\n- 지침: 본진 방어선을 유지하면서 새 진입로를 통해 각 군락을 압박할 것");
+	Minimap Ping("P6 Base");
+	Minimap Ping("P7 Base");
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><03>미션 2: 잔존 군락 섬멸");
 	Display Text Message(Always Display, "<13><03>==========================================");
@@ -4027,7 +4047,8 @@ Actions:
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 }
 
-// First penalty assaults are staggered: one colony attacks after 1 minute, the other after 7 minutes.
+// First penalty assaults are staggered: one colony spawns at 5:00, the other at 5:30.
+// Roll warnings fire 10 seconds before the first spawn batch.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -4035,7 +4056,7 @@ Conditions:
 	Switch("Switch26", Not Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 10800);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 8040);
 	Preserve Trigger();
 }
 
@@ -4046,7 +4067,7 @@ Conditions:
 	Switch("Switch26", Not Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 6480);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 7680);
 	Preserve Trigger();
 }
 
@@ -4057,7 +4078,7 @@ Conditions:
 	Switch("Switch26", Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 6480);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 7680);
 	Preserve Trigger();
 }
 
@@ -4068,7 +4089,7 @@ Conditions:
 	Switch("Switch26", Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 10800);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 8040);
 	Preserve Trigger();
 }
 
