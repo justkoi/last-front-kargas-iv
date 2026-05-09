@@ -5587,6 +5587,62 @@ Actions:
 	Preserve Trigger();
 }
 
+// P6 assault hint - Wave 0: Ultralisk + Zergling
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 3);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+	Switch("Switch9", Not Set);
+	Switch("Switch10", Not Set);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>전방 질량 반응이 큽니다. 소형 무리가 길을 열고, 중장갑 돌파체가 뒤따릅니다.");
+	Preserve Trigger();
+}
+
+// P6 assault hint - Wave 1: Scourge + Devourer + Mutalisk
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 3);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+	Switch("Switch9", Set);
+	Switch("Switch10", Not Set);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>상공 신호가 날카롭게 갈라집니다. 아군 비행 전력을 물어뜯는 무리입니다.");
+	Preserve Trigger();
+}
+
+// P6 assault hint - Wave 2: All Hydralisk
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 3);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+	Switch("Switch9", Not Set);
+	Switch("Switch10", Set);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>가시를 쏘는 개체들이 밀집 대열로 접근합니다. 입구를 좁혀 대열을 끊으십시오.");
+	Preserve Trigger();
+}
+
+// P6 assault hint - Wave 3: Mutalisk + Guardian
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 3);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+	Switch("Switch9", Set);
+	Switch("Switch10", Set);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>느린 비행 반응이 후열에 붙었습니다. 방어선 사거리 밖에서 갉아먹으려 합니다.");
+	Preserve Trigger();
+}
+
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -5603,6 +5659,61 @@ Actions:
 	Preserve Trigger();
 }
 
+// P7 assault hint - Wave 0: Ultralisk + Zergling
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 3);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+	Switch("Switch11", Not Set);
+	Switch("Switch12", Not Set);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>전방 질량 반응이 큽니다. 소형 무리가 길을 열고, 중장갑 돌파체가 뒤따릅니다.");
+	Preserve Trigger();
+}
+
+// P7 assault hint - Wave 1: Scourge + Devourer + Mutalisk
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 3);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+	Switch("Switch11", Set);
+	Switch("Switch12", Not Set);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>상공 신호가 날카롭게 갈라집니다. 아군 비행 전력을 물어뜯는 무리입니다.");
+	Preserve Trigger();
+}
+
+// P7 assault hint - Wave 2: All Hydralisk
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 3);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+	Switch("Switch11", Not Set);
+	Switch("Switch12", Set);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>가시를 쏘는 개체들이 밀집 대열로 접근합니다. 입구를 좁혀 대열을 끊으십시오.");
+	Preserve Trigger();
+}
+
+// P7 assault hint - Wave 3: Mutalisk + Guardian
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 3);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+	Switch("Switch11", Set);
+	Switch("Switch12", Set);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>느린 비행 반응이 후열에 붙었습니다. 방어선 사거리 밖에서 갉아먹으려 합니다.");
+	Preserve Trigger();
+}
 // P6 Hunt target correction. Dead players are never kept as the selected target.
 Trigger("Player 6"){
 Conditions:
