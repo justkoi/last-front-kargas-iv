@@ -7,7 +7,8 @@
 //-----------------------------------------------------------------//
 
 // 8:00 selection. Remove the guaranteed-placement creep colonies first,
-// then create one Overmind Cocoon on a living colony side.
+// then create one Overmind Cocoon a few seconds later so the building
+// footprint has time to clear.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -19,11 +20,10 @@ Conditions:
 	Switch("Switch41", Not Set);
 Actions:
 	Set Switch("Switch39", randomize);
-	Set Switch("Switch40", set);
-	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P6 Overmind");
-	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P6 Overmind");
-	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P7 Overmind");
-	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P7 Overmind");
+	Remove Unit At Location("Player 6", "Zerg Creep Colony", 64, "P6 Overmind");
+	Remove Unit At Location("Player 7", "Zerg Creep Colony", 64, "P6 Overmind");
+	Remove Unit At Location("Player 6", "Zerg Creep Colony", 64, "P7 Overmind");
+	Remove Unit At Location("Player 7", "Zerg Creep Colony", 64, "P7 Overmind");
 }
 
 Trigger("Player 8"){
@@ -37,11 +37,10 @@ Conditions:
 	Switch("Switch41", Not Set);
 Actions:
 	Set Switch("Switch39", clear);
-	Set Switch("Switch40", set);
-	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P6 Overmind");
-	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P6 Overmind");
-	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P7 Overmind");
-	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P7 Overmind");
+	Remove Unit At Location("Player 6", "Zerg Creep Colony", 64, "P6 Overmind");
+	Remove Unit At Location("Player 7", "Zerg Creep Colony", 64, "P6 Overmind");
+	Remove Unit At Location("Player 6", "Zerg Creep Colony", 64, "P7 Overmind");
+	Remove Unit At Location("Player 7", "Zerg Creep Colony", 64, "P7 Overmind");
 }
 
 Trigger("Player 8"){
@@ -55,50 +54,56 @@ Conditions:
 	Switch("Switch41", Not Set);
 Actions:
 	Set Switch("Switch39", set);
-	Set Switch("Switch40", set);
-	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P6 Overmind");
-	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P6 Overmind");
-	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P7 Overmind");
-	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P7 Overmind");
+	Remove Unit At Location("Player 6", "Zerg Creep Colony", 64, "P6 Overmind");
+	Remove Unit At Location("Player 7", "Zerg Creep Colony", 64, "P6 Overmind");
+	Remove Unit At Location("Player 6", "Zerg Creep Colony", 64, "P7 Overmind");
+	Remove Unit At Location("Player 7", "Zerg Creep Colony", 64, "P7 Overmind");
 }
 
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 5760);
-	Deaths("Player 8", "Terran Vulture", At most, 5784);
-	Switch("Switch40", Set);
+	Deaths("Player 8", "Terran Vulture", At least, 5796);
+	Deaths("Player 8", "Terran Vulture", At most, 5820);
+	Switch("Switch40", Not Set);
+	Switch("Switch41", Not Set);
 	Switch("Switch39", Not Set);
+	Switch("Switch31", Not Set);
 Actions:
 	Create Unit("Player 6", "Overmind Cocoon", 1, "P6 Overmind");
 	Create Unit("Player 1", "Map Revealer", 1, "P6 Overmind");
 	Create Unit("Player 2", "Map Revealer", 1, "P6 Overmind");
 	Create Unit("Player 3", "Map Revealer", 1, "P6 Overmind");
 	Create Unit("Player 4", "Map Revealer", 1, "P6 Overmind");
+	Set Switch("Switch40", set);
 }
 
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 5760);
-	Deaths("Player 8", "Terran Vulture", At most, 5784);
-	Switch("Switch40", Set);
+	Deaths("Player 8", "Terran Vulture", At least, 5796);
+	Deaths("Player 8", "Terran Vulture", At most, 5820);
+	Switch("Switch40", Not Set);
+	Switch("Switch41", Not Set);
 	Switch("Switch39", Set);
+	Switch("Switch32", Not Set);
 Actions:
 	Create Unit("Player 7", "Overmind Cocoon", 1, "P7 Overmind");
 	Create Unit("Player 1", "Map Revealer", 1, "P7 Overmind");
 	Create Unit("Player 2", "Map Revealer", 1, "P7 Overmind");
 	Create Unit("Player 3", "Map Revealer", 1, "P7 Overmind");
 	Create Unit("Player 4", "Map Revealer", 1, "P7 Overmind");
+	Set Switch("Switch40", set);
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 5760);
-	Deaths("Player 8", "Terran Vulture", At most, 5784);
+	Deaths("Player 8", "Terran Vulture", At least, 5796);
+	Deaths("Player 8", "Terran Vulture", At most, 5844);
 	Switch("Switch40", Set);
 	Switch("Switch39", Not Set);
+	Bring("Player 6", "Overmind Cocoon", "P6 Overmind", At least, 1);
 Actions:
 	Minimap Ping("P6 Overmind");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -108,10 +113,11 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 5760);
-	Deaths("Player 8", "Terran Vulture", At most, 5784);
+	Deaths("Player 8", "Terran Vulture", At least, 5796);
+	Deaths("Player 8", "Terran Vulture", At most, 5844);
 	Switch("Switch40", Set);
 	Switch("Switch39", Set);
+	Bring("Player 7", "Overmind Cocoon", "P7 Overmind", At least, 1);
 Actions:
 	Minimap Ping("P7 Overmind");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
