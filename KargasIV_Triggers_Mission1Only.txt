@@ -4127,7 +4127,7 @@ Actions:
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 }
 
-// First penalty assaults are staggered: one colony spawns at 5:00, the other at 5:30.
+// First penalty assaults are staggered: one colony spawns at 3:00, the other at 3:30.
 // Roll warnings fire 10 seconds before the first spawn batch.
 Trigger("Player 6"){
 Conditions:
@@ -4136,7 +4136,7 @@ Conditions:
 	Switch("Switch26", Not Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 8040);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 9480);
 	Preserve Trigger();
 }
 
@@ -4147,7 +4147,7 @@ Conditions:
 	Switch("Switch26", Not Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 7680);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 9120);
 	Preserve Trigger();
 }
 
@@ -4158,7 +4158,7 @@ Conditions:
 	Switch("Switch26", Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 7680);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 9120);
 	Preserve Trigger();
 }
 
@@ -4169,7 +4169,7 @@ Conditions:
 	Switch("Switch26", Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 8040);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 9480);
 	Preserve Trigger();
 }
 
