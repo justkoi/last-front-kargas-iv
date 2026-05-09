@@ -13,6 +13,10 @@ Actions:
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 3);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 	Set Deaths("Player 8", "Protoss Shuttle", Set To, 0);
+	Set Deaths("Player 8", "Terran Barracks", Set To, 0);
+	Set Deaths("Player 8", "Terran Factory", Set To, 0);
+	Set Deaths("Player 8", "Terran Starport", Set To, 0);
+	Set Deaths("Player 8", "Terran Engineering Bay", Set To, 0);
 	Set Deaths("Player 8", "Terran Firebat", Set To, 0);
 	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
 	Set Deaths("Player 8", "Terran Medic", Set To, 0);
