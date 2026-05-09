@@ -193,11 +193,10 @@ SC1 TrigEdit triggers can fail compile with `Too many actions` when a large wave
 
 ## Build Verification
 
-Use the project build scripts only when the user wants build verification or when no contrary instruction has been given.
+Do not run the project build scripts by default. Run `build_triggers.bat`, `build_triggers.ps1`, `build_triggers_withTest.bat`, or related build scripts only when the user explicitly asks for a build or import-ready generated trigger output.
 
-- If the user says not to run build verification, do not run `build_triggers.bat` or `build_triggers_withTest.bat` for that turn.
-- In that case, still do lightweight text checks where useful, such as inspecting diffs, counting actions, or searching for referenced location names.
-- If a test build is run, restore the normal generated trigger output afterward with `build_triggers.bat` unless the user explicitly wants the test output left active.
+- When build verification is not explicitly requested, still do lightweight text checks where useful, such as inspecting diffs, counting actions, or searching for referenced location names.
+- If a test build is explicitly requested and run, restore the normal generated trigger output afterward with `build_triggers.bat` unless the user explicitly wants the test output left active.
 
 ## Location Reference Changes
 
