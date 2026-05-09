@@ -1,0 +1,499 @@
+//-----------------------------------------------------------------//
+//  Mission 2 - Overmind Cocoon pressure-relief event
+//
+//  Switch39 : selected cocoon side (Not Set=P6, Set=P7)
+//  Switch40 : cocoon event active / reward unpaid
+//  Switch41 : next main assault from selected side is weakened
+//-----------------------------------------------------------------//
+
+// 8:00 selection. Remove the guaranteed-placement creep colonies first,
+// then create one Overmind Cocoon on a living colony side.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 5760);
+	Deaths("Player 8", "Terran Vulture", At most, 5784);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch40", Not Set);
+	Switch("Switch41", Not Set);
+Actions:
+	Set Switch("Switch39", randomize);
+	Set Switch("Switch40", set);
+	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P6 Overmind");
+	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P6 Overmind");
+	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P7 Overmind");
+	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P7 Overmind");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 5760);
+	Deaths("Player 8", "Terran Vulture", At most, 5784);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Set);
+	Switch("Switch40", Not Set);
+	Switch("Switch41", Not Set);
+Actions:
+	Set Switch("Switch39", clear);
+	Set Switch("Switch40", set);
+	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P6 Overmind");
+	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P6 Overmind");
+	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P7 Overmind");
+	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P7 Overmind");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 5760);
+	Deaths("Player 8", "Terran Vulture", At most, 5784);
+	Switch("Switch31", Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch40", Not Set);
+	Switch("Switch41", Not Set);
+Actions:
+	Set Switch("Switch39", set);
+	Set Switch("Switch40", set);
+	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P6 Overmind");
+	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P6 Overmind");
+	Kill Unit At Location("Player 6", "Zerg Creep Colony", 64, "P7 Overmind");
+	Kill Unit At Location("Player 7", "Zerg Creep Colony", 64, "P7 Overmind");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 5760);
+	Deaths("Player 8", "Terran Vulture", At most, 5784);
+	Switch("Switch40", Set);
+	Switch("Switch39", Not Set);
+Actions:
+	Create Unit("Player 6", "Overmind Cocoon", 1, "P6 Overmind");
+	Create Unit("Player 1", "Map Revealer", 1, "P6 Overmind");
+	Create Unit("Player 2", "Map Revealer", 1, "P6 Overmind");
+	Create Unit("Player 3", "Map Revealer", 1, "P6 Overmind");
+	Create Unit("Player 4", "Map Revealer", 1, "P6 Overmind");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 5760);
+	Deaths("Player 8", "Terran Vulture", At most, 5784);
+	Switch("Switch40", Set);
+	Switch("Switch39", Set);
+Actions:
+	Create Unit("Player 7", "Overmind Cocoon", 1, "P7 Overmind");
+	Create Unit("Player 1", "Map Revealer", 1, "P7 Overmind");
+	Create Unit("Player 2", "Map Revealer", 1, "P7 Overmind");
+	Create Unit("Player 3", "Map Revealer", 1, "P7 Overmind");
+	Create Unit("Player 4", "Map Revealer", 1, "P7 Overmind");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 5760);
+	Deaths("Player 8", "Terran Vulture", At most, 5784);
+	Switch("Switch40", Set);
+	Switch("Switch39", Not Set);
+Actions:
+	Minimap Ping("P6 Overmind");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>군락 변이 속도가 비정상적으로 상승합니다. 오버마인드 계열 조직이 직접 촉진하고 있습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 5760);
+	Deaths("Player 8", "Terran Vulture", At most, 5784);
+	Switch("Switch40", Set);
+	Switch("Switch39", Set);
+Actions:
+	Minimap Ping("P7 Overmind");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>군락 변이 속도가 비정상적으로 상승합니다. 오버마인드 계열 조직이 직접 촉진하고 있습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 5832);
+	Deaths("Player 8", "Terran Vulture", At most, 5856);
+	Switch("Switch40", Set);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>그 고치를 끊으면 다음 공세가 흐트러진다. 표시 지점에 타격대를 보내라.");
+	Display Text Message(Always Display, "<07>작전 정보: <04>오버마인드 고치를 파괴하면 해당 군락의 다음 주공세 1회가 약화됩니다.");
+}
+
+// Destruction reward and one-shot weakening flag.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch40", Set);
+	Switch("Switch39", Not Set);
+	Bring("Player 6", "Overmind Cocoon", "P6 Overmind", At most, 0);
+Actions:
+	Set Resources("Player 1", Add, 1000, ore);
+	Set Resources("Player 2", Add, 1000, ore);
+	Set Resources("Player 3", Add, 1000, ore);
+	Set Resources("Player 4", Add, 1000, ore);
+	Set Resources("Player 1", Add, 500, gas);
+	Set Resources("Player 2", Add, 500, gas);
+	Set Resources("Player 3", Add, 500, gas);
+	Set Resources("Player 4", Add, 500, gas);
+	Create Unit("Player 1", "Map Revealer", 1, "P6 Overmind");
+	Create Unit("Player 2", "Map Revealer", 1, "P6 Overmind");
+	Create Unit("Player 3", "Map Revealer", 1, "P6 Overmind");
+	Create Unit("Player 4", "Map Revealer", 1, "P6 Overmind");
+	Set Switch("Switch40", clear);
+	Set Switch("Switch41", set);
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch40", Set);
+	Switch("Switch39", Set);
+	Bring("Player 7", "Overmind Cocoon", "P7 Overmind", At most, 0);
+Actions:
+	Set Resources("Player 1", Add, 1000, ore);
+	Set Resources("Player 2", Add, 1000, ore);
+	Set Resources("Player 3", Add, 1000, ore);
+	Set Resources("Player 4", Add, 1000, ore);
+	Set Resources("Player 1", Add, 500, gas);
+	Set Resources("Player 2", Add, 500, gas);
+	Set Resources("Player 3", Add, 500, gas);
+	Set Resources("Player 4", Add, 500, gas);
+	Create Unit("Player 1", "Map Revealer", 1, "P7 Overmind");
+	Create Unit("Player 2", "Map Revealer", 1, "P7 Overmind");
+	Create Unit("Player 3", "Map Revealer", 1, "P7 Overmind");
+	Create Unit("Player 4", "Map Revealer", 1, "P7 Overmind");
+	Set Switch("Switch40", clear);
+	Set Switch("Switch41", set);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch40", Not Set);
+	Switch("Switch41", Set);
+	Switch("Switch39", Not Set);
+	Bring("Player 6", "Overmind Cocoon", "P6 Overmind", At most, 0);
+Actions:
+	Minimap Ping("P6 Overmind");
+	Display Text Message(Always Display, "<07>작전 보상: <04>오버마인드 고치 파괴. 미네랄 +1000 / 가스 +500. 이 군락의 다음 주공세 1회가 약화되었습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch40", Not Set);
+	Switch("Switch41", Set);
+	Switch("Switch39", Set);
+	Bring("Player 7", "Overmind Cocoon", "P7 Overmind", At most, 0);
+Actions:
+	Minimap Ping("P7 Overmind");
+	Display Text Message(Always Display, "<07>작전 보상: <04>오버마인드 고치 파괴. 미네랄 +1000 / 가스 +500. 이 군락의 다음 주공세 1회가 약화되었습니다.");
+}
+
+// Weakened roll: consume the selected side's next main assault cooldown
+// before the normal random roll files can consume it.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch41", Set);
+	Switch("Switch39", Not Set);
+	Switch("Switch31", Not Set);
+	Deaths("Player 8", "Zerg Zergling", At least, 11160);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Switch("Switch27", Not Set);
+	Switch("Switch28", Not Set);
+Actions:
+	Set Switch("Switch14", randomize);
+	Set Switch("Switch15", randomize);
+	Set Switch("Switch16", randomize);
+	Set Switch("Switch20", randomize);
+	Set Switch("Switch21", randomize);
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 4);
+	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 11160);
+	Set Switch("Switch41", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch41", Set);
+	Switch("Switch39", Not Set);
+	Switch("Switch31", Not Set);
+	Deaths("Player 8", "Zerg Zergling", At least, 11520);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Switch("Switch27", Set);
+	Switch("Switch28", Not Set);
+Actions:
+	Set Switch("Switch14", randomize);
+	Set Switch("Switch15", randomize);
+	Set Switch("Switch16", randomize);
+	Set Switch("Switch20", randomize);
+	Set Switch("Switch21", randomize);
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 4);
+	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 11520);
+	Set Switch("Switch41", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch41", Set);
+	Switch("Switch39", Not Set);
+	Switch("Switch31", Not Set);
+	Deaths("Player 8", "Zerg Zergling", At least, 11880);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Switch("Switch27", Not Set);
+	Switch("Switch28", Set);
+Actions:
+	Set Switch("Switch14", randomize);
+	Set Switch("Switch15", randomize);
+	Set Switch("Switch16", randomize);
+	Set Switch("Switch20", randomize);
+	Set Switch("Switch21", randomize);
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 4);
+	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 11880);
+	Set Switch("Switch41", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch41", Set);
+	Switch("Switch39", Not Set);
+	Switch("Switch31", Not Set);
+	Deaths("Player 8", "Zerg Zergling", At least, 11520);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Switch("Switch27", Set);
+	Switch("Switch28", Set);
+Actions:
+	Set Switch("Switch14", randomize);
+	Set Switch("Switch15", randomize);
+	Set Switch("Switch16", randomize);
+	Set Switch("Switch20", randomize);
+	Set Switch("Switch21", randomize);
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 4);
+	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 11520);
+	Set Switch("Switch41", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch41", Set);
+	Switch("Switch39", Set);
+	Switch("Switch32", Not Set);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 11160);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Switch("Switch29", Not Set);
+	Switch("Switch30", Not Set);
+Actions:
+	Set Switch("Switch17", randomize);
+	Set Switch("Switch18", randomize);
+	Set Switch("Switch19", randomize);
+	Set Switch("Switch22", randomize);
+	Set Switch("Switch23", randomize);
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 4);
+	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 11160);
+	Set Switch("Switch41", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch41", Set);
+	Switch("Switch39", Set);
+	Switch("Switch32", Not Set);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 11520);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Switch("Switch29", Set);
+	Switch("Switch30", Not Set);
+Actions:
+	Set Switch("Switch17", randomize);
+	Set Switch("Switch18", randomize);
+	Set Switch("Switch19", randomize);
+	Set Switch("Switch22", randomize);
+	Set Switch("Switch23", randomize);
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 4);
+	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 11520);
+	Set Switch("Switch41", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch41", Set);
+	Switch("Switch39", Set);
+	Switch("Switch32", Not Set);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 11880);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Switch("Switch29", Not Set);
+	Switch("Switch30", Set);
+Actions:
+	Set Switch("Switch17", randomize);
+	Set Switch("Switch18", randomize);
+	Set Switch("Switch19", randomize);
+	Set Switch("Switch22", randomize);
+	Set Switch("Switch23", randomize);
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 4);
+	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 11880);
+	Set Switch("Switch41", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch41", Set);
+	Switch("Switch39", Set);
+	Switch("Switch32", Not Set);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 11520);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Switch("Switch29", Set);
+	Switch("Switch30", Set);
+Actions:
+	Set Switch("Switch17", randomize);
+	Set Switch("Switch18", randomize);
+	Set Switch("Switch19", randomize);
+	Set Switch("Switch22", randomize);
+	Set Switch("Switch23", randomize);
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 4);
+	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 11520);
+	Set Switch("Switch41", clear);
+	Preserve Trigger();
+}
+
+// Weakened warning and 10-second spawn delay.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 4);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+Actions:
+	Minimap Ping("P6 Spawn1");
+	Minimap Ping("P6 Spawn2");
+	Minimap Ping("P6 Spawn3");
+	Minimap Ping("P6 Spawn4");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<06>경보: <04>동북쪽 군락 공세 접근. <07>오버마인드 고치 파괴로 규모가 약화되었습니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 4);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+Actions:
+	Minimap Ping("P7 Spawn1");
+	Minimap Ping("P7 Spawn2");
+	Minimap Ping("P7 Spawn3");
+	Minimap Ping("P7 Spawn4");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<06>경보: <04>동남쪽 군락 공세 접근. <07>오버마인드 고치 파괴로 규모가 약화되었습니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 4);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 120);
+Actions:
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 5);
+	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 1);
+	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 4);
+	Deaths("Player 8", "Zerg Devourer", At least, 120);
+Actions:
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 5);
+	Set Deaths("Player 8", "Zerg Devourer", Set To, 1);
+	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Preserve Trigger();
+}
+
+// Weakened spawn: 100 Zerglings total.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 5);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 1);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 0);
+Actions:
+	Create Unit("Player 6", "Zerg Zergling", 25, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 25, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 25, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 25, "P6 Spawn4");
+	Set Switch("Switch27", randomize);
+	Set Switch("Switch28", randomize);
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 2);
+	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 5);
+	Deaths("Player 8", "Zerg Devourer", At least, 1);
+	Deaths("Player 8", "Protoss Observer", Exactly, 0);
+Actions:
+	Create Unit("Player 7", "Zerg Zergling", 25, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 25, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 25, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 25, "P7 Spawn4");
+	Set Switch("Switch29", randomize);
+	Set Switch("Switch30", randomize);
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 2);
+	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Preserve Trigger();
+}

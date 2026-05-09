@@ -29,6 +29,9 @@ Actions:
 	Set Switch("Switch30", clear);
 	Set Switch("Switch37", clear);
 	Set Switch("Switch38", clear);
+	Set Switch("Switch39", clear);
+	Set Switch("Switch40", clear);
+	Set Switch("Switch41", clear);
 	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
 	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
