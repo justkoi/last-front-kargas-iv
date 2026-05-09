@@ -879,13 +879,13 @@ Actions:
 	Preserve Trigger();
 }
 
-// End assault lock tail.
+// End assault lock tail after 120 seconds.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At least, 721);
+	Deaths("Player 8", "Zerg Scourge", At least, 1441);
 Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
