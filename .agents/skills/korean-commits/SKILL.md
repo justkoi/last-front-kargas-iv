@@ -1,16 +1,27 @@
 ---
 name: korean-commits
-description: Use this skill whenever you are about to create a git commit in this repository (E:/유즈맵제작, the Kargas IV StarCraft UMS map project). Commit messages here must be written in Korean — both the subject line and the body. Apply this rule even if the user asks for a commit in English, in mixed English/Korean, or with default phrasing; default to Korean and only deviate if the user explicitly overrides with something like "영어로 커밋해줘" in this turn. Trigger for any phrasing of a commit request: "커밋해줘", "커밋해주세요", "commit this", "commit the work", "make a commit", "stage and commit", etc.
+description: >
+  Use this skill whenever you are about to create a git commit in this repository
+  (E:/유즈맵제작, the Kargas IV StarCraft UMS map project). Commit messages and
+  commit-related explanations here must be written in Korean — both the subject
+  line and the body, plus the user-facing post-commit summary. Apply this rule
+  even if the user asks for a commit in English, in mixed English/Korean, or
+  with default phrasing; default to Korean and only deviate if the user explicitly
+  overrides with something like "영어로 커밋해줘" in this turn. Trigger for any
+  phrasing of a commit request: "커밋해줘", "커밋해주세요", "commit this",
+  "commit the work", "make a commit", "stage and commit", etc.
 ---
 
 # Korean Commit Messages
 
 이 저장소의 모든 커밋 메시지는 한국어로 작성합니다.
+커밋 후 사용자에게 설명할 때도 커밋 해시, 제목, 포함/제외한 변경 사항을 한국어로 설명합니다.
 
 ## 적용 범위
 
 - **제목 (subject)**: 한국어로 작성. 50자 이내 권장.
 - **본문 (body)**: 한국어로 작성. 변경 이유와 영향을 간결히 설명.
+- **커밋 후 설명**: 한국어로 작성. 커밋 해시, 커밋 제목, 포함한 파일/제외한 파일을 짧게 설명.
 - **Co-Authored-By 등 트레일러**: 영어 그대로 유지 (관습대로).
 - **파일 경로/식별자/명령어/심볼 이름**: 원문(영어) 유지. 번역하지 말 것.
 
