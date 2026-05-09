@@ -1,6 +1,14 @@
 ---
 name: write-triggers
-description: Use this skill whenever you write, edit, or debug SCMDraft 2 TrigEdit text triggers for this StarCraft Brood War UMS map (E:/유즈맵제작, Kargas IV). Triggers in this style use a specific syntax (Trigger owner blocks, Conditions/Actions sections, Death Counter pattern, Hyper Trigger, Bring/Order with player/group, AI Script codes) and a tight set of conventions established in this project (12-tick = 1 second formula, Player 8 owns DC slots, individual unit Order calls instead of "Men", etc.). Apply this skill for any task involving Trigger("..."){ Conditions: ... Actions: ... } blocks, .scx map triggers, AI scripts, Death Counter logic, or anything in the Triggers/ folder. Also: whenever you learn something new about SC1 trigger behavior during the work (a new AI script code, a quirk in trigger evaluation order, a unit name SCMDraft accepts, a wrong assumption that got corrected), proactively offer to record it in this skill so future sessions inherit the knowledge — push the suggestion rather than waiting to be asked.
+description: >
+  Use this skill whenever you write, edit, or debug SCMDraft 2 TrigEdit text
+  triggers for this StarCraft Brood War UMS map (E:/유즈맵제작, Kargas IV).
+  Apply it for Trigger("..."){ Conditions: ... Actions: ... } blocks, .scx map
+  triggers, AI scripts, Death Counter logic, and anything in the Triggers/
+  folder. Follow the project's conventions for 12-tick seconds, Player 8 DC
+  slots, Hyper Triggers, Bring/Order syntax, AI Script codes, and individual
+  unit Order calls instead of "Men". When you learn a new SC1 trigger behavior
+  or corrected assumption, proactively offer to record it here.
 ---
 
 # Writing SCMDraft 2 Triggers for Kargas IV
@@ -96,6 +104,7 @@ Switch("Switch1", Not Set);
 - **`Wait()` 액션은 Hyper Trigger 부담** — 1회성 종결 트리거 외엔 `Wait` 대신 DC 카운터 사용.
 - **트리거 owner `Player 6`가 SCMDraft에서 활성화 안 돼있으면 실행 안 됨** — Player Settings에서 P6 슬롯 확인 필수.
 - **`Bring`의 location은 정밀하게** — Beacon 유닛 위 1×1 location은 유닛이 들어갈 수 없음. 3×3 이상 빈 땅 덮도록.
+- **에너지 시전자 스폰은 Unit Properties 사용** — 디파일러처럼 에너지가 전술 가치인 유닛은 기존 프로젝트 관례인 슬롯 `1`로 `Create Unit with Properties("Player 7", "Zerg Defiler", 1, "Raid1", 1);`처럼 생성. 즉시 스킬 사용이 필요하면 plain `Create Unit`로 만들지 않는다.
 
 ## 빌드/배포
 
