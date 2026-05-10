@@ -40,16 +40,16 @@ Conditions:
 	Switch("Switch12", Not Set);
 Actions:
 	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn4");
 	Set Deaths("Player 8", "Protoss Observer", Set To, 2);
 	Preserve Trigger();
@@ -66,16 +66,16 @@ Conditions:
 	Switch("Switch12", Not Set);
 Actions:
 	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
 	Set Switch("Switch29", randomize);
 	Set Switch("Switch30", randomize);
