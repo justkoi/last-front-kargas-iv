@@ -1,10 +1,11 @@
 //-----------------------------------------------------------------//
-//  Mission 1 - dynamic building tracking and all-out attack
+//  Mission 1 - dynamic building tracking and random all-out attack
 //
 //  Protoss Shuttle DC = Hunt location refresh timer (10s = 120)
-//  Barracks/Factory/Starport/Engineering Bay = P1/P2/P3/P4 attack timers (60s = 720)
-//  Patrol priority is last-order-wins: P2 -> P4 -> P3 -> P1.
-//  Final target priority: P1 > P3 > P4 > P2.
+//  Terran Barracks DC = P5 all-out attack timer (60s = 720)
+//  Switch42/43 = P5 random Hunt target selector
+//    clear/clear = P1, set/clear = P2, clear/set = P3, set/set = P4.
+//  If a dead player is selected, the timer is not reset and rolls again.
 //-----------------------------------------------------------------//
 
 Trigger("Player 5"){
@@ -59,63 +60,10 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Command("Player 2", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Factory", At least, 720);
+	Deaths("Player 8", "Terran Barracks", At least, 720);
 Actions:
-	Order("Player 5", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P2 Hunt", Patrol);
-	Order("Player 5", "Zerg Lurker", "Anywhere", "P2 Hunt", Patrol);
-	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P2 Hunt", Patrol);
-	Order("Player 5", "Zerg Scourge", "Anywhere", "P2 Hunt", Patrol);
-	Order("Player 5", "Zerg Queen", "Anywhere", "P2 Hunt", Patrol);
-	Order("Player 5", "Zerg Defiler", "Anywhere", "P2 Hunt", Patrol);
-	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P2 Hunt", Patrol);
-	Order("Player 5", "Zerg Guardian", "Anywhere", "P2 Hunt", Patrol);
-	Order("Player 5", "Zerg Devourer", "Anywhere", "P2 Hunt", Patrol);
-	Order("Player 5", "Infested Terran", "Anywhere", "P2 Hunt", Patrol);
-	Set Deaths("Player 8", "Terran Factory", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 5"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Command("Player 4", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Engineering Bay", At least, 720);
-Actions:
-	Order("Player 5", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P4 Hunt", Patrol);
-	Order("Player 5", "Zerg Lurker", "Anywhere", "P4 Hunt", Patrol);
-	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P4 Hunt", Patrol);
-	Order("Player 5", "Zerg Scourge", "Anywhere", "P4 Hunt", Patrol);
-	Order("Player 5", "Zerg Queen", "Anywhere", "P4 Hunt", Patrol);
-	Order("Player 5", "Zerg Defiler", "Anywhere", "P4 Hunt", Patrol);
-	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P4 Hunt", Patrol);
-	Order("Player 5", "Zerg Guardian", "Anywhere", "P4 Hunt", Patrol);
-	Order("Player 5", "Zerg Devourer", "Anywhere", "P4 Hunt", Patrol);
-	Order("Player 5", "Infested Terran", "Anywhere", "P4 Hunt", Patrol);
-	Set Deaths("Player 8", "Terran Engineering Bay", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 5"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Command("Player 3", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Starport", At least, 720);
-Actions:
-	Order("Player 5", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
-	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P3 Hunt", Patrol);
-	Order("Player 5", "Zerg Lurker", "Anywhere", "P3 Hunt", Patrol);
-	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P3 Hunt", Patrol);
-	Order("Player 5", "Zerg Scourge", "Anywhere", "P3 Hunt", Patrol);
-	Order("Player 5", "Zerg Queen", "Anywhere", "P3 Hunt", Patrol);
-	Order("Player 5", "Zerg Defiler", "Anywhere", "P3 Hunt", Patrol);
-	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P3 Hunt", Patrol);
-	Order("Player 5", "Zerg Guardian", "Anywhere", "P3 Hunt", Patrol);
-	Order("Player 5", "Zerg Devourer", "Anywhere", "P3 Hunt", Patrol);
-	Order("Player 5", "Infested Terran", "Anywhere", "P3 Hunt", Patrol);
-	Set Deaths("Player 8", "Terran Starport", Set To, 0);
+	Set Switch("Switch42", randomize);
+	Set Switch("Switch43", randomize);
 	Preserve Trigger();
 }
 
@@ -124,6 +72,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Command("Player 1", "Buildings", At least, 1);
 	Deaths("Player 8", "Terran Barracks", At least, 720);
+	Switch("Switch42", Not Set);
+	Switch("Switch43", Not Set);
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P1 Hunt", Patrol);
@@ -136,6 +86,75 @@ Actions:
 	Order("Player 5", "Zerg Guardian", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Devourer", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 5", "Infested Terran", "Anywhere", "P1 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran Barracks", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 2", "Buildings", At least, 1);
+	Deaths("Player 8", "Terran Barracks", At least, 720);
+	Switch("Switch42", Set);
+	Switch("Switch43", Not Set);
+Actions:
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P2 Hunt", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P2 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran Barracks", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 3", "Buildings", At least, 1);
+	Deaths("Player 8", "Terran Barracks", At least, 720);
+	Switch("Switch42", Not Set);
+	Switch("Switch43", Set);
+Actions:
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P3 Hunt", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P3 Hunt", Patrol);
+	Set Deaths("Player 8", "Terran Barracks", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 4", "Buildings", At least, 1);
+	Deaths("Player 8", "Terran Barracks", At least, 720);
+	Switch("Switch42", Set);
+	Switch("Switch43", Set);
+Actions:
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P4 Hunt", Patrol);
+	Order("Player 5", "Infested Terran", "Anywhere", "P4 Hunt", Patrol);
 	Set Deaths("Player 8", "Terran Barracks", Set To, 0);
 	Preserve Trigger();
 }

@@ -11,9 +11,9 @@
 //    are not touched.
 //
 //  Disabled timer groups:
-//    P5 Mission 1: Barracks / Factory / Starport / Engineering Bay
-//    P6 Hunt     : Firebat / Ghost / Medic / SCV
-//    P7 Hunt     : Arbiter / Dark Archon / Queen / Defiler
+//    P5 Hunt     : Barracks
+//    P6 Hunt     : Firebat
+//    P7 Hunt     : Arbiter
 //-----------------------------------------------------------------//
 
 Trigger("Player 8"){
@@ -21,16 +21,7 @@ Conditions:
 	Always();
 Actions:
 	Set Deaths("Player 8", "Terran Barracks", Set To, 0);
-	Set Deaths("Player 8", "Terran Factory", Set To, 0);
-	Set Deaths("Player 8", "Terran Starport", Set To, 0);
-	Set Deaths("Player 8", "Terran Engineering Bay", Set To, 0);
 	Set Deaths("Player 8", "Terran Firebat", Set To, 0);
-	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
-	Set Deaths("Player 8", "Terran Medic", Set To, 0);
-	Set Deaths("Player 8", "Terran SCV", Set To, 0);
 	Set Deaths("Player 8", "Protoss Arbiter", Set To, 0);
-	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
-	Set Deaths("Player 8", "Zerg Queen", Set To, 0);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }

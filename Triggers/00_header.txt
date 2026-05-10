@@ -25,18 +25,9 @@
 //    Protoss Probe        : P5 scout rotation index
 //    Protoss Scout        : P6 scout rotation index
 //    Protoss Carrier      : P7 scout rotation index
-//    Terran Barracks      : P5 P1 Hunt all-out attack timer
-//    Terran Factory       : P5 P2 Hunt all-out attack timer
-//    Terran Starport      : P5 P3 Hunt all-out attack timer
-//    Terran Engineering Bay: P5 P4 Hunt all-out attack timer
-//    Terran Firebat       : P6 P1 Hunt all-out attack timer
-//    Terran Ghost         : P6 P2 Hunt all-out attack timer
-//    Terran Medic         : P6 P3 Hunt all-out attack timer
-//    Terran SCV           : P6 P4 Hunt all-out attack timer
-//    Protoss Arbiter      : P7 P1 Hunt all-out attack timer
-//    Protoss Dark Archon  : P7 P2 Hunt all-out attack timer
-//    Zerg Queen           : P7 P3 Hunt all-out attack timer
-//    Zerg Defiler         : P7 P4 Hunt all-out attack timer
+//    Terran Barracks      : P5 Hunt all-out attack timer
+//    Terran Firebat       : P6 Hunt all-out attack timer
+//    Protoss Arbiter      : P7 Hunt all-out attack timer
 //    Terran Goliath       : P5 scout overlord cycle timer
 //    Protoss Archon       : P6 scout overlord cycle timer
 //    Protoss Dark Templar : P7 scout overlord cycle timer
@@ -97,6 +88,9 @@
 //    Switch39   : mission2 overmind cocoon side selector (clear=P6, set=P7)
 //    Switch40   : mission2 overmind cocoon active / reward unpaid
 //    Switch41   : mission2 overmind cocoon weakened-assault pending
+//    Switch42/43: P5 hunt all-out random target selector
+//    Switch44/45: P6 hunt all-out random target selector
+//    Switch46/47: P7 hunt all-out random target selector
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:

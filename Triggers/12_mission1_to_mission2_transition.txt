@@ -14,17 +14,14 @@ Actions:
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 	Set Deaths("Player 8", "Protoss Shuttle", Set To, 0);
 	Set Deaths("Player 8", "Terran Barracks", Set To, 0);
-	Set Deaths("Player 8", "Terran Factory", Set To, 0);
-	Set Deaths("Player 8", "Terran Starport", Set To, 0);
-	Set Deaths("Player 8", "Terran Engineering Bay", Set To, 0);
 	Set Deaths("Player 8", "Terran Firebat", Set To, 0);
-	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
-	Set Deaths("Player 8", "Terran Medic", Set To, 0);
-	Set Deaths("Player 8", "Terran SCV", Set To, 0);
 	Set Deaths("Player 8", "Protoss Arbiter", Set To, 0);
-	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
-	Set Deaths("Player 8", "Zerg Queen", Set To, 0);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
+	Set Switch("Switch42", clear);
+	Set Switch("Switch43", clear);
+	Set Switch("Switch44", clear);
+	Set Switch("Switch45", clear);
+	Set Switch("Switch46", clear);
+	Set Switch("Switch47", clear);
 	Kill Unit("Player 5", "Zerg Sunken Colony");
 	Kill Unit("Player 5", "Zerg Spore Colony");
 }

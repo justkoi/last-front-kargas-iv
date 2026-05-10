@@ -1,4 +1,4 @@
-// P6 Wave 1 - Scourge + Devourer + Mutalisk
+// P6 Wave 1 - Scourge + Devourer + Mutalisk + Queen
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -67,16 +67,20 @@ Conditions:
 Actions:
 	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn1");
+	Create Unit with Properties("Player 6", "Zerg Queen", 2, "P6 Spawn1", 2);
 	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn2");
+	Create Unit with Properties("Player 6", "Zerg Queen", 2, "P6 Spawn2", 2);
 	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn3");
+	Create Unit with Properties("Player 6", "Zerg Queen", 1, "P6 Spawn3", 2);
 	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn4");
+	Create Unit with Properties("Player 6", "Zerg Queen", 1, "P6 Spawn4", 2);
 	Set Switch("Switch27", randomize);
 	Set Switch("Switch28", randomize);
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 2);

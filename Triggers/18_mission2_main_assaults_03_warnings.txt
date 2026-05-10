@@ -30,7 +30,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 assault hint - Wave 1: Scourge + Devourer + Mutalisk
+// P6 assault hint - Wave 1: Scourge + Devourer + Mutalisk + Queen
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -102,7 +102,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 assault hint - Wave 1: Scourge + Devourer + Mutalisk
+// P7 assault hint - Wave 1: Scourge + Devourer + Mutalisk + Queen
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
