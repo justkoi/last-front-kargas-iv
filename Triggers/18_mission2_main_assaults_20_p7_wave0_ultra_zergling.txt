@@ -11,19 +11,19 @@ Conditions:
 Actions:
 	Create Unit("Player 7", "Zerg Ultralisk", 6, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Zergling", 52, "P7 Spawn1");
-	Create Unit with Properties("Player 7", "Zerg Defiler", 2, "P7 Spawn1", 1);
+	Create Unit with Properties("Player 7", "Zerg Defiler", 2, "P7 Spawn1", 2);
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Ultralisk", 6, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Zergling", 52, "P7 Spawn2");
-	Create Unit with Properties("Player 7", "Zerg Defiler", 2, "P7 Spawn2", 1);
+	Create Unit with Properties("Player 7", "Zerg Defiler", 2, "P7 Spawn2", 2);
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Ultralisk", 6, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Zergling", 52, "P7 Spawn3");
-	Create Unit with Properties("Player 7", "Zerg Defiler", 2, "P7 Spawn3", 1);
+	Create Unit with Properties("Player 7", "Zerg Defiler", 2, "P7 Spawn3", 2);
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Ultralisk", 6, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Zergling", 52, "P7 Spawn4");
-	Create Unit with Properties("Player 7", "Zerg Defiler", 2, "P7 Spawn4", 1);
+	Create Unit with Properties("Player 7", "Zerg Defiler", 2, "P7 Spawn4", 2);
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
 	Set Switch("Switch29", randomize);
 	Set Switch("Switch30", randomize);
