@@ -19,8 +19,8 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 6528);
-	Deaths("Player 8", "Terran Vulture", At most, 6552);
+	Deaths("Player 8", "Terran Vulture", At least, 6540);
+	Deaths("Player 8", "Terran Vulture", At most, 6564);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>공중 방어망을 돌려라. 주전선만 보다가 뒤를 내주지 마라.");
 }

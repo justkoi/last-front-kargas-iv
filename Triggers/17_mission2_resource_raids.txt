@@ -171,8 +171,8 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 4368);
-	Deaths("Player 8", "Terran Vulture", At most, 4392);
+	Deaths("Player 8", "Terran Vulture", At least, 4380);
+	Deaths("Player 8", "Terran Vulture", At most, 4404);
 	Switch("Switch2", Set);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>기동대가 있으면 찔러라. 저장낭만 깨면 보급으로 돌릴 수 있다.");

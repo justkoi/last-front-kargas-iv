@@ -1,3 +1,148 @@
+// Early assault analysis cues. These are strategic reads, not immediate contact warnings.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 6);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+	Switch("Switch9", Not Set);
+	Switch("Switch10", Not Set);
+Actions:
+	Minimap Ping("P6 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락에서 대규모 집결 신호를 포착했습니다. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 6);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+	Switch("Switch9", Set);
+	Switch("Switch10", Not Set);
+Actions:
+	Minimap Ping("P6 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락 상공에서 공중 개체가 분리 집결합니다. 아군 비행 전력을 노리는 패턴입니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 6);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+	Switch("Switch9", Not Set);
+	Switch("Switch10", Set);
+Actions:
+	Minimap Ping("P6 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락 지상 통로에 가시형 개체가 밀집합니다. 좁은 입구를 노리는 대열입니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 6);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+	Switch("Switch9", Set);
+	Switch("Switch10", Set);
+Actions:
+	Minimap Ping("P6 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락 후열에 느린 비행 반응이 붙습니다. 장거리 공성형 접근 패턴입니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+Actions:
+	Minimap Ping("P6 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락의 집결 신호를 포착했습니다. 고치 파괴 여파로 반응 밀도는 낮습니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 6);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+	Switch("Switch11", Not Set);
+	Switch("Switch12", Not Set);
+Actions:
+	Minimap Ping("P7 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락에서 대규모 집결 신호를 포착했습니다. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 6);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+	Switch("Switch11", Set);
+	Switch("Switch12", Not Set);
+Actions:
+	Minimap Ping("P7 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락 상공에서 공중 개체가 분리 집결합니다. 아군 비행 전력을 노리는 패턴입니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 6);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+	Switch("Switch11", Not Set);
+	Switch("Switch12", Set);
+Actions:
+	Minimap Ping("P7 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락 지상 통로에 가시형 개체가 밀집합니다. 좁은 입구를 노리는 대열입니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 6);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+	Switch("Switch11", Set);
+	Switch("Switch12", Set);
+Actions:
+	Minimap Ping("P7 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락 후열에 느린 비행 반응이 붙습니다. 장거리 공성형 접근 패턴입니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+Actions:
+	Minimap Ping("P7 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락의 집결 신호를 포착했습니다. 고치 파괴 여파로 반응 밀도는 낮습니다.");
+	Preserve Trigger();
+}
+
 // Assault warnings are owned by P1-P4 so human players see text, sound, and minimap pings.
 // They fire on the first tick after the roll so P1-P4 can see the P6/P7-owned state change.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

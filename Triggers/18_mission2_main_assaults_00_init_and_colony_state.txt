@@ -32,6 +32,9 @@ Actions:
 	Set Switch("Switch39", clear);
 	Set Switch("Switch40", clear);
 	Set Switch("Switch41", clear);
+	Set Switch("Switch48", clear);
+	Set Switch("Switch49", clear);
+	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
 	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
 	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
@@ -115,6 +118,71 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
 	Set Switch("Switch32", set);
+	Preserve Trigger();
+}
+
+// Cancel queued-but-not-spawned main assaults when their MainBase tech core collapses.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Lair", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Hive", "P6 MainBase", At most, 0);
+	Deaths("Player 8", "Zerg Lurker", At least, 3);
+	Deaths("Player 8", "Zerg Lurker", At most, 4);
+Actions:
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
+	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Lair", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Hive", "P6 MainBase", At most, 0);
+	Deaths("Player 8", "Zerg Lurker", At least, 6);
+	Deaths("Player 8", "Zerg Lurker", At most, 7);
+Actions:
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
+	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Lair", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Hive", "P7 MainBase", At most, 0);
+	Deaths("Player 8", "Zerg Mutalisk", At least, 3);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 4);
+Actions:
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Lair", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Hive", "P7 MainBase", At most, 0);
+	Deaths("Player 8", "Zerg Mutalisk", At least, 6);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 7);
+Actions:
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
 

@@ -2,7 +2,7 @@
 //  KARGAS IV - Mission trigger notes
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
 //                      P5 Spawn1~4, P1~P4 Hunt, Player Destination,
-//                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
+//                      P6 Base, P6 Home, P6 MiniBase, P6 Area, P6 Area Ground, P6 Area Air,
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4,
@@ -32,6 +32,7 @@
 //    Protoss Archon       : P6 scout overlord cycle timer
 //    Protoss Dark Templar : P7 scout overlord cycle timer
 //    Protoss Shuttle      : P1~P4 Hunt location refresh timer
+//    Terran Ghost         : P6 MiniBase reveal timer
 //    Terran Wraith        : mission1 late-wave cooldown
 //    Terran Battlecruiser : P5 overlord supply cycle timer
 //    Protoss Dragoon      : P6 overlord supply cycle timer
@@ -42,8 +43,8 @@
 //    Zerg Creep Colony    : mission1 P6/P7 creep colony warning counter
 //    Zerg Zergling        : P6 mission2 penalty assault cooldown
 //    Zerg Hydralisk       : P7 mission2 penalty assault cooldown
-//    Zerg Lurker          : P6 mission2 penalty assault ready flag
-//    Zerg Mutalisk        : P7 mission2 penalty assault ready flag
+//    Zerg Lurker          : P6 mission2 penalty assault ready flag (0=idle, 1=spawning, 2=relay, 3=warning, 4=weakened warning, 5=weakened spawning, 6=pre-analysis queued, 7=weakened pre-analysis queued)
+//    Zerg Mutalisk        : P7 mission2 penalty assault ready flag (0=idle, 1=spawning, 2=relay, 3=warning, 4=weakened warning, 5=weakened spawning, 6=pre-analysis queued, 7=weakened pre-analysis queued)
 //    Zerg Ultralisk       : P6 mission2 penalty assault spawn step timer
 //    Zerg Devourer        : P7 mission2 penalty assault spawn step timer
 //    Zerg Scourge         : P6 mission2 penalty assault waypoint window timer
@@ -91,6 +92,8 @@
 //    Switch42/43: P5 hunt all-out random target selector
 //    Switch44/45: P6 hunt all-out random target selector
 //    Switch46/47: P7 hunt all-out random target selector
+//    Switch48   : P6 MiniBase revealed
+//    Switch49   : P6 MiniBase reward/message paid
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
