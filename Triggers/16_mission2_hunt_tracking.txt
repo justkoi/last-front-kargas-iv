@@ -2,8 +2,8 @@
 //  Mission-independent - dynamic building tracking and random all-out attack
 //
 //  Protoss Shuttle DC = Hunt location refresh timer (10s = 120)
-//  Terran Firebat DC = P6 all-out attack timer (60s = 720)
-//  Protoss Arbiter DC = P7 all-out attack timer (60s = 720)
+//  Terran Firebat DC = P6 all-out attack timer (50s = 600)
+//  Protoss Arbiter DC = P7 all-out attack timer (50s = 600)
 //  Switch44/45 = P6 random Hunt target selector
 //  Switch46/47 = P7 random Hunt target selector
 //    clear/clear = P1, set/clear = P2, clear/set = P3, set/set = P4.
@@ -56,7 +56,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Firebat", At least, 720);
+	Deaths("Player 8", "Terran Firebat", At least, 600);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
 Actions:
 	Set Switch("Switch44", randomize);
@@ -67,7 +67,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Command("Player 1", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Firebat", At least, 720);
+	Deaths("Player 8", "Terran Firebat", At least, 600);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
 	Switch("Switch44", Not Set);
 	Switch("Switch45", Not Set);
@@ -90,7 +90,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Command("Player 2", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Firebat", At least, 720);
+	Deaths("Player 8", "Terran Firebat", At least, 600);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
 	Switch("Switch44", Set);
 	Switch("Switch45", Not Set);
@@ -113,7 +113,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Command("Player 3", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Firebat", At least, 720);
+	Deaths("Player 8", "Terran Firebat", At least, 600);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
 	Switch("Switch44", Not Set);
 	Switch("Switch45", Set);
@@ -136,7 +136,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Command("Player 4", "Buildings", At least, 1);
-	Deaths("Player 8", "Terran Firebat", At least, 720);
+	Deaths("Player 8", "Terran Firebat", At least, 600);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
 	Switch("Switch44", Set);
 	Switch("Switch45", Set);
@@ -158,7 +158,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss Arbiter", At least, 720);
+	Deaths("Player 8", "Protoss Arbiter", At least, 600);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 Actions:
 	Set Switch("Switch46", randomize);
@@ -169,7 +169,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Command("Player 1", "Buildings", At least, 1);
-	Deaths("Player 8", "Protoss Arbiter", At least, 720);
+	Deaths("Player 8", "Protoss Arbiter", At least, 600);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 	Switch("Switch46", Not Set);
 	Switch("Switch47", Not Set);
@@ -192,7 +192,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Command("Player 2", "Buildings", At least, 1);
-	Deaths("Player 8", "Protoss Arbiter", At least, 720);
+	Deaths("Player 8", "Protoss Arbiter", At least, 600);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 	Switch("Switch46", Set);
 	Switch("Switch47", Not Set);
@@ -215,7 +215,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Command("Player 3", "Buildings", At least, 1);
-	Deaths("Player 8", "Protoss Arbiter", At least, 720);
+	Deaths("Player 8", "Protoss Arbiter", At least, 600);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 	Switch("Switch46", Not Set);
 	Switch("Switch47", Set);
@@ -238,7 +238,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Command("Player 4", "Buildings", At least, 1);
-	Deaths("Player 8", "Protoss Arbiter", At least, 720);
+	Deaths("Player 8", "Protoss Arbiter", At least, 600);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 	Switch("Switch46", Set);
 	Switch("Switch47", Set);
