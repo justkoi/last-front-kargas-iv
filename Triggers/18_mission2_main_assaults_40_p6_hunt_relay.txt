@@ -1,10 +1,69 @@
-// Random Hunt relay. Active for 30s after final spawn batch.
+// Random Hunt relay. Active for 120s after final spawn batch.
+// Relay orders fire in four 10s pulses to reduce repeated pathing churn.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+Actions:
+	Set Switch("Switch51", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", At most, 120);
+Actions:
+	Set Switch("Switch51", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", At least, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 480);
+Actions:
+	Set Switch("Switch51", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", At least, 720);
+	Deaths("Player 8", "Zerg Scourge", At most, 840);
+Actions:
+	Set Switch("Switch51", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", At least, 1080);
+	Deaths("Player 8", "Zerg Scourge", At most, 1200);
+Actions:
+	Set Switch("Switch51", set);
+	Preserve Trigger();
+}
+
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -28,7 +87,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -52,7 +112,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -76,7 +137,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -100,7 +162,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -124,7 +187,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -148,7 +212,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -172,7 +237,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -196,7 +262,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -220,7 +287,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -244,7 +312,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -268,7 +337,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -292,7 +362,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -316,7 +387,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -340,7 +412,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -364,7 +437,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -388,7 +462,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -412,7 +487,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -436,7 +512,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -460,7 +537,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -484,7 +562,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -508,7 +587,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -532,7 +612,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -556,7 +637,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -580,7 +662,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -604,7 +687,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -628,7 +712,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -652,7 +737,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -676,7 +762,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -700,7 +787,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -724,7 +812,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -748,7 +837,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -772,7 +862,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -796,7 +887,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -820,7 +912,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -844,7 +937,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -868,7 +962,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -892,7 +987,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -916,7 +1012,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -940,7 +1037,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 360);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
 	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -970,5 +1068,6 @@ Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Switch("Switch51", clear);
 	Preserve Trigger();
 }

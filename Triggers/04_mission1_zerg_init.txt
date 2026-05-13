@@ -71,11 +71,12 @@ Actions:
 	Preserve Trigger();
 }
 
-// 미션2 진입 시 갈색/하얀색 군락 활성화
+// 미션2 목표 표시 시 갈색/하얀색 군락 활성화
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Deaths("Player 8", "Terran Vulture", At least, 756);
+	Deaths("Player 8", "Terran Vulture", At most, 780);
 Actions:
 	Set Resources("Player 6", Set To, 999999, ore);
 	Set Resources("Player 6", Set To, 999999, gas);
@@ -86,6 +87,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Deaths("Player 8", "Terran Vulture", At least, 756);
+	Deaths("Player 8", "Terran Vulture", At most, 780);
 Actions:
 }

@@ -22,6 +22,9 @@ Actions:
 	Set Switch("Switch45", clear);
 	Set Switch("Switch46", clear);
 	Set Switch("Switch47", clear);
+	Set Switch("Switch50", clear);
+	Set Switch("Switch51", clear);
+	Set Switch("Switch52", clear);
 	Kill Unit("Player 5", "Zerg Sunken Colony");
 	Kill Unit("Player 5", "Zerg Spore Colony");
 }
@@ -94,28 +97,9 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 252);
 	Deaths("Player 8", "Terran Vulture", At most, 276);
 Actions:
+	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate1");
 	Minimap Ping("Mission2 Gate1");
 	Display Text Message(Always Display, "<1A>노바: <04>1번 통로를 확인했습니다. 폭이 넓어 공격에는 유리하지만, 방어선은 쉽게 벌어질 겁니다.");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 288);
-	Deaths("Player 8", "Terran Vulture", At most, 312);
-Actions:
-	Minimap Ping("Mission2 Gate2");
-	Display Text Message(Always Display, "<1A>노바: <04>2번은 낮은 언덕길입니다. 언덕 위에 매복하면 방어에 유리합니다.");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 324);
-	Deaths("Player 8", "Terran Vulture", At most, 348);
-Actions:
-	Minimap Ping("Mission2 Gate3");
-	Display Text Message(Always Display, "<1A>노바: <04>3번은 좁은 샛길입니다. 우회 병력이 스며들 수 있으니 감시를 붙이십시오.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -124,6 +108,29 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 360);
 	Deaths("Player 8", "Terran Vulture", At most, 384);
 Actions:
+	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate2");
+	Minimap Ping("Mission2 Gate2");
+	Display Text Message(Always Display, "<1A>노바: <04>2번은 낮은 언덕길입니다. 언덕 위에 매복하면 방어에 유리합니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 468);
+	Deaths("Player 8", "Terran Vulture", At most, 492);
+Actions:
+	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate3");
+	Minimap Ping("Mission2 Gate3");
+	Display Text Message(Always Display, "<1A>노바: <04>3번은 좁은 샛길입니다. 우회 병력이 스며들 수 있으니 감시를 붙이십시오.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 576);
+	Deaths("Player 8", "Terran Vulture", At most, 600);
+Actions:
+	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate5");
 	Minimap Ping("Mission2 Gate5");
 	Display Text Message(Always Display, "<1A>노바: <04>5번은 아래쪽 통로입니다. 안쪽의 좁은 협곡에서 막아 서면 수비가 유리합니다.");
 }
@@ -131,9 +138,10 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 396);
-	Deaths("Player 8", "Terran Vulture", At most, 420);
+	Deaths("Player 8", "Terran Vulture", At least, 684);
+	Deaths("Player 8", "Terran Vulture", At most, 708);
 Actions:
+	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate4");
 	Minimap Ping("Mission2 Gate4");
 	Center View("Mission2 Gate4");
 	Display Text Message(Always Display, "<03>호크: <04>마지막 4번은 아군 기지 방어의 핵심 입구다. 반드시 단단히 방비해라.");
@@ -142,8 +150,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 468);
-	Deaths("Player 8", "Terran Vulture", At most, 492);
+	Deaths("Player 8", "Terran Vulture", At least, 864);
+	Deaths("Player 8", "Terran Vulture", At most, 888);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>지금이 정비 시간이다. 수리하고, 병력을 모으고, 방어선을 다시 그어라.");
 }
@@ -151,115 +159,15 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 576);
-	Deaths("Player 8", "Terran Vulture", At most, 600);
+	Deaths("Player 8", "Terran Vulture", At least, 1080);
+	Deaths("Player 8", "Terran Vulture", At most, 1104);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>두 군락이 병력을 재집결시키고 있습니다. 공격 방향은 아직 고정되지 않았습니다.");
 }
 
 //-----------------------------------------------------------------//
-//  Mission 2 route revealers - keep newly opened routes and hive homes visible for 10 minutes.
+//  Mission 2 gate revealers are created one at a time with each gate ping.
 //-----------------------------------------------------------------//
-
-Trigger("Player 1"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 168);
-	Deaths("Player 8", "Terran Vulture", At most, 192);
-Actions:
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute1");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute2");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute3");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute4");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute5");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute6");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute7");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute8");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute9");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute10");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute11");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute12");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute13");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute14");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute15");
-	Create Unit("Player 1", "Map Revealer", 1, "P6 Home");
-	Create Unit("Player 1", "Map Revealer", 1, "P7 Home");
-}
-
-Trigger("Player 2"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 168);
-	Deaths("Player 8", "Terran Vulture", At most, 192);
-Actions:
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute1");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute2");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute3");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute4");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute5");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute6");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute7");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute8");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute9");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute10");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute11");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute12");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute13");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute14");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute15");
-	Create Unit("Player 2", "Map Revealer", 1, "P6 Home");
-	Create Unit("Player 2", "Map Revealer", 1, "P7 Home");
-}
-
-Trigger("Player 3"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 168);
-	Deaths("Player 8", "Terran Vulture", At most, 192);
-Actions:
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute1");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute2");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute3");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute4");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute5");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute6");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute7");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute8");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute9");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute10");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute11");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute12");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute13");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute14");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute15");
-	Create Unit("Player 3", "Map Revealer", 1, "P6 Home");
-	Create Unit("Player 3", "Map Revealer", 1, "P7 Home");
-}
-
-Trigger("Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 168);
-	Deaths("Player 8", "Terran Vulture", At most, 192);
-Actions:
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute1");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute2");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute3");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute4");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute5");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute6");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute7");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute8");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute9");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute10");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute11");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute12");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute13");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute14");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute15");
-	Create Unit("Player 4", "Map Revealer", 1, "P6 Home");
-	Create Unit("Player 4", "Map Revealer", 1, "P7 Home");
-}
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:

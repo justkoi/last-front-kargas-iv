@@ -11,16 +11,17 @@
 //  timed batches to reduce blocked creation space. Spawn timers only count up;
 //  separate stage counters prevent repeated or chained creation. Air-heavy
 //  waves are split into smaller sub-batches. Spawned groups
-//  rally to Waypoint1~5. For 30s after the final batch,
+//  rally to Waypoint1~5. For 120s after the final batch,
 //  P6/P7 assault units reaching the selected waypoint redirect
 //  toward the already selected P1~P4 Hunt location.
 //-----------------------------------------------------------------//
 
-// Reset assault counters on mission2 entry.
-Trigger("Player 6"){
+// Reset assault counters once on mission2 entry.
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", Exactly, 0);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch50", Not Set);
 Actions:
 	Set Switch("Switch26", randomize);
 	Set Switch("Switch27", set);
@@ -47,50 +48,59 @@ Actions:
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 }
 
-// First penalty assaults are staggered: one colony spawns at 3:00, the other at 3:30.
+// First penalty assaults are staggered: one colony spawns at 4:00, the other at 6:13.
 // Roll warnings fire 10 seconds before the first spawn batch.
-Trigger("Player 6"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch50", Not Set);
 	Switch("Switch26", Not Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 9480);
-	Preserve Trigger();
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 8760);
 }
 
-Trigger("Player 6"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch50", Not Set);
 	Switch("Switch26", Not Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 9120);
-	Preserve Trigger();
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 7164);
 }
 
-Trigger("Player 6"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch50", Not Set);
 	Switch("Switch26", Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 9120);
-	Preserve Trigger();
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 7164);
 }
 
-Trigger("Player 6"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch50", Not Set);
 	Switch("Switch26", Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 9480);
-	Preserve Trigger();
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 8760);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch50", Not Set);
+Actions:
+	Set Switch("Switch50", set);
 }
 
 // If a colony's MainBase tech core collapses, lock that colony's main assault.

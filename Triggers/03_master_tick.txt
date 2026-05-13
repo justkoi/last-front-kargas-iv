@@ -40,6 +40,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 756);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1);

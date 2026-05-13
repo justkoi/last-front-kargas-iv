@@ -6,11 +6,13 @@
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 432);
-	Deaths("Player 8", "Terran Vulture", At most, 456);
+	Deaths("Player 8", "Terran Vulture", At least, 756);
+	Deaths("Player 8", "Terran Vulture", At most, 780);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 동북쪽 <15>갈색 저그<04> 군락과 동남쪽 <16>하얀색 저그<04> 군락 파괴\n- 성공 조건: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락의 해처리 / 레어 / 하이브 파괴\n- 위치: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락\n- 지침: 본진 방어선을 유지하면서 새 진입로를 통해 각 군락을 압박할 것");
+	Create Unit("Current Player", "Map Revealer", 1, "P6 Home");
+	Create Unit("Current Player", "Map Revealer", 1, "P7 Home");
 	Minimap Ping("P6 Base");
 	Minimap Ping("P7 Base");
 	Display Text Message(Always Display, "<13><03>==========================================");
@@ -21,8 +23,47 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 504);
-	Deaths("Player 8", "Terran Vulture", At most, 528);
+	Deaths("Player 8", "Terran Vulture", At least, 756);
+	Deaths("Player 8", "Terran Vulture", At most, 780);
+Actions:
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute5");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 780);
+	Deaths("Player 8", "Terran Vulture", At most, 804);
+Actions:
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute6");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute10");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 804);
+	Deaths("Player 8", "Terran Vulture", At most, 828);
+Actions:
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute14");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute15");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 972);
+	Deaths("Player 8", "Terran Vulture", At most, 996);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>방어선을 유지하면서 한쪽씩 무너뜨린다. 남은 군락을 모두 섬멸한다.");
 }
