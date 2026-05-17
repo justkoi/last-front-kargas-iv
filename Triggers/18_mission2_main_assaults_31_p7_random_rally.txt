@@ -1,10 +1,76 @@
 // Random rally destination for newly spawned batches.
+// Switch54 opens for one trigger cycle after each P7 spawn batch.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+Actions:
+	Set Switch("Switch54", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+Actions:
+	Set Switch("Switch54", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 36);
+Actions:
+	Set Switch("Switch54", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 72);
+Actions:
+	Set Switch("Switch54", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 108);
+Actions:
+	Set Switch("Switch54", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
+	Deaths("Player 8", "Zerg Guardian", Exactly, 0);
+Actions:
+	Set Switch("Switch54", set);
+	Preserve Trigger();
+}
+
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch54", Set);
 	Switch("Switch17", Not Set);
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Not Set);
@@ -62,6 +128,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch54", Set);
 	Switch("Switch17", Set);
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Not Set);
@@ -119,6 +186,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch54", Set);
 	Switch("Switch17", Not Set);
 	Switch("Switch18", Set);
 	Switch("Switch19", Not Set);
@@ -176,6 +244,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch54", Set);
 	Switch("Switch17", Set);
 	Switch("Switch18", Set);
 	Switch("Switch19", Not Set);
@@ -233,6 +302,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch54", Set);
 	Switch("Switch17", Not Set);
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Set);
@@ -290,6 +360,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch54", Set);
 	Switch("Switch17", Set);
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Set);
@@ -347,6 +418,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch54", Set);
 	Switch("Switch17", Not Set);
 	Switch("Switch18", Set);
 	Switch("Switch19", Set);
@@ -404,6 +476,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", At least, 1);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 2);
+	Switch("Switch54", Set);
 	Switch("Switch17", Set);
 	Switch("Switch18", Set);
 	Switch("Switch19", Set);
@@ -454,4 +527,3 @@ Actions:
 	Order("Player 7", "Infested Terran", "P7 Spawn4", "Waypoint5", Patrol);
 	Preserve Trigger();
 }
-

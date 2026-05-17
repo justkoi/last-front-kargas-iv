@@ -25,6 +25,8 @@ Actions:
 	Set Switch("Switch50", clear);
 	Set Switch("Switch51", clear);
 	Set Switch("Switch52", clear);
+	Set Switch("Switch53", clear);
+	Set Switch("Switch54", clear);
 	Kill Unit("Player 5", "Zerg Sunken Colony");
 	Kill Unit("Player 5", "Zerg Spore Colony");
 }
