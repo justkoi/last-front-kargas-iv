@@ -25,6 +25,14 @@ Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 1440);
+	Set Deaths("Player 8", "Terran Academy", Add, 1);
+	Set Deaths("Player 8", "Terran Starport", Add, 1);
+	Set Deaths("Player 8", "Terran Control Tower", Add, 1);
+	Set Deaths("Player 8", "Terran Science Facility", Add, 1);
+	Set Resources("Player 1", Add, 100, ore);
+	Set Resources("Player 2", Add, 100, ore);
+	Set Resources("Player 3", Add, 100, ore);
+	Set Resources("Player 4", Add, 100, ore);
 	Set Deaths("Player 5", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -291,8 +299,8 @@ Conditions:
 	Command("Player 5", "Zerg Cerebrate", At most, 0);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체 제거 확인. 지휘체계 교란으로 후속 공세 규모가 감소합니다.");
-	Display Text Message(Always Display, "<07>작전 보상: <04>저그 정신체 파괴 보상. 미네랄 +1000 / 가스 +1000");
-	Set Resources("Current Player", Add, 1000, ore);
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 정신체 파괴 보상. 미네랄 +2000 / 가스 +1000");
+	Set Resources("Current Player", Add, 2000, ore);
 	Set Resources("Current Player", Add, 1000, gas);
 }
 

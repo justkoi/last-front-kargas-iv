@@ -1,0 +1,39 @@
+//-----------------------------------------------------------------//
+//  Hatchery reward display queues
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 해처리 파괴 보상. 미네랄 +100");
+	Set Deaths("Player 8", "Terran Academy", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Starport", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 해처리 파괴 보상. 미네랄 +100");
+	Set Deaths("Player 8", "Terran Starport", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Control Tower", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 해처리 파괴 보상. 미네랄 +100");
+	Set Deaths("Player 8", "Terran Control Tower", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Science Facility", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 해처리 파괴 보상. 미네랄 +100");
+	Set Deaths("Player 8", "Terran Science Facility", Subtract, 1);
+	Preserve Trigger();
+}

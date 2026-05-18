@@ -2,7 +2,8 @@
 //  Mission 2 - hatchery tech loss accelerates main assaults
 //
 //  Hatchery/Lair/Hive kills reduce that colony's own main assault
-//  cooldown by 80s. 12 DC tick = 1 second, so 80s = 960.
+//  cooldown by 80s. Hatchery kills also grant players +100 minerals.
+//  12 DC tick = 1 second, so 80s = 960.
 //-----------------------------------------------------------------//
 
 Trigger("Player 6"){
@@ -11,6 +12,14 @@ Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 960);
+	Set Deaths("Player 8", "Terran Academy", Add, 1);
+	Set Deaths("Player 8", "Terran Starport", Add, 1);
+	Set Deaths("Player 8", "Terran Control Tower", Add, 1);
+	Set Deaths("Player 8", "Terran Science Facility", Add, 1);
+	Set Resources("Player 1", Add, 100, ore);
+	Set Resources("Player 2", Add, 100, ore);
+	Set Resources("Player 3", Add, 100, ore);
+	Set Resources("Player 4", Add, 100, ore);
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -41,6 +50,14 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 960);
+	Set Deaths("Player 8", "Terran Academy", Add, 1);
+	Set Deaths("Player 8", "Terran Starport", Add, 1);
+	Set Deaths("Player 8", "Terran Control Tower", Add, 1);
+	Set Deaths("Player 8", "Terran Science Facility", Add, 1);
+	Set Resources("Player 1", Add, 100, ore);
+	Set Resources("Player 2", Add, 100, ore);
+	Set Resources("Player 3", Add, 100, ore);
+	Set Resources("Player 4", Add, 100, ore);
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
