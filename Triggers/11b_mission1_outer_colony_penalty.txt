@@ -670,6 +670,15 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴 보상. 미네랄 +100");
+	Preserve Trigger();
+}
+
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
@@ -679,10 +688,6 @@ Actions:
 	Set Switch("Switch25", set);
 	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
-	Set Deaths("Player 8", "Terran Academy", Add, 1);
-	Set Deaths("Player 8", "Terran Starport", Add, 1);
-	Set Deaths("Player 8", "Terran Control Tower", Add, 1);
-	Set Deaths("Player 8", "Terran Science Facility", Add, 1);
 	Set Resources("Player 1", Add, 100, ore);
 	Set Resources("Player 2", Add, 100, ore);
 	Set Resources("Player 3", Add, 100, ore);
@@ -702,6 +707,15 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 6", "Zerg Lair", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 레어 파괴 보상. 미네랄 +200");
+	Preserve Trigger();
+}
+
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
@@ -711,6 +725,10 @@ Actions:
 	Set Switch("Switch25", set);
 	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
+	Set Resources("Player 1", Add, 200, ore);
+	Set Resources("Player 2", Add, 200, ore);
+	Set Resources("Player 3", Add, 200, ore);
+	Set Resources("Player 4", Add, 200, ore);
 	Set Resources("Player 6", Add, 5000, ore);
 	Set Resources("Player 6", Add, 2500, gas);
 	Set Resources("Player 7", Add, 5000, ore);
@@ -726,6 +744,15 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 6", "Zerg Hive", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 하이브 파괴 보상. 미네랄 +300");
+	Preserve Trigger();
+}
+
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
@@ -735,6 +762,10 @@ Actions:
 	Set Switch("Switch25", set);
 	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
+	Set Resources("Player 1", Add, 300, ore);
+	Set Resources("Player 2", Add, 300, ore);
+	Set Resources("Player 3", Add, 300, ore);
+	Set Resources("Player 4", Add, 300, ore);
 	Set Resources("Player 6", Add, 5000, ore);
 	Set Resources("Player 6", Add, 2500, gas);
 	Set Resources("Player 7", Add, 5000, ore);
@@ -750,6 +781,15 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴 보상. 미네랄 +100");
+	Preserve Trigger();
+}
+
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
@@ -759,10 +799,6 @@ Actions:
 	Set Switch("Switch25", set);
 	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
-	Set Deaths("Player 8", "Terran Academy", Add, 1);
-	Set Deaths("Player 8", "Terran Starport", Add, 1);
-	Set Deaths("Player 8", "Terran Control Tower", Add, 1);
-	Set Deaths("Player 8", "Terran Science Facility", Add, 1);
 	Set Resources("Player 1", Add, 100, ore);
 	Set Resources("Player 2", Add, 100, ore);
 	Set Resources("Player 3", Add, 100, ore);
@@ -782,6 +818,15 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 7", "Zerg Lair", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 레어 파괴 보상. 미네랄 +200");
+	Preserve Trigger();
+}
+
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
@@ -791,6 +836,10 @@ Actions:
 	Set Switch("Switch25", set);
 	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
+	Set Resources("Player 1", Add, 200, ore);
+	Set Resources("Player 2", Add, 200, ore);
+	Set Resources("Player 3", Add, 200, ore);
+	Set Resources("Player 4", Add, 200, ore);
 	Set Resources("Player 6", Add, 5000, ore);
 	Set Resources("Player 6", Add, 2500, gas);
 	Set Resources("Player 7", Add, 5000, ore);
@@ -806,6 +855,15 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 7", "Zerg Hive", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 하이브 파괴 보상. 미네랄 +300");
+	Preserve Trigger();
+}
+
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
@@ -815,6 +873,10 @@ Actions:
 	Set Switch("Switch25", set);
 	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
+	Set Resources("Player 1", Add, 300, ore);
+	Set Resources("Player 2", Add, 300, ore);
+	Set Resources("Player 3", Add, 300, ore);
+	Set Resources("Player 4", Add, 300, ore);
 	Set Resources("Player 6", Add, 5000, ore);
 	Set Resources("Player 6", Add, 2500, gas);
 	Set Resources("Player 7", Add, 5000, ore);

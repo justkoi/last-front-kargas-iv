@@ -2,9 +2,18 @@
 //  Mission 2 - hatchery tech loss accelerates main assaults
 //
 //  Hatchery/Lair/Hive kills reduce that colony's own main assault
-//  cooldown by 80s. Hatchery kills also grant players +100 minerals.
+//  cooldown by 80s and grant players +100/+200/+300 minerals.
 //  12 DC tick = 1 second, so 80s = 960.
 //-----------------------------------------------------------------//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴 보상. 미네랄 +100");
+	Preserve Trigger();
+}
 
 Trigger("Player 6"){
 Conditions:
@@ -12,15 +21,20 @@ Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 960);
-	Set Deaths("Player 8", "Terran Academy", Add, 1);
-	Set Deaths("Player 8", "Terran Starport", Add, 1);
-	Set Deaths("Player 8", "Terran Control Tower", Add, 1);
-	Set Deaths("Player 8", "Terran Science Facility", Add, 1);
 	Set Resources("Player 1", Add, 100, ore);
 	Set Resources("Player 2", Add, 100, ore);
 	Set Resources("Player 3", Add, 100, ore);
 	Set Resources("Player 4", Add, 100, ore);
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 6", "Zerg Lair", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 레어 파괴 보상. 미네랄 +200");
 	Preserve Trigger();
 }
 
@@ -30,7 +44,20 @@ Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 960);
+	Set Resources("Player 1", Add, 200, ore);
+	Set Resources("Player 2", Add, 200, ore);
+	Set Resources("Player 3", Add, 200, ore);
+	Set Resources("Player 4", Add, 200, ore);
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 6", "Zerg Hive", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 하이브 파괴 보상. 미네랄 +300");
 	Preserve Trigger();
 }
 
@@ -40,7 +67,20 @@ Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 960);
+	Set Resources("Player 1", Add, 300, ore);
+	Set Resources("Player 2", Add, 300, ore);
+	Set Resources("Player 3", Add, 300, ore);
+	Set Resources("Player 4", Add, 300, ore);
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴 보상. 미네랄 +100");
 	Preserve Trigger();
 }
 
@@ -50,15 +90,20 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 960);
-	Set Deaths("Player 8", "Terran Academy", Add, 1);
-	Set Deaths("Player 8", "Terran Starport", Add, 1);
-	Set Deaths("Player 8", "Terran Control Tower", Add, 1);
-	Set Deaths("Player 8", "Terran Science Facility", Add, 1);
 	Set Resources("Player 1", Add, 100, ore);
 	Set Resources("Player 2", Add, 100, ore);
 	Set Resources("Player 3", Add, 100, ore);
 	Set Resources("Player 4", Add, 100, ore);
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 7", "Zerg Lair", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 레어 파괴 보상. 미네랄 +200");
 	Preserve Trigger();
 }
 
@@ -68,7 +113,20 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 960);
+	Set Resources("Player 1", Add, 200, ore);
+	Set Resources("Player 2", Add, 200, ore);
+	Set Resources("Player 3", Add, 200, ore);
+	Set Resources("Player 4", Add, 200, ore);
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 7", "Zerg Hive", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 하이브 파괴 보상. 미네랄 +300");
 	Preserve Trigger();
 }
 
@@ -78,6 +136,10 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 960);
+	Set Resources("Player 1", Add, 300, ore);
+	Set Resources("Player 2", Add, 300, ore);
+	Set Resources("Player 3", Add, 300, ore);
+	Set Resources("Player 4", Add, 300, ore);
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
