@@ -329,6 +329,7 @@ Conditions:
 	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Run AI Script("+Vi5");
 	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 남은 군락까지 그대로 밀어붙여라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
@@ -344,6 +345,7 @@ Conditions:
 	Bring("Player 7", "Zerg Lair", "P7 MainBase", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Run AI Script("+Vi5");
 	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 남은 군락까지 그대로 밀어붙여라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
@@ -360,6 +362,7 @@ Conditions:
 	Bring("Player 7", "Zerg Hive", "P7 MainBase", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Run AI Script("+Vi5");
 	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 남은 군락까지 그대로 밀어붙여라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
@@ -374,6 +377,7 @@ Conditions:
 	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 남은 군락까지 그대로 밀어붙여라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
@@ -389,6 +393,7 @@ Conditions:
 	Bring("Player 6", "Zerg Lair", "P6 MainBase", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 남은 군락까지 그대로 밀어붙여라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
@@ -405,6 +410,7 @@ Conditions:
 	Bring("Player 6", "Zerg Hive", "P6 MainBase", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 남은 군락까지 그대로 밀어붙여라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");

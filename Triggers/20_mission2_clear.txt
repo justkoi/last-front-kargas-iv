@@ -22,6 +22,8 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 24);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
+	Run AI Script("+Vi5");
+	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<07>작전: <04>동북쪽과 동남쪽 군락 반응 소실. 전선 안정화 확인.");
 }
 
