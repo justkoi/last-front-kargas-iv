@@ -1,9 +1,12 @@
 //-----------------------------------------------------------------//
-//  [TEST MODE] Mission 2 main assault DC dashboard
+//  [TEST MODE] Rotating mission 2 main assault DC dashboard
 //
 //  Standard StarCraft leaderboards cannot read death counters directly.
 //  This test dashboard mirrors the two mission 2 main-assault cooldown
 //  DCs into custom score, then restores the source DCs in the same pass.
+//
+//  Shown during the second half of the cycle driven by
+//  94_test_resource_dashboard_01_resources.txt.
 //
 //  P6 custom score = Player 8 / Zerg Zergling DC.
 //  P7 custom score = Player 8 / Zerg Hydralisk DC.
@@ -639,7 +642,8 @@ Actions:
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Always();
+	Deaths("Player 8", "Zerg Extractor", At least, 60);
+	Deaths("Player 8", "Zerg Extractor", At most, 119);
 Actions:
 	Leader Board Points("TEST M2 Assault DC", Custom);
 	Leaderboard Computer Players(enabled);

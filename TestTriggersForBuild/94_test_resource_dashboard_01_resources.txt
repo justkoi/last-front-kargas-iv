@@ -1,0 +1,35 @@
+//-----------------------------------------------------------------//
+//  [TEST MODE] Rotating player resource dashboard
+//
+//  Shows the original player mineral leaderboard during the first
+//  half of the dashboard cycle. Pair with 94_test_resource_dashboard_02_dc.txt
+//  to alternate between resources and the mission 2 assault DC dashboard.
+//
+//  Player 8 / Zerg Extractor = test dashboard cycle timer.
+//  0~59 ticks: resources, 60~119 ticks: M2 assault DC, then reset.
+//-----------------------------------------------------------------//
+
+Trigger("Player 8"){
+Conditions:
+	Always();
+Actions:
+	Set Deaths("Player 8", "Zerg Extractor", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Extractor", At least, 120);
+Actions:
+	Set Deaths("Player 8", "Zerg Extractor", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Zerg Extractor", At most, 59);
+Actions:
+	Leader Board Resources("TEST Minerals", ore);
+	Leaderboard Computer Players(enabled);
+	Preserve Trigger();
+}
