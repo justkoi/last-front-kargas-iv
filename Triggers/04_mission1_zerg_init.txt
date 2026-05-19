@@ -20,25 +20,19 @@ Actions:
 	Set Switch("Switch25", clear);
 	Set Switch("Switch55", clear);
 	Set Switch("Switch56", clear);
-	Set Switch("Switch57", clear);
 	Set Switch("Switch58", clear);
+	Set Switch("Switch59", clear);
+	Set Switch("Switch60", clear);
 	Set Switch("Switch13", clear);
 	Set Switch("Switch35", clear);
 	Set Switch("Switch36", clear);
 	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 0);
+	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
 	Set Resources("Player 6", Set To, 0, ore);
 	Set Resources("Player 6", Set To, 0, gas);
 	Set Resources("Player 7", Set To, 0, ore);
 	Set Resources("Player 7", Set To, 0, gas);
-}
-
-// AttackPoint1 optional Cerebrate reward target.
-Trigger("Player 5"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Create Unit("Player 5", "Zerg Cerebrate", 1, "AttackPoint1");
-	Set Switch("Switch57", set);
 }
 
 // 각 저그 진영의 기본 AI 시작
@@ -89,6 +83,7 @@ Conditions:
 Actions:
 	Set Resources("Player 6", Set To, 999999, ore);
 	Set Resources("Player 6", Set To, 999999, gas);
+	Create Unit("Player 6", "Zerg Overlord", 10, "P6 Base");
 	Run AI Script At Location("ZSUx", "P6 Base");
 }
 
@@ -98,5 +93,6 @@ Conditions:
 Actions:
 	Set Resources("Player 7", Set To, 999999, ore);
 	Set Resources("Player 7", Set To, 999999, gas);
+	Create Unit("Player 7", "Zerg Overlord", 10, "P7 Base");
 	Run AI Script At Location("ZSUx", "P7 Base");
 }

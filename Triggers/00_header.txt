@@ -33,12 +33,12 @@
 //    Protoss Dark Templar : P7 scout overlord cycle timer
 //    Protoss Shuttle      : P1~P4 Hunt location refresh timer
 //    Terran Ghost         : P6 MiniBase reveal timer
-//    Terran Wraith        : mission1 late-wave cooldown
+//    Terran Wraith        : mission1 late-wave cooldown / P6 mission2 early alert defense recharge timer
 //    Terran Battlecruiser : P5 overlord supply cycle timer
 //    Protoss Dragoon      : P6 overlord supply cycle timer
 //    Protoss High Templar : P7 overlord supply cycle timer
 //    Terran Science Vessel: player alliance refresh timer
-//    Terran Dropship      : mission1 late-wave variant index
+//    Terran Dropship      : mission1 late-wave variant index / P7 mission2 early alert defense recharge timer
 //    Protoss Corsair      : mission1 outer colony warning cooldown timer
 //    Zerg Creep Colony    : mission1 P6/P7 creep colony warning counter
 //    Zerg Zergling        : P6 mission2 penalty assault cooldown
@@ -101,8 +101,9 @@
 //    Switch54   : P7 mission2 penalty assault spawn rally pulse open
 //    Switch55   : P6 AI activation requested
 //    Switch56   : P7 AI activation requested
-//    Switch57   : AttackPoint1 Cerebrate reward armed
 //    Switch58   : P5 Hive death ground counterattack used
+//    Switch59   : P6 mission2 early alert defense charge ready
+//    Switch60   : P7 mission2 early alert defense charge ready
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:

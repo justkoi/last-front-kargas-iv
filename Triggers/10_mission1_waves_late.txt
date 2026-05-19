@@ -338,7 +338,6 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch57", Set);
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>잘했다. 전방 지휘 신호가 끊겼다. 지금 벌어 둔 틈을 놓치지 마라.");

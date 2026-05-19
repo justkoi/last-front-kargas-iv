@@ -16,6 +16,8 @@ Actions:
 	Set Deaths("Player 8", "Terran Barracks", Set To, 0);
 	Set Deaths("Player 8", "Terran Firebat", Set To, 0);
 	Set Deaths("Player 8", "Protoss Arbiter", Set To, 0);
+	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
+	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
 	Set Switch("Switch42", clear);
 	Set Switch("Switch43", clear);
 	Set Switch("Switch44", clear);
@@ -27,6 +29,8 @@ Actions:
 	Set Switch("Switch52", clear);
 	Set Switch("Switch53", clear);
 	Set Switch("Switch54", clear);
+	Set Switch("Switch59", clear);
+	Set Switch("Switch60", clear);
 	Kill Unit("Player 5", "Zerg Sunken Colony");
 	Kill Unit("Player 5", "Zerg Spore Colony");
 }
