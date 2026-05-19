@@ -48,7 +48,9 @@ Actions:
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 }
 
-// First penalty assaults are staggered: one colony spawns at 4:00, the other at 6:13.
+// First penalty assaults are staggered after the mission2 assault cooldown opens
+// at Vulture 756: one colony spawns at about 5:03 mission2 elapsed, the other at
+// about 7:16. From the cooldown-open point, those are 4:00 and 6:13.
 // Roll warnings fire 10 seconds before the first spawn batch.
 Trigger("Player 8"){
 Conditions:

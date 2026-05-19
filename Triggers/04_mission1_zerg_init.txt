@@ -18,6 +18,8 @@ Conditions:
 Actions:
 	Set Switch("Switch24", clear);
 	Set Switch("Switch25", clear);
+	Set Switch("Switch55", clear);
+	Set Switch("Switch56", clear);
 	Set Switch("Switch13", clear);
 	Set Switch("Switch35", clear);
 	Set Switch("Switch36", clear);
@@ -36,19 +38,7 @@ Actions:
 	Run AI Script At Location("ZSUx", "P5 Base");
 }
 
-Trigger("Player 6"){
-Conditions:
-	Elapsed Time(At least, 0);
-Actions:
-	Run AI Script At Location("ZSUx", "P6 Base");
-}
-
-Trigger("Player 7"){
-Conditions:
-	Elapsed Time(At least, 0);
-Actions:
-	Run AI Script At Location("ZSUx", "P7 Base");
-}
+// P6/P7은 Switch55/56이 켜질 때 자원을 먼저 받고 AI를 시작한다.
 
 // Keep outer colonies resource-starved during mission1 until that colony is attacked.
 Trigger("Player 8"){
@@ -71,23 +61,31 @@ Actions:
 	Preserve Trigger();
 }
 
-// 미션2 목표 표시 시 갈색/하얀색 군락 활성화
-Trigger("Player 6"){
+// 미션2 목표 표시 시 갈색/하얀색 군락을 깨운다.
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 756);
 	Deaths("Player 8", "Terran Vulture", At most, 780);
 Actions:
+	Set Switch("Switch55", set);
+	Set Switch("Switch56", set);
+}
+
+Trigger("Player 6"){
+Conditions:
+	Switch("Switch55", Set);
+Actions:
 	Set Resources("Player 6", Set To, 999999, ore);
 	Set Resources("Player 6", Set To, 999999, gas);
-	Set Resources("Player 7", Set To, 999999, ore);
-	Set Resources("Player 7", Set To, 999999, gas);
+	Run AI Script At Location("ZSUx", "P6 Base");
 }
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
-	Deaths("Player 8", "Terran Vulture", At most, 780);
+	Switch("Switch56", Set);
 Actions:
+	Set Resources("Player 7", Set To, 999999, ore);
+	Set Resources("Player 7", Set To, 999999, gas);
+	Run AI Script At Location("ZSUx", "P7 Base");
 }

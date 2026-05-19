@@ -628,6 +628,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch55", set);
 	Set Resources("Player 6", Add, 500, ore);
 	Set Resources("Player 6", Add, 250, gas);
 	Set Deaths("Player 6", "Zerg Sunken Colony", Subtract, 1);
@@ -640,6 +641,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch56", set);
 	Set Resources("Player 7", Add, 500, ore);
 	Set Resources("Player 7", Add, 250, gas);
 	Set Deaths("Player 7", "Zerg Sunken Colony", Subtract, 1);
@@ -652,6 +654,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch55", set);
 	Set Resources("Player 6", Add, 500, ore);
 	Set Resources("Player 6", Add, 250, gas);
 	Set Deaths("Player 6", "Zerg Spore Colony", Subtract, 1);
@@ -664,6 +667,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch56", set);
 	Set Resources("Player 7", Add, 500, ore);
 	Set Resources("Player 7", Add, 250, gas);
 	Set Deaths("Player 7", "Zerg Spore Colony", Subtract, 1);
@@ -686,6 +690,8 @@ Conditions:
 Actions:
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch55", set);
+	Set Switch("Switch56", set);
 	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
 	Set Resources("Player 1", Add, 100, ore);
@@ -723,6 +729,8 @@ Conditions:
 Actions:
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch55", set);
+	Set Switch("Switch56", set);
 	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
 	Set Resources("Player 1", Add, 200, ore);
@@ -760,6 +768,8 @@ Conditions:
 Actions:
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch55", set);
+	Set Switch("Switch56", set);
 	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
 	Set Resources("Player 1", Add, 300, ore);
@@ -797,6 +807,8 @@ Conditions:
 Actions:
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch55", set);
+	Set Switch("Switch56", set);
 	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
 	Set Resources("Player 1", Add, 100, ore);
@@ -834,6 +846,8 @@ Conditions:
 Actions:
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch55", set);
+	Set Switch("Switch56", set);
 	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
 	Set Resources("Player 1", Add, 200, ore);
@@ -871,6 +885,8 @@ Conditions:
 Actions:
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch55", set);
+	Set Switch("Switch56", set);
 	Set Switch("Switch33", set);
 	Set Switch("Switch34", set);
 	Set Resources("Player 1", Add, 300, ore);
@@ -898,6 +914,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch55", set);
 	Set Resources("Player 6", Add, 10000, ore);
 	Set Resources("Player 6", Add, 5000, gas);
 	Set Deaths("Player 6", "Zerg Spawning Pool", Subtract, 1);
@@ -910,6 +927,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch56", set);
 	Set Resources("Player 7", Add, 10000, ore);
 	Set Resources("Player 7", Add, 5000, gas);
 	Set Deaths("Player 7", "Zerg Spawning Pool", Subtract, 1);
@@ -922,6 +940,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch55", set);
 	Set Resources("Player 6", Add, 10000, ore);
 	Set Resources("Player 6", Add, 5000, gas);
 	Set Deaths("Player 6", "Zerg Hydralisk Den", Subtract, 1);
@@ -934,6 +953,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch56", set);
 	Set Resources("Player 7", Add, 10000, ore);
 	Set Resources("Player 7", Add, 5000, gas);
 	Set Deaths("Player 7", "Zerg Hydralisk Den", Subtract, 1);
@@ -946,6 +966,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch55", set);
 	Set Resources("Player 6", Add, 10000, ore);
 	Set Resources("Player 6", Add, 5000, gas);
 	Set Deaths("Player 6", "Zerg Evolution Chamber", Subtract, 1);
@@ -958,6 +979,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch56", set);
 	Set Resources("Player 7", Add, 10000, ore);
 	Set Resources("Player 7", Add, 5000, gas);
 	Set Deaths("Player 7", "Zerg Evolution Chamber", Subtract, 1);
@@ -970,6 +992,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch55", set);
 	Set Resources("Player 6", Add, 10000, ore);
 	Set Resources("Player 6", Add, 5000, gas);
 	Set Deaths("Player 6", "Zerg Spire", Subtract, 1);
@@ -982,6 +1005,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch56", set);
 	Set Resources("Player 7", Add, 10000, ore);
 	Set Resources("Player 7", Add, 5000, gas);
 	Set Deaths("Player 7", "Zerg Spire", Subtract, 1);
@@ -994,6 +1018,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch55", set);
 	Set Resources("Player 6", Add, 10000, ore);
 	Set Resources("Player 6", Add, 5000, gas);
 	Set Deaths("Player 6", "Zerg Greater Spire", Subtract, 1);
@@ -1006,6 +1031,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch56", set);
 	Set Resources("Player 7", Add, 10000, ore);
 	Set Resources("Player 7", Add, 5000, gas);
 	Set Deaths("Player 7", "Zerg Greater Spire", Subtract, 1);
@@ -1018,6 +1044,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch55", set);
 	Set Resources("Player 6", Add, 10000, ore);
 	Set Resources("Player 6", Add, 5000, gas);
 	Set Deaths("Player 6", "Zerg Queen's Nest", Subtract, 1);
@@ -1030,6 +1057,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch56", set);
 	Set Resources("Player 7", Add, 10000, ore);
 	Set Resources("Player 7", Add, 5000, gas);
 	Set Deaths("Player 7", "Zerg Queen's Nest", Subtract, 1);
@@ -1042,6 +1070,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch55", set);
 	Set Resources("Player 6", Add, 10000, ore);
 	Set Resources("Player 6", Add, 5000, gas);
 	Set Deaths("Player 6", "Zerg Defiler Mound", Subtract, 1);
@@ -1054,6 +1083,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch56", set);
 	Set Resources("Player 7", Add, 10000, ore);
 	Set Resources("Player 7", Add, 5000, gas);
 	Set Deaths("Player 7", "Zerg Defiler Mound", Subtract, 1);
@@ -1066,6 +1096,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch55", set);
 	Set Resources("Player 6", Add, 10000, ore);
 	Set Resources("Player 6", Add, 5000, gas);
 	Set Deaths("Player 6", "Zerg Ultralisk Cavern", Subtract, 1);
@@ -1078,6 +1109,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch56", set);
 	Set Resources("Player 7", Add, 10000, ore);
 	Set Resources("Player 7", Add, 5000, gas);
 	Set Deaths("Player 7", "Zerg Ultralisk Cavern", Subtract, 1);
@@ -1090,6 +1122,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch24", set);
+	Set Switch("Switch55", set);
 	Set Resources("Player 6", Add, 10000, ore);
 	Set Resources("Player 6", Add, 5000, gas);
 	Set Deaths("Player 6", "Zerg Nydus Canal", Subtract, 1);
@@ -1102,6 +1135,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
 	Set Switch("Switch25", set);
+	Set Switch("Switch56", set);
 	Set Resources("Player 7", Add, 10000, ore);
 	Set Resources("Player 7", Add, 5000, gas);
 	Set Deaths("Player 7", "Zerg Nydus Canal", Subtract, 1);
