@@ -571,7 +571,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 11160);
 }
 
-// Count destroyed P6/P7 creep colonies together and warn every 5 kills.
+// Count destroyed P6/P7 creep colonies together and warn every 3 kills.
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch13", Set);
@@ -584,9 +584,9 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Deaths("Player 8", "Zerg Creep Colony", At least, 5);
+	Deaths("Player 8", "Zerg Creep Colony", At least, 3);
 Actions:
-	Set Deaths("Player 8", "Zerg Creep Colony", Subtract, 5);
+	Set Deaths("Player 8", "Zerg Creep Colony", Subtract, 3);
 	Set Switch("Switch13", set);
 	Preserve Trigger();
 }
