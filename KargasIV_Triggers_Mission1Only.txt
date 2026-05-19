@@ -1006,6 +1006,54 @@ Actions:
 	Remove Unit("Player 4", "Map Revealer");
 }
 
+// AttackPoint1 optional Cerebrate cue - late mission1 pressure relief.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 1320);
+	Switch("Switch57", Set);
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "AttackPoint1");
+	Create Unit("Player 2", "Map Revealer", 1, "AttackPoint1");
+	Create Unit("Player 3", "Map Revealer", 1, "AttackPoint1");
+	Create Unit("Player 4", "Map Revealer", 1, "AttackPoint1");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 1320);
+	Switch("Switch57", Set);
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("AttackPoint1");
+	Display Text Message(Always Display, "<1A>노바: <04>전방에서 작은 지휘 신호가 잡힙니다. 저 개체를 끊으면 군락 반응이 흔들릴 겁니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 1325);
+	Switch("Switch57", Set);
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>좋다. 표시 지점에 타격대를 보내라. 방어선 숨통이 트일 거다.");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 1380);
+	Elapsed Time(At most, 1382);
+Actions:
+	Kill Unit At Location("Player 1", "Map Revealer", 64, "AttackPoint1");
+	Kill Unit At Location("Player 2", "Map Revealer", 64, "AttackPoint1");
+	Kill Unit At Location("Player 3", "Map Revealer", 64, "AttackPoint1");
+	Kill Unit At Location("Player 4", "Map Revealer", 64, "AttackPoint1");
+}
+
 // 웨이브 2 - 8분 후
 Trigger("Player 5"){
 Conditions:
@@ -1595,6 +1643,7 @@ Conditions:
 	Switch("Switch57", Set);
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
 Actions:
+	Display Text Message(Always Display, "<03>호크: <04>잘했다. 전방 지휘 신호가 끊겼다. 지금 벌어 둔 틈을 놓치지 마라.");
 	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 파괴 보상. 미네랄 +1000");
 	Set Resources("Current Player", Add, 1000, ore);
 }
@@ -12427,4 +12476,3 @@ Actions:
 	Wait(0);
 	Preserve Trigger();
 }
-

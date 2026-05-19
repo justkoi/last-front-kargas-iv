@@ -341,6 +341,7 @@ Conditions:
 	Switch("Switch57", Set);
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
 Actions:
+	Display Text Message(Always Display, "<03>호크: <04>잘했다. 전방 지휘 신호가 끊겼다. 지금 벌어 둔 틈을 놓치지 마라.");
 	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 파괴 보상. 미네랄 +1000");
 	Set Resources("Current Player", Add, 1000, ore);
 }
