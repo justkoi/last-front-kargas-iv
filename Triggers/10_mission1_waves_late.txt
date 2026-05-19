@@ -327,12 +327,22 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Command("Player 5", "Zerg Cerebrate", At most, 0);
+	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At most, 0);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체 제거 확인. 지휘체계 교란으로 후속 공세 규모가 감소합니다.");
 	Display Text Message(Always Display, "<07>작전 보상: <04>저그 정신체 파괴 보상. 미네랄 +2000 / 가스 +1000");
 	Set Resources("Current Player", Add, 2000, ore);
 	Set Resources("Current Player", Add, 1000, gas);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch57", Set);
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 파괴 보상. 미네랄 +1000");
+	Set Resources("Current Player", Add, 1000, ore);
 }
 
 Trigger("Player 8"){

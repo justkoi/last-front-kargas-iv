@@ -1,7 +1,7 @@
 //============================================================
 //  KARGAS IV - Mission trigger notes
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
-//                      P5 Spawn1~4, P1~P4 Hunt, Player Destination,
+//                      P5 Spawn1~4, P1~P4 Hunt, Player Destination, AttackPoint1,
 //                      P6 Base, P6 Home, P6 MiniBase, P6 Area, P6 Area Ground, P6 Area Air,
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
@@ -101,6 +101,7 @@
 //    Switch54   : P7 mission2 penalty assault spawn rally pulse open
 //    Switch55   : P6 AI activation requested
 //    Switch56   : P7 AI activation requested
+//    Switch57   : AttackPoint1 Cerebrate reward armed
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:

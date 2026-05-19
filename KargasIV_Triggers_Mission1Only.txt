@@ -1,7 +1,7 @@
 //============================================================
 //  KARGAS IV - Mission trigger notes
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
-//                      P5 Spawn1~4, P1~P4 Hunt, Player Destination,
+//                      P5 Spawn1~4, P1~P4 Hunt, Player Destination, AttackPoint1,
 //                      P6 Base, P6 Home, P6 MiniBase, P6 Area, P6 Area Ground, P6 Area Air,
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
@@ -101,6 +101,7 @@
 //    Switch54   : P7 mission2 penalty assault spawn rally pulse open
 //    Switch55   : P6 AI activation requested
 //    Switch56   : P7 AI activation requested
+//    Switch57   : AttackPoint1 Cerebrate reward armed
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
@@ -503,6 +504,7 @@ Actions:
 	Set Switch("Switch25", clear);
 	Set Switch("Switch55", clear);
 	Set Switch("Switch56", clear);
+	Set Switch("Switch57", clear);
 	Set Switch("Switch13", clear);
 	Set Switch("Switch35", clear);
 	Set Switch("Switch36", clear);
@@ -511,6 +513,15 @@ Actions:
 	Set Resources("Player 6", Set To, 0, gas);
 	Set Resources("Player 7", Set To, 0, ore);
 	Set Resources("Player 7", Set To, 0, gas);
+}
+
+// AttackPoint1 optional Cerebrate reward target.
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Cerebrate", 1, "AttackPoint1");
+	Set Switch("Switch57", set);
 }
 
 // 각 저그 진영의 기본 AI 시작
@@ -1570,12 +1581,22 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Command("Player 5", "Zerg Cerebrate", At most, 0);
+	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At most, 0);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체 제거 확인. 지휘체계 교란으로 후속 공세 규모가 감소합니다.");
 	Display Text Message(Always Display, "<07>작전 보상: <04>저그 정신체 파괴 보상. 미네랄 +2000 / 가스 +1000");
 	Set Resources("Current Player", Add, 2000, ore);
 	Set Resources("Current Player", Add, 1000, gas);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch57", Set);
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 파괴 보상. 미네랄 +1000");
+	Set Resources("Current Player", Add, 1000, ore);
 }
 
 Trigger("Player 8"){
