@@ -1,27 +1,163 @@
+param(
+    [string]$Source = "",
+    [string]$DestinationDir = "$env:USERPROFILE\Documents\StarCraft\Maps",
+    [string]$DestinationName = "LastFront_KargasIV.scx",
+    [string]$WorkDir = "E:\SCX_WORK",
+    [switch]$WhatIf
+)
+
 $ErrorActionPreference = "Stop"
 
-$sourceItem = Get-ChildItem -Path (Join-Path $PSScriptRoot "*\LastFront_KargasIV.scx") -File |
-    Sort-Object FullName |
-    Select-Object -First 1
-$destinationDir = "C:\Users\justk\Documents\StarCraft\Maps"
-$destination = Join-Path $destinationDir "LastFront_KargasIV.scx"
+Set-Location -LiteralPath $PSScriptRoot
 
-if ($null -eq $sourceItem) {
-    Write-Host "[failed] Source map file was not found."
-    Write-Host "[root]   $PSScriptRoot"
-    exit 1
+$pythonCandidates = @(
+    "C:\Users\justk\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe",
+    "python"
+)
+$repairTool = "C:\Users\justk\.codex\skills\repair-starcraft-map\scripts\repair_scx.py"
+$protectTool = Join-Path $PSScriptRoot "protect_scx.py"
+
+function Resolve-Python {
+    foreach ($candidate in $pythonCandidates) {
+        if (Test-Path -LiteralPath $candidate) {
+            return $candidate
+        }
+
+        $command = Get-Command $candidate -ErrorAction SilentlyContinue
+        if ($null -ne $command) {
+            return $candidate
+        }
+    }
+
+    throw "Python was not found."
 }
 
-Write-Host "[copy] $($sourceItem.FullName)"
-Write-Host "[to]   $destination"
-Write-Host ""
+function Resolve-SourceMap([string]$RequestedSource) {
+    if (-not [string]::IsNullOrWhiteSpace($RequestedSource)) {
+        $sourcePath = if ([System.IO.Path]::IsPathRooted($RequestedSource)) {
+            $RequestedSource
+        }
+        else {
+            Join-Path $PSScriptRoot $RequestedSource
+        }
 
-if (!(Test-Path -LiteralPath $destinationDir)) {
-    Write-Host "[info] Destination folder does not exist. Creating it."
-    New-Item -ItemType Directory -Path $destinationDir | Out-Null
+        if (-not (Test-Path -LiteralPath $sourcePath)) {
+            throw "Source map not found: $sourcePath"
+        }
+
+        return Get-Item -LiteralPath $sourcePath
+    }
+
+    $preferredSource = Join-Path $PSScriptRoot "최후의 전선 카르가스 IV\LastFront_KargasIV.scx"
+    if (Test-Path -LiteralPath $preferredSource) {
+        return Get-Item -LiteralPath $preferredSource
+    }
+
+    $sourceMap = Get-ChildItem -Path (Join-Path $PSScriptRoot "*\LastFront_KargasIV.scx") -File |
+        Where-Object { $_.BaseName -notmatch "(_clean|_protected)(_|$)" } |
+        Sort-Object FullName |
+        Select-Object -First 1
+
+    if ($null -eq $sourceMap) {
+        Write-Host "[failed] Source map file was not found."
+        Write-Host "[root]   $PSScriptRoot"
+        Write-Host "[pattern] *\LastFront_KargasIV.scx"
+        exit 1
+    }
+
+    return $sourceMap
 }
 
-Copy-Item -LiteralPath $sourceItem.FullName -Destination $destination -Force
+function Assert-BuildTools {
+    if (-not (Test-Path -LiteralPath $repairTool)) {
+        throw "Repair tool not found: $repairTool"
+    }
+
+    if (-not (Test-Path -LiteralPath $protectTool)) {
+        throw "Protect tool not found: $protectTool"
+    }
+}
+
+function Invoke-Repair([string]$Python, [string]$SourceMap, [string]$CleanOut) {
+    Write-Host "[clean]  $SourceMap"
+    Write-Host "[clean]  -> $CleanOut"
+    & $Python $repairTool $SourceMap --out $CleanOut --work-dir $WorkDir
+    if ($LASTEXITCODE -ne 0) {
+        throw "Clean map build failed."
+    }
+}
+
+function Protect-Map([string]$Python, [string]$CleanMap, [string]$ProtectedOut) {
+    Write-Host "[protect] $CleanMap"
+    Write-Host "[protect] -> $ProtectedOut"
+    & $Python $protectTool $CleanMap --out $ProtectedOut --work-dir $WorkDir --locale 0x409
+    if ($LASTEXITCODE -ne 0) {
+        throw "Protected map build failed."
+    }
+}
+
+function Test-Readable([string]$Python, [string]$Map) {
+    $verifyLog = Join-Path $WorkDir "verify_kargas_protected_map.log"
+    & $Python $repairTool $Map --analyze --work-dir $WorkDir > $verifyLog 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        Get-Content -LiteralPath $verifyLog | Select-Object -First 40
+        throw "Protected map verification failed."
+    }
+
+    Write-Host "[verify] protected map scenario.chk is readable."
+}
+
+function Copy-WithRetry([string]$SourcePath, [string]$DestinationPath) {
+    for ($attempt = 1; $attempt -le 10; $attempt++) {
+        try {
+            Copy-Item -LiteralPath $SourcePath -Destination $DestinationPath -Force -ErrorAction Stop
+            return
+        }
+        catch {
+            if ($attempt -eq 10) {
+                throw
+            }
+
+            Start-Sleep -Milliseconds 500
+        }
+    }
+}
+
+$sourceMap = Resolve-SourceMap $Source
+if ($sourceMap.Extension -notmatch "^\.(scx|scm)$") {
+    throw "Input must be .scx or .scm: $($sourceMap.FullName)"
+}
+
+$cleanOut = Join-Path $sourceMap.DirectoryName ($sourceMap.BaseName + "_clean.scx")
+$protectedOut = Join-Path $sourceMap.DirectoryName ($sourceMap.BaseName + "_clean_protected.scx")
+$destination = Join-Path $DestinationDir $DestinationName
+
+Write-Host "[source]    $($sourceMap.FullName)"
+Write-Host "[clean]     $cleanOut"
+Write-Host "[protected] $protectedOut"
+Write-Host "[deploy]    $destination"
+Write-Host ""
+
+if ($WhatIf) {
+    Write-Host "[what-if] Clean/protect/deploy steps skipped."
+    exit 0
+}
+
+Assert-BuildTools
+$python = Resolve-Python
+
+New-Item -ItemType Directory -Path $WorkDir -Force | Out-Null
+Invoke-Repair $python $sourceMap.FullName $cleanOut
+Protect-Map $python $cleanOut $protectedOut
+Test-Readable $python $protectedOut
+
+if (-not (Test-Path -LiteralPath $DestinationDir)) {
+    Write-Host "[deploy] Creating destination: $DestinationDir"
+    New-Item -ItemType Directory -Path $DestinationDir | Out-Null
+}
+
+Write-Host "[deploy] $protectedOut -> $destination"
+Copy-WithRetry $protectedOut $destination
 
 Write-Host ""
-Write-Host "[done] Map copied to StarCraft Maps folder."
+Write-Host "[done] Clean protected map built and copied to StarCraft Maps folder."
