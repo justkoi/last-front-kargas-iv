@@ -1,22 +1,11 @@
-// Random Hunt relay. Active for 120s after final spawn batch.
-// Relay orders fire during four 10s pulses, gated to once every 2 seconds
-// while P6 units wait at a waypoint.
+// Random Hunt relay. Active for 60s after final spawn batch.
+// Relay orders fire every 0.5 seconds while P6 units wait at a waypoint.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-Actions:
-	Set Switch("Switch51", clear);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 120);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 Actions:
 	Set Switch("Switch51", set);
 	Preserve Trigger();
@@ -27,44 +16,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At least, 360);
-	Deaths("Player 8", "Zerg Scourge", At most, 480);
-Actions:
-	Set Switch("Switch51", set);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At least, 720);
-	Deaths("Player 8", "Zerg Scourge", At most, 840);
-Actions:
-	Set Switch("Switch51", set);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At least, 1080);
-	Deaths("Player 8", "Zerg Scourge", At most, 1200);
-Actions:
-	Set Switch("Switch51", set);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
-	Deaths("Player 8", "Zerg Drone", At most, 23);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
+	Deaths("Player 8", "Zerg Drone", At most, 5);
 Actions:
 	Set Deaths("Player 8", "Zerg Drone", Add, 1);
 	Preserve Trigger();
@@ -75,9 +28,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -93,6 +46,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint1", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -101,9 +55,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -117,6 +71,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint1", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -125,9 +80,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -143,6 +98,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint1", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint1", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint1", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -151,9 +107,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -167,6 +123,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint1", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint1", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint1", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -175,9 +132,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -193,6 +150,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint1", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint1", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint1", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -201,9 +159,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -217,6 +175,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint1", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint1", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint1", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -225,9 +184,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -243,6 +202,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint1", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint1", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint1", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -251,9 +211,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -267,6 +227,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint1", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint1", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint1", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -275,9 +236,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -293,6 +254,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint2", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint2", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint2", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -301,9 +263,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -317,6 +279,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint2", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint2", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint2", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -325,9 +288,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -343,6 +306,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint2", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint2", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint2", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -351,9 +315,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -367,6 +331,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint2", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint2", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint2", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -375,9 +340,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -393,6 +358,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint2", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint2", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint2", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -401,9 +367,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -417,6 +383,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint2", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint2", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint2", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -425,9 +392,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -443,6 +410,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint2", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint2", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint2", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -451,9 +419,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -467,6 +435,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint2", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint2", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint2", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -475,9 +444,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -493,6 +462,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint3", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint3", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint3", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -501,9 +471,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -517,6 +487,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint3", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint3", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint3", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -525,9 +496,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -543,6 +514,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint3", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint3", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint3", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -551,9 +523,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -567,6 +539,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint3", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint3", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint3", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -575,9 +548,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -593,6 +566,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint3", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint3", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint3", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -601,9 +575,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -617,6 +591,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint3", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint3", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint3", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -625,9 +600,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -643,6 +618,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint3", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint3", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint3", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -651,9 +627,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -667,6 +643,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint3", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint3", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint3", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -675,9 +652,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -693,6 +670,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint4", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint4", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint4", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -701,9 +679,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -717,6 +695,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint4", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint4", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint4", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -725,9 +704,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -743,6 +722,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint4", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint4", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint4", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -751,9 +731,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -767,6 +747,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint4", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint4", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint4", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -775,9 +756,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -793,6 +774,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint4", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint4", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint4", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -801,9 +783,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -817,6 +799,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint4", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint4", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint4", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -825,9 +808,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -843,6 +826,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint4", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint4", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint4", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -851,9 +835,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -867,6 +851,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint4", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint4", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint4", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -875,9 +860,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -893,6 +878,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint5", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint5", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint5", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -901,9 +887,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -917,6 +903,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint5", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint5", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint5", "P1 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -925,9 +912,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -943,6 +930,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint5", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint5", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint5", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -951,9 +939,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -967,6 +955,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint5", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint5", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint5", "P2 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -975,9 +964,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -993,6 +982,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint5", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint5", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint5", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -1001,9 +991,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -1017,6 +1007,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint5", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint5", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint5", "P3 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -1025,9 +1016,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -1043,6 +1034,7 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint5", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint5", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint5", "P4 Hunt", Move);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -1051,9 +1043,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
+	Deaths("Player 8", "Zerg Drone", At least, 6);
 	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -1067,29 +1059,850 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Waypoint5", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Waypoint5", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Overlord", "Waypoint5", "P4 Hunt", Move);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 1440);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 24);
-Actions:
 	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Preserve Trigger();
 }
 
-// End assault lock tail after 120 seconds.
+// Return active main-assault units from East Area to their selected waypoint every 15 seconds.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At least, 1441);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint1", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint2", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint3", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint4", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint5", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint1", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint3", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint5", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint1", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint2", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint3", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint4", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint5", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint1", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint3", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint5", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint1", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint2", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint3", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint4", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint5", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint1", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint3", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint5", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint1", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint2", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint2", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint3", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Not Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint4", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint4", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint5", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Not Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint1", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint1", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Not Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint3", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint3", Move);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
+	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch14", Set);
+	Switch("Switch15", Set);
+	Switch("Switch16", Set);
+Actions:
+	Order("Player 6", "Zerg Zergling", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Lurker", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Defiler", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Queen", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Scourge", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Guardian", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Devourer", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Zerg Overlord", "East Area", "Waypoint5", Move);
+	Order("Player 6", "Infested Terran", "East Area", "Waypoint5", Move);
+	Preserve Trigger();
+}
+
+// End assault lock tail after 60 seconds.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", At least, 721);
 Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
