@@ -16,6 +16,8 @@ $pythonCandidates = @(
 )
 $repairTool = "C:\Users\justk\.codex\skills\repair-starcraft-map\scripts\repair_scx.py"
 $protectTool = Join-Path $PSScriptRoot "protect_scx.py"
+$stringRecoveryTool = Join-Path $PSScriptRoot "recover_map_strings_cp949.py"
+$triggerTextPath = Join-Path $PSScriptRoot "KargasIV_Triggers_Mission1Only.txt"
 
 function Resolve-Python {
     foreach ($candidate in $pythonCandidates) {
@@ -76,6 +78,14 @@ function Assert-BuildTools {
     if (-not (Test-Path -LiteralPath $protectTool)) {
         throw "Protect tool not found: $protectTool"
     }
+
+    if (-not (Test-Path -LiteralPath $stringRecoveryTool)) {
+        throw "String recovery tool not found: $stringRecoveryTool"
+    }
+
+    if (-not (Test-Path -LiteralPath $triggerTextPath)) {
+        throw "Trigger text not found. Run build_triggers.ps1 first: $triggerTextPath"
+    }
 }
 
 function Invoke-Repair([string]$Python, [string]$SourceMap, [string]$CleanOut) {
@@ -85,6 +95,20 @@ function Invoke-Repair([string]$Python, [string]$SourceMap, [string]$CleanOut) {
     if ($LASTEXITCODE -ne 0) {
         throw "Clean map build failed."
     }
+}
+
+function Invoke-StringRecovery([string]$Python, [string]$MapPath) {
+    $recoveredOut = Join-Path $WorkDir "kargas_strings_cp949_recovered.scx"
+    Write-Host "[strings] Recover UTF-8 trigger strings to CP949"
+    Write-Host "[strings] $MapPath"
+    Write-Host "[strings] -> $recoveredOut"
+    & $Python $stringRecoveryTool $MapPath --out $recoveredOut --work-dir $WorkDir --trigger-text $triggerTextPath
+    if ($LASTEXITCODE -ne 0) {
+        throw "String encoding recovery failed."
+    }
+
+    Copy-Item -LiteralPath $recoveredOut -Destination $MapPath -Force
+    Write-Host "[strings] updated clean map string table."
 }
 
 function Protect-Map([string]$Python, [string]$CleanMap, [string]$ProtectedOut) {
@@ -148,6 +172,7 @@ $python = Resolve-Python
 
 New-Item -ItemType Directory -Path $WorkDir -Force | Out-Null
 Invoke-Repair $python $sourceMap.FullName $cleanOut
+Invoke-StringRecovery $python $cleanOut
 Protect-Map $python $cleanOut $protectedOut
 Test-Readable $python $protectedOut
 
