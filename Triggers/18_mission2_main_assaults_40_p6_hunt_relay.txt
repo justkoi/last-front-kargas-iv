@@ -1,5 +1,6 @@
 // Random Hunt relay. Active for 120s after final spawn batch.
-// Relay orders fire in four 10s pulses to reduce repeated pathing churn.
+// Relay orders fire during four 10s pulses, gated to once every 2 seconds
+// while P6 units wait at a waypoint.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -57,6 +58,18 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Deaths("Player 8", "Zerg Drone", At most, 23);
+Actions:
+	Set Deaths("Player 8", "Zerg Drone", Add, 1);
+	Preserve Trigger();
+}
+
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -64,6 +77,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -89,6 +103,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -112,6 +127,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -137,6 +153,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -160,6 +177,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -185,6 +203,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -208,6 +227,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -233,6 +253,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -256,6 +277,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -281,6 +303,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -304,6 +327,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -329,6 +353,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -352,6 +377,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -377,6 +403,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -400,6 +427,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -425,6 +453,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -448,6 +477,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -473,6 +503,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -496,6 +527,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -521,6 +553,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -544,6 +577,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -569,6 +603,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -592,6 +627,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -617,6 +653,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -640,6 +677,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -665,6 +703,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -688,6 +727,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -713,6 +753,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -736,6 +777,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -761,6 +803,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -784,6 +827,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -809,6 +853,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -832,6 +877,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -857,6 +903,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
@@ -880,6 +927,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -905,6 +953,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
@@ -928,6 +977,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -953,6 +1003,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
@@ -976,6 +1027,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -1001,6 +1053,7 @@ Conditions:
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
 	Deaths("Player 8", "Zerg Scourge", At most, 1440);
 	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
 	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
@@ -1017,6 +1070,19 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
+	Deaths("Player 8", "Zerg Scourge", At most, 1440);
+	Switch("Switch51", Set);
+	Deaths("Player 8", "Zerg Drone", At least, 24);
+Actions:
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
+	Preserve Trigger();
+}
+
 // End assault lock tail after 120 seconds.
 Trigger("Player 6"){
 Conditions:
@@ -1027,6 +1093,7 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
 	Set Switch("Switch51", clear);
 	Preserve Trigger();
