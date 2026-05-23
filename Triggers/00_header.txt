@@ -43,10 +43,10 @@
 //    Zerg Creep Colony    : mission1 P6/P7 creep colony warning counter
 //    Zerg Zergling        : P6 mission2 penalty assault cooldown
 //    Zerg Hydralisk       : P7 mission2 penalty assault cooldown
-//    Zerg Lurker          : P6 mission2 penalty assault ready flag (0=idle, 1=spawning, 2=relay, 3=warning, 4=weakened warning, 5=weakened spawning, 6=pre-analysis queued, 7=weakened pre-analysis queued)
-//    Zerg Mutalisk        : P7 mission2 penalty assault ready flag (0=idle, 1=spawning, 2=relay, 3=warning, 4=weakened warning, 5=weakened spawning, 6=pre-analysis queued, 7=weakened pre-analysis queued)
-//    Zerg Ultralisk       : P6 mission2 penalty assault spawn step timer
-//    Zerg Devourer        : P7 mission2 penalty assault spawn step timer
+//    Zerg Lurker          : P6 mission2 penalty assault ready flag (0=idle, 1=spawning, 2=relay, 3=warning, 4=weakened warning, 5=weakened spawning, 6=unused, 7=weakened pre-analysis queued)
+//    Zerg Mutalisk        : P7 mission2 penalty assault ready flag (0=idle, 1=spawning, 2=relay, 3=warning, 4=weakened warning, 5=weakened spawning, 6=unused, 7=weakened pre-analysis queued)
+//    Zerg Ultralisk       : P6 mission2 penalty assault spawn step timer / pre-roll cue pulse while ready flag is idle
+//    Zerg Devourer        : P7 mission2 penalty assault spawn step timer / pre-roll cue pulse while ready flag is idle
 //    Zerg Scourge         : P6 mission2 penalty assault waypoint window timer
 //    Zerg Guardian        : P7 mission2 penalty assault waypoint window timer
 //    Zerg Drone           : P6 mission2 penalty assault relay order cooldown
@@ -106,6 +106,12 @@
 //    Switch58   : P5 Hive death ground counterattack used
 //    Switch59   : P6 mission2 early alert defense charge ready
 //    Switch60   : P7 mission2 early alert defense charge ready
+//    Switch61/62: P6 mission2 pre-roll wave selector
+//    Switch63   : P6 mission2 pre-roll active
+//    Switch64   : P6 mission2 pre-roll message shown
+//    Switch65/66: P7 mission2 pre-roll wave selector
+//    Switch67   : P7 mission2 pre-roll active
+//    Switch68   : P7 mission2 pre-roll message shown
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:

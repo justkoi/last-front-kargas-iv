@@ -35,6 +35,14 @@ Actions:
 	Set Switch("Switch41", clear);
 	Set Switch("Switch48", clear);
 	Set Switch("Switch49", clear);
+	Set Switch("Switch61", clear);
+	Set Switch("Switch62", clear);
+	Set Switch("Switch63", clear);
+	Set Switch("Switch64", clear);
+	Set Switch("Switch65", clear);
+	Set Switch("Switch66", clear);
+	Set Switch("Switch67", clear);
+	Set Switch("Switch68", clear);
 	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
 	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
 	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
@@ -116,6 +124,11 @@ Conditions:
 	Bring("Player 6", "Zerg Hive", "P6 MainBase", At most, 0);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
+	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
+	Set Switch("Switch61", clear);
+	Set Switch("Switch62", clear);
+	Set Switch("Switch63", clear);
+	Set Switch("Switch64", clear);
 	Set Switch("Switch31", set);
 	Preserve Trigger();
 }
@@ -129,6 +142,11 @@ Conditions:
 	Bring("Player 7", "Zerg Hive", "P7 MainBase", At most, 0);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
+	Set Switch("Switch65", clear);
+	Set Switch("Switch66", clear);
+	Set Switch("Switch67", clear);
+	Set Switch("Switch68", clear);
 	Set Switch("Switch32", set);
 	Preserve Trigger();
 }
@@ -147,6 +165,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Switch("Switch61", clear);
+	Set Switch("Switch62", clear);
+	Set Switch("Switch63", clear);
+	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
 
@@ -163,6 +185,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Switch("Switch61", clear);
+	Set Switch("Switch62", clear);
+	Set Switch("Switch63", clear);
+	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
 
@@ -179,6 +205,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Switch("Switch65", clear);
+	Set Switch("Switch66", clear);
+	Set Switch("Switch67", clear);
+	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
 
@@ -195,6 +225,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Switch("Switch65", clear);
+	Set Switch("Switch66", clear);
+	Set Switch("Switch67", clear);
+	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
 
