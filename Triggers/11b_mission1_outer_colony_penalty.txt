@@ -518,7 +518,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 11160);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 12600);
 }
 
 Trigger("Player 6"){
@@ -528,7 +528,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 11160);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 12600);
 }
 
 Trigger("Player 6"){
@@ -538,7 +538,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 11160);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 12600);
 }
 
 Trigger("Player 7"){
@@ -548,7 +548,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 11160);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 12600);
 }
 
 Trigger("Player 7"){
@@ -558,7 +558,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 11160);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 12600);
 }
 
 Trigger("Player 7"){
@@ -568,7 +568,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 11160);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 12600);
 }
 
 // Count destroyed P6/P7 creep colonies together and warn every 3 kills.

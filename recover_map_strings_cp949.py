@@ -76,6 +76,7 @@ TEXT_ACTION_FIELDS = {
     "Set Next Scenario": (("str", 0),),
     "Comment": (("str", 0),),
 }
+FORCE_NAME_RE = re.compile(r"^\s*Force\s*([1-4])\s*:\s*(.*?)\s*$", re.IGNORECASE)
 
 
 def load_repair_tool(path: Path):
@@ -304,6 +305,28 @@ def parse_trigger_text_string_calls(path: Path) -> list[dict[str, object]]:
     return calls
 
 
+def parse_force_names(path: Path | None) -> dict[int, bytes]:
+    if path is None:
+        return {}
+    if not path.exists():
+        raise FileNotFoundError(f"Force names file not found: {path}")
+
+    names: dict[int, bytes] = {}
+    for line_number, line in enumerate(path.read_text(encoding="utf-8-sig").splitlines(), start=1):
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        match = FORCE_NAME_RE.match(line)
+        if not match:
+            raise ValueError(f"{path}:{line_number}: expected 'Force1 : name'")
+        force_number = int(match.group(1))
+        value = match.group(2).strip()
+        if not value:
+            raise ValueError(f"{path}:{line_number}: force name is empty")
+        names[force_number] = literal_to_bytes(value, line_number)
+    return names
+
+
 def unpack_action(data: bytes) -> tuple[int, ...]:
     return struct.unpack("<IIIIIIHBBBBH", data)
 
@@ -368,13 +391,37 @@ def string_map_from_trigger_text(trigger_text: Path, sections: dict[bytes, bytes
     return string_map
 
 
-def rebuild_chk_with_strings(repair, chk: bytes, trigger_text: Path | None) -> tuple[bytes, int, int, bytes]:
+def get_force_name_ids(data: bytes) -> list[int]:
+    if len(data) < 16:
+        raise ValueError("FORC section is too small")
+    return list(struct.unpack_from("<HHHH", data, 8))
+
+
+def set_force_name_ids(data: bytes, ids: list[int]) -> bytes:
+    if len(data) < 16:
+        raise ValueError("FORC section is too small")
+    if len(ids) != 4:
+        raise ValueError("Expected four force name string ids")
+    out = bytearray(data)
+    struct.pack_into("<HHHH", out, 8, *ids)
+    return bytes(out)
+
+
+def rebuild_chk_with_strings(
+    repair,
+    chk: bytes,
+    trigger_text: Path | None,
+    force_names_path: Path | None,
+) -> tuple[bytes, int, int, bytes, int]:
     sections = repair.parse_chk(chk)
     section_data = {name: data for name, data, _off in sections}
     string_map = string_map_from_trigger_text(trigger_text, section_data) if trigger_text else {}
+    force_names = parse_force_names(force_names_path)
+    force_name_ids = get_force_name_ids(section_data[b"FORC"]) if force_names else []
     string_section = b"STRx" if any(name == b"STRx" for name, _data, _off in sections) else b"STR "
     changed = 0
     total = 0
+    force_changed = 0
     out = bytearray()
     for name, data, _offset in sections:
         if name == string_section:
@@ -390,11 +437,25 @@ def rebuild_chk_with_strings(repair, chk: bytes, trigger_text: Path | None) -> t
                 total += 1
                 if did_change:
                     changed += 1
+            for force_number, force_name in force_names.items():
+                current_id = force_name_ids[force_number - 1]
+                if current_id > 0 and current_id <= len(converted_values):
+                    if converted_values[current_id - 1] != force_name:
+                        converted_values[current_id - 1] = force_name
+                        force_changed += 1
+                else:
+                    converted_values.append(force_name)
+                    force_name_ids[force_number - 1] = len(converted_values)
+                    total += 1
+                    changed += 1
+                    force_changed += 1
             data = build_strx(converted_values) if name == b"STRx" else build_str(converted_values)
+        elif name == b"FORC" and force_names:
+            data = set_force_name_ids(data, force_name_ids)
         out.extend(name)
         out.extend(struct.pack("<I", len(data)))
         out.extend(data)
-    return bytes(out), changed, total, string_section
+    return bytes(out), changed, total, string_section, force_changed
 
 
 def recover_map_strings(
@@ -404,6 +465,7 @@ def recover_map_strings(
     stormlib: str | None,
     work_dir: Path,
     trigger_text: Path | None,
+    force_names: Path | None,
 ) -> None:
     repair = load_repair_tool(repair_tool)
     storm = repair.Storm(repair.find_stormlib(stormlib))
@@ -414,7 +476,12 @@ def recover_map_strings(
         if temp_ctx:
             temp_ctx.cleanup()
 
-    rebuilt_chk, changed, total, section_name = rebuild_chk_with_strings(repair, chk, trigger_text)
+    rebuilt_chk, changed, total, section_name, force_changed = rebuild_chk_with_strings(
+        repair,
+        chk,
+        trigger_text,
+        force_names,
+    )
     output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="kargas_strings_cp949_") as tmpdir:
         chk_path = Path(tmpdir) / "scenario.chk"
@@ -424,6 +491,8 @@ def recover_map_strings(
     print(f"Read scenario.chk using locale 0x{locale:X}")
     source_label = f" from {trigger_text}" if trigger_text else ""
     print(f"Recovered {changed}/{total} {section_name.decode('ascii').strip()} string entries to CP949{source_label}")
+    if force_names:
+        print(f"Updated {force_changed} force name entries from {force_names}")
     print(f"Wrote {output}")
 
 
@@ -435,9 +504,18 @@ def main() -> int:
     parser.add_argument("--stormlib")
     parser.add_argument("--work-dir", type=Path, default=Path(r"E:\SCX_WORK"))
     parser.add_argument("--trigger-text", type=Path, help="TrigEdit text source used to restore imported strings")
+    parser.add_argument("--force-names", type=Path, help="ForceNames.md file used to update FORC display names")
     args = parser.parse_args()
 
-    recover_map_strings(args.source, args.out, args.repair_tool, args.stormlib, args.work_dir, args.trigger_text)
+    recover_map_strings(
+        args.source,
+        args.out,
+        args.repair_tool,
+        args.stormlib,
+        args.work_dir,
+        args.trigger_text,
+        args.force_names,
+    )
     return 0
 
 

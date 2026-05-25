@@ -7,7 +7,8 @@
 //  P5 uses P5 Area for detection and P5 Intruder as the moving target.
 //  P6/P7 Area Ground/Air locations are map-side filtered. Each response
 //  moves the single Intruder location onto the detected unit, then orders
-//  the matching defenders to patrol there.
+//  the matching defenders to patrol there. P6/P7 mark intrusion flags;
+//  separate 20s dispatch triggers send one existing Overlord per colony.
 //-----------------------------------------------------------------//
 
 Trigger("Player 5"){
@@ -107,6 +108,7 @@ Conditions:
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Ground", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
@@ -125,6 +127,7 @@ Conditions:
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Air", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
@@ -158,6 +161,7 @@ Conditions:
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Ground", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
@@ -176,6 +180,7 @@ Conditions:
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Air", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
@@ -209,6 +214,7 @@ Conditions:
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Ground", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
@@ -227,6 +233,7 @@ Conditions:
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Air", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
@@ -260,6 +267,7 @@ Conditions:
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Ground", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
@@ -278,6 +286,7 @@ Conditions:
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Air", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
@@ -316,6 +325,7 @@ Conditions:
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Ground", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
@@ -335,6 +345,7 @@ Conditions:
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Air", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
@@ -371,6 +382,7 @@ Conditions:
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Ground", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
@@ -390,6 +402,7 @@ Conditions:
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Air", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
@@ -426,6 +439,7 @@ Conditions:
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Ground", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
@@ -445,6 +459,7 @@ Conditions:
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Air", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
@@ -481,6 +496,7 @@ Conditions:
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Ground", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
@@ -500,6 +516,7 @@ Conditions:
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Air", "P6 Intruder");
+	Set Switch("Switch69", set);
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
@@ -537,6 +554,7 @@ Conditions:
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Ground", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
@@ -555,6 +573,7 @@ Conditions:
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Air", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
@@ -588,6 +607,7 @@ Conditions:
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Ground", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
@@ -606,6 +626,7 @@ Conditions:
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Air", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
@@ -639,6 +660,7 @@ Conditions:
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Ground", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
@@ -657,6 +679,7 @@ Conditions:
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Air", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
@@ -690,6 +713,7 @@ Conditions:
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Ground", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
@@ -708,6 +732,7 @@ Conditions:
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Air", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
@@ -746,6 +771,7 @@ Conditions:
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Ground", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
@@ -765,6 +791,7 @@ Conditions:
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Air", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
@@ -801,6 +828,7 @@ Conditions:
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Ground", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
@@ -820,6 +848,7 @@ Conditions:
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Air", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
@@ -856,6 +885,7 @@ Conditions:
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Ground", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
@@ -875,6 +905,7 @@ Conditions:
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Air", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
@@ -911,6 +942,7 @@ Conditions:
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Ground", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
@@ -930,6 +962,7 @@ Conditions:
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Air", "P7 Intruder");
+	Set Switch("Switch70", set);
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
@@ -956,5 +989,33 @@ Conditions:
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
+	Preserve Trigger();
+}
+
+// P6/P7 intrusion Overlord dispatch: one existing Overlord per colony every 20s.
+
+Trigger("Player 6"){
+Conditions:
+	Switch("Switch69", Set);
+	Deaths("Player 8", "Terran Medic", At least, 240);
+	Bring("Player 6", "Zerg Overlord", "P6 Base", At least, 1);
+Actions:
+	Move Unit("Player 6", "Zerg Overlord", 1, "P6 Base", "P6 Scout");
+	Order("Player 6", "Zerg Overlord", "P6 Scout", "P6 Intruder", Move);
+	Set Deaths("Player 8", "Terran Medic", Set To, 0);
+	Set Switch("Switch69", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Switch("Switch70", Set);
+	Deaths("Player 8", "Terran SCV", At least, 240);
+	Bring("Player 7", "Zerg Overlord", "P7 Base", At least, 1);
+Actions:
+	Move Unit("Player 7", "Zerg Overlord", 1, "P7 Base", "P7 Scout");
+	Order("Player 7", "Zerg Overlord", "P7 Scout", "P7 Intruder", Move);
+	Set Deaths("Player 8", "Terran SCV", Set To, 0);
+	Set Switch("Switch70", clear);
 	Preserve Trigger();
 }

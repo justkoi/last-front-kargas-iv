@@ -1,6 +1,6 @@
 //============================================================
 //  Player-claimable missile turrets
-//  Preplace one Player 9 Terran Missile Turret at each MD1~MD4 location.
+//  Preplace one Player 9 Terran Missile Turret at each MD1~MD6 location.
 //============================================================
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -10,7 +10,7 @@ Conditions:
 Actions:
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD1");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>전술 지원: <04>MD1 미사일 터렛 제어권 확보.");
+	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -20,7 +20,7 @@ Conditions:
 Actions:
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD2");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>전술 지원: <04>MD2 미사일 터렛 제어권 확보.");
+	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -30,7 +30,7 @@ Conditions:
 Actions:
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD3");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>전술 지원: <04>MD3 미사일 터렛 제어권 확보.");
+	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -40,6 +40,25 @@ Conditions:
 Actions:
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>전술 지원: <04>MD4 미사일 터렛 제어권 확보.");
+	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
 }
 
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Bring("Current Player", "Men", "MD5", At least, 1);
+	Bring("Player 9", "Terran Missile Turret", "MD5", At least, 1);
+Actions:
+	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD5");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Bring("Current Player", "Men", "MD6", At least, 1);
+	Bring("Player 9", "Terran Missile Turret", "MD6", At least, 1);
+Actions:
+	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD6");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+}

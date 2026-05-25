@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------//
 //  Mission 2 - P6/P7 uncaptured-colony penalty assaults
 //
-//  12 DC tick = 1 second. Base cooldown is 960s = 11520 ticks.
+//  12 DC tick = 1 second. Base cooldown is 1080s = 12960 ticks.
 //  Roll triggers subtract only the cooldown they consumed, so excess
 //  progress from repeated Hatchery/Lair/Hive kills stays queued.
 //  Hatchery/Lair/Hive kills add 80s worth of cooldown progress.
@@ -68,7 +68,7 @@ Conditions:
 	Switch("Switch26", Not Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 8760);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 10200);
 }
 
 Trigger("Player 8"){
@@ -79,7 +79,7 @@ Conditions:
 	Switch("Switch26", Not Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 7164);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 8604);
 }
 
 Trigger("Player 8"){
@@ -90,7 +90,7 @@ Conditions:
 	Switch("Switch26", Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 7164);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 8604);
 }
 
 Trigger("Player 8"){
@@ -101,7 +101,7 @@ Conditions:
 	Switch("Switch26", Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 8760);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 10200);
 }
 
 Trigger("Player 8"){

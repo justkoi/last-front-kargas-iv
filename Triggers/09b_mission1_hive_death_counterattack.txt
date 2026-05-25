@@ -3,8 +3,8 @@
 //
 //  Fires once when a P5 Hive death is detected, before the late-wave
 //  reward trigger consumes the P5 Zerg Hive death counter.
-//  Composition: 72 Zerglings + 24 Hydralisks + 8 Ultralisks + 4 Defilers
-//  = 100 Zerg supply.
+//  Composition: 64 Zerglings + 24 Hydralisks + 4 Ultralisks + 4 Defilers
+//  = 80 Zerg supply.
 //-----------------------------------------------------------------//
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -25,21 +25,21 @@ Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 	Switch("Switch58", Not Set);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 18, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 16, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Ultralisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn1", 1);
-	Create Unit("Player 5", "Zerg Zergling", 18, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 16, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Ultralisk", 2, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn2");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn2", 1);
-	Create Unit("Player 5", "Zerg Zergling", 18, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 16, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Ultralisk", 2, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn3", 1);
-	Create Unit("Player 5", "Zerg Zergling", 18, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Zergling", 16, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Ultralisk", 2, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn4");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn4", 1);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
