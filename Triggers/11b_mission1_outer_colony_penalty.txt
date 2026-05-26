@@ -137,376 +137,324 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 resource unlock warning.
-Trigger("All Players"){
+// Player-facing warning messages. Detection below is owned by Player 8 so
+// global switches cannot suppress P2~P4 copies before they display.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch71", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch72", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch73", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
+}
+
+// P6 resource unlock warning latch.
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Sunken Colony", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Spore Colony", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch73", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch73", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch73", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Spawning Pool", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Hydralisk Den", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Evolution Chamber", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Spire", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Greater Spire", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Queen's Nest", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Defiler Mound", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Ultralisk Cavern", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Nydus Canal", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-// P7 resource unlock warning.
-Trigger("All Players"){
+// P7 resource unlock warning latch.
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Sunken Colony", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Spore Colony", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch73", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch73", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch73", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Spawning Pool", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Hydralisk Den", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Evolution Chamber", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Spire", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Greater Spire", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Queen's Nest", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Defiler Mound", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Ultralisk Cavern", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Nydus Canal", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
 // First Hatchery/Lair/Hive collapse primes one large assault from that colony only.

@@ -117,6 +117,9 @@
 //    Switch68   : P7 mission2 pre-roll message shown
 //    Switch69   : P6 intrusion detected for Overlord dispatch
 //    Switch70   : P7 intrusion detected for Overlord dispatch
+//    Switch71   : mission1 P6 outer colony awakening warning latch
+//    Switch72   : mission1 P7 outer colony awakening warning latch
+//    Switch73   : mission1 both outer colonies awakening warning latch
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
@@ -2028,376 +2031,324 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 resource unlock warning.
-Trigger("All Players"){
+// Player-facing warning messages. Detection below is owned by Player 8 so
+// global switches cannot suppress P2~P4 copies before they display.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch71", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch72", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch73", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
+	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
+}
+
+// P6 resource unlock warning latch.
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Sunken Colony", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Spore Colony", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch73", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch73", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch73", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Spawning Pool", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Hydralisk Den", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Evolution Chamber", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Spire", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Greater Spire", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Queen's Nest", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Defiler Mound", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Ultralisk Cavern", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch24", Not Set);
 	Deaths("Player 6", "Zerg Nydus Canal", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
+	Set Switch("Switch71", set);
 }
 
-// P7 resource unlock warning.
-Trigger("All Players"){
+// P7 resource unlock warning latch.
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Sunken Colony", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Spore Colony", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch73", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch73", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 두 군락이 동시에 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 두 외곽 군락이 깨어났습니다. 미션2에 시작되는 양쪽 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch24", set);
 	Set Switch("Switch25", set);
+	Set Switch("Switch73", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Spawning Pool", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Hydralisk Den", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Evolution Chamber", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Spire", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Greater Spire", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Queen's Nest", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Defiler Mound", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Ultralisk Cavern", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
-Trigger("All Players"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch25", Not Set);
 	Deaths("Player 7", "Zerg Nydus Canal", At least, 1);
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>미확인 군락의 자원 흐름이 열렸습니다. 생체 반응이 급격히 증가합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방금 선을 넘었다. 저 군락은 이제 우리를 향해 전력을 모을 거다.");
-	Display Text Message(Always Display, "<06>경고: 이 군락이 깨어났습니다. 공격을 계속하면 미션2에 시작되는 공세가 미션1에 시작됩니다.");
 	Set Switch("Switch25", set);
+	Set Switch("Switch72", set);
 }
 
 // First Hatchery/Lair/Hive collapse primes one large assault from that colony only.
@@ -15622,785 +15573,6 @@ Conditions:
 Actions:
 	Wait(1000);
 	Victory();
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] Rotating player resource dashboard
-//
-//  Shows the original player mineral leaderboard during the first
-//  half of the dashboard cycle. Pair with 94_test_resource_dashboard_02_dc.txt
-//  to alternate between resources and the mission 2 assault DC dashboard.
-//
-//  Player 8 / Zerg Extractor = test dashboard cycle timer.
-//  0~59 ticks: resources, 60~119 ticks: M2 assault DC, then reset.
-//-----------------------------------------------------------------//
-
-Trigger("Player 8"){
-Conditions:
-	Always();
-Actions:
-	Set Deaths("Player 8", "Zerg Extractor", Add, 1);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Extractor", At least, 120);
-Actions:
-	Set Deaths("Player 8", "Zerg Extractor", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Zerg Extractor", At most, 59);
-Actions:
-	Leader Board Resources("TEST Minerals", ore);
-	Leaderboard Computer Players(enabled);
-	Preserve Trigger();
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] Rotating mission 2 main assault DC dashboard
-//
-//  Standard StarCraft leaderboards cannot read death counters directly.
-//  This test dashboard mirrors the two mission 2 main-assault cooldown
-//  DCs into custom score, then restores the source DCs in the same pass.
-//
-//  Shown during the second half of the cycle driven by
-//  94_test_resource_dashboard_01_resources.txt.
-//
-//  P6 custom score = Player 8 / Zerg Zergling DC.
-//  P7 custom score = Player 8 / Zerg Hydralisk DC.
-//  Temp DCs: Player 8 / Zerg Spawning Pool, Zerg Evolution Chamber.
-//-----------------------------------------------------------------//
-
-Trigger("Player 8"){
-Conditions:
-	Always();
-Actions:
-	Set Score("Player 6", Set To, 0, Custom);
-	Set Score("Player 7", Set To, 0, Custom);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Set To, 0);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Set To, 0);
-	Preserve Trigger();
-}
-
-// P6 main assault timer binary copy: source DC -> Player 6 custom score.
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 32768);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 32768);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 32768);
-	Set Score("Player 6", Add, 32768, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 16384);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 16384);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 16384);
-	Set Score("Player 6", Add, 16384, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 8192);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 8192);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 8192);
-	Set Score("Player 6", Add, 8192, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 4096);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 4096);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 4096);
-	Set Score("Player 6", Add, 4096, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 2048);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 2048);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 2048);
-	Set Score("Player 6", Add, 2048, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 1024);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 1024);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 1024);
-	Set Score("Player 6", Add, 1024, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 512);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 512);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 512);
-	Set Score("Player 6", Add, 512, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 256);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 256);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 256);
-	Set Score("Player 6", Add, 256, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 128);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 128);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 128);
-	Set Score("Player 6", Add, 128, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 64);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 64);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 64);
-	Set Score("Player 6", Add, 64, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 32);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 32);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 32);
-	Set Score("Player 6", Add, 32, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 16);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 16);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 16);
-	Set Score("Player 6", Add, 16, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 8);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 8);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 8);
-	Set Score("Player 6", Add, 8, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 4);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 4);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 4);
-	Set Score("Player 6", Add, 4, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 2);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 2);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 2);
-	Set Score("Player 6", Add, 2, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 1);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 1);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 1);
-	Set Score("Player 6", Add, 1, Custom);
-	Preserve Trigger();
-}
-
-// P6 main assault timer restore: temp DC -> source DC.
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 32768);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 32768);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 32768);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 16384);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 16384);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 16384);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 8192);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 8192);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 8192);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 4096);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 4096);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4096);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 2048);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 2048);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2048);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 1024);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 1024);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1024);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 512);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 512);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 512);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 256);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 256);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 256);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 128);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 128);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 128);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 64);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 64);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 64);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 32);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 32);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 32);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 16);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 16);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 16);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 8);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 8);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 8);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 4);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 4);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 2);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 2);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 1);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 1);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1);
-	Preserve Trigger();
-}
-
-// P7 main assault timer binary copy: source DC -> Player 7 custom score.
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 32768);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 32768);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 32768);
-	Set Score("Player 7", Add, 32768, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 16384);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 16384);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 16384);
-	Set Score("Player 7", Add, 16384, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 8192);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 8192);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 8192);
-	Set Score("Player 7", Add, 8192, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 4096);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 4096);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 4096);
-	Set Score("Player 7", Add, 4096, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 2048);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 2048);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 2048);
-	Set Score("Player 7", Add, 2048, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 1024);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 1024);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 1024);
-	Set Score("Player 7", Add, 1024, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 512);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 512);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 512);
-	Set Score("Player 7", Add, 512, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 256);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 256);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 256);
-	Set Score("Player 7", Add, 256, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 128);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 128);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 128);
-	Set Score("Player 7", Add, 128, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 64);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 64);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 64);
-	Set Score("Player 7", Add, 64, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 32);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 32);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 32);
-	Set Score("Player 7", Add, 32, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 16);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 16);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 16);
-	Set Score("Player 7", Add, 16, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 8);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 8);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 8);
-	Set Score("Player 7", Add, 8, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 4);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 4);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 4);
-	Set Score("Player 7", Add, 4, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 2);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 2);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 2);
-	Set Score("Player 7", Add, 2, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 1);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 1);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 1);
-	Set Score("Player 7", Add, 1, Custom);
-	Preserve Trigger();
-}
-
-// P7 main assault timer restore: temp DC -> source DC.
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 32768);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 32768);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 32768);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 16384);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 16384);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 16384);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 8192);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 8192);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 8192);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 4096);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 4096);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4096);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 2048);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 2048);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2048);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 1024);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 1024);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1024);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 512);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 512);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 512);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 256);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 256);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 256);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 128);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 128);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 128);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 64);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 64);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 64);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 32);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 32);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 32);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 16);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 16);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 16);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 8);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 8);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 8);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 4);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 4);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 2);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 2);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 1);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 1);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1);
-	Preserve Trigger();
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Zerg Extractor", At least, 60);
-	Deaths("Player 8", "Zerg Extractor", At most, 119);
-Actions:
-	Leader Board Points("TEST M2 Assault DC", Custom);
-	Leaderboard Computer Players(enabled);
-	Preserve Trigger();
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE / CHEAT] Spawn 2 control groups of Jim Raynor at P1 Start
-//  Included for manual test builds only.
-//-----------------------------------------------------------------//
-
-Trigger("Player 1"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Create Unit("Player 1", "Jim Raynor (Marine)", 24, "P1 Start");
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE / CHEAT] 게임 시작 시 P1에게 톰 카잔스키 36기 지급
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  주의: 36기를 한 location에 몰아 스폰하면 stacking으로 일부 멀리
-//        밀려날 수 있음. 테스트 목적이므로 P1 본진(P1 Start 등) 사용.
-//-----------------------------------------------------------------//
-
-Trigger("Player 1"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Create Unit("Player 1", "Tom Kazansky (Wraith)", 36, "Anywhere");
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] 플레이어 절대 패배 방지 (스위치 방식)
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  동작 원리:
-//    게임 시작 직후 Switch1 을 set.
-//    12_mission1_to_mission2_transition.txt 의 패배 트리거에 Switch("Switch1", cleared) 조건이
-//    있으므로, 스위치가 set 상태인 한 Defeat()가 발동하지 않음.
-//-----------------------------------------------------------------//
-
-Trigger("Player 5"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Set Switch("Switch1", set);
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] 컴퓨터(P5, P6) → 플레이어(P1~P4) 시야 공유
-//  (플레이어가 컴퓨터의 시야를 가진다)
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  사용 스크립트 (AI → 해당 플레이어로 시야 공유):
-//    "Turn ON Shared Vision of current player with Player 1"
-//    "Turn ON Shared Vision of current player with Player 2"
-//    "Turn ON Shared Vision of current player with Player 3"
-//    "Turn ON Shared Vision of current player with Player 4"
-//
-//  주의: 위 스크립트 이름이 SCMDraft 드롭다운에 정확히 그대로 있는지
-//        확인할 것. 표기가 다르면 적절히 교체.
-//        ("of [SHARER] with [RECEIVER]" 패턴으로 추정)
-//-----------------------------------------------------------------//
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Run AI Script("+Vi4");
-	Run AI Script("+Vi5");
-	Run AI Script("+Vi6");
-	Run AI Script("+Vi7");
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] Trigger the normal mission 1 clear path
-//
-//  This does not set mission 2 directly. It prepares the same condition
-//  used by Triggers/12_mission1_to_mission2_transition.txt:
-//    - Valkyrie DC = 1
-//    - P5 combat base is removed
-//
-//  Then mission1_to_mission2_transition advances Valkyrie 1 -> 2, grants rewards, and starts
-//  the normal mission 2 phase 1 flow.
-//-----------------------------------------------------------------//
-
-Trigger("Player 8"){
-Conditions:
-	Elapsed Time(At least, 5);
-Actions:
-	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
-	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
-	Kill Unit("Player 5", "Buildings");
-	Kill Unit("Player 5", "Men");
 }
 //-----------------------------------------------------------------//
 //  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유
