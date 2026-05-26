@@ -58,7 +58,7 @@ Actions:
 
 // First penalty assaults are staggered after the mission2 assault cooldown opens
 // at Vulture 756: one colony spawns at about 5:03 mission2 elapsed, the other at
-// about 7:16. From the cooldown-open point, those are 4:00 and 6:13.
+// about 8:16. From the cooldown-open point, those are 4:00 and 7:13.
 // Roll warnings fire 10 seconds before the first spawn batch.
 Trigger("Player 8"){
 Conditions:
@@ -79,7 +79,7 @@ Conditions:
 	Switch("Switch26", Not Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 8604);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 7884);
 }
 
 Trigger("Player 8"){
@@ -90,7 +90,7 @@ Conditions:
 	Switch("Switch26", Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 8604);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 7884);
 }
 
 Trigger("Player 8"){
