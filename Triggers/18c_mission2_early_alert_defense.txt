@@ -78,6 +78,13 @@ Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
 	Set Switch("Switch59", clear);
 	Preserve Trigger();
@@ -111,6 +118,13 @@ Actions:
 	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Scourge", 2, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Scourge", 2, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn3");
 	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
 	Set Switch("Switch60", clear);
 	Preserve Trigger();
