@@ -10,7 +10,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 780);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 동북쪽 <15>갈색 저그<04> 군락과 동남쪽 <16>하얀색 저그<04> 군락 파괴\n- 성공 조건: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락의 해처리 / 레어 / 하이브 파괴\n- 위치: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락\n- 지침: 본진 방어선을 유지하면서 새 진입로를 통해 각 군락을 압박할 것");
+	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 동북쪽 <15>갈색 저그<04> 군락과 동남쪽 <16>하얀색 저그<04> 군락 파괴\n- 성공 조건: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락의 해처리 / 레어 / 하이브 파괴\n- 위치: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락\n- 지침: 초반 5분 동안 본진 방어선을 유지하고, 점막 뿌리망 붕괴 후 새 진입로로 각 군락을 압박할 것");
 	Create Unit("Current Player", "Map Revealer", 1, "P6 Home");
 	Create Unit("Current Player", "Map Revealer", 1, "P7 Home");
 	Minimap Ping("P6 Base");
@@ -62,8 +62,17 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 840);
+	Deaths("Player 8", "Terran Vulture", At most, 864);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>동북쪽과 동남쪽에 잔여 군락을 확인했습니다. 접근로 주변의 주황색 저그 방어기관은 아직 점막 뿌리망으로 버티고 있습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 972);
 	Deaths("Player 8", "Terran Vulture", At most, 996);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>방어선을 유지하면서 한쪽씩 무너뜨린다. 남은 군락을 모두 섬멸한다.");
+	Display Text Message(Always Display, "<03>호크: <04>뿌리망이 마를 때까지 깊게 들어가지 마라. 초반 5분은 방어선을 유지한다.");
 }

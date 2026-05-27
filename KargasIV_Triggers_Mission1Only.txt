@@ -3029,7 +3029,7 @@ Actions:
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><03>미션 1 완료: 첫 군락 붕괴");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<1A>노바: <04>주황색 군락의 중추는 무너졌지만, 성큰과 스포어가 점막 뿌리망에 매달려 아직 살아 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>첫 군락 중추 붕괴 확인. 지형 차단 신호가 약해지고 있습니다.");
 }
 
 Trigger("All Players"){
@@ -3038,7 +3038,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 60);
 	Deaths("Player 8", "Terran Vulture", At most, 84);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>뿌리가 마를 때까지 3분 걸린다. 그 전엔 깊게 들어가지 말고 방어선을 다시 세워라.");
+	Display Text Message(Always Display, "<03>호크: <04>승리 보고는 나중이다. 전 병력, 방어선으로 복귀해라.");
 }
 
 Trigger("All Players"){
@@ -3047,7 +3047,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 144);
 	Deaths("Player 8", "Terran Vulture", At most, 156);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>지형 차단 신호가 약해집니다. 새 진입로를 전술 지도에 표시하겠습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>새 진입로가 열리고 있습니다. 전술 지도에 순차 표시하겠습니다.");
 }
 
 Trigger("All Players"){
@@ -3141,8 +3141,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 864);
-	Deaths("Player 8", "Terran Vulture", At most, 888);
+	Deaths("Player 8", "Terran Vulture", At least, 1032);
+	Deaths("Player 8", "Terran Vulture", At most, 1056);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>지금이 정비 시간이다. 수리하고, 병력을 모으고, 방어선을 다시 그어라.");
 }
@@ -3150,8 +3150,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 1080);
-	Deaths("Player 8", "Terran Vulture", At most, 1104);
+	Deaths("Player 8", "Terran Vulture", At least, 1200);
+	Deaths("Player 8", "Terran Vulture", At most, 1224);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>두 군락이 병력을 재집결시키고 있습니다. 공격 방향은 아직 고정되지 않았습니다.");
 }
@@ -3159,17 +3159,17 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 2160);
-	Deaths("Player 8", "Terran Vulture", At most, 2184);
+	Deaths("Player 8", "Terran Vulture", At least, 3600);
+	Deaths("Player 8", "Terran Vulture", At most, 3624);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>점막 뿌리망 붕괴 확인. 주황색 군락의 성큰과 스포어가 고사했습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>점막 뿌리망 붕괴 확인. 주황색 저그 방어기관이 고사했습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>길이 열렸다. 지금부터 잔여 군락을 하나씩 고립시켜 무너뜨린다.");
 }
 
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At least, 3600);
 Actions:
 	Kill Unit("Player 5", "Zerg Sunken Colony");
 	Kill Unit("Player 5", "Zerg Spore Colony");
@@ -4435,7 +4435,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 780);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 동북쪽 <15>갈색 저그<04> 군락과 동남쪽 <16>하얀색 저그<04> 군락 파괴\n- 성공 조건: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락의 해처리 / 레어 / 하이브 파괴\n- 위치: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락\n- 지침: 본진 방어선을 유지하면서 새 진입로를 통해 각 군락을 압박할 것");
+	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 동북쪽 <15>갈색 저그<04> 군락과 동남쪽 <16>하얀색 저그<04> 군락 파괴\n- 성공 조건: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락의 해처리 / 레어 / 하이브 파괴\n- 위치: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락\n- 지침: 초반 5분 동안 본진 방어선을 유지하고, 점막 뿌리망 붕괴 후 새 진입로로 각 군락을 압박할 것");
 	Create Unit("Current Player", "Map Revealer", 1, "P6 Home");
 	Create Unit("Current Player", "Map Revealer", 1, "P7 Home");
 	Minimap Ping("P6 Base");
@@ -4487,10 +4487,19 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 840);
+	Deaths("Player 8", "Terran Vulture", At most, 864);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>동북쪽과 동남쪽에 잔여 군락을 확인했습니다. 접근로 주변의 주황색 저그 방어기관은 아직 점막 뿌리망으로 버티고 있습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 972);
 	Deaths("Player 8", "Terran Vulture", At most, 996);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>방어선을 유지하면서 한쪽씩 무너뜨린다. 남은 군락을 모두 섬멸한다.");
+	Display Text Message(Always Display, "<03>호크: <04>뿌리망이 마를 때까지 깊게 들어가지 마라. 초반 5분은 방어선을 유지한다.");
 }
 //-----------------------------------------------------------------//
 //  Mission-independent - dynamic building tracking and random all-out attack
