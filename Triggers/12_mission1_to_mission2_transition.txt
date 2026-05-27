@@ -31,8 +31,8 @@ Actions:
 	Set Switch("Switch54", clear);
 	Set Switch("Switch59", clear);
 	Set Switch("Switch60", clear);
-	Kill Unit("Player 5", "Zerg Sunken Colony");
-	Kill Unit("Player 5", "Zerg Spore Colony");
+	Kill Unit At Location("Player 5", "Zerg Sunken Colony", 64, "WestArea");
+	Kill Unit At Location("Player 5", "Zerg Spore Colony", 64, "WestArea");
 }
 
 Trigger("All Players"){
@@ -44,7 +44,7 @@ Actions:
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><03>미션 1 완료: 첫 군락 붕괴");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<1A>노바: <04>첫 군락 붕괴 확인. ...잠깐, 북동쪽과 남동쪽에서 생체 반응이 동시에 상승합니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>주황색 군락의 중추는 무너졌지만, 성큰과 스포어가 점막 뿌리망에 매달려 아직 살아 있습니다.");
 }
 
 Trigger("All Players"){
@@ -53,7 +53,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 60);
 	Deaths("Player 8", "Terran Vulture", At most, 84);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>승리 보고 중지. 전 병력, 방어선으로 복귀해라. 이건 잔존 병력이 아니다.");
+	Display Text Message(Always Display, "<03>호크: <04>뿌리가 마를 때까지 3분 걸린다. 그 전엔 깊게 들어가지 말고 방어선을 다시 세워라.");
 }
 
 Trigger("All Players"){
@@ -169,6 +169,25 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 1104);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>두 군락이 병력을 재집결시키고 있습니다. 공격 방향은 아직 고정되지 않았습니다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+	Deaths("Player 8", "Terran Vulture", At most, 2184);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>점막 뿌리망 붕괴 확인. 주황색 군락의 성큰과 스포어가 고사했습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>길이 열렸다. 지금부터 잔여 군락을 하나씩 고립시켜 무너뜨린다.");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2160);
+Actions:
+	Kill Unit("Player 5", "Zerg Sunken Colony");
+	Kill Unit("Player 5", "Zerg Spore Colony");
 }
 
 //-----------------------------------------------------------------//
