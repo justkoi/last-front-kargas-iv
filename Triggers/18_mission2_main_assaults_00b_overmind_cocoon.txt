@@ -208,8 +208,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 11640);
-	Deaths("Player 8", "Zerg Zergling", At most, 12599);
+	Deaths("Player 8", "Zerg Zergling", At least, 13080);
+	Deaths("Player 8", "Zerg Zergling", At most, 14039);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Not Set);
@@ -231,8 +231,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12000);
-	Deaths("Player 8", "Zerg Zergling", At most, 12959);
+	Deaths("Player 8", "Zerg Zergling", At least, 13440);
+	Deaths("Player 8", "Zerg Zergling", At most, 14399);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Set);
 	Switch("Switch28", Not Set);
@@ -254,8 +254,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12360);
-	Deaths("Player 8", "Zerg Zergling", At most, 13319);
+	Deaths("Player 8", "Zerg Zergling", At least, 13800);
+	Deaths("Player 8", "Zerg Zergling", At most, 14759);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Set);
@@ -277,8 +277,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12000);
-	Deaths("Player 8", "Zerg Zergling", At most, 12959);
+	Deaths("Player 8", "Zerg Zergling", At least, 13440);
+	Deaths("Player 8", "Zerg Zergling", At most, 14399);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Set);
 	Switch("Switch28", Set);
@@ -301,7 +301,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Not Set);
@@ -310,7 +310,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14040);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -320,7 +320,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
 	Switch("Switch27", Set);
 	Switch("Switch28", Not Set);
@@ -329,7 +329,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -339,7 +339,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Set);
@@ -348,7 +348,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14760);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -358,7 +358,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
 	Switch("Switch27", Set);
 	Switch("Switch28", Set);
@@ -367,7 +367,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -378,7 +378,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Not Set);
@@ -392,7 +392,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14040);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -402,7 +402,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Set);
 	Switch("Switch28", Not Set);
@@ -416,7 +416,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -426,7 +426,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Set);
@@ -440,7 +440,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14760);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -450,7 +450,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Set);
 	Switch("Switch28", Set);
@@ -464,7 +464,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -476,8 +476,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 11640);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12599);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13080);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14039);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Not Set);
@@ -499,8 +499,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12959);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13440);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14399);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Set);
 	Switch("Switch30", Not Set);
@@ -522,8 +522,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12360);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 13319);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13800);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14759);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Set);
@@ -545,8 +545,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12959);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13440);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14399);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Set);
 	Switch("Switch30", Set);
@@ -569,7 +569,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Not Set);
@@ -578,7 +578,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14040);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -588,7 +588,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
 	Switch("Switch29", Set);
 	Switch("Switch30", Not Set);
@@ -597,7 +597,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -607,7 +607,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Set);
@@ -616,7 +616,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14760);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -626,7 +626,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
 	Switch("Switch29", Set);
 	Switch("Switch30", Set);
@@ -635,7 +635,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -646,7 +646,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Not Set);
@@ -660,7 +660,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14040);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -670,7 +670,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Set);
 	Switch("Switch30", Not Set);
@@ -684,7 +684,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -694,7 +694,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Set);
@@ -708,7 +708,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14760);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -718,7 +718,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Set);
 	Switch("Switch30", Set);
@@ -732,7 +732,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }

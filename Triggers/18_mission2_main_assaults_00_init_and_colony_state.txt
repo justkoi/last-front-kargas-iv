@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------//
 //  Mission 2 - P6/P7 uncaptured-colony penalty assaults
 //
-//  12 DC tick = 1 second. Base cooldown is 1080s = 12960 ticks.
+//  12 DC tick = 1 second. Base cooldown is 1200s = 14400 ticks.
 //  Roll triggers subtract only the cooldown they consumed, so excess
 //  progress from repeated Hatchery/Lair/Hive kills stays queued.
 //  Hatchery/Lair/Hive kills add 80s worth of cooldown progress.
@@ -57,8 +57,8 @@ Actions:
 }
 
 // First penalty assaults are staggered after the mission2 assault cooldown opens
-// at Vulture 756: one colony spawns at about 5:03 mission2 elapsed, the other at
-// about 8:16. From the cooldown-open point, those are 4:00 and 7:13.
+// at Vulture 756: one colony spawns at about 5:00 mission2 elapsed, the other at
+// about 11:00. From the cooldown-open point, those are 3:57 and 9:57.
 // Roll warnings fire 10 seconds before the first spawn batch.
 Trigger("Player 8"){
 Conditions:
@@ -68,7 +68,7 @@ Conditions:
 	Switch("Switch26", Not Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 10200);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 11676);
 }
 
 Trigger("Player 8"){
@@ -79,7 +79,7 @@ Conditions:
 	Switch("Switch26", Not Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 7884);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 7356);
 }
 
 Trigger("Player 8"){
@@ -90,7 +90,7 @@ Conditions:
 	Switch("Switch26", Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 7884);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 7356);
 }
 
 Trigger("Player 8"){
@@ -101,7 +101,7 @@ Conditions:
 	Switch("Switch26", Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 10200);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 11676);
 }
 
 Trigger("Player 8"){

@@ -2360,7 +2360,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 14040);
 }
 
 Trigger("Player 6"){
@@ -2370,7 +2370,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 14040);
 }
 
 Trigger("Player 6"){
@@ -2380,7 +2380,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 14040);
 }
 
 Trigger("Player 7"){
@@ -2390,7 +2390,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 14040);
 }
 
 Trigger("Player 7"){
@@ -2400,7 +2400,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 14040);
 }
 
 Trigger("Player 7"){
@@ -2410,7 +2410,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 14040);
 }
 
 // Count destroyed P6/P7 creep colonies together and warn every 3 kills.
@@ -5047,7 +5047,7 @@ Actions:
 //-----------------------------------------------------------------//
 //  Mission 2 - P6/P7 uncaptured-colony penalty assaults
 //
-//  12 DC tick = 1 second. Base cooldown is 1080s = 12960 ticks.
+//  12 DC tick = 1 second. Base cooldown is 1200s = 14400 ticks.
 //  Roll triggers subtract only the cooldown they consumed, so excess
 //  progress from repeated Hatchery/Lair/Hive kills stays queued.
 //  Hatchery/Lair/Hive kills add 80s worth of cooldown progress.
@@ -5103,8 +5103,8 @@ Actions:
 }
 
 // First penalty assaults are staggered after the mission2 assault cooldown opens
-// at Vulture 756: one colony spawns at about 5:03 mission2 elapsed, the other at
-// about 8:16. From the cooldown-open point, those are 4:00 and 7:13.
+// at Vulture 756: one colony spawns at about 5:00 mission2 elapsed, the other at
+// about 11:00. From the cooldown-open point, those are 3:57 and 9:57.
 // Roll warnings fire 10 seconds before the first spawn batch.
 Trigger("Player 8"){
 Conditions:
@@ -5114,7 +5114,7 @@ Conditions:
 	Switch("Switch26", Not Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 10200);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 11676);
 }
 
 Trigger("Player 8"){
@@ -5125,7 +5125,7 @@ Conditions:
 	Switch("Switch26", Not Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 7884);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 7356);
 }
 
 Trigger("Player 8"){
@@ -5136,7 +5136,7 @@ Conditions:
 	Switch("Switch26", Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 7884);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 7356);
 }
 
 Trigger("Player 8"){
@@ -5147,7 +5147,7 @@ Conditions:
 	Switch("Switch26", Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 10200);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 11676);
 }
 
 Trigger("Player 8"){
@@ -5705,8 +5705,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 11640);
-	Deaths("Player 8", "Zerg Zergling", At most, 12599);
+	Deaths("Player 8", "Zerg Zergling", At least, 13080);
+	Deaths("Player 8", "Zerg Zergling", At most, 14039);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Not Set);
@@ -5728,8 +5728,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12000);
-	Deaths("Player 8", "Zerg Zergling", At most, 12959);
+	Deaths("Player 8", "Zerg Zergling", At least, 13440);
+	Deaths("Player 8", "Zerg Zergling", At most, 14399);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Set);
 	Switch("Switch28", Not Set);
@@ -5751,8 +5751,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12360);
-	Deaths("Player 8", "Zerg Zergling", At most, 13319);
+	Deaths("Player 8", "Zerg Zergling", At least, 13800);
+	Deaths("Player 8", "Zerg Zergling", At most, 14759);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Set);
@@ -5774,8 +5774,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12000);
-	Deaths("Player 8", "Zerg Zergling", At most, 12959);
+	Deaths("Player 8", "Zerg Zergling", At least, 13440);
+	Deaths("Player 8", "Zerg Zergling", At most, 14399);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Set);
 	Switch("Switch28", Set);
@@ -5798,7 +5798,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Not Set);
@@ -5807,7 +5807,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14040);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -5817,7 +5817,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
 	Switch("Switch27", Set);
 	Switch("Switch28", Not Set);
@@ -5826,7 +5826,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -5836,7 +5836,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Set);
@@ -5845,7 +5845,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14760);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -5855,7 +5855,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
 	Switch("Switch27", Set);
 	Switch("Switch28", Set);
@@ -5864,7 +5864,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -5875,7 +5875,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Not Set);
@@ -5889,7 +5889,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14040);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -5899,7 +5899,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Set);
 	Switch("Switch28", Not Set);
@@ -5913,7 +5913,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -5923,7 +5923,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Set);
@@ -5937,7 +5937,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14760);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -5947,7 +5947,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Set);
 	Switch("Switch28", Set);
@@ -5961,7 +5961,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -5973,8 +5973,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 11640);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12599);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13080);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14039);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Not Set);
@@ -5996,8 +5996,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12959);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13440);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14399);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Set);
 	Switch("Switch30", Not Set);
@@ -6019,8 +6019,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12360);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 13319);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13800);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14759);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Set);
@@ -6042,8 +6042,8 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12959);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13440);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14399);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Set);
 	Switch("Switch30", Set);
@@ -6066,7 +6066,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Not Set);
@@ -6075,7 +6075,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14040);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -6085,7 +6085,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
 	Switch("Switch29", Set);
 	Switch("Switch30", Not Set);
@@ -6094,7 +6094,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -6104,7 +6104,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Set);
@@ -6113,7 +6113,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14760);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -6123,7 +6123,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
 	Switch("Switch29", Set);
 	Switch("Switch30", Set);
@@ -6132,7 +6132,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -6143,7 +6143,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Not Set);
@@ -6157,7 +6157,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14040);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -6167,7 +6167,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Set);
 	Switch("Switch30", Not Set);
@@ -6181,7 +6181,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -6191,7 +6191,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Set);
@@ -6205,7 +6205,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14760);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -6215,7 +6215,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Set);
 	Switch("Switch30", Set);
@@ -6229,7 +6229,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch41", clear);
 	Preserve Trigger();
 }
@@ -6336,14 +6336,14 @@ Actions:
 //-----------------------------------------------------------------//
 
 // P6 wave-only pre-rolls fire 80 seconds before the original warning timing.
-// P6 pre-roll wave - cooldown 17m30s - Hive active
+// P6 pre-roll wave - cooldown 19m30s - Hive active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 11640);
-	Deaths("Player 8", "Zerg Zergling", At most, 12599);
+	Deaths("Player 8", "Zerg Zergling", At least, 13080);
+	Deaths("Player 8", "Zerg Zergling", At most, 14039);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -6357,15 +6357,15 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Preserve Trigger();
 }
-// P6 pre-roll wave - cooldown 17m30s - Lair active
+// P6 pre-roll wave - cooldown 19m30s - Lair active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 11640);
-	Deaths("Player 8", "Zerg Zergling", At most, 12599);
+	Deaths("Player 8", "Zerg Zergling", At least, 13080);
+	Deaths("Player 8", "Zerg Zergling", At most, 14039);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -6379,7 +6379,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Preserve Trigger();
 }
-// P6 pre-roll wave - cooldown 17m30s - Hatchery active
+// P6 pre-roll wave - cooldown 19m30s - Hatchery active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -6387,8 +6387,8 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 11640);
-	Deaths("Player 8", "Zerg Zergling", At most, 12599);
+	Deaths("Player 8", "Zerg Zergling", At least, 13080);
+	Deaths("Player 8", "Zerg Zergling", At most, 14039);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -6402,14 +6402,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Preserve Trigger();
 }
-// P6 pre-roll wave - cooldown 18m - Hive active
+// P6 pre-roll wave - cooldown 20m - Hive active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12000);
-	Deaths("Player 8", "Zerg Zergling", At most, 12959);
+	Deaths("Player 8", "Zerg Zergling", At least, 13440);
+	Deaths("Player 8", "Zerg Zergling", At most, 14399);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -6423,15 +6423,15 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Preserve Trigger();
 }
-// P6 pre-roll wave - cooldown 18m - Lair active
+// P6 pre-roll wave - cooldown 20m - Lair active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12000);
-	Deaths("Player 8", "Zerg Zergling", At most, 12959);
+	Deaths("Player 8", "Zerg Zergling", At least, 13440);
+	Deaths("Player 8", "Zerg Zergling", At most, 14399);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -6445,7 +6445,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Preserve Trigger();
 }
-// P6 pre-roll wave - cooldown 18m - Hatchery active
+// P6 pre-roll wave - cooldown 20m - Hatchery active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -6453,8 +6453,8 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12000);
-	Deaths("Player 8", "Zerg Zergling", At most, 12959);
+	Deaths("Player 8", "Zerg Zergling", At least, 13440);
+	Deaths("Player 8", "Zerg Zergling", At most, 14399);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -6468,14 +6468,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Preserve Trigger();
 }
-// P6 pre-roll wave - cooldown 18m30s - Hive active
+// P6 pre-roll wave - cooldown 20m30s - Hive active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12360);
-	Deaths("Player 8", "Zerg Zergling", At most, 13319);
+	Deaths("Player 8", "Zerg Zergling", At least, 13800);
+	Deaths("Player 8", "Zerg Zergling", At most, 14759);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -6489,15 +6489,15 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Preserve Trigger();
 }
-// P6 pre-roll wave - cooldown 18m30s - Lair active
+// P6 pre-roll wave - cooldown 20m30s - Lair active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12360);
-	Deaths("Player 8", "Zerg Zergling", At most, 13319);
+	Deaths("Player 8", "Zerg Zergling", At least, 13800);
+	Deaths("Player 8", "Zerg Zergling", At most, 14759);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -6511,7 +6511,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Preserve Trigger();
 }
-// P6 pre-roll wave - cooldown 18m30s - Hatchery active
+// P6 pre-roll wave - cooldown 20m30s - Hatchery active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -6519,8 +6519,8 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12360);
-	Deaths("Player 8", "Zerg Zergling", At most, 13319);
+	Deaths("Player 8", "Zerg Zergling", At least, 13800);
+	Deaths("Player 8", "Zerg Zergling", At most, 14759);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -6534,14 +6534,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Preserve Trigger();
 }
-// P6 pre-roll wave - cooldown 18m - Hive active
+// P6 pre-roll wave - cooldown 20m - Hive active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12000);
-	Deaths("Player 8", "Zerg Zergling", At most, 12959);
+	Deaths("Player 8", "Zerg Zergling", At least, 13440);
+	Deaths("Player 8", "Zerg Zergling", At most, 14399);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -6555,15 +6555,15 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Preserve Trigger();
 }
-// P6 pre-roll wave - cooldown 18m - Lair active
+// P6 pre-roll wave - cooldown 20m - Lair active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12000);
-	Deaths("Player 8", "Zerg Zergling", At most, 12959);
+	Deaths("Player 8", "Zerg Zergling", At least, 13440);
+	Deaths("Player 8", "Zerg Zergling", At most, 14399);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -6577,7 +6577,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Preserve Trigger();
 }
-// P6 pre-roll wave - cooldown 18m - Hatchery active
+// P6 pre-roll wave - cooldown 20m - Hatchery active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -6585,8 +6585,8 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12000);
-	Deaths("Player 8", "Zerg Zergling", At most, 12959);
+	Deaths("Player 8", "Zerg Zergling", At least, 13440);
+	Deaths("Player 8", "Zerg Zergling", At most, 14399);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -6602,12 +6602,12 @@ Actions:
 }
 
 // P6 pre-roll wave copy. This runs only when the old roll threshold is reached.
-// P6 copy Wave 0 - cooldown 17m30s
+// P6 copy Wave 0 - cooldown 19m30s
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6620,12 +6620,12 @@ Actions:
 	Set Switch("Switch10", clear);
 	Preserve Trigger();
 }
-// P6 copy Wave 1 - cooldown 17m30s
+// P6 copy Wave 1 - cooldown 19m30s
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6638,12 +6638,12 @@ Actions:
 	Set Switch("Switch10", clear);
 	Preserve Trigger();
 }
-// P6 copy Wave 2 - cooldown 17m30s
+// P6 copy Wave 2 - cooldown 19m30s
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6656,12 +6656,12 @@ Actions:
 	Set Switch("Switch10", set);
 	Preserve Trigger();
 }
-// P6 copy Wave 3 - cooldown 17m30s
+// P6 copy Wave 3 - cooldown 19m30s
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6674,12 +6674,12 @@ Actions:
 	Set Switch("Switch10", set);
 	Preserve Trigger();
 }
-// P6 copy Wave 0 - cooldown 18m
+// P6 copy Wave 0 - cooldown 20m
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6692,12 +6692,12 @@ Actions:
 	Set Switch("Switch10", clear);
 	Preserve Trigger();
 }
-// P6 copy Wave 1 - cooldown 18m
+// P6 copy Wave 1 - cooldown 20m
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6710,12 +6710,12 @@ Actions:
 	Set Switch("Switch10", clear);
 	Preserve Trigger();
 }
-// P6 copy Wave 2 - cooldown 18m
+// P6 copy Wave 2 - cooldown 20m
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6728,12 +6728,12 @@ Actions:
 	Set Switch("Switch10", set);
 	Preserve Trigger();
 }
-// P6 copy Wave 3 - cooldown 18m
+// P6 copy Wave 3 - cooldown 20m
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6746,12 +6746,12 @@ Actions:
 	Set Switch("Switch10", set);
 	Preserve Trigger();
 }
-// P6 copy Wave 0 - cooldown 18m30s
+// P6 copy Wave 0 - cooldown 20m30s
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6764,12 +6764,12 @@ Actions:
 	Set Switch("Switch10", clear);
 	Preserve Trigger();
 }
-// P6 copy Wave 1 - cooldown 18m30s
+// P6 copy Wave 1 - cooldown 20m30s
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6782,12 +6782,12 @@ Actions:
 	Set Switch("Switch10", clear);
 	Preserve Trigger();
 }
-// P6 copy Wave 2 - cooldown 18m30s
+// P6 copy Wave 2 - cooldown 20m30s
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6800,12 +6800,12 @@ Actions:
 	Set Switch("Switch10", set);
 	Preserve Trigger();
 }
-// P6 copy Wave 3 - cooldown 18m30s
+// P6 copy Wave 3 - cooldown 20m30s
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6818,12 +6818,12 @@ Actions:
 	Set Switch("Switch10", set);
 	Preserve Trigger();
 }
-// P6 copy Wave 0 - cooldown 18m
+// P6 copy Wave 0 - cooldown 20m
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6836,12 +6836,12 @@ Actions:
 	Set Switch("Switch10", clear);
 	Preserve Trigger();
 }
-// P6 copy Wave 1 - cooldown 18m
+// P6 copy Wave 1 - cooldown 20m
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6854,12 +6854,12 @@ Actions:
 	Set Switch("Switch10", clear);
 	Preserve Trigger();
 }
-// P6 copy Wave 2 - cooldown 18m
+// P6 copy Wave 2 - cooldown 20m
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6872,12 +6872,12 @@ Actions:
 	Set Switch("Switch10", set);
 	Preserve Trigger();
 }
-// P6 copy Wave 3 - cooldown 18m
+// P6 copy Wave 3 - cooldown 20m
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6892,13 +6892,13 @@ Actions:
 }
 
 // P6 confirmed pre-rolls reach the original warning state.
-// P6 consume pre-roll - cooldown 17m30s - Hive active
+// P6 consume pre-roll - cooldown 19m30s - Hive active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6914,21 +6914,21 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14040);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
-// P6 consume pre-roll - cooldown 17m30s - Lair active
+// P6 consume pre-roll - cooldown 19m30s - Lair active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6944,14 +6944,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14040);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
-// P6 consume pre-roll - cooldown 17m30s - Hatchery active
+// P6 consume pre-roll - cooldown 19m30s - Hatchery active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -6959,7 +6959,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -6975,20 +6975,20 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14040);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
-// P6 consume pre-roll - cooldown 18m - Hive active
+// P6 consume pre-roll - cooldown 20m - Hive active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -7004,21 +7004,21 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
-// P6 consume pre-roll - cooldown 18m - Lair active
+// P6 consume pre-roll - cooldown 20m - Lair active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -7034,14 +7034,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
-// P6 consume pre-roll - cooldown 18m - Hatchery active
+// P6 consume pre-roll - cooldown 20m - Hatchery active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -7049,7 +7049,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -7065,20 +7065,20 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
-// P6 consume pre-roll - cooldown 18m30s - Hive active
+// P6 consume pre-roll - cooldown 20m30s - Hive active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -7094,21 +7094,21 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14760);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
-// P6 consume pre-roll - cooldown 18m30s - Lair active
+// P6 consume pre-roll - cooldown 20m30s - Lair active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -7124,14 +7124,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14760);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
-// P6 consume pre-roll - cooldown 18m30s - Hatchery active
+// P6 consume pre-roll - cooldown 20m30s - Hatchery active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -7139,7 +7139,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -7155,20 +7155,20 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14760);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
-// P6 consume pre-roll - cooldown 18m - Hive active
+// P6 consume pre-roll - cooldown 20m - Hive active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -7184,21 +7184,21 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
-// P6 consume pre-roll - cooldown 18m - Lair active
+// P6 consume pre-roll - cooldown 20m - Lair active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -7214,14 +7214,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
 	Preserve Trigger();
 }
-// P6 consume pre-roll - cooldown 18m - Hatchery active
+// P6 consume pre-roll - cooldown 20m - Hatchery active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -7229,7 +7229,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -7245,7 +7245,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
@@ -7254,13 +7254,13 @@ Actions:
 }
 
 // P6 fallback rolls: if cooldown acceleration skips the pre-roll window, decide at the old timing.
-// P6 roll random wave - cooldown 17m30s - Hive active
+// P6 roll random wave - cooldown 19m30s - Hive active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -7278,17 +7278,17 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14040);
 	Preserve Trigger();
 }
-// P6 roll random wave - cooldown 17m30s - Lair active
+// P6 roll random wave - cooldown 19m30s - Lair active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -7306,10 +7306,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14040);
 	Preserve Trigger();
 }
-// P6 roll random wave - cooldown 17m30s - Hatchery active
+// P6 roll random wave - cooldown 19m30s - Hatchery active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -7317,7 +7317,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12600);
+	Deaths("Player 8", "Zerg Zergling", At least, 14040);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -7335,16 +7335,16 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14040);
 	Preserve Trigger();
 }
-// P6 roll random wave - cooldown 18m - Hive active
+// P6 roll random wave - cooldown 20m - Hive active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -7362,17 +7362,17 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Preserve Trigger();
 }
-// P6 roll random wave - cooldown 18m - Lair active
+// P6 roll random wave - cooldown 20m - Lair active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -7390,10 +7390,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Preserve Trigger();
 }
-// P6 roll random wave - cooldown 18m - Hatchery active
+// P6 roll random wave - cooldown 20m - Hatchery active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -7401,7 +7401,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -7419,16 +7419,16 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Preserve Trigger();
 }
-// P6 roll random wave - cooldown 18m30s - Hive active
+// P6 roll random wave - cooldown 20m30s - Hive active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -7446,17 +7446,17 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14760);
 	Preserve Trigger();
 }
-// P6 roll random wave - cooldown 18m30s - Lair active
+// P6 roll random wave - cooldown 20m30s - Lair active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -7474,10 +7474,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14760);
 	Preserve Trigger();
 }
-// P6 roll random wave - cooldown 18m30s - Hatchery active
+// P6 roll random wave - cooldown 20m30s - Hatchery active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -7485,7 +7485,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 13320);
+	Deaths("Player 8", "Zerg Zergling", At least, 14760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -7503,16 +7503,16 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14760);
 	Preserve Trigger();
 }
-// P6 roll random wave - cooldown 18m - Hive active
+// P6 roll random wave - cooldown 20m - Hive active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -7530,17 +7530,17 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Preserve Trigger();
 }
-// P6 roll random wave - cooldown 18m - Lair active
+// P6 roll random wave - cooldown 20m - Lair active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -7558,10 +7558,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Preserve Trigger();
 }
-// P6 roll random wave - cooldown 18m - Hatchery active
+// P6 roll random wave - cooldown 20m - Hatchery active
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -7569,7 +7569,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 12960);
+	Deaths("Player 8", "Zerg Zergling", At least, 14400);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -7587,7 +7587,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 14400);
 	Preserve Trigger();
 }
 //-----------------------------------------------------------------//
@@ -7597,14 +7597,14 @@ Actions:
 //-----------------------------------------------------------------//
 
 // P7 wave-only pre-rolls fire 80 seconds before the original warning timing.
-// P7 pre-roll wave - cooldown 17m30s - Hive active
+// P7 pre-roll wave - cooldown 19m30s - Hive active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 11640);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12599);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13080);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14039);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -7618,15 +7618,15 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Preserve Trigger();
 }
-// P7 pre-roll wave - cooldown 17m30s - Lair active
+// P7 pre-roll wave - cooldown 19m30s - Lair active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 11640);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12599);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13080);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14039);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -7640,7 +7640,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Preserve Trigger();
 }
-// P7 pre-roll wave - cooldown 17m30s - Hatchery active
+// P7 pre-roll wave - cooldown 19m30s - Hatchery active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -7648,8 +7648,8 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 11640);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12599);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13080);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14039);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -7663,14 +7663,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Preserve Trigger();
 }
-// P7 pre-roll wave - cooldown 18m - Hive active
+// P7 pre-roll wave - cooldown 20m - Hive active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12959);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13440);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14399);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -7684,15 +7684,15 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Preserve Trigger();
 }
-// P7 pre-roll wave - cooldown 18m - Lair active
+// P7 pre-roll wave - cooldown 20m - Lair active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12959);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13440);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14399);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -7706,7 +7706,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Preserve Trigger();
 }
-// P7 pre-roll wave - cooldown 18m - Hatchery active
+// P7 pre-roll wave - cooldown 20m - Hatchery active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -7714,8 +7714,8 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12959);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13440);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14399);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -7729,14 +7729,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Preserve Trigger();
 }
-// P7 pre-roll wave - cooldown 18m30s - Hive active
+// P7 pre-roll wave - cooldown 20m30s - Hive active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12360);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 13319);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13800);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14759);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -7750,15 +7750,15 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Preserve Trigger();
 }
-// P7 pre-roll wave - cooldown 18m30s - Lair active
+// P7 pre-roll wave - cooldown 20m30s - Lair active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12360);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 13319);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13800);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14759);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -7772,7 +7772,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Preserve Trigger();
 }
-// P7 pre-roll wave - cooldown 18m30s - Hatchery active
+// P7 pre-roll wave - cooldown 20m30s - Hatchery active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -7780,8 +7780,8 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12360);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 13319);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13800);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14759);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -7795,14 +7795,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Preserve Trigger();
 }
-// P7 pre-roll wave - cooldown 18m - Hive active
+// P7 pre-roll wave - cooldown 20m - Hive active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12959);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13440);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14399);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -7816,15 +7816,15 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Preserve Trigger();
 }
-// P7 pre-roll wave - cooldown 18m - Lair active
+// P7 pre-roll wave - cooldown 20m - Lair active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12959);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13440);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14399);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -7838,7 +7838,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Preserve Trigger();
 }
-// P7 pre-roll wave - cooldown 18m - Hatchery active
+// P7 pre-roll wave - cooldown 20m - Hatchery active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -7846,8 +7846,8 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12959);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 13440);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14399);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -7863,12 +7863,12 @@ Actions:
 }
 
 // P7 pre-roll wave copy. This runs only when the old roll threshold is reached.
-// P7 copy Wave 0 - cooldown 17m30s
+// P7 copy Wave 0 - cooldown 19m30s
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -7881,12 +7881,12 @@ Actions:
 	Set Switch("Switch12", clear);
 	Preserve Trigger();
 }
-// P7 copy Wave 1 - cooldown 17m30s
+// P7 copy Wave 1 - cooldown 19m30s
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -7899,12 +7899,12 @@ Actions:
 	Set Switch("Switch12", clear);
 	Preserve Trigger();
 }
-// P7 copy Wave 2 - cooldown 17m30s
+// P7 copy Wave 2 - cooldown 19m30s
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -7917,12 +7917,12 @@ Actions:
 	Set Switch("Switch12", set);
 	Preserve Trigger();
 }
-// P7 copy Wave 3 - cooldown 17m30s
+// P7 copy Wave 3 - cooldown 19m30s
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -7935,12 +7935,12 @@ Actions:
 	Set Switch("Switch12", set);
 	Preserve Trigger();
 }
-// P7 copy Wave 0 - cooldown 18m
+// P7 copy Wave 0 - cooldown 20m
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -7953,12 +7953,12 @@ Actions:
 	Set Switch("Switch12", clear);
 	Preserve Trigger();
 }
-// P7 copy Wave 1 - cooldown 18m
+// P7 copy Wave 1 - cooldown 20m
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -7971,12 +7971,12 @@ Actions:
 	Set Switch("Switch12", clear);
 	Preserve Trigger();
 }
-// P7 copy Wave 2 - cooldown 18m
+// P7 copy Wave 2 - cooldown 20m
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -7989,12 +7989,12 @@ Actions:
 	Set Switch("Switch12", set);
 	Preserve Trigger();
 }
-// P7 copy Wave 3 - cooldown 18m
+// P7 copy Wave 3 - cooldown 20m
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8007,12 +8007,12 @@ Actions:
 	Set Switch("Switch12", set);
 	Preserve Trigger();
 }
-// P7 copy Wave 0 - cooldown 18m30s
+// P7 copy Wave 0 - cooldown 20m30s
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8025,12 +8025,12 @@ Actions:
 	Set Switch("Switch12", clear);
 	Preserve Trigger();
 }
-// P7 copy Wave 1 - cooldown 18m30s
+// P7 copy Wave 1 - cooldown 20m30s
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8043,12 +8043,12 @@ Actions:
 	Set Switch("Switch12", clear);
 	Preserve Trigger();
 }
-// P7 copy Wave 2 - cooldown 18m30s
+// P7 copy Wave 2 - cooldown 20m30s
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8061,12 +8061,12 @@ Actions:
 	Set Switch("Switch12", set);
 	Preserve Trigger();
 }
-// P7 copy Wave 3 - cooldown 18m30s
+// P7 copy Wave 3 - cooldown 20m30s
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8079,12 +8079,12 @@ Actions:
 	Set Switch("Switch12", set);
 	Preserve Trigger();
 }
-// P7 copy Wave 0 - cooldown 18m
+// P7 copy Wave 0 - cooldown 20m
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8097,12 +8097,12 @@ Actions:
 	Set Switch("Switch12", clear);
 	Preserve Trigger();
 }
-// P7 copy Wave 1 - cooldown 18m
+// P7 copy Wave 1 - cooldown 20m
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8115,12 +8115,12 @@ Actions:
 	Set Switch("Switch12", clear);
 	Preserve Trigger();
 }
-// P7 copy Wave 2 - cooldown 18m
+// P7 copy Wave 2 - cooldown 20m
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8133,12 +8133,12 @@ Actions:
 	Set Switch("Switch12", set);
 	Preserve Trigger();
 }
-// P7 copy Wave 3 - cooldown 18m
+// P7 copy Wave 3 - cooldown 20m
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8153,13 +8153,13 @@ Actions:
 }
 
 // P7 confirmed pre-rolls reach the original warning state.
-// P7 consume pre-roll - cooldown 17m30s - Hive active
+// P7 consume pre-roll - cooldown 19m30s - Hive active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8175,21 +8175,21 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14040);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
-// P7 consume pre-roll - cooldown 17m30s - Lair active
+// P7 consume pre-roll - cooldown 19m30s - Lair active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8205,14 +8205,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14040);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
-// P7 consume pre-roll - cooldown 17m30s - Hatchery active
+// P7 consume pre-roll - cooldown 19m30s - Hatchery active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -8220,7 +8220,7 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8236,20 +8236,20 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14040);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
-// P7 consume pre-roll - cooldown 18m - Hive active
+// P7 consume pre-roll - cooldown 20m - Hive active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8265,21 +8265,21 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
-// P7 consume pre-roll - cooldown 18m - Lair active
+// P7 consume pre-roll - cooldown 20m - Lair active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8295,14 +8295,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
-// P7 consume pre-roll - cooldown 18m - Hatchery active
+// P7 consume pre-roll - cooldown 20m - Hatchery active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -8310,7 +8310,7 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8326,20 +8326,20 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
-// P7 consume pre-roll - cooldown 18m30s - Hive active
+// P7 consume pre-roll - cooldown 20m30s - Hive active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8355,21 +8355,21 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14760);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
-// P7 consume pre-roll - cooldown 18m30s - Lair active
+// P7 consume pre-roll - cooldown 20m30s - Lair active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8385,14 +8385,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14760);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
-// P7 consume pre-roll - cooldown 18m30s - Hatchery active
+// P7 consume pre-roll - cooldown 20m30s - Hatchery active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -8400,7 +8400,7 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8416,20 +8416,20 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14760);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
-// P7 consume pre-roll - cooldown 18m - Hive active
+// P7 consume pre-roll - cooldown 20m - Hive active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8445,21 +8445,21 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
-// P7 consume pre-roll - cooldown 18m - Lair active
+// P7 consume pre-roll - cooldown 20m - Lair active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8475,14 +8475,14 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
 	Preserve Trigger();
 }
-// P7 consume pre-roll - cooldown 18m - Hatchery active
+// P7 consume pre-roll - cooldown 20m - Hatchery active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -8490,7 +8490,7 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Set);
@@ -8506,7 +8506,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
@@ -8515,13 +8515,13 @@ Actions:
 }
 
 // P7 fallback rolls: if cooldown acceleration skips the pre-roll window, decide at the old timing.
-// P7 roll random wave - cooldown 17m30s - Hive active
+// P7 roll random wave - cooldown 19m30s - Hive active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -8539,17 +8539,17 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14040);
 	Preserve Trigger();
 }
-// P7 roll random wave - cooldown 17m30s - Lair active
+// P7 roll random wave - cooldown 19m30s - Lair active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -8567,10 +8567,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14040);
 	Preserve Trigger();
 }
-// P7 roll random wave - cooldown 17m30s - Hatchery active
+// P7 roll random wave - cooldown 19m30s - Hatchery active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -8578,7 +8578,7 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12600);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14040);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -8596,16 +8596,16 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12600);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14040);
 	Preserve Trigger();
 }
-// P7 roll random wave - cooldown 18m - Hive active
+// P7 roll random wave - cooldown 20m - Hive active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -8623,17 +8623,17 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Preserve Trigger();
 }
-// P7 roll random wave - cooldown 18m - Lair active
+// P7 roll random wave - cooldown 20m - Lair active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -8651,10 +8651,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Preserve Trigger();
 }
-// P7 roll random wave - cooldown 18m - Hatchery active
+// P7 roll random wave - cooldown 20m - Hatchery active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -8662,7 +8662,7 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -8680,16 +8680,16 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Preserve Trigger();
 }
-// P7 roll random wave - cooldown 18m30s - Hive active
+// P7 roll random wave - cooldown 20m30s - Hive active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -8707,17 +8707,17 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14760);
 	Preserve Trigger();
 }
-// P7 roll random wave - cooldown 18m30s - Lair active
+// P7 roll random wave - cooldown 20m30s - Lair active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -8735,10 +8735,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14760);
 	Preserve Trigger();
 }
-// P7 roll random wave - cooldown 18m30s - Hatchery active
+// P7 roll random wave - cooldown 20m30s - Hatchery active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -8746,7 +8746,7 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 13320);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14760);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -8764,16 +8764,16 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 13320);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14760);
 	Preserve Trigger();
 }
-// P7 roll random wave - cooldown 18m - Hive active
+// P7 roll random wave - cooldown 20m - Hive active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -8791,17 +8791,17 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Preserve Trigger();
 }
-// P7 roll random wave - cooldown 18m - Lair active
+// P7 roll random wave - cooldown 20m - Lair active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -8819,10 +8819,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Preserve Trigger();
 }
-// P7 roll random wave - cooldown 18m - Hatchery active
+// P7 roll random wave - cooldown 20m - Hatchery active
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -8830,7 +8830,7 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12960);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 14400);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
@@ -8848,7 +8848,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 12960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 14400);
 	Preserve Trigger();
 }
 // Early assault analysis cues. These are strategic reads, not immediate contact warnings.
@@ -9881,7 +9881,7 @@ Actions:
 	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 5, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
@@ -9904,9 +9904,9 @@ Conditions:
 	Switch("Switch10", Set);
 Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn4");
@@ -9926,9 +9926,9 @@ Conditions:
 	Switch("Switch10", Set);
 Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn4");
@@ -10176,7 +10176,7 @@ Actions:
 	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Mutalisk", 5, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn3");
@@ -10199,9 +10199,9 @@ Conditions:
 	Switch("Switch12", Set);
 Actions:
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
@@ -10221,9 +10221,9 @@ Conditions:
 	Switch("Switch12", Set);
 Actions:
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
@@ -10235,7 +10235,6 @@ Actions:
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
-
 // Random rally destination for newly spawned batches.
 // Switch53 opens for one trigger cycle after each P6 spawn batch.
 Trigger("Player 6"){
