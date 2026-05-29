@@ -1,0 +1,487 @@
+//-----------------------------------------------------------------//
+//  Mission 2 - final scream assault after one colony collapses
+//
+//  If one P6/P7 MainBase tech core fully collapses while the other
+//  still survives, the remaining colony prepares one final 300-supply
+//  distributed assault. 12 DC ticks = 1 second.
+//-----------------------------------------------------------------//
+
+// P6 collapsed first; P7 prepares the final assault.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch74", Not Set);
+	Switch("Switch75", Not Set);
+Actions:
+	Set Switch("Switch74", set);
+	Set Switch("Switch76", clear);
+	Set Switch("Switch77", clear);
+	Set Switch("Switch78", clear);
+	Set Switch("Switch79", clear);
+	Set Switch("Switch80", clear);
+	Set Switch("Switch81", clear);
+	Set Switch("Switch82", clear);
+	Set Switch("Switch83", clear);
+	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
+}
+
+// P7 collapsed first; P6 prepares the final assault.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch32", Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch74", Not Set);
+	Switch("Switch75", Not Set);
+Actions:
+	Set Switch("Switch75", set);
+	Set Switch("Switch76", clear);
+	Set Switch("Switch77", clear);
+	Set Switch("Switch78", clear);
+	Set Switch("Switch79", clear);
+	Set Switch("Switch80", clear);
+	Set Switch("Switch81", clear);
+	Set Switch("Switch82", clear);
+	Set Switch("Switch83", clear);
+	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
+}
+
+// Preparation timer while P7 remains the surviving colony.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 960);
+Actions:
+	Set Deaths("Player 8", "Protoss Dark Archon", Add, 1);
+	Preserve Trigger();
+}
+
+// Preparation timer while P6 remains the surviving colony.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 960);
+Actions:
+	Set Deaths("Player 8", "Protoss Dark Archon", Add, 1);
+	Preserve Trigger();
+}
+
+// Intro: P7 final assault.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 120);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 144);
+Actions:
+	Minimap Ping("P7 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 남은 동남쪽 <16>하얀색 저그<04> 군락 완전 파괴\n- 긴급 지침: 전 전선 방어 준비\n- 주의: 남은 군락에서 대규모 공세 징후 포착");
+	Display Text Message(Always Display, "<13><06>[비상] 남은 군락 반응 급상승");
+	Display Text Message(Always Display, "<1A>노바: <04>잠깐... 무너진 군락의 신경파가 반대편으로 역류합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>전선 유지. 흩어지지 마라. 남은 군락이 마지막 병력을 긁어모은다.");
+	Set Switch("Switch76", set);
+}
+
+// Intro: P6 final assault.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 120);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 144);
+Actions:
+	Minimap Ping("P6 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 남은 동북쪽 <15>갈색 저그<04> 군락 완전 파괴\n- 긴급 지침: 전 전선 방어 준비\n- 주의: 남은 군락에서 대규모 공세 징후 포착");
+	Display Text Message(Always Display, "<13><06>[비상] 남은 군락 반응 급상승");
+	Display Text Message(Always Display, "<1A>노바: <04>잠깐... 무너진 군락의 신경파가 반대편으로 역류합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>전선 유지. 흩어지지 마라. 남은 군락이 마지막 병력을 긁어모은다.");
+	Set Switch("Switch76", set);
+}
+
+// 30-second warning.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 360);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 384);
+Actions:
+	Minimap Ping("P7 Spawn1");
+	Minimap Ping("P7 Spawn2");
+	Minimap Ping("P7 Spawn3");
+	Minimap Ping("P7 Spawn4");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근까지 30초. 전 전선 방어 준비.");
+	Set Switch("Switch77", set);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 360);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 384);
+Actions:
+	Minimap Ping("P6 Spawn1");
+	Minimap Ping("P6 Spawn2");
+	Minimap Ping("P6 Spawn3");
+	Minimap Ping("P6 Spawn4");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근까지 30초. 전 전선 방어 준비.");
+	Set Switch("Switch77", set);
+}
+
+// Launch warning.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 720);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 744);
+Actions:
+	Minimap Ping("P7 Spawn1");
+	Minimap Ping("P7 Spawn2");
+	Minimap Ping("P7 Spawn3");
+	Minimap Ping("P7 Spawn4");
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 남은 동남쪽 <16>하얀색 저그<04> 군락 완전 파괴\n- 긴급 지침: 최후 공세 방어\n- 주의: 적 공세가 전 전선으로 분산 접근 중");
+	Display Text Message(Always Display, "<06>경보: <04>남은 군락의 최후 공세가 전 전선으로 분산 접근합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>각 전선은 자기 구역을 붙잡아라. 밀리면 중앙까지 한 번에 무너진다.");
+	Set Switch("Switch78", set);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 720);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 744);
+Actions:
+	Minimap Ping("P6 Spawn1");
+	Minimap Ping("P6 Spawn2");
+	Minimap Ping("P6 Spawn3");
+	Minimap Ping("P6 Spawn4");
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 남은 동북쪽 <15>갈색 저그<04> 군락 완전 파괴\n- 긴급 지침: 최후 공세 방어\n- 주의: 적 공세가 전 전선으로 분산 접근 중");
+	Display Text Message(Always Display, "<06>경보: <04>남은 군락의 최후 공세가 전 전선으로 분산 접근합니다.");
+	Display Text Message(Always Display, "<03>호크: <04>각 전선은 자기 구역을 붙잡아라. 밀리면 중앙까지 한 번에 무너진다.");
+	Set Switch("Switch78", set);
+}
+
+// P7 batch 1 at 60s: 2 Ultra, 20 Zergling, 1 Defiler, 1 Overlord per front.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch79", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 720);
+Actions:
+	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 20, "P7 Spawn1");
+	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn1", 2);
+	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 20, "P7 Spawn2");
+	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn2", 2);
+	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 20, "P7 Spawn3");
+	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn3", 2);
+	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 20, "P7 Spawn4");
+	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn4", 2);
+	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 7", "Zerg Zergling", "P7 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 Spawn4", "P4 Hunt", Patrol);
+	Set Switch("Switch79", set);
+}
+
+// P6 batch 1 at 60s.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch79", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 720);
+Actions:
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 20, "P6 Spawn1");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 2);
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 20, "P6 Spawn2");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 2);
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 20, "P6 Spawn3");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 2);
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 20, "P6 Spawn4");
+	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 2);
+	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "P4 Hunt", Patrol);
+	Set Switch("Switch79", set);
+}
+
+// P7 batch 2 at 64s: 7 Hydralisk, 1 Lurker per front.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch80", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 768);
+Actions:
+	Create Unit("Player 7", "Zerg Hydralisk", 7, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 7, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 7, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 7, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn4");
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 Spawn4", "P4 Hunt", Patrol);
+	Set Switch("Switch80", set);
+}
+
+// P6 batch 2 at 64s.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch80", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 768);
+Actions:
+	Create Unit("Player 6", "Zerg Hydralisk", 7, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 7, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 7, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 7, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "P4 Hunt", Patrol);
+	Set Switch("Switch80", set);
+}
+
+// P7 batch 3 at 68s: 7 Hydralisk per front.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch81", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 816);
+Actions:
+	Create Unit("Player 7", "Zerg Hydralisk", 7, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 7, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 7, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 7, "P7 Spawn4");
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 Spawn4", "P4 Hunt", Patrol);
+	Set Switch("Switch81", set);
+}
+
+// P6 batch 3 at 68s.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch81", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 816);
+Actions:
+	Create Unit("Player 6", "Zerg Hydralisk", 7, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 7, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 7, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 7, "P6 Spawn4");
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "P4 Hunt", Patrol);
+	Set Switch("Switch81", set);
+}
+
+// P7 batch 4 at 72s: 4 Mutalisk, 1 Guardian, 3 Devourer per front.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch82", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 864);
+Actions:
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn4");
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn4", "P4 Hunt", Patrol);
+	Set Switch("Switch82", set);
+}
+
+// P6 batch 4 at 72s.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch82", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 864);
+Actions:
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn4");
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "P4 Hunt", Patrol);
+	Set Switch("Switch82", set);
+}
+
+// P7 batch 5 at 76s: 4 Devourer, 2 Scourge per front.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch83", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 912);
+Actions:
+	Create Unit("Player 7", "Zerg Devourer", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Scourge", 2, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Scourge", 2, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Scourge", 2, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Scourge", 2, "P7 Spawn4");
+	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 Spawn4", "P4 Hunt", Patrol);
+	Set Switch("Switch83", set);
+}
+
+// P6 batch 5 at 76s.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch83", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 912);
+Actions:
+	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Devourer", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn4");
+	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "P4 Hunt", Patrol);
+	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "P4 Hunt", Patrol);
+	Set Switch("Switch83", set);
+}

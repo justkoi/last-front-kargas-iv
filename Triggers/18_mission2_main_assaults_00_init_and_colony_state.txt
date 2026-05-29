@@ -43,7 +43,18 @@ Actions:
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
+	Set Switch("Switch74", clear);
+	Set Switch("Switch75", clear);
+	Set Switch("Switch76", clear);
+	Set Switch("Switch77", clear);
+	Set Switch("Switch78", clear);
+	Set Switch("Switch79", clear);
+	Set Switch("Switch80", clear);
+	Set Switch("Switch81", clear);
+	Set Switch("Switch82", clear);
+	Set Switch("Switch83", clear);
 	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
+	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
 	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
@@ -365,7 +376,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi5");
 	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 남은 군락까지 그대로 밀어붙여라.");
+	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
 }
 
@@ -381,7 +392,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi5");
 	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 남은 군락까지 그대로 밀어붙여라.");
+	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
 }
 
@@ -398,7 +409,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi5");
 	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 남은 군락까지 그대로 밀어붙여라.");
+	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
 }
 
@@ -413,7 +424,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 남은 군락까지 그대로 밀어붙여라.");
+	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
 }
 
@@ -429,7 +440,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 남은 군락까지 그대로 밀어붙여라.");
+	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
 }
 
@@ -446,6 +457,6 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 남은 군락까지 그대로 밀어붙여라.");
+	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
 }

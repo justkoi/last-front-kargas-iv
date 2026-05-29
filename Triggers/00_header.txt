@@ -56,6 +56,7 @@
 //    Zerg Defiler         : P7 mission2 penalty assault relay order cooldown
 //    Protoss Reaver       : P6 mission2 penalty assault spawn stage index
 //    Protoss Observer     : P7 mission2 penalty assault spawn stage index
+//    Protoss Dark Archon : mission2 final scream assault preparation timer
 //
 //  Player 5 DC roles
 //    Zerg Hatchery        : mission1 late-wave cooldown seed
@@ -120,6 +121,16 @@
 //    Switch71   : mission1 P6 outer colony awakening warning latch
 //    Switch72   : mission1 P7 outer colony awakening warning latch
 //    Switch73   : mission1 both outer colonies awakening warning latch
+//    Switch74   : P6 collapsed; P7 final scream assault active
+//    Switch75   : P7 collapsed; P6 final scream assault active
+//    Switch76   : mission2 final scream assault intro message shown
+//    Switch77   : mission2 final scream assault 30s warning shown
+//    Switch78   : mission2 final scream assault launch message shown
+//    Switch79   : mission2 final scream assault batch 1 spawned
+//    Switch80   : mission2 final scream assault batch 2 spawned
+//    Switch81   : mission2 final scream assault batch 3 spawned
+//    Switch82   : mission2 final scream assault batch 4 spawned
+//    Switch83   : mission2 final scream assault batch 5 spawned
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
