@@ -2,8 +2,8 @@
 //  Mission 2 - hatchery tech loss accelerates main assaults
 //
 //  Hatchery/Lair/Hive kills reduce that colony's own main assault
-//  cooldown by 90s and grant players +100/+200/+300 minerals.
-//  12 DC tick = 1 second, so 90s = 1080.
+//  cooldown by 100s and grant players +100/+200/+300 minerals.
+//  12 DC tick = 1 second, so 100s = 1200.
 //-----------------------------------------------------------------//
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -12,7 +12,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴 보상. 미네랄 +100");
-	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 약 90초 빨라집니다.");
+	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 앞당겨집니다.");
 	Preserve Trigger();
 }
 
@@ -21,7 +21,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1080);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1200);
 	Set Resources("Player 1", Add, 100, ore);
 	Set Resources("Player 2", Add, 100, ore);
 	Set Resources("Player 3", Add, 100, ore);
@@ -36,7 +36,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 레어 파괴 보상. 미네랄 +200");
-	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 약 90초 빨라집니다.");
+	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 앞당겨집니다.");
 	Preserve Trigger();
 }
 
@@ -45,7 +45,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1080);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1200);
 	Set Resources("Player 1", Add, 200, ore);
 	Set Resources("Player 2", Add, 200, ore);
 	Set Resources("Player 3", Add, 200, ore);
@@ -60,7 +60,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 하이브 파괴 보상. 미네랄 +300");
-	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 약 90초 빨라집니다.");
+	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 앞당겨집니다.");
 	Preserve Trigger();
 }
 
@@ -69,7 +69,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1080);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1200);
 	Set Resources("Player 1", Add, 300, ore);
 	Set Resources("Player 2", Add, 300, ore);
 	Set Resources("Player 3", Add, 300, ore);
@@ -84,7 +84,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴 보상. 미네랄 +100");
-	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 약 90초 빨라집니다.");
+	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 앞당겨집니다.");
 	Preserve Trigger();
 }
 
@@ -93,7 +93,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1080);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1200);
 	Set Resources("Player 1", Add, 100, ore);
 	Set Resources("Player 2", Add, 100, ore);
 	Set Resources("Player 3", Add, 100, ore);
@@ -108,7 +108,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 레어 파괴 보상. 미네랄 +200");
-	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 약 90초 빨라집니다.");
+	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 앞당겨집니다.");
 	Preserve Trigger();
 }
 
@@ -117,7 +117,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1080);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1200);
 	Set Resources("Player 1", Add, 200, ore);
 	Set Resources("Player 2", Add, 200, ore);
 	Set Resources("Player 3", Add, 200, ore);
@@ -132,7 +132,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 하이브 파괴 보상. 미네랄 +300");
-	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 약 90초 빨라집니다.");
+	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 앞당겨집니다.");
 	Preserve Trigger();
 }
 
@@ -141,7 +141,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1080);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1200);
 	Set Resources("Player 1", Add, 300, ore);
 	Set Resources("Player 2", Add, 300, ore);
 	Set Resources("Player 3", Add, 300, ore);
