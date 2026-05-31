@@ -26,9 +26,6 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 756);
 	Deaths("Player 8", "Terran Vulture", At most, 780);
 Actions:
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute1");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute2");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute3");
 	Create Unit("Current Player", "Map Revealer", 1, "NewRoute4");
 	Create Unit("Current Player", "Map Revealer", 1, "NewRoute5");
 }

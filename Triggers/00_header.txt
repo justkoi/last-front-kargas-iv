@@ -7,7 +7,7 @@
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4,
-//                      WestArea, East Area, Mission2 Gate1~5, NewRoute1~15, Raid1~3, Raid1~3 Exit, Waypoint1~5,
+//                      WestArea, East Area, Mission2 Gate1, Mission2 Gate3~5, NewRoute4~15, Raid1~3, Raid1~3 Exit, Waypoint1~5,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  P6/P7 Overmind locations require preplaced invincible Overmind Cocoons
@@ -44,6 +44,8 @@
 //    Terran Dropship      : mission1 late-wave variant index / P7 mission2 early alert defense recharge timer
 //    Protoss Corsair      : mission1 outer colony warning cooldown timer
 //    Zerg Creep Colony    : mission1 P6/P7 creep colony warning counter
+//    Zerg Sunken Colony   : P6 Hatchery/Lair/Hive losses for final scream assault
+//    Zerg Spore Colony    : P7 Hatchery/Lair/Hive losses for final scream assault
 //    Zerg Zergling        : P6 mission2 penalty assault cooldown
 //    Zerg Hydralisk       : P7 mission2 penalty assault cooldown
 //    Zerg Lurker          : P6 mission2 penalty assault ready flag (0=idle, 1=spawning, 2=relay, 3=warning, 4=weakened warning, 5=weakened spawning, 6=unused, 7=weakened pre-analysis queued)
@@ -69,7 +71,6 @@
 //    Switch3 : Raid1 cleared
 //    Switch4 : Raid2 cleared
 //    Switch5 : Raid3 cleared
-//    Switch6 : mission2 P7 airstrike one-time flag
 //    Switch7 : mission1 multi scan revealers created
 //    Switch8 : mission1 multi scan revealers removed
 //    Switch9/10 : P6 mission2 penalty assault random selector
@@ -131,6 +132,13 @@
 //    Switch81   : mission2 final scream assault batch 3 spawned
 //    Switch82   : mission2 final scream assault batch 4 spawned
 //    Switch83   : mission2 final scream assault batch 5 spawned
+//    Switch84   : P6 base defense suspended during final scream assault
+//    Switch85   : P7 base defense suspended during final scream assault
+//    Switch86   : mission2 final scream assault batch 6 spawned
+//    Switch87   : mission2 final scream assault batch 7 spawned
+//    Switch88   : mission2 final scream assault batch 8 spawned
+//    Switch89   : mission2 final scream assault batch 9 spawned
+//    Switch90   : mission2 final scream assault batch 10 spawned
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:

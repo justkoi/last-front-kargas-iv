@@ -91,7 +91,6 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 192);
 Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
@@ -105,18 +104,7 @@ Conditions:
 Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate1");
 	Minimap Ping("Mission2 Gate1");
-	Display Text Message(Always Display, "<1A>노바: <04>1번 통로를 확인했습니다. 폭이 넓어 공격에는 유리하지만, 방어선은 쉽게 벌어질 겁니다.");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 360);
-	Deaths("Player 8", "Terran Vulture", At most, 384);
-Actions:
-	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate2");
-	Minimap Ping("Mission2 Gate2");
-	Display Text Message(Always Display, "<1A>노바: <04>2번은 낮은 언덕길입니다. 언덕 위에 매복하면 방어에 유리합니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>주 통로를 확인했습니다. 폭이 넓어 공격에는 유리하지만, 방어선은 쉽게 벌어질 겁니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -127,7 +115,7 @@ Conditions:
 Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate3");
 	Minimap Ping("Mission2 Gate3");
-	Display Text Message(Always Display, "<1A>노바: <04>3번은 좁은 샛길입니다. 우회 병력이 스며들 수 있으니 감시를 붙이십시오.");
+	Display Text Message(Always Display, "<1A>노바: <04>좁은 샛길을 확인했습니다. 우회 병력이 스며들 수 있으니 감시를 붙이십시오.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -138,7 +126,7 @@ Conditions:
 Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate5");
 	Minimap Ping("Mission2 Gate5");
-	Display Text Message(Always Display, "<1A>노바: <04>5번은 아래쪽 통로입니다. 안쪽의 좁은 협곡에서 막아 서면 수비가 유리합니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>남쪽 통로를 확인했습니다. 안쪽의 좁은 협곡에서 막아 서면 수비가 유리합니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -150,7 +138,7 @@ Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate4");
 	Minimap Ping("Mission2 Gate4");
 	Center View("Mission2 Gate4");
-	Display Text Message(Always Display, "<03>호크: <04>마지막 4번은 아군 기지 방어의 핵심 입구다. 반드시 단단히 방비해라.");
+	Display Text Message(Always Display, "<03>호크: <04>본진 핵심 입구를 확인했다. 반드시 단단히 방비해라.");
 }
 
 Trigger("All Players"){

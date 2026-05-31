@@ -34,6 +34,7 @@ description: >
 
 2. **DC 슬롯 패턴**
    - 각 시스템은 자기 DC 슬롯을 가져야 (공유하면 충돌). 슬롯표는 [00_header.txt](../../Triggers/00_header.txt) 에.
+   - 새 P8 DC를 배정하거나 기존 P8 DC를 재사용하기 전에는 `Triggers/`뿐 아니라 `TestTriggers/`, `TestTriggersForBuild/`, 현재 import용 합본에서도 같은 owner+unit DC 사용 여부를 검색한다. 테스트 대시보드가 임시 DC를 매 사이클 초기화/복원할 수 있어 실게임 로직과 충돌할 수 있다.
    - 마스터 틱에 들어있는 DC만 자동 증가 (Civilian/Marine/Firebat/Ghost/Medic/SCV/Goliath/Wraith/Vulture/Battlecruiser).
    - 그 외(Valkyrie, Probe, Zealot, Dropship 등)는 플래그/카운터로 수동 Set만 사용.
 

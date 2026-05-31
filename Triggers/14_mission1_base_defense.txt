@@ -105,6 +105,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Ground", "P6 Intruder");
@@ -124,6 +125,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Air", "P6 Intruder");
@@ -140,6 +142,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -149,6 +152,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -158,6 +162,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Ground", "P6 Intruder");
@@ -177,6 +182,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Air", "P6 Intruder");
@@ -193,6 +199,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -202,6 +209,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -211,6 +219,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Ground", "P6 Intruder");
@@ -230,6 +239,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Air", "P6 Intruder");
@@ -246,6 +256,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -255,6 +266,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -264,6 +276,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Ground", "P6 Intruder");
@@ -283,6 +296,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Air", "P6 Intruder");
@@ -299,6 +313,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -308,6 +323,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
@@ -321,6 +337,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -341,6 +358,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -358,6 +376,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -368,6 +387,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -378,6 +398,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -398,6 +419,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -415,6 +437,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -425,6 +448,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -435,6 +459,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -455,6 +480,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -472,6 +498,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -482,6 +509,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -492,6 +520,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -512,6 +541,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -529,6 +559,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -539,6 +570,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
+	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -551,6 +583,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Ground", "P7 Intruder");
@@ -570,6 +603,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Air", "P7 Intruder");
@@ -586,6 +620,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -595,6 +630,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -604,6 +640,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Ground", "P7 Intruder");
@@ -623,6 +660,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Air", "P7 Intruder");
@@ -639,6 +677,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -648,6 +687,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -657,6 +697,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Ground", "P7 Intruder");
@@ -676,6 +717,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Air", "P7 Intruder");
@@ -692,6 +734,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -701,6 +744,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -710,6 +754,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Ground", "P7 Intruder");
@@ -729,6 +774,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Air", "P7 Intruder");
@@ -745,6 +791,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -754,6 +801,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
@@ -767,6 +815,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -787,6 +836,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -804,6 +854,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -814,6 +865,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -824,6 +876,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -844,6 +897,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -861,6 +915,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -871,6 +926,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -881,6 +937,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -901,6 +958,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -918,6 +976,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -928,6 +987,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -938,6 +998,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -958,6 +1019,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -975,6 +1037,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -985,6 +1048,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
+	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -997,6 +1061,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Switch("Switch69", Set);
+	Switch("Switch84", Not Set);
 	Deaths("Player 8", "Terran Medic", At least, 240);
 	Bring("Player 6", "Zerg Overlord", "P6 Base", At least, 1);
 Actions:
@@ -1010,6 +1075,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Switch("Switch70", Set);
+	Switch("Switch85", Not Set);
 	Deaths("Player 8", "Terran SCV", At least, 240);
 	Bring("Player 7", "Zerg Overlord", "P7 Base", At least, 1);
 Actions:

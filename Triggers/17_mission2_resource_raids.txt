@@ -67,9 +67,6 @@ Actions:
 	Minimap Ping("Raid2");
 	Minimap Ping("Raid3");
 	Remove Unit("Player 1", "Map Revealer");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute1");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute2");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute3");
 	Create Unit("Player 1", "Map Revealer", 1, "NewRoute4");
 	Create Unit("Player 1", "Map Revealer", 1, "NewRoute5");
 	Create Unit("Player 1", "Map Revealer", 1, "NewRoute6");
@@ -99,9 +96,6 @@ Actions:
 	Minimap Ping("Raid2");
 	Minimap Ping("Raid3");
 	Remove Unit("Player 2", "Map Revealer");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute1");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute2");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute3");
 	Create Unit("Player 2", "Map Revealer", 1, "NewRoute4");
 	Create Unit("Player 2", "Map Revealer", 1, "NewRoute5");
 	Create Unit("Player 2", "Map Revealer", 1, "NewRoute6");
@@ -131,9 +125,6 @@ Actions:
 	Minimap Ping("Raid2");
 	Minimap Ping("Raid3");
 	Remove Unit("Player 3", "Map Revealer");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute1");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute2");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute3");
 	Create Unit("Player 3", "Map Revealer", 1, "NewRoute4");
 	Create Unit("Player 3", "Map Revealer", 1, "NewRoute5");
 	Create Unit("Player 3", "Map Revealer", 1, "NewRoute6");
@@ -163,9 +154,6 @@ Actions:
 	Minimap Ping("Raid2");
 	Minimap Ping("Raid3");
 	Remove Unit("Player 4", "Map Revealer");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute1");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute2");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute3");
 	Create Unit("Player 4", "Map Revealer", 1, "NewRoute4");
 	Create Unit("Player 4", "Map Revealer", 1, "NewRoute5");
 	Create Unit("Player 4", "Map Revealer", 1, "NewRoute6");
