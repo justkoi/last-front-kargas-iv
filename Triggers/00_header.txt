@@ -7,7 +7,7 @@
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4,
-//                      WestArea, East Area, Mission2 Gate1, Mission2 Gate3~5, NewRoute4~15, Raid1~3, Raid1~3 Exit, Waypoint1~5,
+//                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~5, NewRoute4~15, Raid1~3, Raid1~3 Exit, Waypoint1~5,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  P6/P7 Overmind locations require preplaced invincible Overmind Cocoons
@@ -139,6 +139,10 @@
 //    Switch88   : mission2 final scream assault batch 8 spawned
 //    Switch89   : mission2 final scream assault batch 9 spawned
 //    Switch90   : mission2 final scream assault batch 10 spawned
+//    Switch91   : Gas1 P5 Overmind Cocoon confirmed
+//    Switch92   : Gas1 P5 Overmind Cocoon gas reward paid
+//    Switch93   : Gas2 P5 Overmind Cocoon confirmed
+//    Switch94   : Gas2 P5 Overmind Cocoon gas reward paid
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:

@@ -2,8 +2,8 @@
 //  Mission 2 - hatchery tech loss accelerates main assaults
 //
 //  Hatchery/Lair/Hive kills reduce that colony's own main assault
-//  cooldown by 60s and grant players +100/+200/+300 minerals.
-//  12 DC tick = 1 second, so 60s = 720.
+//  cooldown by 70s and grant players +100/+200/+300 minerals.
+//  12 DC tick = 1 second, so 70s = 840.
 //-----------------------------------------------------------------//
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -21,7 +21,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 840);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 100, ore);
 	Set Resources("Player 2", Add, 100, ore);
@@ -46,7 +46,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 840);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 200, ore);
 	Set Resources("Player 2", Add, 200, ore);
@@ -71,7 +71,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 840);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 300, ore);
 	Set Resources("Player 2", Add, 300, ore);
@@ -96,7 +96,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 840);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 100, ore);
 	Set Resources("Player 2", Add, 100, ore);
@@ -121,7 +121,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 840);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 200, ore);
 	Set Resources("Player 2", Add, 200, ore);
@@ -146,7 +146,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 840);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 300, ore);
 	Set Resources("Player 2", Add, 300, ore);

@@ -1,0 +1,65 @@
+//-----------------------------------------------------------------//
+//  Mission 1 - Zerg gas store rewards
+//  Switch91 : Gas1 P5 Overmind Cocoon confirmed
+//  Switch92 : Gas1 P5 Overmind Cocoon gas reward paid
+//  Switch93 : Gas2 P5 Overmind Cocoon confirmed
+//  Switch94 : Gas2 P5 Overmind Cocoon gas reward paid
+//-----------------------------------------------------------------//
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch91", Not Set);
+	Bring("Player 5", "Overmind Cocoon", "Gas1", At least, 1);
+Actions:
+	Set Switch("Switch91", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch93", Not Set);
+	Bring("Player 5", "Overmind Cocoon", "Gas2", At least, 1);
+Actions:
+	Set Switch("Switch93", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch91", Set);
+	Switch("Switch92", Not Set);
+	Bring("Player 5", "Overmind Cocoon", "Gas1", At most, 0);
+Actions:
+	Set Resources("Player 1", Add, 800, gas);
+	Set Resources("Player 2", Add, 800, gas);
+	Set Resources("Player 3", Add, 800, gas);
+	Set Resources("Player 4", Add, 800, gas);
+	Set Switch("Switch92", set);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch92", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. 가스 +800");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch93", Set);
+	Switch("Switch94", Not Set);
+	Bring("Player 5", "Overmind Cocoon", "Gas2", At most, 0);
+Actions:
+	Set Resources("Player 1", Add, 800, gas);
+	Set Resources("Player 2", Add, 800, gas);
+	Set Resources("Player 3", Add, 800, gas);
+	Set Resources("Player 4", Add, 800, gas);
+	Set Switch("Switch94", set);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch94", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. 가스 +800");
+}

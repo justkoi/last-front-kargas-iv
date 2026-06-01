@@ -10,10 +10,10 @@ Conditions:
 	Switch("Switch10", Set);
 Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 5, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 5, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
@@ -38,11 +38,11 @@ Actions:
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn4");
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 2);
 	Preserve Trigger();
 }

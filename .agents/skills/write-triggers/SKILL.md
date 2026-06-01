@@ -13,6 +13,122 @@ description: >
 
 # Writing SCMDraft 2 Triggers for Kargas IV
 
+## SC1 Brood War supply/control/psi costs
+
+When designing trigger-spawned forces, calculate exact in-game supply/control/psi,
+not doubled integer "population points". Half-supply units stay `0.5`.
+If a temporary doubled scale is used for arithmetic, label it clearly and divide
+by 2 before reporting the real army size.
+
+Verified 2026-06-01 against UnitStatistics Starcraft data, StrategyWiki unit
+pages, and StarCraft Wiki/Fandom supply notes.
+
+Terran:
+- 1: SCV, Marine, Firebat, Medic, Ghost
+- 2: Vulture, Siege Tank/Tank Mode, Goliath, Wraith, Dropship, Science Vessel
+- 3: Valkyrie
+- 6: Battlecruiser
+- 8: Armed Nuclear Silo / Nuclear Missile supply reservation
+
+Zerg:
+- 0: Larva, Egg, Cocoon, Broodling, Overlord as a spawned unit
+- 0.5: Zergling, Scourge
+- 1: Drone, Hydralisk, Infested Terran
+- 2: Mutalisk, Guardian, Devourer, Lurker, Queen, Defiler
+- 4: Ultralisk
+- Note: Overlord provides +8 control in normal play, but a trigger-spawned
+  attack-wave Overlord should be counted as 0 consumed control unless the
+  calculation explicitly concerns available control cap.
+
+Protoss:
+- 1: Probe, Observer
+- 2: Zealot, Dragoon, High Templar, Dark Templar, Shuttle, Corsair
+- 3: Scout
+- 4: Reaver, Archon, Dark Archon, Arbiter
+- 6: Carrier
+- 0: Interceptor and Scarab for army-size calculations
+
+## SC1 Brood War unit mineral/gas costs
+
+Use these standard mineral/gas costs when estimating the value of trigger-spawned
+armies. For units normally created as pairs or morphs, count the individual
+trigger-created unit value shown here. If a calculation instead needs the raw
+in-game production button cost, use the note beside that unit.
+
+Verified 2026-06-01 against UnitStatistics Starcraft data, StrategyWiki unit
+pages, StrategyWiki Brood War new-feature notes, StarCraft Wiki/Fandom, and
+Liquipedia pages for morph/special cases.
+
+Terran M/G:
+- SCV 50/0
+- Marine 50/0
+- Firebat 50/25
+- Medic 50/25
+- Ghost 25/75
+- Vulture 75/0
+- Siege Tank 150/100
+- Goliath 100/50
+- Wraith 150/100
+- Dropship 100/100
+- Science Vessel 100/225
+- Valkyrie 250/125
+- Battlecruiser 400/300
+- Nuclear Missile 200/200, plus 8 supply reservation while armed
+
+Zerg M/G:
+- Drone 50/0
+- Overlord 100/0
+- Zergling 25/0 each; 50/0 per larva pair in normal production
+- Hydralisk 75/25
+- Mutalisk 100/100
+- Guardian 150/200 total value; morph step is +50/+100 from Mutalisk
+- Devourer 250/150 total value; morph step is +150/+50 from Mutalisk
+- Scourge 12.5/37.5 each; 25/75 per larva pair in normal production
+- Queen 100/150
+- Ultralisk 200/200
+- Defiler 50/150
+- Lurker 125/125 total value; morph step is +50/+100 from Hydralisk
+- Infested Terran 100/50
+- Broodling 0/0 as spawned unit; produced by Queen energy in normal play
+- Larva/Egg/Cocoon 0/0 for army-value calculations
+
+Protoss M/G:
+- Probe 50/0
+- Zealot 100/0
+- Dragoon 125/50
+- High Templar 50/150
+- Dark Templar 125/100
+- Archon 100/300 total value; merge cost is two High Templar
+- Dark Archon 250/200 total value; merge cost is two Dark Templar
+- Shuttle 200/0
+- Reaver 200/100
+- Observer 25/75
+- Scout 275/125
+- Carrier 350/250
+- Arbiter 100/350
+- Corsair 150/100
+- Interceptor 25/0 each
+- Scarab 15/0 each
+
+## Army mix balance convention
+
+When the user asks for a "well-composed" spawned attack force, balance
+anti-air-capable and anti-ground-capable supply/control, not just raw unit count.
+Use capability supply:
+- Count the full supply of any unit that can attack air into the anti-air bucket.
+- Count the full supply of any unit that can attack ground into the anti-ground
+  bucket.
+- Dual-role units such as Hydralisk and Mutalisk count in both buckets for
+  coverage-ratio analysis.
+- No-attack/support units such as Defiler and Overlord are reported separately
+  unless the user explicitly asks to fold support supply into the ratio.
+
+Default target for a well-composed final assault is near 50:50 anti-air to
+anti-ground coverage. A slightly ground-heavier mix is acceptable, up to about
+55:45 ground:air. Avoid presenting a force as well-balanced if anti-air coverage
+falls below roughly 45% of attack coverage, unless the user explicitly wants a
+ground-biased or air-biased wave.
+
 이 스킬은 이 저장소(`E:/유즈맵제작`, 카르가스 IV 협동 캠페인 맵)의 트리거를 쓰고 디버그할 때 적용합니다. SC1 vanilla 트리거의 한계와 SCMDraft TrigEdit 텍스트 형식의 관용을 함께 다룹니다.
 
 ## 핵심 환경 사실
