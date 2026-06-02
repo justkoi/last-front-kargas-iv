@@ -122,7 +122,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 8772);
 	Switch("Switch40", Set);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>그 고치를 끊으면 다음 공세가 흐트러진다. 표시 지점에 타격대를 보내라.");
+	Display Text Message(Always Display, "<03>호크: <04>그 고치를 끊으면 다음 공세가 흐트러진다. 타격대를 보내라.");
 	Display Text Message(Always Display, "<07>작전 정보: <04>오버마인드 고치를 파괴하면 해당 군락의 다음 주공세 1회가 약화됩니다.");
 }
 

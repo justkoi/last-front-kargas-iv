@@ -3,11 +3,11 @@
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
 //                      P5 Spawn1~4, P1~P4 Hunt, Player Destination, AttackPoint1,
 //                      MD1~MD6,
-//                      P6 Base, P6 Home, P6 MiniBase, P6 Area, P6 Area Ground, P6 Area Air,
+//                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4,
-//                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~5, NewRoute4~15, Raid1~3, Raid1~3 Exit, Waypoint1~5,
+//                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~5, NewRoute4~15, Waypoint1~5,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  P6/P7 Overmind locations require preplaced invincible Overmind Cocoons
@@ -33,7 +33,6 @@
 //    Protoss Archon       : P6 scout overlord cycle timer
 //    Protoss Dark Templar : P7 scout overlord cycle timer
 //    Protoss Shuttle      : P1~P4 Hunt location refresh timer
-//    Terran Ghost         : P6 MiniBase reveal timer
 //    Terran Wraith        : mission1 late-wave cooldown / P6 mission2 early alert defense recharge timer
 //    Terran Battlecruiser : P5 overlord supply cycle timer
 //    Protoss Dragoon      : P6 overlord supply cycle timer
@@ -67,10 +66,6 @@
 //
 //  Switch roles
 //    Switch1 : defeat guard
-//    Switch2 : resource raid sites revealed/spawned
-//    Switch3 : Raid1 cleared
-//    Switch4 : Raid2 cleared
-//    Switch5 : Raid3 cleared
 //    Switch7 : mission1 multi scan revealers created
 //    Switch8 : mission1 multi scan revealers removed
 //    Switch9/10 : P6 mission2 penalty assault random selector
@@ -99,8 +94,6 @@
 //    Switch42/43: P5 hunt all-out random target selector
 //    Switch44/45: P6 hunt all-out random target selector
 //    Switch46/47: P7 hunt all-out random target selector
-//    Switch48   : P6 MiniBase revealed
-//    Switch49   : P6 MiniBase reward/message paid
 //    Switch50   : mission2 assault setup initialized
 //    Switch51   : P6 mission2 penalty assault relay pulse open
 //    Switch52   : P7 mission2 penalty assault relay pulse open
@@ -143,6 +136,8 @@
 //    Switch92   : Gas1 P5 Overmind Cocoon gas reward paid
 //    Switch93   : Gas2 P5 Overmind Cocoon confirmed
 //    Switch94   : Gas2 P5 Overmind Cocoon gas reward paid
+//    Switch95   : P6 mission2 tech-structure acceleration info shown
+//    Switch96   : P7 mission2 tech-structure acceleration info shown
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
@@ -160,7 +155,7 @@ Actions:
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><03>작전 개시: 카르가스 IV");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 방어선을 세우고 자원을 확보한 뒤 북서쪽 <11>주황색 저그<04> 군락 완전 파괴\n- 성공 조건: 북서쪽 <11>주황색 저그<04> 군락의 모든 해처리 / 레어 / 하이브 파괴\n- 지침: 기지를 안정화하고 업그레이드 후 군락을 압박할 것");
+	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 북서쪽 <11>주황색 저그<04> 군락 섬멸\n- 클리어 조건: 북서쪽 <11>주황색 저그<04> 군락의 해처리 / 레어 / 하이브 모두 파괴");
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
 }
 
@@ -210,7 +205,7 @@ Conditions:
 	Elapsed Time(At most, 35);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>본진 외곽과 주 진입로도 확인됐습니다. 전술 지도에 표시합니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>주 진입로 확인. 전술 지도에 표시했습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -249,7 +244,7 @@ Conditions:
 	Elapsed Time(At least, 38);
 	Elapsed Time(At most, 40);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>표시된 입구가 첫 방어선이다. 저그가 전선을 넓히기 전에 여기서 막아라.");
+	Display Text Message(Always Display, "<03>호크: <04>저그가 전선을 넓히기 전에 여기서 막아라.");
 }
 
 Trigger("Player 1"){
@@ -264,6 +259,10 @@ Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan5");
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan6");
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan7");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan8");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan9");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan10");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan11");
 	Minimap Ping("BaseEntrance");
 }
 
@@ -279,6 +278,10 @@ Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan5");
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan6");
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan7");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan8");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan9");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan10");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan11");
 	Minimap Ping("BaseEntrance");
 }
 
@@ -294,6 +297,10 @@ Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan5");
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan6");
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan7");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan8");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan9");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan10");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan11");
 	Minimap Ping("BaseEntrance");
 }
 
@@ -309,6 +316,10 @@ Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan5");
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan6");
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan7");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan8");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan9");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan10");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan11");
 	Minimap Ping("BaseEntrance");
 }
 
@@ -468,17 +479,6 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1);
-	Preserve Trigger();
-}
-
-// Mission 2 P6 MiniBase reveal timer starts after the first P6 main assault begins spawning.
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Ghost", At least, 1);
-	Switch("Switch48", Not Set);
-Actions:
-	Set Deaths("Player 8", "Terran Ghost", Add, 1);
 	Preserve Trigger();
 }
 
@@ -955,7 +955,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Spawn1");
-	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 군락 외곽에서 빠른 소형 생체신호가 움직입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>빠른 소형 생체신호가 움직입니다.");
 }
 Trigger("All Players"){
 Conditions:
@@ -1075,7 +1075,7 @@ Conditions:
 	Elapsed Time(At least, 1325);
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>좋다. 표시 지점에 타격대를 보내라. 방어선 숨통이 트일 거다.");
+	Display Text Message(Always Display, "<03>호크: <04>좋다. 타격대를 보내라. 방어선 숨통이 트일 거다.");
 }
 
 Trigger("Player 8"){
@@ -1114,7 +1114,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Spawn1");
-	Display Text Message(Always Display, "<1A>노바: <04>외곽 신호가 다시 움직입니다. 첫 접촉 때보다 수가 늘고 속도도 빠릅니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>신호가 다시 움직입니다. 수와 속도가 늘었습니다.");
 }
 Trigger("All Players"){
 Conditions:
@@ -1237,7 +1237,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Spawn1");
-	Display Text Message(Always Display, "<1A>노바: <04>지하 진동이 섞입니다. 잠복형 개체가 본대 근처에 있는 것 같습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>지하 진동 감지. 잠복형 개체가 섞였습니다.");
 }
 Trigger("All Players"){
 Conditions:
@@ -1341,7 +1341,7 @@ Actions:
 //
 //  Fires once when a P5 Hive death is detected, before the late-wave
 //  reward trigger consumes the P5 Zerg Hive death counter.
-//  Composition: 72 Zerglings + 24 Hydralisks
+//  Composition: 64 Zerglings + 16 Hydralisks + 2 Ultralisks + 2 Defilers
 //  = 60 Zerg supply.
 //-----------------------------------------------------------------//
 
@@ -1363,20 +1363,28 @@ Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 	Switch("Switch58", Not Set);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 18, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Zergling", 18, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Zergling", 18, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 18, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Zergling", 16, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
+	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn1", 1);
+	Create Unit("Player 5", "Zerg Zergling", 16, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 16, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
+	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn3", 1);
+	Create Unit("Player 5", "Zerg Zergling", 16, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn4");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Defiler", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn3", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Defiler", "P5 Spawn3", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn4", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn4", "Player Destination", Patrol);
 	Set Deaths("Player 8", "Terran Barracks", Set To, 720);
@@ -1684,7 +1692,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Cerebrate");
-	Display Text Message(Always Display, "<1A>노바: <04>변형 공세의 동기화 신호를 역추적했습니다. 군락 안쪽에 별도의 지휘 개체가 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>공세 동기화 신호의 근원입니다. 파괴하면 후속 공세가 크게 흐트러질 겁니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -1694,7 +1702,7 @@ Conditions:
 	Elapsed Time(At most, 1808);
 	Command("Player 5", "Zerg Cerebrate", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>방어선만 붙들고 있으면 계속 말라간다. 표시 지점에 타격대를 보내라.");
+	Display Text Message(Always Display, "<03>호크: <04>방어선만 붙들고 있으면 말라간다. 타격대를 보내라.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -1704,7 +1712,6 @@ Conditions:
 	Elapsed Time(At most, 1814);
 	Command("Player 5", "Zerg Cerebrate", At least, 1);
 Actions:
-	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 방어선을 세우고 자원을 확보한 뒤 북서쪽 <11>주황색 저그<04> 군락 완전 파괴\n- 성공 조건: 북서쪽 <11>주황색 저그<04> 군락의 모든 해처리 / 레어 / 하이브 파괴\n- 보조 목표: 저그 정신체 파괴\n- 효과: 지휘체계 교란으로 후속 공세 규모 감소");
 	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체를 파괴하면 지휘체계 교란으로 공세의 규모가 감소합니다.");
 }
 
@@ -1714,9 +1721,9 @@ Conditions:
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At most, 0);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체 제거 확인. 지휘체계 교란으로 후속 공세 규모가 감소합니다.");
-	Display Text Message(Always Display, "<07>작전 보상: <04>저그 정신체 파괴 보상. 미네랄 +2000 / 가스 +1000");
-	Set Resources("Current Player", Add, 2000, ore);
-	Set Resources("Current Player", Add, 1000, gas);
+	Display Text Message(Always Display, "<07>작전 보상: <04>지휘 정신체 제거. 미네랄 +1500 / 가스 +500");
+	Set Resources("Current Player", Add, 1500, ore);
+	Set Resources("Current Player", Add, 500, gas);
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -1725,9 +1732,8 @@ Conditions:
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>잘했다. 전방 지휘 신호가 끊겼다. 지금 벌어 둔 틈을 놓치지 마라.");
-	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 파괴 보상. 미네랄 +1000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 제거. 미네랄 +1000");
 	Set Resources("Current Player", Add, 1000, ore);
-	Set Resources("Current Player", Add, 1000, gas);
 }
 
 Trigger("Player 8"){
@@ -3015,10 +3021,10 @@ Conditions:
 	Switch("Switch92", Not Set);
 	Bring("Player 5", "Overmind Cocoon", "Gas1", At most, 0);
 Actions:
-	Set Resources("Player 1", Add, 800, gas);
-	Set Resources("Player 2", Add, 800, gas);
-	Set Resources("Player 3", Add, 800, gas);
-	Set Resources("Player 4", Add, 800, gas);
+	Set Resources("Player 1", Add, 500, gas);
+	Set Resources("Player 2", Add, 500, gas);
+	Set Resources("Player 3", Add, 500, gas);
+	Set Resources("Player 4", Add, 500, gas);
 	Set Switch("Switch92", set);
 }
 
@@ -3027,7 +3033,7 @@ Conditions:
 	Switch("Switch92", Set);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. 가스 +800");
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. 가스 +500");
 }
 
 Trigger("Player 8"){
@@ -3036,10 +3042,10 @@ Conditions:
 	Switch("Switch94", Not Set);
 	Bring("Player 5", "Overmind Cocoon", "Gas2", At most, 0);
 Actions:
-	Set Resources("Player 1", Add, 800, gas);
-	Set Resources("Player 2", Add, 800, gas);
-	Set Resources("Player 3", Add, 800, gas);
-	Set Resources("Player 4", Add, 800, gas);
+	Set Resources("Player 1", Add, 500, gas);
+	Set Resources("Player 2", Add, 500, gas);
+	Set Resources("Player 3", Add, 500, gas);
+	Set Resources("Player 4", Add, 500, gas);
 	Set Switch("Switch94", set);
 }
 
@@ -3048,7 +3054,7 @@ Conditions:
 	Switch("Switch94", Set);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. 가스 +800");
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. 가스 +500");
 }
 //-----------------------------------------------------------------//
 //  미션1 클리어 -> 미션2 즉시 진입
@@ -3468,7 +3474,8 @@ Actions:
 //  moves the single Intruder location onto the detected unit, then orders
 //  the matching defenders to patrol there. Home-defense triggers mark
 //  intrusion flags; separate 20s dispatch triggers send one existing
-//  Overlord per colony. Allied-base support does not mark Overlord flags.
+//  Overlord per colony. Allied-base support does not mark Overlord flags
+//  or overwrite a pending home-intrusion Overlord target.
 //-----------------------------------------------------------------//
 
 Trigger("Player 5"){
@@ -3798,6 +3805,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -3818,6 +3826,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -3835,6 +3844,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -3846,6 +3856,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -3857,6 +3868,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -3877,6 +3889,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -3894,6 +3907,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -3905,6 +3919,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -3916,6 +3931,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -3936,6 +3952,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -3953,6 +3970,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -3964,6 +3982,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -3975,6 +3994,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -3995,6 +4015,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -4012,6 +4033,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -4023,6 +4045,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
+	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -4268,6 +4291,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -4288,6 +4312,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -4305,6 +4330,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -4316,6 +4342,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -4327,6 +4354,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -4347,6 +4375,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -4364,6 +4393,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -4375,6 +4405,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -4386,6 +4417,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -4406,6 +4438,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -4423,6 +4456,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -4434,6 +4468,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -4445,6 +4480,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -4465,6 +4501,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -4482,6 +4519,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -4493,6 +4531,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
+	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -4541,7 +4580,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 780);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 동북쪽 <15>갈색 저그<04> 군락과 동남쪽 <16>하얀색 저그<04> 군락 파괴\n- 성공 조건: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락의 해처리 / 레어 / 하이브 파괴\n- 위치: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락\n- 지침: 초반 5분 동안 본진 방어선을 유지하고, 점막 뿌리망 붕괴 후 새 진입로로 각 군락을 압박할 것");
+	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 동북쪽 <15>갈색 저그<04> / 동남쪽 <16>하얀색 저그<04> 군락 섬멸\n- 클리어 조건: 양쪽 군락의 해처리 / 레어 / 하이브 모두 파괴");
 	Create Unit("Current Player", "Map Revealer", 1, "P6 Home");
 	Create Unit("Current Player", "Map Revealer", 1, "P7 Home");
 	Minimap Ping("P6 Base");
@@ -4593,7 +4632,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 840);
 	Deaths("Player 8", "Terran Vulture", At most, 864);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽과 동남쪽에 잔여 군락을 확인했습니다. 접근로 주변의 주황색 저그 방어기관은 아직 점막 뿌리망으로 버티고 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>양쪽 잔여 군락 확인. 접근로 주변 방어기관은 아직 점막 뿌리망으로 버티고 있습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -4864,278 +4903,6 @@ Actions:
 	Preserve Trigger();
 }
 //-----------------------------------------------------------------//
-//  Mission 2 Phase 2 - Side Mission: Resource Raids
-//  Switch2 : raid sites revealed/spawned
-//  Switch3 : Raid1 cleared
-//  Switch4 : Raid2 cleared
-//  Switch5 : Raid3 cleared
-//-----------------------------------------------------------------//
-
-// Six minutes after phase 2 starts, spawn three defended biomass stores.
-// Raid locations are briefly revealed, then all revealers are cleared and
-// persistent route/home revealers are restored.
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 4320);
-	Switch("Switch2", Not Set);
-Actions:
-	Move Unit("Player 1", "Men", 64, "Raid1", "Raid1 Exit");
-	Move Unit("Player 2", "Men", 64, "Raid1", "Raid1 Exit");
-	Move Unit("Player 3", "Men", 64, "Raid1", "Raid1 Exit");
-	Move Unit("Player 4", "Men", 64, "Raid1", "Raid1 Exit");
-	Move Unit("Player 5", "Men", 64, "Raid1", "Raid1 Exit");
-	Move Unit("Player 6", "Men", 64, "Raid1", "Raid1 Exit");
-	Move Unit("Player 7", "Men", 64, "Raid1", "Raid1 Exit");
-	Move Unit("Player 8", "Men", 64, "Raid1", "Raid1 Exit");
-	Move Unit("Player 1", "Men", 64, "Raid2", "Raid2 Exit");
-	Move Unit("Player 2", "Men", 64, "Raid2", "Raid2 Exit");
-	Move Unit("Player 3", "Men", 64, "Raid2", "Raid2 Exit");
-	Move Unit("Player 4", "Men", 64, "Raid2", "Raid2 Exit");
-	Move Unit("Player 5", "Men", 64, "Raid2", "Raid2 Exit");
-	Move Unit("Player 6", "Men", 64, "Raid2", "Raid2 Exit");
-	Move Unit("Player 7", "Men", 64, "Raid2", "Raid2 Exit");
-	Move Unit("Player 8", "Men", 64, "Raid2", "Raid2 Exit");
-	Move Unit("Player 1", "Men", 64, "Raid3", "Raid3 Exit");
-	Move Unit("Player 2", "Men", 64, "Raid3", "Raid3 Exit");
-	Move Unit("Player 3", "Men", 64, "Raid3", "Raid3 Exit");
-	Move Unit("Player 4", "Men", 64, "Raid3", "Raid3 Exit");
-	Move Unit("Player 5", "Men", 64, "Raid3", "Raid3 Exit");
-	Move Unit("Player 6", "Men", 64, "Raid3", "Raid3 Exit");
-	Move Unit("Player 7", "Men", 64, "Raid3", "Raid3 Exit");
-	Move Unit("Player 8", "Men", 64, "Raid3", "Raid3 Exit");
-	Create Unit("Player 7", "Mature Crysalis", 1, "Raid1");
-	Create Unit("Player 7", "Mature Crysalis", 1, "Raid2");
-	Create Unit("Player 7", "Mature Crysalis", 1, "Raid3");
-	Create Unit("Player 7", "Zerg Zergling", 12, "Raid1");
-	Create Unit("Player 7", "Zerg Zergling", 12, "Raid2");
-	Create Unit("Player 7", "Zerg Zergling", 12, "Raid3");
-	Create Unit("Player 7", "Zerg Hydralisk", 8, "Raid1");
-	Create Unit("Player 7", "Zerg Hydralisk", 8, "Raid2");
-	Create Unit("Player 7", "Zerg Hydralisk", 8, "Raid3");
-	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "Raid1", 1);
-	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "Raid2", 1);
-	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "Raid3", 1);
-	Set Switch("Switch2", set);
-}
-
-Trigger("Player 1"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 4320);
-	Switch("Switch2", Set);
-Actions:
-	Create Unit("Player 1", "Map Revealer", 1, "Raid1");
-	Create Unit("Player 1", "Map Revealer", 1, "Raid2");
-	Create Unit("Player 1", "Map Revealer", 1, "Raid3");
-	Minimap Ping("Raid1");
-	Minimap Ping("Raid2");
-	Minimap Ping("Raid3");
-	Remove Unit("Player 1", "Map Revealer");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute4");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute5");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute6");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute7");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute8");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute9");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute10");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute11");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute12");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute13");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute14");
-	Create Unit("Player 1", "Map Revealer", 1, "NewRoute15");
-	Create Unit("Player 1", "Map Revealer", 1, "P6 Home");
-	Create Unit("Player 1", "Map Revealer", 1, "P7 Home");
-}
-
-Trigger("Player 2"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 4320);
-	Switch("Switch2", Set);
-Actions:
-	Create Unit("Player 2", "Map Revealer", 1, "Raid1");
-	Create Unit("Player 2", "Map Revealer", 1, "Raid2");
-	Create Unit("Player 2", "Map Revealer", 1, "Raid3");
-	Minimap Ping("Raid1");
-	Minimap Ping("Raid2");
-	Minimap Ping("Raid3");
-	Remove Unit("Player 2", "Map Revealer");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute4");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute5");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute6");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute7");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute8");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute9");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute10");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute11");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute12");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute13");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute14");
-	Create Unit("Player 2", "Map Revealer", 1, "NewRoute15");
-	Create Unit("Player 2", "Map Revealer", 1, "P6 Home");
-	Create Unit("Player 2", "Map Revealer", 1, "P7 Home");
-}
-
-Trigger("Player 3"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 4320);
-	Switch("Switch2", Set);
-Actions:
-	Create Unit("Player 3", "Map Revealer", 1, "Raid1");
-	Create Unit("Player 3", "Map Revealer", 1, "Raid2");
-	Create Unit("Player 3", "Map Revealer", 1, "Raid3");
-	Minimap Ping("Raid1");
-	Minimap Ping("Raid2");
-	Minimap Ping("Raid3");
-	Remove Unit("Player 3", "Map Revealer");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute4");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute5");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute6");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute7");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute8");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute9");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute10");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute11");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute12");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute13");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute14");
-	Create Unit("Player 3", "Map Revealer", 1, "NewRoute15");
-	Create Unit("Player 3", "Map Revealer", 1, "P6 Home");
-	Create Unit("Player 3", "Map Revealer", 1, "P7 Home");
-}
-
-Trigger("Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 4320);
-	Switch("Switch2", Set);
-Actions:
-	Create Unit("Player 4", "Map Revealer", 1, "Raid1");
-	Create Unit("Player 4", "Map Revealer", 1, "Raid2");
-	Create Unit("Player 4", "Map Revealer", 1, "Raid3");
-	Minimap Ping("Raid1");
-	Minimap Ping("Raid2");
-	Minimap Ping("Raid3");
-	Remove Unit("Player 4", "Map Revealer");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute4");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute5");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute6");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute7");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute8");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute9");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute10");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute11");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute12");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute13");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute14");
-	Create Unit("Player 4", "Map Revealer", 1, "NewRoute15");
-	Create Unit("Player 4", "Map Revealer", 1, "P6 Home");
-	Create Unit("Player 4", "Map Revealer", 1, "P7 Home");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 4320);
-	Switch("Switch2", Set);
-Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<1A>노바: <04>외곽 세 곳에서 고밀도 생체 저장낭 확인. 소규모 경비가 붙어 있습니다.");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 4380);
-	Deaths("Player 8", "Terran Vulture", At most, 4404);
-	Switch("Switch2", Set);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>기동대가 있으면 찔러라. 저장낭만 깨면 보급으로 돌릴 수 있다.");
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch2", Set);
-	Switch("Switch3", Not Set);
-	Bring("Player 7", "Mature Crysalis", "Raid1", At most, 0);
-Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
-	Set Resources("Player 1", Add, 800, gas);
-	Set Resources("Player 2", Add, 800, gas);
-	Set Resources("Player 3", Add, 800, gas);
-	Set Resources("Player 4", Add, 800, gas);
-	Set Switch("Switch3", set);
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch3", Set);
-Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<07>군수지원: <04>외곽 생체 저장낭 회수 완료. 미네랄 +2000 / 가스 +800");
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch2", Set);
-	Switch("Switch4", Not Set);
-	Bring("Player 7", "Mature Crysalis", "Raid2", At most, 0);
-Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
-	Set Resources("Player 1", Add, 800, gas);
-	Set Resources("Player 2", Add, 800, gas);
-	Set Resources("Player 3", Add, 800, gas);
-	Set Resources("Player 4", Add, 800, gas);
-	Set Switch("Switch4", set);
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch4", Set);
-Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<07>군수지원: <04>협곡 생체 저장낭 회수 완료. 미네랄 +2000 / 가스 +800");
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch2", Set);
-	Switch("Switch5", Not Set);
-	Bring("Player 7", "Mature Crysalis", "Raid3", At most, 0);
-Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
-	Set Resources("Player 1", Add, 800, gas);
-	Set Resources("Player 2", Add, 800, gas);
-	Set Resources("Player 3", Add, 800, gas);
-	Set Resources("Player 4", Add, 800, gas);
-	Set Switch("Switch5", set);
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch5", Set);
-Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<07>군수지원: <04>후방 생체 저장낭 회수 완료. 미네랄 +2000 / 가스 +800");
-}
-//-----------------------------------------------------------------//
 //  Mission 2 - P6/P7 uncaptured-colony penalty assaults
 //
 //  12 DC tick = 1 second. Base cooldown is 1260s = 15120 ticks.
@@ -5170,8 +4937,6 @@ Actions:
 	Set Switch("Switch39", clear);
 	Set Switch("Switch40", clear);
 	Set Switch("Switch41", clear);
-	Set Switch("Switch48", clear);
-	Set Switch("Switch49", clear);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
@@ -5197,7 +4962,6 @@ Actions:
 	Set Switch("Switch88", clear);
 	Set Switch("Switch89", clear);
 	Set Switch("Switch90", clear);
-	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
 	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Set To, 0);
 	Set Deaths("Player 8", "Zerg Spore Colony", Set To, 0);
@@ -5730,7 +5494,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 8772);
 	Switch("Switch40", Set);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>그 고치를 끊으면 다음 공세가 흐트러진다. 표시 지점에 타격대를 보내라.");
+	Display Text Message(Always Display, "<03>호크: <04>그 고치를 끊으면 다음 공세가 흐트러진다. 타격대를 보내라.");
 	Display Text Message(Always Display, "<07>작전 정보: <04>오버마인드 고치를 파괴하면 해당 군락의 다음 주공세 1회가 약화됩니다.");
 }
 
@@ -9031,7 +8795,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락에서 대규모 집결 신호를 포착했습니다. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>대규모 집결 신호 포착. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
 	Preserve Trigger();
 }
 
@@ -9049,7 +8813,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락 상공에서 공중 개체가 분리 집결합니다. 아군 비행 전력을 노리는 패턴입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>공중 개체 분리 집결. 아군 비행 전력을 노리는 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -9067,7 +8831,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락 지상 통로에 가시형 개체가 밀집합니다. 좁은 입구를 노리는 대열입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>가시형 개체 밀집. 좁은 입구를 노리는 대열입니다.");
 	Preserve Trigger();
 }
 
@@ -9085,7 +8849,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락 후열에 느린 비행 반응이 붙습니다. 장거리 공성형 접근 패턴입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>느린 비행 반응 감지. 장거리 공성형 접근 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -9103,7 +8867,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락에서 대규모 집결 신호를 포착했습니다. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>대규모 집결 신호 포착. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
 	Preserve Trigger();
 }
 
@@ -9121,7 +8885,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락 상공에서 공중 개체가 분리 집결합니다. 아군 비행 전력을 노리는 패턴입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>공중 개체 분리 집결. 아군 비행 전력을 노리는 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -9139,7 +8903,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락 지상 통로에 가시형 개체가 밀집합니다. 좁은 입구를 노리는 대열입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>가시형 개체 밀집. 좁은 입구를 노리는 대열입니다.");
 	Preserve Trigger();
 }
 
@@ -9157,7 +8921,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락 후열에 느린 비행 반응이 붙습니다. 장거리 공성형 접근 패턴입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>느린 비행 반응 감지. 장거리 공성형 접근 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -9170,7 +8934,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락의 집결 신호를 포착했습니다. 고치 파괴 여파로 반응 밀도는 낮습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>집결 신호 포착. 고치 파괴 여파로 반응 밀도는 낮습니다.");
 	Preserve Trigger();
 }
 
@@ -9182,7 +8946,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락의 집결 신호를 포착했습니다. 고치 파괴 여파로 반응 밀도는 낮습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>집결 신호 포착. 고치 파괴 여파로 반응 밀도는 낮습니다.");
 	Preserve Trigger();
 }
 
@@ -9200,7 +8964,7 @@ Actions:
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>경보: <04>동북쪽 군락 대규모 공세 접근.");
+	Display Text Message(Always Display, "<06>경보: <04>대규모 공세 접근.");
 	Preserve Trigger();
 }
 
@@ -9272,7 +9036,7 @@ Actions:
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>경보: <04>동남쪽 군락 대규모 공세 접근.");
+	Display Text Message(Always Display, "<06>경보: <04>대규모 공세 접근.");
 	Preserve Trigger();
 }
 
@@ -9730,17 +9494,6 @@ Actions:
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
 	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
-	Deaths("Player 8", "Terran Ghost", Exactly, 0);
-	Switch("Switch48", Not Set);
-Actions:
-	Set Deaths("Player 8", "Terran Ghost", Set To, 1);
 }
 
 Trigger("Player 8"){
@@ -15238,13 +14991,82 @@ Actions:
 //  12 DC tick = 1 second, so 70s = 840.
 //-----------------------------------------------------------------//
 
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+	Switch("Switch95", Not Set);
+Actions:
+	Set Switch("Switch95", set);
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 6", "Zerg Lair", At least, 1);
+	Switch("Switch95", Not Set);
+Actions:
+	Set Switch("Switch95", set);
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 6", "Zerg Hive", At least, 1);
+	Switch("Switch95", Not Set);
+Actions:
+	Set Switch("Switch95", set);
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+	Switch("Switch96", Not Set);
+Actions:
+	Set Switch("Switch96", set);
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 7", "Zerg Lair", At least, 1);
+	Switch("Switch96", Not Set);
+Actions:
+	Set Switch("Switch96", set);
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 7", "Zerg Hive", At least, 1);
+	Switch("Switch96", Not Set);
+Actions:
+	Set Switch("Switch96", set);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch95", Set);
+Actions:
+	Display Text Message(Always Display, "<07>작전 정보: <04>동북쪽 군락 생산 구조를 파괴하면 자원을 확보하지만, 해당 군락의 다음 주공세가 앞당겨집니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch96", Set);
+Actions:
+	Display Text Message(Always Display, "<07>작전 정보: <04>동남쪽 군락 생산 구조를 파괴하면 자원을 확보하지만, 해당 군락의 다음 주공세가 앞당겨집니다.");
+}
+
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴 보상. 미네랄 +100");
-	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 앞당겨집니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -15255,10 +15077,14 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 840);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 100, ore);
-	Set Resources("Player 2", Add, 100, ore);
-	Set Resources("Player 3", Add, 100, ore);
-	Set Resources("Player 4", Add, 100, ore);
+	Set Resources("Player 1", Add, 250, ore);
+	Set Resources("Player 2", Add, 250, ore);
+	Set Resources("Player 3", Add, 250, ore);
+	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -15268,8 +15094,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 레어 파괴 보상. 미네랄 +200");
-	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 앞당겨집니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 레어 파괴. 미네랄 +350 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -15280,10 +15105,14 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 840);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 200, ore);
-	Set Resources("Player 2", Add, 200, ore);
-	Set Resources("Player 3", Add, 200, ore);
-	Set Resources("Player 4", Add, 200, ore);
+	Set Resources("Player 1", Add, 350, ore);
+	Set Resources("Player 2", Add, 350, ore);
+	Set Resources("Player 3", Add, 350, ore);
+	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -15293,8 +15122,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 하이브 파괴 보상. 미네랄 +300");
-	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 앞당겨집니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 하이브 파괴. 미네랄 +450 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -15305,10 +15133,14 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 840);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 300, ore);
-	Set Resources("Player 2", Add, 300, ore);
-	Set Resources("Player 3", Add, 300, ore);
-	Set Resources("Player 4", Add, 300, ore);
+	Set Resources("Player 1", Add, 450, ore);
+	Set Resources("Player 2", Add, 450, ore);
+	Set Resources("Player 3", Add, 450, ore);
+	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -15318,8 +15150,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴 보상. 미네랄 +100");
-	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 앞당겨집니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -15330,10 +15161,14 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 840);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 100, ore);
-	Set Resources("Player 2", Add, 100, ore);
-	Set Resources("Player 3", Add, 100, ore);
-	Set Resources("Player 4", Add, 100, ore);
+	Set Resources("Player 1", Add, 250, ore);
+	Set Resources("Player 2", Add, 250, ore);
+	Set Resources("Player 3", Add, 250, ore);
+	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -15343,8 +15178,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 레어 파괴 보상. 미네랄 +200");
-	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 앞당겨집니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 레어 파괴. 미네랄 +350 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -15355,10 +15189,14 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 840);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 200, ore);
-	Set Resources("Player 2", Add, 200, ore);
-	Set Resources("Player 3", Add, 200, ore);
-	Set Resources("Player 4", Add, 200, ore);
+	Set Resources("Player 1", Add, 350, ore);
+	Set Resources("Player 2", Add, 350, ore);
+	Set Resources("Player 3", Add, 350, ore);
+	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -15368,8 +15206,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 하이브 파괴 보상. 미네랄 +300");
-	Display Text Message(Always Display, "<08>경고: <04>군락이 격분했습니다. 해당 군락의 다음 주공세가 앞당겨집니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 하이브 파괴. 미네랄 +450 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -15380,75 +15217,16 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 840);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 300, ore);
-	Set Resources("Player 2", Add, 300, ore);
-	Set Resources("Player 3", Add, 300, ore);
-	Set Resources("Player 4", Add, 300, ore);
+	Set Resources("Player 1", Add, 450, ore);
+	Set Resources("Player 2", Add, 450, ore);
+	Set Resources("Player 3", Add, 450, ore);
+	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
-}
-//-----------------------------------------------------------------//
-//  Mission 2 - P6 MiniBase counterattack window
-//
-//  Terran Ghost : reveal timer, starts when the first P6 main assault begins spawning.
-//  Switch48     : P6 MiniBase revealed
-//  Switch49     : P6 MiniBase reward/message paid
-//-----------------------------------------------------------------//
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Ghost", At least, 2880);
-	Switch("Switch48", Not Set);
-Actions:
-	Create Unit("Player 1", "Map Revealer", 1, "P6 MiniBase");
-	Create Unit("Player 2", "Map Revealer", 1, "P6 MiniBase");
-	Create Unit("Player 3", "Map Revealer", 1, "P6 MiniBase");
-	Create Unit("Player 4", "Map Revealer", 1, "P6 MiniBase");
-	Set Switch("Switch48", set);
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Ghost", At least, 2880);
-	Switch("Switch48", Set);
-Actions:
-	Minimap Ping("P6 MiniBase");
-	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 동북쪽 <15>갈색 저그<04> 군락과 동남쪽 <16>하얀색 저그<04> 군락 파괴\n- 성공 조건: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락의 해처리 / 레어 / 하이브 파괴\n- 보조 목표: 동북쪽 외곽집결지 파괴\n- 위치: 동북쪽 <15>갈색 저그<04> 군락 / 동남쪽 <16>하얀색 저그<04> 군락\n- 지침: 본진 방어선을 유지하면서 새 진입로를 통해 각 군락을 압박할 것");
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 외곽에서 공세 집결 신호를 역추적했습니다. 좌표를 전술 지도에 표시합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>표시 지점이 다음 타격 목표다. 가능한 병력부터 보내 집결지를 파괴해라.");
-}
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch48", Set);
-	Switch("Switch49", Not Set);
-	Bring("Player 6", "Zerg Hatchery", "P6 MiniBase", At most, 0);
-	Bring("Player 6", "Zerg Lair", "P6 MiniBase", At most, 0);
-	Bring("Player 6", "Zerg Hive", "P6 MiniBase", At most, 0);
-Actions:
-	Set Resources("Player 1", Add, 1000, ore);
-	Set Resources("Player 2", Add, 1000, ore);
-	Set Resources("Player 3", Add, 1000, ore);
-	Set Resources("Player 4", Add, 1000, ore);
-	Set Resources("Player 1", Add, 500, gas);
-	Set Resources("Player 2", Add, 500, gas);
-	Set Resources("Player 3", Add, 500, gas);
-	Set Resources("Player 4", Add, 500, gas);
-	Set Switch("Switch49", set);
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch48", Set);
-	Switch("Switch49", Set);
-Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>외곽집결지 반응 소실. 동북쪽 군락의 전방 집결망이 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 놈들의 전방 집결망을 끊었다. 다음 목표까지 압박한다.");
-	Display Text Message(Always Display, "<07>군수지원: <04>외곽집결지 파괴 보상. 미네랄 +1000 / 가스 +500");
 }
 //-----------------------------------------------------------------//
 //  Mission 2 - early P6/P7 alert defense
@@ -15585,7 +15363,7 @@ Actions:
 //  Mission 2 - final scream assault after one colony collapses
 //
 //  If one P6/P7 MainBase tech core fully collapses while the other
-//  still survives and has lost 10 Hatchery/Lair/Hive tech structures,
+//  still survives and has lost 8 Hatchery/Lair/Hive tech structures,
 //  the remaining colony prepares one final 500-supply distributed
 //  assault. 12 DC ticks = 1 second.
 //-----------------------------------------------------------------//
@@ -15596,7 +15374,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch31", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Spore Colony", At least, 10);
+	Deaths("Player 8", "Zerg Spore Colony", At least, 8);
 	Switch("Switch74", Not Set);
 	Switch("Switch75", Not Set);
 Actions:
@@ -15625,7 +15403,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch32", Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Sunken Colony", At least, 10);
+	Deaths("Player 8", "Zerg Sunken Colony", At least, 8);
 	Switch("Switch74", Not Set);
 	Switch("Switch75", Not Set);
 Actions:
@@ -15680,7 +15458,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 남은 동남쪽 <16>하얀색 저그<04> 군락 완전 파괴\n- 긴급 지침: 전 전선 방어 준비\n- 주의: 남은 군락에서 대규모 공세 징후 포착");
+	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 남은 동남쪽 <16>하얀색 저그<04> 군락 섬멸\n- 클리어 조건: 남은 군락의 해처리 / 레어 / 하이브 모두 파괴");
 	Display Text Message(Always Display, "<13><06>[비상] 남은 군락 반응 급상승");
 	Display Text Message(Always Display, "<1A>노바: <04>잠깐... 무너진 군락의 신경파가 반대편으로 역류합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>전선 유지. 흩어지지 마라. 남은 군락이 마지막 병력을 긁어모은다.");
@@ -15697,7 +15475,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 남은 동북쪽 <15>갈색 저그<04> 군락 완전 파괴\n- 긴급 지침: 전 전선 방어 준비\n- 주의: 남은 군락에서 대규모 공세 징후 포착");
+	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 남은 동북쪽 <15>갈색 저그<04> 군락 섬멸\n- 클리어 조건: 남은 군락의 해처리 / 레어 / 하이브 모두 파괴");
 	Display Text Message(Always Display, "<13><06>[비상] 남은 군락 반응 급상승");
 	Display Text Message(Always Display, "<1A>노바: <04>잠깐... 무너진 군락의 신경파가 반대편으로 역류합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>전선 유지. 흩어지지 마라. 남은 군락이 마지막 병력을 긁어모은다.");
@@ -15717,7 +15495,7 @@ Actions:
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근까지 15초. 전 전선 방어 준비.");
+	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근까지 15초.");
 	Set Switch("Switch77", set);
 }
 
@@ -15733,7 +15511,7 @@ Actions:
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근까지 15초. 전 전선 방어 준비.");
+	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근까지 15초.");
 	Set Switch("Switch77", set);
 }
 
@@ -15800,8 +15578,7 @@ Actions:
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 남은 동남쪽 <16>하얀색 저그<04> 군락 완전 파괴\n- 긴급 지침: 최후 공세 방어\n- 주의: 적 공세가 전 전선으로 분산 접근 중");
-	Display Text Message(Always Display, "<06>경보: <04>남은 군락의 최후 공세가 전 전선으로 분산 접근합니다.");
+	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근.");
 	Display Text Message(Always Display, "<03>호크: <04>각 전선은 자기 구역을 붙잡아라. 밀리면 중앙까지 한 번에 무너진다.");
 	Set Switch("Switch78", set);
 }
@@ -15818,8 +15595,7 @@ Actions:
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 남은 동북쪽 <15>갈색 저그<04> 군락 완전 파괴\n- 긴급 지침: 최후 공세 방어\n- 주의: 적 공세가 전 전선으로 분산 접근 중");
-	Display Text Message(Always Display, "<06>경보: <04>남은 군락의 최후 공세가 전 전선으로 분산 접근합니다.");
+	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근.");
 	Display Text Message(Always Display, "<03>호크: <04>각 전선은 자기 구역을 붙잡아라. 밀리면 중앙까지 한 번에 무너진다.");
 	Set Switch("Switch78", set);
 }
@@ -16561,6 +16337,21 @@ Actions:
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 }
 
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
+	Deaths("Player 8", "Terran Vulture", At most, 24);
+Actions:
+	Set Resources("Player 1", Add, 500, ore);
+	Set Resources("Player 2", Add, 500, ore);
+	Set Resources("Player 3", Add, 500, ore);
+	Set Resources("Player 4", Add, 500, ore);
+	Set Resources("Player 1", Add, 1000, gas);
+	Set Resources("Player 2", Add, 1000, gas);
+	Set Resources("Player 3", Add, 1000, gas);
+	Set Resources("Player 4", Add, 1000, gas);
+}
+
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
@@ -16570,6 +16361,7 @@ Actions:
 	Run AI Script("+Vi5");
 	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<07>작전: <04>동북쪽과 동남쪽 군락 반응 소실. 전선 안정화 확인.");
+	Display Text Message(Always Display, "<07>군수지원: <04>작전 완료 보상. 미네랄 +500 / 가스 +1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

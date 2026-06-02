@@ -23,7 +23,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Spawn1");
-	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 군락 외곽에서 빠른 소형 생체신호가 움직입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>빠른 소형 생체신호가 움직입니다.");
 }
 Trigger("All Players"){
 Conditions:
@@ -143,7 +143,7 @@ Conditions:
 	Elapsed Time(At least, 1325);
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>좋다. 표시 지점에 타격대를 보내라. 방어선 숨통이 트일 거다.");
+	Display Text Message(Always Display, "<03>호크: <04>좋다. 타격대를 보내라. 방어선 숨통이 트일 거다.");
 }
 
 Trigger("Player 8"){
@@ -182,7 +182,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Spawn1");
-	Display Text Message(Always Display, "<1A>노바: <04>외곽 신호가 다시 움직입니다. 첫 접촉 때보다 수가 늘고 속도도 빠릅니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>신호가 다시 움직입니다. 수와 속도가 늘었습니다.");
 }
 Trigger("All Players"){
 Conditions:
@@ -305,7 +305,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Spawn1");
-	Display Text Message(Always Display, "<1A>노바: <04>지하 진동이 섞입니다. 잠복형 개체가 본대 근처에 있는 것 같습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>지하 진동 감지. 잠복형 개체가 섞였습니다.");
 }
 Trigger("All Players"){
 Conditions:

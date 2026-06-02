@@ -300,7 +300,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Cerebrate");
-	Display Text Message(Always Display, "<1A>노바: <04>변형 공세의 동기화 신호를 역추적했습니다. 군락 안쪽에 별도의 지휘 개체가 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>공세 동기화 신호의 근원입니다. 파괴하면 후속 공세가 크게 흐트러질 겁니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -310,7 +310,7 @@ Conditions:
 	Elapsed Time(At most, 1808);
 	Command("Player 5", "Zerg Cerebrate", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>방어선만 붙들고 있으면 계속 말라간다. 표시 지점에 타격대를 보내라.");
+	Display Text Message(Always Display, "<03>호크: <04>방어선만 붙들고 있으면 말라간다. 타격대를 보내라.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -320,7 +320,6 @@ Conditions:
 	Elapsed Time(At most, 1814);
 	Command("Player 5", "Zerg Cerebrate", At least, 1);
 Actions:
-	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 방어선을 세우고 자원을 확보한 뒤 북서쪽 <11>주황색 저그<04> 군락 완전 파괴\n- 성공 조건: 북서쪽 <11>주황색 저그<04> 군락의 모든 해처리 / 레어 / 하이브 파괴\n- 보조 목표: 저그 정신체 파괴\n- 효과: 지휘체계 교란으로 후속 공세 규모 감소");
 	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체를 파괴하면 지휘체계 교란으로 공세의 규모가 감소합니다.");
 }
 
@@ -330,9 +329,9 @@ Conditions:
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At most, 0);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체 제거 확인. 지휘체계 교란으로 후속 공세 규모가 감소합니다.");
-	Display Text Message(Always Display, "<07>작전 보상: <04>저그 정신체 파괴 보상. 미네랄 +2000 / 가스 +1000");
-	Set Resources("Current Player", Add, 2000, ore);
-	Set Resources("Current Player", Add, 1000, gas);
+	Display Text Message(Always Display, "<07>작전 보상: <04>지휘 정신체 제거. 미네랄 +1500 / 가스 +500");
+	Set Resources("Current Player", Add, 1500, ore);
+	Set Resources("Current Player", Add, 500, gas);
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -341,9 +340,8 @@ Conditions:
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>잘했다. 전방 지휘 신호가 끊겼다. 지금 벌어 둔 틈을 놓치지 마라.");
-	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 파괴 보상. 미네랄 +1000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 제거. 미네랄 +1000");
 	Set Resources("Current Player", Add, 1000, ore);
-	Set Resources("Current Player", Add, 1000, gas);
 }
 
 Trigger("Player 8"){

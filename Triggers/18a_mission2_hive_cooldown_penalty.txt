@@ -81,7 +81,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴 보상. 미네랄 +250 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -109,7 +109,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 레어 파괴 보상. 미네랄 +350 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 레어 파괴. 미네랄 +350 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -137,7 +137,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 하이브 파괴 보상. 미네랄 +450 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 하이브 파괴. 미네랄 +450 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -165,7 +165,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴 보상. 미네랄 +250 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -193,7 +193,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 레어 파괴 보상. 미네랄 +350 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 레어 파괴. 미네랄 +350 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -221,7 +221,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 하이브 파괴 보상. 미네랄 +450 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 하이브 파괴. 미네랄 +450 / 가스 +60");
 	Preserve Trigger();
 }
 

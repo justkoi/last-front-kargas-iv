@@ -3,7 +3,7 @@
 //
 //  Fires once when a P5 Hive death is detected, before the late-wave
 //  reward trigger consumes the P5 Zerg Hive death counter.
-//  Composition: 72 Zerglings + 24 Hydralisks
+//  Composition: 64 Zerglings + 16 Hydralisks + 2 Ultralisks + 2 Defilers
 //  = 60 Zerg supply.
 //-----------------------------------------------------------------//
 
@@ -25,20 +25,28 @@ Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 	Switch("Switch58", Not Set);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 18, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Zergling", 18, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Zergling", 18, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 18, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Zergling", 16, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
+	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn1", 1);
+	Create Unit("Player 5", "Zerg Zergling", 16, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 16, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
+	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn3", 1);
+	Create Unit("Player 5", "Zerg Zergling", 16, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn4");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Defiler", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn3", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Ultralisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Defiler", "P5 Spawn3", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn4", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn4", "Player Destination", Patrol);
 	Set Deaths("Player 8", "Terran Barracks", Set To, 720);

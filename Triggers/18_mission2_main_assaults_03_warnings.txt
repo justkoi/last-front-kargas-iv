@@ -67,7 +67,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락에서 대규모 집결 신호를 포착했습니다. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>대규모 집결 신호 포착. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
 	Preserve Trigger();
 }
 
@@ -85,7 +85,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락 상공에서 공중 개체가 분리 집결합니다. 아군 비행 전력을 노리는 패턴입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>공중 개체 분리 집결. 아군 비행 전력을 노리는 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -103,7 +103,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락 지상 통로에 가시형 개체가 밀집합니다. 좁은 입구를 노리는 대열입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>가시형 개체 밀집. 좁은 입구를 노리는 대열입니다.");
 	Preserve Trigger();
 }
 
@@ -121,7 +121,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락 후열에 느린 비행 반응이 붙습니다. 장거리 공성형 접근 패턴입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>느린 비행 반응 감지. 장거리 공성형 접근 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -139,7 +139,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락에서 대규모 집결 신호를 포착했습니다. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>대규모 집결 신호 포착. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
 	Preserve Trigger();
 }
 
@@ -157,7 +157,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락 상공에서 공중 개체가 분리 집결합니다. 아군 비행 전력을 노리는 패턴입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>공중 개체 분리 집결. 아군 비행 전력을 노리는 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -175,7 +175,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락 지상 통로에 가시형 개체가 밀집합니다. 좁은 입구를 노리는 대열입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>가시형 개체 밀집. 좁은 입구를 노리는 대열입니다.");
 	Preserve Trigger();
 }
 
@@ -193,7 +193,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락 후열에 느린 비행 반응이 붙습니다. 장거리 공성형 접근 패턴입니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>느린 비행 반응 감지. 장거리 공성형 접근 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -206,7 +206,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 군락의 집결 신호를 포착했습니다. 고치 파괴 여파로 반응 밀도는 낮습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>집결 신호 포착. 고치 파괴 여파로 반응 밀도는 낮습니다.");
 	Preserve Trigger();
 }
 
@@ -218,7 +218,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 군락의 집결 신호를 포착했습니다. 고치 파괴 여파로 반응 밀도는 낮습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>집결 신호 포착. 고치 파괴 여파로 반응 밀도는 낮습니다.");
 	Preserve Trigger();
 }
 
@@ -236,7 +236,7 @@ Actions:
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>경보: <04>동북쪽 군락 대규모 공세 접근.");
+	Display Text Message(Always Display, "<06>경보: <04>대규모 공세 접근.");
 	Preserve Trigger();
 }
 
@@ -308,7 +308,7 @@ Actions:
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>경보: <04>동남쪽 군락 대규모 공세 접근.");
+	Display Text Message(Always Display, "<06>경보: <04>대규모 공세 접근.");
 	Preserve Trigger();
 }
 
