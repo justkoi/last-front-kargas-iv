@@ -3,7 +3,7 @@
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
 //                      P5 Spawn1~4, P1~P4 Hunt, Player Destination, AttackPoint1,
 //                      MD1~MD6,
-//                      P6 Base, P6 Home, P6 MiniBase, P6 Area, P6 Area Ground, P6 Area Air,
+//                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4,
@@ -33,7 +33,6 @@
 //    Protoss Archon       : P6 scout overlord cycle timer
 //    Protoss Dark Templar : P7 scout overlord cycle timer
 //    Protoss Shuttle      : P1~P4 Hunt location refresh timer
-//    Terran Ghost         : P6 MiniBase reveal timer
 //    Terran Wraith        : mission1 late-wave cooldown / P6 mission2 early alert defense recharge timer
 //    Terran Battlecruiser : P5 overlord supply cycle timer
 //    Protoss Dragoon      : P6 overlord supply cycle timer
@@ -95,8 +94,6 @@
 //    Switch42/43: P5 hunt all-out random target selector
 //    Switch44/45: P6 hunt all-out random target selector
 //    Switch46/47: P7 hunt all-out random target selector
-//    Switch48   : P6 MiniBase revealed
-//    Switch49   : P6 MiniBase reward/message paid
 //    Switch50   : mission2 assault setup initialized
 //    Switch51   : P6 mission2 penalty assault relay pulse open
 //    Switch52   : P7 mission2 penalty assault relay pulse open

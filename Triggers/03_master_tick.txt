@@ -49,17 +49,6 @@ Actions:
 	Preserve Trigger();
 }
 
-// Mission 2 P6 MiniBase reveal timer starts after the first P6 main assault begins spawning.
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Ghost", At least, 1);
-	Switch("Switch48", Not Set);
-Actions:
-	Set Deaths("Player 8", "Terran Ghost", Add, 1);
-	Preserve Trigger();
-}
-
 // If an outer colony tech core is attacked during mission1, only that
 // colony's main-assault cooldown starts advancing early.
 Trigger("Player 8"){

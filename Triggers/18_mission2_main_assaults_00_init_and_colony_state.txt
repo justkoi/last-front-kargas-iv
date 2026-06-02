@@ -33,8 +33,6 @@ Actions:
 	Set Switch("Switch39", clear);
 	Set Switch("Switch40", clear);
 	Set Switch("Switch41", clear);
-	Set Switch("Switch48", clear);
-	Set Switch("Switch49", clear);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
@@ -60,7 +58,6 @@ Actions:
 	Set Switch("Switch88", clear);
 	Set Switch("Switch89", clear);
 	Set Switch("Switch90", clear);
-	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
 	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Set To, 0);
 	Set Deaths("Player 8", "Zerg Spore Colony", Set To, 0);
