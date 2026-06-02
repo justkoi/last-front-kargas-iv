@@ -7,7 +7,7 @@
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4,
-//                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~5, NewRoute4~15, Raid1~3, Raid1~3 Exit, Waypoint1~5,
+//                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~5, NewRoute4~15, Waypoint1~5,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  P6/P7 Overmind locations require preplaced invincible Overmind Cocoons
@@ -67,10 +67,6 @@
 //
 //  Switch roles
 //    Switch1 : defeat guard
-//    Switch2 : resource raid sites revealed/spawned
-//    Switch3 : Raid1 cleared
-//    Switch4 : Raid2 cleared
-//    Switch5 : Raid3 cleared
 //    Switch7 : mission1 multi scan revealers created
 //    Switch8 : mission1 multi scan revealers removed
 //    Switch9/10 : P6 mission2 penalty assault random selector
@@ -143,6 +139,8 @@
 //    Switch92   : Gas1 P5 Overmind Cocoon gas reward paid
 //    Switch93   : Gas2 P5 Overmind Cocoon confirmed
 //    Switch94   : Gas2 P5 Overmind Cocoon gas reward paid
+//    Switch95   : P6 mission2 tech-structure acceleration info shown
+//    Switch96   : P7 mission2 tech-structure acceleration info shown
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
