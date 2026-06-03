@@ -33,6 +33,18 @@ Actions:
 	Set Switch("Switch60", clear);
 	Kill Unit At Location("Player 5", "Zerg Sunken Colony", 64, "WestArea");
 	Kill Unit At Location("Player 5", "Zerg Spore Colony", 64, "WestArea");
+	Set Deaths("Player 5", "Zerg Sunken Colony", Set To, 0);
+	Set Deaths("Player 5", "Zerg Spore Colony", Set To, 0);
+	Set Deaths("Player 5", "Terran Marine", Set To, 0);
+	Set Deaths("Player 5", "Terran Firebat", Set To, 0);
+	Set Switch("Switch109", clear);
+	Set Switch("Switch110", clear);
+	Set Switch("Switch111", clear);
+	Set Switch("Switch112", clear);
+	Set Switch("Switch113", clear);
+	Set Switch("Switch114", clear);
+	Set Switch("Switch115", clear);
+	Set Switch("Switch116", clear);
 }
 
 Trigger("All Players"){
@@ -71,7 +83,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 216);
 	Deaths("Player 8", "Terran Vulture", At most, 240);
 Actions:
-	Display Text Message(Always Display, "<07>군수지원: <04>전선 재정비 보급 투입. 미네랄 +2500 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>전선 재정비 보급 투입. 미네랄 +500 / 가스 +500");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -80,8 +92,8 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 216);
 	Deaths("Player 8", "Terran Vulture", At most, 240);
 Actions:
-	Set Resources("Current Player", Add, 2500, ore);
-	Set Resources("Current Player", Add, 1000, gas);
+	Set Resources("Current Player", Add, 500, ore);
+	Set Resources("Current Player", Add, 500, gas);
 }
 
 Trigger("Player 6"){
@@ -93,7 +105,6 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
-	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -116,17 +127,6 @@ Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate3");
 	Minimap Ping("Mission2 Gate3");
 	Display Text Message(Always Display, "<1A>노바: <04>좁은 샛길을 확인했습니다. 우회 병력이 스며들 수 있으니 감시를 붙이십시오.");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 576);
-	Deaths("Player 8", "Terran Vulture", At most, 600);
-Actions:
-	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate5");
-	Minimap Ping("Mission2 Gate5");
-	Display Text Message(Always Display, "<1A>노바: <04>남쪽 통로를 확인했습니다. 안쪽의 좁은 협곡에서 막아 서면 수비가 유리합니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -174,6 +174,16 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 3600);
 Actions:
+	Set Deaths("Player 5", "Terran Marine", Set To, 0);
+	Set Deaths("Player 5", "Terran Firebat", Set To, 0);
+	Set Switch("Switch109", clear);
+	Set Switch("Switch110", clear);
+	Set Switch("Switch111", clear);
+	Set Switch("Switch112", clear);
+	Set Switch("Switch113", clear);
+	Set Switch("Switch114", clear);
+	Set Switch("Switch115", clear);
+	Set Switch("Switch116", clear);
 	Kill Unit("Player 5", "Zerg Sunken Colony");
 	Kill Unit("Player 5", "Zerg Spore Colony");
 }

@@ -7,7 +7,7 @@
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4,
-//                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~5, NewRoute4~15, Waypoint1~5,
+//                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~4, NewRoute4~12, NewRoute14~15, Waypoint1~5,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  P6/P7 Overmind locations require preplaced invincible Overmind Cocoons
@@ -138,6 +138,9 @@
 //    Switch94   : Gas2 P5 Overmind Cocoon gas reward paid
 //    Switch95   : P6 mission2 tech-structure acceleration info shown
 //    Switch96   : P7 mission2 tech-structure acceleration info shown
+//    Switch97~100  : P1~P4 P5 first Mutalisk warning shown
+//    Switch101~104 : P1~P4 P5 first Guardian warning shown
+//    Switch105~108 : P1~P4 P5 first Devourer warning shown
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
@@ -1413,69 +1416,75 @@ Actions:
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 해처리 파괴 보상. 미네랄 +100");
+	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 해처리 파괴 보상. 미네랄 +250 / 가스 +50");
 	Preserve Trigger();
 }
 
 Trigger("Player 5"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 1440);
-	Set Resources("Player 1", Add, 100, ore);
-	Set Resources("Player 2", Add, 100, ore);
-	Set Resources("Player 3", Add, 100, ore);
-	Set Resources("Player 4", Add, 100, ore);
+	Set Resources("Player 1", Add, 250, ore);
+	Set Resources("Player 2", Add, 250, ore);
+	Set Resources("Player 3", Add, 250, ore);
+	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 50, gas);
+	Set Resources("Player 2", Add, 50, gas);
+	Set Resources("Player 3", Add, 50, gas);
+	Set Resources("Player 4", Add, 50, gas);
 	Set Deaths("Player 5", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 레어 파괴 보상. 미네랄 +200");
+	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 레어 파괴 보상. 미네랄 +350 / 가스 +50");
 	Preserve Trigger();
 }
 
 Trigger("Player 5"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 2160);
-	Set Resources("Player 1", Add, 200, ore);
-	Set Resources("Player 2", Add, 200, ore);
-	Set Resources("Player 3", Add, 200, ore);
-	Set Resources("Player 4", Add, 200, ore);
+	Set Resources("Player 1", Add, 350, ore);
+	Set Resources("Player 2", Add, 350, ore);
+	Set Resources("Player 3", Add, 350, ore);
+	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 50, gas);
+	Set Resources("Player 2", Add, 50, gas);
+	Set Resources("Player 3", Add, 50, gas);
+	Set Resources("Player 4", Add, 50, gas);
 	Set Deaths("Player 5", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 하이브 파괴 보상. 미네랄 +300");
+	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 하이브 파괴 보상. 미네랄 +450 / 가스 +50");
 	Preserve Trigger();
 }
 
 Trigger("Player 5"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 2880);
-	Set Resources("Player 1", Add, 300, ore);
-	Set Resources("Player 2", Add, 300, ore);
-	Set Resources("Player 3", Add, 300, ore);
-	Set Resources("Player 4", Add, 300, ore);
+	Set Resources("Player 1", Add, 450, ore);
+	Set Resources("Player 2", Add, 450, ore);
+	Set Resources("Player 3", Add, 450, ore);
+	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 50, gas);
+	Set Resources("Player 2", Add, 50, gas);
+	Set Resources("Player 3", Add, 50, gas);
+	Set Resources("Player 4", Add, 50, gas);
 	Set Deaths("Player 5", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1745,6 +1754,168 @@ Actions:
 	Kill Unit At Location("Player 2", "Map Revealer", 64, "P5 Cerebrate");
 	Kill Unit At Location("Player 3", "Map Revealer", 64, "P5 Cerebrate");
 	Kill Unit At Location("Player 4", "Map Revealer", 64, "P5 Cerebrate");
+}
+//-----------------------------------------------------------------//
+//  Mission 1 P5 first air-tech alerts
+//  Switch97~100  : P1~P4 first Mutalisk warning shown
+//  Switch101~104 : P1~P4 first Guardian warning shown
+//  Switch105~108 : P1~P4 first Devourer warning shown
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Mutalisk", At least, 1);
+	Switch("Switch97", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>뮤탈리스크 출현 확인. 기동성이 좋으니 기습에 대비하는 것이 좋겠습니다.");
+	Set Switch("Switch97", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Mutalisk", At least, 1);
+	Switch("Switch98", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>뮤탈리스크 출현 확인. 기동성이 좋으니 기습에 대비하는 것이 좋겠습니다.");
+	Set Switch("Switch98", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Mutalisk", At least, 1);
+	Switch("Switch99", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>뮤탈리스크 출현 확인. 기동성이 좋으니 기습에 대비하는 것이 좋겠습니다.");
+	Set Switch("Switch99", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Mutalisk", At least, 1);
+	Switch("Switch100", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>뮤탈리스크 출현 확인. 기동성이 좋으니 기습에 대비하는 것이 좋겠습니다.");
+	Set Switch("Switch100", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Guardian", At least, 1);
+	Switch("Switch101", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하는 것이 좋겠습니다.");
+	Set Switch("Switch101", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Guardian", At least, 1);
+	Switch("Switch102", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하는 것이 좋겠습니다.");
+	Set Switch("Switch102", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Guardian", At least, 1);
+	Switch("Switch103", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하는 것이 좋겠습니다.");
+	Set Switch("Switch103", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Guardian", At least, 1);
+	Switch("Switch104", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하는 것이 좋겠습니다.");
+	Set Switch("Switch104", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Devourer", At least, 1);
+	Switch("Switch105", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
+	Set Switch("Switch105", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Devourer", At least, 1);
+	Switch("Switch106", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
+	Set Switch("Switch106", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Devourer", At least, 1);
+	Switch("Switch107", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
+	Set Switch("Switch107", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Devourer", At least, 1);
+	Switch("Switch108", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
+	Set Switch("Switch108", set);
+	Preserve Trigger();
 }
 //-----------------------------------------------------------------//
 //  Mission 1 - dynamic building tracking and random all-out attack
@@ -2563,7 +2734,6 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
-	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2601,7 +2771,6 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
-	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2639,7 +2808,6 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
-	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2677,7 +2845,6 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
-	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2715,7 +2882,6 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
-	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2753,7 +2919,6 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
-	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -3129,7 +3294,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 216);
 	Deaths("Player 8", "Terran Vulture", At most, 240);
 Actions:
-	Display Text Message(Always Display, "<07>군수지원: <04>전선 재정비 보급 투입. 미네랄 +2500 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>전선 재정비 보급 투입. 미네랄 +500 / 가스 +500");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -3138,8 +3303,8 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 216);
 	Deaths("Player 8", "Terran Vulture", At most, 240);
 Actions:
-	Set Resources("Current Player", Add, 2500, ore);
-	Set Resources("Current Player", Add, 1000, gas);
+	Set Resources("Current Player", Add, 500, ore);
+	Set Resources("Current Player", Add, 500, gas);
 }
 
 Trigger("Player 6"){
@@ -3151,7 +3316,6 @@ Actions:
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
-	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate5");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -3174,17 +3338,6 @@ Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate3");
 	Minimap Ping("Mission2 Gate3");
 	Display Text Message(Always Display, "<1A>노바: <04>좁은 샛길을 확인했습니다. 우회 병력이 스며들 수 있으니 감시를 붙이십시오.");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 576);
-	Deaths("Player 8", "Terran Vulture", At most, 600);
-Actions:
-	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate5");
-	Minimap Ping("Mission2 Gate5");
-	Display Text Message(Always Display, "<1A>노바: <04>남쪽 통로를 확인했습니다. 안쪽의 좁은 협곡에서 막아 서면 수비가 유리합니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -4621,7 +4774,6 @@ Conditions:
 Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "NewRoute11");
 	Create Unit("Current Player", "Map Revealer", 1, "NewRoute12");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute13");
 	Create Unit("Current Player", "Map Revealer", 1, "NewRoute14");
 	Create Unit("Current Player", "Map Revealer", 1, "NewRoute15");
 }

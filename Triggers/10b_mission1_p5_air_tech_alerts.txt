@@ -1,0 +1,162 @@
+//-----------------------------------------------------------------//
+//  Mission 1 P5 first air-tech alerts
+//  Switch97~100  : P1~P4 first Mutalisk warning shown
+//  Switch101~104 : P1~P4 first Guardian warning shown
+//  Switch105~108 : P1~P4 first Devourer warning shown
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Mutalisk", At least, 1);
+	Switch("Switch97", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>뮤탈리스크 출현 확인. 기동성이 좋으니 기습에 대비하는 것이 좋겠습니다.");
+	Set Switch("Switch97", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Mutalisk", At least, 1);
+	Switch("Switch98", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>뮤탈리스크 출현 확인. 기동성이 좋으니 기습에 대비하는 것이 좋겠습니다.");
+	Set Switch("Switch98", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Mutalisk", At least, 1);
+	Switch("Switch99", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>뮤탈리스크 출현 확인. 기동성이 좋으니 기습에 대비하는 것이 좋겠습니다.");
+	Set Switch("Switch99", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Mutalisk", At least, 1);
+	Switch("Switch100", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>뮤탈리스크 출현 확인. 기동성이 좋으니 기습에 대비하는 것이 좋겠습니다.");
+	Set Switch("Switch100", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Guardian", At least, 1);
+	Switch("Switch101", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하는 것이 좋겠습니다.");
+	Set Switch("Switch101", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Guardian", At least, 1);
+	Switch("Switch102", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하는 것이 좋겠습니다.");
+	Set Switch("Switch102", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Guardian", At least, 1);
+	Switch("Switch103", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하는 것이 좋겠습니다.");
+	Set Switch("Switch103", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Guardian", At least, 1);
+	Switch("Switch104", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하는 것이 좋겠습니다.");
+	Set Switch("Switch104", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Devourer", At least, 1);
+	Switch("Switch105", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
+	Set Switch("Switch105", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Devourer", At least, 1);
+	Switch("Switch106", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
+	Set Switch("Switch106", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Devourer", At least, 1);
+	Switch("Switch107", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
+	Set Switch("Switch107", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Command("Player 5", "Zerg Devourer", At least, 1);
+	Switch("Switch108", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
+	Set Switch("Switch108", set);
+	Preserve Trigger();
+}

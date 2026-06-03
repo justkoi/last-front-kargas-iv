@@ -7,7 +7,7 @@
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4,
-//                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~5, NewRoute4~15, Waypoint1~5,
+//                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~4, NewRoute4~12, NewRoute14~15, Waypoint1~5,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  P6/P7 Overmind locations require preplaced invincible Overmind Cocoons
@@ -63,6 +63,8 @@
 //    Zerg Hatchery        : mission1 late-wave cooldown seed
 //    Zerg Lair            : mission1 late-wave cooldown seed
 //    Zerg Hive            : mission1 late-wave cooldown seed
+//    Terran Marine        : P5 mission2 early Sunken Colony loss warning progress
+//    Terran Firebat       : P5 mission2 early Spore Colony loss warning progress
 //
 //  Switch roles
 //    Switch1 : defeat guard
@@ -138,6 +140,11 @@
 //    Switch94   : Gas2 P5 Overmind Cocoon gas reward paid
 //    Switch95   : P6 mission2 tech-structure acceleration info shown
 //    Switch96   : P7 mission2 tech-structure acceleration info shown
+//    Switch97~100  : P1~P4 P5 first Mutalisk warning shown
+//    Switch101~104 : P1~P4 P5 first Guardian warning shown
+//    Switch105~108 : P1~P4 P5 first Devourer warning shown
+//    Switch109~112 : P1~P4 P5 early Sunken Colony decay warning queued
+//    Switch113~116 : P1~P4 P5 early Spore Colony decay warning queued
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
