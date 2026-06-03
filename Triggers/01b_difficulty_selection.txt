@@ -2,7 +2,7 @@
 //  Difficulty selection
 //
 //  Player 8 / Terran Academy:
-//    0 = unset, 1 = easy, 2 = normal, 3 = hard
+//    0 = unset, 1 = easy, 2 = normal, 3 = hard, 4 = very hard
 //  Switch117 = selector civilian has been created.
 //  Selector civilian priority: lowest active player slot receives it immediately.
 //-----------------------------------------------------------------//
@@ -51,22 +51,199 @@ Actions:
 
 Trigger("All Players"){
 Conditions:
+	Elapsed Time(At least, 10);
+	Elapsed Time(At most, 12);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 20);
+	Elapsed Time(At most, 22);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 30);
+	Elapsed Time(At most, 32);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 40);
+	Elapsed Time(At most, 42);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 50);
+	Elapsed Time(At most, 52);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 60);
+	Elapsed Time(At most, 62);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 70);
+	Elapsed Time(At most, 72);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 80);
+	Elapsed Time(At most, 82);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 90);
+	Elapsed Time(At most, 92);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 100);
+	Elapsed Time(At most, 102);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 110);
+	Elapsed Time(At most, 112);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 120);
+	Elapsed Time(At most, 122);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 130);
+	Elapsed Time(At most, 132);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 140);
+	Elapsed Time(At most, 142);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 150);
+	Elapsed Time(At most, 152);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 160);
+	Elapsed Time(At most, 162);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
 	Elapsed Time(At least, 55);
 	Elapsed Time(At most, 57);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("Selector");
-	Display Text Message(Always Display, "<07>난이도를 선택하세요. <04>선택 시민을 <07>쉬움<04>, <11>보통<04>, <08>어려움<04> 구역으로 이동시키십시오. 선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
+	Display Text Message(Always Display, "<07>난이도를 선택하세요. <04>선택 시민을 <07>쉬움<04>, <11>보통<04>, <08>어려움<04>, <06>매우 어려움<04> 구역으로 이동시키십시오. 선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
 	Display Text Message(Always Display, "<13><03>[난이도 차이 안내]");
 	Display Text Message(Always Display, "<11>보통: <04>적 공세 간격이 짧아지고, 적 해처리가 추가됩니다.");
 	Display Text Message(Always Display, "<08>어려움: <04>적 공세 간격이 더 짧아지고, 적 병력과 해처리가 더 늘어납니다.");
+	Display Text Message(Always Display, "<06>매우 어려움: <04>어려움보다 공세 주기와 처치 페널티가 더 강해집니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Elapsed Time(At least, 55);
+	Elapsed Time(At most, 57);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+	Bring("Current Player", "Terran Civilian", "Difficulty", At least, 1);
+Actions:
+	Center View("Difficulty");
 }
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 115);
-	Elapsed Time(At most, 117);
+	Elapsed Time(At least, 75);
+	Elapsed Time(At most, 77);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("Selector");
+	Display Text Message(Always Display, "<07>난이도 선택 대기 중: <04>선택 시민을 난이도 구역으로 이동시키십시오.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 95);
+	Elapsed Time(At most, 97);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("Selector");
+	Display Text Message(Always Display, "<07>난이도 선택 대기 중: <04>선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 145);
+	Elapsed Time(At most, 147);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -100,8 +277,16 @@ Actions:
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Elapsed Time(At least, 140);
-	Elapsed Time(At most, 142);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+	Bring("Current Player", "Terran Civilian", "SelectVeryHard", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Academy", Set To, 4);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Elapsed Time(At least, 170);
+	Elapsed Time(At most, 172);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
 	Set Deaths("Player 8", "Terran Academy", Set To, 1);
@@ -135,6 +320,16 @@ Actions:
 	Display Text Message(Always Display, "<07>행운을 빕니다!");
 }
 
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<04>선택한 난이도는 <06>매우 어려움<04>입니다.");
+	Display Text Message(Always Display, "<06>매우 어려움 효과: <04>어려움보다 공세 주기, 병력, 처치 페널티 강화.");
+	Display Text Message(Always Display, "<07>행운을 빕니다!");
+}
+
 // Mission 2 difficulty Hatcheries are spawned immediately after difficulty is locked.
 Trigger("Player 8"){
 Conditions:
@@ -162,7 +357,7 @@ Actions:
 
 Trigger("Player 8"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Switch("Switch122", Not Set);
 Actions:
 	Move Unit("All Players", "Men", 64, "P5 H1", "P5 Spawn1");

@@ -51,6 +51,14 @@
 - "P7 Alert Ping": P7 mission1 warning minimap ping tracking location
 - "P8 Base"    : 남동 보스 영역
 
+[난이도 선택]
+- "Difficulty"     : 시작 난이도 선택 영역 전체
+- "Selector"       : 난이도 선택 시민 생성 위치
+- "SelectEasy"     : 쉬움 선택 판정 영역
+- "SelectNormal"   : 보통 선택 판정 영역
+- "SelectHard"     : 어려움 선택 판정 영역
+- "SelectVeryHard" : 매우 어려움 선택 판정 영역. Difficulty 영역 안에 새로 추가
+
 [미션 2 - 난민 호송]
 - "Mission2 Civilians" : 남서쪽 난민 시작 지점 (10명 생성됨)
 - "Mission2 Goal"      : 본진 중앙 (난민 호송 목적지, 본진 영역 안)

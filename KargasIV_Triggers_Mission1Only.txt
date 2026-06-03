@@ -8,6 +8,7 @@
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4, P7 H1~4,
 //                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~4, NewRoute4~12, NewRoute14~15, Waypoint1~5,
+//                      Difficulty, Selector, SelectEasy, SelectNormal, SelectHard, SelectVeryHard,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  P6/P7 Overmind locations require preplaced invincible Overmind Cocoons
@@ -40,7 +41,7 @@
 //    Terran Science Vessel: player alliance refresh timer
 //    Terran Medic         : P6 intrusion Overlord dispatch timer
 //    Terran SCV           : P7 intrusion Overlord dispatch timer
-//    Terran Academy       : difficulty selection flag (0=unset, 1=easy, 2=normal, 3=hard)
+//    Terran Academy       : difficulty selection flag (0=unset, 1=easy, 2=normal, 3=hard, 4=very hard)
 //    Terran Ghost         : difficulty reminder timer
 //    Terran Dropship      : mission1 late-wave variant index / P7 mission2 early alert defense recharge timer
 //    Protoss Corsair      : mission1 outer colony warning cooldown timer
@@ -157,6 +158,7 @@
 //    Switch124     : normal difficulty reminder queued
 //    Switch125     : hard difficulty reminder queued
 //    Switch126     : difficulty reminder displayed to players; clear queued reminder on P8 pass
+//    Switch127     : very hard difficulty reminder queued
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
@@ -388,7 +390,7 @@ Actions:
 //  Difficulty selection
 //
 //  Player 8 / Terran Academy:
-//    0 = unset, 1 = easy, 2 = normal, 3 = hard
+//    0 = unset, 1 = easy, 2 = normal, 3 = hard, 4 = very hard
 //  Switch117 = selector civilian has been created.
 //  Selector civilian priority: lowest active player slot receives it immediately.
 //-----------------------------------------------------------------//
@@ -437,22 +439,199 @@ Actions:
 
 Trigger("All Players"){
 Conditions:
+	Elapsed Time(At least, 10);
+	Elapsed Time(At most, 12);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 20);
+	Elapsed Time(At most, 22);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 30);
+	Elapsed Time(At most, 32);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 40);
+	Elapsed Time(At most, 42);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 50);
+	Elapsed Time(At most, 52);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 60);
+	Elapsed Time(At most, 62);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 70);
+	Elapsed Time(At most, 72);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 80);
+	Elapsed Time(At most, 82);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 90);
+	Elapsed Time(At most, 92);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 100);
+	Elapsed Time(At most, 102);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 110);
+	Elapsed Time(At most, 112);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 120);
+	Elapsed Time(At most, 122);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 130);
+	Elapsed Time(At most, 132);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 140);
+	Elapsed Time(At most, 142);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 150);
+	Elapsed Time(At most, 152);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 160);
+	Elapsed Time(At most, 162);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Minimap Ping("Selector");
+}
+
+Trigger("All Players"){
+Conditions:
 	Elapsed Time(At least, 55);
 	Elapsed Time(At most, 57);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("Selector");
-	Display Text Message(Always Display, "<07>난이도를 선택하세요. <04>선택 시민을 <07>쉬움<04>, <11>보통<04>, <08>어려움<04> 구역으로 이동시키십시오. 선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
+	Display Text Message(Always Display, "<07>난이도를 선택하세요. <04>선택 시민을 <07>쉬움<04>, <11>보통<04>, <08>어려움<04>, <06>매우 어려움<04> 구역으로 이동시키십시오. 선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
 	Display Text Message(Always Display, "<13><03>[난이도 차이 안내]");
 	Display Text Message(Always Display, "<11>보통: <04>적 공세 간격이 짧아지고, 적 해처리가 추가됩니다.");
 	Display Text Message(Always Display, "<08>어려움: <04>적 공세 간격이 더 짧아지고, 적 병력과 해처리가 더 늘어납니다.");
+	Display Text Message(Always Display, "<06>매우 어려움: <04>어려움보다 공세 주기와 처치 페널티가 더 강해집니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Elapsed Time(At least, 55);
+	Elapsed Time(At most, 57);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+	Bring("Current Player", "Terran Civilian", "Difficulty", At least, 1);
+Actions:
+	Center View("Difficulty");
 }
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 115);
-	Elapsed Time(At most, 117);
+	Elapsed Time(At least, 75);
+	Elapsed Time(At most, 77);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("Selector");
+	Display Text Message(Always Display, "<07>난이도 선택 대기 중: <04>선택 시민을 난이도 구역으로 이동시키십시오.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 95);
+	Elapsed Time(At most, 97);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("Selector");
+	Display Text Message(Always Display, "<07>난이도 선택 대기 중: <04>선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 145);
+	Elapsed Time(At most, 147);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -486,8 +665,16 @@ Actions:
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Elapsed Time(At least, 140);
-	Elapsed Time(At most, 142);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+	Bring("Current Player", "Terran Civilian", "SelectVeryHard", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Academy", Set To, 4);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Elapsed Time(At least, 170);
+	Elapsed Time(At most, 172);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
 	Set Deaths("Player 8", "Terran Academy", Set To, 1);
@@ -521,6 +708,16 @@ Actions:
 	Display Text Message(Always Display, "<07>행운을 빕니다!");
 }
 
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<04>선택한 난이도는 <06>매우 어려움<04>입니다.");
+	Display Text Message(Always Display, "<06>매우 어려움 효과: <04>어려움보다 공세 주기, 병력, 처치 페널티 강화.");
+	Display Text Message(Always Display, "<07>행운을 빕니다!");
+}
+
 // Mission 2 difficulty Hatcheries are spawned immediately after difficulty is locked.
 Trigger("Player 8"){
 Conditions:
@@ -548,7 +745,7 @@ Actions:
 
 Trigger("Player 8"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Switch("Switch122", Not Set);
 Actions:
 	Move Unit("All Players", "Men", 64, "P5 H1", "P5 Spawn1");
@@ -668,6 +865,18 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Ghost", At least, 3600);
+Actions:
+	Set Switch("Switch127", set);
+	Set Deaths("Player 8", "Terran Ghost", Subtract, 3600);
+	Preserve Trigger();
+}
+
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Switch("Switch123", Set);
@@ -695,6 +904,15 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch127", Set);
+Actions:
+	Display Text Message(Always Display, "<04>현재 플레이중인 난이도는 <06>매우 어려움<04>입니다.");
+	Set Switch("Switch126", set);
+	Preserve Trigger();
+}
+
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch123", Set);
@@ -705,6 +923,15 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch127", Set);
+	Switch("Switch126", Set);
+Actions:
+	Set Switch("Switch127", clear);
+	Set Switch("Switch126", clear);
+	Preserve Trigger();
+}
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch124", Set);
@@ -1853,7 +2080,7 @@ Actions:
 //-----------------------------------------------------------------//
 //  Mission 1 difficulty adjustment - Hard
 //
-//  Player 8 / Terran Academy = 3 hard.
+//  Player 8 / Terran Academy = 3 hard, 4 very hard.
 //  These are extra additions on top of normal adjustment.
 //-----------------------------------------------------------------//
 
@@ -1861,7 +2088,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Elapsed Time(At least, 210);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
@@ -1873,7 +2100,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Elapsed Time(At least, 450);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
@@ -1886,7 +2113,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Elapsed Time(At least, 630);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
@@ -1900,7 +2127,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Elapsed Time(At least, 660);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
@@ -1912,7 +2139,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 60);
@@ -1922,7 +2149,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 60);
@@ -1932,7 +2159,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 60);
@@ -1947,6 +2174,95 @@ Conditions:
 	Deaths("Player 8", "Terran Wraith", At least, 2280);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 240);
+	Preserve Trigger();
+}
+//-----------------------------------------------------------------//
+//  Mission 1 difficulty adjustment - Very Hard
+//
+//  Player 8 / Terran Academy = 4 very hard.
+//  These are extra additions on top of hard adjustment.
+//-----------------------------------------------------------------//
+
+// Wave 1 very hard reinforcement - added over hard.
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Elapsed Time(At least, 210);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
+}
+
+// Wave 2 very hard reinforcement - added over hard.
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Elapsed Time(At least, 450);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn3");
+}
+
+// Wave 3 very hard reinforcement - added over hard.
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Elapsed Time(At least, 630);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn2");
+}
+
+// Colony destruction penalty: +5 seconds beyond hard.
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 5", "Zerg Hatchery", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 5", "Zerg Lair", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 5", "Zerg Hive", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
+	Preserve Trigger();
+}
+
+// Convert the easy 210s late-wave threshold into very hard 180s.
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Wraith", At least, 2160);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 360);
 	Preserve Trigger();
 }
 //-----------------------------------------------------------------//
@@ -4722,25 +5038,25 @@ Actions:
 // P6 allied-base support: after all P6 self-defense triggers so P6 home defense
 // consumes the shared cooldown first when both bases are under attack.
 // Only support an allied base while that base area still contains at least one building.
+// Intrusion Overlord dispatch latches stay independent so they do not suppress allied support.
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
-	Move Location("Player 1", "Men", "P7 Area Ground", "P6 Intruder");
-	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 1", "Men", "P7 Area Ground", "P7 Intruder");
+	Order("Player 6", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Infested Terran", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -4748,17 +5064,16 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
-	Move Location("Player 1", "Men", "P7 Area Air", "P6 Intruder");
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 1", "Men", "P7 Area Air", "P7 Intruder");
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -4766,7 +5081,6 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -4778,7 +5092,6 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -4790,20 +5103,19 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
-	Move Location("Player 2", "Men", "P7 Area Ground", "P6 Intruder");
-	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 2", "Men", "P7 Area Ground", "P7 Intruder");
+	Order("Player 6", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Infested Terran", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -4811,17 +5123,16 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
-	Move Location("Player 2", "Men", "P7 Area Air", "P6 Intruder");
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 2", "Men", "P7 Area Air", "P7 Intruder");
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -4829,7 +5140,6 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -4841,7 +5151,6 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -4853,20 +5162,19 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
-	Move Location("Player 3", "Men", "P7 Area Ground", "P6 Intruder");
-	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 3", "Men", "P7 Area Ground", "P7 Intruder");
+	Order("Player 6", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Infested Terran", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -4874,17 +5182,16 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
-	Move Location("Player 3", "Men", "P7 Area Air", "P6 Intruder");
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 3", "Men", "P7 Area Air", "P7 Intruder");
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -4892,7 +5199,6 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -4904,7 +5210,6 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -4916,20 +5221,19 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
-	Move Location("Player 4", "Men", "P7 Area Ground", "P6 Intruder");
-	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 4", "Men", "P7 Area Ground", "P7 Intruder");
+	Order("Player 6", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Infested Terran", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -4937,17 +5241,16 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
-	Move Location("Player 4", "Men", "P7 Area Air", "P6 Intruder");
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 4", "Men", "P7 Area Air", "P7 Intruder");
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -4955,7 +5258,6 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -4967,7 +5269,6 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Armory", At least, 84);
 	Switch("Switch84", Not Set);
-	Switch("Switch69", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -5208,25 +5509,25 @@ Actions:
 // P7 allied-base support: after all P7 self-defense triggers so P7 home defense
 // consumes the shared cooldown first when both bases are under attack.
 // Only support an allied base while that base area still contains at least one building.
+// Intrusion Overlord dispatch latches stay independent so they do not suppress allied support.
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
-	Move Location("Player 1", "Men", "P6 Area Ground", "P7 Intruder");
-	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 1", "Men", "P6 Area Ground", "P6 Intruder");
+	Order("Player 7", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Infested Terran", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -5234,17 +5535,16 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
-	Move Location("Player 1", "Men", "P6 Area Air", "P7 Intruder");
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 1", "Men", "P6 Area Air", "P6 Intruder");
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -5252,7 +5552,6 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -5264,7 +5563,6 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -5276,20 +5574,19 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
-	Move Location("Player 2", "Men", "P6 Area Ground", "P7 Intruder");
-	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 2", "Men", "P6 Area Ground", "P6 Intruder");
+	Order("Player 7", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Infested Terran", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -5297,17 +5594,16 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
-	Move Location("Player 2", "Men", "P6 Area Air", "P7 Intruder");
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 2", "Men", "P6 Area Air", "P6 Intruder");
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -5315,7 +5611,6 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -5327,7 +5622,6 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -5339,20 +5633,19 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
-	Move Location("Player 3", "Men", "P6 Area Ground", "P7 Intruder");
-	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 3", "Men", "P6 Area Ground", "P6 Intruder");
+	Order("Player 7", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Infested Terran", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -5360,17 +5653,16 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
-	Move Location("Player 3", "Men", "P6 Area Air", "P7 Intruder");
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 3", "Men", "P6 Area Air", "P6 Intruder");
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -5378,7 +5670,6 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -5390,7 +5681,6 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -5402,20 +5692,19 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
-	Move Location("Player 4", "Men", "P6 Area Ground", "P7 Intruder");
-	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 4", "Men", "P6 Area Ground", "P6 Intruder");
+	Order("Player 7", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Infested Terran", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -5423,17 +5712,16 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
-	Move Location("Player 4", "Men", "P6 Area Air", "P7 Intruder");
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 4", "Men", "P6 Area Air", "P6 Intruder");
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -5441,7 +5729,6 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -5453,7 +5740,6 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 84);
 	Switch("Switch85", Not Set);
-	Switch("Switch70", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -5836,7 +6122,7 @@ Actions:
 //  timed batches to reduce blocked creation space. Spawn timers only count up;
 //  separate stage counters prevent repeated or chained creation. Air-heavy
 //  waves are split into smaller sub-batches. Spawned groups
-//  rally to Waypoint1~5. For 120s after the final batch,
+//  rally to Waypoint1~5. For 60s after the final batch,
 //  P6/P7 assault units reaching the selected waypoint redirect
 //  toward the already selected P1~P4 Hunt location.
 //-----------------------------------------------------------------//
@@ -6319,12 +6605,12 @@ Actions:
 //  Mission 2 difficulty timing adjustments
 //
 //  Easy keeps the existing first-assault seed and 20:30/21:00/21:30
-//  repeated cooldowns. Normal and hard only advance cooldown progress;
+//  repeated cooldowns. Normal, hard, and very hard only advance cooldown progress;
 //  the existing roll, warning, 10-second spawn delay, and consume
 //  triggers remain unchanged.
 //-----------------------------------------------------------------//
 
-// First P6 assault seed: normal +30s, hard +60s.
+// First P6 assault seed: normal +30s, hard +60s, very hard +90s.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -6351,7 +6637,20 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
 }
 
-// First P7 assault seed: normal +30s, hard +60s.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch50", Set);
+	Switch("Switch31", Not Set);
+	Deaths("Player 8", "Zerg Zergling", At least, 10236);
+	Deaths("Player 8", "Zerg Zergling", At most, 12396);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1080);
+}
+
+// First P7 assault seed: normal +30s, hard +60s, very hard +90s.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -6376,6 +6675,19 @@ Conditions:
 	Deaths("Player 8", "Zerg Hydralisk", At most, 12396);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch50", Set);
+	Switch("Switch32", Not Set);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 10236);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 12396);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1080);
 }
 
 // Repeated cooldown adjustments start only after that colony's first spawn begins.
@@ -6573,6 +6885,83 @@ Actions:
 	Preserve Trigger();
 }
 
+// P6 very hard repeated cooldowns: 12:30/13:00/13:30 warnings, preserving 80s pre-roll.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch118", Set);
+	Switch("Switch120", Not Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch63", Not Set);
+	Switch("Switch27", Not Set);
+	Switch("Switch28", Not Set);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Deaths("Player 8", "Zerg Zergling", At least, 8040);
+	Deaths("Player 8", "Zerg Zergling", At most, 13799);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Add, 5760);
+	Set Switch("Switch120", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch118", Set);
+	Switch("Switch120", Not Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch63", Not Set);
+	Switch("Switch27", Set);
+	Switch("Switch28", Set);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Deaths("Player 8", "Zerg Zergling", At least, 8400);
+	Deaths("Player 8", "Zerg Zergling", At most, 14159);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Add, 5760);
+	Set Switch("Switch120", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch118", Set);
+	Switch("Switch120", Not Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch63", Not Set);
+	Switch("Switch27", Set);
+	Switch("Switch28", Not Set);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Deaths("Player 8", "Zerg Zergling", At least, 8400);
+	Deaths("Player 8", "Zerg Zergling", At most, 14159);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Add, 5760);
+	Set Switch("Switch120", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch118", Set);
+	Switch("Switch120", Not Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch63", Not Set);
+	Switch("Switch27", Not Set);
+	Switch("Switch28", Set);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Deaths("Player 8", "Zerg Zergling", At least, 8760);
+	Deaths("Player 8", "Zerg Zergling", At most, 14519);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Add, 5760);
+	Set Switch("Switch120", set);
+	Preserve Trigger();
+}
+
 // P7 normal repeated cooldowns: 16:30/17:00/17:30 warnings, preserving 80s pre-roll.
 Trigger("Player 8"){
 Conditions:
@@ -6666,6 +7055,83 @@ Conditions:
 	Deaths("Player 8", "Zerg Hydralisk", At most, 13799);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4320);
+	Set Switch("Switch121", set);
+	Preserve Trigger();
+}
+
+// P7 very hard repeated cooldowns: 12:30/13:00/13:30 warnings, preserving 80s pre-roll.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch119", Set);
+	Switch("Switch121", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch67", Not Set);
+	Switch("Switch29", Not Set);
+	Switch("Switch30", Not Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 8040);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 13799);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
+	Set Switch("Switch121", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch119", Set);
+	Switch("Switch121", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch67", Not Set);
+	Switch("Switch29", Set);
+	Switch("Switch30", Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 8400);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14159);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
+	Set Switch("Switch121", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch119", Set);
+	Switch("Switch121", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch67", Not Set);
+	Switch("Switch29", Set);
+	Switch("Switch30", Not Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 8400);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14159);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
+	Set Switch("Switch121", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch119", Set);
+	Switch("Switch121", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch67", Not Set);
+	Switch("Switch29", Not Set);
+	Switch("Switch30", Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 8760);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14519);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
 	Set Switch("Switch121", set);
 	Preserve Trigger();
 }
@@ -10173,7 +10639,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 pre-roll analysis - Wave 2: All Hydralisk
+// P6 pre-roll analysis - Wave 2: Hydralisk + Devourer support
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -10245,7 +10711,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 pre-roll analysis - Wave 2: All Hydralisk
+// P7 pre-roll analysis - Wave 2: Hydralisk + Devourer support
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -10352,7 +10818,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 assault hint - Wave 2: All Hydralisk
+// P6 assault hint - Wave 2: Hydralisk + Devourer support
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -10424,7 +10890,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 assault hint - Wave 2: All Hydralisk
+// P7 assault hint - Wave 2: Hydralisk + Devourer support
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -10869,7 +11335,8 @@ Actions:
 //  Mission 2 difficulty wave-size scaling
 //
 //  Normal adds about +10% over easy. Hard adds another small layer so
-//  hard totals about +15% over easy. These triggers do not change
+//  hard totals about +15% over easy. Very hard adds another layer so
+//  very hard totals about +25% over easy. These triggers do not change
 //  orders, waypoint relay timing, rewards, or Overlord support.
 //-----------------------------------------------------------------//
 
@@ -10897,7 +11364,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
@@ -10935,7 +11402,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
@@ -10969,7 +11436,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
@@ -11002,7 +11469,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
@@ -11016,7 +11483,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 Wave 2 - Hydralisks
+// P6 Wave 2 - Hydralisk + Devourer support
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 2);
@@ -11032,12 +11499,13 @@ Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn1");
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
@@ -11048,6 +11516,7 @@ Conditions:
 Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn3");
 	Preserve Trigger();
 }
 
@@ -11071,7 +11540,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
@@ -11105,7 +11574,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
@@ -11139,7 +11608,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
@@ -11173,7 +11642,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
@@ -11206,7 +11675,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
@@ -11238,7 +11707,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
@@ -11269,7 +11738,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
@@ -11306,7 +11775,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
@@ -11344,7 +11813,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
@@ -11378,7 +11847,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
@@ -11411,7 +11880,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
@@ -11425,7 +11894,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 Wave 2 - Hydralisks
+// P7 Wave 2 - Hydralisk + Devourer support
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 2);
@@ -11441,12 +11910,13 @@ Actions:
 	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn1");
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
@@ -11457,6 +11927,7 @@ Conditions:
 Actions:
 	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn3");
 	Preserve Trigger();
 }
 
@@ -11480,7 +11951,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
@@ -11514,7 +11985,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
@@ -11548,7 +12019,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
@@ -11582,7 +12053,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
@@ -11615,7 +12086,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
@@ -11647,7 +12118,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
@@ -11678,7 +12149,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
@@ -11688,6 +12159,348 @@ Conditions:
 	Switch("Switch12", Set);
 Actions:
 	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn2");
+	Preserve Trigger();
+}
+
+//-----------------------------------------------------------------//
+//  Very Hard adds another layer over hard.
+//-----------------------------------------------------------------//
+
+// P6 Wave 0 very hard - Ultralisk + Zergling
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 1);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 0);
+	Switch("Switch9", Not Set);
+	Switch("Switch10", Not Set);
+Actions:
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn4");
+	Preserve Trigger();
+}
+
+// P6 Wave 1 very hard - extra air pressure on first batch.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 1);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 0);
+	Switch("Switch9", Set);
+	Switch("Switch10", Not Set);
+Actions:
+	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn4");
+	Preserve Trigger();
+}
+
+// P6 Wave 2 very hard - two Hydralisks per active batch.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 1);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 0);
+	Switch("Switch9", Not Set);
+	Switch("Switch10", Set);
+Actions:
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn3");
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 36);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 1);
+	Switch("Switch9", Not Set);
+	Switch("Switch10", Set);
+Actions:
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn4");
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 72);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 2);
+	Switch("Switch9", Not Set);
+	Switch("Switch10", Set);
+Actions:
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn3");
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 108);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 3);
+	Switch("Switch9", Not Set);
+	Switch("Switch10", Set);
+Actions:
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn4");
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 144);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 4);
+	Switch("Switch9", Not Set);
+	Switch("Switch10", Set);
+Actions:
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn3");
+	Preserve Trigger();
+}
+
+// P6 Wave 3 very hard - Guardian + Mutalisk per active batch.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 1);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 0);
+	Switch("Switch9", Set);
+	Switch("Switch10", Set);
+Actions:
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 36);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 1);
+	Switch("Switch9", Set);
+	Switch("Switch10", Set);
+Actions:
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn4");
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 72);
+	Deaths("Player 8", "Protoss Reaver", Exactly, 2);
+	Switch("Switch9", Set);
+	Switch("Switch10", Set);
+Actions:
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
+	Preserve Trigger();
+}
+
+// P7 Wave 0 very hard - Ultralisk + Zergling
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", At least, 1);
+	Deaths("Player 8", "Protoss Observer", Exactly, 0);
+	Switch("Switch11", Not Set);
+	Switch("Switch12", Not Set);
+Actions:
+	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn4");
+	Preserve Trigger();
+}
+
+// P7 Wave 1 very hard - extra air pressure on first batch.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", At least, 1);
+	Deaths("Player 8", "Protoss Observer", Exactly, 0);
+	Switch("Switch11", Set);
+	Switch("Switch12", Not Set);
+Actions:
+	Create Unit("Player 7", "Zerg Scourge", 2, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn4");
+	Preserve Trigger();
+}
+
+// P7 Wave 2 very hard - two Hydralisks per active batch.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", At least, 1);
+	Deaths("Player 8", "Protoss Observer", Exactly, 0);
+	Switch("Switch11", Not Set);
+	Switch("Switch12", Set);
+Actions:
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn3");
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", At least, 36);
+	Deaths("Player 8", "Protoss Observer", Exactly, 1);
+	Switch("Switch11", Not Set);
+	Switch("Switch12", Set);
+Actions:
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn4");
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", At least, 72);
+	Deaths("Player 8", "Protoss Observer", Exactly, 2);
+	Switch("Switch11", Not Set);
+	Switch("Switch12", Set);
+Actions:
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn3");
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", At least, 108);
+	Deaths("Player 8", "Protoss Observer", Exactly, 3);
+	Switch("Switch11", Not Set);
+	Switch("Switch12", Set);
+Actions:
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn4");
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", At least, 144);
+	Deaths("Player 8", "Protoss Observer", Exactly, 4);
+	Switch("Switch11", Not Set);
+	Switch("Switch12", Set);
+Actions:
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn3");
+	Preserve Trigger();
+}
+
+// P7 Wave 3 very hard - Guardian + Mutalisk per active batch.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", At least, 1);
+	Deaths("Player 8", "Protoss Observer", Exactly, 0);
+	Switch("Switch11", Set);
+	Switch("Switch12", Set);
+Actions:
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn2");
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", At least, 36);
+	Deaths("Player 8", "Protoss Observer", Exactly, 1);
+	Switch("Switch11", Set);
+	Switch("Switch12", Set);
+Actions:
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn4");
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 1);
+	Deaths("Player 8", "Zerg Devourer", At least, 72);
+	Deaths("Player 8", "Protoss Observer", Exactly, 2);
+	Switch("Switch11", Set);
+	Switch("Switch12", Set);
+Actions:
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn3");
 	Preserve Trigger();
 }
 // P6 Wave 0 - Ultralisk + Zergling
@@ -11812,7 +12625,7 @@ Actions:
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
 	Preserve Trigger();
 }
-// P6 Wave 2 - All Hydralisk
+// P6 Wave 2 - Hydralisk + Devourer support
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -11825,12 +12638,16 @@ Conditions:
 Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn4");
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 1);
 	Preserve Trigger();
 }
@@ -11846,9 +12663,13 @@ Conditions:
 	Switch("Switch10", Set);
 Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn4");
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 2);
 	Preserve Trigger();
 }
@@ -11864,9 +12685,13 @@ Conditions:
 	Switch("Switch10", Set);
 Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn4");
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 3);
 	Preserve Trigger();
 }
@@ -11910,7 +12735,6 @@ Actions:
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
 	Preserve Trigger();
 }
-
 // P6 Wave 3 - Mutalisk + Guardian
 Trigger("Player 6"){
 Conditions:
@@ -12107,7 +12931,7 @@ Actions:
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
-// P7 Wave 2 - All Hydralisk
+// P7 Wave 2 - Hydralisk + Devourer support
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -12120,12 +12944,16 @@ Conditions:
 Actions:
 	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn4");
 	Set Deaths("Player 8", "Protoss Observer", Set To, 1);
 	Preserve Trigger();
 }
@@ -12141,9 +12969,13 @@ Conditions:
 	Switch("Switch12", Set);
 Actions:
 	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn4");
 	Set Deaths("Player 8", "Protoss Observer", Set To, 2);
 	Preserve Trigger();
 }
@@ -12159,9 +12991,13 @@ Conditions:
 	Switch("Switch12", Set);
 Actions:
 	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn4");
 	Set Deaths("Player 8", "Protoss Observer", Set To, 3);
 	Preserve Trigger();
 }
@@ -12205,7 +13041,6 @@ Actions:
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Preserve Trigger();
 }
-
 // P7 Wave 3 - Mutalisk + Guardian
 Trigger("Player 7"){
 Conditions:
@@ -17169,7 +18004,7 @@ Actions:
 //
 //  Hatchery/Lair/Hive kills reduce that colony's own main assault
 //  cooldown by difficulty and grant players minerals/gas.
-//  12 DC tick = 1 second: easy 70s = 840, normal 80s = 960, hard 90s = 1080.
+//  12 DC tick = 1 second: easy 70s = 840, normal 80s = 960, hard 90s = 1080, very hard 100s = 1200.
 //-----------------------------------------------------------------//
 
 Trigger("Player 6"){
@@ -17643,6 +18478,130 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1080);
+	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Resources("Player 1", Add, 450, ore);
+	Set Resources("Player 2", Add, 450, ore);
+	Set Resources("Player 3", Add, 450, ore);
+	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
+	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+//-----------------------------------------------------------------//
+//  Very hard tech loss acceleration - 100 seconds.
+//-----------------------------------------------------------------//
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1200);
+	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Resources("Player 1", Add, 250, ore);
+	Set Resources("Player 2", Add, 250, ore);
+	Set Resources("Player 3", Add, 250, ore);
+	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
+	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 6", "Zerg Lair", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1200);
+	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Resources("Player 1", Add, 350, ore);
+	Set Resources("Player 2", Add, 350, ore);
+	Set Resources("Player 3", Add, 350, ore);
+	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
+	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 6", "Zerg Hive", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1200);
+	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Resources("Player 1", Add, 450, ore);
+	Set Resources("Player 2", Add, 450, ore);
+	Set Resources("Player 3", Add, 450, ore);
+	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
+	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1200);
+	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Resources("Player 1", Add, 250, ore);
+	Set Resources("Player 2", Add, 250, ore);
+	Set Resources("Player 3", Add, 250, ore);
+	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
+	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 7", "Zerg Lair", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1200);
+	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Resources("Player 1", Add, 350, ore);
+	Set Resources("Player 2", Add, 350, ore);
+	Set Resources("Player 3", Add, 350, ore);
+	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
+	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 7", "Zerg Hive", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1200);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -18866,8 +19825,18 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
 	Deaths("Player 8", "Terran Vulture", At least, 300);
 	Deaths("Player 8", "Terran Vulture", At most, 324);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
 Actions:
-	Display Text Message(Always Display, "<04>난이도 목록: <07>쉬움<04> / <11>보통<04> / <08>어려움<04>");
+	Display Text Message(Always Display, "<04>클리어 난이도는 <06>매우 어려움<04>입니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
+	Deaths("Player 8", "Terran Vulture", At least, 300);
+	Deaths("Player 8", "Terran Vulture", At most, 324);
+Actions:
+	Display Text Message(Always Display, "<04>난이도 목록: <07>쉬움<04> / <11>보통<04> / <08>어려움<04> / <06>매우 어려움<04>");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

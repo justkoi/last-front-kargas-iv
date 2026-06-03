@@ -11,7 +11,7 @@
 //  timed batches to reduce blocked creation space. Spawn timers only count up;
 //  separate stage counters prevent repeated or chained creation. Air-heavy
 //  waves are split into smaller sub-batches. Spawned groups
-//  rally to Waypoint1~5. For 120s after the final batch,
+//  rally to Waypoint1~5. For 60s after the final batch,
 //  P6/P7 assault units reaching the selected waypoint redirect
 //  toward the already selected P1~P4 Hunt location.
 //-----------------------------------------------------------------//

@@ -89,7 +89,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 pre-roll analysis - Wave 2: All Hydralisk
+// P6 pre-roll analysis - Wave 2: Hydralisk + Devourer support
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -161,7 +161,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 pre-roll analysis - Wave 2: All Hydralisk
+// P7 pre-roll analysis - Wave 2: Hydralisk + Devourer support
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -268,7 +268,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 assault hint - Wave 2: All Hydralisk
+// P6 assault hint - Wave 2: Hydralisk + Devourer support
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -340,7 +340,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 assault hint - Wave 2: All Hydralisk
+// P7 assault hint - Wave 2: Hydralisk + Devourer support
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);

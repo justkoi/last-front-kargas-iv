@@ -51,6 +51,18 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Ghost", At least, 3600);
+Actions:
+	Set Switch("Switch127", set);
+	Set Deaths("Player 8", "Terran Ghost", Subtract, 3600);
+	Preserve Trigger();
+}
+
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Switch("Switch123", Set);
@@ -78,6 +90,15 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch127", Set);
+Actions:
+	Display Text Message(Always Display, "<04>현재 플레이중인 난이도는 <06>매우 어려움<04>입니다.");
+	Set Switch("Switch126", set);
+	Preserve Trigger();
+}
+
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch123", Set);
@@ -88,6 +109,15 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch127", Set);
+	Switch("Switch126", Set);
+Actions:
+	Set Switch("Switch127", clear);
+	Set Switch("Switch126", clear);
+	Preserve Trigger();
+}
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch124", Set);

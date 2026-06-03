@@ -8,6 +8,7 @@
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4, P7 H1~4,
 //                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~4, NewRoute4~12, NewRoute14~15, Waypoint1~5,
+//                      Difficulty, Selector, SelectEasy, SelectNormal, SelectHard, SelectVeryHard,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  P6/P7 Overmind locations require preplaced invincible Overmind Cocoons
@@ -40,7 +41,7 @@
 //    Terran Science Vessel: player alliance refresh timer
 //    Terran Medic         : P6 intrusion Overlord dispatch timer
 //    Terran SCV           : P7 intrusion Overlord dispatch timer
-//    Terran Academy       : difficulty selection flag (0=unset, 1=easy, 2=normal, 3=hard)
+//    Terran Academy       : difficulty selection flag (0=unset, 1=easy, 2=normal, 3=hard, 4=very hard)
 //    Terran Ghost         : difficulty reminder timer
 //    Terran Dropship      : mission1 late-wave variant index / P7 mission2 early alert defense recharge timer
 //    Protoss Corsair      : mission1 outer colony warning cooldown timer
@@ -157,6 +158,7 @@
 //    Switch124     : normal difficulty reminder queued
 //    Switch125     : hard difficulty reminder queued
 //    Switch126     : difficulty reminder displayed to players; clear queued reminder on P8 pass
+//    Switch127     : very hard difficulty reminder queued
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
