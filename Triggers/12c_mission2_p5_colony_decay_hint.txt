@@ -83,6 +83,7 @@ Conditions:
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
 	Set Switch("Switch109", clear);
+	Preserve Trigger();
 }
 
 Trigger("Player 2"){
@@ -93,6 +94,7 @@ Conditions:
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
 	Set Switch("Switch110", clear);
+	Preserve Trigger();
 }
 
 Trigger("Player 3"){
@@ -103,6 +105,7 @@ Conditions:
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
 	Set Switch("Switch111", clear);
+	Preserve Trigger();
 }
 
 Trigger("Player 4"){
@@ -113,6 +116,7 @@ Conditions:
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
 	Set Switch("Switch112", clear);
+	Preserve Trigger();
 }
 
 Trigger("Player 1"){
@@ -123,6 +127,7 @@ Conditions:
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
 	Set Switch("Switch113", clear);
+	Preserve Trigger();
 }
 
 Trigger("Player 2"){
@@ -133,6 +138,7 @@ Conditions:
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
 	Set Switch("Switch114", clear);
+	Preserve Trigger();
 }
 
 Trigger("Player 3"){
@@ -143,6 +149,7 @@ Conditions:
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
 	Set Switch("Switch115", clear);
+	Preserve Trigger();
 }
 
 Trigger("Player 4"){
@@ -153,6 +160,7 @@ Conditions:
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
 	Set Switch("Switch116", clear);
+	Preserve Trigger();
 }
 
 Trigger("Player 8"){

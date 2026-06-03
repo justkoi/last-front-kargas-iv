@@ -166,6 +166,14 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 3624);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>점막 뿌리망 붕괴 확인. 주황색 저그 방어기관이 고사했습니다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 3672);
+	Deaths("Player 8", "Terran Vulture", At most, 3696);
+Actions:
 	Display Text Message(Always Display, "<03>호크: <04>길이 열렸다. 지금부터 잔여 군락을 하나씩 고립시켜 무너뜨린다.");
 }
 
