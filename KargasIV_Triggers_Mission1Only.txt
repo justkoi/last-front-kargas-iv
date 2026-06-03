@@ -40,6 +40,7 @@
 //    Terran Science Vessel: player alliance refresh timer
 //    Terran Medic         : P6 intrusion Overlord dispatch timer
 //    Terran SCV           : P7 intrusion Overlord dispatch timer
+//    Terran Academy       : difficulty selection flag (0=unset, 1=normal, 2=hard, 3=very hard)
 //    Terran Dropship      : mission1 late-wave variant index / P7 mission2 early alert defense recharge timer
 //    Protoss Corsair      : mission1 outer colony warning cooldown timer
 //    Zerg Creep Colony    : mission1 P6/P7 creep colony warning counter
@@ -145,6 +146,7 @@
 //    Switch105~108 : P1~P4 P5 first Devourer warning shown
 //    Switch109~112 : P1~P4 P5 early Sunken Colony decay warning queued
 //    Switch113~116 : P1~P4 P5 early Spore Colony decay warning queued
+//    Switch117     : difficulty selector spawned / selection window active
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
@@ -168,6 +170,7 @@ Actions:
 	Set Deaths("Player 5", "Zerg Spore Colony", Set To, 0);
 	Set Deaths("Player 5", "Terran Marine", Set To, 0);
 	Set Deaths("Player 5", "Terran Firebat", Set To, 0);
+	Set Deaths("Player 8", "Terran Academy", Set To, 0);
 	Set Switch("Switch109", clear);
 	Set Switch("Switch110", clear);
 	Set Switch("Switch111", clear);
@@ -176,6 +179,7 @@ Actions:
 	Set Switch("Switch114", clear);
 	Set Switch("Switch115", clear);
 	Set Switch("Switch116", clear);
+	Set Switch("Switch117", clear);
 }
 
 Trigger("All Players"){
@@ -359,6 +363,130 @@ Conditions:
 	Elapsed Time(At most, 45);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>방어선을 먼저 세워라. 병력을 낭비하면 다음 전투는 없다.");
+}
+//-----------------------------------------------------------------//
+//  Difficulty selection
+//
+//  Player 8 / Terran Academy:
+//    0 = unset, 1 = normal, 2 = hard, 3 = very hard
+//  Switch117 = selector civilian has been created.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Switch("Switch117", Not Set);
+Actions:
+	Create Unit("Player 1", "Terran Civilian", 1, "Selector");
+	Set Switch("Switch117", set);
+}
+
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Switch("Switch117", Not Set);
+Actions:
+	Create Unit("Player 2", "Terran Civilian", 1, "Selector");
+	Set Switch("Switch117", set);
+}
+
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Switch("Switch117", Not Set);
+Actions:
+	Create Unit("Player 3", "Terran Civilian", 1, "Selector");
+	Set Switch("Switch117", set);
+}
+
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Switch("Switch117", Not Set);
+Actions:
+	Create Unit("Player 4", "Terran Civilian", 1, "Selector");
+	Set Switch("Switch117", set);
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 55);
+	Elapsed Time(At most, 57);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("Selector");
+	Display Text Message(Always Display, "<07>난이도 선택: <04>선택 시민을 <11>보통<04>, <08>어려움<04>, <06>매우 어려움<04> 구역으로 이동시키십시오. 선택하지 않으면 <11>보통<04>으로 진행됩니다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 115);
+	Elapsed Time(At most, 117);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("Selector");
+	Display Text Message(Always Display, "<07>난이도 선택 대기 중: <04>곧 선택 시간이 종료됩니다. 선택하지 않으면 <11>보통<04>으로 확정됩니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+	Bring("Current Player", "Terran Civilian", "SelectNormal", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Academy", Set To, 1);
+	Display Text Message(Always Display, "<07>난이도 확정: <11>보통");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+	Bring("Current Player", "Terran Civilian", "SelectHard", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Academy", Set To, 2);
+	Display Text Message(Always Display, "<07>난이도 확정: <08>어려움");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+	Bring("Current Player", "Terran Civilian", "SelectVeryHard", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Academy", Set To, 3);
+	Display Text Message(Always Display, "<07>난이도 확정: <06>매우 어려움");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Elapsed Time(At least, 140);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
+Actions:
+	Set Deaths("Player 8", "Terran Academy", Set To, 1);
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 140);
+	Elapsed Time(At most, 142);
+	Deaths("Player 8", "Terran Academy", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<07>난이도 확정: <11>보통");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Elapsed Time(At least, 140);
+	Elapsed Time(At most, 142);
+Actions:
+	Remove Unit At Location("All Players", "Terran Beacon", 64, "Difficulty");
+	Remove Unit At Location("Neutral Players", "Terran Beacon", 64, "Difficulty");
+	Remove Unit At Location("All Players", "Mineral Field", 64, "Difficulty");
+	Remove Unit At Location("Neutral Players", "Mineral Field", 64, "Difficulty");
+	Remove Unit At Location("Player 1", "Terran Civilian", 64, "Difficulty");
+	Remove Unit At Location("Player 2", "Terran Civilian", 64, "Difficulty");
+	Remove Unit At Location("Player 3", "Terran Civilian", 64, "Difficulty");
+	Remove Unit At Location("Player 4", "Terran Civilian", 64, "Difficulty");
 }
 //-----------------------------------------------------------------//
 //  플레이어 팀킬 방지 - 동맹 상태 고정
