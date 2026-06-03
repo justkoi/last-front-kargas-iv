@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------//
 //  Mission 2 - P6/P7 uncaptured-colony penalty assaults
 //
-//  12 DC tick = 1 second. Base cooldown is 1260s = 15120 ticks.
+//  12 DC tick = 1 second. Easy base cooldown is 1260s = 15120 ticks.
 //  Roll triggers subtract only the cooldown they consumed, so excess
 //  progress from repeated Hatchery/Lair/Hive kills stays queued.
 //  Hatchery/Lair/Hive kills add 70s worth of cooldown progress.
@@ -58,6 +58,10 @@ Actions:
 	Set Switch("Switch88", clear);
 	Set Switch("Switch89", clear);
 	Set Switch("Switch90", clear);
+	Set Switch("Switch118", clear);
+	Set Switch("Switch119", clear);
+	Set Switch("Switch120", clear);
+	Set Switch("Switch121", clear);
 	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Set To, 0);
 	Set Deaths("Player 8", "Zerg Spore Colony", Set To, 0);
@@ -465,4 +469,24 @@ Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+}
+// Reveal a colony once its MainBase tech core collapses.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Lair", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Hive", "P6 MainBase", At most, 0);
+Actions:
+	Run AI Script("+Vi5");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Lair", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Hive", "P7 MainBase", At most, 0);
+Actions:
+	Run AI Script("+Vi6");
 }

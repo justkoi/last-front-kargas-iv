@@ -15,6 +15,7 @@ Actions:
 	Set Deaths("Player 5", "Terran Marine", Set To, 0);
 	Set Deaths("Player 5", "Terran Firebat", Set To, 0);
 	Set Deaths("Player 8", "Terran Academy", Set To, 0);
+	Set Deaths("Player 8", "Terran Ghost", Set To, 0);
 	Set Switch("Switch109", clear);
 	Set Switch("Switch110", clear);
 	Set Switch("Switch111", clear);
@@ -24,6 +25,15 @@ Actions:
 	Set Switch("Switch115", clear);
 	Set Switch("Switch116", clear);
 	Set Switch("Switch117", clear);
+	Set Switch("Switch118", clear);
+	Set Switch("Switch119", clear);
+	Set Switch("Switch120", clear);
+	Set Switch("Switch121", clear);
+	Set Switch("Switch122", clear);
+	Set Switch("Switch123", clear);
+	Set Switch("Switch124", clear);
+	Set Switch("Switch125", clear);
+	Set Switch("Switch126", clear);
 }
 
 Trigger("All Players"){

@@ -86,6 +86,45 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
+	Deaths("Player 8", "Terran Vulture", At least, 300);
+	Deaths("Player 8", "Terran Vulture", At most, 324);
+	Deaths("Player 8", "Terran Academy", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<04>클리어 난이도는 <07>쉬움<04>입니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
+	Deaths("Player 8", "Terran Vulture", At least, 300);
+	Deaths("Player 8", "Terran Vulture", At most, 324);
+	Deaths("Player 8", "Terran Academy", Exactly, 2);
+Actions:
+	Display Text Message(Always Display, "<04>클리어 난이도는 <11>보통<04>입니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
+	Deaths("Player 8", "Terran Vulture", At least, 300);
+	Deaths("Player 8", "Terran Vulture", At most, 324);
+	Deaths("Player 8", "Terran Academy", Exactly, 3);
+Actions:
+	Display Text Message(Always Display, "<04>클리어 난이도는 <08>어려움<04>입니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
+	Deaths("Player 8", "Terran Vulture", At least, 300);
+	Deaths("Player 8", "Terran Vulture", At most, 324);
+Actions:
+	Display Text Message(Always Display, "<04>난이도 목록: <07>쉬움<04> / <11>보통<04> / <08>어려움<04>");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
 	Deaths("Player 8", "Terran Vulture", At least, 360);
 Actions:
 	Wait(1000);

@@ -1,0 +1,109 @@
+//-----------------------------------------------------------------//
+//  Difficulty reminder
+//
+//  Player 8 / Terran Ghost:
+//    5-minute reminder timer after difficulty is locked.
+//-----------------------------------------------------------------//
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Terran Ghost", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 1);
+	Deaths("Player 8", "Terran Ghost", At least, 3600);
+Actions:
+	Set Switch("Switch123", set);
+	Set Deaths("Player 8", "Terran Ghost", Subtract, 3600);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 2);
+	Deaths("Player 8", "Terran Ghost", At least, 3600);
+Actions:
+	Set Switch("Switch124", set);
+	Set Deaths("Player 8", "Terran Ghost", Subtract, 3600);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Ghost", At least, 3600);
+Actions:
+	Set Switch("Switch125", set);
+	Set Deaths("Player 8", "Terran Ghost", Subtract, 3600);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch123", Set);
+Actions:
+	Display Text Message(Always Display, "<04>현재 플레이중인 난이도는 <07>쉬움<04>입니다.");
+	Set Switch("Switch126", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch124", Set);
+Actions:
+	Display Text Message(Always Display, "<04>현재 플레이중인 난이도는 <11>보통<04>입니다.");
+	Set Switch("Switch126", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch125", Set);
+Actions:
+	Display Text Message(Always Display, "<04>현재 플레이중인 난이도는 <08>어려움<04>입니다.");
+	Set Switch("Switch126", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch123", Set);
+	Switch("Switch126", Set);
+Actions:
+	Set Switch("Switch123", clear);
+	Set Switch("Switch126", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch124", Set);
+	Switch("Switch126", Set);
+Actions:
+	Set Switch("Switch124", clear);
+	Set Switch("Switch126", clear);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch125", Set);
+	Switch("Switch126", Set);
+Actions:
+	Set Switch("Switch125", clear);
+	Set Switch("Switch126", clear);
+	Preserve Trigger();
+}

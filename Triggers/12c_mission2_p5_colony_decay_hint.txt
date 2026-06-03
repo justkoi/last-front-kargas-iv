@@ -51,9 +51,9 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 3599);
-	Deaths("Player 5", "Terran Marine", At least, 3);
+	Deaths("Player 5", "Terran Marine", At least, 6);
 Actions:
-	Set Deaths("Player 5", "Terran Marine", Subtract, 3);
+	Set Deaths("Player 5", "Terran Marine", Subtract, 6);
 	Set Switch("Switch109", set);
 	Set Switch("Switch110", set);
 	Set Switch("Switch111", set);
@@ -65,9 +65,9 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 3599);
-	Deaths("Player 5", "Terran Firebat", At least, 3);
+	Deaths("Player 5", "Terran Firebat", At least, 6);
 Actions:
-	Set Deaths("Player 5", "Terran Firebat", Subtract, 3);
+	Set Deaths("Player 5", "Terran Firebat", Subtract, 6);
 	Set Switch("Switch113", set);
 	Set Switch("Switch114", set);
 	Set Switch("Switch115", set);

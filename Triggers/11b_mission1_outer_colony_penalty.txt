@@ -664,7 +664,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 레어 파괴 보상. 미네랄 +200");
+	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴 보상. 미네랄 +200");
 	Preserve Trigger();
 }
 
@@ -701,7 +701,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 하이브 파괴 보상. 미네랄 +300");
+	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴 보상. 미네랄 +300");
 	Preserve Trigger();
 }
 
@@ -775,7 +775,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 레어 파괴 보상. 미네랄 +200");
+	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴 보상. 미네랄 +200");
 	Preserve Trigger();
 }
 
@@ -812,7 +812,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 하이브 파괴 보상. 미네랄 +300");
+	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴 보상. 미네랄 +300");
 	Preserve Trigger();
 }
 

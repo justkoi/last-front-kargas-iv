@@ -70,7 +70,7 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch74", Set);
-	Deaths("Player 8", "Protoss Dark Archon", At most, 1440);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 2160);
 Actions:
 	Set Deaths("Player 8", "Protoss Dark Archon", Add, 1);
 	Preserve Trigger();
@@ -81,7 +81,7 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch75", Set);
-	Deaths("Player 8", "Protoss Dark Archon", At most, 1440);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 2160);
 Actions:
 	Set Deaths("Player 8", "Protoss Dark Archon", Add, 1);
 	Preserve Trigger();
@@ -154,51 +154,51 @@ Actions:
 	Set Switch("Switch77", set);
 }
 
-// Suspend surviving P7 base defense for 60 seconds after launch.
+// Suspend surviving P7 base defense for 150 seconds after launch.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch74", Set);
 	Switch("Switch85", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 360);
-	Deaths("Player 8", "Protoss Dark Archon", At most, 1079);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 2159);
 Actions:
 	Set Switch("Switch85", set);
 	Set Switch("Switch70", clear);
 }
 
-// Suspend surviving P6 base defense for 60 seconds after launch.
+// Suspend surviving P6 base defense for 150 seconds after launch.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch75", Set);
 	Switch("Switch84", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 360);
-	Deaths("Player 8", "Protoss Dark Archon", At most, 1079);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 2159);
 Actions:
 	Set Switch("Switch84", set);
 	Set Switch("Switch69", clear);
 }
 
-// Resume P7 base defense 60 seconds after final assault launch.
+// Resume P7 base defense 150 seconds after final assault launch.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch74", Set);
 	Switch("Switch85", Set);
-	Deaths("Player 8", "Protoss Dark Archon", At least, 1080);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 2160);
 Actions:
 	Set Switch("Switch85", clear);
 	Set Switch("Switch70", clear);
 }
 
-// Resume P6 base defense 60 seconds after final assault launch.
+// Resume P6 base defense 150 seconds after final assault launch.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch75", Set);
 	Switch("Switch84", Set);
-	Deaths("Player 8", "Protoss Dark Archon", At least, 1080);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 2160);
 Actions:
 	Set Switch("Switch84", clear);
 	Set Switch("Switch69", clear);

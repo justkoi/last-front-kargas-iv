@@ -1,12 +1,12 @@
 //============================================================
 //  KARGAS IV - Mission trigger notes
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
-//                      P5 Spawn1~4, P1~P4 Hunt, Player Destination, AttackPoint1,
+//                      P5 Spawn1~4, P5 H1~4, P1~P4 Hunt, Player Destination, AttackPoint1,
 //                      MD1~MD6,
 //                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
-//                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4,
+//                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4, P6 H1~8,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
-//                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4,
+//                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4, P7 H1~4,
 //                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~4, NewRoute4~12, NewRoute14~15, Waypoint1~5,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
@@ -40,7 +40,8 @@
 //    Terran Science Vessel: player alliance refresh timer
 //    Terran Medic         : P6 intrusion Overlord dispatch timer
 //    Terran SCV           : P7 intrusion Overlord dispatch timer
-//    Terran Academy       : difficulty selection flag (0=unset, 1=normal, 2=hard, 3=very hard)
+//    Terran Academy       : difficulty selection flag (0=unset, 1=easy, 2=normal, 3=hard)
+//    Terran Ghost         : difficulty reminder timer
 //    Terran Dropship      : mission1 late-wave variant index / P7 mission2 early alert defense recharge timer
 //    Protoss Corsair      : mission1 outer colony warning cooldown timer
 //    Zerg Creep Colony    : mission1 P6/P7 creep colony warning counter
@@ -147,6 +148,15 @@
 //    Switch109~112 : P1~P4 P5 early Sunken Colony decay warning queued
 //    Switch113~116 : P1~P4 P5 early Spore Colony decay warning queued
 //    Switch117     : difficulty selector spawned / selection window active
+//    Switch118     : P6 mission2 first main assault has started
+//    Switch119     : P7 mission2 first main assault has started
+//    Switch120     : P6 mission2 difficulty cooldown boost applied for current cycle
+//    Switch121     : P7 mission2 difficulty cooldown boost applied for current cycle
+//    Switch122     : mission2 difficulty extra Hatcheries spawned
+//    Switch123     : easy difficulty reminder queued
+//    Switch124     : normal difficulty reminder queued
+//    Switch125     : hard difficulty reminder queued
+//    Switch126     : difficulty reminder displayed to players; clear queued reminder on P8 pass
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
