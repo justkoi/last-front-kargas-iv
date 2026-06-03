@@ -203,6 +203,7 @@ Actions:
 	Minimap Ping("Selector");
 	Display Text Message(Always Display, "<07>난이도를 선택하세요. <04>선택 시민을 <07>쉬움<04>, <11>보통<04>, <08>어려움<04>, <06>매우 어려움<04> 구역으로 이동시키십시오. 선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
 	Display Text Message(Always Display, "<13><03>[난이도 차이 안내]");
+	Display Text Message(Always Display, "<07>쉬움 보급: <04>미네랄 +100 / 가스 +100, <11>보통 보급: <04>미네랄 +100.");
 	Display Text Message(Always Display, "<11>보통: <04>적 공세 간격이 짧아지고, 적 해처리가 추가됩니다.");
 	Display Text Message(Always Display, "<08>어려움: <04>적 공세 간격이 더 짧아지고, 적 병력과 해처리가 더 늘어납니다.");
 	Display Text Message(Always Display, "<06>매우 어려움: <04>어려움보다 공세 주기와 처치 페널티가 더 강해집니다.");
@@ -298,6 +299,9 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<04>선택한 난이도는 <07>쉬움<04>입니다.");
+	Display Text Message(Always Display, "<07>선택 보급: <04>미네랄 +100 / 가스 +100.");
+	Set Resources("Current Player", Add, 100, ore);
+	Set Resources("Current Player", Add, 100, gas);
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -307,6 +311,8 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<04>선택한 난이도는 <11>보통<04>입니다.");
 	Display Text Message(Always Display, "<11>보통 효과: <04>적 공세 간격 감소, 적 해처리 추가.");
+	Display Text Message(Always Display, "<11>선택 보급: <04>미네랄 +100.");
+	Set Resources("Current Player", Add, 100, ore);
 	Display Text Message(Always Display, "<07>행운을 빕니다!");
 }
 
