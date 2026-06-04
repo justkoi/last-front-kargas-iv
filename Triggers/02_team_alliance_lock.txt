@@ -41,6 +41,47 @@ Actions:
 	Set Alliance Status("Player 3", Ally);
 }
 
+//-----------------------------------------------------------------//
+//  Force 2 shared vision safety net.
+//  +Vi4=P5, +Vi5=P6, +Vi6=P7, +Vi7=P8. Current Player gains target vision.
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Run AI Script("+Vi5");
+	Run AI Script("+Vi6");
+	Run AI Script("+Vi7");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Run AI Script("+Vi4");
+	Run AI Script("+Vi6");
+	Run AI Script("+Vi7");
+}
+
+Trigger("Player 7"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Run AI Script("+Vi4");
+	Run AI Script("+Vi5");
+	Run AI Script("+Vi7");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Run AI Script("+Vi4");
+	Run AI Script("+Vi5");
+	Run AI Script("+Vi6");
+}
+
 Trigger("Player 1"){
 Conditions:
 	Deaths("Player 8", "Terran Science Vessel", At least, 120);
