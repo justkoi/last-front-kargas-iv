@@ -164,7 +164,6 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At most, 2159);
 Actions:
 	Set Switch("Switch85", set);
-	Set Switch("Switch70", clear);
 }
 
 // Suspend surviving P6 base defense for 150 seconds after launch.
@@ -177,7 +176,6 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At most, 2159);
 Actions:
 	Set Switch("Switch84", set);
-	Set Switch("Switch69", clear);
 }
 
 // Resume P7 base defense 150 seconds after final assault launch.
@@ -189,7 +187,6 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At least, 2160);
 Actions:
 	Set Switch("Switch85", clear);
-	Set Switch("Switch70", clear);
 }
 
 // Resume P6 base defense 150 seconds after final assault launch.
@@ -201,7 +198,6 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At least, 2160);
 Actions:
 	Set Switch("Switch84", clear);
-	Set Switch("Switch69", clear);
 }
 
 // Launch warning.

@@ -122,6 +122,46 @@ Actions:
 	Preserve Trigger();
 }
 
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Science Vessel", At least, 120);
+Actions:
+	Run AI Script("+Vi5");
+	Run AI Script("+Vi6");
+	Run AI Script("+Vi7");
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Science Vessel", At least, 120);
+Actions:
+	Run AI Script("+Vi4");
+	Run AI Script("+Vi6");
+	Run AI Script("+Vi7");
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Science Vessel", At least, 120);
+Actions:
+	Run AI Script("+Vi4");
+	Run AI Script("+Vi5");
+	Run AI Script("+Vi7");
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Science Vessel", At least, 120);
+Actions:
+	Run AI Script("+Vi4");
+	Run AI Script("+Vi5");
+	Run AI Script("+Vi6");
+	Preserve Trigger();
+}
+
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Science Vessel", At least, 120);

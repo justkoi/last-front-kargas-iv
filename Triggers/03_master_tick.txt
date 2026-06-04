@@ -22,8 +22,6 @@ Actions:
 	Set Deaths("Player 8", "Protoss Dragoon", Add, 1);
 	Set Deaths("Player 8", "Protoss High Templar", Add, 1);
 	Set Deaths("Player 8", "Terran Science Vessel", Add, 1);
-	Set Deaths("Player 8", "Terran Medic", Add, 1);
-	Set Deaths("Player 8", "Terran SCV", Add, 1);
 	Preserve Trigger();
 }
 

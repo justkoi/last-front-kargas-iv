@@ -39,8 +39,6 @@
 //    Protoss Dragoon      : P6 overlord supply cycle timer
 //    Protoss High Templar : P7 overlord supply cycle timer
 //    Terran Science Vessel: player alliance refresh timer
-//    Terran Medic         : P6 intrusion Overlord dispatch timer
-//    Terran SCV           : P7 intrusion Overlord dispatch timer
 //    Terran Academy       : difficulty selection flag (0=unset, 1=easy, 2=normal, 3=hard, 4=very hard)
 //    Terran Ghost         : difficulty reminder timer
 //    Terran Dropship      : mission1 late-wave variant index / P7 mission2 early alert defense recharge timer
@@ -115,8 +113,6 @@
 //    Switch65/66: P7 mission2 pre-roll wave selector
 //    Switch67   : P7 mission2 pre-roll active
 //    Switch68   : P7 mission2 pre-roll message shown
-//    Switch69   : P6 intrusion detected for Overlord dispatch
-//    Switch70   : P7 intrusion detected for Overlord dispatch
 //    Switch71   : mission1 P6 outer colony awakening warning latch
 //    Switch72   : mission1 P7 outer colony awakening warning latch
 //    Switch73   : mission1 both outer colonies awakening warning latch

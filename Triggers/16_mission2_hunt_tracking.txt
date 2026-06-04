@@ -67,6 +67,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Command("Player 1", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
 	Deaths("Player 8", "Terran Firebat", At least, 720);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
 	Switch("Switch44", Not Set);
@@ -83,6 +84,14 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 6", "Infested Terran", "Anywhere", "P1 Hunt", Patrol);
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P6 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P6 Spawn2", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P6 Spawn3", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P6 Spawn4", "P1 Hunt", Patrol);
 	Set Deaths("Player 8", "Terran Firebat", Set To, 0);
 	Preserve Trigger();
 }
@@ -90,6 +99,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Command("Player 2", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
 	Deaths("Player 8", "Terran Firebat", At least, 720);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
 	Switch("Switch44", Set);
@@ -106,6 +116,14 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 6", "Infested Terran", "Anywhere", "P2 Hunt", Patrol);
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P6 Spawn1", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P6 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P6 Spawn3", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P6 Spawn4", "P2 Hunt", Patrol);
 	Set Deaths("Player 8", "Terran Firebat", Set To, 0);
 	Preserve Trigger();
 }
@@ -113,6 +131,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Command("Player 3", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
 	Deaths("Player 8", "Terran Firebat", At least, 720);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
 	Switch("Switch44", Not Set);
@@ -129,6 +148,14 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 6", "Infested Terran", "Anywhere", "P3 Hunt", Patrol);
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P6 Spawn1", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P6 Spawn2", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P6 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P6 Spawn4", "P3 Hunt", Patrol);
 	Set Deaths("Player 8", "Terran Firebat", Set To, 0);
 	Preserve Trigger();
 }
@@ -136,6 +163,7 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Command("Player 4", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
 	Deaths("Player 8", "Terran Firebat", At least, 720);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
 	Switch("Switch44", Set);
@@ -152,6 +180,14 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 6", "Infested Terran", "Anywhere", "P4 Hunt", Patrol);
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn1");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn3");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P6 Spawn1", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P6 Spawn2", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P6 Spawn3", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P6 Spawn4", "P4 Hunt", Patrol);
 	Set Deaths("Player 8", "Terran Firebat", Set To, 0);
 	Preserve Trigger();
 }
@@ -169,6 +205,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Command("Player 1", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
 	Deaths("Player 8", "Protoss Arbiter", At least, 720);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 	Switch("Switch46", Not Set);
@@ -185,6 +222,14 @@ Actions:
 	Order("Player 7", "Zerg Guardian", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Anywhere", "P1 Hunt", Patrol);
 	Order("Player 7", "Infested Terran", "Anywhere", "P1 Hunt", Patrol);
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn1");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn3");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P7 Spawn1", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P7 Spawn2", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P7 Spawn3", "P1 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P7 Spawn4", "P1 Hunt", Patrol);
 	Set Deaths("Player 8", "Protoss Arbiter", Set To, 0);
 	Preserve Trigger();
 }
@@ -192,6 +237,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Command("Player 2", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
 	Deaths("Player 8", "Protoss Arbiter", At least, 720);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 	Switch("Switch46", Set);
@@ -208,6 +254,14 @@ Actions:
 	Order("Player 7", "Zerg Guardian", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Anywhere", "P2 Hunt", Patrol);
 	Order("Player 7", "Infested Terran", "Anywhere", "P2 Hunt", Patrol);
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn1");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn3");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P7 Spawn1", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P7 Spawn2", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P7 Spawn3", "P2 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P7 Spawn4", "P2 Hunt", Patrol);
 	Set Deaths("Player 8", "Protoss Arbiter", Set To, 0);
 	Preserve Trigger();
 }
@@ -215,6 +269,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Command("Player 3", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
 	Deaths("Player 8", "Protoss Arbiter", At least, 720);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 	Switch("Switch46", Not Set);
@@ -231,6 +286,14 @@ Actions:
 	Order("Player 7", "Zerg Guardian", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Anywhere", "P3 Hunt", Patrol);
 	Order("Player 7", "Infested Terran", "Anywhere", "P3 Hunt", Patrol);
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn1");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn3");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P7 Spawn1", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P7 Spawn2", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P7 Spawn3", "P3 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P7 Spawn4", "P3 Hunt", Patrol);
 	Set Deaths("Player 8", "Protoss Arbiter", Set To, 0);
 	Preserve Trigger();
 }
@@ -238,6 +301,7 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Command("Player 4", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
 	Deaths("Player 8", "Protoss Arbiter", At least, 720);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
 	Switch("Switch46", Set);
@@ -254,6 +318,14 @@ Actions:
 	Order("Player 7", "Zerg Guardian", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Anywhere", "P4 Hunt", Patrol);
 	Order("Player 7", "Infested Terran", "Anywhere", "P4 Hunt", Patrol);
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn1");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn3");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P7 Spawn1", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P7 Spawn2", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P7 Spawn3", "P4 Hunt", Patrol);
+	Order("Player 5", "Zerg Overlord", "P7 Spawn4", "P4 Hunt", Patrol);
 	Set Deaths("Player 8", "Protoss Arbiter", Set To, 0);
 	Preserve Trigger();
 }

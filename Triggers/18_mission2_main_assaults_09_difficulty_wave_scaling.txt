@@ -7,7 +7,7 @@
 //  orders, waypoint relay timing, rewards, or Overlord support.
 //-----------------------------------------------------------------//
 
-// P6 Wave 0 - Ultralisk + Zergling
+// P6 Wave 0 - Ultralisk + Zergling + Hydralisk
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 2);
@@ -20,12 +20,14 @@ Conditions:
 	Switch("Switch10", Not Set);
 Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn1");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 2);
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn4");
 	Preserve Trigger();
 }
 
@@ -40,12 +42,13 @@ Conditions:
 	Switch("Switch9", Not Set);
 	Switch("Switch10", Not Set);
 Actions:
-	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn4");
 	Preserve Trigger();
 }
 
@@ -431,12 +434,14 @@ Conditions:
 	Switch("Switch12", Not Set);
 Actions:
 	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn1");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn2", 2);
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn4");
 	Preserve Trigger();
 }
 
@@ -451,12 +456,13 @@ Conditions:
 	Switch("Switch11", Not Set);
 	Switch("Switch12", Not Set);
 Actions:
-	Create Unit("Player 7", "Zerg Zergling", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Zergling", 3, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn4");
 	Preserve Trigger();
 }
 
@@ -833,7 +839,7 @@ Actions:
 //  Very Hard adds another layer over hard.
 //-----------------------------------------------------------------//
 
-// P6 Wave 0 very hard - Ultralisk + Zergling
+// P6 Wave 0 very hard - Ultralisk + Zergling + Hydralisk
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
@@ -847,9 +853,10 @@ Conditions:
 Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn4");
 	Preserve Trigger();
 }
 
@@ -1002,7 +1009,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 Wave 0 very hard - Ultralisk + Zergling
+// P7 Wave 0 very hard - Ultralisk + Zergling + Hydralisk
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
@@ -1016,9 +1023,10 @@ Conditions:
 Actions:
 	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn4");
 	Preserve Trigger();
 }
 

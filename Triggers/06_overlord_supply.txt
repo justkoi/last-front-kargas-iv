@@ -1,7 +1,8 @@
 //-----------------------------------------------------------------//
-//  오버로드 보급 - 각 군락별 독립 DC (20s = 240틱)
-//  군락 오버로드 < 33기일 때만 1기 추가. 인구 부족 방지하되
-//  플레이어가 처치 후 충격 줄 시간을 위해 20초 간격
+//  Overlord supply - independent colony timers
+//  P5: 20s = 240 ticks. P6/P7: 10s = 120 ticks.
+//  Each colony creates 1 Overlord only while it has at most 32 Overlords
+//  and at least 1 Drone.
 //-----------------------------------------------------------------//
 
 Trigger("Player 5"){
@@ -17,7 +18,7 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Protoss Dragoon", At least, 240);
+	Deaths("Player 8", "Protoss Dragoon", At least, 120);
 	Command("Player 6", "Zerg Overlord", At most, 32);
 	Command("Player 6", "Zerg Drone", At least, 1);
 Actions:
@@ -28,7 +29,7 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
-	Deaths("Player 8", "Protoss High Templar", At least, 240);
+	Deaths("Player 8", "Protoss High Templar", At least, 120);
 	Command("Player 7", "Zerg Overlord", At most, 32);
 	Command("Player 7", "Zerg Drone", At least, 1);
 Actions:

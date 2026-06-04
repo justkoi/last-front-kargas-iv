@@ -1,4 +1,4 @@
-// P6 Wave 0 - Ultralisk + Zergling
+// P6 Wave 0 - Ultralisk + Zergling + Hydralisk
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -9,20 +9,24 @@ Conditions:
 	Switch("Switch9", Not Set);
 	Switch("Switch10", Not Set);
 Actions:
-	Create Unit("Player 6", "Zerg Ultralisk", 6, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 52, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 5, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 47, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn1");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 Spawn1", 2);
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Ultralisk", 6, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 52, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 47, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn2");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 Spawn2", 2);
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Ultralisk", 6, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 52, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 5, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 47, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn3");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 Spawn3", 2);
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Ultralisk", 6, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 52, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 47, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn4");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 2, "P6 Spawn4", 2);
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
 	Set Switch("Switch27", randomize);
