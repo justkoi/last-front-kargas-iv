@@ -116,6 +116,20 @@ function Invoke-StringRecovery([string]$Python, [string]$MapPath) {
     Write-Host "[strings] updated clean map string table."
 }
 
+function Invoke-NormalizeStrx([string]$Python, [string]$MapPath) {
+    $normalizedOut = Join-Path $WorkDir "kargas_strx_normalized.scx"
+    Write-Host "[strx] Normalize STRx offsets after string recovery"
+    Write-Host "[strx] $MapPath"
+    Write-Host "[strx] -> $normalizedOut"
+    & $Python $repairTool $MapPath --out $normalizedOut --work-dir $WorkDir
+    if ($LASTEXITCODE -ne 0) {
+        throw "STRx normalization failed."
+    }
+
+    Copy-Item -LiteralPath $normalizedOut -Destination $MapPath -Force
+    Write-Host "[strx] updated clean map string table offsets."
+}
+
 function Protect-Map([string]$Python, [string]$CleanMap, [string]$ProtectedOut) {
     Write-Host "[protect] $CleanMap"
     Write-Host "[protect] -> $ProtectedOut"
@@ -178,6 +192,7 @@ $python = Resolve-Python
 New-Item -ItemType Directory -Path $WorkDir -Force | Out-Null
 Invoke-Repair $python $sourceMap.FullName $cleanOut
 Invoke-StringRecovery $python $cleanOut
+Invoke-NormalizeStrx $python $cleanOut
 Protect-Map $python $cleanOut $protectedOut
 Test-Readable $python $protectedOut
 
