@@ -61,6 +61,7 @@ Conditions:
 Actions:
 	Set Switch("Switch44", randomize);
 	Set Switch("Switch45", randomize);
+	Set Switch("Switch57", clear);
 	Preserve Trigger();
 }
 
@@ -68,19 +69,41 @@ Trigger("Player 6"){
 Conditions:
 	Command("Player 1", "Buildings", At least, 1);
 	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Firebat", At least, 720);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
+	Switch("Switch57", Not Set);
+	Switch("Switch48", Not Set);
 	Switch("Switch44", Not Set);
 	Switch("Switch45", Not Set);
 Actions:
 	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn2");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn4");
 	Order("Player 5", "Zerg Overlord", "P6 Spawn1", "P1 Hunt", Patrol);
-	Order("Player 5", "Zerg Overlord", "P6 Spawn2", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P6 Spawn3", "P1 Hunt", Patrol);
+	Set Switch("Switch57", set);
+	Set Switch("Switch48", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Command("Player 1", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Firebat", At least, 720);
+	Deaths("Player 8", "Zerg Lurker", At most, 1);
+	Switch("Switch57", Not Set);
+	Switch("Switch48", Set);
+	Switch("Switch44", Not Set);
+	Switch("Switch45", Not Set);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P6 Spawn2", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P6 Spawn4", "P1 Hunt", Patrol);
+	Set Switch("Switch57", set);
+	Set Switch("Switch48", clear);
 	Preserve Trigger();
 }
 
@@ -111,19 +134,41 @@ Trigger("Player 6"){
 Conditions:
 	Command("Player 2", "Buildings", At least, 1);
 	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Firebat", At least, 720);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
+	Switch("Switch57", Not Set);
+	Switch("Switch48", Not Set);
 	Switch("Switch44", Set);
 	Switch("Switch45", Not Set);
 Actions:
 	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn2");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn4");
 	Order("Player 5", "Zerg Overlord", "P6 Spawn1", "P2 Hunt", Patrol);
-	Order("Player 5", "Zerg Overlord", "P6 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P6 Spawn3", "P2 Hunt", Patrol);
+	Set Switch("Switch57", set);
+	Set Switch("Switch48", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Command("Player 2", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Firebat", At least, 720);
+	Deaths("Player 8", "Zerg Lurker", At most, 1);
+	Switch("Switch57", Not Set);
+	Switch("Switch48", Set);
+	Switch("Switch44", Set);
+	Switch("Switch45", Not Set);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P6 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P6 Spawn4", "P2 Hunt", Patrol);
+	Set Switch("Switch57", set);
+	Set Switch("Switch48", clear);
 	Preserve Trigger();
 }
 
@@ -154,19 +199,41 @@ Trigger("Player 6"){
 Conditions:
 	Command("Player 3", "Buildings", At least, 1);
 	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Firebat", At least, 720);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
+	Switch("Switch57", Not Set);
+	Switch("Switch48", Not Set);
 	Switch("Switch44", Not Set);
 	Switch("Switch45", Set);
 Actions:
 	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn2");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn4");
 	Order("Player 5", "Zerg Overlord", "P6 Spawn1", "P3 Hunt", Patrol);
-	Order("Player 5", "Zerg Overlord", "P6 Spawn2", "P3 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P6 Spawn3", "P3 Hunt", Patrol);
+	Set Switch("Switch57", set);
+	Set Switch("Switch48", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Command("Player 3", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Firebat", At least, 720);
+	Deaths("Player 8", "Zerg Lurker", At most, 1);
+	Switch("Switch57", Not Set);
+	Switch("Switch48", Set);
+	Switch("Switch44", Not Set);
+	Switch("Switch45", Set);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P6 Spawn2", "P3 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P6 Spawn4", "P3 Hunt", Patrol);
+	Set Switch("Switch57", set);
+	Set Switch("Switch48", clear);
 	Preserve Trigger();
 }
 
@@ -197,19 +264,41 @@ Trigger("Player 6"){
 Conditions:
 	Command("Player 4", "Buildings", At least, 1);
 	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Firebat", At least, 720);
 	Deaths("Player 8", "Zerg Lurker", At most, 1);
+	Switch("Switch57", Not Set);
+	Switch("Switch48", Not Set);
 	Switch("Switch44", Set);
 	Switch("Switch45", Set);
 Actions:
 	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn2");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn4");
 	Order("Player 5", "Zerg Overlord", "P6 Spawn1", "P4 Hunt", Patrol);
-	Order("Player 5", "Zerg Overlord", "P6 Spawn2", "P4 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P6 Spawn3", "P4 Hunt", Patrol);
+	Set Switch("Switch57", set);
+	Set Switch("Switch48", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Command("Player 4", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Firebat", At least, 720);
+	Deaths("Player 8", "Zerg Lurker", At most, 1);
+	Switch("Switch57", Not Set);
+	Switch("Switch48", Set);
+	Switch("Switch44", Set);
+	Switch("Switch45", Set);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P6 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P6 Spawn2", "P4 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P6 Spawn4", "P4 Hunt", Patrol);
+	Set Switch("Switch57", set);
+	Set Switch("Switch48", clear);
 	Preserve Trigger();
 }
 
@@ -243,6 +332,7 @@ Conditions:
 Actions:
 	Set Switch("Switch46", randomize);
 	Set Switch("Switch47", randomize);
+	Set Switch("Switch69", clear);
 	Preserve Trigger();
 }
 
@@ -250,19 +340,41 @@ Trigger("Player 7"){
 Conditions:
 	Command("Player 1", "Buildings", At least, 1);
 	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Arbiter", At least, 720);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+	Switch("Switch69", Not Set);
+	Switch("Switch49", Not Set);
 	Switch("Switch46", Not Set);
 	Switch("Switch47", Not Set);
 Actions:
 	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn1");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn2");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn3");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn4");
 	Order("Player 5", "Zerg Overlord", "P7 Spawn1", "P1 Hunt", Patrol);
-	Order("Player 5", "Zerg Overlord", "P7 Spawn2", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P7 Spawn3", "P1 Hunt", Patrol);
+	Set Switch("Switch69", set);
+	Set Switch("Switch49", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Command("Player 1", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Arbiter", At least, 720);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+	Switch("Switch69", Not Set);
+	Switch("Switch49", Set);
+	Switch("Switch46", Not Set);
+	Switch("Switch47", Not Set);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P7 Spawn2", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P7 Spawn4", "P1 Hunt", Patrol);
+	Set Switch("Switch69", set);
+	Set Switch("Switch49", clear);
 	Preserve Trigger();
 }
 
@@ -293,19 +405,41 @@ Trigger("Player 7"){
 Conditions:
 	Command("Player 2", "Buildings", At least, 1);
 	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Arbiter", At least, 720);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+	Switch("Switch69", Not Set);
+	Switch("Switch49", Not Set);
 	Switch("Switch46", Set);
 	Switch("Switch47", Not Set);
 Actions:
 	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn1");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn2");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn3");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn4");
 	Order("Player 5", "Zerg Overlord", "P7 Spawn1", "P2 Hunt", Patrol);
-	Order("Player 5", "Zerg Overlord", "P7 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P7 Spawn3", "P2 Hunt", Patrol);
+	Set Switch("Switch69", set);
+	Set Switch("Switch49", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Command("Player 2", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Arbiter", At least, 720);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+	Switch("Switch69", Not Set);
+	Switch("Switch49", Set);
+	Switch("Switch46", Set);
+	Switch("Switch47", Not Set);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P7 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P7 Spawn4", "P2 Hunt", Patrol);
+	Set Switch("Switch69", set);
+	Set Switch("Switch49", clear);
 	Preserve Trigger();
 }
 
@@ -336,19 +470,41 @@ Trigger("Player 7"){
 Conditions:
 	Command("Player 3", "Buildings", At least, 1);
 	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Arbiter", At least, 720);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+	Switch("Switch69", Not Set);
+	Switch("Switch49", Not Set);
 	Switch("Switch46", Not Set);
 	Switch("Switch47", Set);
 Actions:
 	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn1");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn2");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn3");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn4");
 	Order("Player 5", "Zerg Overlord", "P7 Spawn1", "P3 Hunt", Patrol);
-	Order("Player 5", "Zerg Overlord", "P7 Spawn2", "P3 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P7 Spawn3", "P3 Hunt", Patrol);
+	Set Switch("Switch69", set);
+	Set Switch("Switch49", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Command("Player 3", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Arbiter", At least, 720);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+	Switch("Switch69", Not Set);
+	Switch("Switch49", Set);
+	Switch("Switch46", Not Set);
+	Switch("Switch47", Set);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P7 Spawn2", "P3 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P7 Spawn4", "P3 Hunt", Patrol);
+	Set Switch("Switch69", set);
+	Set Switch("Switch49", clear);
 	Preserve Trigger();
 }
 
@@ -379,19 +535,41 @@ Trigger("Player 7"){
 Conditions:
 	Command("Player 4", "Buildings", At least, 1);
 	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Protoss Arbiter", At least, 720);
 	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+	Switch("Switch69", Not Set);
+	Switch("Switch49", Not Set);
 	Switch("Switch46", Set);
 	Switch("Switch47", Set);
 Actions:
 	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn1");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn2");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn3");
-	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn4");
 	Order("Player 5", "Zerg Overlord", "P7 Spawn1", "P4 Hunt", Patrol);
-	Order("Player 5", "Zerg Overlord", "P7 Spawn2", "P4 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P7 Spawn3", "P4 Hunt", Patrol);
+	Set Switch("Switch69", set);
+	Set Switch("Switch49", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Command("Player 4", "Buildings", At least, 1);
+	Command("Player 5", "Zerg Overlord", At most, 21);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Protoss Arbiter", At least, 720);
+	Deaths("Player 8", "Zerg Mutalisk", At most, 1);
+	Switch("Switch69", Not Set);
+	Switch("Switch49", Set);
+	Switch("Switch46", Set);
+	Switch("Switch47", Set);
+Actions:
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn2");
+	Create Unit("Player 5", "Zerg Overlord", 1, "P7 Spawn4");
+	Order("Player 5", "Zerg Overlord", "P7 Spawn2", "P4 Hunt", Patrol);
 	Order("Player 5", "Zerg Overlord", "P7 Spawn4", "P4 Hunt", Patrol);
+	Set Switch("Switch69", set);
+	Set Switch("Switch49", clear);
 	Preserve Trigger();
 }
 

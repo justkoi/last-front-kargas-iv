@@ -97,6 +97,8 @@
 //    Switch42/43: P5 hunt all-out random target selector
 //    Switch44/45: P6 hunt all-out random target selector
 //    Switch46/47: P7 hunt all-out random target selector
+//    Switch48   : P6 hunt P5 Overlord support spawn pair toggle (clear=1/3, set=2/4)
+//    Switch49   : P7 hunt P5 Overlord support spawn pair toggle (clear=1/3, set=2/4)
 //    Switch50   : mission2 assault setup initialized
 //    Switch51   : P6 mission2 penalty assault relay pulse open
 //    Switch52   : P7 mission2 penalty assault relay pulse open
@@ -104,6 +106,7 @@
 //    Switch54   : P7 mission2 penalty assault spawn rally pulse open
 //    Switch55   : P6 AI activation requested
 //    Switch56   : P7 AI activation requested
+//    Switch57   : P6 hunt P5 Overlord support fired this cycle
 //    Switch58   : P5 Hive death ground counterattack used
 //    Switch59   : P6 mission2 early alert defense charge ready
 //    Switch60   : P7 mission2 early alert defense charge ready
@@ -113,6 +116,7 @@
 //    Switch65/66: P7 mission2 pre-roll wave selector
 //    Switch67   : P7 mission2 pre-roll active
 //    Switch68   : P7 mission2 pre-roll message shown
+//    Switch69   : P7 hunt P5 Overlord support fired this cycle
 //    Switch71   : mission1 P6 outer colony awakening warning latch
 //    Switch72   : mission1 P7 outer colony awakening warning latch
 //    Switch73   : mission1 both outer colonies awakening warning latch

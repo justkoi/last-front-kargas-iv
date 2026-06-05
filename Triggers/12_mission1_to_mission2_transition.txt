@@ -24,13 +24,17 @@ Actions:
 	Set Switch("Switch45", clear);
 	Set Switch("Switch46", clear);
 	Set Switch("Switch47", clear);
+	Set Switch("Switch48", clear);
+	Set Switch("Switch49", clear);
 	Set Switch("Switch50", clear);
 	Set Switch("Switch51", clear);
 	Set Switch("Switch52", clear);
 	Set Switch("Switch53", clear);
 	Set Switch("Switch54", clear);
+	Set Switch("Switch57", clear);
 	Set Switch("Switch59", clear);
 	Set Switch("Switch60", clear);
+	Set Switch("Switch69", clear);
 	Kill Unit At Location("Player 5", "Zerg Sunken Colony", 64, "WestArea");
 	Kill Unit At Location("Player 5", "Zerg Spore Colony", 64, "WestArea");
 	Set Deaths("Player 5", "Zerg Sunken Colony", Set To, 0);
