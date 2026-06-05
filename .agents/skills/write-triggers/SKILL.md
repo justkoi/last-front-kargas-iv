@@ -13,6 +13,21 @@ description: >
 
 # Writing SCMDraft 2 Triggers for Kargas IV
 
+## Post-implementation explanation
+
+After implementing or changing triggers, explain the core trigger logic and
+runtime behavior to the user in Korean. Keep it concise but concrete:
+- Which trigger file and location changed.
+- The key conditions that must be true.
+- The actions that run when those conditions pass.
+- The timer/DC period, if any, using both ticks and seconds when helpful.
+- How the new trigger order interacts with nearby existing triggers.
+- What is intentionally blocked or skipped, and what still continues.
+
+Prefer behavior-level explanations over only listing edited lines. For example,
+describe "Overlord support is skipped when the cap is exceeded, but the Hunt
+attack body still runs and resets its timer."
+
 ## SC1 Brood War supply/control/psi costs
 
 When designing trigger-spawned forces, calculate exact in-game supply/control/psi,

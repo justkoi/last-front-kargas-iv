@@ -5,6 +5,30 @@
 //  and at least 1 Drone.
 //-----------------------------------------------------------------//
 
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Dragoon", At least, 120);
+	Command("Player 6", "Zerg Overlord", At least, 1);
+	Bring("Player 6", "Zerg Overlord", "P6 MainBase", At most, 0);
+	Switch("Switch31", Not Set);
+Actions:
+	Set Deaths("Player 8", "Protoss Dragoon", Set To, 0);
+	Move Unit("Player 6", "Zerg Overlord", 1, "Anywhere", "P6 Scout");
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss High Templar", At least, 120);
+	Command("Player 7", "Zerg Overlord", At least, 1);
+	Bring("Player 7", "Zerg Overlord", "P7 MainBase", At most, 0);
+	Switch("Switch32", Not Set);
+Actions:
+	Set Deaths("Player 8", "Protoss High Templar", Set To, 0);
+	Move Unit("Player 7", "Zerg Overlord", 1, "Anywhere", "P7 Scout");
+	Preserve Trigger();
+}
+
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Battlecruiser", At least, 240);
