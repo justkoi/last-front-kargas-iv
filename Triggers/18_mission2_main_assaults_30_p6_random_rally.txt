@@ -1,561 +1,561 @@
-// Random rally destination for newly spawned batches.
-// Switch53 opens for one trigger cycle after each P6 spawn batch.
+// P6 패널티 강습 스폰 병력의 랜덤 랠리 목적지를 지정합니다.
+// Switch53은 각 P6 스폰 묶음 직후 한 트리거 사이클 동안 열리는 랠리 펄스입니다.
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
 Actions:
-	Set Switch("Switch53", clear);
-	Preserve Trigger();
+	Set Switch("Switch53", clear); //P6 스폰 랠리 펄스를 닫음 : 이번 사이클에 랠리 명령이 반복 실행되지 않게 초기화
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1); //P6 패널티 강습 스폰 단계일때 : 준비 플래그가 1일때
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1); //스폰 직후 랠리 타이밍 : 스폰 단계 타이머가 1틱일때
 Actions:
-	Set Switch("Switch53", set);
-	Preserve Trigger();
+	Set Switch("Switch53", set); //P6 스폰 랠리 펄스를 열어둠 : 이번 스폰 묶음에 웨이포인트 랠리 명령을 허용
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", Exactly, 36);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1); //P6 패널티 강습 스폰 단계일때 : 준비 플래그가 1일때
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 36); //스폰 3초 후 랠리 타이밍 : 스폰 단계 타이머가 36틱일때
 Actions:
-	Set Switch("Switch53", set);
-	Preserve Trigger();
+	Set Switch("Switch53", set); //P6 스폰 랠리 펄스를 열어둠 : 이번 스폰 묶음에 웨이포인트 랠리 명령을 허용
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", Exactly, 72);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1); //P6 패널티 강습 스폰 단계일때 : 준비 플래그가 1일때
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 72); //스폰 6초 후 랠리 타이밍 : 스폰 단계 타이머가 72틱일때
 Actions:
-	Set Switch("Switch53", set);
-	Preserve Trigger();
+	Set Switch("Switch53", set); //P6 스폰 랠리 펄스를 열어둠 : 이번 스폰 묶음에 웨이포인트 랠리 명령을 허용
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 1);
-	Deaths("Player 8", "Zerg Ultralisk", Exactly, 108);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", Exactly, 1); //P6 패널티 강습 스폰 단계일때 : 준비 플래그가 1일때
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 108); //스폰 9초 후 랠리 타이밍 : 스폰 단계 타이머가 108틱일때
 Actions:
-	Set Switch("Switch53", set);
-	Preserve Trigger();
+	Set Switch("Switch53", set); //P6 스폰 랠리 펄스를 열어둠 : 이번 스폰 묶음에 웨이포인트 랠리 명령을 허용
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 0);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 패널티 강습 릴레이 단계일때 : 준비 플래그가 2일때
+	Deaths("Player 8", "Zerg Scourge", Exactly, 0); //웨이포인트 창이 열렸을때 : P6 경유지 타이머가 0일때
 Actions:
-	Set Switch("Switch53", set);
-	Preserve Trigger();
+	Set Switch("Switch53", set); //P6 스폰 랠리 펄스를 열어둠 : 이번 스폰 묶음에 웨이포인트 랠리 명령을 허용
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", At least, 1);
-	Deaths("Player 8", "Zerg Lurker", At most, 2);
-	Switch("Switch53", Set);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", At least, 1); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 1 이상일때
+	Deaths("Player 8", "Zerg Lurker", At most, 2); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 2 이하일때
+	Switch("Switch53", Set); //P6 스폰 랠리 펄스가 열려 있을때 : 새 스폰 묶음에 랠리 명령을 줄 수 있을때
+	Switch("Switch14", Not Set); //P6 랜덤 웨이포인트 선택 비트1이 꺼져 있을때 : Switch14가 Not Set일때
+	Switch("Switch15", Not Set); //P6 랜덤 웨이포인트 선택 비트2가 꺼져 있을때 : Switch15가 Not Set일때
+	Switch("Switch16", Not Set); //P6 랜덤 웨이포인트 선택 비트3이 꺼져 있을때 : Switch16이 Not Set일때
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint1", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Zergling 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Hydralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Lurker 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Defiler 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Queen 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Mutalisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Scourge 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Ultralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Guardian 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Devourer 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Overlord 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Infested Terran 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Zergling 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Hydralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Lurker 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Defiler 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Queen 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Mutalisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Scourge 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Ultralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Guardian 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Devourer 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Overlord 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Infested Terran 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Zergling 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Hydralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Lurker 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Defiler 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Queen 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Mutalisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Scourge 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Ultralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Guardian 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Devourer 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Overlord 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Infested Terran 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Zergling 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Hydralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Lurker 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Defiler 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Queen 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Mutalisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Scourge 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Ultralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Guardian 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Devourer 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Overlord 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Infested Terran 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", At least, 1);
-	Deaths("Player 8", "Zerg Lurker", At most, 2);
-	Switch("Switch53", Set);
-	Switch("Switch14", Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", At least, 1); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 1 이상일때
+	Deaths("Player 8", "Zerg Lurker", At most, 2); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 2 이하일때
+	Switch("Switch53", Set); //P6 스폰 랠리 펄스가 열려 있을때 : 새 스폰 묶음에 랠리 명령을 줄 수 있을때
+	Switch("Switch14", Set); //P6 랜덤 웨이포인트 선택 비트1이 켜져 있을때 : Switch14가 Set일때
+	Switch("Switch15", Not Set); //P6 랜덤 웨이포인트 선택 비트2가 꺼져 있을때 : Switch15가 Not Set일때
+	Switch("Switch16", Not Set); //P6 랜덤 웨이포인트 선택 비트3이 꺼져 있을때 : Switch16이 Not Set일때
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint2", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint2", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint2", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint2", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint2", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint2", Patrol); //P6 Spawn1의 Zerg Zergling 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint2", Patrol); //P6 Spawn1의 Zerg Hydralisk 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint2", Patrol); //P6 Spawn1의 Zerg Lurker 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint2", Patrol); //P6 Spawn1의 Zerg Defiler 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint2", Patrol); //P6 Spawn1의 Zerg Queen 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint2", Patrol); //P6 Spawn1의 Zerg Mutalisk 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint2", Patrol); //P6 Spawn1의 Zerg Scourge 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint2", Patrol); //P6 Spawn1의 Zerg Ultralisk 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint2", Patrol); //P6 Spawn1의 Zerg Guardian 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint2", Patrol); //P6 Spawn1의 Zerg Devourer 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint2", Patrol); //P6 Spawn1의 Zerg Overlord 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint2", Patrol); //P6 Spawn1의 Infested Terran 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint2", Patrol); //P6 Spawn2의 Zerg Zergling 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint2", Patrol); //P6 Spawn2의 Zerg Hydralisk 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint2", Patrol); //P6 Spawn2의 Zerg Lurker 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint2", Patrol); //P6 Spawn2의 Zerg Defiler 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint2", Patrol); //P6 Spawn2의 Zerg Queen 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint2", Patrol); //P6 Spawn2의 Zerg Mutalisk 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint2", Patrol); //P6 Spawn2의 Zerg Scourge 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint2", Patrol); //P6 Spawn2의 Zerg Ultralisk 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint2", Patrol); //P6 Spawn2의 Zerg Guardian 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint2", Patrol); //P6 Spawn2의 Zerg Devourer 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint2", Patrol); //P6 Spawn2의 Zerg Overlord 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint2", Patrol); //P6 Spawn2의 Infested Terran 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint2", Patrol); //P6 Spawn3의 Zerg Zergling 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint2", Patrol); //P6 Spawn3의 Zerg Hydralisk 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint2", Patrol); //P6 Spawn3의 Zerg Lurker 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint2", Patrol); //P6 Spawn3의 Zerg Defiler 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint2", Patrol); //P6 Spawn3의 Zerg Queen 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint2", Patrol); //P6 Spawn3의 Zerg Mutalisk 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint2", Patrol); //P6 Spawn3의 Zerg Scourge 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint2", Patrol); //P6 Spawn3의 Zerg Ultralisk 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint2", Patrol); //P6 Spawn3의 Zerg Guardian 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint2", Patrol); //P6 Spawn3의 Zerg Devourer 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint2", Patrol); //P6 Spawn3의 Zerg Overlord 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint2", Patrol); //P6 Spawn3의 Infested Terran 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint2", Patrol); //P6 Spawn4의 Zerg Zergling 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint2", Patrol); //P6 Spawn4의 Zerg Hydralisk 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint2", Patrol); //P6 Spawn4의 Zerg Lurker 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint2", Patrol); //P6 Spawn4의 Zerg Defiler 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint2", Patrol); //P6 Spawn4의 Zerg Queen 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint2", Patrol); //P6 Spawn4의 Zerg Mutalisk 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint2", Patrol); //P6 Spawn4의 Zerg Scourge 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint2", Patrol); //P6 Spawn4의 Zerg Ultralisk 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint2", Patrol); //P6 Spawn4의 Zerg Guardian 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint2", Patrol); //P6 Spawn4의 Zerg Devourer 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint2", Patrol); //P6 Spawn4의 Zerg Overlord 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint2", Patrol); //P6 Spawn4의 Infested Terran 유닛을 Waypoint2로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", At least, 1);
-	Deaths("Player 8", "Zerg Lurker", At most, 2);
-	Switch("Switch53", Set);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", At least, 1); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 1 이상일때
+	Deaths("Player 8", "Zerg Lurker", At most, 2); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 2 이하일때
+	Switch("Switch53", Set); //P6 스폰 랠리 펄스가 열려 있을때 : 새 스폰 묶음에 랠리 명령을 줄 수 있을때
+	Switch("Switch14", Not Set); //P6 랜덤 웨이포인트 선택 비트1이 꺼져 있을때 : Switch14가 Not Set일때
+	Switch("Switch15", Set); //P6 랜덤 웨이포인트 선택 비트2가 켜져 있을때 : Switch15가 Set일때
+	Switch("Switch16", Not Set); //P6 랜덤 웨이포인트 선택 비트3이 꺼져 있을때 : Switch16이 Not Set일때
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint3", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Zergling 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Hydralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Lurker 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Defiler 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Queen 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Mutalisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Scourge 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Ultralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Guardian 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Devourer 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Overlord 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Infested Terran 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Zergling 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Hydralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Lurker 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Defiler 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Queen 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Mutalisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Scourge 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Ultralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Guardian 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Devourer 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Overlord 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Infested Terran 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Zergling 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Hydralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Lurker 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Defiler 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Queen 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Mutalisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Scourge 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Ultralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Guardian 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Devourer 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Overlord 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Infested Terran 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Zergling 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Hydralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Lurker 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Defiler 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Queen 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Mutalisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Scourge 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Ultralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Guardian 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Devourer 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Overlord 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Infested Terran 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", At least, 1);
-	Deaths("Player 8", "Zerg Lurker", At most, 2);
-	Switch("Switch53", Set);
-	Switch("Switch14", Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", At least, 1); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 1 이상일때
+	Deaths("Player 8", "Zerg Lurker", At most, 2); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 2 이하일때
+	Switch("Switch53", Set); //P6 스폰 랠리 펄스가 열려 있을때 : 새 스폰 묶음에 랠리 명령을 줄 수 있을때
+	Switch("Switch14", Set); //P6 랜덤 웨이포인트 선택 비트1이 켜져 있을때 : Switch14가 Set일때
+	Switch("Switch15", Set); //P6 랜덤 웨이포인트 선택 비트2가 켜져 있을때 : Switch15가 Set일때
+	Switch("Switch16", Not Set); //P6 랜덤 웨이포인트 선택 비트3이 꺼져 있을때 : Switch16이 Not Set일때
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint4", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint4", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint4", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint4", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint4", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint4", Patrol); //P6 Spawn1의 Zerg Zergling 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint4", Patrol); //P6 Spawn1의 Zerg Hydralisk 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint4", Patrol); //P6 Spawn1의 Zerg Lurker 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint4", Patrol); //P6 Spawn1의 Zerg Defiler 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint4", Patrol); //P6 Spawn1의 Zerg Queen 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint4", Patrol); //P6 Spawn1의 Zerg Mutalisk 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint4", Patrol); //P6 Spawn1의 Zerg Scourge 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint4", Patrol); //P6 Spawn1의 Zerg Ultralisk 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint4", Patrol); //P6 Spawn1의 Zerg Guardian 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint4", Patrol); //P6 Spawn1의 Zerg Devourer 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint4", Patrol); //P6 Spawn1의 Zerg Overlord 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint4", Patrol); //P6 Spawn1의 Infested Terran 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint4", Patrol); //P6 Spawn2의 Zerg Zergling 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint4", Patrol); //P6 Spawn2의 Zerg Hydralisk 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint4", Patrol); //P6 Spawn2의 Zerg Lurker 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint4", Patrol); //P6 Spawn2의 Zerg Defiler 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint4", Patrol); //P6 Spawn2의 Zerg Queen 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint4", Patrol); //P6 Spawn2의 Zerg Mutalisk 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint4", Patrol); //P6 Spawn2의 Zerg Scourge 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint4", Patrol); //P6 Spawn2의 Zerg Ultralisk 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint4", Patrol); //P6 Spawn2의 Zerg Guardian 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint4", Patrol); //P6 Spawn2의 Zerg Devourer 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint4", Patrol); //P6 Spawn2의 Zerg Overlord 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint4", Patrol); //P6 Spawn2의 Infested Terran 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint4", Patrol); //P6 Spawn3의 Zerg Zergling 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint4", Patrol); //P6 Spawn3의 Zerg Hydralisk 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint4", Patrol); //P6 Spawn3의 Zerg Lurker 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint4", Patrol); //P6 Spawn3의 Zerg Defiler 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint4", Patrol); //P6 Spawn3의 Zerg Queen 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint4", Patrol); //P6 Spawn3의 Zerg Mutalisk 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint4", Patrol); //P6 Spawn3의 Zerg Scourge 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint4", Patrol); //P6 Spawn3의 Zerg Ultralisk 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint4", Patrol); //P6 Spawn3의 Zerg Guardian 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint4", Patrol); //P6 Spawn3의 Zerg Devourer 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint4", Patrol); //P6 Spawn3의 Zerg Overlord 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint4", Patrol); //P6 Spawn3의 Infested Terran 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint4", Patrol); //P6 Spawn4의 Zerg Zergling 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint4", Patrol); //P6 Spawn4의 Zerg Hydralisk 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint4", Patrol); //P6 Spawn4의 Zerg Lurker 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint4", Patrol); //P6 Spawn4의 Zerg Defiler 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint4", Patrol); //P6 Spawn4의 Zerg Queen 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint4", Patrol); //P6 Spawn4의 Zerg Mutalisk 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint4", Patrol); //P6 Spawn4의 Zerg Scourge 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint4", Patrol); //P6 Spawn4의 Zerg Ultralisk 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint4", Patrol); //P6 Spawn4의 Zerg Guardian 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint4", Patrol); //P6 Spawn4의 Zerg Devourer 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint4", Patrol); //P6 Spawn4의 Zerg Overlord 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint4", Patrol); //P6 Spawn4의 Infested Terran 유닛을 Waypoint4로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", At least, 1);
-	Deaths("Player 8", "Zerg Lurker", At most, 2);
-	Switch("Switch53", Set);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", At least, 1); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 1 이상일때
+	Deaths("Player 8", "Zerg Lurker", At most, 2); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 2 이하일때
+	Switch("Switch53", Set); //P6 스폰 랠리 펄스가 열려 있을때 : 새 스폰 묶음에 랠리 명령을 줄 수 있을때
+	Switch("Switch14", Not Set); //P6 랜덤 웨이포인트 선택 비트1이 꺼져 있을때 : Switch14가 Not Set일때
+	Switch("Switch15", Not Set); //P6 랜덤 웨이포인트 선택 비트2가 꺼져 있을때 : Switch15가 Not Set일때
+	Switch("Switch16", Set); //P6 랜덤 웨이포인트 선택 비트3이 켜져 있을때 : Switch16이 Set일때
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint5", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Zergling 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Hydralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Lurker 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Defiler 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Queen 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Mutalisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Scourge 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Ultralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Guardian 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Devourer 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Overlord 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Infested Terran 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Zergling 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Hydralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Lurker 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Defiler 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Queen 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Mutalisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Scourge 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Ultralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Guardian 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Devourer 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Overlord 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Infested Terran 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Zergling 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Hydralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Lurker 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Defiler 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Queen 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Mutalisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Scourge 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Ultralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Guardian 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Devourer 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Overlord 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Infested Terran 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Zergling 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Hydralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Lurker 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Defiler 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Queen 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Mutalisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Scourge 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Ultralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Guardian 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Devourer 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Overlord 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Infested Terran 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", At least, 1);
-	Deaths("Player 8", "Zerg Lurker", At most, 2);
-	Switch("Switch53", Set);
-	Switch("Switch14", Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", At least, 1); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 1 이상일때
+	Deaths("Player 8", "Zerg Lurker", At most, 2); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 2 이하일때
+	Switch("Switch53", Set); //P6 스폰 랠리 펄스가 열려 있을때 : 새 스폰 묶음에 랠리 명령을 줄 수 있을때
+	Switch("Switch14", Set); //P6 랜덤 웨이포인트 선택 비트1이 켜져 있을때 : Switch14가 Set일때
+	Switch("Switch15", Not Set); //P6 랜덤 웨이포인트 선택 비트2가 꺼져 있을때 : Switch15가 Not Set일때
+	Switch("Switch16", Set); //P6 랜덤 웨이포인트 선택 비트3이 켜져 있을때 : Switch16이 Set일때
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint1", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Zergling 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Hydralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Lurker 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Defiler 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Queen 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Mutalisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Scourge 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Ultralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Guardian 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Devourer 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Zerg Overlord 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint1", Patrol); //P6 Spawn1의 Infested Terran 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Zergling 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Hydralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Lurker 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Defiler 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Queen 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Mutalisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Scourge 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Ultralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Guardian 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Devourer 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Zerg Overlord 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint1", Patrol); //P6 Spawn2의 Infested Terran 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Zergling 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Hydralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Lurker 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Defiler 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Queen 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Mutalisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Scourge 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Ultralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Guardian 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Devourer 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Zerg Overlord 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint1", Patrol); //P6 Spawn3의 Infested Terran 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Zergling 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Hydralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Lurker 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Defiler 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Queen 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Mutalisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Scourge 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Ultralisk 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Guardian 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Devourer 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Zerg Overlord 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint1", Patrol); //P6 Spawn4의 Infested Terran 유닛을 Waypoint1로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", At least, 1);
-	Deaths("Player 8", "Zerg Lurker", At most, 2);
-	Switch("Switch53", Set);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", At least, 1); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 1 이상일때
+	Deaths("Player 8", "Zerg Lurker", At most, 2); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 2 이하일때
+	Switch("Switch53", Set); //P6 스폰 랠리 펄스가 열려 있을때 : 새 스폰 묶음에 랠리 명령을 줄 수 있을때
+	Switch("Switch14", Not Set); //P6 랜덤 웨이포인트 선택 비트1이 꺼져 있을때 : Switch14가 Not Set일때
+	Switch("Switch15", Set); //P6 랜덤 웨이포인트 선택 비트2가 켜져 있을때 : Switch15가 Set일때
+	Switch("Switch16", Set); //P6 랜덤 웨이포인트 선택 비트3이 켜져 있을때 : Switch16이 Set일때
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint3", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Zergling 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Hydralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Lurker 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Defiler 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Queen 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Mutalisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Scourge 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Ultralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Guardian 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Devourer 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Zerg Overlord 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint3", Patrol); //P6 Spawn1의 Infested Terran 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Zergling 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Hydralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Lurker 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Defiler 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Queen 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Mutalisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Scourge 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Ultralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Guardian 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Devourer 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Zerg Overlord 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint3", Patrol); //P6 Spawn2의 Infested Terran 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Zergling 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Hydralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Lurker 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Defiler 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Queen 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Mutalisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Scourge 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Ultralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Guardian 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Devourer 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Zerg Overlord 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint3", Patrol); //P6 Spawn3의 Infested Terran 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Zergling 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Hydralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Lurker 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Defiler 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Queen 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Mutalisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Scourge 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Ultralisk 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Guardian 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Devourer 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Zerg Overlord 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint3", Patrol); //P6 Spawn4의 Infested Terran 유닛을 Waypoint3로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", At least, 1);
-	Deaths("Player 8", "Zerg Lurker", At most, 2);
-	Switch("Switch53", Set);
-	Switch("Switch14", Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 클리어 전일때 : 미션 진행 변수가 3 이하일때
+	Deaths("Player 8", "Zerg Lurker", At least, 1); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 1 이상일때
+	Deaths("Player 8", "Zerg Lurker", At most, 2); //P6 패널티 강습 명령 단계일때 : 준비 플래그가 2 이하일때
+	Switch("Switch53", Set); //P6 스폰 랠리 펄스가 열려 있을때 : 새 스폰 묶음에 랠리 명령을 줄 수 있을때
+	Switch("Switch14", Set); //P6 랜덤 웨이포인트 선택 비트1이 켜져 있을때 : Switch14가 Set일때
+	Switch("Switch15", Set); //P6 랜덤 웨이포인트 선택 비트2가 켜져 있을때 : Switch15가 Set일때
+	Switch("Switch16", Set); //P6 랜덤 웨이포인트 선택 비트3이 켜져 있을때 : Switch16이 Set일때
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint5", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Zergling 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Hydralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Lurker 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Defiler 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Queen 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Mutalisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Scourge 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Ultralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Guardian 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Devourer 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Zerg Overlord 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn1", "Waypoint5", Patrol); //P6 Spawn1의 Infested Terran 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Zergling 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Hydralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Lurker 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Defiler 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Queen 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Mutalisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Scourge 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Ultralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Guardian 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Devourer 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Zerg Overlord 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn2", "Waypoint5", Patrol); //P6 Spawn2의 Infested Terran 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Zergling 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Hydralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Lurker 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Defiler 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Queen 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Mutalisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Scourge 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Ultralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Guardian 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Devourer 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Zerg Overlord 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn3", "Waypoint5", Patrol); //P6 Spawn3의 Infested Terran 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Zergling 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Hydralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Lurker 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Defiler 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Queen", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Queen 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Mutalisk", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Mutalisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Scourge", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Scourge 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Ultralisk 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Guardian 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Devourer 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Zerg Overlord", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Zerg Overlord 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Order("Player 6", "Infested Terran", "P6 Spawn4", "Waypoint5", Patrol); //P6 Spawn4의 Infested Terran 유닛을 Waypoint5로 랠리 : Patrol 명령으로 경유지까지 전진시킴
+	Preserve Trigger(); //반복 트리거로 유지 : 다음 트리거 사이클에도 조건을 재검사
 }
