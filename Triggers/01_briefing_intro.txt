@@ -34,6 +34,7 @@ Actions:
 	Set Switch("Switch124", clear);
 	Set Switch("Switch125", clear);
 	Set Switch("Switch126", clear);
+	Set Switch("Switch133", clear);
 }
 
 Trigger("All Players"){
@@ -78,11 +79,19 @@ Actions:
 
 Trigger("All Players"){
 Conditions:
+	Elapsed Time(At least, 28);
+	Elapsed Time(At most, 30);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔상 선봉 거점은 지상과 연결된 접근로가 하나뿐입니다.");
+}
+
+Trigger("All Players"){
+Conditions:
 	Elapsed Time(At least, 33);
 	Elapsed Time(At most, 35);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>주 진입로 확인. 전술 지도에 표시했습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>단일 접근로 확인. 표시한 협곡이 유일한 진입로입니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -121,7 +130,7 @@ Conditions:
 	Elapsed Time(At least, 38);
 	Elapsed Time(At most, 40);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>저그가 전선을 넓히기 전에 여기서 막아라.");
+	Display Text Message(Always Display, "<03>호크: <04>진입로는 하나다. 선봉대 전원, 그곳을 함께 사수해라.");
 }
 
 Trigger("Player 1"){
@@ -216,5 +225,5 @@ Conditions:
 	Elapsed Time(At least, 43);
 	Elapsed Time(At most, 45);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>방어선을 먼저 세워라. 병력을 낭비하면 다음 전투는 없다.");
+	Display Text Message(Always Display, "<03>호크: <04>병력을 흩뿌리지 마라. 진입로 방어에 집중해라.");
 }

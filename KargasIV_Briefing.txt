@@ -30,6 +30,10 @@ Briefing("All Players"){
 	Wait(5000);
 
 	Display Speaking Portrait(2, 5);
+	Text Message("<04>궤도 스캔상 선봉 거점은 지상과 연결된 접근로가 하나뿐입니다.", 5500);
+	Wait(5500);
+
+	Display Speaking Portrait(2, 5);
 	Text Message("<04>초반에는 방어선을 먼저 세우는 편이 안전합니다. 무리해서 진입하면 병력 손실이 커집니다.", 5500);
 	Wait(5500);
 
@@ -37,6 +41,10 @@ Briefing("All Players"){
 	Wait(500);
 
 	Show Portrait("Terran Marine", 1);
+	Display Speaking Portrait(1, 6);
+	Text Message("<03>호크: <04>진입로는 선봉대가 함께 사수한다. 착륙 직후 거기부터 방어선을 세워라.", 5500);
+	Wait(5500);
+
 	Display Speaking Portrait(1, 6);
 	Text Message("<03>호크: <04>그래서 첫 전선이 필요하다. 북서쪽 군락을 치고, 다음 공세를 받아낼 발판을 만든다.", 5500);
 	Wait(5500);

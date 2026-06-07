@@ -166,6 +166,17 @@ P8 (보스):
 
 
 ============================================================
+  Entrance guide / claimable turrets
+============================================================
+
+- "BaseEntrance"  : shared player front-line choke (minimap ping target)
+- "BaseScan1"~"BaseScan11" : orbital scan revealer slots at game start
+- "MainLoad1", "MainLoad2" : wave attack path preview near entrance
+- "MD1"~"MD6"     : Player 9 preplaced claimable Missile Turret slots
+                    (13c pings entrance-axis slots only; confirm MD numbers in editor)
+- "Player Destination" : P5 wave patrol target toward player base
+
+============================================================
   END
 ============================================================
 

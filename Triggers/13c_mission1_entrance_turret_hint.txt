@@ -1,0 +1,41 @@
+//============================================================
+//  Mission 1 entrance turret hint (after wave 1, before wave 2)
+//  Switch133 = one-shot sequence guard
+//  Ping MD1~MD6 at entrance axis (map editor placement)
+//============================================================
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch133", Not Set);
+	Elapsed Time(At least, 300);
+	Elapsed Time(At most, 302);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>UED 잔당 터렛이 진입로 방어축에 남아 있습니다. 아직 작동 중이에요.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch133", Not Set);
+	Elapsed Time(At least, 312);
+	Elapsed Time(At most, 314);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>터렛을 살려라. 진입로 사수에 쓸 화력이다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch133", Not Set);
+	Elapsed Time(At least, 324);
+	Elapsed Time(At most, 326);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("MD1");
+	Display Text Message(Always Display, "<07>작전 안내: <04>표시한 터렛에 병력을 접근시키면 터렛 제어권을 넘겨받습니다.");
+	Set Switch("Switch133", set);
+}
