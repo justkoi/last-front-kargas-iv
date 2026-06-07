@@ -122,7 +122,8 @@ Actions:
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Overlord", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
+	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -139,7 +140,8 @@ Actions:
 	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Overlord", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
+	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -181,7 +183,8 @@ Actions:
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Overlord", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
+	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -198,7 +201,8 @@ Actions:
 	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Overlord", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
+	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -240,7 +244,8 @@ Actions:
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Overlord", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
+	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -257,7 +262,8 @@ Actions:
 	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Overlord", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
+	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -299,7 +305,8 @@ Actions:
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Overlord", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
+	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -316,7 +323,8 @@ Actions:
 	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Overlord", "East Area", "P6 Intruder", Patrol);
+	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
+	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -609,7 +617,8 @@ Actions:
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Overlord", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
+	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -626,7 +635,8 @@ Actions:
 	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Overlord", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
+	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -668,7 +678,8 @@ Actions:
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Overlord", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
+	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -685,7 +696,8 @@ Actions:
 	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Overlord", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
+	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -727,7 +739,8 @@ Actions:
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Overlord", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
+	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -744,7 +757,8 @@ Actions:
 	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Overlord", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
+	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -786,7 +800,8 @@ Actions:
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Overlord", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
+	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -803,7 +818,8 @@ Actions:
 	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Overlord", "East Area", "P7 Intruder", Patrol);
+	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
+	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
