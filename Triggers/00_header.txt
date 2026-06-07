@@ -4,18 +4,23 @@
 //                      P5 Spawn1~4, P5 H1~4, P1~P4 Hunt, Player Destination, AttackPoint1,
 //                      MD1~MD6, BaseEntrance, BaseScan1~11, MainLoad1~2, Player Destination,
 //                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
-//                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4, P6 H1~8,
+//                      P6 Scout, P6 Intruder, P6 Overmind, P6 MiniBase, P6 Spawn1~4, P6 H1~8,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4, P7 H1~4,
-//                      WestArea, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~4, NewRoute4~12, NewRoute14~15, Waypoint1~5,
+//                      WestArea, Middle Area, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~4, NewRoute1~14, Waypoint1~5,
 //                      Difficulty, Selector, SelectEasy, SelectNormal, SelectHard, SelectVeryHard,
-//                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
+//                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping,
+//                      DefenseCenter1, DefenseCenter2
 //
 //  P6/P7 Overmind locations require preplaced invincible Overmind Cocoons
 //  owned by Player 6 / Player 7. The event disables invincibility on the selected one.
+//  DefenseCenter1/2 likewise require preplaced invincible Player 9 buildings.
+//  Easy/Normal hand off each center to a random living player (invincibility off);
+//  Normal strips Photon Cannons and Pylons at difficulty lock first; Hard+ destroy all.
+//  See 15b_mission2_easy_defense_handoff.txt.
 //
 //  Timer rule: 12 DC tick = 1 second
-//    10s = 120, 60s = 720, 90s = 1080, 3min = 2160, 4min = 2880, 5min = 3600
+//    10s = 120, 60s = 720, 90s = 1080, 3min = 2160, 3min40 = 2640, 4min = 2880, 5min = 3600, 10min = 7200
 //
 //  Player 8 DC roles
 //    Terran Civilian      : zerg resource supply timer
@@ -38,9 +43,10 @@
 //    Terran Battlecruiser : P5 overlord supply cycle timer
 //    Protoss Dragoon      : P6 overlord supply cycle timer
 //    Protoss High Templar : P7 overlord supply cycle timer
-//    Terran Science Vessel: player alliance refresh timer
+//    Terran Science Vessel: Force2(P5~P8) shared vision refresh timer
 //    Terran Academy       : difficulty selection flag (0=unset, 1=easy, 2=normal, 3=hard, 4=very hard)
 //    Terran Ghost         : difficulty reminder timer
+//    Terran Medic         : mission2 P6 minibase destroy reward message spacing timer
 //    Terran Dropship      : mission1 late-wave variant index / P7 mission2 early alert defense recharge timer
 //    Protoss Corsair      : mission1 outer colony warning cooldown timer
 //    Zerg Creep Colony    : mission1 P6/P7 creep colony warning counter
@@ -165,6 +171,15 @@
 //    Switch131     : P7 main assault coarse (air/ground) warning shown
 //    Switch132     : main assault first-wave seeded at game start (one-shot guard)
 //    Switch133     : mission1 entrance turret hint sequence played (13c)
+//    Switch134/135 : DefenseCenter1 easy-mode handoff random living-player selector (clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4)
+//    Switch136     : DefenseCenter1 easy-mode handoff completed
+//    Switch137/138 : DefenseCenter2 easy-mode handoff random living-player selector
+//    Switch139     : DefenseCenter2 easy-mode handoff completed
+//    Switch140     : mission2 P6 forward rally point revealed (Vulture >= 4080)
+//    Switch141     : mission2 P6 forward rally point reward paid
+//    Switch142     : mission1 advance briefing sequence played (13d)
+//    Switch143     : AttackPoint1 cerebrate destroy P5 Hunt delay applied (one-shot)
+//    Switch144     : AttackPoint1 cerebrate destroy reward shown (one-shot)
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:

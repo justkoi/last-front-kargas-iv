@@ -111,6 +111,8 @@ Avoid decorative headers that consume too many message lines during combat. In l
 
 ## Dialogue Formatting
 
+When discussing dialogue with the user — in review, diffs, summaries, or change proposals — always quote the **full in-game display string** for every line you mention. Do not paraphrase, shorten with ellipsis, or omit the tail of a sentence. If a line includes color/control codes, include them in the quoted string exactly as written in the trigger file.
+
 Use a stable speaker prefix:
 
 ```
@@ -121,6 +123,10 @@ Use a stable speaker prefix:
 
 Guidelines:
 
+- **One speaker per trigger.** Never put two different characters' dialogue in the same trigger; split into separate triggers.
+- **Minimum display gap: 7 seconds (84 ticks).** Space consecutive dialogue triggers at least 84 ticks apart on the mission timer (`Terran Vulture` in mission 2). Use 96 ticks (8 seconds) after a longer line if needed.
+- **One visible line per trigger.** Multiple `Display Text Message` actions in one trigger overwrite each other in the same frame; use separate timed triggers instead.
+- **Split long lines.** If a line is hard to read within 7-8 seconds, split it across two triggers from the same speaker, still spaced by at least 84 ticks.
 - Keep combat lines short enough to read while playing.
 - Keep one idea per message. Split only when the player needs both tactical instruction and story reveal.
 - Make `호크` decisive and tactical.
@@ -223,6 +229,8 @@ Before finalizing text output, check:
 - Does each line sound like the named speaker would say it?
 - Does the player understand the next action within one or two lines?
 - Are lore terms introduced before they become mission-critical?
+- Does dialogue obey one-speaker-per-trigger and at least 84-tick spacing between consecutive lines?
+- Are long lines split instead of stacking multiple `Display Text Message` calls in one trigger?
 - Are color codes purposeful and not noisy?
 - Are centered headers using `<13>` where possible?
 - Are "신호원", "유닛", and raw "카운트다운" avoided in dialogue unless intentionally system-facing?

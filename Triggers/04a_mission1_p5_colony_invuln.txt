@@ -1,0 +1,14 @@
+//-----------------------------------------------------------------//
+//  Mission 1 - P5 outer colony invulnerability
+//  Middle Area / East Area Sunken+Spore are invincible until M1 clear.
+//-----------------------------------------------------------------//
+
+Trigger("Player 8"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Invincibility("Player 5", "Zerg Sunken Colony", "Middle Area", enabled);
+	Set Invincibility("Player 5", "Zerg Spore Colony", "Middle Area", enabled);
+	Set Invincibility("Player 5", "Zerg Sunken Colony", "East Area", enabled);
+	Set Invincibility("Player 5", "Zerg Spore Colony", "East Area", enabled);
+}

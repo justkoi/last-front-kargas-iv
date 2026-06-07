@@ -28,8 +28,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 215);
-	Elapsed Time(At most, 217);
+	Elapsed Time(At least, 216);
+	Elapsed Time(At most, 218);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("BaseEntrance");

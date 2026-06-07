@@ -12,7 +12,7 @@ Conditions:
 	Elapsed Time(At least, 300);
 	Elapsed Time(At most, 302);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>UED 잔당 터렛이 진입로 방어축에 남아 있습니다. 아직 작동 중이에요.");
+	Display Text Message(Always Display, "<1A>노바: 여기 <04>UED 잔당이 남긴 터렛을 발견했습니다.");
 }
 
 Trigger("All Players"){
@@ -23,7 +23,7 @@ Conditions:
 	Elapsed Time(At least, 312);
 	Elapsed Time(At most, 314);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>터렛을 살려라. 진입로 사수에 쓸 화력이다.");
+	Display Text Message(Always Display, "<03>호크: <04>작동하지 않는군. 하지만 수리해서 쓸 수 있다. 터렛을 손에 넣어라. ");
 }
 
 Trigger("All Players"){
@@ -36,6 +36,11 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("MD1");
-	Display Text Message(Always Display, "<07>작전 안내: <04>표시한 터렛에 병력을 접근시키면 터렛 제어권을 넘겨받습니다.");
+	Minimap Ping("MD2");
+	Minimap Ping("MD3");
+	Minimap Ping("MD4");
+	Minimap Ping("MD5");
+	Minimap Ping("MD6");
+	Display Text Message(Always Display, "<07>작전 안내: <04>표시한 터렛에 병력을 접근시키면 터렛 제어권을 넘겨받을 수 있습니다.");
 	Set Switch("Switch133", set);
 }

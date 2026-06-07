@@ -10,6 +10,10 @@ Conditions:
 	Bring("Player 5", "Zerg Hive", "P5 Base", At most, 0);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
+	Set Invincibility("Player 5", "Zerg Sunken Colony", "Middle Area", disabled);
+	Set Invincibility("Player 5", "Zerg Spore Colony", "Middle Area", disabled);
+	Set Invincibility("Player 5", "Zerg Sunken Colony", "East Area", disabled);
+	Set Invincibility("Player 5", "Zerg Spore Colony", "East Area", disabled);
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 3);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 	Set Deaths("Player 8", "Protoss Shuttle", Set To, 0);
@@ -49,6 +53,9 @@ Actions:
 	Set Switch("Switch114", clear);
 	Set Switch("Switch115", clear);
 	Set Switch("Switch116", clear);
+	Set Switch("Switch142", clear);
+	Set Switch("Switch143", clear);
+	Set Switch("Switch144", clear);
 }
 
 Trigger("All Players"){
@@ -60,7 +67,7 @@ Actions:
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><03>미션 1 완료: 첫 군락 붕괴");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<1A>노바: <04>첫 군락 중추 붕괴 확인. 지형 차단 신호가 약해지고 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>주황색 군락 붕괴 확인. 지형 차단 신호가 약해지고 있습니다.");
 }
 
 Trigger("All Players"){
@@ -69,7 +76,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 60);
 	Deaths("Player 8", "Terran Vulture", At most, 84);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>승리 보고는 나중이다. 전 병력, 방어선으로 복귀해라.");
+	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 첫 군락을 잘라냈다.");
 }
 
 Trigger("All Players"){
@@ -118,6 +125,11 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 276);
 Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate1");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute1");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute2");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute3");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute4");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute5");
 	Minimap Ping("Mission2 Gate1");
 	Display Text Message(Always Display, "<1A>노바: <04>주 통로를 확인했습니다. 폭이 넓어 공격에는 유리하지만, 방어선은 쉽게 벌어질 겁니다.");
 }
@@ -129,6 +141,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 492);
 Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate3");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute6");
 	Minimap Ping("Mission2 Gate3");
 	Display Text Message(Always Display, "<1A>노바: <04>좁은 샛길을 확인했습니다. 우회 병력이 스며들 수 있으니 감시를 붙이십시오.");
 }
@@ -139,9 +152,17 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 684);
 	Deaths("Player 8", "Terran Vulture", At most, 708);
 Actions:
-	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate4");
-	Minimap Ping("Mission2 Gate4");
-	Center View("Mission2 Gate4");
+	Create Unit("Current Player", "Map Revealer", 1, "DefenseCenter2");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute7");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute8");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute9");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute10");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute11");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute12");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute13");
+	Create Unit("Current Player", "Map Revealer", 1, "NewRoute14");
+	Minimap Ping("DefenseCenter2");
+	Center View("DefenseCenter2");
 	Display Text Message(Always Display, "<03>호크: <04>본진 핵심 입구를 확인했다. 반드시 단단히 방비해라.");
 }
 
@@ -157,17 +178,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 1200);
-	Deaths("Player 8", "Terran Vulture", At most, 1224);
-Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>두 군락이 병력을 재집결시키고 있습니다. 공격 방향은 아직 고정되지 않았습니다.");
-}
-
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 3600);
-	Deaths("Player 8", "Terran Vulture", At most, 3624);
+	Deaths("Player 8", "Terran Vulture", At least, 2640);
+	Deaths("Player 8", "Terran Vulture", At most, 2664);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>점막 뿌리망 붕괴 확인. 주황색 저그 방어기관이 고사했습니다.");
 }
@@ -175,16 +187,25 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 3672);
-	Deaths("Player 8", "Terran Vulture", At most, 3696);
+	Deaths("Player 8", "Terran Vulture", At least, 2712);
+	Deaths("Player 8", "Terran Vulture", At most, 2736);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>길이 열렸다. 지금부터 잔여 군락을 하나씩 고립시켜 무너뜨린다.");
+	Display Text Message(Always Display, "<03>호크: <04>길이 열렸다. 모두 전력을 모아 동북쪽 <15>갈색 저그<04> 군락부터 고립시켜 무너뜨린다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2796);
+	Deaths("Player 8", "Terran Vulture", At most, 2820);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>각개격파 당하지 않도록 힘을 합쳐라.");
 }
 
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 3600);
+	Deaths("Player 8", "Terran Vulture", At least, 2640);
 Actions:
 	Set Deaths("Player 5", "Terran Marine", Set To, 0);
 	Set Deaths("Player 5", "Terran Firebat", Set To, 0);
@@ -211,6 +232,14 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 10272);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 장치에 과부하가 걸렸습니다. 새 진입로 관측 신호가 끊깁니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 10332);
+	Deaths("Player 8", "Terran Vulture", At most, 10356);
+Actions:
 	Display Text Message(Always Display, "<03>호크: <04>전술 표시는 여기까지다. 이후 경로 확인은 현장 정찰로 보완해라.");
 }
 

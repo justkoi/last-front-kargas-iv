@@ -1,0 +1,145 @@
+//-----------------------------------------------------------------//
+//  Mission 2 - P6 forward rally point
+//
+//  Internal location: P6 MiniBase
+//  Player-facing name: 전방 집결지
+//  Reveal: mission2 elapsed 5:40 (Vulture DC 4080 ticks).
+//  Reward: +1000 minerals / +500 gas, delay next P6 main assault by 4 minutes.
+//-----------------------------------------------------------------//
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch140", Not Set);
+	Deaths("Player 8", "Terran Vulture", At least, 4080);
+	Bring("Player 6", "Zerg Hatchery", "P6 MiniBase", At least, 1);
+Actions:
+	Set Switch("Switch140", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch140", Not Set);
+	Deaths("Player 8", "Terran Vulture", At least, 4080);
+	Bring("Player 6", "Zerg Lair", "P6 MiniBase", At least, 1);
+Actions:
+	Set Switch("Switch140", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch140", Not Set);
+	Deaths("Player 8", "Terran Vulture", At least, 4080);
+	Bring("Player 6", "Zerg Hive", "P6 MiniBase", At least, 1);
+Actions:
+	Set Switch("Switch140", set);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch140", Set);
+Actions:
+	Create Unit("Current Player", "Map Revealer", 1, "P6 MiniBase");
+	Minimap Ping("P6 MiniBase");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04><15>갈색 저그<04> 전방 집결지 확인. 본체보다 반응 밀도가 낮습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch140", Set);
+	Deaths("Player 8", "Terran Vulture", At least, 4164);
+	Deaths("Player 8", "Terran Vulture", At most, 4188);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>저 집결지를 끊어라. 갈색 군락의 다음 대공세를 늦출 수 있다.");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch140", Set);
+	Switch("Switch141", Not Set);
+	Deaths("Player 8", "Zerg Zergling", At least, 2880);
+	Bring("Player 6", "Zerg Hatchery", "P6 MiniBase", At most, 0);
+	Bring("Player 6", "Zerg Lair", "P6 MiniBase", At most, 0);
+	Bring("Player 6", "Zerg Hive", "P6 MiniBase", At most, 0);
+Actions:
+	Set Resources("Player 1", Add, 1000, ore);
+	Set Resources("Player 2", Add, 1000, ore);
+	Set Resources("Player 3", Add, 1000, ore);
+	Set Resources("Player 4", Add, 1000, ore);
+	Set Resources("Player 1", Add, 500, gas);
+	Set Resources("Player 2", Add, 500, gas);
+	Set Resources("Player 3", Add, 500, gas);
+	Set Resources("Player 4", Add, 500, gas);
+	Set Deaths("Player 8", "Zerg Zergling", Subtract, 2880);
+	Set Deaths("Player 8", "Terran Medic", Set To, 0);
+	Set Switch("Switch141", set);
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch140", Set);
+	Switch("Switch141", Not Set);
+	Deaths("Player 8", "Zerg Zergling", At most, 2879);
+	Bring("Player 6", "Zerg Hatchery", "P6 MiniBase", At most, 0);
+	Bring("Player 6", "Zerg Lair", "P6 MiniBase", At most, 0);
+	Bring("Player 6", "Zerg Hive", "P6 MiniBase", At most, 0);
+Actions:
+	Set Resources("Player 1", Add, 1000, ore);
+	Set Resources("Player 2", Add, 1000, ore);
+	Set Resources("Player 3", Add, 1000, ore);
+	Set Resources("Player 4", Add, 1000, ore);
+	Set Resources("Player 1", Add, 500, gas);
+	Set Resources("Player 2", Add, 500, gas);
+	Set Resources("Player 3", Add, 500, gas);
+	Set Resources("Player 4", Add, 500, gas);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
+	Set Deaths("Player 8", "Terran Medic", Set To, 0);
+	Set Switch("Switch141", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch141", Set);
+Actions:
+	Set Deaths("Player 8", "Terran Medic", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch141", Set);
+	Deaths("Player 8", "Terran Medic", Exactly, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1800);
+	Display Text Message(Always Display, "<07>작전 보상: <04>전방 집결지 파괴. 미네랄 +1000 / 가스 +500");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch141", Set);
+	Deaths("Player 8", "Terran Medic", Exactly, 85);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>전방 집결지를 잘라냈다. 정확한 타격이다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch141", Set);
+	Deaths("Player 8", "Terran Medic", Exactly, 169);
+Actions:
+	Display Text Message(Always Display, "<07>전술 효과: <04>전방 집결망 차단. <15>갈색 저그<04> 다음 대규모 공세가 4분 지연됩니다.");
+}

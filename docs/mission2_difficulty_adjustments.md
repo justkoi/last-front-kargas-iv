@@ -2,10 +2,10 @@
 
 Difficulty flag: `Player 8 / Terran Academy`
 
-- `1 = easy`: current Mission 2 behavior.
-- `2 = normal`: first P6/P7 main assaults are advanced by 30 seconds, repeated main-assault standard cooldown is 17:30, and main-assault waves gain about +10% units.
-- `3 = hard`: first P6/P7 main assaults are advanced by 60 seconds, repeated main-assault standard cooldown is 15:00, and main-assault waves gain about +15% units.
-- `4 = very hard`: compared with hard, first P6/P7 main assaults are advanced by 30 more seconds, repeated main-assault standard cooldown is 13:00, waves gain another layer to about +25% over easy, and Hatchery/Lair/Hive kill acceleration is 100 seconds instead of hard's 90 seconds.
+- `1 = easy`: current Mission 2 behavior. Overmind Cocoon side selection always picks P6 when both colonies are still alive.
+- `2 = normal`: first P6/P7 main assaults use the same 5:00 / 7:00 mission2 timing as easy; repeated main-assault standard cooldown is 17:30, and main-assault waves gain about +10% units.
+- `3 = hard`: first P6/P7 main assaults use the same 5:00 / 7:00 mission2 timing as easy; repeated main-assault standard cooldown is 15:00, and main-assault waves gain about +15% units.
+- `4 = very hard`: first P6/P7 main assaults use the same 5:00 / 7:00 mission2 timing as easy; repeated main-assault standard cooldown is 13:00, waves gain another layer to about +25% over easy, and Hatchery/Lair/Hive kill acceleration is 100 seconds instead of hard's 90 seconds.
 
 Repeated cooldown jitter keeps the existing +/-30 second pattern:
 

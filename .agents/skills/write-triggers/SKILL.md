@@ -24,6 +24,10 @@ runtime behavior to the user in Korean. Keep it concise but concrete:
 - How the new trigger order interacts with nearby existing triggers.
 - What is intentionally blocked or skipped, and what still continues.
 
+When reporting dialogue or objective text changes, quote every affected string in
+full — same rule as `trigedit-text-output`: no paraphrase, no ellipsis, no
+partial lines.
+
 Prefer behavior-level explanations over only listing edited lines. For example,
 describe "Overlord support is skipped when the cap is exceeded, but the Hunt
 attack body still runs and resets its timer."

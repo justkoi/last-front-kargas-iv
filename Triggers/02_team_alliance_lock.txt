@@ -1,8 +1,6 @@
 //-----------------------------------------------------------------//
-//  플레이어 팀킬 방지 - 동맹 상태 고정
-//  P1~P4만 서로 Ally로 반복 갱신한다.
-//  P9 입구 방어 건물 슬롯은 궤도스캔 시점에만 1회 설정한다.
-//  Terran Science Vessel DC = 10초 주기 (120틱)
+//  시작 시 동맹 초기화
+//  P1~P4 상호 동맹, P9(입구 방어 건물) 동맹/적대는 게임 시작 직후 1회만 설정한다.
 //-----------------------------------------------------------------//
 
 Trigger("Player 1"){
@@ -39,6 +37,76 @@ Actions:
 	Set Alliance Status("Player 1", Ally);
 	Set Alliance Status("Player 2", Ally);
 	Set Alliance Status("Player 3", Ally);
+}
+
+Trigger("Player 9"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 1", Ally); //입구 방어 건물(P9) : P1~P4와 즉시 동맹
+	Set Alliance Status("Player 2", Ally);
+	Set Alliance Status("Player 3", Ally);
+	Set Alliance Status("Player 4", Ally);
+	Set Alliance Status("Player 5", Enemy);
+	Set Alliance Status("Player 6", Enemy);
+	Set Alliance Status("Player 7", Enemy);
+	Set Alliance Status("Player 8", Enemy);
+}
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 9", Ally); //P9 입구 방어 건물 : 시작 즉시 동맹
+}
+
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 9", Ally);
+}
+
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 9", Ally);
+}
+
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 9", Ally);
+}
+
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 9", Enemy); //P9는 적 세력과 적대
+}
+
+Trigger("Player 6"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 9", Enemy);
+}
+
+Trigger("Player 7"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 9", Enemy);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Alliance Status("Player 9", Enemy);
 }
 
 //-----------------------------------------------------------------//
@@ -82,51 +150,16 @@ Actions:
 	Run AI Script("+Vi6");
 }
 
-Trigger("Player 1"){
-Conditions:
-	Deaths("Player 8", "Terran Science Vessel", At least, 120);
-Actions:
-	Set Alliance Status("Player 2", Ally);
-	Set Alliance Status("Player 3", Ally);
-	Set Alliance Status("Player 4", Ally);
-	Preserve Trigger();
-}
-
-Trigger("Player 2"){
-Conditions:
-	Deaths("Player 8", "Terran Science Vessel", At least, 120);
-Actions:
-	Set Alliance Status("Player 1", Ally);
-	Set Alliance Status("Player 3", Ally);
-	Set Alliance Status("Player 4", Ally);
-	Preserve Trigger();
-}
-
-Trigger("Player 3"){
-Conditions:
-	Deaths("Player 8", "Terran Science Vessel", At least, 120);
-Actions:
-	Set Alliance Status("Player 1", Ally);
-	Set Alliance Status("Player 2", Ally);
-	Set Alliance Status("Player 4", Ally);
-	Preserve Trigger();
-}
-
-Trigger("Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Science Vessel", At least, 120);
-Actions:
-	Set Alliance Status("Player 1", Ally);
-	Set Alliance Status("Player 2", Ally);
-	Set Alliance Status("Player 3", Ally);
-	Preserve Trigger();
-}
+//-----------------------------------------------------------------//
+//  Force 2 shared vision refresh (10초 주기).
+//  Terran Science Vessel DC = 120틱. 동맹 고정과 분리해 시야만 반복 갱신한다.
+//-----------------------------------------------------------------//
 
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Science Vessel", At least, 120);
 Actions:
-	Run AI Script("+Vi5");
+	Run AI Script("+Vi5"); //P5가 P6·P7·P8 시야 획득
 	Run AI Script("+Vi6");
 	Run AI Script("+Vi7");
 	Preserve Trigger();
@@ -136,7 +169,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Science Vessel", At least, 120);
 Actions:
-	Run AI Script("+Vi4");
+	Run AI Script("+Vi4"); //P6가 P5·P7·P8 시야 획득
 	Run AI Script("+Vi6");
 	Run AI Script("+Vi7");
 	Preserve Trigger();
@@ -146,7 +179,7 @@ Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Science Vessel", At least, 120);
 Actions:
-	Run AI Script("+Vi4");
+	Run AI Script("+Vi4"); //P7가 P5·P6·P8 시야 획득
 	Run AI Script("+Vi5");
 	Run AI Script("+Vi7");
 	Preserve Trigger();
@@ -156,7 +189,7 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Science Vessel", At least, 120);
 Actions:
-	Run AI Script("+Vi4");
+	Run AI Script("+Vi4"); //P8가 P5·P6·P7 시야 획득
 	Run AI Script("+Vi5");
 	Run AI Script("+Vi6");
 	Preserve Trigger();
@@ -166,6 +199,6 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Science Vessel", At least, 120);
 Actions:
-	Set Deaths("Player 8", "Terran Science Vessel", Set To, 0);
+	Set Deaths("Player 8", "Terran Science Vessel", Set To, 0); //10초 타이머 리셋
 	Preserve Trigger();
 }

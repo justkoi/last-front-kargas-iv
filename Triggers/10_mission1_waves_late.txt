@@ -343,11 +343,57 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch144", Not Set);
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>잘했다. 전방 지휘 신호가 끊겼다. 지금 벌어 둔 틈을 놓치지 마라.");
+	Display Text Message(Always Display, "<11>주황색 저그<04>의 지휘체계가 혼란에 빠졌습니다. 잠시 동안 공격을 망설일 것입니다.");
 	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 제거. 미네랄 +1000");
 	Set Resources("Current Player", Add, 1000, ore);
+	Set Switch("Switch144", set);
+}
+
+// AttackPoint1 cerebrate kill - rally P5 hunt assault units toward P5 Spawn1 once.
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch143", Not Set);
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
+Actions:
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Infested Terran", "Anywhere", "P5 Spawn1", Move);
+}
+
+// AttackPoint1 cerebrate kill - delay next P5 Hunt all-out by up to 60s (720 ticks).
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch143", Not Set);
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
+	Deaths("Player 8", "Terran Barracks", At least, 720);
+Actions:
+	Set Switch("Switch143", set);
+	Set Deaths("Player 8", "Terran Barracks", Subtract, 720);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch143", Not Set);
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
+	Deaths("Player 8", "Terran Barracks", At most, 719);
+Actions:
+	Set Switch("Switch143", set);
+	Set Deaths("Player 8", "Terran Barracks", Set To, 0);
 }
 
 Trigger("Player 8"){

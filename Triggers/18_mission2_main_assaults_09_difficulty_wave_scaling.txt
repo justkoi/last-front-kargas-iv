@@ -1,10 +1,23 @@
 //-----------------------------------------------------------------//
 //  Mission 2 difficulty wave-size scaling
 //
-//  Normal adds about +10% over easy. Hard adds another small layer so
-//  hard totals about +15% over easy. Very hard adds another layer so
-//  very hard totals about +25% over easy. These triggers do not change
-//  orders, waypoint relay timing, rewards, or Overlord support.
+//  Balance note (assault scale rework):
+//    Easy was cut -10% in the base wave files (10~13 / 20~23).
+//    To keep Normal at the *original easy* +5% (= about -5% vs the old
+//    Normal) and to leave Hard / Very Hard totals exactly unchanged,
+//    the units removed from the base are moved back up into these layers:
+//    half into the L2 (Normal, Academy At least 2) triggers and half into
+//    the L3 (Hard, Academy At least 3) triggers, per unit type and wave.
+//    L4 (Very Hard, Academy Exactly 4) is left untouched.
+//
+//  Net result per wave:
+//    Easy      = base                  (-10% vs before)
+//    Normal    = base + L2             (original easy +5%)
+//    Hard      = base + L2 + L3        (unchanged total)
+//    Very Hard = base + L2 + L3 + L4   (unchanged total)
+//
+//  These triggers do not change orders, waypoint relay timing, rewards,
+//  or Overlord support.
 //-----------------------------------------------------------------//
 
 // P6 Wave 0 - Ultralisk + Zergling + Hydralisk
@@ -19,14 +32,14 @@ Conditions:
 	Switch("Switch9", Not Set);
 	Switch("Switch10", Not Set);
 Actions:
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 8, "P6 Spawn1");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 2);
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn4");
 	Preserve Trigger();
 }
@@ -42,12 +55,12 @@ Conditions:
 	Switch("Switch9", Not Set);
 	Switch("Switch10", Not Set);
 Actions:
-	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 3, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn4");
 	Preserve Trigger();
 }
@@ -64,9 +77,9 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Not Set);
 Actions:
-	Create Unit("Player 6", "Zerg Scourge", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
 	Preserve Trigger();
 }
 
@@ -81,9 +94,9 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Not Set);
 Actions:
-	Create Unit("Player 6", "Zerg Scourge", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn3");
 	Preserve Trigger();
 }
 
@@ -165,10 +178,10 @@ Conditions:
 	Switch("Switch9", Not Set);
 	Switch("Switch10", Set);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn1");
 	Preserve Trigger();
 }
@@ -184,9 +197,10 @@ Conditions:
 	Switch("Switch9", Not Set);
 	Switch("Switch10", Set);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 2, "P6 Spawn4");
 	Preserve Trigger();
 }
 
@@ -338,8 +352,8 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 5, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn2");
 	Preserve Trigger();
 }
 
@@ -354,8 +368,8 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
 	Preserve Trigger();
 }
 
@@ -433,14 +447,14 @@ Conditions:
 	Switch("Switch11", Not Set);
 	Switch("Switch12", Not Set);
 Actions:
-	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 8, "P7 Spawn1");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn2", 2);
-	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 2, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 7, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn4");
 	Preserve Trigger();
 }
@@ -456,12 +470,12 @@ Conditions:
 	Switch("Switch11", Not Set);
 	Switch("Switch12", Not Set);
 Actions:
-	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Zergling", 3, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 2, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 2, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn4");
 	Preserve Trigger();
 }
@@ -478,9 +492,9 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Not Set);
 Actions:
-	Create Unit("Player 7", "Zerg Scourge", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
 	Preserve Trigger();
 }
 
@@ -495,9 +509,9 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Not Set);
 Actions:
-	Create Unit("Player 7", "Zerg Scourge", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn3");
 	Preserve Trigger();
 }
 
@@ -579,10 +593,10 @@ Conditions:
 	Switch("Switch11", Not Set);
 	Switch("Switch12", Set);
 Actions:
-	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 2, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn1");
 	Preserve Trigger();
 }
@@ -598,9 +612,10 @@ Conditions:
 	Switch("Switch11", Not Set);
 	Switch("Switch12", Set);
 Actions:
-	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 2, "P7 Spawn4");
 	Preserve Trigger();
 }
 
@@ -752,8 +767,8 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 5, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn2");
 	Preserve Trigger();
 }
 
@@ -768,8 +783,8 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn2");
 	Preserve Trigger();
 }
 
@@ -956,7 +971,6 @@ Conditions:
 	Switch("Switch10", Set);
 Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 1, "P6 Spawn3");
 	Preserve Trigger();
 }
 
@@ -1126,7 +1140,6 @@ Conditions:
 	Switch("Switch12", Set);
 Actions:
 	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Hydralisk", 1, "P7 Spawn3");
 	Preserve Trigger();
 }
 

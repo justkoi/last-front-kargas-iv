@@ -1,91 +1,12 @@
 //-----------------------------------------------------------------//
 //  Mission 2 difficulty timing adjustments
 //
-//  Easy keeps the existing first-assault seed and 21:00/21:30/22:00
-//  repeated cooldowns. Normal, hard, and very hard only advance cooldown progress;
+//  First-assault timing is identical on all difficulties (5:00 / 7:00 mission2).
+//  Easy keeps 21:30/22:00/22:30 repeated cooldowns (22:00 standard).
+//  Normal, hard, and very hard only advance repeated cooldown progress;
 //  the existing roll, warning, 10-second spawn delay, and consume
 //  triggers remain unchanged.
 //-----------------------------------------------------------------//
-
-// First P6 assault seed: normal +30s, hard +60s, very hard +90s.
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
-	Deaths("Player 8", "Terran Academy", Exactly, 2);
-	Switch("Switch50", Set);
-	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 10236);
-	Deaths("Player 8", "Zerg Zergling", At most, 12396);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 360);
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
-	Switch("Switch50", Set);
-	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 10236);
-	Deaths("Player 8", "Zerg Zergling", At most, 12396);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 720);
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
-	Deaths("Player 8", "Terran Academy", Exactly, 4);
-	Switch("Switch50", Set);
-	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Zergling", At least, 10236);
-	Deaths("Player 8", "Zerg Zergling", At most, 12396);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1080);
-}
-
-// First P7 assault seed: normal +30s, hard +60s, very hard +90s.
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
-	Deaths("Player 8", "Terran Academy", Exactly, 2);
-	Switch("Switch50", Set);
-	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 10236);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12396);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 360);
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
-	Switch("Switch50", Set);
-	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 10236);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12396);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 720);
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
-	Deaths("Player 8", "Terran Academy", Exactly, 4);
-	Switch("Switch50", Set);
-	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 10236);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 12396);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1080);
-}
 
 // Repeated cooldown adjustments start only after that colony's first spawn begins.
 Trigger("Player 8"){
@@ -140,8 +61,8 @@ Conditions:
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 11280);
-	Deaths("Player 8", "Zerg Zergling", At most, 14159);
+	Deaths("Player 8", "Zerg Zergling", At least, 11640);
+	Deaths("Player 8", "Zerg Zergling", At most, 14479);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 2880);
 	Set Switch("Switch120", set);
@@ -159,8 +80,8 @@ Conditions:
 	Switch("Switch27", Set);
 	Switch("Switch28", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 11640);
-	Deaths("Player 8", "Zerg Zergling", At most, 14519);
+	Deaths("Player 8", "Zerg Zergling", At least, 12000);
+	Deaths("Player 8", "Zerg Zergling", At most, 14879);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 2880);
 	Set Switch("Switch120", set);
@@ -178,8 +99,8 @@ Conditions:
 	Switch("Switch27", Set);
 	Switch("Switch28", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 11640);
-	Deaths("Player 8", "Zerg Zergling", At most, 14519);
+	Deaths("Player 8", "Zerg Zergling", At least, 12000);
+	Deaths("Player 8", "Zerg Zergling", At most, 14879);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 2880);
 	Set Switch("Switch120", set);
@@ -197,8 +118,8 @@ Conditions:
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 12000);
-	Deaths("Player 8", "Zerg Zergling", At most, 14879);
+	Deaths("Player 8", "Zerg Zergling", At least, 12360);
+	Deaths("Player 8", "Zerg Zergling", At most, 15239);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 2880);
 	Set Switch("Switch120", set);
@@ -217,8 +138,8 @@ Conditions:
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 9840);
-	Deaths("Player 8", "Zerg Zergling", At most, 14159);
+	Deaths("Player 8", "Zerg Zergling", At least, 10200);
+	Deaths("Player 8", "Zerg Zergling", At most, 14479);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 4320);
 	Set Switch("Switch120", set);
@@ -236,8 +157,8 @@ Conditions:
 	Switch("Switch27", Set);
 	Switch("Switch28", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 10200);
-	Deaths("Player 8", "Zerg Zergling", At most, 14519);
+	Deaths("Player 8", "Zerg Zergling", At least, 10560);
+	Deaths("Player 8", "Zerg Zergling", At most, 14879);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 4320);
 	Set Switch("Switch120", set);
@@ -255,8 +176,8 @@ Conditions:
 	Switch("Switch27", Set);
 	Switch("Switch28", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 10200);
-	Deaths("Player 8", "Zerg Zergling", At most, 14519);
+	Deaths("Player 8", "Zerg Zergling", At least, 10560);
+	Deaths("Player 8", "Zerg Zergling", At most, 14879);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 4320);
 	Set Switch("Switch120", set);
@@ -274,8 +195,8 @@ Conditions:
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 10560);
-	Deaths("Player 8", "Zerg Zergling", At most, 14879);
+	Deaths("Player 8", "Zerg Zergling", At least, 10920);
+	Deaths("Player 8", "Zerg Zergling", At most, 15239);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 4320);
 	Set Switch("Switch120", set);
@@ -294,8 +215,8 @@ Conditions:
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 8400);
-	Deaths("Player 8", "Zerg Zergling", At most, 14159);
+	Deaths("Player 8", "Zerg Zergling", At least, 8760);
+	Deaths("Player 8", "Zerg Zergling", At most, 14479);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 5760);
 	Set Switch("Switch120", set);
@@ -313,8 +234,8 @@ Conditions:
 	Switch("Switch27", Set);
 	Switch("Switch28", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 8760);
-	Deaths("Player 8", "Zerg Zergling", At most, 14519);
+	Deaths("Player 8", "Zerg Zergling", At least, 9120);
+	Deaths("Player 8", "Zerg Zergling", At most, 14879);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 5760);
 	Set Switch("Switch120", set);
@@ -332,8 +253,8 @@ Conditions:
 	Switch("Switch27", Set);
 	Switch("Switch28", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 8760);
-	Deaths("Player 8", "Zerg Zergling", At most, 14519);
+	Deaths("Player 8", "Zerg Zergling", At least, 9120);
+	Deaths("Player 8", "Zerg Zergling", At most, 14879);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 5760);
 	Set Switch("Switch120", set);
@@ -351,8 +272,8 @@ Conditions:
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 9120);
-	Deaths("Player 8", "Zerg Zergling", At most, 14879);
+	Deaths("Player 8", "Zerg Zergling", At least, 9480);
+	Deaths("Player 8", "Zerg Zergling", At most, 15239);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 5760);
 	Set Switch("Switch120", set);
@@ -371,8 +292,8 @@ Conditions:
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 11280);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14159);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 11640);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14479);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2880);
 	Set Switch("Switch121", set);
@@ -390,8 +311,8 @@ Conditions:
 	Switch("Switch29", Set);
 	Switch("Switch30", Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 11640);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14519);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14879);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2880);
 	Set Switch("Switch121", set);
@@ -409,8 +330,8 @@ Conditions:
 	Switch("Switch29", Set);
 	Switch("Switch30", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 11640);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14519);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14879);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2880);
 	Set Switch("Switch121", set);
@@ -428,8 +349,8 @@ Conditions:
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14879);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 12360);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 15239);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2880);
 	Set Switch("Switch121", set);
@@ -448,8 +369,8 @@ Conditions:
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 9840);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14159);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 10200);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14479);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4320);
 	Set Switch("Switch121", set);
@@ -468,8 +389,8 @@ Conditions:
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 8400);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14159);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 8760);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14479);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
 	Set Switch("Switch121", set);
@@ -485,44 +406,6 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
 	Switch("Switch29", Set);
-	Switch("Switch30", Set);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 8760);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14519);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
-	Set Switch("Switch121", set);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Academy", Exactly, 4);
-	Switch("Switch119", Set);
-	Switch("Switch121", Not Set);
-	Switch("Switch32", Not Set);
-	Switch("Switch67", Not Set);
-	Switch("Switch29", Set);
-	Switch("Switch30", Not Set);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 8760);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14519);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
-	Set Switch("Switch121", set);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Academy", Exactly, 4);
-	Switch("Switch119", Set);
-	Switch("Switch121", Not Set);
-	Switch("Switch32", Not Set);
-	Switch("Switch67", Not Set);
-	Switch("Switch29", Not Set);
 	Switch("Switch30", Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 9120);
@@ -536,6 +419,44 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch119", Set);
+	Switch("Switch121", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch67", Not Set);
+	Switch("Switch29", Set);
+	Switch("Switch30", Not Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 9120);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14879);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
+	Set Switch("Switch121", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch119", Set);
+	Switch("Switch121", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch67", Not Set);
+	Switch("Switch29", Not Set);
+	Switch("Switch30", Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 9480);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 15239);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
+	Set Switch("Switch121", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Switch("Switch119", Set);
 	Switch("Switch121", Not Set);
@@ -544,8 +465,8 @@ Conditions:
 	Switch("Switch29", Set);
 	Switch("Switch30", Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 10200);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14519);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 10560);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14879);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4320);
 	Set Switch("Switch121", set);
@@ -563,8 +484,8 @@ Conditions:
 	Switch("Switch29", Set);
 	Switch("Switch30", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 10200);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14519);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 10560);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14879);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4320);
 	Set Switch("Switch121", set);
@@ -582,8 +503,8 @@ Conditions:
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 10560);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14879);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 10920);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 15239);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4320);
 	Set Switch("Switch121", set);

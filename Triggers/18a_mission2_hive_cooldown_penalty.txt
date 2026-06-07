@@ -3,7 +3,7 @@
 //
 //  Hatchery/Lair/Hive kills reduce that colony's own main assault
 //  cooldown by difficulty and grant players minerals/gas.
-//  12 DC tick = 1 second: easy 70s = 840, normal 80s = 960, hard 90s = 1080, very hard 100s = 1200.
+//  12 DC tick = 1 second: easy 65s = 780, normal 75s = 900, hard 85s = 1020, very hard 95s = 1140.
 //-----------------------------------------------------------------//
 
 Trigger("Player 6"){
@@ -64,6 +64,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch95", Set);
+	Switch("Switch32", Not Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>동북쪽 군락 생산 구조를 파괴하면 자원을 확보하지만, 해당 군락의 다음 주공세가 앞당겨집니다.");
 }
@@ -72,6 +73,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch96", Set);
+	Switch("Switch31", Not Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>동남쪽 군락 생산 구조를 파괴하면 자원을 확보하지만, 해당 군락의 다음 주공세가 앞당겨집니다.");
 }
@@ -79,6 +81,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
@@ -90,8 +93,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 840);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 780);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -108,6 +112,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
@@ -119,8 +124,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 960);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 900);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -139,8 +145,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1080);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1020);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -159,8 +166,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
+	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 840);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 780);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -177,6 +185,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
@@ -188,8 +197,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
+	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 960);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 900);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -208,8 +218,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
+	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1080);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1020);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -228,8 +239,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
+	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 840);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 780);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -248,8 +260,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
+	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 960);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 900);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -268,8 +281,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
+	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1080);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1020);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -286,6 +300,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
@@ -297,8 +312,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 840);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 780);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -317,8 +333,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 900);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -337,8 +354,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1080);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1020);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -355,6 +373,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
@@ -366,8 +385,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
+	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 840);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 780);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -386,8 +406,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
+	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 900);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -406,8 +427,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
+	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1080);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1020);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -424,6 +446,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
@@ -435,8 +458,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
+	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 840);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 780);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -455,8 +479,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
+	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 960);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 900);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -475,8 +500,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
+	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1080);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1020);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -491,7 +517,7 @@ Actions:
 }
 
 //-----------------------------------------------------------------//
-//  Very hard tech loss acceleration - 100 seconds.
+//  Very hard tech loss acceleration - 95 seconds.
 //-----------------------------------------------------------------//
 
 Trigger("Player 6"){
@@ -499,8 +525,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1200);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1140);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -519,8 +546,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
+	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1200);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1140);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -539,8 +567,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
+	Switch("Switch32", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1200);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1140);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -559,8 +588,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1200);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1140);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -579,8 +609,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
+	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1200);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1140);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -599,8 +630,149 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
+	Switch("Switch31", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1200);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1140);
+	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Resources("Player 1", Add, 450, ore);
+	Set Resources("Player 2", Add, 450, ore);
+	Set Resources("Player 3", Add, 450, ore);
+	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
+	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+//-----------------------------------------------------------------//
+//  Opposite-colony-cleared variants - no main-assault acceleration.
+//
+//  Once one colony's MainBase tech core has collapsed (Switch31 = P6,
+//  Switch32 = P7), destroying the surviving colony's Hatchery/Lair/Hive
+//  no longer advances its main-assault cooldown - it only grants the
+//  player resources and still counts toward the final-scream tally
+//  (Zerg Sunken/Spore Colony, read by 18d). This cuts pointless attrition
+//  so a winning team can finish faster. Reward/counter/consume are
+//  difficulty-independent, so one trigger per building type is enough.
+//  Mutually exclusive with the accelerating triggers above via the
+//  opposite-colony switch (Set here vs Not Set above).
+//-----------------------------------------------------------------//
+
+// P6 surviving (P7 cleared) - Hatchery destroyed: reward + tally, no acceleration.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch32", Set);
+	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Resources("Player 1", Add, 250, ore);
+	Set Resources("Player 2", Add, 250, ore);
+	Set Resources("Player 3", Add, 250, ore);
+	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
+	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+// P6 surviving (P7 cleared) - Lair destroyed: reward + tally, no acceleration.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch32", Set);
+	Deaths("Player 6", "Zerg Lair", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Resources("Player 1", Add, 350, ore);
+	Set Resources("Player 2", Add, 350, ore);
+	Set Resources("Player 3", Add, 350, ore);
+	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
+	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+// P6 surviving (P7 cleared) - Hive destroyed: reward + tally, no acceleration.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch32", Set);
+	Deaths("Player 6", "Zerg Hive", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Resources("Player 1", Add, 450, ore);
+	Set Resources("Player 2", Add, 450, ore);
+	Set Resources("Player 3", Add, 450, ore);
+	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
+	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+// P7 surviving (P6 cleared) - Hatchery destroyed: reward + tally, no acceleration.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch31", Set);
+	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Resources("Player 1", Add, 250, ore);
+	Set Resources("Player 2", Add, 250, ore);
+	Set Resources("Player 3", Add, 250, ore);
+	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
+	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+// P7 surviving (P6 cleared) - Lair destroyed: reward + tally, no acceleration.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch31", Set);
+	Deaths("Player 7", "Zerg Lair", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Resources("Player 1", Add, 350, ore);
+	Set Resources("Player 2", Add, 350, ore);
+	Set Resources("Player 3", Add, 350, ore);
+	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 60, gas);
+	Set Resources("Player 2", Add, 60, gas);
+	Set Resources("Player 3", Add, 60, gas);
+	Set Resources("Player 4", Add, 60, gas);
+	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+// P7 surviving (P6 cleared) - Hive destroyed: reward + tally, no acceleration.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch31", Set);
+	Deaths("Player 7", "Zerg Hive", At least, 1);
+Actions:
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);

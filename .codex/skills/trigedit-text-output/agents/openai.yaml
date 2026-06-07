@@ -1,0 +1,7 @@
+interface:
+  display_name: "TrigEdit Text Output"
+  short_description: "SC1 trigger text and color rules."
+  default_prompt: "Use $trigedit-text-output to write or review StarCraft trigger dialogue, mission objectives, alerts, headers, and color/control codes."
+
+policy:
+  allow_implicit_invocation: true

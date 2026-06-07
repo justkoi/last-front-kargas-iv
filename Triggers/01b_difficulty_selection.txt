@@ -9,7 +9,9 @@
 
 Trigger("Player 1"){
 Conditions:
-	Elapsed Time(At most, 1);
+	Elapsed Time(At least, 106);
+	Elapsed Time(At most, 108);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
 	Switch("Switch117", Not Set);
 Actions:
 	Create Unit("Player 1", "Terran Civilian", 1, "Selector");
@@ -18,7 +20,9 @@ Actions:
 
 Trigger("Player 2"){
 Conditions:
-	Elapsed Time(At most, 1);
+	Elapsed Time(At least, 106);
+	Elapsed Time(At most, 108);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
 	Switch("Switch117", Not Set);
 	Command("Player 1", "Buildings", At most, 0);
 Actions:
@@ -28,7 +32,9 @@ Actions:
 
 Trigger("Player 3"){
 Conditions:
-	Elapsed Time(At most, 1);
+	Elapsed Time(At least, 106);
+	Elapsed Time(At most, 108);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
 	Switch("Switch117", Not Set);
 	Command("Player 1", "Buildings", At most, 0);
 	Command("Player 2", "Buildings", At most, 0);
@@ -39,7 +45,9 @@ Actions:
 
 Trigger("Player 4"){
 Conditions:
-	Elapsed Time(At most, 1);
+	Elapsed Time(At least, 106);
+	Elapsed Time(At most, 108);
+	Deaths("Player 8", "Terran Academy", Exactly, 0);
 	Switch("Switch117", Not Set);
 	Command("Player 1", "Buildings", At most, 0);
 	Command("Player 2", "Buildings", At most, 0);
@@ -51,92 +59,13 @@ Actions:
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 10);
-	Elapsed Time(At most, 12);
+	Elapsed Time(At least, 106);
+	Elapsed Time(At most, 108);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 20);
-	Elapsed Time(At most, 22);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 30);
-	Elapsed Time(At most, 32);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 40);
-	Elapsed Time(At most, 42);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 50);
-	Elapsed Time(At most, 52);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 60);
-	Elapsed Time(At most, 62);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 70);
-	Elapsed Time(At most, 72);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 80);
-	Elapsed Time(At most, 82);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 90);
-	Elapsed Time(At most, 92);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 100);
-	Elapsed Time(At most, 102);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
+	Display Text Message(Always Display, "<07>난이도를 선택하세요. <04>선택 시민을 <07>쉬움<04>, <11>보통<04>, <08>어려움<04>, <06>매우 어려움<04> 구역으로 이동시키십시오. 선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
 }
 
 Trigger("All Players"){
@@ -145,74 +74,26 @@ Conditions:
 	Elapsed Time(At most, 112);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
-	Minimap Ping("Selector");
+	Display Text Message(Always Display, "<03>안내: <04>이 작전은 꽤 어려운 편입니다. 처음 플레이하신다면 <07>쉬움<04>을 권장합니다.");
 }
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 120);
-	Elapsed Time(At most, 122);
+	Elapsed Time(At least, 113);
+	Elapsed Time(At most, 115);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 130);
-	Elapsed Time(At most, 132);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 140);
-	Elapsed Time(At most, 142);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 150);
-	Elapsed Time(At most, 152);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 160);
-	Elapsed Time(At most, 162);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Minimap Ping("Selector");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 55);
-	Elapsed Time(At most, 57);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("Selector");
-	Display Text Message(Always Display, "<07>난이도를 선택하세요. <04>선택 시민을 <07>쉬움<04>, <11>보통<04>, <08>어려움<04>, <06>매우 어려움<04> 구역으로 이동시키십시오. 선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
-	Display Text Message(Always Display, "<13><03>[난이도 차이 안내]");
-	Display Text Message(Always Display, "<07>쉬움 보급: <04>미네랄 +200 / 가스 +100, <11>보통 보급: <04>미네랄 +100.");
-	Display Text Message(Always Display, "<11>보통: <04>적 공세 간격이 짧아지고, 적 해처리가 추가됩니다.");
-	Display Text Message(Always Display, "<08>어려움: <04>적 공세 간격이 더 짧아지고, 적 병력과 해처리가 더 늘어납니다.");
-	Display Text Message(Always Display, "<06>매우 어려움: <04>어려움보다 공세 주기와 처치 페널티가 더 강해집니다.");
+	Display Text Message(Always Display, "<13><03>[난이도 차이]");
+	Display Text Message(Always Display, "<07>쉬움 : <04>미네랄 +400 / 가스 +150 보급이 지원됩니다.");
+	Display Text Message(Always Display, "<11>보통 : <04>공세 간격 감소, 해처리 추가. 미네랄 +150 보급이 지원됩니다.");
+	Display Text Message(Always Display, "<08>어려움 : <04>공세 간격 추가 감소, 병력과 해처리 증가.");
+	Display Text Message(Always Display, "<06>매우 어려움 : <04>공세 주기와 처치 페널티 강화.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Elapsed Time(At least, 55);
-	Elapsed Time(At most, 57);
+	Elapsed Time(At least, 106);
+	Elapsed Time(At most, 108);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 	Bring("Current Player", "Terran Civilian", "Difficulty", At least, 1);
 Actions:
@@ -221,8 +102,8 @@ Actions:
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 75);
-	Elapsed Time(At most, 77);
+	Elapsed Time(At least, 145);
+	Elapsed Time(At most, 147);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -232,8 +113,8 @@ Actions:
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 95);
-	Elapsed Time(At most, 97);
+	Elapsed Time(At least, 170);
+	Elapsed Time(At most, 172);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -243,8 +124,8 @@ Actions:
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 145);
-	Elapsed Time(At most, 147);
+	Elapsed Time(At least, 185);
+	Elapsed Time(At most, 187);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -286,8 +167,8 @@ Actions:
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Elapsed Time(At least, 170);
-	Elapsed Time(At most, 172);
+	Elapsed Time(At least, 205);
+	Elapsed Time(At most, 207);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
 	Set Deaths("Player 8", "Terran Academy", Set To, 1);
@@ -299,9 +180,9 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<04>선택한 난이도는 <07>쉬움<04>입니다.");
-	Display Text Message(Always Display, "<07>선택 보급: <04>미네랄 +200 / 가스 +100.");
-	Set Resources("Current Player", Add, 200, ore);
-	Set Resources("Current Player", Add, 100, gas);
+	Display Text Message(Always Display, "<07>선택 보급: <04>미네랄 +400 / 가스 +150 보급이 지원됩니다.");
+	Set Resources("Current Player", Add, 400, ore);
+	Set Resources("Current Player", Add, 150, gas);
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -311,8 +192,8 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<04>선택한 난이도는 <11>보통<04>입니다.");
 	Display Text Message(Always Display, "<11>보통 효과: <04>적 공세 간격 감소, 적 해처리 추가.");
-	Display Text Message(Always Display, "<11>선택 보급: <04>미네랄 +100.");
-	Set Resources("Current Player", Add, 100, ore);
+	Display Text Message(Always Display, "<11>선택 보급: <04>미네랄 +150 보급이 지원됩니다.");
+	Set Resources("Current Player", Add, 150, ore);
 	Display Text Message(Always Display, "<07>행운을 빕니다!");
 }
 

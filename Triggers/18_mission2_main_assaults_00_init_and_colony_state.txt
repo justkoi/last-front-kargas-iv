@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------//
 //  Mission 2 - P6/P7 uncaptured-colony penalty assaults
 //
-//  12 DC tick = 1 second. Easy base cooldown is 1290s = 15480 ticks.
-//  Roll triggers subtract only the cooldown they consumed, so excess
-//  progress from repeated Hatchery/Lair/Hive kills stays queued.
-//  Hatchery/Lair/Hive kills add 70s worth of cooldown progress.
+//  12 DC tick = 1 second. Easy standard cooldown is 1320s = 15840 ticks (22:00).
+//  Easy jitter bands are 21:30 / 22:00 / 22:30. Roll triggers subtract only the
+//  cooldown they consumed, so excess progress from repeated Hatchery/Lair/Hive
+//  kills stays queued. Hatchery/Lair/Hive kills add 65s worth of cooldown progress on easy.
 //
 //  Waves may fire during mission1 or mission2, but not after victory.
 //  They are rolled randomly, then spawned across Spawn1~4 in parallel
@@ -77,6 +77,9 @@ Actions:
 	Set Switch("Switch119", clear);
 	Set Switch("Switch120", clear);
 	Set Switch("Switch121", clear);
+	Set Switch("Switch140", clear);
+	Set Switch("Switch141", clear);
+	Set Deaths("Player 8", "Terran Medic", Set To, 0);
 	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Set To, 0);
 	Set Deaths("Player 8", "Zerg Spore Colony", Set To, 0);
@@ -114,10 +117,11 @@ Actions:
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 }
 
-// First penalty assaults are staggered after the mission2 assault cooldown opens
+// First main assaults are staggered after the mission2 assault cooldown opens
 // at Vulture 756: one colony spawns at about 5:00 mission2 elapsed, the other at
-// about 8:00. From the cooldown-open point, those are 3:47 and 6:47.
-// Roll warnings fire 10 seconds before the first spawn batch.
+// about 7:00. From the cooldown-open point, those are 3:57 and 5:57.
+// Same first-assault timing on all difficulties. Roll warnings fire 10 seconds
+// before the first spawn batch.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -127,7 +131,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 12396);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 12996);
 }
 
 Trigger("Player 8"){
@@ -139,7 +143,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 10236);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 11556);
 }
 
 Trigger("Player 8"){
@@ -151,7 +155,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 10236);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 11556);
 }
 
 Trigger("Player 8"){
@@ -163,7 +167,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 12396);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 12996);
 }
 
 Trigger("Player 8"){

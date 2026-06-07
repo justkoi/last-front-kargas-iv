@@ -35,6 +35,9 @@ Actions:
 	Set Switch("Switch125", clear);
 	Set Switch("Switch126", clear);
 	Set Switch("Switch133", clear);
+	Set Switch("Switch142", clear);
+	Set Switch("Switch143", clear);
+	Set Switch("Switch144", clear);
 }
 
 Trigger("All Players"){
@@ -47,101 +50,38 @@ Actions:
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 9);
-	Elapsed Time(At most, 11);
+	Elapsed Time(At least, 11);
+	Elapsed Time(At most, 13);
 Actions:
-	Display Text Message(Always Display, "<04>지금 상태로는 오래 못 버틴다. 기지를 세우고 전선을 구축해야 한다.");
+	Display Text Message(Always Display, "<03>호크: <04>카르가스 전선은 이미 무너졌다. 우리가 온 이유는 하나다.");
 }
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 14);
-	Elapsed Time(At most, 16);
+	Elapsed Time(At least, 18);
+	Elapsed Time(At most, 20);
 Actions:
-	Display Text Message(Always Display, "<04>기지를 안정화하고 자원을 확보해라. 북서쪽 군락은 준비가 끝난 뒤 친다.");
+	Display Text Message(Always Display, "<04>여기에 새 거점을 세우고, 카르가스 IV의 전세를 다시 뒤집는 것이다.");
 }
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 21);
-	Elapsed Time(At most, 23);
+	Elapsed Time(At least, 25);
+	Elapsed Time(At most, 27);
 Actions:
-	Display Text Message(Always Display, "<1A>작전 정보장교 노바: <04>초기 정찰 보고입니다. 북서쪽 자원 지대에 대규모 군락이 확인됩니다.");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 26);
-	Elapsed Time(At most, 28);
-Actions:
-	Display Text Message(Always Display, "<04>군락 주변 확장로가 막혀 있습니다. 그대로 두면 자원 확보가 늦어집니다.");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 28);
-	Elapsed Time(At most, 30);
-Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔상 선봉 거점은 지상과 연결된 접근로가 하나뿐입니다.");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 33);
-	Elapsed Time(At most, 35);
-Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>단일 접근로 확인. 표시한 협곡이 유일한 진입로입니다.");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Elapsed Time(At least, 33);
-	Elapsed Time(At most, 35);
-Actions:
-	Set Alliance Status("Player 9", Ally);
-}
-
-Trigger("Player 5", "Player 6", "Player 7", "Player 8"){
-Conditions:
-	Elapsed Time(At least, 33);
-	Elapsed Time(At most, 35);
-Actions:
-	Set Alliance Status("Player 9", Enemy);
-}
-
-Trigger("Player 9"){
-Conditions:
-	Elapsed Time(At least, 33);
-	Elapsed Time(At most, 35);
-Actions:
-	Set Alliance Status("Player 1", Ally);
-	Set Alliance Status("Player 2", Ally);
-	Set Alliance Status("Player 3", Ally);
-	Set Alliance Status("Player 4", Ally);
-	Set Alliance Status("Player 5", Enemy);
-	Set Alliance Status("Player 6", Enemy);
-	Set Alliance Status("Player 7", Enemy);
-	Set Alliance Status("Player 8", Enemy);
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 38);
-	Elapsed Time(At most, 40);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>진입로는 하나다. 선봉대 전원, 그곳을 함께 사수해라.");
+	Display Text Message(Always Display, "<1A>작전 정보장교 노바: <04>사령관님, 주변 정찰이 필요합니다. 궤도 스캔을 올리겠습니다.");
 }
 
 Trigger("Player 1"){
 Conditions:
-	Elapsed Time(At least, 33);
-	Elapsed Time(At most, 35);
+	Elapsed Time(At least, 32);
+	Elapsed Time(At most, 34);
 Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan1");
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan2");
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan3");
-	Create Unit("Player 1", "Map Revealer", 1, "BaseScan4");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan4");	
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan5");
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan6");
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan7");
@@ -149,14 +89,14 @@ Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan9");
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan10");
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan11");
-	Minimap Ping("BaseEntrance");
 }
 
 Trigger("Player 2"){
 Conditions:
-	Elapsed Time(At least, 33);
-	Elapsed Time(At most, 35);
+	Elapsed Time(At least, 32);
+	Elapsed Time(At most, 34);
 Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan1");
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan2");
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan3");
@@ -168,14 +108,14 @@ Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan9");
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan10");
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan11");
-	Minimap Ping("BaseEntrance");
 }
 
 Trigger("Player 3"){
 Conditions:
-	Elapsed Time(At least, 33);
-	Elapsed Time(At most, 35);
+	Elapsed Time(At least, 32);
+	Elapsed Time(At most, 34);
 Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan1");
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan2");
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan3");
@@ -187,14 +127,14 @@ Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan9");
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan10");
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan11");
-	Minimap Ping("BaseEntrance");
 }
 
 Trigger("Player 4"){
 Conditions:
-	Elapsed Time(At least, 33);
-	Elapsed Time(At most, 35);
+	Elapsed Time(At least, 32);
+	Elapsed Time(At most, 34);
 Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan1");
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan2");
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan3");
@@ -206,13 +146,77 @@ Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan9");
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan10");
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan11");
-	Minimap Ping("BaseEntrance");
 }
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 183);
-	Elapsed Time(At most, 185);
+	Elapsed Time(At least, 32);
+	Elapsed Time(At most, 34);
+Actions:
+	Minimap Ping("BaseEntrance");
+	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 완료. 우리 거점으로 들어오는 길은 하나뿐입니다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 39);
+	Elapsed Time(At most, 41);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>저 입구는 반드시 사수해야 한다. 방어를 준비해라.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 46);
+	Elapsed Time(At most, 48);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>정찰 보고에 따르면, 북서쪽 자원 지대를 <11>주황색 저그<04> 군락이 점령 중입니다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 53);
+	Elapsed Time(At most, 55);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>우리에게 남은 자원이 얼마 없다. 북서쪽 자원 지대를 확보해야 한다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 60);
+	Elapsed Time(At most, 62);
+Actions:
+	Display Text Message(Always Display, "<11>주황색 저그<04> 군락을 치려면 준비가 필요하다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 67);
+	Elapsed Time(At most, 69);
+Actions:
+	Display Text Message(Always Display, "<04>먼저 방어를 단단히 한다. 진출은 그 다음이다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 74);
+	Elapsed Time(At most, 76);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>적이 우리 위치를 파악한 것 같습니다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 81);
+	Elapsed Time(At most, 83);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>병력을 흩뿌리지 말고 진입로 방어에 집중해라.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 243);
+	Elapsed Time(At most, 245);
 Actions:
 	Remove Unit("Player 1", "Map Revealer");
 	Remove Unit("Player 2", "Map Revealer");
@@ -222,8 +226,18 @@ Actions:
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 43);
-	Elapsed Time(At most, 45);
+	Elapsed Time(At least, 88);
+	Elapsed Time(At most, 90);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>병력을 흩뿌리지 마라. 진입로 방어에 집중해라.");
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Minimap Ping("BaseEntrance");
+	Display Text Message(Always Display, "<1A>노바: <04>거점 입구에 수리가 필요해 보이는 임시 방벽이 있습니다.");
+}
+
+Trigger("All Players"){
+Conditions:
+	Elapsed Time(At least, 95);
+	Elapsed Time(At most, 97);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>가능하면 수리해서 방어에 쓸 수 있도록 해라.");
 }

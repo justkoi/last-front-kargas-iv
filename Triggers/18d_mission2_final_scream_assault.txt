@@ -2,8 +2,8 @@
 //  Mission 2 - final scream assault after one colony collapses
 //
 //  If one P6/P7 MainBase tech core fully collapses while the other
-//  still survives and has lost 8 Hatchery/Lair/Hive tech structures,
-//  the remaining colony prepares one final 500-supply distributed
+//  still survives and has lost 10 Hatchery/Lair/Hive tech structures,
+//  the remaining colony prepares one final ~400-supply distributed
 //  assault. 12 DC ticks = 1 second.
 //-----------------------------------------------------------------//
 
@@ -13,7 +13,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch31", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Spore Colony", At least, 8);
+	Deaths("Player 8", "Zerg Spore Colony", At least, 10);
 	Switch("Switch74", Not Set);
 	Switch("Switch75", Not Set);
 Actions:
@@ -42,7 +42,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch32", Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Sunken Colony", At least, 8);
+	Deaths("Player 8", "Zerg Sunken Colony", At least, 10);
 	Switch("Switch74", Not Set);
 	Switch("Switch75", Not Set);
 Actions:
@@ -235,7 +235,7 @@ Actions:
 	Set Switch("Switch78", set);
 }
 
-// P7 batch 1 at 30s: 2 Ultra, 6 Zergling, 1 Defiler, 1 Overlord per front.
+// P7 batch 1 at 30s: 2 Ultra, 5 Zergling, 1 Defiler, 1 Overlord per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -245,19 +245,19 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At least, 360);
 Actions:
 	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn1");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn1", 2);
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn2");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn2", 2);
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn3");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn3", 2);
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn4");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn4", 2);
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
 	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -289,19 +289,19 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At least, 360);
 Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn1");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 2);
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn2");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 2);
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn3");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 2);
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn4");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 2);
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -323,7 +323,7 @@ Actions:
 	Set Switch("Switch79", set);
 }
 
-// P7 batch 2 at 34s: 2 Ultra, 6 Zergling, 1 Defiler per front.
+// P7 batch 2 at 34s: 1 Ultra, 5 Zergling per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -332,30 +332,22 @@ Conditions:
 	Switch("Switch80", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 408);
 Actions:
-	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn1");
-	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn1", 2);
-	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn2");
-	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn2", 2);
-	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn3");
-	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn3", 2);
-	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn4");
-	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn4", 2);
+	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn4");
 	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Defiler", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "P7 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Zergling", "P7 Spawn2", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Defiler", "P7 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "P7 Spawn3", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Zergling", "P7 Spawn3", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Defiler", "P7 Spawn3", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "P7 Spawn4", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Zergling", "P7 Spawn4", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Defiler", "P7 Spawn4", "P4 Hunt", Patrol);
 	Set Switch("Switch80", set);
 }
 
@@ -368,34 +360,26 @@ Conditions:
 	Switch("Switch80", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 408);
 Actions:
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn1");
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 2);
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn2");
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 2);
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn3");
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 2);
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn4");
-	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 2);
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn4");
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn3", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn4", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "P4 Hunt", Patrol);
 	Set Switch("Switch80", set);
 }
 
-// P7 batch 3 at 38s: 12 Hydralisk, 1 Lurker per front.
+// P7 batch 3 at 38s: 10 Hydralisk, 1 Lurker per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -404,13 +388,13 @@ Conditions:
 	Switch("Switch81", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 456);
 Actions:
-	Create Unit("Player 7", "Zerg Hydralisk", 12, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Hydralisk", 12, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Hydralisk", 12, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Hydralisk", 12, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn4");
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Lurker", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -432,13 +416,13 @@ Conditions:
 	Switch("Switch81", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 456);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 12, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 12, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 12, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 12, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -451,7 +435,7 @@ Actions:
 	Set Switch("Switch81", set);
 }
 
-// P7 batch 4 at 42s: 10 Hydralisk, 6 Zergling, 1 Lurker, 1 Defiler per front.
+// P7 batch 4 at 42s: 8 Hydralisk, 5 Zergling, 1 Defiler per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -460,37 +444,29 @@ Conditions:
 	Switch("Switch82", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 504);
 Actions:
-	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn1");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn1", 2);
-	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn2");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn2", 2);
-	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn3");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn3", 2);
-	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn4");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn4", 2);
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Defiler", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Zergling", "P7 Spawn2", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "P7 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Defiler", "P7 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn3", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Zergling", "P7 Spawn3", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "P7 Spawn3", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Defiler", "P7 Spawn3", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn4", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Zergling", "P7 Spawn4", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "P7 Spawn4", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Defiler", "P7 Spawn4", "P4 Hunt", Patrol);
 	Set Switch("Switch82", set);
 }
@@ -504,42 +480,34 @@ Conditions:
 	Switch("Switch82", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 504);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn1");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 2);
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn2");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 2);
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn3");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 2);
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn4");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 2);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn3", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn3", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn3", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn4", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 Spawn4", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Defiler", "P6 Spawn4", "P4 Hunt", Patrol);
 	Set Switch("Switch82", set);
 }
 
-// P7 batch 5 at 46s: 3 Mutalisk, 5 Scourge, 6 Zergling per front.
+// P7 batch 5 at 46s: 2 Mutalisk, 4 Scourge, 4 Zergling per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -548,18 +516,18 @@ Conditions:
 	Switch("Switch83", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 552);
 Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn4");
 	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Scourge", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -584,18 +552,18 @@ Conditions:
 	Switch("Switch83", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 552);
 Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn4");
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -611,7 +579,7 @@ Actions:
 	Set Switch("Switch83", set);
 }
 
-// P7 batch 6 at 50s: 10 Hydralisk, 3 Mutalisk, 5 Scourge, 1 Lurker per front.
+// P7 batch 6 at 50s: 8 Hydralisk, 3 Mutalisk, 4 Scourge, 1 Lurker per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -620,21 +588,21 @@ Conditions:
 	Switch("Switch86", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 600);
 Actions:
-	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn4");
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -664,21 +632,21 @@ Conditions:
 	Switch("Switch86", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 600);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -699,7 +667,7 @@ Actions:
 	Set Switch("Switch86", set);
 }
 
-// P7 batch 7 at 54s: 4 Hydralisk, 2 Guardian, 2 Devourer per front.
+// P7 batch 7 at 54s: 3 Hydralisk, 2 Guardian, 2 Devourer per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -708,16 +676,16 @@ Conditions:
 	Switch("Switch87", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 648);
 Actions:
-	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn4");
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -744,16 +712,16 @@ Conditions:
 	Switch("Switch87", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 648);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn4");
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -771,7 +739,7 @@ Actions:
 	Set Switch("Switch87", set);
 }
 
-// P7 batch 8 at 58s: 4 Hydralisk, 2 Guardian, 2 Devourer per front.
+// P7 batch 8 at 58s: 3 Hydralisk, 2 Guardian, 2 Devourer per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -780,16 +748,16 @@ Conditions:
 	Switch("Switch88", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 696);
 Actions:
-	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn4");
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -816,16 +784,16 @@ Conditions:
 	Switch("Switch88", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 696);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn4");
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -843,7 +811,7 @@ Actions:
 	Set Switch("Switch88", set);
 }
 
-// P7 batch 9 at 62s: 2 Guardian, 1 Devourer per front.
+// P7 batch 9 at 62s: 1 Guardian, 1 Devourer per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -852,13 +820,13 @@ Conditions:
 	Switch("Switch89", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 744);
 Actions:
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn4");
 	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -880,13 +848,13 @@ Conditions:
 	Switch("Switch89", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 744);
 Actions:
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn4");
 	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -899,7 +867,7 @@ Actions:
 	Set Switch("Switch89", set);
 }
 
-// P7 batch 10 at 66s: 2 Guardian, 1 Devourer per front.
+// P7 batch 10 at 66s: 1 Guardian per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -908,22 +876,14 @@ Conditions:
 	Switch("Switch90", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 792);
 Actions:
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn4");
 	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "P7 Spawn2", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "P7 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "P7 Spawn3", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "P7 Spawn3", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "P7 Spawn4", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "P7 Spawn4", "P4 Hunt", Patrol);
 	Set Switch("Switch90", set);
 }
 
@@ -936,21 +896,13 @@ Conditions:
 	Switch("Switch90", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 792);
 Actions:
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn4");
 	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn2", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn3", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 Spawn4", "P4 Hunt", Patrol);
 	Set Switch("Switch90", set);
 }

@@ -36,9 +36,11 @@ Actions:
 }
 
 // 각 저그 진영의 기본 AI 시작
+// P5 AI는 난이도 확정(Terran Academy >= 1) 이후에만 가동한다.
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 330);
+	Deaths("Player 8", "Terran Academy", At least, 1);
 Actions:
 	Run AI Script At Location("ZSUx", "P5 Base");
 }
