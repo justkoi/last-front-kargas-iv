@@ -1,1413 +1,1410 @@
-// Random Hunt relay. Active for 60s after final spawn batch.
-// Relay orders fire every 1 second while P6 units are routed through a waypoint.
+// P6 random Hunt relay. Final spawn batch 이후 60초 동안 활성.
+// P6 병력이 Waypoint에 머무는 동안 1초마다 선택된 P1~P4 Hunt 목적지로 재명령한다.
+// 참고: Waypoint -> Hunt Order는 Bring 조건 없이 유닛 타입별 Order를 발행하므로, 해당 위치에 없는 유닛 타입은 영향이 없다.
 Trigger("Player 8"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
 Actions:
-	Set Switch("Switch51", set);
-	Preserve Trigger();
+	Set Switch("Switch51", set); //P6 릴레이 enable 스위치 열기 : state=2와 window 조건이 살아 있음을 표시
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 8"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Deaths("Player 8", "Zerg Drone", At most, 11);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Deaths("Player 8", "Zerg Drone", At most, 11); //P6 Hunt 릴레이 쿨다운 충전 중 : 12틱(약 1초) 전까지 +1
 Actions:
-	Set Deaths("Player 8", "Zerg Drone", Add, 1);
-	Preserve Trigger();
+	Set Deaths("Player 8", "Zerg Drone", Add, 1); //P6 Hunt 릴레이 쿨다운 증가 : 12틱이 되면 다음 Order 트리거 허용
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Not Set);
-	Switch("Switch21", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Not Set); //P6 Hunt 대상 랜덤 비트 1 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Not Set); //P6 Hunt 대상 랜덤 비트 2 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint1", "P1 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
-}
-
-
-Trigger("Player 6"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Set);
-	Switch("Switch21", Not Set);
-Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint1", "P2 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint1", "P1 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint1에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P1 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint1에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint1", "P1 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint1에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint1", "P1 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint1에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint1", "P1 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint1에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint1", "P1 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint1에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint1", "P1 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint1에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint1", "P1 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint1에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint1", "P1 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint1에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint1", "P1 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint1에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint1", "P1 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint1에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Not Set);
-	Switch("Switch21", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Set); //P6 Hunt 대상 랜덤 비트 1 : Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Not Set); //P6 Hunt 대상 랜덤 비트 2 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint1", "P3 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint1", "P2 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint1에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P2 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint1에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint1", "P2 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint1에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint1", "P2 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint1에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint1", "P2 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint1에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint1", "P2 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint1에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint1", "P2 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint1에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint1", "P2 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint1에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint1", "P2 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint1에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint1", "P2 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint1에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint1", "P2 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint1에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Set);
-	Switch("Switch21", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Not Set); //P6 Hunt 대상 랜덤 비트 1 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Set); //P6 Hunt 대상 랜덤 비트 2 : Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint1", "P4 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint1", "P3 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint1에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P3 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint1에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint1", "P3 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint1에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint1", "P3 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint1에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint1", "P3 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint1에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint1", "P3 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint1에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint1", "P3 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint1에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint1", "P3 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint1에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint1", "P3 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint1에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint1", "P3 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint1에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint1", "P3 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint1에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Not Set);
-	Switch("Switch21", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Set); //P6 Hunt 대상 랜덤 비트 1 : Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Set); //P6 Hunt 대상 랜덤 비트 2 : Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint2", "P1 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint1", "P4 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint1에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P4 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint1에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint1", "P4 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint1에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint1", "P4 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint1에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint1", "P4 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint1에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint1", "P4 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint1에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint1", "P4 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint1에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint1", "P4 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint1에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint1", "P4 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint1에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint1", "P4 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint1에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint1", "P4 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint1에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Set);
-	Switch("Switch21", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Not Set); //P6 Hunt 대상 랜덤 비트 1 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Not Set); //P6 Hunt 대상 랜덤 비트 2 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint2", "P2 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint2", "P1 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint2에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P1 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint2에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint2", "P1 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint2에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint2", "P1 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint2에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint2", "P1 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint2에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint2", "P1 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint2에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint2", "P1 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint2에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint2", "P1 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint2에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint2", "P1 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint2에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint2", "P1 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint2에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint2", "P1 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint2에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Not Set);
-	Switch("Switch21", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Set); //P6 Hunt 대상 랜덤 비트 1 : Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Not Set); //P6 Hunt 대상 랜덤 비트 2 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint2", "P3 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint2", "P2 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint2에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P2 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint2에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint2", "P2 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint2에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint2", "P2 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint2에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint2", "P2 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint2에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint2", "P2 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint2에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint2", "P2 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint2에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint2", "P2 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint2에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint2", "P2 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint2에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint2", "P2 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint2에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint2", "P2 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint2에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Set);
-	Switch("Switch21", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Not Set); //P6 Hunt 대상 랜덤 비트 1 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Set); //P6 Hunt 대상 랜덤 비트 2 : Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint2", "P4 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint2", "P3 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint2에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P3 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint2에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint2", "P3 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint2에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint2", "P3 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint2에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint2", "P3 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint2에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint2", "P3 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint2에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint2", "P3 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint2에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint2", "P3 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint2에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint2", "P3 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint2에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint2", "P3 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint2에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint2", "P3 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint2에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Not Set);
-	Switch("Switch21", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Set); //P6 Hunt 대상 랜덤 비트 1 : Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Set); //P6 Hunt 대상 랜덤 비트 2 : Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint3", "P1 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint2", "P4 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint2에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P4 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint2에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint2", "P4 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint2에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint2", "P4 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint2에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint2", "P4 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint2에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint2", "P4 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint2에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint2", "P4 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint2에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint2", "P4 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint2에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint2", "P4 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint2에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint2", "P4 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint2에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint2", "P4 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint2에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Set);
-	Switch("Switch21", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Not Set); //P6 Hunt 대상 랜덤 비트 1 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Not Set); //P6 Hunt 대상 랜덤 비트 2 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint3", "P2 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint3", "P1 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint3에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P1 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint3에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint3", "P1 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint3에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint3", "P1 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint3에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint3", "P1 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint3에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint3", "P1 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint3에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint3", "P1 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint3에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint3", "P1 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint3에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint3", "P1 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint3에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint3", "P1 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint3에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint3", "P1 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint3에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Not Set);
-	Switch("Switch21", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Set); //P6 Hunt 대상 랜덤 비트 1 : Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Not Set); //P6 Hunt 대상 랜덤 비트 2 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint3", "P3 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint3", "P2 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint3에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P2 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint3에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint3", "P2 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint3에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint3", "P2 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint3에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint3", "P2 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint3에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint3", "P2 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint3에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint3", "P2 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint3에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint3", "P2 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint3에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint3", "P2 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint3에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint3", "P2 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint3에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint3", "P2 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint3에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Set);
-	Switch("Switch21", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Not Set); //P6 Hunt 대상 랜덤 비트 1 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Set); //P6 Hunt 대상 랜덤 비트 2 : Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint3", "P4 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint3", "P3 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint3에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P3 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint3에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint3", "P3 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint3에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint3", "P3 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint3에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint3", "P3 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint3에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint3", "P3 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint3에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint3", "P3 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint3에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint3", "P3 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint3에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint3", "P3 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint3에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint3", "P3 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint3에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint3", "P3 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint3에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Not Set);
-	Switch("Switch21", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Set); //P6 Hunt 대상 랜덤 비트 1 : Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Set); //P6 Hunt 대상 랜덤 비트 2 : Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint4", "P1 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint3", "P4 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint3에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P4 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint3에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint3", "P4 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint3에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint3", "P4 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint3에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint3", "P4 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint3에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint3", "P4 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint3에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint3", "P4 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint3에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint3", "P4 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint3에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint3", "P4 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint3에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint3", "P4 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint3에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint3", "P4 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint3에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Set);
-	Switch("Switch21", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Not Set); //P6 Hunt 대상 랜덤 비트 1 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Not Set); //P6 Hunt 대상 랜덤 비트 2 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint4", "P2 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint4", "P1 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint4에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P1 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint4에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint4", "P1 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint4에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint4", "P1 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint4에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint4", "P1 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint4에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint4", "P1 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint4에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint4", "P1 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint4에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint4", "P1 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint4에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint4", "P1 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint4에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint4", "P1 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint4에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint4", "P1 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint4에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Not Set);
-	Switch("Switch21", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Set); //P6 Hunt 대상 랜덤 비트 1 : Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Not Set); //P6 Hunt 대상 랜덤 비트 2 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint4", "P3 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint4", "P2 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint4에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P2 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint4에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint4", "P2 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint4에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint4", "P2 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint4에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint4", "P2 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint4에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint4", "P2 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint4에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint4", "P2 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint4에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint4", "P2 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint4에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint4", "P2 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint4에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint4", "P2 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint4에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint4", "P2 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint4에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Set);
-	Switch("Switch21", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Not Set); //P6 Hunt 대상 랜덤 비트 1 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Set); //P6 Hunt 대상 랜덤 비트 2 : Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint4", "P4 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint4", "P3 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint4에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P3 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint4에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint4", "P3 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint4에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint4", "P3 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint4에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint4", "P3 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint4에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint4", "P3 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint4에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint4", "P3 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint4에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint4", "P3 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint4에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint4", "P3 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint4에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint4", "P3 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint4에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint4", "P3 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint4에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Not Set);
-	Switch("Switch21", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Set); //P6 Hunt 대상 랜덤 비트 1 : Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Set); //P6 Hunt 대상 랜덤 비트 2 : Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint5", "P1 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint4", "P4 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint4에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P4 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint4에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint4", "P4 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint4에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint4", "P4 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint4에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint4", "P4 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint4에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint4", "P4 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint4에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint4", "P4 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint4에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint4", "P4 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint4에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint4", "P4 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint4에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint4", "P4 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint4에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint4", "P4 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint4에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Set);
-	Switch("Switch21", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Not Set); //P6 Hunt 대상 랜덤 비트 1 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Not Set); //P6 Hunt 대상 랜덤 비트 2 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint5", "P2 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint5", "P1 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint5에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P1 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint5에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint5", "P1 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint5에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint5", "P1 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint5에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint5", "P1 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint5에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint5", "P1 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint5에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint5", "P1 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint5에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint5", "P1 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint5에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint5", "P1 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint5에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint5", "P1 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint5에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint5", "P1 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint5에 있는 병력을 P1 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Not Set);
-	Switch("Switch21", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Set); //P6 Hunt 대상 랜덤 비트 1 : Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Not Set); //P6 Hunt 대상 랜덤 비트 2 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint5", "P3 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint5", "P2 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint5에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P2 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint5에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint5", "P2 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint5에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint5", "P2 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint5에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint5", "P2 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint5에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint5", "P2 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint5에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint5", "P2 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint5에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint5", "P2 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint5에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint5", "P2 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint5에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint5", "P2 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint5에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint5", "P2 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint5에 있는 병력을 P2 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At most, 720);
-	Switch("Switch51", Set);
-	Deaths("Player 8", "Zerg Drone", At least, 12);
-	Switch("Switch20", Set);
-	Switch("Switch21", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Not Set); //P6 Hunt 대상 랜덤 비트 1 : Not Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Set); //P6 Hunt 대상 랜덤 비트 2 : Set 조합으로 P1~P4 Hunt 목적지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Lurker", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Defiler", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Queen", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Scourge", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Guardian", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Devourer", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 6", "Zerg Overlord", "Waypoint5", "P4 Hunt", Patrol);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "Waypoint5", "P3 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint5에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P3 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint5에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint5", "P3 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint5에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint5", "P3 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint5에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint5", "P3 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint5에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint5", "P3 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint5에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint5", "P3 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint5에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint5", "P3 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint5에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint5", "P3 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint5에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint5", "P3 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint5에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint5", "P3 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint5에 있는 병력을 P3 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+	Switch("Switch20", Set); //P6 Hunt 대상 랜덤 비트 1 : Set 조합으로 P1~P4 Hunt 목적지 선택
+	Switch("Switch21", Set); //P6 Hunt 대상 랜덤 비트 2 : Set 조합으로 P1~P4 Hunt 목적지 선택
+Actions:
+	Order("Player 6", "Zerg Zergling", "Waypoint5", "P4 Hunt", Patrol); //P6 Zerg Zergling 재명령 : Waypoint5에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P4 Hunt", Patrol); //P6 Zerg Hydralisk 재명령 : Waypoint5에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Lurker", "Waypoint5", "P4 Hunt", Patrol); //P6 Zerg Lurker 재명령 : Waypoint5에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Defiler", "Waypoint5", "P4 Hunt", Patrol); //P6 Zerg Defiler 재명령 : Waypoint5에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Queen", "Waypoint5", "P4 Hunt", Patrol); //P6 Zerg Queen 재명령 : Waypoint5에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Mutalisk", "Waypoint5", "P4 Hunt", Patrol); //P6 Zerg Mutalisk 재명령 : Waypoint5에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Scourge", "Waypoint5", "P4 Hunt", Patrol); //P6 Zerg Scourge 재명령 : Waypoint5에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Ultralisk", "Waypoint5", "P4 Hunt", Patrol); //P6 Zerg Ultralisk 재명령 : Waypoint5에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Guardian", "Waypoint5", "P4 Hunt", Patrol); //P6 Zerg Guardian 재명령 : Waypoint5에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Devourer", "Waypoint5", "P4 Hunt", Patrol); //P6 Zerg Devourer 재명령 : Waypoint5에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Order("Player 6", "Zerg Overlord", "Waypoint5", "P4 Hunt", Patrol); //P6 Zerg Overlord 재명령 : Waypoint5에 있는 병력을 P4 Hunt로 Patrol/Hunt 랠리
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
+}
+
+
+
+
+// Reset P6 Hunt relay cooldown after every Waypoint -> Hunt candidate has had a chance to issue orders.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At most, 720); //P6 waypoint 창 : final spawn 후 60초(720틱) 이내만 Hunt 릴레이 허용
+	Switch("Switch51", Set); //P6 릴레이 enable 스위치 : Player 8 펄스가 열려 있어야 명령 발행
+	Deaths("Player 8", "Zerg Drone", At least, 12); //P6 Hunt 릴레이 발행 가능 : 약 1초마다 Waypoint -> Hunt 재명령
+Actions:
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0); //P6 Hunt 릴레이 쿨다운 초기화 : 20개 Waypoint/Hunt Order 후보를 모두 평가한 뒤 한 번만 리셋
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
+}
 
 // Return active main-assault units from P6 MainBase to their selected waypoint every 15 seconds.
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint2", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint2", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint4", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint4", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 180);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint2", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint2", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint4", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint4", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 360);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint2", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint2", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint4", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint4", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 540);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint2", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint2", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint2", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint2", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint2 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint4", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint4", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint4", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint4", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint4 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Not Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint1", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint1", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint1 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Not Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint3", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint3", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint3 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", Exactly, 720);
-	Deaths("Player 8", "Terran Armory", At least, 84);
-	Switch("Switch14", Set);
-	Switch("Switch15", Set);
-	Switch("Switch16", Set);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
+	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
+	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
 Actions:
-	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol);
-	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol);
-	Preserve Trigger();
+	Order("Player 6", "Zerg Zergling", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Zergling 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Hydralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Hydralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Lurker", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Lurker 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Defiler", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Defiler 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Queen", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Queen 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Mutalisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Mutalisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Scourge", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Scourge 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Ultralisk", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Ultralisk 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Guardian", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Guardian 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Devourer", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Devourer 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Zerg Overlord", "P6 MainBase", "Waypoint5", Patrol); //P6 Zerg Overlord 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Order("Player 6", "Infested Terran", "P6 MainBase", "Waypoint5", Patrol); //P6 Infested Terran 재집결 : P6 MainBase에 남은 병력을 Waypoint5 경유지로 복귀
+	Preserve Trigger(); //반복 트리거 유지 : 릴레이 창이 열려 있는 동안 계속 재평가
 }
 
 // End assault lock tail after 60 seconds.
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 2);
-	Deaths("Player 8", "Zerg Scourge", At least, 721);
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 게이트 : 미션1에서 출발한 공세도 릴레이 추적
+	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
+	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
+	Deaths("Player 8", "Zerg Scourge", At least, 721); //P6 waypoint 창 만료 : 60초를 넘기면 릴레이 상태 정리
 Actions:
-	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
-	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Switch("Switch51", clear);
-	Preserve Trigger();
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 0); //P6 주공세 상태 초기화 : 릴레이 종료 후 다음 공세 대기
+	Set Deaths("Player 8", "Zerg Scourge", Set To, 0); //P6 waypoint 창 타이머 초기화 : 다음 공세에서 새 창 사용
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0); //P6 Hunt 릴레이 쿨다운 초기화 : 릴레이 종료 시 재명령 주기 정리
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0); //P6 스폰 단계 인덱스 초기화 : 다음 공세 스폰 준비
+	Set Switch("Switch51", clear); //P6 릴레이 enable 스위치 닫기 : 60초 창 만료 후 재명령 중단
+	Preserve Trigger(); //반복 트리거 유지 : 다음 공세에서도 만료 정리 조건 재평가
 }
