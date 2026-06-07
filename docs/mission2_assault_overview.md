@@ -38,9 +38,25 @@
 | 첫 번째 군락 | 미션 2 약 4분 50초 | 미션 2 약 5분 00초 | 쿨다운 시작 기준으로는 3분 47초 / 3분 57초 |
 | 두 번째 군락 | 미션 2 약 10분 50초 | 미션 2 약 11분 00초 | 쿨다운 시작 기준으로는 9분 47초 / 9분 57초 |
 
-첫 공세 이후에는 각 군락이 독립적으로 주공세 사이클을 반복한다. 기본 주기는 랜덤 지터에 따라 `19분 30초`, `20분`, `20분 30초` 중 하나다.
+첫 공세 이후에는 각 군락이 독립적으로 주공세 사이클을 반복한다. 쉬움 기본 주기는 랜덤 지터에 따라 `21분`, `21분 30초`, `22분` 중 하나다.
 
 쿨다운은 미션 2에서만 기본 증가하지만, 미션 1 중 외곽 군락을 건드려 깨우면 해당 군락의 쿨다운만 미션 1부터 먼저 전진한다.
+
+### 웨이브 사전 확정
+
+- **첫 공세**: 게임 시작 시 `Switch132` 1회 트리거로 P6 `Switch61/62`, P7 `Switch65/66`를 randomize. 미션 1 패널티 공세·테스트에도 동일하게 적용된다.
+- **이후 공세**: consume(접촉 경보) 직후 같은 스위치를 다시 randomize해 다음 사이클 웨이브를 즉시 확정한다.
+- **스폰용 복사**: detailed-analysis 시점(spawn-90s)에 `Switch61/62` → `Switch9/10`(P7는 `Switch11/12`)로 복사한다. 스폰 파일은 `Switch9/10`만 읽는다.
+
+### 3단계 순차 경고 (실제 스폰 기준)
+
+| 단계 | 시점 | 스위치/DC | 내용 |
+|------|------|-----------|------|
+| 1. 큰 분류 | spawn − 180s | `Switch128/130` roll, `Switch129/131` shown | `Switch61`(P6) / `Switch65`(P7)만 읽어 공중 vs 지상 |
+| 2. 상세 분석 | spawn − 90s | `Switch63/67` active, `Switch64/68` shown | 4종 웨이브별 노바 분석 (큰 분류 표시 후에만) |
+| 3. 접촉 경보 | spawn − 10s | `Lurker/Mutalisk = 3` | 대규모 공세 접근 + 전술 힌트 (기존) |
+
+쿨다운 가속으로 임계값을 건너뛰면 `At least` 조건 덕에 해당 경고가 즉시 발화한다(리드타임만 단축, 누락 없음).
 
 ---
 
@@ -132,11 +148,12 @@ P6의 첫 주공세가 실제 스폰 단계에 들어가면 `Terran Ghost` 타�
 
 | 파일 | 책임 |
 |------|------|
-| `18_mission2_main_assaults_00_init_and_colony_state.txt` | 미션 2 진입 초기화, 첫 공세 순서, 군락 붕괴/보상 |
+| `18_mission2_main_assaults_00_init_and_colony_state.txt` | 미션 2 진입 초기화, 게임 시작 웨이브 시드, 첫 공세 순서, 군락 붕괴/보상 |
+| `18_mission2_main_assaults_00a_difficulty_timing.txt` | 난이도별 쿨다운 밴드(3단계 경고 앵커 유지) |
 | `18_mission2_main_assaults_00b_overmind_cocoon.txt` | 오버마인드 고치 이벤트와 약화 공세 |
-| `18_mission2_main_assaults_01_p6_rolls.txt` | P6 일반 주공세 롤 |
-| `18_mission2_main_assaults_02_p7_rolls.txt` | P7 일반 주공세 롤 |
-| `18_mission2_main_assaults_03_warnings.txt` | 일반/분석 경보 메시지 |
+| `18_mission2_main_assaults_01_p6_rolls.txt` | P6 coarse/detailed roll, wave copy, consume |
+| `18_mission2_main_assaults_02_p7_rolls.txt` | P7 coarse/detailed roll, wave copy, consume |
+| `18_mission2_main_assaults_03_warnings.txt` | 3단계 경고(큰 분류/상세/접촉) 메시지 |
 | `18_mission2_main_assaults_04_p6_target_correction.txt` | P6 목표 플레이어 사망 보정 |
 | `18_mission2_main_assaults_05_p7_target_correction.txt` | P7 목표 플레이어 사망 보정 |
 | `18_mission2_main_assaults_06_spawn_delay.txt` | 일반 공세 10초 경보 후 스폰 전환 |

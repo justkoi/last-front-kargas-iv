@@ -2,7 +2,7 @@
 //  KARGAS IV - Mission trigger notes
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
 //                      P5 Spawn1~4, P5 H1~4, P1~P4 Hunt, Player Destination, AttackPoint1,
-//                      MD1~MD6,
+//                      MD1~MD6, BaseEntrance, BaseScan1~11, MainLoad1~2, Player Destination,
 //                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 Spawn1~4, P6 H1~8,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
@@ -110,12 +110,12 @@
 //    Switch58   : P5 Hive death ground counterattack used
 //    Switch59   : P6 mission2 early alert defense charge ready
 //    Switch60   : P7 mission2 early alert defense charge ready
-//    Switch61/62: P6 mission2 pre-roll wave selector
-//    Switch63   : P6 mission2 pre-roll active
-//    Switch64   : P6 mission2 pre-roll message shown
-//    Switch65/66: P7 mission2 pre-roll wave selector
-//    Switch67   : P7 mission2 pre-roll active
-//    Switch68   : P7 mission2 pre-roll message shown
+//    Switch61/62: P6 mission2 upcoming wave selector (pre-seeded; air/ground in Switch61)
+//    Switch63   : P6 mission2 detailed-analysis anchor active
+//    Switch64   : P6 mission2 detailed-analysis message shown
+//    Switch65/66: P7 mission2 upcoming wave selector (pre-seeded; air/ground in Switch65)
+//    Switch67   : P7 mission2 detailed-analysis anchor active
+//    Switch68   : P7 mission2 detailed-analysis message shown
 //    Switch69   : P7 hunt P5 Overlord support fired this cycle
 //    Switch71   : mission1 P6 outer colony awakening warning latch
 //    Switch72   : mission1 P7 outer colony awakening warning latch
@@ -159,6 +159,12 @@
 //    Switch125     : hard difficulty reminder queued
 //    Switch126     : difficulty reminder displayed to players; clear queued reminder on P8 pass
 //    Switch127     : very hard difficulty reminder queued
+//    Switch128     : P6 main assault coarse (air/ground) warning rolled
+//    Switch129     : P6 main assault coarse (air/ground) warning shown
+//    Switch130     : P7 main assault coarse (air/ground) warning rolled
+//    Switch131     : P7 main assault coarse (air/ground) warning shown
+//    Switch132     : main assault first-wave seeded at game start (one-shot guard)
+//    Switch133     : mission1 entrance turret hint sequence played (13c)
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:

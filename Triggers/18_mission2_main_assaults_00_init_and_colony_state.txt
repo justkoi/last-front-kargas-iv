@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------//
 //  Mission 2 - P6/P7 uncaptured-colony penalty assaults
 //
-//  12 DC tick = 1 second. Easy base cooldown is 1260s = 15120 ticks.
+//  12 DC tick = 1 second. Easy base cooldown is 1290s = 15480 ticks.
 //  Roll triggers subtract only the cooldown they consumed, so excess
 //  progress from repeated Hatchery/Lair/Hive kills stays queued.
 //  Hatchery/Lair/Hive kills add 70s worth of cooldown progress.
@@ -15,6 +15,21 @@
 //  P6/P7 assault units reaching the selected waypoint redirect
 //  toward the already selected P1~P4 Hunt location.
 //-----------------------------------------------------------------//
+
+// Seed the first main-assault wave type at game start so the colony's air/ground
+// kind is already decided before any warning fires. This also covers mission1
+// penalty assaults (awakened outer colonies) and convenient testing. One-shot:
+// no Preserve, so it self-disables after the first pass.
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch132", Not Set);
+Actions:
+	Set Switch("Switch61", randomize);
+	Set Switch("Switch62", randomize);
+	Set Switch("Switch65", randomize);
+	Set Switch("Switch66", randomize);
+	Set Switch("Switch132", set);
+}
 
 // Reset assault counters once on mission2 entry.
 Trigger("Player 8"){
@@ -33,14 +48,14 @@ Actions:
 	Set Switch("Switch39", clear);
 	Set Switch("Switch40", clear);
 	Set Switch("Switch41", clear);
-	Set Switch("Switch61", clear);
-	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
-	Set Switch("Switch65", clear);
-	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
+	Set Switch("Switch128", clear);
+	Set Switch("Switch129", clear);
+	Set Switch("Switch130", clear);
+	Set Switch("Switch131", clear);
 	Set Switch("Switch74", clear);
 	Set Switch("Switch75", clear);
 	Set Switch("Switch76", clear);
@@ -67,14 +82,36 @@ Actions:
 	Set Deaths("Player 8", "Zerg Spore Colony", Set To, 0);
 	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
 	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
+}
+
+// Clear P6 assault state only when no P6 penalty assault is already active from mission1.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch50", Not Set);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+Actions:
 	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
-	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
+}
+
+// Clear P7 assault state only when no P7 penalty assault is already active from mission1.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At most, 12);
+	Switch("Switch50", Not Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
 	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 }
 
 // First penalty assaults are staggered after the mission2 assault cooldown opens
@@ -88,6 +125,7 @@ Conditions:
 	Switch("Switch50", Not Set);
 	Switch("Switch26", Not Set);
 	Switch("Switch31", Not Set);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Set To, 12396);
 }
@@ -99,6 +137,7 @@ Conditions:
 	Switch("Switch50", Not Set);
 	Switch("Switch26", Not Set);
 	Switch("Switch32", Not Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 10236);
 }
@@ -110,6 +149,7 @@ Conditions:
 	Switch("Switch50", Not Set);
 	Switch("Switch26", Set);
 	Switch("Switch31", Not Set);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Set To, 10236);
 }
@@ -121,6 +161,7 @@ Conditions:
 	Switch("Switch50", Not Set);
 	Switch("Switch26", Set);
 	Switch("Switch32", Not Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 12396);
 }
@@ -150,6 +191,8 @@ Actions:
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
+	Set Switch("Switch128", clear);
+	Set Switch("Switch129", clear);
 	Set Switch("Switch31", set);
 	Preserve Trigger();
 }
@@ -168,6 +211,8 @@ Actions:
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
+	Set Switch("Switch130", clear);
+	Set Switch("Switch131", clear);
 	Set Switch("Switch32", set);
 	Preserve Trigger();
 }
@@ -190,6 +235,8 @@ Actions:
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
+	Set Switch("Switch128", clear);
+	Set Switch("Switch129", clear);
 	Preserve Trigger();
 }
 
@@ -210,6 +257,8 @@ Actions:
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
+	Set Switch("Switch128", clear);
+	Set Switch("Switch129", clear);
 	Preserve Trigger();
 }
 
@@ -230,6 +279,8 @@ Actions:
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
+	Set Switch("Switch130", clear);
+	Set Switch("Switch131", clear);
 	Preserve Trigger();
 }
 
@@ -250,6 +301,8 @@ Actions:
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
 	Set Switch("Switch68", clear);
+	Set Switch("Switch130", clear);
+	Set Switch("Switch131", clear);
 	Preserve Trigger();
 }
 

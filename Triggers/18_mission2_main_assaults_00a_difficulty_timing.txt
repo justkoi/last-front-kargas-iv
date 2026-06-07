@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------//
 //  Mission 2 difficulty timing adjustments
 //
-//  Easy keeps the existing first-assault seed and 20:30/21:00/21:30
+//  Easy keeps the existing first-assault seed and 21:00/21:30/22:00
 //  repeated cooldowns. Normal, hard, and very hard only advance cooldown progress;
 //  the existing roll, warning, 10-second spawn delay, and consume
 //  triggers remain unchanged.
@@ -128,7 +128,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 normal repeated cooldowns: 16:30/17:00/17:30 warnings, preserving 80s pre-roll.
+// P6 normal repeated cooldowns: 17:00/17:30/18:00 warnings, preserving 180s/90s/10s warning anchors (coarse/detailed/contact).
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -139,25 +139,6 @@ Conditions:
 	Switch("Switch63", Not Set);
 	Switch("Switch27", Not Set);
 	Switch("Switch28", Not Set);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 10920);
-	Deaths("Player 8", "Zerg Zergling", At most, 13799);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2880);
-	Set Switch("Switch120", set);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Academy", Exactly, 2);
-	Switch("Switch118", Set);
-	Switch("Switch120", Not Set);
-	Switch("Switch31", Not Set);
-	Switch("Switch63", Not Set);
-	Switch("Switch27", Set);
-	Switch("Switch28", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Deaths("Player 8", "Zerg Zergling", At least, 11280);
 	Deaths("Player 8", "Zerg Zergling", At most, 14159);
@@ -176,25 +157,6 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
 	Switch("Switch27", Set);
-	Switch("Switch28", Not Set);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 11280);
-	Deaths("Player 8", "Zerg Zergling", At most, 14159);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2880);
-	Set Switch("Switch120", set);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Academy", Exactly, 2);
-	Switch("Switch118", Set);
-	Switch("Switch120", Not Set);
-	Switch("Switch31", Not Set);
-	Switch("Switch63", Not Set);
-	Switch("Switch27", Not Set);
 	Switch("Switch28", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Deaths("Player 8", "Zerg Zergling", At least, 11640);
@@ -205,22 +167,21 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 hard repeated cooldowns: 14:30/15:00/15:30 warnings, preserving 80s pre-roll.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Switch("Switch118", Set);
 	Switch("Switch120", Not Set);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
-	Switch("Switch27", Not Set);
+	Switch("Switch27", Set);
 	Switch("Switch28", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 9480);
-	Deaths("Player 8", "Zerg Zergling", At most, 13799);
+	Deaths("Player 8", "Zerg Zergling", At least, 11640);
+	Deaths("Player 8", "Zerg Zergling", At most, 14519);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4320);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 2880);
 	Set Switch("Switch120", set);
 	Preserve Trigger();
 }
@@ -228,22 +189,23 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Switch("Switch118", Set);
 	Switch("Switch120", Not Set);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
-	Switch("Switch27", Set);
+	Switch("Switch27", Not Set);
 	Switch("Switch28", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 9840);
-	Deaths("Player 8", "Zerg Zergling", At most, 14159);
+	Deaths("Player 8", "Zerg Zergling", At least, 12000);
+	Deaths("Player 8", "Zerg Zergling", At most, 14879);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4320);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 2880);
 	Set Switch("Switch120", set);
 	Preserve Trigger();
 }
 
+// P6 hard repeated cooldowns: 14:30/15:00/15:30 warnings, preserving 180s/90s/10s warning anchors (coarse/detailed/contact).
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -252,7 +214,7 @@ Conditions:
 	Switch("Switch120", Not Set);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
-	Switch("Switch27", Set);
+	Switch("Switch27", Not Set);
 	Switch("Switch28", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Deaths("Player 8", "Zerg Zergling", At least, 9840);
@@ -271,7 +233,7 @@ Conditions:
 	Switch("Switch120", Not Set);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
-	Switch("Switch27", Not Set);
+	Switch("Switch27", Set);
 	Switch("Switch28", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Deaths("Player 8", "Zerg Zergling", At least, 10200);
@@ -282,22 +244,21 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 very hard repeated cooldowns: 12:30/13:00/13:30 warnings, preserving 80s pre-roll.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Switch("Switch118", Set);
 	Switch("Switch120", Not Set);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
-	Switch("Switch27", Not Set);
+	Switch("Switch27", Set);
 	Switch("Switch28", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 8040);
-	Deaths("Player 8", "Zerg Zergling", At most, 13799);
+	Deaths("Player 8", "Zerg Zergling", At least, 10200);
+	Deaths("Player 8", "Zerg Zergling", At most, 14519);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 5760);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4320);
 	Set Switch("Switch120", set);
 	Preserve Trigger();
 }
@@ -305,22 +266,23 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Switch("Switch118", Set);
 	Switch("Switch120", Not Set);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
-	Switch("Switch27", Set);
+	Switch("Switch27", Not Set);
 	Switch("Switch28", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Zergling", At least, 8400);
-	Deaths("Player 8", "Zerg Zergling", At most, 14159);
+	Deaths("Player 8", "Zerg Zergling", At least, 10560);
+	Deaths("Player 8", "Zerg Zergling", At most, 14879);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 5760);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4320);
 	Set Switch("Switch120", set);
 	Preserve Trigger();
 }
 
+// P6 very hard repeated cooldowns: 12:30/13:00/13:30 warnings, preserving 180s/90s/10s warning anchors (coarse/detailed/contact).
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -329,7 +291,7 @@ Conditions:
 	Switch("Switch120", Not Set);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
-	Switch("Switch27", Set);
+	Switch("Switch27", Not Set);
 	Switch("Switch28", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Deaths("Player 8", "Zerg Zergling", At least, 8400);
@@ -348,7 +310,7 @@ Conditions:
 	Switch("Switch120", Not Set);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
-	Switch("Switch27", Not Set);
+	Switch("Switch27", Set);
 	Switch("Switch28", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Deaths("Player 8", "Zerg Zergling", At least, 8760);
@@ -359,7 +321,45 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 normal repeated cooldowns: 16:30/17:00/17:30 warnings, preserving 80s pre-roll.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch118", Set);
+	Switch("Switch120", Not Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch63", Not Set);
+	Switch("Switch27", Set);
+	Switch("Switch28", Not Set);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Deaths("Player 8", "Zerg Zergling", At least, 8760);
+	Deaths("Player 8", "Zerg Zergling", At most, 14519);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Add, 5760);
+	Set Switch("Switch120", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch118", Set);
+	Switch("Switch120", Not Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch63", Not Set);
+	Switch("Switch27", Not Set);
+	Switch("Switch28", Set);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Deaths("Player 8", "Zerg Zergling", At least, 9120);
+	Deaths("Player 8", "Zerg Zergling", At most, 14879);
+Actions:
+	Set Deaths("Player 8", "Zerg Zergling", Add, 5760);
+	Set Switch("Switch120", set);
+	Preserve Trigger();
+}
+
+// P7 normal repeated cooldowns: 17:00/17:30/18:00 warnings, preserving 180s/90s/10s warning anchors (coarse/detailed/contact).
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -370,25 +370,6 @@ Conditions:
 	Switch("Switch67", Not Set);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Not Set);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 10920);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 13799);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2880);
-	Set Switch("Switch121", set);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Academy", Exactly, 2);
-	Switch("Switch119", Set);
-	Switch("Switch121", Not Set);
-	Switch("Switch32", Not Set);
-	Switch("Switch67", Not Set);
-	Switch("Switch29", Set);
-	Switch("Switch30", Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 11280);
 	Deaths("Player 8", "Zerg Hydralisk", At most, 14159);
@@ -407,25 +388,6 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
 	Switch("Switch29", Set);
-	Switch("Switch30", Not Set);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 11280);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14159);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2880);
-	Set Switch("Switch121", set);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Academy", Exactly, 2);
-	Switch("Switch119", Set);
-	Switch("Switch121", Not Set);
-	Switch("Switch32", Not Set);
-	Switch("Switch67", Not Set);
-	Switch("Switch29", Not Set);
 	Switch("Switch30", Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 11640);
@@ -436,7 +398,45 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 hard repeated cooldowns: 14:30/15:00/15:30 warnings, preserving 80s pre-roll.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 2);
+	Switch("Switch119", Set);
+	Switch("Switch121", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch67", Not Set);
+	Switch("Switch29", Set);
+	Switch("Switch30", Not Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 11640);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14519);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2880);
+	Set Switch("Switch121", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 2);
+	Switch("Switch119", Set);
+	Switch("Switch121", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch67", Not Set);
+	Switch("Switch29", Not Set);
+	Switch("Switch30", Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 12000);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14879);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2880);
+	Set Switch("Switch121", set);
+	Preserve Trigger();
+}
+
+// P7 hard repeated cooldowns: 14:30/15:00/15:30 warnings, preserving 180s/90s/10s warning anchors (coarse/detailed/contact).
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -448,15 +448,15 @@ Conditions:
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 9480);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 13799);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 9840);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14159);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4320);
 	Set Switch("Switch121", set);
 	Preserve Trigger();
 }
 
-// P7 very hard repeated cooldowns: 12:30/13:00/13:30 warnings, preserving 80s pre-roll.
+// P7 very hard repeated cooldowns: 12:30/13:00/13:30 warnings, preserving 180s/90s/10s warning anchors (coarse/detailed/contact).
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -467,25 +467,6 @@ Conditions:
 	Switch("Switch67", Not Set);
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Not Set);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 8040);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 13799);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
-	Set Switch("Switch121", set);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Academy", Exactly, 4);
-	Switch("Switch119", Set);
-	Switch("Switch121", Not Set);
-	Switch("Switch32", Not Set);
-	Switch("Switch67", Not Set);
-	Switch("Switch29", Set);
-	Switch("Switch30", Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 8400);
 	Deaths("Player 8", "Zerg Hydralisk", At most, 14159);
@@ -504,25 +485,6 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch67", Not Set);
 	Switch("Switch29", Set);
-	Switch("Switch30", Not Set);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 8400);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14159);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
-	Set Switch("Switch121", set);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Academy", Exactly, 4);
-	Switch("Switch119", Set);
-	Switch("Switch121", Not Set);
-	Switch("Switch32", Not Set);
-	Switch("Switch67", Not Set);
-	Switch("Switch29", Not Set);
 	Switch("Switch30", Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 8760);
@@ -536,6 +498,44 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch119", Set);
+	Switch("Switch121", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch67", Not Set);
+	Switch("Switch29", Set);
+	Switch("Switch30", Not Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 8760);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14519);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
+	Set Switch("Switch121", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+	Switch("Switch119", Set);
+	Switch("Switch121", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch67", Not Set);
+	Switch("Switch29", Not Set);
+	Switch("Switch30", Set);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 9120);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14879);
+Actions:
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5760);
+	Set Switch("Switch121", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Switch("Switch119", Set);
 	Switch("Switch121", Not Set);
@@ -544,8 +544,8 @@ Conditions:
 	Switch("Switch29", Set);
 	Switch("Switch30", Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 9840);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14159);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 10200);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14519);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4320);
 	Set Switch("Switch121", set);
@@ -563,8 +563,8 @@ Conditions:
 	Switch("Switch29", Set);
 	Switch("Switch30", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 9840);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14159);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 10200);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14519);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4320);
 	Set Switch("Switch121", set);
@@ -582,8 +582,8 @@ Conditions:
 	Switch("Switch29", Not Set);
 	Switch("Switch30", Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Hydralisk", At least, 10200);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 14519);
+	Deaths("Player 8", "Zerg Hydralisk", At least, 10560);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 14879);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4320);
 	Set Switch("Switch121", set);

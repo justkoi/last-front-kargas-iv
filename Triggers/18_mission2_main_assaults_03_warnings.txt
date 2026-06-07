@@ -1,5 +1,127 @@
+// Three-stage main-assault warnings: coarse air/ground (spawn-180s), detailed analysis (spawn-90s), contact (spawn-10s).
+// Coarse cue pulses reuse Ultralisk/Devourer while Lurker/Mutalisk phase is idle, same pattern as detailed analysis.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Switch("Switch128", Set);
+	Switch("Switch129", Not Set);
+	Deaths("Player 8", "Zerg Ultralisk", At most, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Ultralisk", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Switch("Switch128", Set);
+	Switch("Switch129", Not Set);
+	Deaths("Player 8", "Zerg Ultralisk", At least, 2);
+Actions:
+	Set Switch("Switch129", set);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Switch("Switch130", Set);
+	Switch("Switch131", Not Set);
+	Deaths("Player 8", "Zerg Devourer", At most, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Devourer", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Switch("Switch130", Set);
+	Switch("Switch131", Not Set);
+	Deaths("Player 8", "Zerg Devourer", At least, 2);
+Actions:
+	Set Switch("Switch131", set);
+	Preserve Trigger();
+}
+
+// P6 coarse warning - ground
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+	Switch("Switch128", Set);
+	Switch("Switch129", Not Set);
+	Switch("Switch61", Not Set);
+Actions:
+	Minimap Ping("P6 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>광범위 지상 반응 누적. 대규모 지상 물량이 결집하고 있습니다.");
+	Preserve Trigger();
+}
+
+// P6 coarse warning - air
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
+	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
+	Switch("Switch128", Set);
+	Switch("Switch129", Not Set);
+	Switch("Switch61", Set);
+Actions:
+	Minimap Ping("P6 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>상공 전반에 비행 반응 확산. 대규모 공중 전력이 결집하고 있습니다.");
+	Preserve Trigger();
+}
+
+// P7 coarse warning - ground
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+	Switch("Switch130", Set);
+	Switch("Switch131", Not Set);
+	Switch("Switch65", Not Set);
+Actions:
+	Minimap Ping("P7 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>광범위 지상 반응 누적. 대규모 지상 물량이 결집하고 있습니다.");
+	Preserve Trigger();
+}
+
+// P7 coarse warning - air
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1);
+	Deaths("Player 8", "Terran Valkyrie", At most, 3);
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
+	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
+	Switch("Switch130", Set);
+	Switch("Switch131", Not Set);
+	Switch("Switch65", Set);
+Actions:
+	Minimap Ping("P7 Base");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>상공 전반에 비행 반응 확산. 대규모 공중 전력이 결집하고 있습니다.");
+	Preserve Trigger();
+}
+
 // Early assault analysis cues. These are strategic reads, not immediate contact warnings.
-// P8 opens a one-tick cue pulse after P6/P7 pre-rolls so every human-owned
+// P8 opens a one-tick cue pulse after P6/P7 detailed-analysis anchors so every human-owned
 // copy can display the message before the global shown guard closes.
 Trigger("Player 8"){
 Conditions:
@@ -53,7 +175,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 pre-roll analysis - Wave 0: Ultralisk + Zergling
+// P6 detailed analysis - Wave 0: Ultralisk + Zergling
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -71,7 +193,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 pre-roll analysis - Wave 1: Scourge + Devourer + Mutalisk + Queen
+// P6 detailed analysis - Wave 1: Scourge + Devourer + Mutalisk + Queen
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -89,7 +211,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 pre-roll analysis - Wave 2: Hydralisk + Devourer support
+// P6 detailed analysis - Wave 2: Hydralisk + Devourer support
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -107,7 +229,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 pre-roll analysis - Wave 3: Mutalisk + Guardian
+// P6 detailed analysis - Wave 3: Mutalisk + Guardian
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -125,7 +247,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 pre-roll analysis - Wave 0: Ultralisk + Zergling
+// P7 detailed analysis - Wave 0: Ultralisk + Zergling
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -143,7 +265,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 pre-roll analysis - Wave 1: Scourge + Devourer + Mutalisk + Queen
+// P7 detailed analysis - Wave 1: Scourge + Devourer + Mutalisk + Queen
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -161,7 +283,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 pre-roll analysis - Wave 2: Hydralisk + Devourer support
+// P7 detailed analysis - Wave 2: Hydralisk + Devourer support
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -179,7 +301,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// P7 pre-roll analysis - Wave 3: Mutalisk + Guardian
+// P7 detailed analysis - Wave 3: Mutalisk + Guardian
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
