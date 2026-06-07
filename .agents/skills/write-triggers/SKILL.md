@@ -183,8 +183,34 @@ ground-biased or air-biased wave.
    - 1회성 트리거: Preserve 안 붙임. 한 번 발동 후 SC가 자동 비활성화.
    - 반복: `Preserve Trigger();` 마지막에. DC로 쿨다운 관리.
 
-7. **타이머 영구 정지/재개**
+7. **의미 해석 주석 유지**
+   - 새로 작성하거나 변경하는 트리거의 `Conditions` / `Actions` 줄에는 가능한 한 inline 주석을 붙여, 단순 문법 설명이 아니라 **게임상 의미**와 **세부 동작**을 함께 적는다.
+   - 형식은 `//큰 의미 : 세부 조건/동작`을 기본으로 한다. 예: `Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중일때 : 미션 진행 변수가 1 이상일때`
+   - `Switch`, DC 슬롯, 타이머, 단계 플래그처럼 의미 있는 변수는 `00_header.txt`의 역할표와 주변 트리거 흐름을 확인해서 해석한다. 모르면 추측하지 말고 관련 사용처를 검색한다.
+   - 변경하지 않는 기존 트리거 전체를 일부러 주석화할 필요는 없다. 다만 변수 의미, 단계 값, 스위치 역할, 목적지/명령 대상이 바뀌어 기존 주석이 낡게 될 가능성이 있으면 함께 수정해서 주석이 코드와 어긋나지 않게 보수한다.
+   - `Order` 액션은 어느 플레이어의 어떤 유닛을 어느 위치에서 어디로 보내는지, `Patrol`/`Attack` 등 명령이 실제로 어떤 경유/공격 동작을 유도하는지 적는다.
+
+8. **타이머 영구 정지/재개**
    - `Pause Timer();` / `Unpause Timer();` 가 SCMDraft 액션. Countdown Timer를 화면에 표시 중일 때 작동.
+
+9. **조건 순서: 값싼 조건을 비싼 조건보다 먼저**
+   - SC는 한 트리거의 Conditions를 **위에서 아래로 평가하다 false면 즉시 단락(short-circuit)** 한다. 따라서 자주 false가 되는 **값싼 조건을 앞에** 두면, 뒤의 비싼 조건 평가를 건너뛴다. 조건은 모두 AND라 **순서를 바꿔도 논리 결과는 동일**.
+   - **비용 등급:** `Deaths`(DC)·`Switch`·`Elapsed Time` = 단순 비교, **쌈**. `Bring`·`Command` = 지역/소유 유닛을 **스캔**, **비쌈**(맵 유닛 수에 비례해 더 무거워짐).
+   - **철칙:** 트리거에 **쿨다운(Deaths DC) 조건이 있으면 그 쿨다운을 맨 위로**, `Bring`/`Command`보다 먼저 둔다. 쿨다운은 대부분의 사이클에서 false라, 비싼 스캔을 매 사이클(≈12Hz) 건너뛰게 된다. 후반 유닛 누적 시 프리징 가속을 막는 핵심.
+   - 같은 트리거의 값싼 `Switch`/진행 게이트 `Deaths`도 `Bring` **앞으로**. (예: `14_base_defense` P5 감지, `18_..._40/41_hunt_relay`, `18_..._00_init_and_colony_state` 교정 완료.)
+   - ❌ 나쁨:
+     ```
+     Conditions:
+       Bring("Player 1", "Men", "P5 Area", At least, 1);   // 매 사이클 스캔
+       Deaths("Player 8", "Terran Marine", At least, 120);  // 쿨다운(보통 false)
+     ```
+   - ✅ 좋음:
+     ```
+     Conditions:
+       Deaths("Player 8", "Terran Marine", At least, 120);  // 쿨다운 먼저 → false면 단락
+       Bring("Player 1", "Men", "P5 Area", At least, 1);
+     ```
+   - 주의: 조건과 짝지어진 `Set Deaths` 등 **액션은 건드리지 않는다**(액션 순서는 성능과 무관).
 
 ## AI Script 코드 (확인된 것)
 
@@ -237,6 +263,7 @@ Switch("Switch1", Not Set);
 - **트리거 owner `Player 6`가 SCMDraft에서 활성화 안 돼있으면 실행 안 됨** — Player Settings에서 P6 슬롯 확인 필수.
 - **`Bring`의 location은 정밀하게** — Beacon 유닛 위 1×1 location은 유닛이 들어갈 수 없음. 3×3 이상 빈 땅 덮도록.
 - **에너지 시전자 스폰은 Unit Properties 사용** — 디파일러처럼 에너지가 전술 가치인 유닛은 기존 프로젝트 관례인 슬롯 `1`로 `Create Unit with Properties("Player 7", "Zerg Defiler", 1, "Raid1", 1);`처럼 생성. 즉시 스킬 사용이 필요하면 plain `Create Unit`로 만들지 않는다.
+- **테스트용 MainDC 주입 트리거에서 활성 주공세 상태 DC를 지우지 말 것** — `TestTriggersForBuild/`는 정상 트리거 뒤에 붙으므로, 테스트 트리거가 `Zerg Zergling`/`Zerg Hydralisk` 같은 MainDC를 더한 뒤 `Zerg Lurker`/`Zerg Mutalisk`를 0으로 만들면 이미 P6/P7 트리거가 스폰과 Waypoint 랠리를 끝낸 공세의 상태 머신만 끊길 수 있다. 그러면 유닛은 Waypoint까지 가지만 Hunt 릴레이 조건(`state == 2`)이 닫힌다.
 
 ## 빌드/배포
 
