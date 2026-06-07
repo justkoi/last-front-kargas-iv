@@ -13,8 +13,8 @@
 
 Trigger("Player 5"){
 Conditions:
-	Bring("Player 1", "Men", "P5 Area", At least, 1);
 	Deaths("Player 8", "Terran Marine", At least, 120);
+	Bring("Player 1", "Men", "P5 Area", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P5 Area", "P5 Intruder");
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
@@ -35,8 +35,8 @@ Actions:
 
 Trigger("Player 5"){
 Conditions:
-	Bring("Player 2", "Men", "P5 Area", At least, 1);
 	Deaths("Player 8", "Terran Marine", At least, 120);
+	Bring("Player 2", "Men", "P5 Area", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P5 Area", "P5 Intruder");
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
@@ -57,8 +57,8 @@ Actions:
 
 Trigger("Player 5"){
 Conditions:
-	Bring("Player 3", "Men", "P5 Area", At least, 1);
 	Deaths("Player 8", "Terran Marine", At least, 120);
+	Bring("Player 3", "Men", "P5 Area", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P5 Area", "P5 Intruder");
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);
@@ -79,8 +79,8 @@ Actions:
 
 Trigger("Player 5"){
 Conditions:
-	Bring("Player 4", "Men", "P5 Area", At least, 1);
 	Deaths("Player 8", "Terran Marine", At least, 120);
+	Bring("Player 4", "Men", "P5 Area", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P5 Area", "P5 Intruder");
 	Set Deaths("Player 8", "Terran Marine", Set To, 0);

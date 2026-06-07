@@ -31,9 +31,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P1 Hunt", Patrol);
@@ -58,9 +58,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P1 Hunt", Patrol);
@@ -83,9 +83,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint1", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P2 Hunt", Patrol);
@@ -110,9 +110,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint1", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P2 Hunt", Patrol);
@@ -135,9 +135,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint1", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P3 Hunt", Patrol);
@@ -162,9 +162,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint1", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P3 Hunt", Patrol);
@@ -187,9 +187,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Men", "Waypoint1", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint1", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P4 Hunt", Patrol);
@@ -214,9 +214,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint1", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint1", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint1", "P4 Hunt", Patrol);
@@ -239,9 +239,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint2", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P1 Hunt", Patrol);
@@ -266,9 +266,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint2", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P1 Hunt", Patrol);
@@ -291,9 +291,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint2", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P2 Hunt", Patrol);
@@ -318,9 +318,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint2", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P2 Hunt", Patrol);
@@ -343,9 +343,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint2", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P3 Hunt", Patrol);
@@ -370,9 +370,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint2", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P3 Hunt", Patrol);
@@ -395,9 +395,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Men", "Waypoint2", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint2", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P4 Hunt", Patrol);
@@ -422,9 +422,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint2", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint2", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint2", "P4 Hunt", Patrol);
@@ -447,9 +447,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint3", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P1 Hunt", Patrol);
@@ -474,9 +474,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint3", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P1 Hunt", Patrol);
@@ -499,9 +499,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint3", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P2 Hunt", Patrol);
@@ -526,9 +526,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint3", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P2 Hunt", Patrol);
@@ -551,9 +551,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint3", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P3 Hunt", Patrol);
@@ -578,9 +578,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint3", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P3 Hunt", Patrol);
@@ -603,9 +603,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Men", "Waypoint3", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint3", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P4 Hunt", Patrol);
@@ -630,9 +630,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint3", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint3", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint3", "P4 Hunt", Patrol);
@@ -655,9 +655,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint4", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P1 Hunt", Patrol);
@@ -682,9 +682,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint4", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P1 Hunt", Patrol);
@@ -707,9 +707,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint4", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P2 Hunt", Patrol);
@@ -734,9 +734,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint4", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P2 Hunt", Patrol);
@@ -759,9 +759,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint4", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P3 Hunt", Patrol);
@@ -786,9 +786,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint4", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P3 Hunt", Patrol);
@@ -811,9 +811,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Men", "Waypoint4", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint4", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P4 Hunt", Patrol);
@@ -838,9 +838,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint4", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint4", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint4", "P4 Hunt", Patrol);
@@ -863,9 +863,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint5", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P1 Hunt", Patrol);
@@ -890,9 +890,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint5", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P1 Hunt", Patrol);
@@ -915,9 +915,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint5", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P2 Hunt", Patrol);
@@ -942,9 +942,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Not Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint5", "P2 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P2 Hunt", Patrol);
@@ -967,9 +967,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint5", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P3 Hunt", Patrol);
@@ -994,9 +994,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Not Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint5", "P3 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P3 Hunt", Patrol);
@@ -1019,9 +1019,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Men", "Waypoint5", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint5", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P4 Hunt", Patrol);
@@ -1046,9 +1046,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Scourge", At most, 720);
 	Switch("Switch51", Set);
 	Deaths("Player 8", "Zerg Drone", At least, 6);
-	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 	Switch("Switch20", Set);
 	Switch("Switch21", Set);
+	Bring("Player 6", "Zerg Overlord", "Waypoint5", At least, 1);
 Actions:
 	Order("Player 6", "Zerg Zergling", "Waypoint5", "P4 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "Waypoint5", "P4 Hunt", Patrol);
