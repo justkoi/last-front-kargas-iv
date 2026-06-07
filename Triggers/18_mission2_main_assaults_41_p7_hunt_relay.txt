@@ -1,5 +1,5 @@
 // Random Hunt relay. Active for 60s after final spawn batch.
-// Relay orders fire every 0.5 seconds while P7 units wait at a waypoint.
+// Relay orders fire every 1 second while P7 units are routed through a waypoint.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -17,7 +17,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Deaths("Player 8", "Zerg Defiler", At most, 5);
+	Deaths("Player 8", "Zerg Defiler", At most, 11);
 Actions:
 	Set Deaths("Player 8", "Zerg Defiler", Add, 1);
 	Preserve Trigger();
@@ -30,10 +30,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Not Set);
 	Switch("Switch23", Not Set);
-	Bring("Player 7", "Men", "Waypoint1", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint1", "P1 Hunt", Patrol);
@@ -45,10 +44,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint1", "P1 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint1", "P1 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -57,35 +57,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Not Set);
-	Switch("Switch23", Not Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint1", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint1", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint1", "P1 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Set);
 	Switch("Switch23", Not Set);
-	Bring("Player 7", "Men", "Waypoint1", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint1", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint1", "P2 Hunt", Patrol);
@@ -97,10 +71,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint1", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint1", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint1", "P2 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint1", "P2 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -109,35 +84,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Set);
-	Switch("Switch23", Not Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint1", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint1", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint1", "P2 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Not Set);
 	Switch("Switch23", Set);
-	Bring("Player 7", "Men", "Waypoint1", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint1", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint1", "P3 Hunt", Patrol);
@@ -149,10 +98,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint1", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint1", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint1", "P3 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint1", "P3 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -161,35 +111,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Not Set);
-	Switch("Switch23", Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint1", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint1", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint1", "P3 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Set);
 	Switch("Switch23", Set);
-	Bring("Player 7", "Men", "Waypoint1", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint1", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint1", "P4 Hunt", Patrol);
@@ -201,10 +125,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint1", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint1", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint1", "P4 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint1", "P4 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -213,35 +138,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Set);
-	Switch("Switch23", Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint1", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint1", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint1", "P4 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Not Set);
 	Switch("Switch23", Not Set);
-	Bring("Player 7", "Men", "Waypoint2", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint2", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint2", "P1 Hunt", Patrol);
@@ -253,10 +152,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint2", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint2", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint2", "P1 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint2", "P1 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -265,35 +165,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Not Set);
-	Switch("Switch23", Not Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint2", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint2", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint2", "P1 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Set);
 	Switch("Switch23", Not Set);
-	Bring("Player 7", "Men", "Waypoint2", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint2", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint2", "P2 Hunt", Patrol);
@@ -305,10 +179,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint2", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint2", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint2", "P2 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint2", "P2 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -317,35 +192,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Set);
-	Switch("Switch23", Not Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint2", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint2", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint2", "P2 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Not Set);
 	Switch("Switch23", Set);
-	Bring("Player 7", "Men", "Waypoint2", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint2", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint2", "P3 Hunt", Patrol);
@@ -357,10 +206,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint2", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint2", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint2", "P3 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint2", "P3 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -369,35 +219,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Not Set);
-	Switch("Switch23", Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint2", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint2", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint2", "P3 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Set);
 	Switch("Switch23", Set);
-	Bring("Player 7", "Men", "Waypoint2", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint2", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint2", "P4 Hunt", Patrol);
@@ -409,10 +233,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint2", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint2", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint2", "P4 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint2", "P4 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -421,35 +246,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Set);
-	Switch("Switch23", Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint2", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint2", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint2", "P4 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Not Set);
 	Switch("Switch23", Not Set);
-	Bring("Player 7", "Men", "Waypoint3", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint3", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint3", "P1 Hunt", Patrol);
@@ -461,10 +260,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint3", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint3", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint3", "P1 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint3", "P1 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -473,35 +273,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Not Set);
-	Switch("Switch23", Not Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint3", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint3", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint3", "P1 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Set);
 	Switch("Switch23", Not Set);
-	Bring("Player 7", "Men", "Waypoint3", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint3", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint3", "P2 Hunt", Patrol);
@@ -513,10 +287,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint3", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint3", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint3", "P2 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint3", "P2 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -525,35 +300,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Set);
-	Switch("Switch23", Not Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint3", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint3", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint3", "P2 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Not Set);
 	Switch("Switch23", Set);
-	Bring("Player 7", "Men", "Waypoint3", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint3", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint3", "P3 Hunt", Patrol);
@@ -565,10 +314,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint3", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint3", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint3", "P3 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint3", "P3 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -577,35 +327,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Not Set);
-	Switch("Switch23", Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint3", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint3", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint3", "P3 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Set);
 	Switch("Switch23", Set);
-	Bring("Player 7", "Men", "Waypoint3", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint3", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint3", "P4 Hunt", Patrol);
@@ -617,10 +341,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint3", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint3", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint3", "P4 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint3", "P4 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -629,35 +354,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Set);
-	Switch("Switch23", Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint3", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint3", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint3", "P4 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Not Set);
 	Switch("Switch23", Not Set);
-	Bring("Player 7", "Men", "Waypoint4", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint4", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint4", "P1 Hunt", Patrol);
@@ -669,10 +368,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint4", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint4", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint4", "P1 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint4", "P1 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -681,35 +381,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Not Set);
-	Switch("Switch23", Not Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint4", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint4", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint4", "P1 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Set);
 	Switch("Switch23", Not Set);
-	Bring("Player 7", "Men", "Waypoint4", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint4", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint4", "P2 Hunt", Patrol);
@@ -721,10 +395,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint4", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint4", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint4", "P2 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint4", "P2 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -733,35 +408,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Set);
-	Switch("Switch23", Not Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint4", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint4", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint4", "P2 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Not Set);
 	Switch("Switch23", Set);
-	Bring("Player 7", "Men", "Waypoint4", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint4", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint4", "P3 Hunt", Patrol);
@@ -773,10 +422,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint4", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint4", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint4", "P3 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint4", "P3 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -785,35 +435,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Not Set);
-	Switch("Switch23", Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint4", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint4", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint4", "P3 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Set);
 	Switch("Switch23", Set);
-	Bring("Player 7", "Men", "Waypoint4", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint4", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint4", "P4 Hunt", Patrol);
@@ -825,10 +449,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint4", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint4", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint4", "P4 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint4", "P4 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -837,35 +462,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Set);
-	Switch("Switch23", Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint4", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint4", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint4", "P4 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Not Set);
 	Switch("Switch23", Not Set);
-	Bring("Player 7", "Men", "Waypoint5", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint5", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint5", "P1 Hunt", Patrol);
@@ -877,10 +476,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint5", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint5", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint5", "P1 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint5", "P1 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -889,35 +489,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Not Set);
-	Switch("Switch23", Not Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint5", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint5", "P1 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint5", "P1 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Set);
 	Switch("Switch23", Not Set);
-	Bring("Player 7", "Men", "Waypoint5", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint5", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint5", "P2 Hunt", Patrol);
@@ -929,10 +503,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint5", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint5", "P2 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint5", "P2 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint5", "P2 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -941,35 +516,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Set);
-	Switch("Switch23", Not Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint5", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint5", "P2 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint5", "P2 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Not Set);
 	Switch("Switch23", Set);
-	Bring("Player 7", "Men", "Waypoint5", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint5", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint5", "P3 Hunt", Patrol);
@@ -981,10 +530,11 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint5", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint5", "P3 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint5", "P3 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint5", "P3 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
+
 
 Trigger("Player 7"){
 Conditions:
@@ -993,35 +543,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
 	Deaths("Player 8", "Zerg Guardian", At most, 720);
 	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Not Set);
-	Switch("Switch23", Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint5", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint5", "P3 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint5", "P3 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
+	Deaths("Player 8", "Zerg Defiler", At least, 12);
 	Switch("Switch22", Set);
 	Switch("Switch23", Set);
-	Bring("Player 7", "Men", "Waypoint5", At least, 1);
 Actions:
 	Order("Player 7", "Zerg Zergling", "Waypoint5", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "Waypoint5", "P4 Hunt", Patrol);
@@ -1033,37 +557,13 @@ Actions:
 	Order("Player 7", "Zerg Ultralisk", "Waypoint5", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "Waypoint5", "P4 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint5", "P4 Hunt", Move);
+	Order("Player 7", "Zerg Overlord", "Waypoint5", "P4 Hunt", Patrol);
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 	Preserve Trigger();
 }
 
-Trigger("Player 7"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2);
-	Deaths("Player 8", "Zerg Guardian", At most, 720);
-	Switch("Switch52", Set);
-	Deaths("Player 8", "Zerg Defiler", At least, 6);
-	Switch("Switch22", Set);
-	Switch("Switch23", Set);
-	Bring("Player 7", "Zerg Overlord", "Waypoint5", At least, 1);
-Actions:
-	Order("Player 7", "Zerg Zergling", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Lurker", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Scourge", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Ultralisk", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Guardian", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Devourer", "Waypoint5", "P4 Hunt", Patrol);
-	Order("Player 7", "Zerg Overlord", "Waypoint5", "P4 Hunt", Move);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Preserve Trigger();
-}
 
-// Return active main-assault units from East Area to their selected waypoint every 15 seconds.
+// Return active main-assault units from P7 MainBase to their selected waypoint every 15 seconds.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
@@ -1075,18 +575,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint1", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint1", Patrol);
 	Preserve Trigger();
 }
 
@@ -1101,18 +601,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint2", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint2", Patrol);
 	Preserve Trigger();
 }
 
@@ -1127,18 +627,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint3", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint3", Patrol);
 	Preserve Trigger();
 }
 
@@ -1153,18 +653,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint4", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint4", Patrol);
 	Preserve Trigger();
 }
 
@@ -1179,18 +679,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint5", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint5", Patrol);
 	Preserve Trigger();
 }
 
@@ -1205,18 +705,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint1", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint1", Patrol);
 	Preserve Trigger();
 }
 
@@ -1231,18 +731,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint3", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint3", Patrol);
 	Preserve Trigger();
 }
 
@@ -1257,18 +757,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint5", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint5", Patrol);
 	Preserve Trigger();
 }
 
@@ -1283,18 +783,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint1", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint1", Patrol);
 	Preserve Trigger();
 }
 
@@ -1309,18 +809,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint2", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint2", Patrol);
 	Preserve Trigger();
 }
 
@@ -1335,18 +835,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint3", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint3", Patrol);
 	Preserve Trigger();
 }
 
@@ -1361,18 +861,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint4", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint4", Patrol);
 	Preserve Trigger();
 }
 
@@ -1387,18 +887,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint5", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint5", Patrol);
 	Preserve Trigger();
 }
 
@@ -1413,18 +913,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint1", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint1", Patrol);
 	Preserve Trigger();
 }
 
@@ -1439,18 +939,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint3", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint3", Patrol);
 	Preserve Trigger();
 }
 
@@ -1465,18 +965,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint5", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint5", Patrol);
 	Preserve Trigger();
 }
 
@@ -1491,18 +991,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint1", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint1", Patrol);
 	Preserve Trigger();
 }
 
@@ -1517,18 +1017,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint2", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint2", Patrol);
 	Preserve Trigger();
 }
 
@@ -1543,18 +1043,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint3", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint3", Patrol);
 	Preserve Trigger();
 }
 
@@ -1569,18 +1069,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint4", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint4", Patrol);
 	Preserve Trigger();
 }
 
@@ -1595,18 +1095,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint5", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint5", Patrol);
 	Preserve Trigger();
 }
 
@@ -1621,18 +1121,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint1", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint1", Patrol);
 	Preserve Trigger();
 }
 
@@ -1647,18 +1147,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint3", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint3", Patrol);
 	Preserve Trigger();
 }
 
@@ -1673,18 +1173,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint5", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint5", Patrol);
 	Preserve Trigger();
 }
 
@@ -1699,18 +1199,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint1", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint1", Patrol);
 	Preserve Trigger();
 }
 
@@ -1725,18 +1225,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint2", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint2", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint2", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint2", Patrol);
 	Preserve Trigger();
 }
 
@@ -1751,18 +1251,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint3", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint3", Patrol);
 	Preserve Trigger();
 }
 
@@ -1777,18 +1277,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Not Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint4", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint4", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint4", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint4", Patrol);
 	Preserve Trigger();
 }
 
@@ -1803,18 +1303,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint5", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint5", Patrol);
 	Preserve Trigger();
 }
 
@@ -1829,18 +1329,18 @@ Conditions:
 	Switch("Switch18", Not Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint1", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint1", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint1", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint1", Patrol);
 	Preserve Trigger();
 }
 
@@ -1855,18 +1355,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint3", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint3", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint3", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint3", Patrol);
 	Preserve Trigger();
 }
 
@@ -1881,18 +1381,18 @@ Conditions:
 	Switch("Switch18", Set);
 	Switch("Switch19", Set);
 Actions:
-	Order("Player 7", "Zerg Zergling", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Lurker", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Defiler", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Queen", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Scourge", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Ultralisk", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Guardian", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Devourer", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Zerg Overlord", "East Area", "Waypoint5", Move);
-	Order("Player 7", "Infested Terran", "East Area", "Waypoint5", Move);
+	Order("Player 7", "Zerg Zergling", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Hydralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Lurker", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Defiler", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Queen", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Scourge", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Ultralisk", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Guardian", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Devourer", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Zerg Overlord", "P7 MainBase", "Waypoint5", Patrol);
+	Order("Player 7", "Infested Terran", "P7 MainBase", "Waypoint5", Patrol);
 	Preserve Trigger();
 }
 
