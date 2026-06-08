@@ -46,37 +46,6 @@ Actions:
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn2");
 }
 
-// Colony destruction penalty: +5 seconds beyond hard.
-Trigger("Player 5"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", Exactly, 4);
-	Deaths("Player 5", "Zerg Hatchery", At least, 1);
-Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 60);
-	Preserve Trigger();
-}
-
-Trigger("Player 5"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", Exactly, 4);
-	Deaths("Player 5", "Zerg Lair", At least, 1);
-Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 60);
-	Preserve Trigger();
-}
-
-Trigger("Player 5"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", Exactly, 4);
-	Deaths("Player 5", "Zerg Hive", At least, 1);
-Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 60);
-	Preserve Trigger();
-}
-
 // Convert the easy 210s late-wave threshold into very hard 180s.
 Trigger("Player 5"){
 Conditions:

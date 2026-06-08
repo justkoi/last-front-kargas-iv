@@ -13,6 +13,7 @@
 
 Trigger("Player 5"){
 Conditions:
+	Switch("Switch133", Not Set);
 	Deaths("Player 8", "Terran Marine", At least, 120);
 	Bring("Player 1", "Men", "P5 Area", At least, 1);
 Actions:
@@ -35,6 +36,7 @@ Actions:
 
 Trigger("Player 5"){
 Conditions:
+	Switch("Switch133", Not Set);
 	Deaths("Player 8", "Terran Marine", At least, 120);
 	Bring("Player 2", "Men", "P5 Area", At least, 1);
 Actions:
@@ -57,6 +59,7 @@ Actions:
 
 Trigger("Player 5"){
 Conditions:
+	Switch("Switch133", Not Set);
 	Deaths("Player 8", "Terran Marine", At least, 120);
 	Bring("Player 3", "Men", "P5 Area", At least, 1);
 Actions:
@@ -79,6 +82,7 @@ Actions:
 
 Trigger("Player 5"){
 Conditions:
+	Switch("Switch133", Not Set);
 	Deaths("Player 8", "Terran Marine", At least, 120);
 	Bring("Player 4", "Men", "P5 Area", At least, 1);
 Actions:

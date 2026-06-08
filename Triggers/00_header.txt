@@ -46,7 +46,7 @@
 //    Terran Science Vessel: Force2(P5~P8) shared vision refresh timer
 //    Terran Academy       : difficulty selection flag (0=unset, 1=easy, 2=normal, 3=hard, 4=very hard)
 //    Terran Ghost         : difficulty reminder timer
-//    Terran Medic         : mission2 P6 minibase destroy reward message spacing timer
+//    Terran Medic         : mission1 P5 Hatchery/Lair/Hive cumulative destroy counter (M2 minibase spacing after Valkyrie=3)
 //    Terran Dropship      : mission1 late-wave variant index / P7 mission2 early alert defense recharge timer
 //    Protoss Corsair      : mission1 outer colony warning cooldown timer
 //    Zerg Creep Colony    : mission1 P6/P7 creep colony warning counter
@@ -64,15 +64,15 @@
 //    Zerg Defiler         : P7 mission2 penalty assault relay order cooldown
 //    Protoss Reaver       : P6 mission2 penalty assault spawn stage index
 //    Protoss Observer     : P7 mission2 penalty assault spawn stage index
-//    Protoss Dark Archon : mission2 final scream assault preparation timer
+//    Protoss Dark Archon : mission1 colony rage / mission2 final scream assault preparation timer
 //
 //  Player 1~4 DC roles
 //    Tom Kazansky (Wraith): 종족 마커(시작 3초 스냅샷) 1=Terran, 2=Zerg, 3=Protoss. 13e arsenal handoff 테란 우선 판정용. 미사용 영웅 유닛 슬롯.
 //
 //  Player 5 DC roles
-//    Zerg Hatchery        : mission1 late-wave cooldown seed
-//    Zerg Lair            : mission1 late-wave cooldown seed
-//    Zerg Hive            : mission1 late-wave cooldown seed
+//    Zerg Hatchery        : mission1 P5 Hatchery destroy reward counter (late-wave seed removed)
+//    Zerg Lair            : mission1 P5 Lair destroy reward counter
+//    Zerg Hive            : mission1 P5 Hive destroy reward counter
 //    Terran Marine        : P5 mission2 early Sunken Colony loss warning progress
 //    Terran Firebat       : P5 mission2 early Spore Colony loss warning progress
 //
@@ -116,7 +116,7 @@
 //    Switch55   : P6 AI activation requested
 //    Switch56   : P7 AI activation requested
 //    Switch57   : P6 hunt P5 Overlord support fired this cycle
-//    Switch58   : P5 Hive death ground counterattack used
+//    Switch58   : mission1 colony rage armed (one-shot, 8 tech destroys)
 //    Switch59   : P6 mission2 early alert defense charge ready
 //    Switch60   : P7 mission2 early alert defense charge ready
 //    Switch61/62: P6 mission2 upcoming wave selector (pre-seeded; air/ground in Switch61)
@@ -131,13 +131,13 @@
 //    Switch73   : mission1 both outer colonies awakening warning latch
 //    Switch74   : P6 collapsed; P7 final scream assault active
 //    Switch75   : P7 collapsed; P6 final scream assault active
-//    Switch76   : mission2 final scream assault intro message shown
-//    Switch77   : mission2 final scream assault 30s warning shown
-//    Switch78   : mission2 final scream assault launch message shown
-//    Switch79   : mission2 final scream assault batch 1 spawned
-//    Switch80   : mission2 final scream assault batch 2 spawned
-//    Switch81   : mission2 final scream assault batch 3 spawned
-//    Switch82   : mission2 final scream assault batch 4 spawned
+//    Switch76   : mission1 colony rage intro / mission2 final scream assault intro message shown
+//    Switch77   : mission1 colony rage 15s warning / mission2 final scream assault 30s warning shown
+//    Switch78   : mission1 colony rage launch / mission2 final scream assault launch message shown
+//    Switch79   : mission1 colony rage batch 1 / mission2 final scream assault batch 1 spawned
+//    Switch80   : mission1 colony rage batch 2 / mission2 final scream assault batch 2 spawned
+//    Switch81   : mission1 colony rage batch 3 / mission2 final scream assault batch 3 spawned
+//    Switch82   : mission1 colony rage batch 4 / mission2 final scream assault batch 4 spawned
 //    Switch83   : mission2 final scream assault batch 5 spawned
 //    Switch84   : P6 base defense suspended during final scream assault
 //    Switch85   : P7 base defense suspended during final scream assault
@@ -173,6 +173,7 @@
 //    Switch130     : P7 main assault coarse (air/ground) warning rolled
 //    Switch131     : P7 main assault coarse (air/ground) warning shown
 //    Switch132     : main assault first-wave seeded at game start (one-shot guard)
+//    Switch133     : mission1 P5 base defense suspended during colony rage (60s after launch)
 //    Switch134/135 : DefenseCenter1 easy-mode handoff random living-player selector (clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4)
 //    Switch136     : DefenseCenter1 easy-mode handoff completed
 //    Switch137/138 : DefenseCenter2 easy-mode handoff random living-player selector
@@ -191,6 +192,8 @@
 //    Switch152     : P5 Cerebrate destroy reward A (작전 정보 + 자원 +1500/+500) applied (one-shot)
 //    Switch153     : P5 Cerebrate destroy hawk praise(B) shown (one-shot)
 //    Switch154     : P5 Cerebrate destroy reward text(C) shown (one-shot)
+//    Switch158     : P6 main assault locked after final scream assault batch 10
+//    Switch159     : P7 main assault locked after final scream assault batch 10
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:

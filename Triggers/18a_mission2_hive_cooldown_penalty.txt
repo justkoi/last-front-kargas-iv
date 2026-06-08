@@ -94,6 +94,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 	Switch("Switch32", Not Set);
+	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 780);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
@@ -125,6 +126,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 	Switch("Switch32", Not Set);
+	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 900);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
@@ -146,6 +148,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 	Switch("Switch32", Not Set);
+	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1020);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
@@ -167,6 +170,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Switch("Switch32", Not Set);
+	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 780);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
@@ -198,6 +202,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Switch("Switch32", Not Set);
+	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 900);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
@@ -219,6 +224,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Switch("Switch32", Not Set);
+	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1020);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
@@ -240,6 +246,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Switch("Switch32", Not Set);
+	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 780);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
@@ -261,6 +268,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Switch("Switch32", Not Set);
+	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 900);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
@@ -282,6 +290,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Switch("Switch32", Not Set);
+	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1020);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
@@ -313,6 +322,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Switch("Switch31", Not Set);
+	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 780);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
@@ -334,6 +344,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Switch("Switch31", Not Set);
+	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 900);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
@@ -355,6 +366,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Switch("Switch31", Not Set);
+	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1020);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
@@ -386,6 +398,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Switch("Switch31", Not Set);
+	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 780);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
@@ -407,6 +420,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Switch("Switch31", Not Set);
+	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 900);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
@@ -428,6 +442,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Switch("Switch31", Not Set);
+	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1020);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
@@ -459,6 +474,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Switch("Switch31", Not Set);
+	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 780);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
@@ -480,6 +496,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Switch("Switch31", Not Set);
+	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 900);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
@@ -501,6 +518,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Switch("Switch31", Not Set);
+	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1020);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
@@ -526,6 +544,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 	Switch("Switch32", Not Set);
+	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1140);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
@@ -547,6 +566,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Switch("Switch32", Not Set);
+	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1140);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
@@ -568,6 +588,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Switch("Switch32", Not Set);
+	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1140);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
@@ -589,6 +610,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Switch("Switch31", Not Set);
+	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1140);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
@@ -610,6 +632,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Switch("Switch31", Not Set);
+	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1140);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
@@ -631,6 +654,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Switch("Switch31", Not Set);
+	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1140);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);

@@ -9,7 +9,7 @@
 //  변형 D: 공성 공중 (가디언/디바우러/뮤탈)
 //-----------------------------------------------------------------//
 
-// 군락 테크 건물 붕괴 반격 보정 (1변종 = 2520틱, 시작 보정 = 10080틱)
+// 늦은 웨이브 시작 시 Wraith DC 시드 (4변종 × 2520틱). 테크 건물 파괴는 자원 보상 + Medic 누적만.
 // Seed enough cooldown for four late-wave variants when late waves begin.
 Trigger("Player 5"){
 Conditions:
@@ -31,7 +31,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 1440);
+	Set Deaths("Player 8", "Terran Medic", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
 	Set Resources("Player 3", Add, 250, ore);
@@ -56,7 +56,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 2160);
+	Set Deaths("Player 8", "Terran Medic", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
 	Set Resources("Player 3", Add, 350, ore);
@@ -81,7 +81,7 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 2880);
+	Set Deaths("Player 8", "Terran Medic", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
 	Set Resources("Player 3", Add, 450, ore);

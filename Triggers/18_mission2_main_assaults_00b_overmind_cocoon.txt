@@ -223,6 +223,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
+	Switch("Switch158", Not Set);
 	Deaths("Player 8", "Zerg Zergling", At least, 14520);
 	Deaths("Player 8", "Zerg Zergling", At most, 15479);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
@@ -246,6 +247,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
+	Switch("Switch158", Not Set);
 	Deaths("Player 8", "Zerg Zergling", At least, 14880);
 	Deaths("Player 8", "Zerg Zergling", At most, 15839);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
@@ -269,6 +271,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
+	Switch("Switch158", Not Set);
 	Deaths("Player 8", "Zerg Zergling", At least, 15240);
 	Deaths("Player 8", "Zerg Zergling", At most, 16199);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
@@ -292,6 +295,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
+	Switch("Switch158", Not Set);
 	Deaths("Player 8", "Zerg Zergling", At least, 14880);
 	Deaths("Player 8", "Zerg Zergling", At most, 15839);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
@@ -316,6 +320,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
+	Switch("Switch158", Not Set);
 	Deaths("Player 8", "Zerg Zergling", At least, 15480);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
 	Switch("Switch27", Not Set);
@@ -335,6 +340,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
+	Switch("Switch158", Not Set);
 	Deaths("Player 8", "Zerg Zergling", At least, 15840);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
 	Switch("Switch27", Set);
@@ -354,6 +360,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
+	Switch("Switch158", Not Set);
 	Deaths("Player 8", "Zerg Zergling", At least, 16200);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
 	Switch("Switch27", Not Set);
@@ -373,6 +380,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
+	Switch("Switch158", Not Set);
 	Deaths("Player 8", "Zerg Zergling", At least, 15840);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 7);
 	Switch("Switch27", Set);
@@ -393,6 +401,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
+	Switch("Switch158", Not Set);
 	Deaths("Player 8", "Zerg Zergling", At least, 15480);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Not Set);
@@ -417,6 +426,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
+	Switch("Switch158", Not Set);
 	Deaths("Player 8", "Zerg Zergling", At least, 15840);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Set);
@@ -441,6 +451,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
+	Switch("Switch158", Not Set);
 	Deaths("Player 8", "Zerg Zergling", At least, 16200);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Not Set);
@@ -465,6 +476,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Not Set);
 	Switch("Switch31", Not Set);
+	Switch("Switch158", Not Set);
 	Deaths("Player 8", "Zerg Zergling", At least, 15840);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch27", Set);
@@ -491,6 +503,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
+	Switch("Switch159", Not Set);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 14520);
 	Deaths("Player 8", "Zerg Hydralisk", At most, 15479);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
@@ -514,6 +527,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
+	Switch("Switch159", Not Set);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 14880);
 	Deaths("Player 8", "Zerg Hydralisk", At most, 15839);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
@@ -537,6 +551,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
+	Switch("Switch159", Not Set);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 15240);
 	Deaths("Player 8", "Zerg Hydralisk", At most, 16199);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
@@ -560,6 +575,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
+	Switch("Switch159", Not Set);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 14880);
 	Deaths("Player 8", "Zerg Hydralisk", At most, 15839);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
@@ -584,6 +600,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
+	Switch("Switch159", Not Set);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 15480);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
 	Switch("Switch29", Not Set);
@@ -603,6 +620,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
+	Switch("Switch159", Not Set);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 15840);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
 	Switch("Switch29", Set);
@@ -622,6 +640,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
+	Switch("Switch159", Not Set);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 16200);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
 	Switch("Switch29", Not Set);
@@ -641,6 +660,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
+	Switch("Switch159", Not Set);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 15840);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 7);
 	Switch("Switch29", Set);
@@ -661,6 +681,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
+	Switch("Switch159", Not Set);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 15480);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Not Set);
@@ -685,6 +706,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
+	Switch("Switch159", Not Set);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 15840);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Set);
@@ -709,6 +731,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
+	Switch("Switch159", Not Set);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 16200);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Not Set);
@@ -733,6 +756,7 @@ Conditions:
 	Switch("Switch41", Set);
 	Switch("Switch39", Set);
 	Switch("Switch32", Not Set);
+	Switch("Switch159", Not Set);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 15840);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch29", Set);
