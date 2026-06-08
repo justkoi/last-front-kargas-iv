@@ -1,7 +1,7 @@
 //============================================================
 //  KARGAS IV - Mission trigger notes
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
-//                      P5 Spawn1~4, P5 H1~4, P1~P4 Hunt, Player Destination, AttackPoint1,
+//                      P5 Spawn1~4, P5 H1~4, P1~P4 Hunt, Player Destination, AttackPoint1, EarlyTower,
 //                      MD1~MD6, BaseEntrance, BaseScan1~11, MainLoad1~2, Player Destination,
 //                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 MiniBase, P6 Spawn1~4, P6 H1~8,
@@ -65,6 +65,9 @@
 //    Protoss Reaver       : P6 mission2 penalty assault spawn stage index
 //    Protoss Observer     : P7 mission2 penalty assault spawn stage index
 //    Protoss Dark Archon : mission2 final scream assault preparation timer
+//
+//  Player 1~4 DC roles
+//    Tom Kazansky (Wraith): 종족 마커(시작 3초 스냅샷) 1=Terran, 2=Zerg, 3=Protoss. 13e arsenal handoff 테란 우선 판정용. 미사용 영웅 유닛 슬롯.
 //
 //  Player 5 DC roles
 //    Zerg Hatchery        : mission1 late-wave cooldown seed
@@ -170,16 +173,24 @@
 //    Switch130     : P7 main assault coarse (air/ground) warning rolled
 //    Switch131     : P7 main assault coarse (air/ground) warning shown
 //    Switch132     : main assault first-wave seeded at game start (one-shot guard)
-//    Switch133     : mission1 entrance turret hint sequence played (13c)
 //    Switch134/135 : DefenseCenter1 easy-mode handoff random living-player selector (clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4)
 //    Switch136     : DefenseCenter1 easy-mode handoff completed
 //    Switch137/138 : DefenseCenter2 easy-mode handoff random living-player selector
 //    Switch139     : DefenseCenter2 easy-mode handoff completed
 //    Switch140     : mission2 P6 forward rally point revealed (Vulture >= 4080)
 //    Switch141     : mission2 P6 forward rally point reward paid
-//    Switch142     : mission1 advance briefing sequence played (13d)
+//    Switch142     : mission1 arsenal facility alive gate - Barracks OR Factory at BaseEntrance (13e, prescan 1378-1380)
 //    Switch143     : AttackPoint1 cerebrate destroy P5 Hunt delay applied (one-shot)
-//    Switch144     : AttackPoint1 cerebrate destroy reward shown (one-shot)
+//    Switch144     : AttackPoint1 cerebrate destroy reward A (자원 +2500 / EarlyTower 성큰 전멸 / 격파 헤더) applied (one-shot)
+//    Switch145/146 : mission1 arsenal handoff random selector (clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4) (13e)
+//    Switch147     : mission1 arsenal handoff completed (13e)
+//    Switch148     : AttackPoint1 정신체 자원 확보 안내(22:10, 호크 대사 이후) shown (one-shot)
+//    Switch149     : AttackPoint1 정신체 처치 칭찬(B) shown (one-shot)
+//    Switch150     : AttackPoint1 정신체 처치 보상 안내(C) shown (one-shot)
+//    Switch151     : mission1 arsenal handoff personal message shown (one-shot) (13e)
+//    Switch152     : P5 Cerebrate destroy reward A (작전 정보 + 자원 +1500/+500) applied (one-shot)
+//    Switch153     : P5 Cerebrate destroy hawk praise(B) shown (one-shot)
+//    Switch154     : P5 Cerebrate destroy reward text(C) shown (one-shot)
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:

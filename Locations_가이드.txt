@@ -171,10 +171,14 @@ P8 (보스):
 ============================================================
 
 - "BaseEntrance"  : shared player front-line choke (minimap ping target)
+                    P9 소유 Terran Barracks/Factory(버려진 군수시설) 선배치 필요.
+                    23분경 13e가 무작위 플레이어(테란 우선)에게 소유권 이양.
+- "EarlyTower"     : 전방 P5 Zerg Sunken Colony 군집 위치
+                    (AttackPoint1 정신체 처치 시 10_mission1_waves_late가 이 위치 P5 성큰 전멸)
 - "BaseScan1"~"BaseScan11" : orbital scan revealer slots at game start
 - "MainLoad1", "MainLoad2" : wave attack path preview near entrance
 - "MD1"~"MD6"     : Player 9 preplaced claimable Missile Turret slots
-                    (13c pings entrance-axis slots only; confirm MD numbers in editor)
+                    (13b: 병력 접근 시 점령 + 해당 슬롯 미니맵 핑; 에디터에서 MD 번호 확인)
 - "Player Destination" : P5 wave patrol target toward player base
 
 ============================================================

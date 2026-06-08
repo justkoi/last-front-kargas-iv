@@ -364,11 +364,18 @@ def string_map_from_trigger_text(trigger_text: Path, sections: dict[bytes, bytes
     if len(target_trig) % 2400:
         raise ValueError("TRIG size is not a multiple of 2400")
     target_calls = collect_target_string_actions(target_trig)
-    if len(source_calls) != len(target_calls):
+    if len(source_calls) > len(target_calls):
         raise ValueError(f"String action count differs: trigger_text={len(source_calls)} target_map={len(target_calls)}")
+    if len(source_calls) < len(target_calls):
+        extra = len(target_calls) - len(source_calls)
+        first_extra = target_calls[len(source_calls)]
+        print(
+            f"Warning: map has {extra} extra string action(s) not present in trigger_text; "
+            f"first extra is trigger {first_extra['trigger']} action {first_extra['action']} {first_extra['name']}"
+        )
 
     string_map: dict[int, bytes] = {}
-    for index, (source_call, target_call) in enumerate(zip(source_calls, target_calls)):
+    for index, (source_call, target_call) in enumerate(zip(source_calls, target_calls, strict=False)):
         if source_call["name"] != target_call["name"]:
             raise ValueError(
                 f"String action order differs at {index}: "

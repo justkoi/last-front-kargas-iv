@@ -100,7 +100,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 324);
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 Actions:
-	Display Text Message(Always Display, "<04>클리어 난이도는 <11>보통<04>입니다.");
+	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <11>보통<04>입니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

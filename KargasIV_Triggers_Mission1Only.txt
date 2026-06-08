@@ -1,7 +1,7 @@
 //============================================================
 //  KARGAS IV - Mission trigger notes
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
-//                      P5 Spawn1~4, P5 H1~4, P1~P4 Hunt, Player Destination, AttackPoint1,
+//                      P5 Spawn1~4, P5 H1~4, P1~P4 Hunt, Player Destination, AttackPoint1, EarlyTower,
 //                      MD1~MD6, BaseEntrance, BaseScan1~11, MainLoad1~2, Player Destination,
 //                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 MiniBase, P6 Spawn1~4, P6 H1~8,
@@ -65,6 +65,9 @@
 //    Protoss Reaver       : P6 mission2 penalty assault spawn stage index
 //    Protoss Observer     : P7 mission2 penalty assault spawn stage index
 //    Protoss Dark Archon : mission2 final scream assault preparation timer
+//
+//  Player 1~4 DC roles
+//    Tom Kazansky (Wraith): 종족 마커(시작 3초 스냅샷) 1=Terran, 2=Zerg, 3=Protoss. 13e arsenal handoff 테란 우선 판정용. 미사용 영웅 유닛 슬롯.
 //
 //  Player 5 DC roles
 //    Zerg Hatchery        : mission1 late-wave cooldown seed
@@ -170,16 +173,24 @@
 //    Switch130     : P7 main assault coarse (air/ground) warning rolled
 //    Switch131     : P7 main assault coarse (air/ground) warning shown
 //    Switch132     : main assault first-wave seeded at game start (one-shot guard)
-//    Switch133     : mission1 entrance turret hint sequence played (13c)
 //    Switch134/135 : DefenseCenter1 easy-mode handoff random living-player selector (clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4)
 //    Switch136     : DefenseCenter1 easy-mode handoff completed
 //    Switch137/138 : DefenseCenter2 easy-mode handoff random living-player selector
 //    Switch139     : DefenseCenter2 easy-mode handoff completed
 //    Switch140     : mission2 P6 forward rally point revealed (Vulture >= 4080)
 //    Switch141     : mission2 P6 forward rally point reward paid
-//    Switch142     : mission1 advance briefing sequence played (13d)
+//    Switch142     : mission1 arsenal facility alive gate - Barracks OR Factory at BaseEntrance (13e, prescan 1378-1380)
 //    Switch143     : AttackPoint1 cerebrate destroy P5 Hunt delay applied (one-shot)
-//    Switch144     : AttackPoint1 cerebrate destroy reward shown (one-shot)
+//    Switch144     : AttackPoint1 cerebrate destroy reward A (자원 +2500 / EarlyTower 성큰 전멸 / 격파 헤더) applied (one-shot)
+//    Switch145/146 : mission1 arsenal handoff random selector (clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4) (13e)
+//    Switch147     : mission1 arsenal handoff completed (13e)
+//    Switch148     : AttackPoint1 정신체 자원 확보 안내(22:10, 호크 대사 이후) shown (one-shot)
+//    Switch149     : AttackPoint1 정신체 처치 칭찬(B) shown (one-shot)
+//    Switch150     : AttackPoint1 정신체 처치 보상 안내(C) shown (one-shot)
+//    Switch151     : mission1 arsenal handoff personal message shown (one-shot) (13e)
+//    Switch152     : P5 Cerebrate destroy reward A (작전 정보 + 자원 +1500/+500) applied (one-shot)
+//    Switch153     : P5 Cerebrate destroy hawk praise(B) shown (one-shot)
+//    Switch154     : P5 Cerebrate destroy reward text(C) shown (one-shot)
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
@@ -223,10 +234,19 @@ Actions:
 	Set Switch("Switch124", clear);
 	Set Switch("Switch125", clear);
 	Set Switch("Switch126", clear);
-	Set Switch("Switch133", clear);
 	Set Switch("Switch142", clear);
 	Set Switch("Switch143", clear);
 	Set Switch("Switch144", clear);
+	Set Switch("Switch145", clear);
+	Set Switch("Switch146", clear);
+	Set Switch("Switch147", clear);
+	Set Switch("Switch148", clear);
+	Set Switch("Switch149", clear);
+	Set Switch("Switch150", clear);
+	Set Switch("Switch151", clear);
+	Set Switch("Switch152", clear);
+	Set Switch("Switch153", clear);
+	Set Switch("Switch154", clear);
 }
 
 Trigger("All Players"){
@@ -420,7 +440,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Minimap Ping("BaseEntrance");
-	Display Text Message(Always Display, "<1A>노바: <04>거점 입구에 수리가 필요해 보이는 임시 방벽이 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>거점 입구에 버려진 군수시설이 있습니다. 배럭과 팩토리 같군요.");
 }
 
 Trigger("All Players"){
@@ -428,7 +448,7 @@ Conditions:
 	Elapsed Time(At least, 95);
 	Elapsed Time(At most, 97);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>가능하면 수리해서 방어에 쓸 수 있도록 해라.");
+	Display Text Message(Always Display, "<03>호크: <04>복구하려면 시간이 걸리겠지만, 그동안은 입구를 막는 방어벽으로도 쓸 수 있겠군.");
 }
 //-----------------------------------------------------------------//
 //  Difficulty selection
@@ -1775,6 +1795,18 @@ Actions:
 	Display Text Message(Always Display, "<03>호크: <04>좋다. 타격대를 보내라. 방어선 숨통이 트일 거다.");
 }
 
+// 22:10 공개 안내 - 전방 정신체 제거 시 자원 확보 가능함을 알림 (호크 대사 이후, 정신체 존재 시 1회)
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch148", Not Set);                          //자원 안내 미표시 (값싼 가드 먼저)
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
+	Elapsed Time(At least, 1330);                          //22:10 시점 (호크 대사 5초 후)
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 존재 시 (스캔, 마지막)
+Actions:
+	Display Text Message(Always Display, "<07>작전 정보: <04>전방의 저그 정신체를 제거하면 지휘 교란과 함께 상당한 자원을 확보할 수 있습니다.");
+	Set Switch("Switch148", set);
+}
+
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
@@ -2683,28 +2715,79 @@ Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체를 파괴하면 지휘체계 교란으로 공세의 규모가 감소합니다.");
 }
 
+// P5 지휘 정신체 처치 - 작전정보(A) -> 호크 칭찬(B) -> 보상 안내(C) 순서로 1줄씩 표시.
+// AttackPoint1과 동일 : C->B->A 역순 배치로 사이클 분리.
+
+// (C) 시스템 보상 안내 : Switch153(칭찬) 이후 사이클에 발동
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At most, 0);
+	Switch("Switch153", Set);                              //칭찬 표시 후
+	Switch("Switch154", Not Set);                          //보상 안내 미표시
 Actions:
-	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체 제거 확인. 지휘체계 교란으로 후속 공세 규모가 감소합니다.");
 	Display Text Message(Always Display, "<07>작전 보상: <04>지휘 정신체 제거. 미네랄 +1500 / 가스 +500");
-	Set Resources("Current Player", Add, 1500, ore);
-	Set Resources("Current Player", Add, 500, gas);
+	Set Switch("Switch154", set);
 }
 
+// (B) 호크 칭찬 : Switch152(처치) 이후 사이클에 발동
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch144", Not Set);
-	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
+	Switch("Switch152", Set);                              //처치 확정 후
+	Switch("Switch153", Not Set);                          //칭찬 미표시
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>잘했다. 전방 지휘 신호가 끊겼다. 지금 벌어 둔 틈을 놓치지 마라.");
-	Display Text Message(Always Display, "<11>주황색 저그<04>의 지휘체계가 혼란에 빠졌습니다. 잠시 동안 공격을 망설일 것입니다.");
-	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 제거. 미네랄 +1000");
-	Set Resources("Current Player", Add, 1000, ore);
-	Set Switch("Switch144", set);
+	Display Text Message(Always Display, "<03>호크: <04>잘했다! 지휘 정신체를 끊었군. 이젠 방어선이 숨통 트일 거다.");
+	Set Switch("Switch153", set);
+}
+
+// (A) 작전 정보 + 자원 지급 : 정신체 파괴 즉시 발동
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch152", Not Set);                          //지휘 정신체 보상 미지급 (값싼 가드 먼저)
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
+	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At most, 0); //지휘 정신체 파괴됨 (스캔, 마지막)
+Actions:
+	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체 제거 확인. 지휘체계 교란으로 후속 공세 규모가 감소합니다.");
+	Set Resources("Current Player", Add, 1500, ore);       //지휘 정신체 처치 보상 : 미네랄 +1500
+	Set Resources("Current Player", Add, 500, gas);        //지휘 정신체 처치 보상 : 가스 +500
+	Set Switch("Switch152", set);                          //보상 지급 완료
+}
+
+// AttackPoint1 정신체 처치 보상 - 격파 헤더(A) -> 칭찬(B) -> 보상 안내(C) 순서로 1줄씩 표시.
+// 한 트리거 사이클 내에서 위 트리거가 set한 Switch를 아래 트리거가 즉시 보면 같은 프레임에
+// 함께 발동해 메시지가 덮어써진다. 이를 막으려고 의존 트리거(C->B->A)를 일부러 역순 배치해
+// A는 사이클 N, B는 N+1, C는 N+2에 발동 -> 표시 순서는 A,B,C로 3줄 모두 노출.
+
+// (C) 시스템 보상/효과 안내 : Switch149(칭찬) 이후 사이클에 발동
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch149", Set);                              //칭찬 표시 후
+	Switch("Switch150", Not Set);                          //보상 안내 미표시
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 제거. 미네랄 +2500. 지휘 교란으로 전방 방어 군집이 와해됐습니다.");
+	Set Switch("Switch150", set);
+}
+
+// (B) 호크의 강한 칭찬 : Switch144(격파) 이후 사이클에 발동
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch144", Set);                              //격파 확정 후
+	Switch("Switch149", Not Set);                          //칭찬 미표시
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>잘했다! 적 지휘의 급소를 정확히 짚어냈어. 자네가 해냈다.");
+	Set Switch("Switch149", set);
+}
+
+// (A) 자원 +2500 + EarlyTower 성큰 전멸 + 격파 헤더 : 정신체 파괴 즉시 발동
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch144", Not Set);                          //정신체 보상 미지급 (값싼 가드 먼저)
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0); //전방 정신체 파괴됨 (스캔, 마지막)
+Actions:
+	Set Resources("Current Player", Add, 2500, ore);       //정신체 처치 보상 : 미네랄 +2500
+	Kill Unit At Location("Player 5", "Zerg Sunken Colony", All, "EarlyTower"); //별개 보상 : EarlyTower P5 성큰 전멸
+	//중앙 정렬 격파 강조 헤더
+	Display Text Message(Always Display, "<13><03>[ 전방 정신체 격파 ]");
+	Set Switch("Switch144", set);                          //보상 지급 완료
 }
 
 // AttackPoint1 cerebrate kill - rally P5 hunt assault units toward P5 Spawn1 once.
@@ -4191,10 +4274,10 @@ Conditions:
 	Switch("Switch92", Not Set);
 	Bring("Player 5", "Overmind Cocoon", "Gas1", At most, 0);
 Actions:
-	Set Resources("Player 1", Add, 500, gas);
-	Set Resources("Player 2", Add, 500, gas);
-	Set Resources("Player 3", Add, 500, gas);
-	Set Resources("Player 4", Add, 500, gas);
+	Set Resources("Player 1", Add, 1000, gas);
+	Set Resources("Player 2", Add, 1000, gas);
+	Set Resources("Player 3", Add, 1000, gas);
+	Set Resources("Player 4", Add, 1000, gas);
 	Set Switch("Switch92", set);
 }
 
@@ -4203,7 +4286,7 @@ Conditions:
 	Switch("Switch92", Set);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. 가스 +500");
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. 가스 +1000");
 }
 
 Trigger("Player 8"){
@@ -4212,10 +4295,10 @@ Conditions:
 	Switch("Switch94", Not Set);
 	Bring("Player 5", "Overmind Cocoon", "Gas2", At most, 0);
 Actions:
-	Set Resources("Player 1", Add, 500, gas);
-	Set Resources("Player 2", Add, 500, gas);
-	Set Resources("Player 3", Add, 500, gas);
-	Set Resources("Player 4", Add, 500, gas);
+	Set Resources("Player 1", Add, 1000, gas);
+	Set Resources("Player 2", Add, 1000, gas);
+	Set Resources("Player 3", Add, 1000, gas);
+	Set Resources("Player 4", Add, 1000, gas);
 	Set Switch("Switch94", set);
 }
 
@@ -4224,7 +4307,7 @@ Conditions:
 	Switch("Switch94", Set);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. 가스 +500");
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. 가스 +1000");
 }
 //-----------------------------------------------------------------//
 //  미션1 클리어 -> 미션2 즉시 진입
@@ -4813,10 +4896,11 @@ Conditions:
 	Bring("Current Player", "Men", "MD1", At least, 1);
 	Bring("Player 9", "Terran Missile Turret", "MD1", At least, 1);
 Actions:
+	Modify Unit Hit Points("Player 9", "Terran Missile Turret", 100, 1, "MD1"); //수리 : P9 터렛 체력 100%로 복구 후 양도
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD1");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD1"); //제어권 확보 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
-	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+	Minimap Ping("MD1"); //수리 완료 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
+	Display Text Message(Always Display, "<07>전술 지원: <04>고장난 미사일 터렛을 수리했습니다!");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -4824,10 +4908,11 @@ Conditions:
 	Bring("Current Player", "Men", "MD2", At least, 1);
 	Bring("Player 9", "Terran Missile Turret", "MD2", At least, 1);
 Actions:
+	Modify Unit Hit Points("Player 9", "Terran Missile Turret", 100, 1, "MD2"); //수리 : P9 터렛 체력 100%로 복구 후 양도
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD2");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD2"); //제어권 확보 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
-	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+	Minimap Ping("MD2"); //수리 완료 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
+	Display Text Message(Always Display, "<07>전술 지원: <04>고장난 미사일 터렛을 수리했습니다!");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -4835,10 +4920,11 @@ Conditions:
 	Bring("Current Player", "Men", "MD3", At least, 1);
 	Bring("Player 9", "Terran Missile Turret", "MD3", At least, 1);
 Actions:
+	Modify Unit Hit Points("Player 9", "Terran Missile Turret", 100, 1, "MD3"); //수리 : P9 터렛 체력 100%로 복구 후 양도
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD3");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD3"); //제어권 확보 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
-	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+	Minimap Ping("MD3"); //수리 완료 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
+	Display Text Message(Always Display, "<07>전술 지원: <04>고장난 미사일 터렛을 수리했습니다!");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -4846,10 +4932,11 @@ Conditions:
 	Bring("Current Player", "Men", "MD4", At least, 1);
 	Bring("Player 9", "Terran Missile Turret", "MD4", At least, 1);
 Actions:
+	Modify Unit Hit Points("Player 9", "Terran Missile Turret", 100, 1, "MD4"); //수리 : P9 터렛 체력 100%로 복구 후 양도
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD4"); //제어권 확보 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
-	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+	Minimap Ping("MD4"); //수리 완료 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
+	Display Text Message(Always Display, "<07>전술 지원: <04>고장난 미사일 터렛을 수리했습니다!");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -4857,10 +4944,11 @@ Conditions:
 	Bring("Current Player", "Men", "MD5", At least, 1);
 	Bring("Player 9", "Terran Missile Turret", "MD5", At least, 1);
 Actions:
+	Modify Unit Hit Points("Player 9", "Terran Missile Turret", 100, 1, "MD5"); //수리 : P9 터렛 체력 100%로 복구 후 양도
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD5");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD5"); //제어권 확보 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
-	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+	Minimap Ping("MD5"); //수리 완료 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
+	Display Text Message(Always Display, "<07>전술 지원: <04>고장난 미사일 터렛을 수리했습니다!");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -4868,95 +4956,355 @@ Conditions:
 	Bring("Current Player", "Men", "MD6", At least, 1);
 	Bring("Player 9", "Terran Missile Turret", "MD6", At least, 1);
 Actions:
+	Modify Unit Hit Points("Player 9", "Terran Missile Turret", 100, 1, "MD6"); //수리 : P9 터렛 체력 100%로 복구 후 양도
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD6");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD6"); //제어권 확보 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
-	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+	Minimap Ping("MD6"); //수리 완료 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
+	Display Text Message(Always Display, "<07>전술 지원: <04>고장난 미사일 터렛을 수리했습니다!");
 }
 //============================================================
-//  Mission 1 entrance turret hint (after wave 1, before wave 2)
-//  Switch133 = one-shot sequence guard
-//  Ping MD1~MD6 at entrance axis (map editor placement)
+//  Mission 1 advance cue
+//  자원 부족을 직접 언급하거나 진출을 명령하는 대사는 모두 제거했다.
+//  진출 유도는 13e 군수시설 복구 통지와 09 AttackPoint1 정신체 큐가 단서로 대신한다.
+//  (별도 대사 없음 - 플레이어가 스스로 판단하게 둔다.)
+//  Switch142 : 13e 군수시설 생존 게이트 (여기서는 미사용, 시작/전환 시 clear만 유지)
+//============================================================
+//============================================================
+//  Mission 1 - 입구 군수시설(P9 배럭/팩토리) 통제권 이양
+//  기존 "입구 임시 방벽 수동 파괴"를 대체. 23분경 버려진 군수시설을
+//  복구했다는 메타포로 P9 소유 배럭/팩토리 소유권을 플레이어 1명에게 이양한다.
+//  무적/파괴 없음 - 순수 소유권 이양(플레이어가 시설을 띄워 입구를 열 수 있음).
+//
+//  종족 마커 DC : Tom Kazansky (Wraith) (P1~P4, 미사용 영웅 유닛 슬롯)
+//    값 1 = 테란, 2 = 저그, 3 = 프로토스. 시작 3초 시점 일꾼으로 스냅샷.
+//  Switch142     : 군수시설 생존 게이트 — P9 BaseEntrance에 배럭 OR 팩토리 중 1개 이상 (1378~1380 스냅샷)
+//  Switch145/146 : 무작위 선택자 1회 추첨(clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4)
+//  Switch147     : 이양 완료(가드)
+//  Switch151     : 개인 메시지 1회 출력 완료(가드)
+//
+//  이양 대상 결정(매 사이클 재추첨 없음 - 1380초에 1회만 추첨 후 우선순위 cascade):
+//    1순위) 테란 보유 플레이어 우선 : P1->P4 순으로 첫 생존 테란에게.
+//    2순위) 테란이 없으면 : 1회 추첨으로 뽑힌 생존 플레이어에게(무작위).
+//    3순위) 뽑힌 플레이어가 비생존이면 : P1->P4 순 첫 생존 플레이어(안전망).
+//    파일 순서(테란 cascade -> 추첨 -> 생존 scan)로 한 사이클 내 우선순위가 결정됨.
+//  군수시설 생존 게이트 : 23:00 직전(1378~1380) P8이 배럭/팩토리를 각각 스캔해 Switch142 set.
+//    이양 조건은 Switch142 Set만 확인. Give는 배럭·팩토리 둘 다 호출(있는 유닛만 이전).
 //============================================================
 
-Trigger("All Players"){
+//----- (A) 종족 감지 : 시작 3초, 일꾼으로 종족 판정 후 마커 DC 저장 (1회성) -----//
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Switch("Switch133", Not Set);
-	Elapsed Time(At least, 300);
-	Elapsed Time(At most, 302);
+	Elapsed Time(At least, 3);                          //시작 3초 후 종족 스냅샷
+	Elapsed Time(At most, 5);
+	Command("Current Player", "Terran SCV", At least, 1); //테란 일꾼 보유 : 테란 종족
 Actions:
-	Display Text Message(Always Display, "<1A>노바: 여기 <04>UED 잔당이 남긴 터렛을 발견했습니다.");
+	Set Deaths("Current Player", "Tom Kazansky (Wraith)", Set To, 1); //종족 마커 = 1(테란)
 }
 
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Switch("Switch133", Not Set);
-	Elapsed Time(At least, 312);
-	Elapsed Time(At most, 314);
+	Elapsed Time(At least, 3);
+	Elapsed Time(At most, 5);
+	Command("Current Player", "Zerg Drone", At least, 1); //저그 일꾼 보유 : 저그 종족
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>작동하지 않는군. 하지만 수리해서 쓸 수 있다. 터렛을 손에 넣어라. ");
+	Set Deaths("Current Player", "Tom Kazansky (Wraith)", Set To, 2); //종족 마커 = 2(저그)
 }
 
-Trigger("All Players"){
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Switch("Switch133", Not Set);
-	Elapsed Time(At least, 324);
-	Elapsed Time(At most, 326);
+	Elapsed Time(At least, 3);
+	Elapsed Time(At most, 5);
+	Command("Current Player", "Protoss Probe", At least, 1); //프로토스 일꾼 보유 : 프로토스 종족
 Actions:
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD1");
-	Minimap Ping("MD2");
-	Minimap Ping("MD3");
-	Minimap Ping("MD4");
-	Minimap Ping("MD5");
-	Minimap Ping("MD6");
-	Display Text Message(Always Display, "<07>작전 안내: <04>표시한 터렛에 병력을 접근시키면 터렛 제어권을 넘겨받을 수 있습니다.");
-	Set Switch("Switch133", set);
-}
-//============================================================
-//  Mission 1 advance briefing (narrative only)
-//  AttackPoint1 guide(1320s) 후 약 1분 내 진출 작전 서사.
-//  Switch142 : advance briefing sequence played (one-shot)
-//============================================================
-
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Switch("Switch142", Not Set);
-	Elapsed Time(At least, 1382);
-	Elapsed Time(At most, 1384);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>병기고 자원이 바닥났다. 이 상태로는 방어만 반복하게 된다. 밖으로 나가야 한다.");
+	Set Deaths("Current Player", "Tom Kazansky (Wraith)", Set To, 3); //종족 마커 = 3(프로토스)
 }
 
-Trigger("All Players"){
+//----- (A-pre) 23:00 직전 군수시설 생존 스냅샷 → Switch142 -----//
+Trigger("Player 8"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Switch("Switch142", Not Set);
-	Elapsed Time(At least, 1392);
-	Elapsed Time(At most, 1394);
+	Elapsed Time(At least, 1378);
+	Elapsed Time(At most, 1380);
+	Bring("Player 9", "Terran Barracks", "BaseEntrance", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>주변 자원이 거의 고갈됐습니다. 군락 쪽으로 압박을 넣지 않으면 버틸 수 없어요.");
-}
-
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Switch("Switch142", Not Set);
-	Elapsed Time(At least, 1402);
-	Elapsed Time(At most, 1404);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>이대로 버틸 수만은 없다. 입구를 열고 밖으로 나가 <11>주황색 저그<04> 군락을 압박해라.");
 	Set Switch("Switch142", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Elapsed Time(At least, 1378);
+	Elapsed Time(At most, 1380);
+	Bring("Player 9", "Terran Factory", "BaseEntrance", At least, 1);
+Actions:
+	Set Switch("Switch142", set);
+}
+
+//----- (B) 무작위 선택자 1회 추첨 (23분 시점, Preserve 없음 - 재추첨 안 함) -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);   //미이양 시에만
+	Elapsed Time(At least, 1380);   //23분 시점 : 군수시설 복구 개시
+	Elapsed Time(At most, 1382);    //1회성 윈도우 : 한 번만 추첨
+Actions:
+	Set Switch("Switch145", randomize); //무작위 대상 1회 추첨
+	Set Switch("Switch146", randomize);
+}
+
+//----- (C) 1순위 : 테란 보유 플레이어 우선 (P1->P4 scan, 첫 생존 테란) -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);                          //미이양 (값싼 가드 먼저)
+	Elapsed Time(At least, 1380);
+	Deaths("Player 1", "Tom Kazansky (Wraith)", Exactly, 1); //P1 종족 = 테란
+	Command("Player 1", "Men", At least, 1);               //P1 생존 확인
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+Actions:
+	Give Units to Player("Player 9", "Player 1", "Terran Barracks", All, "BaseEntrance"); //통제권 P1 이양
+	Give Units to Player("Player 9", "Player 1", "Terran Factory", All, "BaseEntrance");
+	Set Switch("Switch147", set);                          //이양 완료
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);
+	Elapsed Time(At least, 1380);
+	Deaths("Player 2", "Tom Kazansky (Wraith)", Exactly, 1); //P2 종족 = 테란
+	Command("Player 2", "Men", At least, 1);
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+Actions:
+	Give Units to Player("Player 9", "Player 2", "Terran Barracks", All, "BaseEntrance");
+	Give Units to Player("Player 9", "Player 2", "Terran Factory", All, "BaseEntrance");
+	Set Switch("Switch147", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);
+	Elapsed Time(At least, 1380);
+	Deaths("Player 3", "Tom Kazansky (Wraith)", Exactly, 1); //P3 종족 = 테란
+	Command("Player 3", "Men", At least, 1);
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+Actions:
+	Give Units to Player("Player 9", "Player 3", "Terran Barracks", All, "BaseEntrance");
+	Give Units to Player("Player 9", "Player 3", "Terran Factory", All, "BaseEntrance");
+	Set Switch("Switch147", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);
+	Elapsed Time(At least, 1380);
+	Deaths("Player 4", "Tom Kazansky (Wraith)", Exactly, 1); //P4 종족 = 테란
+	Command("Player 4", "Men", At least, 1);
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+Actions:
+	Give Units to Player("Player 9", "Player 4", "Terran Barracks", All, "BaseEntrance");
+	Give Units to Player("Player 9", "Player 4", "Terran Factory", All, "BaseEntrance");
+	Set Switch("Switch147", set);
+}
+
+//----- (D) 2순위 : 테란 부재 시, 추첨된 생존 플레이어(무작위) -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);                          //미이양 (테란 cascade 통과)
+	Switch("Switch145", Not Set);                          //추첨 조합 : P1 (clear/clear)
+	Switch("Switch146", Not Set);
+	Elapsed Time(At least, 1380);
+	Command("Player 1", "Men", At least, 1);               //P1 생존 확인
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+Actions:
+	Give Units to Player("Player 9", "Player 1", "Terran Barracks", All, "BaseEntrance");
+	Give Units to Player("Player 9", "Player 1", "Terran Factory", All, "BaseEntrance");
+	Set Switch("Switch147", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);
+	Switch("Switch145", Set);                              //추첨 조합 : P2 (set/clear)
+	Switch("Switch146", Not Set);
+	Elapsed Time(At least, 1380);
+	Command("Player 2", "Men", At least, 1);
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+Actions:
+	Give Units to Player("Player 9", "Player 2", "Terran Barracks", All, "BaseEntrance");
+	Give Units to Player("Player 9", "Player 2", "Terran Factory", All, "BaseEntrance");
+	Set Switch("Switch147", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);
+	Switch("Switch145", Not Set);                          //추첨 조합 : P3 (clear/set)
+	Switch("Switch146", Set);
+	Elapsed Time(At least, 1380);
+	Command("Player 3", "Men", At least, 1);
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+Actions:
+	Give Units to Player("Player 9", "Player 3", "Terran Barracks", All, "BaseEntrance");
+	Give Units to Player("Player 9", "Player 3", "Terran Factory", All, "BaseEntrance");
+	Set Switch("Switch147", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);
+	Switch("Switch145", Set);                              //추첨 조합 : P4 (set/set)
+	Switch("Switch146", Set);
+	Elapsed Time(At least, 1380);
+	Command("Player 4", "Men", At least, 1);
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+Actions:
+	Give Units to Player("Player 9", "Player 4", "Terran Barracks", All, "BaseEntrance");
+	Give Units to Player("Player 9", "Player 4", "Terran Factory", All, "BaseEntrance");
+	Set Switch("Switch147", set);
+}
+
+//----- (E) 3순위 안전망 : 뽑힌 플레이어 비생존 시 P1->P4 첫 생존 플레이어 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);
+	Elapsed Time(At least, 1380);
+	Command("Player 1", "Men", At least, 1);               //P1 생존
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+Actions:
+	Give Units to Player("Player 9", "Player 1", "Terran Barracks", All, "BaseEntrance");
+	Give Units to Player("Player 9", "Player 1", "Terran Factory", All, "BaseEntrance");
+	Set Switch("Switch147", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);
+	Elapsed Time(At least, 1380);
+	Command("Player 2", "Men", At least, 1);
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+Actions:
+	Give Units to Player("Player 9", "Player 2", "Terran Barracks", All, "BaseEntrance");
+	Give Units to Player("Player 9", "Player 2", "Terran Factory", All, "BaseEntrance");
+	Set Switch("Switch147", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);
+	Elapsed Time(At least, 1380);
+	Command("Player 3", "Men", At least, 1);
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+Actions:
+	Give Units to Player("Player 9", "Player 3", "Terran Barracks", All, "BaseEntrance");
+	Give Units to Player("Player 9", "Player 3", "Terran Factory", All, "BaseEntrance");
+	Set Switch("Switch147", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch147", Not Set);
+	Elapsed Time(At least, 1380);
+	Command("Player 4", "Men", At least, 1);
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+Actions:
+	Give Units to Player("Player 9", "Player 4", "Terran Barracks", All, "BaseEntrance");
+	Give Units to Player("Player 9", "Player 4", "Terran Factory", All, "BaseEntrance");
+	Set Switch("Switch147", set);
+}
+
+//----- (F) 이양 전체 공지 : P1~P4 소유로 보내 모든 플레이어가 보게 (각자 1회) -----//
+//  P8 소유 트리거의 Display/Ping/WAV는 사람 플레이어에게 안 보이므로 분리한다.
+//  가드 없이 비-Preserve로 각 P1~P4가 1회씩 발동(각자 화면에 표시).
+//  개인 메시지(G)는 Switch151 체인으로 이양 다음 사이클에 1회 출력(AttackPoint1 B패턴).
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch147", Set);   //이양 완료 시 (각 플레이어 1회)
+Actions:
+	Minimap Ping("BaseEntrance");
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<07>군수 복구: <04>입구의 버려진 군수시설을 복구해 아군 지휘관 한 명에게 통제권을 이양했습니다.");
+}
+
+//----- (G) 받은 사람 개인 메시지 : Switch147(이양) 이후 사이클에 1회 출력 -----//
+//  Switch151 Not Set 가드로 AttackPoint1 칭찬(B)과 동일한 사이클 분리.
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch147", Set);                              //이양 완료(이전 사이클)
+	Switch("Switch151", Not Set);                          //개인 메시지 미표시
+	Bring("Current Player", "Terran Barracks", "BaseEntrance", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Set Switch("Switch151", set);
+}
+
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch147", Set);
+	Switch("Switch151", Not Set);
+	Bring("Current Player", "Terran Barracks", "BaseEntrance", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Set Switch("Switch151", set);
+}
+
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch147", Set);
+	Switch("Switch151", Not Set);
+	Bring("Current Player", "Terran Barracks", "BaseEntrance", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Set Switch("Switch151", set);
+}
+
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch147", Set);
+	Switch("Switch151", Not Set);
+	Bring("Current Player", "Terran Barracks", "BaseEntrance", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Set Switch("Switch151", set);
+}
+
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch147", Set);
+	Switch("Switch151", Not Set);
+	Bring("Current Player", "Terran Barracks", "BaseEntrance", At most, 0);
+	Bring("Current Player", "Terran Factory", "BaseEntrance", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Set Switch("Switch151", set);
+}
+
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch147", Set);
+	Switch("Switch151", Not Set);
+	Bring("Current Player", "Terran Barracks", "BaseEntrance", At most, 0);
+	Bring("Current Player", "Terran Factory", "BaseEntrance", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Set Switch("Switch151", set);
+}
+
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch147", Set);
+	Switch("Switch151", Not Set);
+	Bring("Current Player", "Terran Barracks", "BaseEntrance", At most, 0);
+	Bring("Current Player", "Terran Factory", "BaseEntrance", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Set Switch("Switch151", set);
+}
+
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch147", Set);
+	Switch("Switch151", Not Set);
+	Bring("Current Player", "Terran Barracks", "BaseEntrance", At most, 0);
+	Bring("Current Player", "Terran Factory", "BaseEntrance", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Set Switch("Switch151", set);
 }
 //-----------------------------------------------------------------//
 //  Base defense response
@@ -19762,7 +20110,7 @@ Actions:
 //
 //  If one P6/P7 MainBase tech core fully collapses while the other
 //  still survives and has lost 10 Hatchery/Lair/Hive tech structures,
-//  the remaining colony prepares one final ~400-supply distributed
+//  the remaining colony prepares one final ~500-supply distributed
 //  assault. 12 DC ticks = 1 second.
 //-----------------------------------------------------------------//
 
@@ -19994,7 +20342,7 @@ Actions:
 	Set Switch("Switch78", set);
 }
 
-// P7 batch 1 at 30s: 2 Ultra, 5 Zergling, 1 Defiler, 1 Overlord per front.
+// P7 batch 1 at 30s: 3 Ultra, 6 Zergling, 1 Defiler, 1 Overlord per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20003,20 +20351,20 @@ Conditions:
 	Switch("Switch79", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 360);
 Actions:
-	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Ultralisk", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn1");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn1", 2);
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Ultralisk", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn2");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn2", 2);
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Ultralisk", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn3");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn3", 2);
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Ultralisk", 2, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Ultralisk", 3, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn4");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn4", 2);
 	Create Unit("Player 7", "Zerg Overlord", 1, "P7 Spawn4");
 	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -20038,7 +20386,7 @@ Actions:
 	Set Switch("Switch79", set);
 }
 
-// P6 batch 1 at 30s.
+// P6 batch 1 at 30s: 3 Ultra, 6 Zergling, 1 Defiler, 1 Overlord per front.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20047,20 +20395,20 @@ Conditions:
 	Switch("Switch79", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 360);
 Actions:
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Ultralisk", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn1");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 2);
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Ultralisk", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn2");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 2);
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Ultralisk", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn3");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 2);
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Ultralisk", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Ultralisk", 3, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn4");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 2);
 	Create Unit("Player 6", "Zerg Overlord", 1, "P6 Spawn4");
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -20082,7 +20430,7 @@ Actions:
 	Set Switch("Switch79", set);
 }
 
-// P7 batch 2 at 34s: 1 Ultra, 5 Zergling per front.
+// P7 batch 2 at 34s: 1 Ultra, 7 Zergling per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20092,13 +20440,13 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At least, 408);
 Actions:
 	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 7, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 7, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 7, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Ultralisk", 1, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 7, "P7 Spawn4");
 	Order("Player 7", "Zerg Ultralisk", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "P7 Spawn2", "P2 Hunt", Patrol);
@@ -20110,7 +20458,7 @@ Actions:
 	Set Switch("Switch80", set);
 }
 
-// P6 batch 2 at 34s.
+// P6 batch 2 at 34s: 1 Ultra, 7 Zergling per front.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20120,13 +20468,13 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At least, 408);
 Actions:
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Ultralisk", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 7, "P6 Spawn4");
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "P6 Spawn2", "P2 Hunt", Patrol);
@@ -20138,7 +20486,7 @@ Actions:
 	Set Switch("Switch80", set);
 }
 
-// P7 batch 3 at 38s: 10 Hydralisk, 1 Lurker per front.
+// P7 batch 3 at 38s: 11 Hydralisk, 2 Lurker per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20147,14 +20495,14 @@ Conditions:
 	Switch("Switch81", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 456);
 Actions:
-	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Hydralisk", 10, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 11, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Lurker", 2, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 11, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Lurker", 2, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 11, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Lurker", 2, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 11, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Lurker", 2, "P7 Spawn4");
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Lurker", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn2", "P2 Hunt", Patrol);
@@ -20166,7 +20514,7 @@ Actions:
 	Set Switch("Switch81", set);
 }
 
-// P6 batch 3 at 38s.
+// P6 batch 3 at 38s: 11 Hydralisk, 2 Lurker per front.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20175,14 +20523,14 @@ Conditions:
 	Switch("Switch81", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 456);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 10, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 11, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 11, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 11, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 11, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Lurker", 2, "P6 Spawn4");
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Lurker", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn2", "P2 Hunt", Patrol);
@@ -20194,7 +20542,7 @@ Actions:
 	Set Switch("Switch81", set);
 }
 
-// P7 batch 4 at 42s: 8 Hydralisk, 5 Zergling, 1 Defiler per front.
+// P7 batch 4 at 42s: 9 Hydralisk, 6 Zergling, 1 Defiler per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20203,17 +20551,17 @@ Conditions:
 	Switch("Switch82", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 504);
 Actions:
-	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 9, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn1");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn1", 2);
-	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 9, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn2");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn2", 2);
-	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 9, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn3");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn3", 2);
-	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 9, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn4");
 	Create Unit with Properties("Player 7", "Zerg Defiler", 1, "P7 Spawn4", 2);
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -20230,7 +20578,7 @@ Actions:
 	Set Switch("Switch82", set);
 }
 
-// P6 batch 4 at 42s.
+// P6 batch 4 at 42s: 9 Hydralisk, 6 Zergling, 1 Defiler per front.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20239,17 +20587,17 @@ Conditions:
 	Switch("Switch82", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 504);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 9, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn1");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn1", 2);
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 9, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn2");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn2", 2);
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 9, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn3");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn3", 2);
-	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 9, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn4");
 	Create Unit with Properties("Player 6", "Zerg Defiler", 1, "P6 Spawn4", 2);
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -20266,7 +20614,7 @@ Actions:
 	Set Switch("Switch82", set);
 }
 
-// P7 batch 5 at 46s: 2 Mutalisk, 4 Scourge, 4 Zergling per front.
+// P7 batch 5 at 46s: 3 Mutalisk, 5 Scourge, 5 Zergling per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20275,18 +20623,18 @@ Conditions:
 	Switch("Switch83", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 552);
 Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Zergling", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Zergling", 5, "P7 Spawn4");
 	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Scourge", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Zergling", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -20302,7 +20650,7 @@ Actions:
 	Set Switch("Switch83", set);
 }
 
-// P6 batch 5 at 46s.
+// P6 batch 5 at 46s: 3 Mutalisk, 5 Scourge, 5 Zergling per front.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20311,18 +20659,18 @@ Conditions:
 	Switch("Switch83", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 552);
 Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Zergling", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Zergling", 5, "P6 Spawn4");
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Scourge", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Zergling", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -20338,7 +20686,7 @@ Actions:
 	Set Switch("Switch83", set);
 }
 
-// P7 batch 6 at 50s: 8 Hydralisk, 3 Mutalisk, 4 Scourge, 1 Lurker per front.
+// P7 batch 6 at 50s: 8 Hydralisk, 4 Mutalisk, 5 Scourge, 1 Lurker per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20348,20 +20696,20 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At least, 600);
 Actions:
 	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Hydralisk", 8, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Scourge", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Mutalisk", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Scourge", 5, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Lurker", 1, "P7 Spawn4");
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -20382,7 +20730,7 @@ Actions:
 	Set Switch("Switch86", set);
 }
 
-// P6 batch 6 at 50s.
+// P6 batch 6 at 50s: 8 Hydralisk, 4 Mutalisk, 5 Scourge, 1 Lurker per front.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20392,20 +20740,20 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At least, 600);
 Actions:
 	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Hydralisk", 8, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Scourge", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Mutalisk", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Scourge", 5, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Lurker", 1, "P6 Spawn4");
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -20426,7 +20774,7 @@ Actions:
 	Set Switch("Switch86", set);
 }
 
-// P7 batch 7 at 54s: 3 Hydralisk, 2 Guardian, 2 Devourer per front.
+// P7 batch 7 at 54s: 4 Hydralisk, 3 Guardian, 3 Devourer per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20435,18 +20783,18 @@ Conditions:
 	Switch("Switch87", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 648);
 Actions:
-	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn4");
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -20462,7 +20810,7 @@ Actions:
 	Set Switch("Switch87", set);
 }
 
-// P6 batch 7 at 54s.
+// P6 batch 7 at 54s: 4 Hydralisk, 3 Guardian, 3 Devourer per front.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20471,18 +20819,18 @@ Conditions:
 	Switch("Switch87", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 648);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn4");
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -20498,7 +20846,7 @@ Actions:
 	Set Switch("Switch87", set);
 }
 
-// P7 batch 8 at 58s: 3 Hydralisk, 2 Guardian, 2 Devourer per front.
+// P7 batch 8 at 58s: 4 Hydralisk, 3 Guardian, 3 Devourer per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20507,18 +20855,18 @@ Conditions:
 	Switch("Switch88", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 696);
 Actions:
-	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Hydralisk", 3, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Hydralisk", 4, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 3, "P7 Spawn4");
 	Order("Player 7", "Zerg Hydralisk", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "P1 Hunt", Patrol);
@@ -20534,7 +20882,7 @@ Actions:
 	Set Switch("Switch88", set);
 }
 
-// P6 batch 8 at 58s.
+// P6 batch 8 at 58s: 4 Hydralisk, 3 Guardian, 3 Devourer per front.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20543,18 +20891,18 @@ Conditions:
 	Switch("Switch88", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 696);
 Actions:
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Hydralisk", 3, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Hydralisk", 4, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Devourer", 3, "P6 Spawn4");
 	Order("Player 6", "Zerg Hydralisk", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "P1 Hunt", Patrol);
@@ -20570,7 +20918,7 @@ Actions:
 	Set Switch("Switch88", set);
 }
 
-// P7 batch 9 at 62s: 1 Guardian, 1 Devourer per front.
+// P7 batch 9 at 62s: 1 Guardian, 2 Devourer per front.
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20580,13 +20928,13 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At least, 744);
 Actions:
 	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn2");
 	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn4");
 	Order("Player 7", "Zerg Guardian", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Devourer", "P7 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 7", "Zerg Guardian", "P7 Spawn2", "P2 Hunt", Patrol);
@@ -20598,7 +20946,7 @@ Actions:
 	Set Switch("Switch89", set);
 }
 
-// P6 batch 9 at 62s.
+// P6 batch 9 at 62s: 1 Guardian, 2 Devourer per front.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20608,13 +20956,13 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At least, 744);
 Actions:
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn2");
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn3");
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn4");
-	Create Unit("Player 6", "Zerg Devourer", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Devourer", 2, "P6 Spawn4");
 	Order("Player 6", "Zerg Guardian", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Devourer", "P6 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 6", "Zerg Guardian", "P6 Spawn2", "P2 Hunt", Patrol);
@@ -20646,7 +20994,7 @@ Actions:
 	Set Switch("Switch90", set);
 }
 
-// P6 batch 10 at 66s.
+// P6 batch 10 at 66s: 1 Guardian per front.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -20767,7 +21115,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 324);
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 Actions:
-	Display Text Message(Always Display, "<04>클리어 난이도는 <11>보통<04>입니다.");
+	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <11>보통<04>입니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -20806,764 +21154,6 @@ Conditions:
 Actions:
 	Wait(1000);
 	Victory();
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] Rotating player resource dashboard
-//
-//  Shows the original player mineral leaderboard during the first
-//  half of the dashboard cycle. Pair with 94_test_resource_dashboard_02_dc.txt
-//  to alternate between resources and the mission 2 assault DC dashboard.
-//
-//  Player 8 / Zerg Extractor = test dashboard cycle timer.
-//  0~59 ticks: resources, 60~119 ticks: M2 assault DC, then reset.
-//-----------------------------------------------------------------//
-
-Trigger("Player 8"){
-Conditions:
-	Always();
-Actions:
-	Set Deaths("Player 8", "Zerg Extractor", Add, 1);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Extractor", At least, 120);
-Actions:
-	Set Deaths("Player 8", "Zerg Extractor", Set To, 0);
-	Preserve Trigger();
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Zerg Extractor", At most, 59);
-Actions:
-	Leader Board Resources("TEST Minerals", ore);
-	Leaderboard Computer Players(enabled);
-	Preserve Trigger();
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] Rotating mission 2 main assault DC dashboard
-//
-//  Standard StarCraft leaderboards cannot read death counters directly.
-//  This test dashboard mirrors the two mission 2 main-assault cooldown
-//  DCs into custom score, then restores the source DCs in the same pass.
-//
-//  Shown during the second half of the cycle driven by
-//  94_test_resource_dashboard_01_resources.txt.
-//
-//  P6 custom score = Player 8 / Zerg Zergling DC.
-//  P7 custom score = Player 8 / Zerg Hydralisk DC.
-//  Temp DCs: Player 8 / Zerg Spawning Pool, Zerg Evolution Chamber.
-//-----------------------------------------------------------------//
-
-Trigger("Player 8"){
-Conditions:
-	Always();
-Actions:
-	Set Score("Player 6", Set To, 0, Custom);
-	Set Score("Player 7", Set To, 0, Custom);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Set To, 0);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Set To, 0);
-	Preserve Trigger();
-}
-
-// P6 main assault timer binary copy: source DC -> Player 6 custom score.
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 32768);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 32768);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 32768);
-	Set Score("Player 6", Add, 32768, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 16384);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 16384);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 16384);
-	Set Score("Player 6", Add, 16384, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 8192);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 8192);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 8192);
-	Set Score("Player 6", Add, 8192, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 4096);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 4096);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 4096);
-	Set Score("Player 6", Add, 4096, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 2048);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 2048);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 2048);
-	Set Score("Player 6", Add, 2048, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 1024);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 1024);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 1024);
-	Set Score("Player 6", Add, 1024, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 512);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 512);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 512);
-	Set Score("Player 6", Add, 512, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 256);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 256);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 256);
-	Set Score("Player 6", Add, 256, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 128);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 128);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 128);
-	Set Score("Player 6", Add, 128, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 64);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 64);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 64);
-	Set Score("Player 6", Add, 64, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 32);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 32);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 32);
-	Set Score("Player 6", Add, 32, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 16);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 16);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 16);
-	Set Score("Player 6", Add, 16, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 8);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 8);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 8);
-	Set Score("Player 6", Add, 8, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 4);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 4);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 4);
-	Set Score("Player 6", Add, 4, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 2);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 2);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 2);
-	Set Score("Player 6", Add, 2, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Zergling", At least, 1);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 1);
-	Set Deaths("Player 8", "Zerg Spawning Pool", Add, 1);
-	Set Score("Player 6", Add, 1, Custom);
-	Preserve Trigger();
-}
-
-// P6 main assault timer restore: temp DC -> source DC.
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 32768);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 32768);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 32768);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 16384);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 16384);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 16384);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 8192);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 8192);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 8192);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 4096);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 4096);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4096);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 2048);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 2048);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2048);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 1024);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 1024);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1024);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 512);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 512);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 512);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 256);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 256);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 256);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 128);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 128);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 128);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 64);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 64);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 64);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 32);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 32);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 32);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 16);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 16);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 16);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 8);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 8);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 8);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 4);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 4);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 2);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 2);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Spawning Pool", At least, 1);
-Actions:
-	Set Deaths("Player 8", "Zerg Spawning Pool", Subtract, 1);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1);
-	Preserve Trigger();
-}
-
-// P7 main assault timer binary copy: source DC -> Player 7 custom score.
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 32768);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 32768);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 32768);
-	Set Score("Player 7", Add, 32768, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 16384);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 16384);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 16384);
-	Set Score("Player 7", Add, 16384, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 8192);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 8192);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 8192);
-	Set Score("Player 7", Add, 8192, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 4096);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 4096);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 4096);
-	Set Score("Player 7", Add, 4096, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 2048);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 2048);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 2048);
-	Set Score("Player 7", Add, 2048, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 1024);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 1024);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 1024);
-	Set Score("Player 7", Add, 1024, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 512);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 512);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 512);
-	Set Score("Player 7", Add, 512, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 256);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 256);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 256);
-	Set Score("Player 7", Add, 256, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 128);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 128);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 128);
-	Set Score("Player 7", Add, 128, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 64);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 64);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 64);
-	Set Score("Player 7", Add, 64, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 32);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 32);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 32);
-	Set Score("Player 7", Add, 32, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 16);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 16);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 16);
-	Set Score("Player 7", Add, 16, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 8);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 8);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 8);
-	Set Score("Player 7", Add, 8, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 4);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 4);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 4);
-	Set Score("Player 7", Add, 4, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 2);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 2);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 2);
-	Set Score("Player 7", Add, 2, Custom);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Hydralisk", At least, 1);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 1);
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Add, 1);
-	Set Score("Player 7", Add, 1, Custom);
-	Preserve Trigger();
-}
-
-// P7 main assault timer restore: temp DC -> source DC.
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 32768);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 32768);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 32768);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 16384);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 16384);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 16384);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 8192);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 8192);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 8192);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 4096);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 4096);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4096);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 2048);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 2048);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2048);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 1024);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 1024);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1024);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 512);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 512);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 512);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 256);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 256);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 256);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 128);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 128);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 128);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 64);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 64);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 64);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 32);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 32);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 32);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 16);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 16);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 16);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 8);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 8);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 8);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 4);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 4);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 2);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 2);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2);
-	Preserve Trigger();
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Zerg Evolution Chamber", At least, 1);
-Actions:
-	Set Deaths("Player 8", "Zerg Evolution Chamber", Subtract, 1);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1);
-	Preserve Trigger();
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Zerg Extractor", At least, 60);
-	Deaths("Player 8", "Zerg Extractor", At most, 119);
-Actions:
-	Leader Board Points("TEST M2 Assault DC", Custom);
-	Leaderboard Computer Players(enabled);
-	Preserve Trigger();
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE / CHEAT] Spawn 2 control groups of Jim Raynor at P1 Start
-//  Included for manual test builds only.
-//-----------------------------------------------------------------//
-
-Trigger("Player 1"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Create Unit("Player 1", "Jim Raynor (Marine)", 24, "P1 Start");
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE / CHEAT] 게임 시작 시 P1에게 톰 카잔스키 36기 지급
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  주의: 36기를 한 location에 몰아 스폰하면 stacking으로 일부 멀리
-//        밀려날 수 있음. 테스트 목적이므로 P1 본진(P1 Start 등) 사용.
-//-----------------------------------------------------------------//
-
-Trigger("Player 1"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Create Unit("Player 1", "Tom Kazansky (Wraith)", 36, "Anywhere");
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] 플레이어 절대 패배 방지 (스위치 방식)
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  동작 원리:
-//    게임 시작 직후 Switch1 을 set.
-//    12_mission1_to_mission2_transition.txt 의 패배 트리거에 Switch("Switch1", cleared) 조건이
-//    있으므로, 스위치가 set 상태인 한 Defeat()가 발동하지 않음.
-//-----------------------------------------------------------------//
-
-Trigger("Player 5"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Set Switch("Switch1", set);
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] 컴퓨터(P5, P6) → 플레이어(P1~P4) 시야 공유
-//  (플레이어가 컴퓨터의 시야를 가진다)
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  사용 스크립트 (AI → 해당 플레이어로 시야 공유):
-//    "Turn ON Shared Vision of current player with Player 1"
-//    "Turn ON Shared Vision of current player with Player 2"
-//    "Turn ON Shared Vision of current player with Player 3"
-//    "Turn ON Shared Vision of current player with Player 4"
-//
-//  주의: 위 스크립트 이름이 SCMDraft 드롭다운에 정확히 그대로 있는지
-//        확인할 것. 표기가 다르면 적절히 교체.
-//        ("of [SHARER] with [RECEIVER]" 패턴으로 추정)
-//-----------------------------------------------------------------//
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Run AI Script("+Vi4");
-	Run AI Script("+Vi5");
-	Run AI Script("+Vi6");
-	Run AI Script("+Vi7");
 }
 //-----------------------------------------------------------------//
 //  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유

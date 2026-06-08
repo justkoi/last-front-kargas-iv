@@ -149,6 +149,18 @@ Actions:
 	Display Text Message(Always Display, "<03>호크: <04>좋다. 타격대를 보내라. 방어선 숨통이 트일 거다.");
 }
 
+// 22:10 공개 안내 - 전방 정신체 제거 시 자원 확보 가능함을 알림 (호크 대사 이후, 정신체 존재 시 1회)
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch148", Not Set);                          //자원 안내 미표시 (값싼 가드 먼저)
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
+	Elapsed Time(At least, 1330);                          //22:10 시점 (호크 대사 5초 후)
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 존재 시 (스캔, 마지막)
+Actions:
+	Display Text Message(Always Display, "<07>작전 정보: <04>전방의 저그 정신체를 제거하면 지휘 교란과 함께 상당한 자원을 확보할 수 있습니다.");
+	Set Switch("Switch148", set);
+}
+
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);

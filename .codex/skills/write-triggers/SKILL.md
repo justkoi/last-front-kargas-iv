@@ -193,6 +193,12 @@ ground-biased or air-biased wave.
    - `Switch`, DC 슬롯, 타이머, 단계 플래그처럼 의미 있는 변수는 `00_header.txt`의 역할표와 주변 트리거 흐름을 확인해서 해석한다. 모르면 추측하지 말고 관련 사용처를 검색한다.
    - 변경하지 않는 기존 트리거 전체를 일부러 주석화할 필요는 없다. 다만 변수 의미, 단계 값, 스위치 역할, 목적지/명령 대상이 바뀌어 기존 주석이 낡게 될 가능성이 있으면 함께 수정해서 주석이 코드와 어긋나지 않게 보수한다.
    - `Order` 액션은 어느 플레이어의 어떤 유닛을 어느 위치에서 어디로 보내는지, `Patrol`/`Attack` 등 명령이 실제로 어떤 경유/공격 동작을 유도하는지 적는다.
+   - **예외 — 문자열 액션 줄 끝 인라인 주석 금지:** `Display Text Message`, `Play WAV`, `Set Mission Objectives`, `Transmission`, `Comment`, `Leader Board*` 등 **문자열을 쓰는 액션**은 `); //주석` 형태로 쓰지 않는다. `deploy_map.ps1`의 `recover_map_strings_cp949.py`가 `);`로 **줄이 끝나야**만 해당 액션을 인식한다. 줄 끝 주석이 있으면 파서가 그 줄을 **통째로 건너뛰어** 맵 TRIG와 `KargasIV_Triggers_Mission1Only.txt`의 문자열 액션 개수·순서가 어긋나고 `String encoding recovery failed`로 빌드가 멈춘다. 주석은 **한 줄 위**에 둔다:
+     ```
+     //중앙 정렬 격파 강조 헤더
+     Display Text Message(Always Display, "<13><06>[ 전방 정신체 격파 ]");
+     ```
+     `Deaths`, `Set Switch`, `Bring` 같은 **비문자열** 줄의 `//주석` 은 이 제한과 무관하다.
 
 8. **타이머 영구 정지/재개**
    - `Pause Timer();` / `Unpause Timer();` 가 SCMDraft 액션. Countdown Timer를 화면에 표시 중일 때 작동.
@@ -268,12 +274,33 @@ Switch("Switch1", Not Set);
 - **`Bring`의 location은 정밀하게** — Beacon 유닛 위 1×1 location은 유닛이 들어갈 수 없음. 3×3 이상 빈 땅 덮도록.
 - **에너지 시전자 스폰은 Unit Properties 사용** — 디파일러처럼 에너지가 전술 가치인 유닛은 기존 프로젝트 관례인 슬롯 `1`로 `Create Unit with Properties("Player 7", "Zerg Defiler", 1, "Raid1", 1);`처럼 생성. 즉시 스킬 사용이 필요하면 plain `Create Unit`로 만들지 않는다.
 - **테스트용 MainDC 주입 트리거에서 활성 주공세 상태 DC를 지우지 말 것** — `TestTriggersForBuild/`는 정상 트리거 뒤에 붙으므로, 테스트 트리거가 `Zerg Zergling`/`Zerg Hydralisk` 같은 MainDC를 더한 뒤 `Zerg Lurker`/`Zerg Mutalisk`를 0으로 만들면 이미 P6/P7 트리거가 스폰과 Waypoint 랠리를 끝낸 공세의 상태 머신만 끊길 수 있다. 그러면 유닛은 Waypoint까지 가지만 Hunt 릴레이 조건(`state == 2`)이 닫힌다.
+- **문자열 액션 줄 끝 `//주석`은 deploy 빌드를 깨뜨림** — `Display Text Message(...); //설명` 처럼 쓰면 `recover_map_strings_cp949.py`가 그 액션을 파싱하지 못한다. 주석은 반드시 **별도 줄**로 올린다. (2026-06-08, `10_mission1_waves_late.txt` 격파 헤더 사례)
+- **`Player 8`(또는 컴퓨터) 소유 트리거의 `Display Text Message`/`Minimap Ping`/`Play WAV`는 사람 플레이어에게 안 보임/안 들림** — 이 액션들은 트리거 owner에게만 출력된다. 컴퓨터 슬롯(P8 등) 소유로 띄우면 사람은 못 본다. **플레이어용 메시지/핑/사운드는 반드시 `Player 1~4` 소유 트리거로** 보낸다. DC·랜덤·Give 같은 메커니즘은 P8 소유로 두되, 출력은 `Switch` 등으로 신호를 받아 P1~P4 트리거에서 별도로 표시하라. 특정 한 명에게만 보이려면 그 플레이어 소유(`Trigger("Player N")`) 트리거를 쓴다. (2026-06-08, 13e 군수시설 이양 통지)
+- **같은 사이클 내 `Switch` 연쇄 → 같은 프레임 메시지 덮어쓰기** — SC는 한 플레이어의 트리거를 한 사이클에 위→아래로 평가하며, 위 트리거가 set한 `Switch`를 **같은 사이클 아래 트리거가 즉시 본다**. 그래서 `A가 S1 set → B가 S1 조건으로 발동`을 파일 순서 A→B로 두면 둘 다 같은 사이클(같은 프레임)에 발동해, `Display Text Message`가 서로 덮어써 마지막 한 줄만 보인다. **여러 줄을 순차 노출하려면 의존 트리거를 파일상 역순으로 배치**한다(C→B→A로 두면 A는 사이클 N, B는 N+1, C는 N+2에 발동 → 표시 순서는 A,B,C). 비-Preserve 트리거는 조건이 거짓이면 비활성화되지 않고 다음 사이클에 재평가되므로 이 stagger가 성립한다. (2026-06-08, 10_mission1_waves_late 정신체 격파 칭찬 / 13e 개인 메시지)
+- **`.scx`와 프로덕션 합본의 문자열 액션 순서·개수 불일치** — `deploy_map.ps1`은 clean → CP949 string recovery → STRx normalize → protect 순으로 진행한다. recovery 단계에서 `KargasIV_Triggers_Mission1Only.txt`와 `.scx` TRIG의 문자열 액션을 **같은 순서로 1:1 매칭**한다. 텍스트에만 있거나 맵에만 있으면 `String action count differs` / `String encoding recovery failed`가 난다. 예전에 `build_triggers_withTest.ps1`로 임포트한 뒤 프로덕션 합본만 빌드하면, 맵에 `Leader Board Resources` 같은 테스트 잔여가 남을 수 있다. 프로덕션 배포 전 SCMDraft에서 **`build_triggers.ps1` 결과만** 다시 임포트하는 것이 정석이다.
 
 ## 빌드/배포
 
-- 트리거 수정 후 [build_triggers.bat](../../build_triggers.bat) 더블클릭 → `KargasIV_Triggers_Mission1Only.txt` 생성
-- SCMDraft에서 해당 파일 import (Triggers → Edit → Replace with file)
-- 맵 저장 후 [deploy_map.bat](../../deploy_map.bat) 더블클릭 → StarCraft Maps 폴더 복사
+- 트리거 수정 후 [build_triggers.ps1](../../build_triggers.ps1) 또는 [build_triggers.bat](../../build_triggers.bat) → `KargasIV_Triggers_Mission1Only.txt` 생성 (`Triggers/*.txt` 61개 concat, **프로덕션**)
+- 테스트 트리거까지 합치려면 [build_triggers_withTest.ps1](../../build_triggers_withTest.ps1) → `Triggers/` + `TestTriggersForBuild/` concat. 테스트 임포트 후에는 사용자가 명시하지 않는 한 **프로덕션 합본으로 되돌릴 것**.
+- SCMDraft에서 해당 파일 import (Triggers → Edit → Replace with file) → `.scx` 저장
+- [deploy_map.ps1](../../deploy_map.ps1) / [deploy_map.bat](../../deploy_map.bat) → clean, CP949 string recovery, protect 후 StarCraft Maps 폴더 복사
+
+### deploy_map string recovery (CP949)
+
+`recover_map_strings_cp949.py`가 담당한다. TrigEdit UTF-8 텍스트의 한글/제어코드를 맵 STRx에 CP949로 되돌린다.
+
+- **파싱 대상 문자열 액션:** `Display Text Message`, `Play WAV`, `Set Mission Objectives`, `Transmission`, `Comment`, `Leader Board Control`, `Leader Board Resources`, `Leader Board Kills`, `Leader Board Points`, `Leaderboard Goal*`, `Set Next Scenario` 등 (`recover_map_strings_cp949.py`의 `TEXT_ACTION_FIELDS` 참고)
+- **매칭 규칙:** 위 액션을 `KargasIV_Triggers_Mission1Only.txt`와 `.scx` TRIG에서 **등장 순서대로** 짝지음. 한 쌍이라도 액션 종류가 다르면 즉시 실패.
+- **텍스트 > 맵:** 실패 (텍스트에 있는 문자열 액션이 맵에 없음 → SCMDraft 재임포트 필요)
+- **맵 > 텍스트:** 접두사까지 일치하면 **경고만 내고 진행** (맵에만 남은 테스트/잔여 문자열 액션). unmapped 문자열은 기존 STRx 값에 UTF-8→CP949 변환만 적용.
+- **흔한 실패 원인**
+  1. 문자열 액션 줄 끝 `//주석` → 파서 skip → 개수 불일치
+  2. `Triggers/` 수정 후 `build_triggers.ps1` 안 돌림
+  3. `Triggers/` 수정 후 SCMDraft 재임포트 안 함 (텍스트와 `.scx` TRIG 불일치)
+  4. 테스트 합본으로 임포트한 `.scx`에 프로덕션 합본을 recovery 소스로 쓸 때 trailing extra
+
+에러 메시지가 `String encoding recovery failed.`만 보이면, 같은 명령을 Python으로 직접 실행해 `String action count differs` 또는 `String action order differs` 본문을 확인한다.
 
 ## ⚡ 새로운 발견을 기록할 것
 

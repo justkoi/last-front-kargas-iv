@@ -8,10 +8,11 @@ Conditions:
 	Bring("Current Player", "Men", "MD1", At least, 1);
 	Bring("Player 9", "Terran Missile Turret", "MD1", At least, 1);
 Actions:
+	Modify Unit Hit Points("Player 9", "Terran Missile Turret", 100, 1, "MD1"); //수리 : P9 터렛 체력 100%로 복구 후 양도
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD1");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD1"); //제어권 확보 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
-	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+	Minimap Ping("MD1"); //수리 완료 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
+	Display Text Message(Always Display, "<07>전술 지원: <04>고장난 미사일 터렛을 수리했습니다!");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -19,10 +20,11 @@ Conditions:
 	Bring("Current Player", "Men", "MD2", At least, 1);
 	Bring("Player 9", "Terran Missile Turret", "MD2", At least, 1);
 Actions:
+	Modify Unit Hit Points("Player 9", "Terran Missile Turret", 100, 1, "MD2"); //수리 : P9 터렛 체력 100%로 복구 후 양도
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD2");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD2"); //제어권 확보 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
-	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+	Minimap Ping("MD2"); //수리 완료 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
+	Display Text Message(Always Display, "<07>전술 지원: <04>고장난 미사일 터렛을 수리했습니다!");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -30,10 +32,11 @@ Conditions:
 	Bring("Current Player", "Men", "MD3", At least, 1);
 	Bring("Player 9", "Terran Missile Turret", "MD3", At least, 1);
 Actions:
+	Modify Unit Hit Points("Player 9", "Terran Missile Turret", 100, 1, "MD3"); //수리 : P9 터렛 체력 100%로 복구 후 양도
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD3");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD3"); //제어권 확보 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
-	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+	Minimap Ping("MD3"); //수리 완료 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
+	Display Text Message(Always Display, "<07>전술 지원: <04>고장난 미사일 터렛을 수리했습니다!");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -41,10 +44,11 @@ Conditions:
 	Bring("Current Player", "Men", "MD4", At least, 1);
 	Bring("Player 9", "Terran Missile Turret", "MD4", At least, 1);
 Actions:
+	Modify Unit Hit Points("Player 9", "Terran Missile Turret", 100, 1, "MD4"); //수리 : P9 터렛 체력 100%로 복구 후 양도
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD4"); //제어권 확보 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
-	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+	Minimap Ping("MD4"); //수리 완료 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
+	Display Text Message(Always Display, "<07>전술 지원: <04>고장난 미사일 터렛을 수리했습니다!");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -52,10 +56,11 @@ Conditions:
 	Bring("Current Player", "Men", "MD5", At least, 1);
 	Bring("Player 9", "Terran Missile Turret", "MD5", At least, 1);
 Actions:
+	Modify Unit Hit Points("Player 9", "Terran Missile Turret", 100, 1, "MD5"); //수리 : P9 터렛 체력 100%로 복구 후 양도
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD5");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD5"); //제어권 확보 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
-	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+	Minimap Ping("MD5"); //수리 완료 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
+	Display Text Message(Always Display, "<07>전술 지원: <04>고장난 미사일 터렛을 수리했습니다!");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -63,8 +68,9 @@ Conditions:
 	Bring("Current Player", "Men", "MD6", At least, 1);
 	Bring("Player 9", "Terran Missile Turret", "MD6", At least, 1);
 Actions:
+	Modify Unit Hit Points("Player 9", "Terran Missile Turret", 100, 1, "MD6"); //수리 : P9 터렛 체력 100%로 복구 후 양도
 	Give Units to Player("Player 9", "Current Player", "Terran Missile Turret", 1, "MD6");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Minimap Ping("MD6"); //제어권 확보 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
-	Display Text Message(Always Display, "<07>전술 지원: <04>미사일 터렛 제어권 확보.");
+	Minimap Ping("MD6"); //수리 완료 피드백 : 해당 플레이어(Current Player) 트리거 인스턴스만 발동
+	Display Text Message(Always Display, "<07>전술 지원: <04>고장난 미사일 터렛을 수리했습니다!");
 }

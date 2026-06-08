@@ -1,39 +1,7 @@
 //============================================================
-//  Mission 1 advance briefing (narrative only)
-//  AttackPoint1 guide(1320s) 후 약 1분 내 진출 작전 서사.
-//  Switch142 : advance briefing sequence played (one-shot)
+//  Mission 1 advance cue
+//  자원 부족을 직접 언급하거나 진출을 명령하는 대사는 모두 제거했다.
+//  진출 유도는 13e 군수시설 복구 통지와 09 AttackPoint1 정신체 큐가 단서로 대신한다.
+//  (별도 대사 없음 - 플레이어가 스스로 판단하게 둔다.)
+//  Switch142 : 13e 군수시설 생존 게이트 (여기서는 미사용, 시작/전환 시 clear만 유지)
 //============================================================
-
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Switch("Switch142", Not Set);
-	Elapsed Time(At least, 1382);
-	Elapsed Time(At most, 1384);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>병기고 자원이 바닥났다. 이 상태로는 방어만 반복하게 된다. 밖으로 나가야 한다.");
-}
-
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Switch("Switch142", Not Set);
-	Elapsed Time(At least, 1392);
-	Elapsed Time(At most, 1394);
-Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>주변 자원이 거의 고갈됐습니다. 군락 쪽으로 압박을 넣지 않으면 버틸 수 없어요.");
-}
-
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Switch("Switch142", Not Set);
-	Elapsed Time(At least, 1402);
-	Elapsed Time(At most, 1404);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>이대로 버틸 수만은 없다. 입구를 열고 밖으로 나가 <11>주황색 저그<04> 군락을 압박해라.");
-	Set Switch("Switch142", set);
-}

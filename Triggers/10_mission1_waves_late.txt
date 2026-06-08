@@ -329,28 +329,79 @@ Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체를 파괴하면 지휘체계 교란으로 공세의 규모가 감소합니다.");
 }
 
+// P5 지휘 정신체 처치 - 작전정보(A) -> 호크 칭찬(B) -> 보상 안내(C) 순서로 1줄씩 표시.
+// AttackPoint1과 동일 : C->B->A 역순 배치로 사이클 분리.
+
+// (C) 시스템 보상 안내 : Switch153(칭찬) 이후 사이클에 발동
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At most, 0);
+	Switch("Switch153", Set);                              //칭찬 표시 후
+	Switch("Switch154", Not Set);                          //보상 안내 미표시
 Actions:
-	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체 제거 확인. 지휘체계 교란으로 후속 공세 규모가 감소합니다.");
 	Display Text Message(Always Display, "<07>작전 보상: <04>지휘 정신체 제거. 미네랄 +1500 / 가스 +500");
-	Set Resources("Current Player", Add, 1500, ore);
-	Set Resources("Current Player", Add, 500, gas);
+	Set Switch("Switch154", set);
 }
 
+// (B) 호크 칭찬 : Switch152(처치) 이후 사이클에 발동
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch144", Not Set);
-	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
+	Switch("Switch152", Set);                              //처치 확정 후
+	Switch("Switch153", Not Set);                          //칭찬 미표시
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>잘했다. 전방 지휘 신호가 끊겼다. 지금 벌어 둔 틈을 놓치지 마라.");
-	Display Text Message(Always Display, "<11>주황색 저그<04>의 지휘체계가 혼란에 빠졌습니다. 잠시 동안 공격을 망설일 것입니다.");
-	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 제거. 미네랄 +1000");
-	Set Resources("Current Player", Add, 1000, ore);
-	Set Switch("Switch144", set);
+	Display Text Message(Always Display, "<03>호크: <04>잘했다! 지휘 정신체를 끊었군. 이젠 방어선이 숨통 트일 거다.");
+	Set Switch("Switch153", set);
+}
+
+// (A) 작전 정보 + 자원 지급 : 정신체 파괴 즉시 발동
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch152", Not Set);                          //지휘 정신체 보상 미지급 (값싼 가드 먼저)
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
+	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At most, 0); //지휘 정신체 파괴됨 (스캔, 마지막)
+Actions:
+	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체 제거 확인. 지휘체계 교란으로 후속 공세 규모가 감소합니다.");
+	Set Resources("Current Player", Add, 1500, ore);       //지휘 정신체 처치 보상 : 미네랄 +1500
+	Set Resources("Current Player", Add, 500, gas);        //지휘 정신체 처치 보상 : 가스 +500
+	Set Switch("Switch152", set);                          //보상 지급 완료
+}
+
+// AttackPoint1 정신체 처치 보상 - 격파 헤더(A) -> 칭찬(B) -> 보상 안내(C) 순서로 1줄씩 표시.
+// 한 트리거 사이클 내에서 위 트리거가 set한 Switch를 아래 트리거가 즉시 보면 같은 프레임에
+// 함께 발동해 메시지가 덮어써진다. 이를 막으려고 의존 트리거(C->B->A)를 일부러 역순 배치해
+// A는 사이클 N, B는 N+1, C는 N+2에 발동 -> 표시 순서는 A,B,C로 3줄 모두 노출.
+
+// (C) 시스템 보상/효과 안내 : Switch149(칭찬) 이후 사이클에 발동
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch149", Set);                              //칭찬 표시 후
+	Switch("Switch150", Not Set);                          //보상 안내 미표시
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 제거. 미네랄 +2500. 지휘 교란으로 전방 방어 군집이 와해됐습니다.");
+	Set Switch("Switch150", set);
+}
+
+// (B) 호크의 강한 칭찬 : Switch144(격파) 이후 사이클에 발동
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch144", Set);                              //격파 확정 후
+	Switch("Switch149", Not Set);                          //칭찬 미표시
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>잘했다! 적 지휘의 급소를 정확히 짚어냈어. 자네가 해냈다.");
+	Set Switch("Switch149", set);
+}
+
+// (A) 자원 +2500 + EarlyTower 성큰 전멸 + 격파 헤더 : 정신체 파괴 즉시 발동
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch144", Not Set);                          //정신체 보상 미지급 (값싼 가드 먼저)
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0); //전방 정신체 파괴됨 (스캔, 마지막)
+Actions:
+	Set Resources("Current Player", Add, 2500, ore);       //정신체 처치 보상 : 미네랄 +2500
+	Kill Unit At Location("Player 5", "Zerg Sunken Colony", All, "EarlyTower"); //별개 보상 : EarlyTower P5 성큰 전멸
+	//중앙 정렬 격파 강조 헤더
+	Display Text Message(Always Display, "<13><03>[ 전방 정신체 격파 ]");
+	Set Switch("Switch144", set);                          //보상 지급 완료
 }
 
 // AttackPoint1 cerebrate kill - rally P5 hunt assault units toward P5 Spawn1 once.

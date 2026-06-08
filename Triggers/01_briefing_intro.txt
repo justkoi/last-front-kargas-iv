@@ -34,10 +34,19 @@ Actions:
 	Set Switch("Switch124", clear);
 	Set Switch("Switch125", clear);
 	Set Switch("Switch126", clear);
-	Set Switch("Switch133", clear);
 	Set Switch("Switch142", clear);
 	Set Switch("Switch143", clear);
 	Set Switch("Switch144", clear);
+	Set Switch("Switch145", clear);
+	Set Switch("Switch146", clear);
+	Set Switch("Switch147", clear);
+	Set Switch("Switch148", clear);
+	Set Switch("Switch149", clear);
+	Set Switch("Switch150", clear);
+	Set Switch("Switch151", clear);
+	Set Switch("Switch152", clear);
+	Set Switch("Switch153", clear);
+	Set Switch("Switch154", clear);
 }
 
 Trigger("All Players"){
@@ -231,7 +240,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Minimap Ping("BaseEntrance");
-	Display Text Message(Always Display, "<1A>노바: <04>거점 입구에 수리가 필요해 보이는 임시 방벽이 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>거점 입구에 버려진 군수시설이 있습니다. 배럭과 팩토리 같군요.");
 }
 
 Trigger("All Players"){
@@ -239,5 +248,5 @@ Conditions:
 	Elapsed Time(At least, 95);
 	Elapsed Time(At most, 97);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>가능하면 수리해서 방어에 쓸 수 있도록 해라.");
+	Display Text Message(Always Display, "<03>호크: <04>복구하려면 시간이 걸리겠지만, 그동안은 입구를 막는 방어벽으로도 쓸 수 있겠군.");
 }
