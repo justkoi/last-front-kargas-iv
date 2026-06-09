@@ -1,22 +1,22 @@
 //============================================================
 //  Mission 1 - 입구 군수시설(P9 배럭/팩토리) 통제권 이양
-//  기존 "입구 임시 방벽 수동 파괴"를 대체. 23분경 버려진 군수시설을
+//  기존 "입구 임시 방벽 수동 파괴"를 대체. 20분경 버려진 군수시설을
 //  복구했다는 메타포로 P9 소유 배럭/팩토리 소유권을 플레이어 1명에게 이양한다.
 //  무적/파괴 없음 - 순수 소유권 이양(플레이어가 시설을 띄워 입구를 열 수 있음).
 //
 //  종족 마커 DC : Tom Kazansky (Wraith) (P1~P4, 미사용 영웅 유닛 슬롯)
 //    값 1 = 테란, 2 = 저그, 3 = 프로토스. 시작 3초 시점 일꾼으로 스냅샷.
-//  Switch142     : 군수시설 생존 게이트 — P9 BaseEntrance에 배럭 OR 팩토리 중 1개 이상 (1378~1380 스냅샷)
+//  Switch142     : 군수시설 생존 게이트 — P9 BaseEntrance에 배럭 OR 팩토리 중 1개 이상 (1198~1200 스냅샷)
 //  Switch145/146 : 무작위 선택자 1회 추첨(clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4)
 //  Switch147     : 이양 완료(가드)
 //  Switch151     : 개인 메시지 1회 출력 완료(가드)
 //
-//  이양 대상 결정(매 사이클 재추첨 없음 - 1380초에 1회만 추첨 후 우선순위 cascade):
+//  이양 대상 결정(매 사이클 재추첨 없음 - 1200초에 1회만 추첨 후 우선순위 cascade):
 //    1순위) 테란 보유 플레이어 우선 : P1->P4 순으로 첫 생존 테란에게.
 //    2순위) 테란이 없으면 : 1회 추첨으로 뽑힌 생존 플레이어에게(무작위).
 //    3순위) 뽑힌 플레이어가 비생존이면 : P1->P4 순 첫 생존 플레이어(안전망).
 //    파일 순서(테란 cascade -> 추첨 -> 생존 scan)로 한 사이클 내 우선순위가 결정됨.
-//  군수시설 생존 게이트 : 23:00 직전(1378~1380) P8이 배럭/팩토리를 각각 스캔해 Switch142 set.
+//  군수시설 생존 게이트 : 20:00 직전(1198~1200) P8이 배럭/팩토리를 각각 스캔해 Switch142 set.
 //    이양 조건은 Switch142 Set만 확인. Give는 배럭·팩토리 둘 다 호출(있는 유닛만 이전).
 //============================================================
 
@@ -48,11 +48,11 @@ Actions:
 	Set Deaths("Current Player", "Tom Kazansky (Wraith)", Set To, 3); //종족 마커 = 3(프로토스)
 }
 
-//----- (A-pre) 23:00 직전 군수시설 생존 스냅샷 → Switch142 -----//
+//----- (A-pre) 20:00 직전 군수시설 생존 스냅샷 → Switch142 -----//
 Trigger("Player 8"){
 Conditions:
-	Elapsed Time(At least, 1378);
-	Elapsed Time(At most, 1380);
+	Elapsed Time(At least, 1198);
+	Elapsed Time(At most, 1200);
 	Bring("Player 9", "Terran Barracks", "BaseEntrance", At least, 1);
 Actions:
 	Set Switch("Switch142", set);
@@ -60,19 +60,19 @@ Actions:
 
 Trigger("Player 8"){
 Conditions:
-	Elapsed Time(At least, 1378);
-	Elapsed Time(At most, 1380);
+	Elapsed Time(At least, 1198);
+	Elapsed Time(At most, 1200);
 	Bring("Player 9", "Terran Factory", "BaseEntrance", At least, 1);
 Actions:
 	Set Switch("Switch142", set);
 }
 
-//----- (B) 무작위 선택자 1회 추첨 (23분 시점, Preserve 없음 - 재추첨 안 함) -----//
+//----- (B) 무작위 선택자 1회 추첨 (20분 시점, Preserve 없음 - 재추첨 안 함) -----//
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);   //미이양 시에만
-	Elapsed Time(At least, 1380);   //23분 시점 : 군수시설 복구 개시
-	Elapsed Time(At most, 1382);    //1회성 윈도우 : 한 번만 추첨
+	Elapsed Time(At least, 1200);   //20분 시점 : 군수시설 복구 개시
+	Elapsed Time(At most, 1202);    //1회성 윈도우 : 한 번만 추첨
 Actions:
 	Set Switch("Switch145", randomize); //무작위 대상 1회 추첨
 	Set Switch("Switch146", randomize);
@@ -82,10 +82,10 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);                          //미이양 (값싼 가드 먼저)
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Deaths("Player 1", "Tom Kazansky (Wraith)", Exactly, 1); //P1 종족 = 테란
 	Command("Player 1", "Men", At least, 1);               //P1 생존 확인
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 1", "Terran Barracks", All, "BaseEntrance"); //통제권 P1 이양
 	Give Units to Player("Player 9", "Player 1", "Terran Factory", All, "BaseEntrance");
@@ -95,10 +95,10 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Deaths("Player 2", "Tom Kazansky (Wraith)", Exactly, 1); //P2 종족 = 테란
 	Command("Player 2", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 2", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 2", "Terran Factory", All, "BaseEntrance");
@@ -108,10 +108,10 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Deaths("Player 3", "Tom Kazansky (Wraith)", Exactly, 1); //P3 종족 = 테란
 	Command("Player 3", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 3", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 3", "Terran Factory", All, "BaseEntrance");
@@ -121,10 +121,10 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Deaths("Player 4", "Tom Kazansky (Wraith)", Exactly, 1); //P4 종족 = 테란
 	Command("Player 4", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 4", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 4", "Terran Factory", All, "BaseEntrance");
@@ -137,9 +137,9 @@ Conditions:
 	Switch("Switch147", Not Set);                          //미이양 (테란 cascade 통과)
 	Switch("Switch145", Not Set);                          //추첨 조합 : P1 (clear/clear)
 	Switch("Switch146", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 1", "Men", At least, 1);               //P1 생존 확인
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 1", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 1", "Terran Factory", All, "BaseEntrance");
@@ -151,9 +151,9 @@ Conditions:
 	Switch("Switch147", Not Set);
 	Switch("Switch145", Set);                              //추첨 조합 : P2 (set/clear)
 	Switch("Switch146", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 2", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 2", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 2", "Terran Factory", All, "BaseEntrance");
@@ -165,9 +165,9 @@ Conditions:
 	Switch("Switch147", Not Set);
 	Switch("Switch145", Not Set);                          //추첨 조합 : P3 (clear/set)
 	Switch("Switch146", Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 3", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 3", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 3", "Terran Factory", All, "BaseEntrance");
@@ -179,9 +179,9 @@ Conditions:
 	Switch("Switch147", Not Set);
 	Switch("Switch145", Set);                              //추첨 조합 : P4 (set/set)
 	Switch("Switch146", Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 4", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 4", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 4", "Terran Factory", All, "BaseEntrance");
@@ -192,9 +192,9 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 1", "Men", At least, 1);               //P1 생존
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 1", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 1", "Terran Factory", All, "BaseEntrance");
@@ -204,9 +204,9 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 2", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 2", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 2", "Terran Factory", All, "BaseEntrance");
@@ -216,9 +216,9 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 3", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 3", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 3", "Terran Factory", All, "BaseEntrance");
@@ -228,9 +228,9 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 4", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 4", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 4", "Terran Factory", All, "BaseEntrance");
@@ -247,7 +247,7 @@ Conditions:
 Actions:
 	Minimap Ping("BaseEntrance");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>군수 복구: <04>입구의 버려진 군수시설을 복구해 아군 지휘관 한 명에게 통제권을 이양했습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>입구 군수시설 복구를 마쳤다. 통제권은 한 지휘관에게 넘긴다.");
 }
 
 //----- (G) 받은 사람 개인 메시지 : Switch147(이양) 이후 사이클에 1회 출력 -----//

@@ -2,7 +2,9 @@
 //  KARGAS IV - Mission trigger notes
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
 //                      P5 Spawn1~4, P5 H1~4, P1~P4 Hunt, Player Destination, AttackPoint1, EarlyTower,
-//                      MD1~MD6, BaseEntrance, BaseScan1~11, MainLoad1~2, Player Destination,
+//                      MD1~MD6, BaseEntrance, BaseScan1~12, MultiKey, MultiLock, MainLoad1~2, Player Destination,
+//                      MultiKey: P5 Mature Crysalis preplaced (unlock key; SCMDraft name, not Chrysalis). MultiLock: P5/P9 invincible blockers.
+//                      BaseScan12: orbital scan slot at game start (01_briefing_intro, 32s).
 //                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 MiniBase, P6 Spawn1~4, P6 H1~8,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
@@ -20,7 +22,7 @@
 //  See 15b_mission2_easy_defense_handoff.txt.
 //
 //  Timer rule: 12 DC tick = 1 second
-//    10s = 120, 60s = 720, 90s = 1080, 3min = 2160, 3min40 = 2640, 4min = 2880, 5min = 3600, 10min = 7200
+//    10s = 120, 60s = 720, 90s = 1080, 3min = 2160, 3min20 = 2400, 4min = 2880, 5min = 3600, 10min = 7200
 //
 //  Player 8 DC roles
 //    Terran Civilian      : zerg resource supply timer
@@ -28,7 +30,7 @@
 //    Terran Armory        : P6 base defense cooldown
 //    Protoss Zealot       : P7 base defense cooldown
 //    Terran Valkyrie      : mission phase flag (1=M1, 3=M2, 4=clear)
-//    Terran Vulture       : mission2 elapsed timer
+//    Terran Vulture       : mission2 elapsed timer (756=public/objectives+assault timer start)
 //    Protoss Probe        : P5 scout rotation index
 //    Protoss Scout        : P6 scout rotation index
 //    Protoss Carrier      : P7 scout rotation index
@@ -113,8 +115,8 @@
 //    Switch52   : P7 mission2 penalty assault relay pulse open
 //    Switch53   : P6 mission2 penalty assault spawn rally pulse open
 //    Switch54   : P7 mission2 penalty assault spawn rally pulse open
-//    Switch55   : P6 AI activation requested
-//    Switch56   : P7 AI activation requested
+//    Switch55   : P6 AI activation requested (set at mission2 entry)
+//    Switch56   : P7 AI activation requested (set at mission2 entry)
 //    Switch57   : P6 hunt P5 Overlord support fired this cycle
 //    Switch58   : mission1 colony rage armed (one-shot, 8 tech destroys)
 //    Switch59   : P6 mission2 early alert defense charge ready
@@ -180,18 +182,19 @@
 //    Switch139     : DefenseCenter2 easy-mode handoff completed
 //    Switch140     : mission2 P6 forward rally point revealed (Vulture >= 4080)
 //    Switch141     : mission2 P6 forward rally point reward paid
-//    Switch142     : mission1 arsenal facility alive gate - Barracks OR Factory at BaseEntrance (13e, prescan 1378-1380)
+//    Switch142     : mission1 arsenal facility alive gate - Barracks OR Factory at BaseEntrance (13e, prescan 1198-1200)
 //    Switch143     : AttackPoint1 cerebrate destroy P5 Hunt delay applied (one-shot)
-//    Switch144     : AttackPoint1 cerebrate destroy reward A (자원 +2500 / EarlyTower 성큰 전멸 / 격파 헤더) applied (one-shot)
+//    Switch144     : AttackPoint1 cerebrate destroy reward mechanics paid (자원 +2500 / EarlyTower 성큰 전멸) (one-shot)
 //    Switch145/146 : mission1 arsenal handoff random selector (clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4) (13e)
 //    Switch147     : mission1 arsenal handoff completed (13e)
-//    Switch148     : AttackPoint1 정신체 자원 확보 안내(22:10, 호크 대사 이후) shown (one-shot)
-//    Switch149     : AttackPoint1 정신체 처치 칭찬(B) shown (one-shot)
-//    Switch150     : AttackPoint1 정신체 처치 보상 안내(C) shown (one-shot)
+//    Switch148     : AttackPoint1 정신체 자원 확보 안내(21:10, 호크 대사 이후) shown (one-shot)
+//    Switch149     : AttackPoint1 정신체 처치 격파 헤더(A) display phase completed
+//    Switch150     : AttackPoint1 정신체 처치 칭찬(B) display phase completed
 //    Switch151     : mission1 arsenal handoff personal message shown (one-shot) (13e)
-//    Switch152     : P5 Cerebrate destroy reward A (작전 정보 + 자원 +1500/+500) applied (one-shot)
-//    Switch153     : P5 Cerebrate destroy hawk praise(B) shown (one-shot)
-//    Switch154     : P5 Cerebrate destroy reward text(C) shown (one-shot)
+//    Switch152     : P5 Cerebrate destroy reward mechanics paid (자원 +1500/+500) (one-shot)
+//    Switch153     : P5 Cerebrate destroy operation info(A) display phase completed
+//    Switch154     : P5 Cerebrate destroy hawk praise(B) display phase completed
+//    Switch155~157 : (free) — early multi lock now switch-free, uses Bring("Player 5","Mature Crysalis","MultiKey",At most,0) (08b)
 //    Switch158     : P6 main assault locked after final scream assault batch 10
 //    Switch159     : P7 main assault locked after final scream assault batch 10
 //
@@ -311,6 +314,7 @@ Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan9");
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan10");
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan11");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan12");
 }
 
 Trigger("Player 2"){
@@ -330,6 +334,7 @@ Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan9");
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan10");
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan11");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan12");
 }
 
 Trigger("Player 3"){
@@ -349,6 +354,7 @@ Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan9");
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan10");
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan11");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan12");
 }
 
 Trigger("Player 4"){
@@ -368,6 +374,7 @@ Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan9");
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan10");
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan11");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan12");
 }
 
 Trigger("All Players"){
@@ -1167,22 +1174,20 @@ Actions:
 	Preserve Trigger();
 }
 
-// Mission 2 P6 main assault cooldown advances during mission2.
+// Mission 2 P6 main assault cooldown advances from mission2 entry.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
 	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1);
 	Preserve Trigger();
 }
 
-// Mission 2 P7 main assault cooldown advances during mission2.
+// Mission 2 P7 main assault cooldown advances from mission2 entry.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
 	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1);
@@ -1302,16 +1307,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// 미션2 목표 표시 시 갈색/하얀색 군락을 깨운다.
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
-	Deaths("Player 8", "Terran Vulture", At most, 780);
-Actions:
-	Set Switch("Switch55", set);
-	Set Switch("Switch56", set);
-}
+// P6/P7 AI activation is requested at mission2 entry in 12_mission1_to_mission2_transition.txt.
 
 Trigger("Player 6"){
 Conditions:
@@ -1679,6 +1675,38 @@ Actions:
 	Set Switch("Switch8", set);
 }
 //-----------------------------------------------------------------//
+//  Early multi lock — switch-free (Bring presence check, no Switch155~158)
+//  Key: Player 5 "Mature Crysalis" preplaced at MultiKey
+//       (SCMDraft unit string is "Mature Crysalis", not "Mature Chrysalis").
+//  Unlock fires when the key is no longer at MultiKey
+//  (Bring At most 0). Non-Preserve one-shot triggers fire exactly once.
+//  MultiLock location must fully cover the P5/P9 blocker building footprints.
+//-----------------------------------------------------------------//
+
+//잠금 해제 : MultiKey에 멀티 열쇠(P5 Mature Crysalis)가 없어지면 1회 — MultiLock의 P5/P9 건물 제거
+Trigger("Player 8"){
+Conditions:
+	Bring("Player 8", "Mature Crysalis", "MultiKey", At most, 0); //열쇠 부재 감지 : 파괴되면 영구 참 → 비-Preserve라 1회만 실행
+Actions:
+	Set Invincibility("Player 5", "Buildings", "MultiLock", disabled); //무적 해제 먼저 : Kill은 무적 유닛을 못 죽이므로 선행 필수
+	Set Invincibility("Player 9", "Buildings", "MultiLock", disabled); //무적 해제 먼저 : Kill은 무적 유닛을 못 죽이므로 선행 필수
+	Kill Unit At Location("Player 5", "Buildings", All, "MultiLock");
+	Kill Unit At Location("Player 9", "Buildings", All, "MultiLock");
+	Set Resources("Player 1", Add, 50, ore);                         //공용 보상 : 모든 플레이어 미네랄 +50
+	Set Resources("Player 2", Add, 50, ore);                         //공용 보상 : 모든 플레이어 미네랄 +50
+	Set Resources("Player 3", Add, 50, ore);                         //공용 보상 : 모든 플레이어 미네랄 +50
+	Set Resources("Player 4", Add, 50, ore);                         //공용 보상 : 모든 플레이어 미네랄 +50
+}
+
+//작전 보상 안내 : 열쇠 부재 시 1회 — 사운드/메시지는 플레이어 소유 트리거에서만
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Bring("Player 8", "Mature Crysalis", "MultiKey", At most, 0); //열쇠 부재 감지 : 비-Preserve라 각 플레이어에게 1회만
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<07>작전 보상: <04>버려진 자원지대 확보. 미네랄 +50");
+}
+//-----------------------------------------------------------------//
 //  웨이브 (Wait 제거 / 드론 제외 - 전투 유닛만 Order)
 //  각 웨이브는 30초 전 P5 Spawn 집결을 보여준 뒤 출발 시 MainLoad1~2를 보여준다.
 //-----------------------------------------------------------------//
@@ -1801,7 +1829,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 1320);
+	Elapsed Time(At least, 1260);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "AttackPoint1");
 	Create Unit("Player 2", "Map Revealer", 1, "AttackPoint1");
@@ -1812,7 +1840,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 1320);
+	Elapsed Time(At least, 1260);
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -1823,18 +1851,18 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 1325);
+	Elapsed Time(At least, 1265);
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>좋다. 타격대를 보내라. 방어선 숨통이 트일 거다.");
 }
 
-// 22:10 공개 안내 - 전방 정신체 제거 시 자원 확보 가능함을 알림 (호크 대사 이후, 정신체 존재 시 1회)
+// 21:10 공개 안내 - 전방 정신체 제거 시 자원 확보 가능함을 알림 (호크 대사 이후, 정신체 존재 시 1회)
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Switch("Switch148", Not Set);                          //자원 안내 미표시 (값싼 가드 먼저)
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 1330);                          //22:10 시점 (호크 대사 5초 후)
+	Elapsed Time(At least, 1270);                          //21:10 시점 (호크 대사 5초 후)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 존재 시 (스캔, 마지막)
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>전방의 저그 정신체를 제거하면 지휘 교란과 함께 상당한 자원을 확보할 수 있습니다.");
@@ -1844,8 +1872,8 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 1380);
-	Elapsed Time(At most, 1382);
+	Elapsed Time(At least, 1320);
+	Elapsed Time(At most, 1322);
 Actions:
 	Kill Unit At Location("Player 1", "Map Revealer", 64, "AttackPoint1");
 	Kill Unit At Location("Player 2", "Map Revealer", 64, "AttackPoint1");
@@ -2104,7 +2132,7 @@ Actions:
 //
 //  P5 Hatchery/Lair/Hive cumulative destroy count (Terran Medic DC)
 //  reaches 8 once -> 30s telegraphed prep -> 4 batched spawns to P1~P4 Hunt.
-//  Easy base = 200 supply. Extra layers in 09g_mission1_colony_rage_difficulty.txt.
+//  Easy base = 260 supply. Extra layers in 09g_mission1_colony_rage_difficulty.txt.
 //  12 DC ticks = 1 second.
 //-----------------------------------------------------------------//
 
@@ -2112,7 +2140,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Deaths("Player 8", "Terran Medic", Exactly, 8);
+	Deaths("Player 8", "Terran Medic", At least, 8); //군락의 분노 무장 : Medic(테크 파괴 누적)이 8 이상 — 다중 건물 동시 파괴로 8을 건너뛰어도 발동(Switch58 래치로 1회성)
 	Switch("Switch58", Not Set);
 Actions:
 	Set Switch("Switch58", set);
@@ -2126,20 +2154,39 @@ Actions:
 	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
 }
 
-// Intro at ~10s.
+// Countdown start ~1s (45 = 30 DC sec prep x 1.5).
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch58", Set);
-	Deaths("Player 8", "Protoss Dark Archon", At least, 120);
-	Deaths("Player 8", "Protoss Dark Archon", At most, 144);
+	Deaths("Player 8", "Protoss Dark Archon", Exactly, 12);
+Actions:
+	Set Countdown Timer(Set To, 45);
+}
+
+// Header ~3s.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch58", Set);
+	Switch("Switch76", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", Exactly, 36);
 Actions:
 	Minimap Ping("P5 Home");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Display Text Message(Always Display, "<13><06>[ 군락의 분노 ]");
-	Display Text Message(Always Display, "<1A>노바: <04>주황색 저그 <11>군락<04> 전역에서 생체 반응이 급등합니다. 마지막 병력을 긁어모으고 있어요.");
-	Display Text Message(Always Display, "<03>호크: <04>전선을 유지해라. 흩어지면 한 번에 무너진다.");
 	Set Switch("Switch76", set);
+}
+
+// Nova 1 ~10s.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch58", Set);
+	Switch("Switch76", Set);
+	Deaths("Player 8", "Protoss Dark Archon", Exactly, 120);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>…이상해요. <11>주황색<04> 군락 본진 쪽에서 병력이 빠르게 모이고 있어요. 방금 전투와 연결된 것 같습니다.");
 }
 
 // 15-second warning at ~15s prep.
@@ -2147,8 +2194,8 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch58", Set);
-	Deaths("Player 8", "Protoss Dark Archon", At least, 180);
-	Deaths("Player 8", "Protoss Dark Archon", At most, 204);
+	Switch("Switch77", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", Exactly, 180);
 Actions:
 	Minimap Ping("P5 Spawn1");
 	Minimap Ping("P5 Spawn2");
@@ -2157,6 +2204,28 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<06>경보: <04>군락의 분노 접근까지 15초.");
 	Set Switch("Switch77", set);
+}
+
+// Nova 2 ~17s.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch58", Set);
+	Switch("Switch77", Set);
+	Deaths("Player 8", "Protoss Dark Archon", Exactly, 204);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>감지망상 결집 규모가 커지고 있어요. 곧 각 전선으로 동시에 퍼질 겁니다.");
+}
+
+// Hawk ~24s.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Switch("Switch58", Set);
+	Switch("Switch77", Set);
+	Deaths("Player 8", "Protoss Dark Archon", Exactly, 288);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>적이 발악한다. 공세에 대비해라.");
 }
 
 // Suspend P5 base defense for 60s after launch.
@@ -2186,20 +2255,20 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch58", Set);
-	Deaths("Player 8", "Protoss Dark Archon", At least, 360);
-	Deaths("Player 8", "Protoss Dark Archon", At most, 384);
+	Switch("Switch78", Not Set);
+	Deaths("Player 8", "Protoss Dark Archon", Exactly, 360);
 Actions:
 	Minimap Ping("P5 Spawn1");
 	Minimap Ping("P5 Spawn2");
 	Minimap Ping("P5 Spawn3");
 	Minimap Ping("P5 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Set Countdown Timer(Set To, 0);
 	Display Text Message(Always Display, "<06>경보: <04>군락의 분노 접근.");
-	Display Text Message(Always Display, "<03>호크: <04>각 전선은 자기 구역을 붙잡아라. 밀리면 중앙까지 한 번에 무너진다.");
 	Set Switch("Switch78", set);
 }
 
-// Batch 1 at 30s: 1 Ultra, 5 Hydra, 1 Defiler, 5 Zergling per front (54 supply total).
+// Batch 1 at 30s: 1 Ultra, 7 Hydra, 1 Defiler, 7 Zergling per front (66 supply total).
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
@@ -2208,21 +2277,21 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At least, 360);
 Actions:
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 5, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn1");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn1", 1);
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 7, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 5, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn2");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn2", 1);
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 7, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 5, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn3");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn3", 1);
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 7, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 5, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn4");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn4", 1);
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Zergling", 7, "P5 Spawn4");
 	Order("Player 5", "Zerg Ultralisk", "P5 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Defiler", "P5 Spawn1", "P1 Hunt", Patrol);
@@ -2242,7 +2311,7 @@ Actions:
 	Set Switch("Switch79", set);
 }
 
-// Batch 2 at 34s: 1 Ultra, 6 Zergling, 3 Hydra per front (40 supply total).
+// Batch 2 at 34s: 1 Ultra, 8 Zergling, 4 Hydra per front (48 supply total).
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
@@ -2251,17 +2320,17 @@ Conditions:
 	Deaths("Player 8", "Protoss Dark Archon", At least, 408);
 Actions:
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 8, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 8, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 8, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Zergling", 8, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn4");
 	Order("Player 5", "Zerg Ultralisk", "P5 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "P1 Hunt", Patrol);
@@ -2277,7 +2346,7 @@ Actions:
 	Set Switch("Switch80", set);
 }
 
-// Batch 3 at 38s: 4 Hydra, 2 Lurker, 2 Mutalisk, 3 Scourge per front (54 supply total).
+// Batch 3 at 38s: 5 Hydra, 3 Lurker, 3 Mutalisk, 3 Scourge per front (74 supply total).
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
@@ -2285,21 +2354,21 @@ Conditions:
 	Switch("Switch81", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 456);
 Actions:
-	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 5, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Mutalisk", 3, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Scourge", 3, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 5, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Mutalisk", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Scourge", 3, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 5, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Mutalisk", 3, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Scourge", 3, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 5, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Mutalisk", 3, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Scourge", 3, "P5 Spawn4");
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Lurker", "P5 Spawn1", "P1 Hunt", Patrol);
@@ -2320,7 +2389,7 @@ Actions:
 	Set Switch("Switch81", set);
 }
 
-// Batch 4 at 42s: 2 Guardian, 2 Devourer, 3 Hydra, 4 Zergling per front (52 supply total).
+// Batch 4 at 42s: 3 Guardian, 3 Devourer, 4 Hydra, 4 Zergling per front (72 supply total).
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
@@ -2328,21 +2397,21 @@ Conditions:
 	Switch("Switch82", Not Set);
 	Deaths("Player 8", "Protoss Dark Archon", At least, 504);
 Actions:
-	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Devourer", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Devourer", 3, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Devourer", 3, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Devourer", 3, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn4");
 	Order("Player 5", "Zerg Guardian", "P5 Spawn1", "P1 Hunt", Patrol);
 	Order("Player 5", "Zerg Devourer", "P5 Spawn1", "P1 Hunt", Patrol);
@@ -3033,77 +3102,132 @@ Actions:
 }
 
 // P5 지휘 정신체 처치 - 작전정보(A) -> 호크 칭찬(B) -> 보상 안내(C) 순서로 1줄씩 표시.
-// AttackPoint1과 동일 : C->B->A 역순 배치로 사이클 분리.
+// 실제 보상은 Player 8 단일 트리거에서 1회 지급하고, P1~P4 트리거는 표시만 담당한다.
+// P8 phase 트리거가 각 표시 사이클 뒤에 Switch153/154를 넘겨 메시지 덮어쓰기를 막는다.
 
-// (C) 시스템 보상 안내 : Switch153(칭찬) 이후 사이클에 발동
+// (C) 시스템 보상 안내 : Switch154(칭찬 표시 완료) 이후 사이클에 발동
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Switch("Switch153", Set);                              //칭찬 표시 후
-	Switch("Switch154", Not Set);                          //보상 안내 미표시
+	Switch("Switch154", Set);                              //칭찬 표시 완료 후
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <04>지휘 정신체 제거. 미네랄 +1500 / 가스 +500");
-	Set Switch("Switch154", set);
 }
 
-// (B) 호크 칭찬 : Switch152(처치) 이후 사이클에 발동
+// (C phase) 보상 안내 단계 개방 : B 표시 사이클 뒤에 P8이 1회 진행
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch153", Set);                              //작전 정보 표시 단계 완료
+	Switch("Switch154", Not Set);                          //칭찬 표시 완료 전
+Actions:
+	Set Switch("Switch154", set);                          //다음 사이클에 보상 안내 표시
+}
+
+// (B) 호크 칭찬 : Switch153(작전 정보 표시 완료) 이후 사이클에 발동
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Switch("Switch152", Set);                              //처치 확정 후
-	Switch("Switch153", Not Set);                          //칭찬 미표시
+	Switch("Switch153", Set);                              //작전 정보 표시 완료 후
+	Switch("Switch154", Not Set);                          //보상 안내 단계 전
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>잘했다! 지휘 정신체를 끊었군. 이젠 방어선이 숨통 트일 거다.");
-	Set Switch("Switch153", set);
 }
 
-// (A) 작전 정보 + 자원 지급 : 정신체 파괴 즉시 발동
+// (B phase) 칭찬 단계 개방 : A 표시 사이클 뒤에 P8이 1회 진행
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch152", Set);                              //지휘 정신체 보상 지급 완료
+	Switch("Switch153", Not Set);                          //작전 정보 표시 완료 전
+Actions:
+	Set Switch("Switch153", set);                          //다음 사이클에 호크 칭찬 표시
+}
+
+// (A) 작전 정보 표시 : 보상 지급 다음 사이클에 각 플레이어에게 1회 표시
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch152", Set);                              //지휘 정신체 보상 지급 완료
+	Switch("Switch153", Not Set);                          //작전 정보 표시 단계
+Actions:
+	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체 제거 확인. 지휘체계 교란으로 후속 공세 규모가 감소합니다.");
+}
+
+// (A mechanics) 자원 지급 : Player 8 단일 owner로 1회만 실행
+Trigger("Player 8"){
 Conditions:
 	Switch("Switch152", Not Set);                          //지휘 정신체 보상 미지급 (값싼 가드 먼저)
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At most, 0); //지휘 정신체 파괴됨 (스캔, 마지막)
 Actions:
-	Display Text Message(Always Display, "<07>작전 정보: <04>저그 정신체 제거 확인. 지휘체계 교란으로 후속 공세 규모가 감소합니다.");
-	Set Resources("Current Player", Add, 1500, ore);       //지휘 정신체 처치 보상 : 미네랄 +1500
-	Set Resources("Current Player", Add, 500, gas);        //지휘 정신체 처치 보상 : 가스 +500
+	Set Resources("Player 1", Add, 1500, ore);             //지휘 정신체 처치 보상 : 모든 플레이어 미네랄 +1500
+	Set Resources("Player 2", Add, 1500, ore);             //지휘 정신체 처치 보상 : 모든 플레이어 미네랄 +1500
+	Set Resources("Player 3", Add, 1500, ore);             //지휘 정신체 처치 보상 : 모든 플레이어 미네랄 +1500
+	Set Resources("Player 4", Add, 1500, ore);             //지휘 정신체 처치 보상 : 모든 플레이어 미네랄 +1500
+	Set Resources("Player 1", Add, 500, gas);              //지휘 정신체 처치 보상 : 모든 플레이어 가스 +500
+	Set Resources("Player 2", Add, 500, gas);              //지휘 정신체 처치 보상 : 모든 플레이어 가스 +500
+	Set Resources("Player 3", Add, 500, gas);              //지휘 정신체 처치 보상 : 모든 플레이어 가스 +500
+	Set Resources("Player 4", Add, 500, gas);              //지휘 정신체 처치 보상 : 모든 플레이어 가스 +500
 	Set Switch("Switch152", set);                          //보상 지급 완료
 }
 
 // AttackPoint1 정신체 처치 보상 - 격파 헤더(A) -> 칭찬(B) -> 보상 안내(C) 순서로 1줄씩 표시.
-// 한 트리거 사이클 내에서 위 트리거가 set한 Switch를 아래 트리거가 즉시 보면 같은 프레임에
-// 함께 발동해 메시지가 덮어써진다. 이를 막으려고 의존 트리거(C->B->A)를 일부러 역순 배치해
-// A는 사이클 N, B는 N+1, C는 N+2에 발동 -> 표시 순서는 A,B,C로 3줄 모두 노출.
+// 실제 보상은 Player 8 단일 트리거에서 1회 지급하고, P1~P4 트리거는 표시만 담당한다.
+// P8 phase 트리거가 각 표시 사이클 뒤에 Switch149/150을 넘겨 메시지 덮어쓰기를 막는다.
 
-// (C) 시스템 보상/효과 안내 : Switch149(칭찬) 이후 사이클에 발동
+// (C) 시스템 보상/효과 안내 : Switch150(칭찬 표시 완료) 이후 사이클에 발동
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Switch("Switch149", Set);                              //칭찬 표시 후
-	Switch("Switch150", Not Set);                          //보상 안내 미표시
+	Switch("Switch150", Set);                              //칭찬 표시 완료 후
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 제거. 미네랄 +2500. 지휘 교란으로 전방 방어 군집이 와해됐습니다.");
-	Set Switch("Switch150", set);
 }
 
-// (B) 호크의 강한 칭찬 : Switch144(격파) 이후 사이클에 발동
+// (C phase) 보상 안내 단계 개방 : B 표시 사이클 뒤에 P8이 1회 진행
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch149", Set);                              //격파 헤더 표시 단계 완료
+	Switch("Switch150", Not Set);                          //칭찬 표시 완료 전
+Actions:
+	Set Switch("Switch150", set);                          //다음 사이클에 보상 안내 표시
+}
+
+// (B) 호크의 강한 칭찬 : Switch149(격파 헤더 표시 완료) 이후 사이클에 발동
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Switch("Switch144", Set);                              //격파 확정 후
-	Switch("Switch149", Not Set);                          //칭찬 미표시
+	Switch("Switch149", Set);                              //격파 헤더 표시 완료 후
+	Switch("Switch150", Not Set);                          //보상 안내 단계 전
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>잘했다! 적 지휘의 급소를 정확히 짚어냈어. 자네가 해냈다.");
-	Set Switch("Switch149", set);
 }
 
-// (A) 자원 +2500 + EarlyTower 성큰 전멸 + 격파 헤더 : 정신체 파괴 즉시 발동
+// (B phase) 칭찬 단계 개방 : A 표시 사이클 뒤에 P8이 1회 진행
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch144", Set);                              //전방 정신체 보상 지급 완료
+	Switch("Switch149", Not Set);                          //격파 헤더 표시 완료 전
+Actions:
+	Set Switch("Switch149", set);                          //다음 사이클에 호크 칭찬 표시
+}
+
+// (A) 격파 헤더 표시 : 보상 지급 다음 사이클에 각 플레이어에게 1회 표시
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch144", Set);                              //전방 정신체 보상 지급 완료
+	Switch("Switch149", Not Set);                          //격파 헤더 표시 단계
+Actions:
+	//중앙 정렬 격파 강조 헤더
+	Display Text Message(Always Display, "<13><03>[ 전방 정신체 격파 ]");
+}
+
+// (A mechanics) 자원 +2500 + EarlyTower 성큰 전멸 : Player 8 단일 owner로 1회만 실행
+Trigger("Player 8"){
 Conditions:
 	Switch("Switch144", Not Set);                          //정신체 보상 미지급 (값싼 가드 먼저)
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0); //전방 정신체 파괴됨 (스캔, 마지막)
 Actions:
-	Set Resources("Current Player", Add, 2500, ore);       //정신체 처치 보상 : 미네랄 +2500
+	Set Resources("Player 1", Add, 2500, ore);             //정신체 처치 보상 : 모든 플레이어 미네랄 +2500
+	Set Resources("Player 2", Add, 2500, ore);             //정신체 처치 보상 : 모든 플레이어 미네랄 +2500
+	Set Resources("Player 3", Add, 2500, ore);             //정신체 처치 보상 : 모든 플레이어 미네랄 +2500
+	Set Resources("Player 4", Add, 2500, ore);             //정신체 처치 보상 : 모든 플레이어 미네랄 +2500
 	Kill Unit At Location("Player 5", "Zerg Sunken Colony", All, "EarlyTower"); //별개 보상 : EarlyTower P5 성큰 전멸
-	//중앙 정렬 격파 강조 헤더
-	Display Text Message(Always Display, "<13><03>[ 전방 정신체 격파 ]");
 	Set Switch("Switch144", set);                          //보상 지급 완료
 }
 
@@ -4684,6 +4808,8 @@ Actions:
 	Set Switch("Switch142", clear);
 	Set Switch("Switch143", clear);
 	Set Switch("Switch144", clear);
+	Set Switch("Switch55", set);
+	Set Switch("Switch56", set);
 }
 
 Trigger("All Players"){
@@ -4725,14 +4851,20 @@ Actions:
 	Display Text Message(Always Display, "<07>군수지원: <04>전선 재정비 보급 투입. 미네랄 +500 / 가스 +500");
 }
 
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 216);
 	Deaths("Player 8", "Terran Vulture", At most, 240);
 Actions:
-	Set Resources("Current Player", Add, 500, ore);
-	Set Resources("Current Player", Add, 500, gas);
+	Set Resources("Player 1", Add, 500, ore);
+	Set Resources("Player 2", Add, 500, ore);
+	Set Resources("Player 3", Add, 500, ore);
+	Set Resources("Player 4", Add, 500, ore);
+	Set Resources("Player 1", Add, 500, gas);
+	Set Resources("Player 2", Add, 500, gas);
+	Set Resources("Player 3", Add, 500, gas);
+	Set Resources("Player 4", Add, 500, gas);
 }
 
 Trigger("Player 6"){
@@ -4797,17 +4929,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 1032);
-	Deaths("Player 8", "Terran Vulture", At most, 1056);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>지금이 정비 시간이다. 수리하고, 병력을 모으고, 방어선을 다시 그어라.");
-}
-
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 2640);
-	Deaths("Player 8", "Terran Vulture", At most, 2664);
+	Deaths("Player 8", "Terran Vulture", At least, 2400);
+	Deaths("Player 8", "Terran Vulture", At most, 2424);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>점막 뿌리망 붕괴 확인. 주황색 저그 방어기관이 고사했습니다.");
 }
@@ -4815,8 +4938,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 2712);
-	Deaths("Player 8", "Terran Vulture", At most, 2736);
+	Deaths("Player 8", "Terran Vulture", At least, 2472);
+	Deaths("Player 8", "Terran Vulture", At most, 2496);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>길이 열렸다. 모두 전력을 모아 동북쪽 <15>갈색 저그<04> 군락부터 고립시켜 무너뜨린다.");
 }
@@ -4824,8 +4947,8 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 2796);
-	Deaths("Player 8", "Terran Vulture", At most, 2820);
+	Deaths("Player 8", "Terran Vulture", At least, 2556);
+	Deaths("Player 8", "Terran Vulture", At most, 2580);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>각개격파 당하지 않도록 힘을 합쳐라.");
 }
@@ -4833,7 +4956,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 2640);
+	Deaths("Player 8", "Terran Vulture", At least, 2400);
 Actions:
 	Set Deaths("Player 5", "Terran Marine", Set To, 0);
 	Set Deaths("Player 5", "Terran Firebat", Set To, 0);
@@ -5012,7 +5135,7 @@ Actions:
 //  Mission 2 - early P5 colony decay hint
 //
 //  Warns players only when they destroy orange Sunken/Spore Colonies
-//  before the scripted 3-minute 40-second creep-root decay.
+//  before the scripted 3-minute 20-second creep-root decay.
 //-----------------------------------------------------------------//
 
 Trigger("Player 8"){
@@ -5038,7 +5161,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2639);
+	Deaths("Player 8", "Terran Vulture", At most, 2399);
 	Deaths("Player 5", "Zerg Sunken Colony", At least, 1);
 Actions:
 	Set Deaths("Player 5", "Terran Marine", Add, 1);
@@ -5049,7 +5172,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2639);
+	Deaths("Player 8", "Terran Vulture", At most, 2399);
 	Deaths("Player 5", "Zerg Spore Colony", At least, 1);
 Actions:
 	Set Deaths("Player 5", "Terran Firebat", Add, 1);
@@ -5060,7 +5183,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2639);
+	Deaths("Player 8", "Terran Vulture", At most, 2399);
 	Deaths("Player 5", "Terran Marine", At least, 3);
 Actions:
 	Set Deaths("Player 5", "Terran Marine", Subtract, 3);
@@ -5074,7 +5197,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2639);
+	Deaths("Player 8", "Terran Vulture", At most, 2399);
 	Deaths("Player 5", "Terran Firebat", At least, 3);
 Actions:
 	Set Deaths("Player 5", "Terran Firebat", Subtract, 3);
@@ -5088,7 +5211,7 @@ Actions:
 Trigger("Player 1"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2639);
+	Deaths("Player 8", "Terran Vulture", At most, 2399);
 	Switch("Switch109", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -5099,7 +5222,7 @@ Actions:
 Trigger("Player 2"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2639);
+	Deaths("Player 8", "Terran Vulture", At most, 2399);
 	Switch("Switch110", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -5110,7 +5233,7 @@ Actions:
 Trigger("Player 3"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2639);
+	Deaths("Player 8", "Terran Vulture", At most, 2399);
 	Switch("Switch111", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -5121,7 +5244,7 @@ Actions:
 Trigger("Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2639);
+	Deaths("Player 8", "Terran Vulture", At most, 2399);
 	Switch("Switch112", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -5132,7 +5255,7 @@ Actions:
 Trigger("Player 1"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2639);
+	Deaths("Player 8", "Terran Vulture", At most, 2399);
 	Switch("Switch113", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -5143,7 +5266,7 @@ Actions:
 Trigger("Player 2"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2639);
+	Deaths("Player 8", "Terran Vulture", At most, 2399);
 	Switch("Switch114", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -5154,7 +5277,7 @@ Actions:
 Trigger("Player 3"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2639);
+	Deaths("Player 8", "Terran Vulture", At most, 2399);
 	Switch("Switch115", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -5165,7 +5288,7 @@ Actions:
 Trigger("Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2639);
+	Deaths("Player 8", "Terran Vulture", At most, 2399);
 	Switch("Switch116", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -5176,7 +5299,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 2640);
+	Deaths("Player 8", "Terran Vulture", At least, 2400);
 Actions:
 	Set Deaths("Player 5", "Zerg Sunken Colony", Set To, 0);
 	Set Deaths("Player 5", "Zerg Spore Colony", Set To, 0);
@@ -5190,6 +5313,32 @@ Actions:
 	Set Switch("Switch114", clear);
 	Set Switch("Switch115", clear);
 	Set Switch("Switch116", clear);
+}
+//-----------------------------------------------------------------//
+//  미션2 공개 후 첫 주공세 보안 타이머
+//  미션2 목표 표시(Vulture 756) 시 Countdown Timer 270초(게임 초) 시작.
+//  공개 후 3분(180초)에 consume(접촉 경보) + 추가 10초 spawn delay 후 첫 유닛 배치.
+//  첫 군락 실스폰: Vulture 3036. 둘째 군락: Vulture 3756.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 840);
+	Deaths("Player 8", "Terran Vulture", At most, 864);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>노바: <04>군락에서 대규모 병력 결집이 시작됐습니다. 제한시간 안에 대비를 끝내야 합니다.");
+	Set Countdown Timer(Set To, 270);
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 924);
+	Deaths("Player 8", "Terran Vulture", At most, 948);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>주공세에 대비해라. 카운트다운이 끝나기 전에 수리·집결·방어선 재정비를 마쳐라.");
 }
 //-----------------------------------------------------------------//
 
@@ -5288,23 +5437,23 @@ Actions:
 //============================================================
 //============================================================
 //  Mission 1 - 입구 군수시설(P9 배럭/팩토리) 통제권 이양
-//  기존 "입구 임시 방벽 수동 파괴"를 대체. 23분경 버려진 군수시설을
+//  기존 "입구 임시 방벽 수동 파괴"를 대체. 20분경 버려진 군수시설을
 //  복구했다는 메타포로 P9 소유 배럭/팩토리 소유권을 플레이어 1명에게 이양한다.
 //  무적/파괴 없음 - 순수 소유권 이양(플레이어가 시설을 띄워 입구를 열 수 있음).
 //
 //  종족 마커 DC : Tom Kazansky (Wraith) (P1~P4, 미사용 영웅 유닛 슬롯)
 //    값 1 = 테란, 2 = 저그, 3 = 프로토스. 시작 3초 시점 일꾼으로 스냅샷.
-//  Switch142     : 군수시설 생존 게이트 — P9 BaseEntrance에 배럭 OR 팩토리 중 1개 이상 (1378~1380 스냅샷)
+//  Switch142     : 군수시설 생존 게이트 — P9 BaseEntrance에 배럭 OR 팩토리 중 1개 이상 (1198~1200 스냅샷)
 //  Switch145/146 : 무작위 선택자 1회 추첨(clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4)
 //  Switch147     : 이양 완료(가드)
 //  Switch151     : 개인 메시지 1회 출력 완료(가드)
 //
-//  이양 대상 결정(매 사이클 재추첨 없음 - 1380초에 1회만 추첨 후 우선순위 cascade):
+//  이양 대상 결정(매 사이클 재추첨 없음 - 1200초에 1회만 추첨 후 우선순위 cascade):
 //    1순위) 테란 보유 플레이어 우선 : P1->P4 순으로 첫 생존 테란에게.
 //    2순위) 테란이 없으면 : 1회 추첨으로 뽑힌 생존 플레이어에게(무작위).
 //    3순위) 뽑힌 플레이어가 비생존이면 : P1->P4 순 첫 생존 플레이어(안전망).
 //    파일 순서(테란 cascade -> 추첨 -> 생존 scan)로 한 사이클 내 우선순위가 결정됨.
-//  군수시설 생존 게이트 : 23:00 직전(1378~1380) P8이 배럭/팩토리를 각각 스캔해 Switch142 set.
+//  군수시설 생존 게이트 : 20:00 직전(1198~1200) P8이 배럭/팩토리를 각각 스캔해 Switch142 set.
 //    이양 조건은 Switch142 Set만 확인. Give는 배럭·팩토리 둘 다 호출(있는 유닛만 이전).
 //============================================================
 
@@ -5336,11 +5485,11 @@ Actions:
 	Set Deaths("Current Player", "Tom Kazansky (Wraith)", Set To, 3); //종족 마커 = 3(프로토스)
 }
 
-//----- (A-pre) 23:00 직전 군수시설 생존 스냅샷 → Switch142 -----//
+//----- (A-pre) 20:00 직전 군수시설 생존 스냅샷 → Switch142 -----//
 Trigger("Player 8"){
 Conditions:
-	Elapsed Time(At least, 1378);
-	Elapsed Time(At most, 1380);
+	Elapsed Time(At least, 1198);
+	Elapsed Time(At most, 1200);
 	Bring("Player 9", "Terran Barracks", "BaseEntrance", At least, 1);
 Actions:
 	Set Switch("Switch142", set);
@@ -5348,19 +5497,19 @@ Actions:
 
 Trigger("Player 8"){
 Conditions:
-	Elapsed Time(At least, 1378);
-	Elapsed Time(At most, 1380);
+	Elapsed Time(At least, 1198);
+	Elapsed Time(At most, 1200);
 	Bring("Player 9", "Terran Factory", "BaseEntrance", At least, 1);
 Actions:
 	Set Switch("Switch142", set);
 }
 
-//----- (B) 무작위 선택자 1회 추첨 (23분 시점, Preserve 없음 - 재추첨 안 함) -----//
+//----- (B) 무작위 선택자 1회 추첨 (20분 시점, Preserve 없음 - 재추첨 안 함) -----//
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);   //미이양 시에만
-	Elapsed Time(At least, 1380);   //23분 시점 : 군수시설 복구 개시
-	Elapsed Time(At most, 1382);    //1회성 윈도우 : 한 번만 추첨
+	Elapsed Time(At least, 1200);   //20분 시점 : 군수시설 복구 개시
+	Elapsed Time(At most, 1202);    //1회성 윈도우 : 한 번만 추첨
 Actions:
 	Set Switch("Switch145", randomize); //무작위 대상 1회 추첨
 	Set Switch("Switch146", randomize);
@@ -5370,10 +5519,10 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);                          //미이양 (값싼 가드 먼저)
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Deaths("Player 1", "Tom Kazansky (Wraith)", Exactly, 1); //P1 종족 = 테란
 	Command("Player 1", "Men", At least, 1);               //P1 생존 확인
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 1", "Terran Barracks", All, "BaseEntrance"); //통제권 P1 이양
 	Give Units to Player("Player 9", "Player 1", "Terran Factory", All, "BaseEntrance");
@@ -5383,10 +5532,10 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Deaths("Player 2", "Tom Kazansky (Wraith)", Exactly, 1); //P2 종족 = 테란
 	Command("Player 2", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 2", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 2", "Terran Factory", All, "BaseEntrance");
@@ -5396,10 +5545,10 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Deaths("Player 3", "Tom Kazansky (Wraith)", Exactly, 1); //P3 종족 = 테란
 	Command("Player 3", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 3", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 3", "Terran Factory", All, "BaseEntrance");
@@ -5409,10 +5558,10 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Deaths("Player 4", "Tom Kazansky (Wraith)", Exactly, 1); //P4 종족 = 테란
 	Command("Player 4", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 4", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 4", "Terran Factory", All, "BaseEntrance");
@@ -5425,9 +5574,9 @@ Conditions:
 	Switch("Switch147", Not Set);                          //미이양 (테란 cascade 통과)
 	Switch("Switch145", Not Set);                          //추첨 조합 : P1 (clear/clear)
 	Switch("Switch146", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 1", "Men", At least, 1);               //P1 생존 확인
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 1", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 1", "Terran Factory", All, "BaseEntrance");
@@ -5439,9 +5588,9 @@ Conditions:
 	Switch("Switch147", Not Set);
 	Switch("Switch145", Set);                              //추첨 조합 : P2 (set/clear)
 	Switch("Switch146", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 2", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 2", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 2", "Terran Factory", All, "BaseEntrance");
@@ -5453,9 +5602,9 @@ Conditions:
 	Switch("Switch147", Not Set);
 	Switch("Switch145", Not Set);                          //추첨 조합 : P3 (clear/set)
 	Switch("Switch146", Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 3", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 3", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 3", "Terran Factory", All, "BaseEntrance");
@@ -5467,9 +5616,9 @@ Conditions:
 	Switch("Switch147", Not Set);
 	Switch("Switch145", Set);                              //추첨 조합 : P4 (set/set)
 	Switch("Switch146", Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 4", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 4", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 4", "Terran Factory", All, "BaseEntrance");
@@ -5480,9 +5629,9 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 1", "Men", At least, 1);               //P1 생존
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 1", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 1", "Terran Factory", All, "BaseEntrance");
@@ -5492,9 +5641,9 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 2", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 2", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 2", "Terran Factory", All, "BaseEntrance");
@@ -5504,9 +5653,9 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 3", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 3", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 3", "Terran Factory", All, "BaseEntrance");
@@ -5516,9 +5665,9 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
-	Elapsed Time(At least, 1380);
+	Elapsed Time(At least, 1200);
 	Command("Player 4", "Men", At least, 1);
-	Switch("Switch142", Set);                              //군수시설 생존 확인 (23:00 직전 스냅샷)
+	Switch("Switch142", Set);                              //군수시설 생존 확인 (20:00 직전 스냅샷)
 Actions:
 	Give Units to Player("Player 9", "Player 4", "Terran Barracks", All, "BaseEntrance");
 	Give Units to Player("Player 9", "Player 4", "Terran Factory", All, "BaseEntrance");
@@ -5535,7 +5684,7 @@ Conditions:
 Actions:
 	Minimap Ping("BaseEntrance");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>군수 복구: <04>입구의 버려진 군수시설을 복구해 아군 지휘관 한 명에게 통제권을 이양했습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>입구 군수시설 복구를 마쳤다. 통제권은 한 지휘관에게 넘긴다.");
 }
 
 //----- (G) 받은 사람 개인 메시지 : Switch147(이양) 이후 사이클에 1회 출력 -----//
@@ -6747,28 +6896,10 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 840);
-	Deaths("Player 8", "Terran Vulture", At most, 864);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>주공은 동북쪽으로 집결한다. 아래쪽 전선은 방어에 집중해라.");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 924);
-	Deaths("Player 8", "Terran Vulture", At most, 948);
-Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락 방어 반응이 낮습니다. 전력을 모으면 먼저 꺾을 수 있습니다.");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 1008);
 	Deaths("Player 8", "Terran Vulture", At most, 1032);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>동북쪽 <15>갈색 저그<04> 군락부터 무너뜨린다.");
+	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락 방어 반응이 낮습니다. 전력을 모으면 먼저 꺾을 수 있습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -6777,7 +6908,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 1092);
 	Deaths("Player 8", "Terran Vulture", At most, 1116);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04><11>주황색 저그<04> 군락은 괴멸한 것 같습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>좋다 — 동북쪽 <15>갈색 저그<04> 군락부터 무너뜨린다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -6786,7 +6917,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 1176);
 	Deaths("Player 8", "Terran Vulture", At most, 1200);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: 하지만 <04>점막 뿌리망이 남아 접근로 방어기관을 아직 유지하고 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04><11>주황색 저그<04> 군락은 괴멸한 것 같습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -6795,7 +6926,16 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 1260);
 	Deaths("Player 8", "Terran Vulture", At most, 1284);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>뿌리망이 마를 때까지 깊게 들어가지 마라. 그때까지는 방어선을 유지한다.");
+	Display Text Message(Always Display, "<1A>노바: 하지만 <04>점막 뿌리망이 남아 접근로 방어기관을 아직 유지하고 있습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 1344);
+	Deaths("Player 8", "Terran Vulture", At most, 1368);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>뿌리망이 마를 때까지 깊게 들어가지 마라. 그때까진 아래쪽 방어선을 유지한다.");
 }
 //-----------------------------------------------------------------//
 //  DefenseCenter1/2 방어 거점 인계 (난이도별)
@@ -7742,9 +7882,9 @@ Actions:
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 }
 
-// First main assaults are staggered after the mission2 assault cooldown opens
-// at Vulture 756: one colony spawns at about 5:00 mission2 elapsed, the other at
-// about 7:00. From the cooldown-open point, those are 3:57 and 5:57.
+// First main assaults are staggered from mission2 entry (cooldown starts at Vulture 0).
+// After mission2 public at Vulture 756, the earlier colony spawns at public+3:00
+// (Vulture 2916) and the later at public+4:00 (Vulture 3636).
 // Same first-assault timing on all difficulties. Roll warnings fire 10 seconds
 // before the first spawn batch.
 Trigger("Player 8"){
@@ -7756,7 +7896,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 12996);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 12924);
 }
 
 Trigger("Player 8"){
@@ -7768,7 +7908,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 11556);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 12204);
 }
 
 Trigger("Player 8"){
@@ -7780,7 +7920,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 11556);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 12204);
 }
 
 Trigger("Player 8"){
@@ -7792,7 +7932,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 12996);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 12924);
 }
 
 Trigger("Player 8"){
@@ -9582,13 +9722,13 @@ Actions:
 	Preserve Trigger();
 }
 //-----------------------------------------------------------------//
-//  P6 main-assault roll with pre-seeded wave type and 3-stage warnings
+//  P6 main-assault roll with pre-seeded wave type and 2-stage player warnings
 //  Wave type (Switch61/Switch62) is seeded at game start and re-rolled after each consume.
-//  Coarse air/ground warning at spawn-180s, detailed analysis at spawn-90s,
-//  route/Hunt target and assault state at consume (spawn-10s).
+//  Coarse roll at spawn-180s is now a SILENT internal anchor (no display); detailed analysis
+//  shows at spawn-90s, route/Hunt target and assault state at consume (spawn-10s).
 //-----------------------------------------------------------------//
 
-// P6 coarse warning roll - spawn-180s (cooldown T-2040). At least threshold: no upper cap.
+// P6 coarse anchor roll (silent) - spawn-180s (cooldown T-2040). At least threshold: no upper cap.
 
 // P6 coarse warning roll - cooldown 21m30s - Hive active
 Trigger("Player 6"){
@@ -11081,13 +11221,13 @@ Actions:
 	Preserve Trigger();
 }
 //-----------------------------------------------------------------//
-//  P7 main-assault roll with pre-seeded wave type and 3-stage warnings
+//  P7 main-assault roll with pre-seeded wave type and 2-stage player warnings
 //  Wave type (Switch65/Switch66) is seeded at game start and re-rolled after each consume.
-//  Coarse air/ground warning at spawn-180s, detailed analysis at spawn-90s,
-//  route/Hunt target and assault state at consume (spawn-10s).
+//  Coarse roll at spawn-180s is now a SILENT internal anchor (no display); detailed analysis
+//  shows at spawn-90s, route/Hunt target and assault state at consume (spawn-10s).
 //-----------------------------------------------------------------//
 
-// P7 coarse warning roll - spawn-180s (cooldown T-2040). At least threshold: no upper cap.
+// P7 coarse anchor roll (silent) - spawn-180s (cooldown T-2040). At least threshold: no upper cap.
 
 // P7 coarse warning roll - cooldown 21m30s - Hive active
 Trigger("Player 7"){
@@ -12579,7 +12719,9 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 15840);
 	Preserve Trigger();
 }
-// Three-stage main-assault warnings: coarse air/ground (spawn-180s), detailed analysis (spawn-90s), contact (spawn-10s).
+// Two-stage main-assault warnings shown to players: detailed analysis (spawn-90s), contact (spawn-10s).
+// The coarse (spawn-180s) stage no longer displays anything; its roll/cue pulses below are kept as a SILENT
+// internal anchor only, because the detailed-analysis anchor still gates on Switch129/Switch131 (coarse-shown).
 // Coarse cue pulses reuse Ultralisk/Devourer while Lurker/Mutalisk phase is idle, same pattern as detailed analysis.
 Trigger("Player 8"){
 Conditions:
@@ -12633,85 +12775,8 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6 coarse warning - ground
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
-	Switch("Switch128", Set);
-	Switch("Switch129", Not Set);
-	Switch("Switch61", Not Set);
-Actions:
-	Minimap Ping("P6 Spawn1");
-	Minimap Ping("P6 Spawn2");
-	Minimap Ping("P6 Spawn3");
-	Minimap Ping("P6 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <15>갈색 저그<04> 군락에서 광범위 지상 반응 누적. 대규모 지상 물량이 결집하고 있습니다.");
-	Preserve Trigger();
-}
-
-// P6 coarse warning - air
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-	Deaths("Player 8", "Zerg Ultralisk", Exactly, 1);
-	Switch("Switch128", Set);
-	Switch("Switch129", Not Set);
-	Switch("Switch61", Set);
-Actions:
-	Minimap Ping("P6 Spawn1");
-	Minimap Ping("P6 Spawn2");
-	Minimap Ping("P6 Spawn3");
-	Minimap Ping("P6 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <15>갈색 저그<04> 군락 상공에 비행 반응 확산. 대규모 공중 전력이 결집하고 있습니다.");
-	Preserve Trigger();
-}
-
-// P7 coarse warning - ground
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
-	Switch("Switch130", Set);
-	Switch("Switch131", Not Set);
-	Switch("Switch65", Not Set);
-Actions:
-	Minimap Ping("P7 Spawn1");
-	Minimap Ping("P7 Spawn2");
-	Minimap Ping("P7 Spawn3");
-	Minimap Ping("P7 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <16>하얀색 저그<04> 군락에서 광범위 지상 반응 누적. 대규모 지상 물량이 결집하고 있습니다.");
-	Preserve Trigger();
-}
-
-// P7 coarse warning - air
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", At least, 1);
-	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-	Deaths("Player 8", "Zerg Devourer", Exactly, 1);
-	Switch("Switch130", Set);
-	Switch("Switch131", Not Set);
-	Switch("Switch65", Set);
-Actions:
-	Minimap Ping("P7 Spawn1");
-	Minimap Ping("P7 Spawn2");
-	Minimap Ping("P7 Spawn3");
-	Minimap Ping("P7 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <16>하얀색 저그<04> 군락 상공에 비행 반응 확산. 대규모 공중 전력이 결집하고 있습니다.");
-	Preserve Trigger();
-}
+// (Removed) P6/P7 coarse warning display triggers (spawn-180s, stage 1). The coarse roll/cue machinery
+// above is retained as a silent anchor so the detailed-analysis stage below still fires.
 
 // Early assault analysis cues. These are strategic reads, not immediate contact warnings.
 // P8 opens a one-tick cue pulse after P6/P7 detailed-analysis anchors so every human-owned
@@ -20589,6 +20654,26 @@ Actions:
 	Preserve Trigger();
 }
 
+// Countdown start ~1s (45 = 30 DC sec prep x 1.5) - P7 final assault.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Deaths("Player 8", "Protoss Dark Archon", Exactly, 12);
+Actions:
+	Set Countdown Timer(Set To, 45);
+}
+
+// Countdown start ~1s (45 = 30 DC sec prep x 1.5) - P6 final assault.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Deaths("Player 8", "Protoss Dark Archon", Exactly, 12);
+Actions:
+	Set Countdown Timer(Set To, 45);
+}
+
 // Intro: P7 final assault.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
@@ -20715,6 +20800,7 @@ Actions:
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Set Countdown Timer(Set To, 0);
 	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근.");
 	Display Text Message(Always Display, "<03>호크: <04>각 전선은 자기 구역을 붙잡아라. 밀리면 중앙까지 한 번에 무너진다.");
 	Set Switch("Switch78", set);
@@ -20732,6 +20818,7 @@ Actions:
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Set Countdown Timer(Set To, 0);
 	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근.");
 	Display Text Message(Always Display, "<03>호크: <04>각 전선은 자기 구역을 붙잡아라. 밀리면 중앙까지 한 번에 무너진다.");
 	Set Switch("Switch78", set);

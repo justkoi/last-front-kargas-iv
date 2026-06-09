@@ -68,16 +68,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// 미션2 목표 표시 시 갈색/하얀색 군락을 깨운다.
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
-	Deaths("Player 8", "Terran Vulture", At most, 780);
-Actions:
-	Set Switch("Switch55", set);
-	Set Switch("Switch56", set);
-}
+// P6/P7 AI activation is requested at mission2 entry in 12_mission1_to_mission2_transition.txt.
 
 Trigger("Player 6"){
 Conditions:

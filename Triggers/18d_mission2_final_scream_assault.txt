@@ -87,6 +87,26 @@ Actions:
 	Preserve Trigger();
 }
 
+// Countdown start ~1s (45 = 30 DC sec prep x 1.5) - P7 final assault.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Deaths("Player 8", "Protoss Dark Archon", Exactly, 12);
+Actions:
+	Set Countdown Timer(Set To, 45);
+}
+
+// Countdown start ~1s (45 = 30 DC sec prep x 1.5) - P6 final assault.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Deaths("Player 8", "Protoss Dark Archon", Exactly, 12);
+Actions:
+	Set Countdown Timer(Set To, 45);
+}
+
 // Intro: P7 final assault.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
@@ -213,6 +233,7 @@ Actions:
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Set Countdown Timer(Set To, 0);
 	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근.");
 	Display Text Message(Always Display, "<03>호크: <04>각 전선은 자기 구역을 붙잡아라. 밀리면 중앙까지 한 번에 무너진다.");
 	Set Switch("Switch78", set);
@@ -230,6 +251,7 @@ Actions:
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Set Countdown Timer(Set To, 0);
 	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근.");
 	Display Text Message(Always Display, "<03>호크: <04>각 전선은 자기 구역을 붙잡아라. 밀리면 중앙까지 한 번에 무너진다.");
 	Set Switch("Switch78", set);

@@ -119,9 +119,9 @@ Actions:
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 }
 
-// First main assaults are staggered after the mission2 assault cooldown opens
-// at Vulture 756: one colony spawns at about 5:00 mission2 elapsed, the other at
-// about 7:00. From the cooldown-open point, those are 3:57 and 5:57.
+// First main assaults are staggered from mission2 entry (cooldown starts at Vulture 0).
+// After mission2 public at Vulture 756, the earlier colony spawns at public+3:00
+// (Vulture 2916) and the later at public+4:00 (Vulture 3636).
 // Same first-assault timing on all difficulties. Roll warnings fire 10 seconds
 // before the first spawn batch.
 Trigger("Player 8"){
@@ -133,7 +133,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 12996);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 12924);
 }
 
 Trigger("Player 8"){
@@ -145,7 +145,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 11556);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 12204);
 }
 
 Trigger("Player 8"){
@@ -157,7 +157,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 11556);
+	Set Deaths("Player 8", "Zerg Zergling", Set To, 12204);
 }
 
 Trigger("Player 8"){
@@ -169,7 +169,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 12996);
+	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 12924);
 }
 
 Trigger("Player 8"){

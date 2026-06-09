@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------//
-//  P7 main-assault roll with pre-seeded wave type and 3-stage warnings
+//  P7 main-assault roll with pre-seeded wave type and 2-stage player warnings
 //  Wave type (Switch65/Switch66) is seeded at game start and re-rolled after each consume.
-//  Coarse air/ground warning at spawn-180s, detailed analysis at spawn-90s,
-//  route/Hunt target and assault state at consume (spawn-10s).
+//  Coarse roll at spawn-180s is now a SILENT internal anchor (no display); detailed analysis
+//  shows at spawn-90s, route/Hunt target and assault state at consume (spawn-10s).
 //-----------------------------------------------------------------//
 
-// P7 coarse warning roll - spawn-180s (cooldown T-2040). At least threshold: no upper cap.
+// P7 coarse anchor roll (silent) - spawn-180s (cooldown T-2040). At least threshold: no upper cap.
 
 // P7 coarse warning roll - cooldown 21m30s - Hive active
 Trigger("Player 7"){

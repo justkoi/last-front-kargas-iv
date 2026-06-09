@@ -108,6 +108,7 @@ Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan9");
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan10");
 	Create Unit("Player 1", "Map Revealer", 1, "BaseScan11");
+	Create Unit("Player 1", "Map Revealer", 1, "BaseScan12");
 }
 
 Trigger("Player 2"){
@@ -127,6 +128,7 @@ Actions:
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan9");
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan10");
 	Create Unit("Player 2", "Map Revealer", 1, "BaseScan11");
+	Create Unit("Player 2", "Map Revealer", 1, "BaseScan12");
 }
 
 Trigger("Player 3"){
@@ -146,6 +148,7 @@ Actions:
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan9");
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan10");
 	Create Unit("Player 3", "Map Revealer", 1, "BaseScan11");
+	Create Unit("Player 3", "Map Revealer", 1, "BaseScan12");
 }
 
 Trigger("Player 4"){
@@ -165,6 +168,7 @@ Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan9");
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan10");
 	Create Unit("Player 4", "Map Revealer", 1, "BaseScan11");
+	Create Unit("Player 4", "Map Revealer", 1, "BaseScan12");
 }
 
 Trigger("All Players"){

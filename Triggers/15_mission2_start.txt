@@ -23,28 +23,10 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 840);
-	Deaths("Player 8", "Terran Vulture", At most, 864);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>주공은 동북쪽으로 집결한다. 아래쪽 전선은 방어에 집중해라.");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 924);
-	Deaths("Player 8", "Terran Vulture", At most, 948);
-Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락 방어 반응이 낮습니다. 전력을 모으면 먼저 꺾을 수 있습니다.");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At least, 1008);
 	Deaths("Player 8", "Terran Vulture", At most, 1032);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>동북쪽 <15>갈색 저그<04> 군락부터 무너뜨린다.");
+	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락 방어 반응이 낮습니다. 전력을 모으면 먼저 꺾을 수 있습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -53,7 +35,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 1092);
 	Deaths("Player 8", "Terran Vulture", At most, 1116);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04><11>주황색 저그<04> 군락은 괴멸한 것 같습니다.");
+	Display Text Message(Always Display, "<03>호크: <04>좋다 — 동북쪽 <15>갈색 저그<04> 군락부터 무너뜨린다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -62,7 +44,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 1176);
 	Deaths("Player 8", "Terran Vulture", At most, 1200);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: 하지만 <04>점막 뿌리망이 남아 접근로 방어기관을 아직 유지하고 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04><11>주황색 저그<04> 군락은 괴멸한 것 같습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -71,5 +53,14 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 1260);
 	Deaths("Player 8", "Terran Vulture", At most, 1284);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>뿌리망이 마를 때까지 깊게 들어가지 마라. 그때까지는 방어선을 유지한다.");
+	Display Text Message(Always Display, "<1A>노바: 하지만 <04>점막 뿌리망이 남아 접근로 방어기관을 아직 유지하고 있습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 1344);
+	Deaths("Player 8", "Terran Vulture", At most, 1368);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>뿌리망이 마를 때까지 깊게 들어가지 마라. 그때까진 아래쪽 방어선을 유지한다.");
 }

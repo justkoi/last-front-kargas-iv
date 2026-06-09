@@ -1,6 +1,6 @@
 ---
 name: trigedit-text-output
-description: Use this skill when writing, editing, or reviewing SCMDraft 2 TrigEdit text output for this StarCraft Brood War UMS map, including Display Text Message, Set Mission Objectives, briefing Text Message strings, color/control codes, centered headers, dialogue readability, and separation between in-universe dialogue and system/gameplay instructions.
+description: Use this skill when writing, editing, or reviewing SCMDraft 2 TrigEdit text output for this StarCraft Brood War UMS map, including Display Text Message, Set Mission Objectives, briefing Text Message strings, color/control codes, centered headers, dialogue readability, and separation between in-universe dialogue and system/gameplay instructions. Countdown timers use Set Countdown Timer (see write-triggers), not mm:ss chat messages, unless the user explicitly asks for chat display.
 ---
 
 # TrigEdit Text Output Rules
@@ -134,6 +134,16 @@ Guidelines:
 - Make unknown/enemy transmissions fewer, colder, and more memorable.
 - Use ellipses sparingly for suspense, not as a default rhythm.
 
+## Countdown Timer Display
+
+When the user asks for a **countdown timer** without specifying another method:
+
+- Use **`Set Countdown Timer(Set To, seconds);`** for the on-screen timer (see `write-triggers` skill).
+- Do **not** default to `Display Text Message` strings like `<06>경보: <04>주공세까지 3:00` or periodic `2:00` / `1:00` chat updates.
+- Dialogue may still announce that a limit timer is starting (e.g. 노바 `제한시간을 표시하겠습니다.`) — that is fiction, not the timer UI.
+
+Use chat-based mm:ss countdown text only when the user **explicitly** wants chat display instead of Countdown Timer.
+
 ## System Text Vs World Text
 
 Prefer putting detailed mechanics in `Set Mission Objectives`, then let dialogue summarize the fiction.
@@ -199,7 +209,7 @@ SC1 TrigEdit triggers can fail compile with `Too many actions` when a large wave
 
 ## Build Verification
 
-Do not run the project build scripts by default. Run `build_triggers.bat`, `build_triggers.ps1`, `build_triggers_withTest.bat`, or related build scripts only when the user explicitly asks for a build or import-ready generated trigger output.
+Do not run the project build scripts by default. Run `build_triggers.bat`, `build_triggers.ps1`, `build_triggers_withTest.bat`, or related build scripts only when the user explicitly asks for a build or import-ready generated trigger output. When editing trigger source files, do not manually update generated concat output such as `KargasIV_Triggers_Mission1Only.txt` unless the user explicitly asks for it in the current turn.
 
 - When build verification is not explicitly requested, still do lightweight text checks where useful, such as inspecting diffs, counting actions, or searching for referenced location names.
 - If a test build is explicitly requested and run, restore the normal generated trigger output afterward with `build_triggers.bat` unless the user explicitly wants the test output left active.

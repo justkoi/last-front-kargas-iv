@@ -6,9 +6,10 @@ description: >
   Apply it for Trigger("..."){ Conditions: ... Actions: ... } blocks, .scx map
   triggers, AI scripts, Death Counter logic, and anything in the Triggers/
   folder. Follow the project's conventions for 12-tick seconds, Player 8 DC
-  slots, Hyper Triggers, Bring/Order syntax, AI Script codes, and individual
-  unit Order calls instead of "Men". When you learn a new SC1 trigger behavior
-  or corrected assumption, proactively offer to record it here.
+  slots, Hyper Triggers, Bring/Order syntax, AI Script codes, Set Countdown Timer
+  for on-screen countdowns, and individual unit Order calls instead of "Men".
+  When you learn a new SC1 trigger behavior or corrected assumption, proactively
+  offer to record it here.
 ---
 
 # Writing SCMDraft 2 Triggers for Kargas IV
@@ -163,7 +164,10 @@ ground-biased or air-biased wave.
 
 1. **트리거 owner 선택**
    - DC 조작/메시지/세트피스: `Player 5` (M1) 또는 `Player 6` (M2 변종 적). 컴퓨터 슬롯이 살아있어야 그 owner의 트리거가 돔.
-   - 플레이어가 직접 영향받는 트리거(자원, 패배): `Player 1, Player 2, Player 3, Player 4` 명시.
+   - 플레이어별로 독립 실행되어야 하는 트리거(개인 선택 보급, 개인 수입, 패배): `Player 1, Player 2, Player 3, Player 4` 명시 + `Current Player` 사용.
+   - **공용 오브젝트 보상(자원/유닛 제거/상태 변경)은 `Player 8` 같은 단일 owner가 1회만 처리**한다. 그 단일 트리거 안에서 `Set Resources("Player 1"...)` ~ `Player 4`를 모두 명시하고, 보상 완료 스위치를 세운다. 가스 보관소(`11c_mission1_gas_store_rewards`) 패턴을 따른다.
+   - **공용 보상 메시지/사운드/핑은 별도 `Player 1, Player 2, Player 3, Player 4` 트리거에서 표시만 담당**한다. P8/P5/P6 owner의 Display/Ping/WAV는 사람에게 안 보일 수 있다.
+   - 금지 패턴: `Trigger("Player 1", "Player 2", "Player 3", "Player 4")` 안에서 전역 one-shot 스위치(`SwitchXX Not Set`)를 검사하면서 `Set Resources("Current Player", ...)`를 지급하면 첫 평가 플레이어만 받을 수 있다. 반대로 그 안에서 `Set Resources("Player 1"... "Player 4")` 전체 지급을 하면 트리거가 플레이어별로 돌며 x4 지급될 위험이 있다.
    - **`All Players` 는 P1~P8 전부** 포함. P8 owned hyper trigger와 충돌하지 않도록 Wait 사용 금지.
    - **P8 owned 트리거에 비-zero `Wait()` 절대 추가 금지** — Hyper trigger의 Wait 블록 발생 시 효과 멈춤.
 
@@ -200,8 +204,21 @@ ground-biased or air-biased wave.
      ```
      `Deaths`, `Set Switch`, `Bring` 같은 **비문자열** 줄의 `//주석` 은 이 제한과 무관하다.
 
-8. **타이머 영구 정지/재개**
-   - `Pause Timer();` / `Unpause Timer();` 가 SCMDraft 액션. Countdown Timer를 화면에 표시 중일 때 작동.
+8. **카운트다운 타이머 (기본)**
+   - 사용자가 **카운트다운 타이머**를 요청하고 다른 방식을 지정하지 않으면, 화면 상단 Countdown Timer를 **`Set Countdown Timer(Set To, seconds);`** 로 설정한다.
+   - 단위는 **초**. 예: 3분 = `180`, 1분 30초 = `90`.
+   - `Display Text Message`로 `주공세까지 3:00` / `2:00` / `1:00` 같은 mm:ss 채팅 갱신을 **기본으로 쓰지 않는다**. Countdown Timer가 화면에서 자동으로 줄어든다.
+   - mm:ss 텍스트 경보·분 단위 채팅 갱신은 사용자가 **채팅 표시를 명시**할 때만.
+   - 만료 감지 조건: `Countdown Timer(At most, 0);`
+   - 일시 정지/재개: `Pause Timer();` / `Unpause Timer();`
+   - 해제/리셋: `Set Countdown Timer(Set To, 0);`
+   - 대사와 병행은 **맥락에 맞을 때만**. 예: M2 주공세 보안 타이머(`12d`) 노바 `제한시간을 표시하겠습니다.` + `Set Countdown Timer(Set To, 270);`. 반격·결집 **예고** 이벤트는 UI만 켜도 됨.
+   - **DC ↔ Countdown 변환 (별개 시계)**
+     - DC(Hyper Trigger, 12 tick = 1초)와 Countdown Timer(화면 UI)는 **다른 시계**. 변환비 **DC : Countdown = 1 : 1.5**.
+     - `countdown_seconds = dc_seconds × 1.5` 또는 `countdown_seconds = (dc_ticks / 12) × 1.5`
+     - DC prep 시작(Dark Archon reset 등)에 `Set Countdown Timer(Set To, countdown_seconds);`, DC 접촉 milestone에서 `Set Countdown Timer(Set To, 0);`으로 종료 동기화.
+     - SC Countdown Timer는 게임 초 1:1 감소 → 30 DC초 예고에 45를 넣으면 접촉 시 화면에 ~15가 남을 수 있으므로 **접촉 시 0 해제**로 맞춘다.
+     - 예: 30 DC초 예고 → **45**, 180 DC초 → **270** (`12d`).
 
 9. **조건 순서: 값싼 조건을 비싼 조건보다 먼저**
    - SC는 한 트리거의 Conditions를 **위에서 아래로 평가하다 false면 즉시 단락(short-circuit)** 한다. 따라서 자주 false가 되는 **값싼 조건을 앞에** 두면, 뒤의 비싼 조건 평가를 건너뛴다. 조건은 모두 AND라 **순서를 바꿔도 논리 결과는 동일**.
@@ -278,10 +295,13 @@ Switch("Switch1", Not Set);
 - **`Player 8`(또는 컴퓨터) 소유 트리거의 `Display Text Message`/`Minimap Ping`/`Play WAV`는 사람 플레이어에게 안 보임/안 들림** — 이 액션들은 트리거 owner에게만 출력된다. 컴퓨터 슬롯(P8 등) 소유로 띄우면 사람은 못 본다. **플레이어용 메시지/핑/사운드는 반드시 `Player 1~4` 소유 트리거로** 보낸다. DC·랜덤·Give 같은 메커니즘은 P8 소유로 두되, 출력은 `Switch` 등으로 신호를 받아 P1~P4 트리거에서 별도로 표시하라. 특정 한 명에게만 보이려면 그 플레이어 소유(`Trigger("Player N")`) 트리거를 쓴다. (2026-06-08, 13e 군수시설 이양 통지)
 - **같은 사이클 내 `Switch` 연쇄 → 같은 프레임 메시지 덮어쓰기** — SC는 한 플레이어의 트리거를 한 사이클에 위→아래로 평가하며, 위 트리거가 set한 `Switch`를 **같은 사이클 아래 트리거가 즉시 본다**. 그래서 `A가 S1 set → B가 S1 조건으로 발동`을 파일 순서 A→B로 두면 둘 다 같은 사이클(같은 프레임)에 발동해, `Display Text Message`가 서로 덮어써 마지막 한 줄만 보인다. **여러 줄을 순차 노출하려면 의존 트리거를 파일상 역순으로 배치**한다(C→B→A로 두면 A는 사이클 N, B는 N+1, C는 N+2에 발동 → 표시 순서는 A,B,C). 비-Preserve 트리거는 조건이 거짓이면 비활성화되지 않고 다음 사이클에 재평가되므로 이 stagger가 성립한다. (2026-06-08, 10_mission1_waves_late 정신체 격파 칭찬 / 13e 개인 메시지)
 - **`.scx`와 프로덕션 합본의 문자열 액션 순서·개수 불일치** — `deploy_map.ps1`은 clean → CP949 string recovery → STRx normalize → protect 순으로 진행한다. recovery 단계에서 `KargasIV_Triggers_Mission1Only.txt`와 `.scx` TRIG의 문자열 액션을 **같은 순서로 1:1 매칭**한다. 텍스트에만 있거나 맵에만 있으면 `String action count differs` / `String encoding recovery failed`가 난다. 예전에 `build_triggers_withTest.ps1`로 임포트한 뒤 프로덕션 합본만 빌드하면, 맵에 `Leader Board Resources` 같은 테스트 잔여가 남을 수 있다. 프로덕션 배포 전 SCMDraft에서 **`build_triggers.ps1` 결과만** 다시 임포트하는 것이 정석이다.
+- **여러 트리거가 같은 사이클에 더하는 누적 DC를 `Exactly`로 게이트하면 값을 건너뛴다** — 한 DC를 **서로 독립된 다수 트리거**가 +1 하는 경우(예: P5 해처리/레어/하이브 파괴를 각각 감지하는 `10_mission1_waves_late.txt`의 3개 Preserve 트리거가 `Terran Medic` +1), 건물 2~3개가 한 사이클에 동시 파괴되면 DC가 `6 → 8/9`처럼 **한 번에 +2~+3 점프**한다. 이 DC를 `Deaths(..., Exactly, N)`으로 마일스톤 게이트하면 N을 정확히 밟지 못하고 건너뛰어 **트리거가 영영 발동 안 할 수 있다**. 마일스톤은 `At least, N` + 래치 스위치(`Switch`)로 1회성을 보장한다. **단일 +1/사이클 경로**(예: `18b_mission2_p6_minibase.txt`의 M2 Medic가 한 트리거로만 증가)에서만 `Exactly` 스태거(`Exactly 1/85/169`)가 안전하다. (2026-06-09, 09c_mission1_colony_rage 무장 조건 `Medic Exactly 8` → `At least 8` 수정)
 
 ## 빌드/배포
 
-- 트리거 수정 후 [build_triggers.ps1](../../build_triggers.ps1) 또는 [build_triggers.bat](../../build_triggers.bat) → `KargasIV_Triggers_Mission1Only.txt` 생성 (`Triggers/*.txt` 61개 concat, **프로덕션**)
+- 에이전트가 트리거를 편집할 때는 기본적으로 `Triggers/*.txt` 같은 소스 파일만 수정한다. **`KargasIV_Triggers_Mission1Only.txt` 합본은 직접 갱신하지 않는다.**
+- 트리거 수정 후 [build_triggers.ps1](../../build_triggers.ps1) 또는 [build_triggers.bat](../../build_triggers.bat) → `KargasIV_Triggers_Mission1Only.txt` 생성 (`Triggers/*.txt` concat, **프로덕션**)은 사용자가 수행한다.
+- 에이전트는 사용자가 이번 턴에 명시적으로 요청한 경우에만 빌드 스크립트 실행이나 합본 갱신을 수행한다.
 - 테스트 트리거까지 합치려면 [build_triggers_withTest.ps1](../../build_triggers_withTest.ps1) → `Triggers/` + `TestTriggersForBuild/` concat. 테스트 임포트 후에는 사용자가 명시하지 않는 한 **프로덕션 합본으로 되돌릴 것**.
 - SCMDraft에서 해당 파일 import (Triggers → Edit → Replace with file) → `.scx` 저장
 - [deploy_map.ps1](../../deploy_map.ps1) / [deploy_map.bat](../../deploy_map.bat) → clean, CP949 string recovery, protect 후 StarCraft Maps 폴더 복사

@@ -2,7 +2,9 @@
 //  KARGAS IV - Mission trigger notes
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
 //                      P5 Spawn1~4, P5 H1~4, P1~P4 Hunt, Player Destination, AttackPoint1, EarlyTower,
-//                      MD1~MD6, BaseEntrance, BaseScan1~11, MainLoad1~2, Player Destination,
+//                      MD1~MD6, BaseEntrance, BaseScan1~12, MultiKey, MultiLock, MainLoad1~2, Player Destination,
+//                      MultiKey: P5 Mature Crysalis preplaced (unlock key; SCMDraft name, not Chrysalis). MultiLock: P5/P9 invincible blockers.
+//                      BaseScan12: orbital scan slot at game start (01_briefing_intro, 32s).
 //                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 MiniBase, P6 Spawn1~4, P6 H1~8,
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
@@ -20,7 +22,7 @@
 //  See 15b_mission2_easy_defense_handoff.txt.
 //
 //  Timer rule: 12 DC tick = 1 second
-//    10s = 120, 60s = 720, 90s = 1080, 3min = 2160, 3min40 = 2640, 4min = 2880, 5min = 3600, 10min = 7200
+//    10s = 120, 60s = 720, 90s = 1080, 3min = 2160, 3min20 = 2400, 4min = 2880, 5min = 3600, 10min = 7200
 //
 //  Player 8 DC roles
 //    Terran Civilian      : zerg resource supply timer
@@ -28,7 +30,7 @@
 //    Terran Armory        : P6 base defense cooldown
 //    Protoss Zealot       : P7 base defense cooldown
 //    Terran Valkyrie      : mission phase flag (1=M1, 3=M2, 4=clear)
-//    Terran Vulture       : mission2 elapsed timer
+//    Terran Vulture       : mission2 elapsed timer (756=public/objectives+assault timer start)
 //    Protoss Probe        : P5 scout rotation index
 //    Protoss Scout        : P6 scout rotation index
 //    Protoss Carrier      : P7 scout rotation index
@@ -113,8 +115,8 @@
 //    Switch52   : P7 mission2 penalty assault relay pulse open
 //    Switch53   : P6 mission2 penalty assault spawn rally pulse open
 //    Switch54   : P7 mission2 penalty assault spawn rally pulse open
-//    Switch55   : P6 AI activation requested
-//    Switch56   : P7 AI activation requested
+//    Switch55   : P6 AI activation requested (set at mission2 entry)
+//    Switch56   : P7 AI activation requested (set at mission2 entry)
 //    Switch57   : P6 hunt P5 Overlord support fired this cycle
 //    Switch58   : mission1 colony rage armed (one-shot, 8 tech destroys)
 //    Switch59   : P6 mission2 early alert defense charge ready
@@ -180,18 +182,19 @@
 //    Switch139     : DefenseCenter2 easy-mode handoff completed
 //    Switch140     : mission2 P6 forward rally point revealed (Vulture >= 4080)
 //    Switch141     : mission2 P6 forward rally point reward paid
-//    Switch142     : mission1 arsenal facility alive gate - Barracks OR Factory at BaseEntrance (13e, prescan 1378-1380)
+//    Switch142     : mission1 arsenal facility alive gate - Barracks OR Factory at BaseEntrance (13e, prescan 1198-1200)
 //    Switch143     : AttackPoint1 cerebrate destroy P5 Hunt delay applied (one-shot)
-//    Switch144     : AttackPoint1 cerebrate destroy reward A (자원 +2500 / EarlyTower 성큰 전멸 / 격파 헤더) applied (one-shot)
+//    Switch144     : AttackPoint1 cerebrate destroy reward mechanics paid (자원 +2500 / EarlyTower 성큰 전멸) (one-shot)
 //    Switch145/146 : mission1 arsenal handoff random selector (clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4) (13e)
 //    Switch147     : mission1 arsenal handoff completed (13e)
-//    Switch148     : AttackPoint1 정신체 자원 확보 안내(22:10, 호크 대사 이후) shown (one-shot)
-//    Switch149     : AttackPoint1 정신체 처치 칭찬(B) shown (one-shot)
-//    Switch150     : AttackPoint1 정신체 처치 보상 안내(C) shown (one-shot)
+//    Switch148     : AttackPoint1 정신체 자원 확보 안내(21:10, 호크 대사 이후) shown (one-shot)
+//    Switch149     : AttackPoint1 정신체 처치 격파 헤더(A) display phase completed
+//    Switch150     : AttackPoint1 정신체 처치 칭찬(B) display phase completed
 //    Switch151     : mission1 arsenal handoff personal message shown (one-shot) (13e)
-//    Switch152     : P5 Cerebrate destroy reward A (작전 정보 + 자원 +1500/+500) applied (one-shot)
-//    Switch153     : P5 Cerebrate destroy hawk praise(B) shown (one-shot)
-//    Switch154     : P5 Cerebrate destroy reward text(C) shown (one-shot)
+//    Switch152     : P5 Cerebrate destroy reward mechanics paid (자원 +1500/+500) (one-shot)
+//    Switch153     : P5 Cerebrate destroy operation info(A) display phase completed
+//    Switch154     : P5 Cerebrate destroy hawk praise(B) display phase completed
+//    Switch155~157 : (free) — early multi lock now switch-free, uses Bring("Player 5","Mature Crysalis","MultiKey",At most,0) (08b)
 //    Switch158     : P6 main assault locked after final scream assault batch 10
 //    Switch159     : P7 main assault locked after final scream assault batch 10
 //

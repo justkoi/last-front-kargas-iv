@@ -46,22 +46,20 @@ Actions:
 	Preserve Trigger();
 }
 
-// Mission 2 P6 main assault cooldown advances during mission2.
+// Mission 2 P6 main assault cooldown advances from mission2 entry.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
 	Switch("Switch158", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1);
 	Preserve Trigger();
 }
 
-// Mission 2 P7 main assault cooldown advances during mission2.
+// Mission 2 P7 main assault cooldown advances from mission2 entry.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
 	Switch("Switch159", Not Set);
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1);
