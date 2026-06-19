@@ -70,24 +70,15 @@ Actions:
 
 Trigger("All Players"){
 Conditions:
-	Elapsed Time(At least, 110);
-	Elapsed Time(At most, 112);
-	Deaths("Player 8", "Terran Academy", Exactly, 0);
-Actions:
-	Display Text Message(Always Display, "<03>안내: <04>이 작전은 꽤 어려운 편입니다. 처음 플레이하신다면 <07>쉬움<04>을 권장합니다.");
-}
-
-Trigger("All Players"){
-Conditions:
 	Elapsed Time(At least, 113);
 	Elapsed Time(At most, 115);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
 	Display Text Message(Always Display, "<13><03>[난이도 차이]");
-	Display Text Message(Always Display, "<07>쉬움 : <04>미네랄 +400 / 가스 +150 보급이 지원됩니다.");
-	Display Text Message(Always Display, "<11>보통 : <04>공세 간격 감소, 해처리 추가. 미네랄 +150 보급이 지원됩니다.");
-	Display Text Message(Always Display, "<08>어려움 : <04>공세 간격 추가 감소, 병력과 해처리 증가.");
-	Display Text Message(Always Display, "<06>매우 어려움 : <04>공세 주기와 처치 페널티 강화.");
+	Display Text Message(Always Display, "<07>쉬움 : <04>추가 자원 지원.");
+	Display Text Message(Always Display, "<11>보통 : <04>공세 간격 감소, 해처리 추가.");
+	Display Text Message(Always Display, "<08>어려움 : <04>공세와 병력 강화, 해처리 추가 증가.");
+	Display Text Message(Always Display, "<06>매우 어려움 : <04>한쪽 군락을 파괴해도 양쪽 공세가 앞당겨집니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -213,11 +204,12 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<04>선택한 난이도는 <06>매우 어려움<04>입니다.");
-	Display Text Message(Always Display, "<06>매우 어려움 효과: <04>어려움보다 공세 주기, 병력, 처치 페널티 강화.");
+	Display Text Message(Always Display, "<06>매우 어려움 효과: <04>공세와 병력이 강화되며, 군락 파괴 시 양쪽 공세가 가속됩니다.");
 	Display Text Message(Always Display, "<07>행운을 빕니다!");
 }
 
 // Mission 2 difficulty Hatcheries are spawned immediately after difficulty is locked.
+// P6/P7 scale by one Hatchery per difficulty step: Normal 1, Hard 2, Very Hard 3.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
@@ -234,9 +226,37 @@ Actions:
 	Create Unit("Player 5", "Zerg Hatchery", 1, "P5 H1");
 	Create Unit("Player 5", "Zerg Hatchery", 1, "P5 H2");
 	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H1");
+	Create Unit("Player 7", "Zerg Hatchery", 1, "P7 H1");
+	Set Switch("Switch122", set);
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 3);
+	Switch("Switch122", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "P5 H1", "P5 Spawn1");
+	Move Unit("All Players", "Buildings", 64, "P5 H1", "P5 Spawn1");
+	Move Unit("Neutral Players", "Men", 64, "P5 H1", "P5 Spawn1");
+	Move Unit("Neutral Players", "Buildings", 64, "P5 H1", "P5 Spawn1");
+	Move Unit("All Players", "Men", 64, "P5 H2", "P5 Spawn1");
+	Move Unit("All Players", "Buildings", 64, "P5 H2", "P5 Spawn1");
+	Move Unit("Neutral Players", "Men", 64, "P5 H2", "P5 Spawn1");
+	Move Unit("Neutral Players", "Buildings", 64, "P5 H2", "P5 Spawn1");
+	Move Unit("All Players", "Men", 64, "P5 H3", "P5 Spawn1");
+	Move Unit("All Players", "Buildings", 64, "P5 H3", "P5 Spawn1");
+	Move Unit("Neutral Players", "Men", 64, "P5 H3", "P5 Spawn1");
+	Move Unit("Neutral Players", "Buildings", 64, "P5 H3", "P5 Spawn1");
+	Move Unit("All Players", "Men", 64, "P5 H4", "P5 Spawn1");
+	Move Unit("All Players", "Buildings", 64, "P5 H4", "P5 Spawn1");
+	Move Unit("Neutral Players", "Men", 64, "P5 H4", "P5 Spawn1");
+	Move Unit("Neutral Players", "Buildings", 64, "P5 H4", "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hatchery", 1, "P5 H1");
+	Create Unit("Player 5", "Zerg Hatchery", 1, "P5 H2");
+	Create Unit("Player 5", "Zerg Hatchery", 1, "P5 H3");
+	Create Unit("Player 5", "Zerg Hatchery", 1, "P5 H4");
+	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H1");
 	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H2");
-	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H3");
-	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H4");
 	Create Unit("Player 7", "Zerg Hatchery", 1, "P7 H1");
 	Create Unit("Player 7", "Zerg Hatchery", 1, "P7 H2");
 	Set Switch("Switch122", set);
@@ -244,7 +264,7 @@ Actions:
 
 Trigger("Player 8"){
 Conditions:
-	Deaths("Player 8", "Terran Academy", At least, 3);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Switch("Switch122", Not Set);
 Actions:
 	Move Unit("All Players", "Men", 64, "P5 H1", "P5 Spawn1");
@@ -270,15 +290,9 @@ Actions:
 	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H1");
 	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H2");
 	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H3");
-	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H4");
-	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H5");
-	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H6");
-	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H7");
-	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H8");
 	Create Unit("Player 7", "Zerg Hatchery", 1, "P7 H1");
 	Create Unit("Player 7", "Zerg Hatchery", 1, "P7 H2");
 	Create Unit("Player 7", "Zerg Hatchery", 1, "P7 H3");
-	Create Unit("Player 7", "Zerg Hatchery", 1, "P7 H4");
 	Set Switch("Switch122", set);
 }
 

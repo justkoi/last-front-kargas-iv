@@ -3,7 +3,8 @@
 //
 //  Hatchery/Lair/Hive kills reduce that colony's own main assault
 //  cooldown by difficulty and grant players minerals/gas.
-//  12 DC tick = 1 second: easy 65s = 780, normal 75s = 900, hard 85s = 1020, very hard 95s = 1140.
+//  12 DC tick = 1 second: easy 97.5s = 1170, normal 337.5s = 4050, hard 382.5s = 4590, very hard 427.5s = 5130.
+//  Hard also accelerates the opposite colony by 191.25s = 2295; very hard accelerates it by the full 427.5s = 5130.
 //-----------------------------------------------------------------//
 
 Trigger("Player 6"){
@@ -66,7 +67,7 @@ Conditions:
 	Switch("Switch95", Set);
 	Switch("Switch32", Not Set);
 Actions:
-	Display Text Message(Always Display, "<07>작전 정보: <04>동북쪽 군락 생산 구조를 파괴하면 자원을 확보하지만, 해당 군락의 다음 주공세가 앞당겨집니다.");
+	Display Text Message(Always Display, "<07>작전 정보: <04>동북쪽 군락 생산 구조 파괴 시 자원을 회수하며, 군락은 다음 공세를 앞당겨 반격합니다. 반격을 막아낼수록 군락은 약해진 채 다음 타격을 받습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -75,7 +76,7 @@ Conditions:
 	Switch("Switch96", Set);
 	Switch("Switch31", Not Set);
 Actions:
-	Display Text Message(Always Display, "<07>작전 정보: <04>동남쪽 군락 생산 구조를 파괴하면 자원을 확보하지만, 해당 군락의 다음 주공세가 앞당겨집니다.");
+	Display Text Message(Always Display, "<07>작전 정보: <04>동남쪽 군락 생산 구조 파괴 시 자원을 회수하며, 군락은 다음 공세를 앞당겨 반격합니다. 반격을 막아낼수록 군락은 약해진 채 다음 타격을 받습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -96,7 +97,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 780);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1170);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -128,7 +129,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 900);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4050);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -150,7 +151,8 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1020);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4590);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2295);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -172,7 +174,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 780);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1170);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -204,7 +206,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 900);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4050);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -226,7 +228,8 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1020);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4590);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2295);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -248,7 +251,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 780);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 1170);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -270,7 +273,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 900);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4050);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -292,7 +295,8 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1020);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4590);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2295);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -324,7 +328,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 780);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1170);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -346,7 +350,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 900);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4050);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -368,7 +372,8 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1020);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4590);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 2295);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -400,7 +405,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 780);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1170);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -422,7 +427,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 900);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4050);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -444,7 +449,8 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1020);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4590);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 2295);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -476,7 +482,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 780);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1170);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -498,7 +504,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 900);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4050);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -520,7 +526,8 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1020);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4590);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 2295);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -535,7 +542,7 @@ Actions:
 }
 
 //-----------------------------------------------------------------//
-//  Very hard tech loss acceleration - 95 seconds.
+//  Very hard tech loss acceleration - 427.5 seconds, mirrored to the opposite colony.
 //-----------------------------------------------------------------//
 
 Trigger("Player 6"){
@@ -546,7 +553,8 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1140);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -568,7 +576,8 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1140);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -590,7 +599,8 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1140);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -612,7 +622,8 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1140);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -634,7 +645,8 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1140);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -656,7 +668,8 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1140);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);

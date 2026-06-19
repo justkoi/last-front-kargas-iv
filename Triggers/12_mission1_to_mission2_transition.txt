@@ -177,7 +177,7 @@ Actions:
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 2400);
+	Deaths("Player 8", "Terran Vulture", At least, 1680);
 	Deaths("Player 8", "Terran Vulture", At most, 2424);
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>점막 뿌리망 붕괴 확인. 주황색 저그 방어기관이 고사했습니다.");
@@ -204,7 +204,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 2400);
+	Deaths("Player 8", "Terran Vulture", At least, 1680);
 Actions:
 	Set Deaths("Player 5", "Terran Marine", Set To, 0);
 	Set Deaths("Player 5", "Terran Firebat", Set To, 0);

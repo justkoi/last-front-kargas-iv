@@ -2,7 +2,7 @@
 //  Mission 2 - final scream assault after one colony collapses
 //
 //  If one P6/P7 MainBase tech core fully collapses while the other
-//  still survives and has lost 10 Hatchery/Lair/Hive tech structures,
+//  still survives and has lost 8 Hatchery/Lair/Hive tech structures,
 //  the remaining colony prepares one final ~500-supply distributed
 //  assault. 12 DC ticks = 1 second.
 //-----------------------------------------------------------------//
@@ -13,7 +13,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch31", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Spore Colony", At least, 10);
+	Deaths("Player 8", "Zerg Spore Colony", At least, 8);
 	Switch("Switch74", Not Set);
 	Switch("Switch75", Not Set);
 Actions:
@@ -42,7 +42,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch32", Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Sunken Colony", At least, 10);
+	Deaths("Player 8", "Zerg Sunken Colony", At least, 8);
 	Switch("Switch74", Not Set);
 	Switch("Switch75", Not Set);
 Actions:

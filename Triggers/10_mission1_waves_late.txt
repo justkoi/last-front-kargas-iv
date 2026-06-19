@@ -9,7 +9,7 @@
 //  변형 D: 공성 공중 (가디언/디바우러/뮤탈)
 //-----------------------------------------------------------------//
 
-// 늦은 웨이브 시작 시 Wraith DC 시드 (4변종 × 2520틱). 테크 건물 파괴는 자원 보상 + Medic 누적만.
+// 군락 테크 건물 붕괴 반격 보정 (Hatchery +1584 / Lair +2376 / Hive +3168틱, 기존 대비 +10%)
 // Seed enough cooldown for four late-wave variants when late waves begin.
 Trigger("Player 5"){
 Conditions:
@@ -23,7 +23,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 해처리 파괴 보상. 미네랄 +250 / 가스 +50");
+	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 해처리 파괴 보상. 미네랄 +125 / 가스 +25");
 	Preserve Trigger();
 }
 
@@ -31,15 +31,15 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Medic", Add, 1);
-	Set Resources("Player 1", Add, 250, ore);
-	Set Resources("Player 2", Add, 250, ore);
-	Set Resources("Player 3", Add, 250, ore);
-	Set Resources("Player 4", Add, 250, ore);
-	Set Resources("Player 1", Add, 50, gas);
-	Set Resources("Player 2", Add, 50, gas);
-	Set Resources("Player 3", Add, 50, gas);
-	Set Resources("Player 4", Add, 50, gas);
+	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
+	Set Resources("Player 1", Add, 125, ore);
+	Set Resources("Player 2", Add, 125, ore);
+	Set Resources("Player 3", Add, 125, ore);
+	Set Resources("Player 4", Add, 125, ore);
+	Set Resources("Player 1", Add, 25, gas);
+	Set Resources("Player 2", Add, 25, gas);
+	Set Resources("Player 3", Add, 25, gas);
+	Set Resources("Player 4", Add, 25, gas);
 	Set Deaths("Player 5", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -48,7 +48,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <11>주황색 저그<04> <19>레어<04> 파괴 보상. 미네랄 +350 / 가스 +50");
+	Display Text Message(Always Display, "<19>상급 보상: <11>주황색 저그<04> <19>레어<04> 파괴 보상. 미네랄 +175 / 가스 +25");
 	Preserve Trigger();
 }
 
@@ -56,15 +56,15 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Medic", Add, 1);
-	Set Resources("Player 1", Add, 350, ore);
-	Set Resources("Player 2", Add, 350, ore);
-	Set Resources("Player 3", Add, 350, ore);
-	Set Resources("Player 4", Add, 350, ore);
-	Set Resources("Player 1", Add, 50, gas);
-	Set Resources("Player 2", Add, 50, gas);
-	Set Resources("Player 3", Add, 50, gas);
-	Set Resources("Player 4", Add, 50, gas);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
+	Set Resources("Player 1", Add, 175, ore);
+	Set Resources("Player 2", Add, 175, ore);
+	Set Resources("Player 3", Add, 175, ore);
+	Set Resources("Player 4", Add, 175, ore);
+	Set Resources("Player 1", Add, 25, gas);
+	Set Resources("Player 2", Add, 25, gas);
+	Set Resources("Player 3", Add, 25, gas);
+	Set Resources("Player 4", Add, 25, gas);
 	Set Deaths("Player 5", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -73,7 +73,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <11>주황색 저그<04> <1F>하이브<04> 파괴 보상. 미네랄 +450 / 가스 +50");
+	Display Text Message(Always Display, "<1F>핵심 보상: <11>주황색 저그<04> <1F>하이브<04> 파괴 보상. 미네랄 +225 / 가스 +25");
 	Preserve Trigger();
 }
 
@@ -81,15 +81,15 @@ Trigger("Player 5"){
 Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Medic", Add, 1);
-	Set Resources("Player 1", Add, 450, ore);
-	Set Resources("Player 2", Add, 450, ore);
-	Set Resources("Player 3", Add, 450, ore);
-	Set Resources("Player 4", Add, 450, ore);
-	Set Resources("Player 1", Add, 50, gas);
-	Set Resources("Player 2", Add, 50, gas);
-	Set Resources("Player 3", Add, 50, gas);
-	Set Resources("Player 4", Add, 50, gas);
+	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
+	Set Resources("Player 1", Add, 225, ore);
+	Set Resources("Player 2", Add, 225, ore);
+	Set Resources("Player 3", Add, 225, ore);
+	Set Resources("Player 4", Add, 225, ore);
+	Set Resources("Player 1", Add, 25, gas);
+	Set Resources("Player 2", Add, 25, gas);
+	Set Resources("Player 3", Add, 25, gas);
+	Set Resources("Player 4", Add, 25, gas);
 	Set Deaths("Player 5", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -459,12 +459,14 @@ Actions:
 	Set Switch("Switch144", set);                          //보상 지급 완료
 }
 
-// AttackPoint1 cerebrate kill - rally P5 hunt assault units toward P5 Spawn1 once.
+// AttackPoint1 cerebrate kill - rally P5 hunt assault units toward P5 Spawn1.
+// 1회차 Move는 본 트리거가 즉시 발급하고, Switch133 회군 윈도우를 열어
+// 아래 반복 트리거가 12틱(1초)마다 14회 재발급 -> 총 15회/약 15초 확실한 회군.
 Trigger("Player 5"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch143", Not Set);
-	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
+	Switch("Switch143", Not Set);                          //정신체 격파 직후 1사이클 (헌트 지연 적용 전)
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0); //전방 정신체 파괴됨 (스캔, 마지막)
 Actions:
 	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Spawn1", Move);
 	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Spawn1", Move);
@@ -477,6 +479,51 @@ Actions:
 	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Spawn1", Move);
 	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Spawn1", Move);
 	Order("Player 5", "Infested Terran", "Anywhere", "P5 Spawn1", Move);
+	Set Switch("Switch133", set);                          //회군 윈도우 개시 : 15초간 매초 Move 재발급
+	Set Deaths("Player 8", "Zerg Broodling", Set To, 0);   //회군 틱 타이머 초기화
+	Set Deaths("Player 8", "Zerg Overlord", Set To, 14);   //남은 반복 횟수 : 1회차는 위에서 즉시 발급, 이후 14회 = 총 15회/15초
+}
+
+// AttackPoint1 cerebrate kill retreat - reissue Move every 12 ticks (1s) while window open.
+Trigger("Player 5"){
+Conditions:
+	Switch("Switch133", Set);                              //회군 윈도우 활성
+	Deaths("Player 8", "Zerg Broodling", At least, 12);    //1초(12틱) 경과
+	Deaths("Player 8", "Zerg Overlord", At least, 1);      //반복 횟수 남음
+Actions:
+	Order("Player 5", "Zerg Zergling", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Hydralisk", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Lurker", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Mutalisk", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Scourge", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Queen", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Defiler", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Ultralisk", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Guardian", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Zerg Devourer", "Anywhere", "P5 Spawn1", Move);
+	Order("Player 5", "Infested Terran", "Anywhere", "P5 Spawn1", Move);
+	Set Deaths("Player 8", "Zerg Broodling", Subtract, 12); //1초 소비 : 잉여 틱은 유지해 누적 오차 방지
+	Set Deaths("Player 8", "Zerg Overlord", Subtract, 1);   //반복 1회 소비
+	Preserve Trigger();
+}
+
+// AttackPoint1 cerebrate kill retreat - tick increment while window open (master tick excludes Broodling).
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch133", Set);                              //회군 윈도우 활성
+Actions:
+	Set Deaths("Player 8", "Zerg Broodling", Add, 1);      //회군 틱 타이머 : 매 사이클 +1 (12 = 1초)
+	Preserve Trigger();
+}
+
+// AttackPoint1 cerebrate kill retreat - close window after 15 reissues (one-shot).
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch133", Set);                              //회군 윈도우 활성
+	Deaths("Player 8", "Zerg Overlord", At most, 0);       //반복 모두 소진
+Actions:
+	Set Switch("Switch133", clear);                        //회군 윈도우 종료 : 틱 증가 중지
+	Set Deaths("Player 8", "Zerg Broodling", Set To, 0);   //회군 틱 타이머 정리
 }
 
 // AttackPoint1 cerebrate kill - delay next P5 Hunt all-out by up to 60s (720 ticks).

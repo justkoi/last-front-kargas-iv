@@ -10,7 +10,7 @@ Conditions:
 	Elapsed Time(At least, 210);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn4");
@@ -69,6 +69,7 @@ Conditions:
 	Elapsed Time(At least, 240);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
+	Order("Player 5", "Zerg Ultralisk", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn3", "Player Destination", Patrol);

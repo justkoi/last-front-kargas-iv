@@ -1,10 +1,11 @@
 //-----------------------------------------------------------------//
 //  Mission 2 - P6/P7 uncaptured-colony penalty assaults
 //
-//  12 DC tick = 1 second. Easy standard cooldown is 1320s = 15840 ticks (22:00).
-//  Easy jitter bands are 21:30 / 22:00 / 22:30. Roll triggers subtract only the
+//  12 DC tick = 1 second. Easy standard cooldown is 1980s = 23760 ticks (33:00).
+//  First and repeated cooldowns use the same jitter bands from mission2 entry.
+//  Easy jitter bands are 32:15 / 33:00 / 33:45. Roll triggers subtract only the
 //  cooldown they consumed, so excess progress from repeated Hatchery/Lair/Hive
-//  kills stays queued. Hatchery/Lair/Hive kills add 65s worth of cooldown progress on easy.
+//  kills stays queued.
 //
 //  Waves may fire during mission1 or mission2, but not after victory.
 //  They are rolled randomly, then spawned across Spawn1~4 in parallel
@@ -38,11 +39,10 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 12);
 	Switch("Switch50", Not Set);
 Actions:
-	Set Switch("Switch26", randomize);
-	Set Switch("Switch27", set);
-	Set Switch("Switch28", clear);
-	Set Switch("Switch29", set);
-	Set Switch("Switch30", clear);
+	Set Switch("Switch27", randomize);
+	Set Switch("Switch28", randomize);
+	Set Switch("Switch29", randomize);
+	Set Switch("Switch30", randomize);
 	Set Switch("Switch37", clear);
 	Set Switch("Switch38", clear);
 	Set Switch("Switch39", clear);
@@ -75,8 +75,8 @@ Actions:
 	Set Switch("Switch90", clear);
 	Set Switch("Switch158", clear);
 	Set Switch("Switch159", clear);
-	Set Switch("Switch118", clear);
-	Set Switch("Switch119", clear);
+	Set Switch("Switch118", set);
+	Set Switch("Switch119", set);
 	Set Switch("Switch120", clear);
 	Set Switch("Switch121", clear);
 	Set Switch("Switch140", clear);
@@ -119,59 +119,6 @@ Actions:
 	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
 }
 
-// First main assaults are staggered from mission2 entry (cooldown starts at Vulture 0).
-// After mission2 public at Vulture 756, the earlier colony spawns at public+3:00
-// (Vulture 2916) and the later at public+4:00 (Vulture 3636).
-// Same first-assault timing on all difficulties. Roll warnings fire 10 seconds
-// before the first spawn batch.
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
-	Switch("Switch50", Not Set);
-	Switch("Switch26", Not Set);
-	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 12924);
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
-	Switch("Switch50", Not Set);
-	Switch("Switch26", Not Set);
-	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 12204);
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
-	Switch("Switch50", Not Set);
-	Switch("Switch26", Set);
-	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
-Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 12204);
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 12);
-	Switch("Switch50", Not Set);
-	Switch("Switch26", Set);
-	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
-Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 12924);
-}
-
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -182,7 +129,6 @@ Actions:
 }
 
 // If a colony's MainBase tech core collapses, lock that colony's main assault.
-// This runs after the first-assault stagger setup so a collapsed colony stays at 0.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);

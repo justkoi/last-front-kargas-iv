@@ -21,14 +21,14 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
 	Deaths("Player 8", "Terran Vulture", At most, 24);
 Actions:
-	Set Resources("Player 1", Add, 500, ore);
-	Set Resources("Player 2", Add, 500, ore);
-	Set Resources("Player 3", Add, 500, ore);
-	Set Resources("Player 4", Add, 500, ore);
-	Set Resources("Player 1", Add, 1000, gas);
-	Set Resources("Player 2", Add, 1000, gas);
-	Set Resources("Player 3", Add, 1000, gas);
-	Set Resources("Player 4", Add, 1000, gas);
+	Set Resources("Player 1", Add, 50000, ore);
+	Set Resources("Player 2", Add, 50000, ore);
+	Set Resources("Player 3", Add, 50000, ore);
+	Set Resources("Player 4", Add, 50000, ore);
+	Set Resources("Player 1", Add, 25000, gas);
+	Set Resources("Player 2", Add, 25000, gas);
+	Set Resources("Player 3", Add, 25000, gas);
+	Set Resources("Player 4", Add, 25000, gas);
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -40,7 +40,7 @@ Actions:
 	Run AI Script("+Vi5");
 	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<07>작전: <04>동북쪽과 동남쪽 군락 반응 소실. 전선 안정화 확인.");
-	Display Text Message(Always Display, "<07>군수지원: <04>작전 완료 보상. 미네랄 +500 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>작전 완료 보상. 미네랄 +50000 / 가스 +25000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

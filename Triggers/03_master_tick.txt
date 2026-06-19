@@ -36,16 +36,6 @@ Actions:
 	Preserve Trigger();
 }
 
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Switch("Switch58", Set);
-	Deaths("Player 8", "Protoss Dark Archon", At most, 504);
-Actions:
-	Set Deaths("Player 8", "Protoss Dark Archon", Add, 1);
-	Preserve Trigger();
-}
-
 // Mission 2 P6 main assault cooldown advances from mission2 entry.
 Trigger("Player 8"){
 Conditions:

@@ -2,7 +2,9 @@
 //  Mission 2 - early P5 colony decay hint
 //
 //  Warns players only when they destroy orange Sunken/Spore Colonies
-//  before the scripted 3-minute 20-second creep-root decay.
+//  before the scripted 2-minute 20-second creep-root decay.
+//  Player 5 Terran Marine/Firebat latch at 1000 after the first warning so
+//  Sunken and Spore hints each display only once.
 //-----------------------------------------------------------------//
 
 Trigger("Player 8"){
@@ -28,7 +30,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2399);
+	Deaths("Player 8", "Terran Vulture", At most, 1679);
 	Deaths("Player 5", "Zerg Sunken Colony", At least, 1);
 Actions:
 	Set Deaths("Player 5", "Terran Marine", Add, 1);
@@ -39,7 +41,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2399);
+	Deaths("Player 8", "Terran Vulture", At most, 1679);
 	Deaths("Player 5", "Zerg Spore Colony", At least, 1);
 Actions:
 	Set Deaths("Player 5", "Terran Firebat", Add, 1);
@@ -50,10 +52,11 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2399);
+	Deaths("Player 8", "Terran Vulture", At most, 1679);
 	Deaths("Player 5", "Terran Marine", At least, 3);
+	Deaths("Player 5", "Terran Marine", At most, 999);
 Actions:
-	Set Deaths("Player 5", "Terran Marine", Subtract, 3);
+	Set Deaths("Player 5", "Terran Marine", Set To, 1000);
 	Set Switch("Switch109", set);
 	Set Switch("Switch110", set);
 	Set Switch("Switch111", set);
@@ -64,10 +67,11 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2399);
+	Deaths("Player 8", "Terran Vulture", At most, 1679);
 	Deaths("Player 5", "Terran Firebat", At least, 3);
+	Deaths("Player 5", "Terran Firebat", At most, 999);
 Actions:
-	Set Deaths("Player 5", "Terran Firebat", Subtract, 3);
+	Set Deaths("Player 5", "Terran Firebat", Set To, 1000);
 	Set Switch("Switch113", set);
 	Set Switch("Switch114", set);
 	Set Switch("Switch115", set);
@@ -78,7 +82,7 @@ Actions:
 Trigger("Player 1"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2399);
+	Deaths("Player 8", "Terran Vulture", At most, 1679);
 	Switch("Switch109", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -89,7 +93,7 @@ Actions:
 Trigger("Player 2"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2399);
+	Deaths("Player 8", "Terran Vulture", At most, 1679);
 	Switch("Switch110", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -100,7 +104,7 @@ Actions:
 Trigger("Player 3"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2399);
+	Deaths("Player 8", "Terran Vulture", At most, 1679);
 	Switch("Switch111", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -111,7 +115,7 @@ Actions:
 Trigger("Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2399);
+	Deaths("Player 8", "Terran Vulture", At most, 1679);
 	Switch("Switch112", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -122,7 +126,7 @@ Actions:
 Trigger("Player 1"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2399);
+	Deaths("Player 8", "Terran Vulture", At most, 1679);
 	Switch("Switch113", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -133,7 +137,7 @@ Actions:
 Trigger("Player 2"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2399);
+	Deaths("Player 8", "Terran Vulture", At most, 1679);
 	Switch("Switch114", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -144,7 +148,7 @@ Actions:
 Trigger("Player 3"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2399);
+	Deaths("Player 8", "Terran Vulture", At most, 1679);
 	Switch("Switch115", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -155,7 +159,7 @@ Actions:
 Trigger("Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2399);
+	Deaths("Player 8", "Terran Vulture", At most, 1679);
 	Switch("Switch116", Set);
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>주황색 저그 방어기관은 잠시 후 점막 뿌리망 고사와 함께 파괴됩니다. 지금은 적 공세에 대비해 방어선을 구축하는 것이 좋겠습니다.");
@@ -166,7 +170,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 2400);
+	Deaths("Player 8", "Terran Vulture", At least, 1680);
 Actions:
 	Set Deaths("Player 5", "Zerg Sunken Colony", Set To, 0);
 	Set Deaths("Player 5", "Zerg Spore Colony", Set To, 0);

@@ -1,8 +1,8 @@
 //-----------------------------------------------------------------//
-//  미션2 공개 후 첫 주공세 보안 타이머
-//  미션2 목표 표시(Vulture 756) 시 Countdown Timer 270초(게임 초) 시작.
-//  공개 후 3분(180초)에 consume(접촉 경보) + 추가 10초 spawn delay 후 첫 유닛 배치.
-//  첫 군락 실스폰: Vulture 3036. 둘째 군락: Vulture 3756.
+//  미션2 공개 후 첫 주공세 대비 경고
+//  미션2 목표 표시(Vulture 756) 직후 첫 주공세 대비 경고를 표시.
+//  공개 후 3분 30초(210초)에 consume(접촉 경보) + 추가 10초 spawn delay 후 첫 유닛 배치.
+//  첫 군락 실스폰: Vulture 3396. 둘째 군락: Vulture 5916.
 //-----------------------------------------------------------------//
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -12,8 +12,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 864);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>군락에서 대규모 병력 결집이 시작됐습니다. 제한시간 안에 대비를 끝내야 합니다.");
-	Set Countdown Timer(Set To, 270);
+	Display Text Message(Always Display, "<1A>노바: <04>군락에서 대규모 병력 결집이 시작됐습니다. 첫 공세 전까지 대비를 끝내야 합니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -22,5 +21,5 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 924);
 	Deaths("Player 8", "Terran Vulture", At most, 948);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>주공세에 대비해라. 카운트다운이 끝나기 전에 수리·집결·방어선 재정비를 마쳐라.");
+	Display Text Message(Always Display, "<03>호크: <04>주공세에 대비해라. 지금부터 수리·집결·방어선 재정비를 마쳐라.");
 }
