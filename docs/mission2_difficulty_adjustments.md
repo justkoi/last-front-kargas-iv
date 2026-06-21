@@ -3,7 +3,7 @@
 Difficulty flag: `Player 8 / Terran Academy`
 
 - `1 = easy`: first and repeated P6/P7 main assaults use the 32:15 / 33:00 / 33:45 cooldown band. Overmind Cocoon side selection always picks P6 when both colonies are still alive.
-- `2 = normal`: first and repeated P6/P7 main assaults use the 26:15 / 27:00 / 27:45 cooldown band, main-assault waves gain about +10% units, and Hatchery/Lair/Hive kills accelerate that colony by 337.5 seconds.
+- `2 = normal`: first and repeated P6/P7 main assaults use the 26:15 / 27:00 / 27:45 cooldown band, main-assault waves gain about +10% units, and Hatchery/Lair/Hive kills accelerate that colony by 371.25 seconds.
 - `3 = hard`: first and repeated P6/P7 main assaults use the 23:15 / 24:00 / 24:45 cooldown band, main-assault waves gain the hard layer plus an extra hard+ layer of about +12%, Hatchery/Lair/Hive kills accelerate that colony by 382.5 seconds, and also accelerate the opposite living colony by 191.25 seconds.
 - `4 = very hard`: first and repeated P6/P7 main assaults use the same 23:15 / 24:00 / 24:45 cooldown band as hard, waves gain the very-hard layer plus the same hard+ layer, and Hatchery/Lair/Hive kills accelerate both living colonies by 427.5 seconds.
 

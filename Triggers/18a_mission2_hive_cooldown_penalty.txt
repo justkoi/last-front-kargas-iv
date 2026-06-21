@@ -3,86 +3,367 @@
 //
 //  Hatchery/Lair/Hive kills reduce that colony's own main assault
 //  cooldown by difficulty and grant players minerals/gas.
-//  12 DC tick = 1 second: easy 97.5s = 1170, normal 337.5s = 4050, hard 382.5s = 4590, very hard 427.5s = 5130.
+//  12 DC tick = 1 second: easy 97.5s = 1170, normal 371.25s = 4455, hard 382.5s = 4590, very hard 427.5s = 5130.
 //  Hard also accelerates the opposite colony by 191.25s = 2295; very hard accelerates it by the full 427.5s = 5130.
 //-----------------------------------------------------------------//
 
+// 실제 가속 조건과 같은 가드로 사건을 대기열에 적재한다.
+// 해당 사망 카운터는 아래 가속/보상 트리거가 사이클당 1개씩 소비하므로 동시 파괴 수도 보존된다.
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 6", "Zerg Hatchery", At least, 1);
-	Switch("Switch95", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 생산 구조 파괴 가속 활성 구간
+	Deaths("Player 8", "Terran Academy", At least, 1); //난이도 선택 완료 : 쉬움~매우 어려움
+	Deaths("Player 8", "Terran Academy", At most, 4); //유효 난이도 범위 : 실제 가속 트리거와 일치
+	Switch("Switch32", Not Set); //P7 군락 생존 중 : P6 생산 구조 파괴가 실제 공세를 가속
+	Switch("Switch158", Not Set); //P6 최종 절규 공세 종료 전 : P6 주공세 가속 잠금 전
+	Deaths("Player 6", "Zerg Hatchery", At least, 1); //P6 해처리 파괴 사건 대기
 Actions:
-	Set Switch("Switch95", set);
+	Set Deaths("Player 8", "Terran Covert Ops", Add, 1); //P6 해처리 분노 후속 메시지 1건 적재
+	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 6", "Zerg Lair", At least, 1);
-	Switch("Switch95", Not Set);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Deaths("Player 8", "Terran Academy", At most, 4);
+	Switch("Switch32", Not Set); //P7 군락 생존 중 : P6 생산 구조 파괴가 실제 공세를 가속
+	Switch("Switch158", Not Set); //P6 주공세 가속 잠금 전
+	Deaths("Player 6", "Zerg Lair", At least, 1); //P6 레어 파괴 사건 대기
 Actions:
-	Set Switch("Switch95", set);
+	Set Deaths("Player 8", "Protoss Observatory", Add, 1); //P6 레어 분노 후속 메시지 1건 적재
+	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 6", "Zerg Hive", At least, 1);
-	Switch("Switch95", Not Set);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Deaths("Player 8", "Terran Academy", At most, 4);
+	Switch("Switch32", Not Set); //P7 군락 생존 중 : P6 생산 구조 파괴가 실제 공세를 가속
+	Switch("Switch158", Not Set); //P6 주공세 가속 잠금 전
+	Deaths("Player 6", "Zerg Hive", At least, 1); //P6 하이브 파괴 사건 대기
 Actions:
-	Set Switch("Switch95", set);
+	Set Deaths("Player 8", "Terran Nuclear Silo", Add, 1); //P6 하이브 분노 후속 메시지 1건 적재
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 생산 구조 파괴 가속 활성 구간
+	Deaths("Player 8", "Terran Academy", At least, 1); //난이도 선택 완료 : 쉬움~매우 어려움
+	Deaths("Player 8", "Terran Academy", At most, 4); //유효 난이도 범위 : 실제 가속 트리거와 일치
+	Switch("Switch31", Not Set); //P6 군락 생존 중 : P7 생산 구조 파괴가 실제 공세를 가속
+	Switch("Switch159", Not Set); //P7 최종 절규 공세 종료 전 : P7 주공세 가속 잠금 전
+	Deaths("Player 7", "Zerg Hatchery", At least, 1); //P7 해처리 파괴 사건 대기
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Facility", Add, 1); //P7 해처리 분노 후속 메시지 1건 적재
+	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 7", "Zerg Hatchery", At least, 1);
-	Switch("Switch96", Not Set);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Deaths("Player 8", "Terran Academy", At most, 4);
+	Switch("Switch31", Not Set); //P6 군락 생존 중 : P7 생산 구조 파괴가 실제 공세를 가속
+	Switch("Switch159", Not Set); //P7 주공세 가속 잠금 전
+	Deaths("Player 7", "Zerg Lair", At least, 1); //P7 레어 파괴 사건 대기
 Actions:
-	Set Switch("Switch96", set);
+	Set Deaths("Player 8", "Protoss Nexus", Add, 1); //P7 레어 분노 후속 메시지 1건 적재
+	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 7", "Zerg Lair", At least, 1);
-	Switch("Switch96", Not Set);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Deaths("Player 8", "Terran Academy", At most, 4);
+	Switch("Switch31", Not Set); //P6 군락 생존 중 : P7 생산 구조 파괴가 실제 공세를 가속
+	Switch("Switch159", Not Set); //P7 주공세 가속 잠금 전
+	Deaths("Player 7", "Zerg Hive", At least, 1); //P7 하이브 파괴 사건 대기
 Actions:
-	Set Switch("Switch96", set);
+	Set Deaths("Player 8", "Terran Command Center", Add, 1); //P7 하이브 분노 후속 메시지 1건 적재
+	Preserve Trigger();
 }
 
-Trigger("Player 7"){
+//-----------------------------------------------------------------//
+//  Accelerated tech-loss follow-up queue
+//
+//  P6/P7 acceleration triggers enqueue the destroyed structure type.
+//  Player 8 publishes one reward code after human-player triggers have
+//  finished, advances it to the matching rage code on the next P8 pass,
+//  then clears it after the red reaction. Simultaneous kills therefore show
+//  as reward -> rage pairs without same-frame message overwrites.
+//-----------------------------------------------------------------//
+
+// 한쪽 군락의 MainBase 핵심 구조가 모두 사라지면 아직 표시되지 않은
+// 보상/분노 대기열을 즉시 폐기한다. 인간 플레이어의 출력 트리거보다
+// 먼저 실행해 같은 사이클에 남은 분노 문구가 표시되는 것도 막는다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 7", "Zerg Hive", At least, 1);
-	Switch("Switch96", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 후속 메시지 시스템 활성 구간
+	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At most, 0); //P6 군락 핵심 구조 소실 : 군락 가속 종료
+	Bring("Player 6", "Zerg Lair", "P6 MainBase", At most, 0);
+	Bring("Player 6", "Zerg Hive", "P6 MainBase", At most, 0);
 Actions:
-	Set Switch("Switch96", set);
+	Set Deaths("Player 8", "Terran Covert Ops", Set To, 0); //P6 해처리 후속 메시지 대기열 폐기
+	Set Deaths("Player 8", "Protoss Observatory", Set To, 0); //P6 레어 후속 메시지 대기열 폐기
+	Set Deaths("Player 8", "Terran Nuclear Silo", Set To, 0); //P6 하이브 후속 메시지 대기열 폐기
+	Set Deaths("Player 8", "Protoss Robotics Facility", Set To, 0); //P7 해처리 후속 메시지 대기열 폐기
+	Set Deaths("Player 8", "Protoss Nexus", Set To, 0); //P7 레어 후속 메시지 대기열 폐기
+	Set Deaths("Player 8", "Terran Command Center", Set To, 0); //P7 하이브 후속 메시지 대기열 폐기
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 0); //현재 예약된 보상/분노 출력 코드 폐기
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 후속 메시지 시스템 활성 구간
+	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At most, 0); //P7 군락 핵심 구조 소실 : 군락 가속 종료
+	Bring("Player 7", "Zerg Lair", "P7 MainBase", At most, 0);
+	Bring("Player 7", "Zerg Hive", "P7 MainBase", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Terran Covert Ops", Set To, 0); //P6 해처리 후속 메시지 대기열 폐기
+	Set Deaths("Player 8", "Protoss Observatory", Set To, 0); //P6 레어 후속 메시지 대기열 폐기
+	Set Deaths("Player 8", "Terran Nuclear Silo", Set To, 0); //P6 하이브 후속 메시지 대기열 폐기
+	Set Deaths("Player 8", "Protoss Robotics Facility", Set To, 0); //P7 해처리 후속 메시지 대기열 폐기
+	Set Deaths("Player 8", "Protoss Nexus", Set To, 0); //P7 레어 후속 메시지 대기열 폐기
+	Set Deaths("Player 8", "Terran Command Center", Set To, 0); //P7 하이브 후속 메시지 대기열 폐기
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 0); //현재 예약된 보상/분노 출력 코드 폐기
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", At least, 11); //분노 메시지 출력 완료 대기 : P1~P4가 현재 분노 코드를 표시한 사이클
+	Deaths("Player 8", "Terran Physics Lab", At most, 16); //유효 분노 코드 범위 : 11~16만 완료 처리
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 0); //출력 코드 초기화 : 같은 P8 패스의 아래 대기열 승격을 허용
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 1); //P6 해처리 보상 표시 완료 : 다음 사이클 분노 단계로 전환
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 11); //P6 해처리 분노 출력 코드
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 2); //P6 레어 보상 표시 완료 : 다음 사이클 분노 단계로 전환
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 12); //P6 레어 분노 출력 코드
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 3); //P6 하이브 보상 표시 완료 : 다음 사이클 분노 단계로 전환
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 13); //P6 하이브 분노 출력 코드
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 4); //P7 해처리 보상 표시 완료 : 다음 사이클 분노 단계로 전환
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 14); //P7 해처리 분노 출력 코드
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 5); //P7 레어 보상 표시 완료 : 다음 사이클 분노 단계로 전환
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 15); //P7 레어 분노 출력 코드
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 6); //P7 하이브 보상 표시 완료 : 다음 사이클 분노 단계로 전환
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 16); //P7 하이브 분노 출력 코드
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 0); //단일 출력 슬롯 비어 있음 : 이번 사이클에 아직 후속 메시지 미예약
+	Deaths("Player 8", "Terran Covert Ops", At least, 1); //P6 해처리 분노 대기열 : 미표시 사건 1건 이상
+Actions:
+	Set Deaths("Player 8", "Terran Covert Ops", Subtract, 1); //P6 해처리 사건 1건 소비 : 동시 파괴도 한 사이클씩 직렬 출력
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 1); //출력 코드 1 : 다음 사이클 P6 해처리 보상 표시
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 0); //앞선 우선순위가 코드를 예약했으면 단락
+	Deaths("Player 8", "Protoss Observatory", At least, 1); //P6 레어 분노 대기열 : 미표시 사건 1건 이상
+Actions:
+	Set Deaths("Player 8", "Protoss Observatory", Subtract, 1); //P6 레어 사건 1건 소비
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 2); //출력 코드 2 : 다음 사이클 P6 레어 보상 표시
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 0); //앞선 우선순위가 코드를 예약했으면 단락
+	Deaths("Player 8", "Terran Nuclear Silo", At least, 1); //P6 하이브 분노 대기열 : 미표시 사건 1건 이상
+Actions:
+	Set Deaths("Player 8", "Terran Nuclear Silo", Subtract, 1); //P6 하이브 사건 1건 소비
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 3); //출력 코드 3 : 다음 사이클 P6 하이브 보상 표시
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 0); //앞선 우선순위가 코드를 예약했으면 단락
+	Deaths("Player 8", "Protoss Robotics Facility", At least, 1); //P7 해처리 분노 대기열 : 미표시 사건 1건 이상
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Facility", Subtract, 1); //P7 해처리 사건 1건 소비
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 4); //출력 코드 4 : 다음 사이클 P7 해처리 보상 표시
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 0); //앞선 우선순위가 코드를 예약했으면 단락
+	Deaths("Player 8", "Protoss Nexus", At least, 1); //P7 레어 분노 대기열 : 미표시 사건 1건 이상
+Actions:
+	Set Deaths("Player 8", "Protoss Nexus", Subtract, 1); //P7 레어 사건 1건 소비
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 5); //출력 코드 5 : 다음 사이클 P7 레어 보상 표시
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 0); //앞선 우선순위가 코드를 예약했으면 단락
+	Deaths("Player 8", "Terran Command Center", At least, 1); //P7 하이브 분노 대기열 : 미표시 사건 1건 이상
+Actions:
+	Set Deaths("Player 8", "Terran Command Center", Subtract, 1); //P7 하이브 사건 1건 소비
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 6); //출력 코드 6 : 다음 사이클 P7 하이브 보상 표시
+	Preserve Trigger();
+}
+
+// 보상 단계: 가속 사건은 대기열에서 하나씩 꺼내 기존 문구를 먼저 표시한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 보상/분노 출력 활성 구간
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 1); //P6 해처리 보상 출력 코드
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
+	Preserve Trigger();
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch95", Set);
-	Switch("Switch32", Not Set);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 2); //P6 레어 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<07>작전 정보: <04>동북쪽 군락 생산 구조 파괴 시 자원을 회수하며, 군락은 다음 공세를 앞당겨 반격합니다. 반격을 막아낼수록 군락은 약해진 채 다음 타격을 받습니다.");
+	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
+	Preserve Trigger();
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch96", Set);
-	Switch("Switch31", Not Set);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 3); //P6 하이브 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<07>작전 정보: <04>동남쪽 군락 생산 구조 파괴 시 자원을 회수하며, 군락은 다음 공세를 앞당겨 반격합니다. 반격을 막아낼수록 군락은 약해진 채 다음 타격을 받습니다.");
+	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 4); //P7 해처리 보상 출력 코드
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 5); //P7 레어 보상 출력 코드
+Actions:
+	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 6); //P7 하이브 보상 출력 코드
+Actions:
+	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
+	Preserve Trigger();
+}
+
+// 분노 단계: 보상 다음 사이클에 구조물 종류별 붉은 메시지만 표시한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 군락 가속 시스템 활성 구간
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 11); //P6 해처리 분노 출력 코드
+Actions:
+	Display Text Message(Always Display, "<06>적 군락이 해처리 파괴에 분노합니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 12); //P6 레어 분노 출력 코드
+Actions:
+	Display Text Message(Always Display, "<06>적 군락이 레어 파괴에 분노합니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 13); //P6 하이브 분노 출력 코드
+Actions:
+	Display Text Message(Always Display, "<06>적 군락이 하이브 파괴에 분노합니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 14); //P7 해처리 분노 출력 코드
+Actions:
+	Display Text Message(Always Display, "<06>적 군락이 해처리 파괴에 분노합니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 15); //P7 레어 분노 출력 코드
+Actions:
+	Display Text Message(Always Display, "<06>적 군락이 레어 파괴에 분노합니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 16); //P7 하이브 분노 출력 코드
+Actions:
+	Display Text Message(Always Display, "<06>적 군락이 하이브 파괴에 분노합니다.");
+	Preserve Trigger();
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 해처리 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
@@ -115,6 +396,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 레어 보상만 직접 표시
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
@@ -129,7 +411,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4050);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4455);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -192,6 +474,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 하이브 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
@@ -206,7 +489,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4050);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4455);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -273,7 +556,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4050);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4455);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -314,6 +597,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 해처리 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
@@ -350,7 +634,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4050);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4455);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -391,6 +675,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 레어 보상만 직접 표시
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
@@ -427,7 +712,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4050);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4455);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -468,6 +753,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 하이브 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
@@ -504,7 +790,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4050);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4455);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);

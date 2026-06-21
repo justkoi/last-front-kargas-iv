@@ -71,6 +71,14 @@
 //    Terran Missile Turret: P7 mission2 offense-window timer (spawn start +180s 안내, 18e)
 //    Zerg Broodling       : mission1 AttackPoint1 정신체 격파 회군 틱 타이머 (12 = 1초)
 //    Zerg Overlord        : mission1 AttackPoint1 정신체 격파 회군 잔여 반복 횟수
+//    Terran Covert Ops    : mission2 P6 Hatchery 분노 후속 메시지 대기열
+//    Protoss Observatory  : mission2 P6 Lair 분노 후속 메시지 대기열
+//    Terran Nuclear Silo  : mission2 P6 Hive 분노 후속 메시지 대기열
+//    Protoss Robotics Facility: mission2 P7 Hatchery 분노 후속 메시지 대기열
+//    Protoss Nexus        : mission2 P7 Lair 분노 후속 메시지 대기열
+//    Terran Command Center: mission2 P7 Hive 분노 후속 메시지 대기열
+//    Terran Physics Lab   : mission2 생산 구조 보상/분노 출력 코드 (0=대기, 1~6=보상 P6 H/L/H,P7 H/L/H, 11~16=해당 분노)
+//    위 7개 P8 DC 예약 건물은 Player 8 소유로 배치/지급/파괴하지 말 것.
 //
 //  Player 1~4 DC roles (승계 전용 비생산 오브젝트; 해당 Beacon을 플레이어 소유로 배치/지급/파괴하지 말 것)
 //    Terran Beacon : 종족 마커(시작 3초 스냅샷) 1=Terran, 2=Zerg, 3=Protoss. 13e arsenal handoff 테란 우선 판정용.
@@ -163,8 +171,7 @@
 //    Switch92   : Gas1 P5 Overmind Cocoon gas reward paid
 //    Switch93   : Gas2 P5 Overmind Cocoon confirmed
 //    Switch94   : Gas2 P5 Overmind Cocoon gas reward paid
-//    Switch95   : P6 mission2 tech-structure acceleration info shown
-//    Switch96   : P7 mission2 tech-structure acceleration info shown
+//    Switch95/96: unused (was P6/P7 mission2 tech-structure acceleration info shown)
 //    Switch97~100  : P1~P4 P5 first Mutalisk warning shown
 //    Switch101~104 : P1~P4 P5 first Guardian warning shown
 //    Switch105~108 : P1~P4 P5 first Devourer warning shown
