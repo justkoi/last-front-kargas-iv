@@ -554,8 +554,11 @@ Conditions:
 	Elapsed Time(At least, 1890);
 	Elapsed Time(At most, 1892);
 Actions:
-	Kill Unit At Location("Player 1", "Map Revealer", 64, "P5 Cerebrate");
-	Kill Unit At Location("Player 2", "Map Revealer", 64, "P5 Cerebrate");
-	Kill Unit At Location("Player 3", "Map Revealer", 64, "P5 Cerebrate");
-	Kill Unit At Location("Player 4", "Map Revealer", 64, "P5 Cerebrate");
+	// 정신체(P5 Cerebrate)·자원지대(P5 Base+Multi) 리빌러 일괄 제거.
+	// Map Revealer는 Kill Unit At Location이 듣지 않으므로 플레이어 소유 단위를 Remove Unit으로 제거.
+	// 이 시점(31:30) 활성 리빌러는 정신체·자원지대 둘뿐이라 일괄 제거해도 안전(둘 다 동시 만료 대상).
+	Remove Unit("Player 1", "Map Revealer");
+	Remove Unit("Player 2", "Map Revealer");
+	Remove Unit("Player 3", "Map Revealer");
+	Remove Unit("Player 4", "Map Revealer");
 }

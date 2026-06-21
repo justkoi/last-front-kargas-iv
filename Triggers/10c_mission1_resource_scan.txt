@@ -1,0 +1,56 @@
+//-----------------------------------------------------------------//
+//  미션1 저그 자원지대 궤도스캔 - 28:00 (1680틱)
+//  두번째 정신체(P5 지휘 정신체, 30:00) 공개 2분 전, 주황색 저그(P5)가
+//  채취 중인 자원지대(P5 Base + P5 Multi1~5)를 궤도스캔으로 비춰준다.
+//  종료는 별도 트리거 없이 10_mission1_waves_late.txt 의 1890틱 제거 트리거에서
+//  같은 6개 위치를 함께 Kill 한다 (정신체 리빌러와 동시 만료).
+//  Valkyrie Exactly 1 가드 -> 미션1을 이미 클리어했다면 자동 생략.
+//-----------------------------------------------------------------//
+
+// 자원지대 리빌러 생성 - 28:00
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 1680);
+	Elapsed Time(At most, 1682);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Base");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi1");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi2");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi3");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi4");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi5");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Base");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi1");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi2");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi3");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi4");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi5");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Base");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi1");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi2");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi3");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi4");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi5");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Base");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi1");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi2");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi3");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi4");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi5");
+}
+
+// 궤도스캔 연출 (스캔음 + 핑 + 노바 대사) - 28:00
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 1680);
+	Elapsed Time(At most, 1682);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 갱신. 북서쪽에서 미개발 대형 자원 지대를 포착했습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>지금은 <11>주황색 저그<04>가 통째로 빨아들이고 있군요. ...전선이 길어지면 우리에게도 저만한 자원이 필요할 텐데요.");
+}
