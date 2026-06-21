@@ -4,7 +4,10 @@
 //  If players bypass the first colony and attack P6/P7 during mission1,
 //  destroyed outer-colony structures feed resources back into that colony.
 //  If either outer colony's Hatchery/Lair/Hive collapses, both P6 and P7 wake up.
-//  The first tech-core collapse also primes one large assault from that colony only.
+//  The first tech-core collapse immediately spawns one assault from the attacked
+//  colony only (priming to the consume threshold). Each tech-core kill also
+//  accelerates BOTH colonies' main-assault timers by 6480 (stronger than mission2
+//  very hard's 5130 mirror), since the kill arms both colony timers (Switch33+34).
 //-----------------------------------------------------------------//
 
 // Repeat the outer-colony intrusion warning at most once every 20 seconds.
@@ -457,8 +460,9 @@ Actions:
 	Set Switch("Switch72", set);
 }
 
-// First Hatchery/Lair/Hive collapse primes one large assault from that colony only.
-// Own these by P6/P7 so the boost runs before their death-counter consumers below.
+// First Hatchery/Lair/Hive collapse immediately spawns one assault from that colony only,
+// by priming its timer to the max consume threshold (24300). Own these by P6/P7 so the
+// boost runs before their death-counter consumers below.
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
@@ -466,7 +470,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 14040);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 24300);
 }
 
 Trigger("Player 6"){
@@ -476,7 +480,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 14040);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 24300);
 }
 
 Trigger("Player 6"){
@@ -486,7 +490,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 14040);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 24300);
 }
 
 Trigger("Player 7"){
@@ -496,7 +500,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 14040);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 24300);
 }
 
 Trigger("Player 7"){
@@ -506,7 +510,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 14040);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 24300);
 }
 
 Trigger("Player 7"){
@@ -516,7 +520,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 14040);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 24300);
 }
 
 // Count destroyed P6/P7 creep colonies together and warn every 1 kill.
@@ -651,7 +655,8 @@ Actions:
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
-	Set Deaths("Player 8", "Zerg Zergling", Add, 3840);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
@@ -688,7 +693,8 @@ Actions:
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
-	Set Deaths("Player 8", "Zerg Zergling", Add, 3840);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
@@ -725,7 +731,8 @@ Actions:
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
-	Set Deaths("Player 8", "Zerg Zergling", Add, 3840);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
@@ -762,7 +769,8 @@ Actions:
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 3840);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
@@ -799,7 +807,8 @@ Actions:
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 3840);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
@@ -836,7 +845,8 @@ Actions:
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 3840);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
 	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
