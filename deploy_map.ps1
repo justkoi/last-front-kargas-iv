@@ -1,7 +1,7 @@
 param(
     [string]$Source = "",
     [string]$DestinationDir = "$env:USERPROFILE\Documents\StarCraft\Maps",
-    [string]$DestinationName = "KargasIV.scx",
+    [string]$DestinationName = "KargasIV_R.scx",
     [string]$WorkDir = "E:\SCX_WORK",
     [switch]$WhatIf
 )

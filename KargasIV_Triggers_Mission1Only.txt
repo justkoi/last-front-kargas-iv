@@ -71,6 +71,14 @@
 //    Terran Missile Turret: P7 mission2 offense-window timer (spawn start +180s 안내, 18e)
 //    Zerg Broodling       : mission1 AttackPoint1 정신체 격파 회군 틱 타이머 (12 = 1초)
 //    Zerg Overlord        : mission1 AttackPoint1 정신체 격파 회군 잔여 반복 횟수
+//    Terran Covert Ops    : mission2 P6 Hatchery 분노 후속 메시지 대기열
+//    Protoss Observatory  : mission2 P6 Lair 분노 후속 메시지 대기열
+//    Terran Nuclear Silo  : mission2 P6 Hive 분노 후속 메시지 대기열
+//    Protoss Robotics Facility: mission2 P7 Hatchery 분노 후속 메시지 대기열
+//    Protoss Nexus        : mission2 P7 Lair 분노 후속 메시지 대기열
+//    Terran Command Center: mission2 P7 Hive 분노 후속 메시지 대기열
+//    Terran Physics Lab   : mission2 생산 구조 보상/분노 출력 코드 (0=대기, 1~6=보상 P6 H/L/H,P7 H/L/H, 11~16=해당 분노)
+//    위 7개 P8 DC 예약 건물은 Player 8 소유로 배치/지급/파괴하지 말 것.
 //
 //  Player 1~4 DC roles (승계 전용 비생산 오브젝트; 해당 Beacon을 플레이어 소유로 배치/지급/파괴하지 말 것)
 //    Terran Beacon : 종족 마커(시작 3초 스냅샷) 1=Terran, 2=Zerg, 3=Protoss. 13e arsenal handoff 테란 우선 판정용.
@@ -163,8 +171,7 @@
 //    Switch92   : Gas1 P5 Overmind Cocoon gas reward paid
 //    Switch93   : Gas2 P5 Overmind Cocoon confirmed
 //    Switch94   : Gas2 P5 Overmind Cocoon gas reward paid
-//    Switch95   : P6 mission2 tech-structure acceleration info shown
-//    Switch96   : P7 mission2 tech-structure acceleration info shown
+//    Switch95/96: unused (was P6/P7 mission2 tech-structure acceleration info shown)
 //    Switch97~100  : P1~P4 P5 first Mutalisk warning shown
 //    Switch101~104 : P1~P4 P5 first Guardian warning shown
 //    Switch105~108 : P1~P4 P5 first Devourer warning shown
@@ -3018,10 +3025,13 @@ Conditions:
 	Elapsed Time(At least, 1890);
 	Elapsed Time(At most, 1892);
 Actions:
-	Kill Unit At Location("Player 1", "Map Revealer", 64, "P5 Cerebrate");
-	Kill Unit At Location("Player 2", "Map Revealer", 64, "P5 Cerebrate");
-	Kill Unit At Location("Player 3", "Map Revealer", 64, "P5 Cerebrate");
-	Kill Unit At Location("Player 4", "Map Revealer", 64, "P5 Cerebrate");
+	// 정신체(P5 Cerebrate)·자원지대(P5 Base+Multi) 리빌러 일괄 제거.
+	// Map Revealer는 Kill Unit At Location이 듣지 않으므로 플레이어 소유 단위를 Remove Unit으로 제거.
+	// 이 시점(31:30) 활성 리빌러는 정신체·자원지대 둘뿐이라 일괄 제거해도 안전(둘 다 동시 만료 대상).
+	Remove Unit("Player 1", "Map Revealer");
+	Remove Unit("Player 2", "Map Revealer");
+	Remove Unit("Player 3", "Map Revealer");
+	Remove Unit("Player 4", "Map Revealer");
 }
 //-----------------------------------------------------------------//
 //  Mission 1 P5 first air-tech alerts
@@ -3184,6 +3194,62 @@ Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
 	Set Switch("Switch108", set);
 	Preserve Trigger();
+}
+//-----------------------------------------------------------------//
+//  미션1 저그 자원지대 궤도스캔 - 28:00 (1680틱)
+//  두번째 정신체(P5 지휘 정신체, 30:00) 공개 2분 전, 주황색 저그(P5)가
+//  채취 중인 자원지대(P5 Base + P5 Multi1~5)를 궤도스캔으로 비춰준다.
+//  종료는 별도 트리거 없이 10_mission1_waves_late.txt 의 1890틱 제거 트리거에서
+//  같은 6개 위치를 함께 Kill 한다 (정신체 리빌러와 동시 만료).
+//  Valkyrie Exactly 1 가드 -> 미션1을 이미 클리어했다면 자동 생략.
+//-----------------------------------------------------------------//
+
+// 자원지대 리빌러 생성 - 28:00
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 1680);
+	Elapsed Time(At most, 1682);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Base");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi1");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi2");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi3");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi4");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi5");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Base");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi1");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi2");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi3");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi4");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi5");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Base");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi1");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi2");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi3");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi4");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi5");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Base");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi1");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi2");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi3");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi4");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi5");
+}
+
+// 궤도스캔 연출 (스캔음 + 핑 + 노바 대사) - 28:00
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 1680);
+	Elapsed Time(At most, 1682);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Minimap Ping("P5 Base");
+	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 갱신. 북서쪽에서 미개발 대형 자원 지대를 포착했습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>지금은 <11>주황색 저그<04>가 통째로 빨아들이고 있군요. ...전선이 길어지면 우리에게도 저만한 자원이 필요할 텐데요.");
 }
 //-----------------------------------------------------------------//
 //  Mission 1 - dynamic building tracking and random all-out attack
@@ -13644,8 +13710,13 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 5, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 3, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn4");
 	Preserve Trigger();
 }
 
@@ -13660,8 +13731,11 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 3, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn4");
 	Preserve Trigger();
 }
 
@@ -13676,8 +13750,9 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn2");
 	Preserve Trigger();
 }
 
@@ -13707,8 +13782,8 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn2");
-	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn4");
 	Preserve Trigger();
 }
 
@@ -14059,8 +14134,13 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 5, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 3, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn4");
 	Preserve Trigger();
 }
 
@@ -14075,8 +14155,11 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 3, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn4");
 	Preserve Trigger();
 }
 
@@ -14091,8 +14174,9 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn2");
 	Preserve Trigger();
 }
 
@@ -14122,8 +14206,8 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn2");
-	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn4");
 	Preserve Trigger();
 }
 
@@ -14293,8 +14377,8 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn3");
-	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn4");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn1");
 	Preserve Trigger();
 }
 
@@ -14309,7 +14393,7 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn4");
 	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
 	Preserve Trigger();
 }
@@ -14461,8 +14545,8 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn1");
 	Preserve Trigger();
 }
 
@@ -14477,7 +14561,7 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn4");
 	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn3");
 	Preserve Trigger();
 }
@@ -14636,8 +14720,10 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
-	Create Unit("Player 6", "Zerg Mutalisk", 2, "P6 Spawn1");
-	Create Unit("Player 6", "Zerg Guardian", 2, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn2");
+	Create Unit("Player 6", "Zerg Mutalisk", 1, "P6 Spawn3");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn1");
+	Create Unit("Player 6", "Zerg Guardian", 1, "P6 Spawn3");
 	Preserve Trigger();
 }
 
@@ -14819,8 +14905,10 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
-	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn1");
-	Create Unit("Player 7", "Zerg Guardian", 2, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn2");
+	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn3");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn1");
+	Create Unit("Player 7", "Zerg Guardian", 1, "P7 Spawn3");
 	Preserve Trigger();
 }
 
@@ -19550,86 +19638,332 @@ Actions:
 //
 //  Hatchery/Lair/Hive kills reduce that colony's own main assault
 //  cooldown by difficulty and grant players minerals/gas.
-//  12 DC tick = 1 second: easy 97.5s = 1170, normal 337.5s = 4050, hard 382.5s = 4590, very hard 427.5s = 5130.
+//  12 DC tick = 1 second: easy 97.5s = 1170, normal 371.25s = 4455, hard 382.5s = 4590, very hard 427.5s = 5130.
 //  Hard also accelerates the opposite colony by 191.25s = 2295; very hard accelerates it by the full 427.5s = 5130.
 //-----------------------------------------------------------------//
 
+// 실제 가속 조건과 같은 가드로 사건을 대기열에 적재한다.
+// 해당 사망 카운터는 아래 가속/보상 트리거가 사이클당 1개씩 소비하므로 동시 파괴 수도 보존된다.
 Trigger("Player 6"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 6", "Zerg Hatchery", At least, 1);
-	Switch("Switch95", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 생산 구조 파괴 가속 활성 구간
+	Deaths("Player 8", "Terran Academy", At least, 1); //난이도 선택 완료 : 쉬움~매우 어려움
+	Deaths("Player 8", "Terran Academy", At most, 4); //유효 난이도 범위 : 실제 가속 트리거와 일치
+	Switch("Switch32", Not Set); //P7 군락 생존 중 : P6 생산 구조 파괴가 실제 공세를 가속
+	Switch("Switch158", Not Set); //P6 최종 절규 공세 종료 전 : P6 주공세 가속 잠금 전
+	Deaths("Player 6", "Zerg Hatchery", At least, 1); //P6 해처리 파괴 사건 대기
 Actions:
-	Set Switch("Switch95", set);
+	Set Deaths("Player 8", "Terran Covert Ops", Add, 1); //P6 해처리 분노 후속 메시지 1건 적재
+	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 6", "Zerg Lair", At least, 1);
-	Switch("Switch95", Not Set);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Deaths("Player 8", "Terran Academy", At most, 4);
+	Switch("Switch32", Not Set); //P7 군락 생존 중 : P6 생산 구조 파괴가 실제 공세를 가속
+	Switch("Switch158", Not Set); //P6 주공세 가속 잠금 전
+	Deaths("Player 6", "Zerg Lair", At least, 1); //P6 레어 파괴 사건 대기
 Actions:
-	Set Switch("Switch95", set);
+	Set Deaths("Player 8", "Protoss Observatory", Add, 1); //P6 레어 분노 후속 메시지 1건 적재
+	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 6", "Zerg Hive", At least, 1);
-	Switch("Switch95", Not Set);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Deaths("Player 8", "Terran Academy", At most, 4);
+	Switch("Switch32", Not Set); //P7 군락 생존 중 : P6 생산 구조 파괴가 실제 공세를 가속
+	Switch("Switch158", Not Set); //P6 주공세 가속 잠금 전
+	Deaths("Player 6", "Zerg Hive", At least, 1); //P6 하이브 파괴 사건 대기
 Actions:
-	Set Switch("Switch95", set);
+	Set Deaths("Player 8", "Terran Nuclear Silo", Add, 1); //P6 하이브 분노 후속 메시지 1건 적재
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 생산 구조 파괴 가속 활성 구간
+	Deaths("Player 8", "Terran Academy", At least, 1); //난이도 선택 완료 : 쉬움~매우 어려움
+	Deaths("Player 8", "Terran Academy", At most, 4); //유효 난이도 범위 : 실제 가속 트리거와 일치
+	Switch("Switch31", Not Set); //P6 군락 생존 중 : P7 생산 구조 파괴가 실제 공세를 가속
+	Switch("Switch159", Not Set); //P7 최종 절규 공세 종료 전 : P7 주공세 가속 잠금 전
+	Deaths("Player 7", "Zerg Hatchery", At least, 1); //P7 해처리 파괴 사건 대기
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Facility", Add, 1); //P7 해처리 분노 후속 메시지 1건 적재
+	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 7", "Zerg Hatchery", At least, 1);
-	Switch("Switch96", Not Set);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Deaths("Player 8", "Terran Academy", At most, 4);
+	Switch("Switch31", Not Set); //P6 군락 생존 중 : P7 생산 구조 파괴가 실제 공세를 가속
+	Switch("Switch159", Not Set); //P7 주공세 가속 잠금 전
+	Deaths("Player 7", "Zerg Lair", At least, 1); //P7 레어 파괴 사건 대기
 Actions:
-	Set Switch("Switch96", set);
+	Set Deaths("Player 8", "Protoss Nexus", Add, 1); //P7 레어 분노 후속 메시지 1건 적재
+	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 7", "Zerg Lair", At least, 1);
-	Switch("Switch96", Not Set);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Deaths("Player 8", "Terran Academy", At most, 4);
+	Switch("Switch31", Not Set); //P6 군락 생존 중 : P7 생산 구조 파괴가 실제 공세를 가속
+	Switch("Switch159", Not Set); //P7 주공세 가속 잠금 전
+	Deaths("Player 7", "Zerg Hive", At least, 1); //P7 하이브 파괴 사건 대기
 Actions:
-	Set Switch("Switch96", set);
+	Set Deaths("Player 8", "Terran Command Center", Add, 1); //P7 하이브 분노 후속 메시지 1건 적재
+	Preserve Trigger();
 }
 
-Trigger("Player 7"){
+//-----------------------------------------------------------------//
+//  Accelerated tech-loss follow-up queue
+//
+//  P6/P7 acceleration triggers enqueue the destroyed structure type.
+//  Player 8 publishes one reward code after human-player triggers have
+//  finished, advances it to the matching rage code on the next P8 pass,
+//  then clears it after the red reaction. Simultaneous kills therefore show
+//  as reward -> rage pairs without same-frame message overwrites.
+//-----------------------------------------------------------------//
+
+Trigger("Player 8"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 7", "Zerg Hive", At least, 1);
-	Switch("Switch96", Not Set);
+	Deaths("Player 8", "Terran Physics Lab", At least, 11); //분노 메시지 출력 완료 대기 : P1~P4가 현재 분노 코드를 표시한 사이클
+	Deaths("Player 8", "Terran Physics Lab", At most, 16); //유효 분노 코드 범위 : 11~16만 완료 처리
 Actions:
-	Set Switch("Switch96", set);
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 0); //출력 코드 초기화 : 같은 P8 패스의 아래 대기열 승격을 허용
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 1); //P6 해처리 보상 표시 완료 : 다음 사이클 분노 단계로 전환
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 11); //P6 해처리 분노 출력 코드
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 2); //P6 레어 보상 표시 완료 : 다음 사이클 분노 단계로 전환
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 12); //P6 레어 분노 출력 코드
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 3); //P6 하이브 보상 표시 완료 : 다음 사이클 분노 단계로 전환
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 13); //P6 하이브 분노 출력 코드
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 4); //P7 해처리 보상 표시 완료 : 다음 사이클 분노 단계로 전환
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 14); //P7 해처리 분노 출력 코드
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 5); //P7 레어 보상 표시 완료 : 다음 사이클 분노 단계로 전환
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 15); //P7 레어 분노 출력 코드
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 6); //P7 하이브 보상 표시 완료 : 다음 사이클 분노 단계로 전환
+Actions:
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 16); //P7 하이브 분노 출력 코드
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 0); //단일 출력 슬롯 비어 있음 : 이번 사이클에 아직 후속 메시지 미예약
+	Deaths("Player 8", "Terran Covert Ops", At least, 1); //P6 해처리 분노 대기열 : 미표시 사건 1건 이상
+Actions:
+	Set Deaths("Player 8", "Terran Covert Ops", Subtract, 1); //P6 해처리 사건 1건 소비 : 동시 파괴도 한 사이클씩 직렬 출력
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 1); //출력 코드 1 : 다음 사이클 P6 해처리 보상 표시
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 0); //앞선 우선순위가 코드를 예약했으면 단락
+	Deaths("Player 8", "Protoss Observatory", At least, 1); //P6 레어 분노 대기열 : 미표시 사건 1건 이상
+Actions:
+	Set Deaths("Player 8", "Protoss Observatory", Subtract, 1); //P6 레어 사건 1건 소비
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 2); //출력 코드 2 : 다음 사이클 P6 레어 보상 표시
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 0); //앞선 우선순위가 코드를 예약했으면 단락
+	Deaths("Player 8", "Terran Nuclear Silo", At least, 1); //P6 하이브 분노 대기열 : 미표시 사건 1건 이상
+Actions:
+	Set Deaths("Player 8", "Terran Nuclear Silo", Subtract, 1); //P6 하이브 사건 1건 소비
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 3); //출력 코드 3 : 다음 사이클 P6 하이브 보상 표시
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 0); //앞선 우선순위가 코드를 예약했으면 단락
+	Deaths("Player 8", "Protoss Robotics Facility", At least, 1); //P7 해처리 분노 대기열 : 미표시 사건 1건 이상
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Facility", Subtract, 1); //P7 해처리 사건 1건 소비
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 4); //출력 코드 4 : 다음 사이클 P7 해처리 보상 표시
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 0); //앞선 우선순위가 코드를 예약했으면 단락
+	Deaths("Player 8", "Protoss Nexus", At least, 1); //P7 레어 분노 대기열 : 미표시 사건 1건 이상
+Actions:
+	Set Deaths("Player 8", "Protoss Nexus", Subtract, 1); //P7 레어 사건 1건 소비
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 5); //출력 코드 5 : 다음 사이클 P7 레어 보상 표시
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 0); //앞선 우선순위가 코드를 예약했으면 단락
+	Deaths("Player 8", "Terran Command Center", At least, 1); //P7 하이브 분노 대기열 : 미표시 사건 1건 이상
+Actions:
+	Set Deaths("Player 8", "Terran Command Center", Subtract, 1); //P7 하이브 사건 1건 소비
+	Set Deaths("Player 8", "Terran Physics Lab", Set To, 6); //출력 코드 6 : 다음 사이클 P7 하이브 보상 표시
+	Preserve Trigger();
+}
+
+// 보상 단계: 가속 사건은 대기열에서 하나씩 꺼내 기존 문구를 먼저 표시한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 보상/분노 출력 활성 구간
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 1); //P6 해처리 보상 출력 코드
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
+	Preserve Trigger();
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch95", Set);
-	Switch("Switch32", Not Set);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 2); //P6 레어 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<07>작전 정보: <04>동북쪽 군락 생산 구조 파괴 시 자원을 회수하며, 군락은 다음 공세를 앞당겨 반격합니다. 반격을 막아낼수록 군락은 약해진 채 다음 타격을 받습니다.");
+	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
+	Preserve Trigger();
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch96", Set);
-	Switch("Switch31", Not Set);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 3); //P6 하이브 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<07>작전 정보: <04>동남쪽 군락 생산 구조 파괴 시 자원을 회수하며, 군락은 다음 공세를 앞당겨 반격합니다. 반격을 막아낼수록 군락은 약해진 채 다음 타격을 받습니다.");
+	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 4); //P7 해처리 보상 출력 코드
+Actions:
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 5); //P7 레어 보상 출력 코드
+Actions:
+	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 6); //P7 하이브 보상 출력 코드
+Actions:
+	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
+	Preserve Trigger();
+}
+
+// 분노 단계: 보상 다음 사이클에 구조물 종류별 붉은 메시지만 표시한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 군락 가속 시스템 활성 구간
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 11); //P6 해처리 분노 출력 코드
+Actions:
+	Display Text Message(Always Display, "<06>적 군락이 해처리 파괴에 분노합니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 12); //P6 레어 분노 출력 코드
+Actions:
+	Display Text Message(Always Display, "<06>적 군락이 레어 파괴에 분노합니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 13); //P6 하이브 분노 출력 코드
+Actions:
+	Display Text Message(Always Display, "<06>적 군락이 하이브 파괴에 분노합니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 14); //P7 해처리 분노 출력 코드
+Actions:
+	Display Text Message(Always Display, "<06>적 군락이 해처리 파괴에 분노합니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 15); //P7 레어 분노 출력 코드
+Actions:
+	Display Text Message(Always Display, "<06>적 군락이 레어 파괴에 분노합니다.");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 16); //P7 하이브 분노 출력 코드
+Actions:
+	Display Text Message(Always Display, "<06>적 군락이 하이브 파괴에 분노합니다.");
+	Preserve Trigger();
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 해처리 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
@@ -19662,6 +19996,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 레어 보상만 직접 표시
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
@@ -19676,7 +20011,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4050);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4455);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -19739,6 +20074,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 하이브 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
@@ -19753,7 +20089,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4050);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4455);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -19820,7 +20156,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4050);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 4455);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -19861,6 +20197,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 해처리 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
@@ -19897,7 +20234,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4050);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4455);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 250, ore);
 	Set Resources("Player 2", Add, 250, ore);
@@ -19938,6 +20275,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 레어 보상만 직접 표시
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
@@ -19974,7 +20312,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4050);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4455);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 350, ore);
 	Set Resources("Player 2", Add, 350, ore);
@@ -20015,6 +20353,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 하이브 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
@@ -20051,7 +20390,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4050);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4455);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 450, ore);
 	Set Resources("Player 2", Add, 450, ore);
@@ -22074,7 +22413,7 @@ Actions:
 //============================================================
 //  Player leave handoff (P1~P4)
 //  - Active players emit a heartbeat every trigger cycle.
-//  - P8 transfers the leaver's Men, Buildings, ore, and gas to one survivor.
+//  - The engine reassigns departed Men/Buildings to Neutral(P12); P8 transfers them and the leaver's resources to one survivor.
 //  - Survivors with a different starting race are preferred; ties are random.
 //============================================================
 
@@ -28550,8 +28889,8 @@ Conditions:
 	Deaths("Player 2", "Zerg Beacon", At least, 1);
 	Deaths("Player 1", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 1", "Player 2", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 1", "Player 2", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 2", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 2", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 12);
 	Set Deaths("Player 2", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -28565,8 +28904,8 @@ Conditions:
 	Deaths("Player 3", "Zerg Beacon", At least, 1);
 	Deaths("Player 1", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 1", "Player 3", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 1", "Player 3", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 3", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 3", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 13);
 	Set Deaths("Player 3", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -28580,8 +28919,8 @@ Conditions:
 	Deaths("Player 4", "Zerg Beacon", At least, 1);
 	Deaths("Player 1", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 1", "Player 4", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 1", "Player 4", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 4", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 4", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 14);
 	Set Deaths("Player 4", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -28595,8 +28934,8 @@ Conditions:
 	Deaths("Player 1", "Zerg Beacon", At least, 1);
 	Deaths("Player 2", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 2", "Player 1", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 2", "Player 1", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 1", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 1", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 21);
 	Set Deaths("Player 1", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -28610,8 +28949,8 @@ Conditions:
 	Deaths("Player 3", "Zerg Beacon", At least, 1);
 	Deaths("Player 2", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 2", "Player 3", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 2", "Player 3", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 3", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 3", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 23);
 	Set Deaths("Player 3", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -28625,8 +28964,8 @@ Conditions:
 	Deaths("Player 4", "Zerg Beacon", At least, 1);
 	Deaths("Player 2", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 2", "Player 4", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 2", "Player 4", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 4", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 4", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 24);
 	Set Deaths("Player 4", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -28640,8 +28979,8 @@ Conditions:
 	Deaths("Player 1", "Zerg Beacon", At least, 1);
 	Deaths("Player 3", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 3", "Player 1", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 3", "Player 1", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 1", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 1", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 31);
 	Set Deaths("Player 1", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -28655,8 +28994,8 @@ Conditions:
 	Deaths("Player 2", "Zerg Beacon", At least, 1);
 	Deaths("Player 3", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 3", "Player 2", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 3", "Player 2", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 2", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 2", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 32);
 	Set Deaths("Player 2", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -28670,8 +29009,8 @@ Conditions:
 	Deaths("Player 4", "Zerg Beacon", At least, 1);
 	Deaths("Player 3", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 3", "Player 4", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 3", "Player 4", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 4", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 4", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 34);
 	Set Deaths("Player 4", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -28685,8 +29024,8 @@ Conditions:
 	Deaths("Player 1", "Zerg Beacon", At least, 1);
 	Deaths("Player 4", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 4", "Player 1", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 4", "Player 1", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 1", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 1", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 41);
 	Set Deaths("Player 1", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -28700,8 +29039,8 @@ Conditions:
 	Deaths("Player 2", "Zerg Beacon", At least, 1);
 	Deaths("Player 4", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 4", "Player 2", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 4", "Player 2", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 2", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 2", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 42);
 	Set Deaths("Player 2", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -28715,8 +29054,8 @@ Conditions:
 	Deaths("Player 3", "Zerg Beacon", At least, 1);
 	Deaths("Player 4", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 4", "Player 3", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 4", "Player 3", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 3", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 3", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 43);
 	Set Deaths("Player 3", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
