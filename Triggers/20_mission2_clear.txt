@@ -90,7 +90,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 324);
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 Actions:
-	Display Text Message(Always Display, "<04>클리어 난이도는 <07>쉬움<04>입니다.");
+	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <07>쉬움<04>입니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -110,7 +110,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 324);
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 Actions:
-	Display Text Message(Always Display, "<04>클리어 난이도는 <08>어려움<04>입니다.");
+	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <08>어려움<04>입니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -120,7 +120,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 324);
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 Actions:
-	Display Text Message(Always Display, "<04>클리어 난이도는 <06>매우 어려움<04>입니다.");
+	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <06>매우 어려움<04>입니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

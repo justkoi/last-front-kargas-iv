@@ -1,7 +1,7 @@
 param(
     [string]$Source = "",
     [string]$DestinationDir = "$env:USERPROFILE\Documents\StarCraft\Maps",
-    [string]$DestinationName = "LastFront_KargasIV.scx",
+    [string]$DestinationName = "KargasIV.scx",
     [string]$WorkDir = "E:\SCX_WORK",
     [switch]$WhatIf
 )
@@ -51,12 +51,12 @@ function Resolve-SourceMap([string]$RequestedSource) {
         return Get-Item -LiteralPath $sourcePath
     }
 
-    $preferredSource = Join-Path $PSScriptRoot "최후의 전선 카르가스 IV\LastFront_KargasIV.scx"
+    $preferredSource = Join-Path $PSScriptRoot "최후의 전선 카르가스 IV\KargasIV.scx"
     if (Test-Path -LiteralPath $preferredSource) {
         return Get-Item -LiteralPath $preferredSource
     }
 
-    $sourceMap = Get-ChildItem -Path (Join-Path $PSScriptRoot "*\LastFront_KargasIV.scx") -File |
+    $sourceMap = Get-ChildItem -Path (Join-Path $PSScriptRoot "*\KargasIV.scx") -File |
         Where-Object { $_.BaseName -notmatch "(_clean|_protected)(_|$)" } |
         Sort-Object FullName |
         Select-Object -First 1
@@ -64,7 +64,7 @@ function Resolve-SourceMap([string]$RequestedSource) {
     if ($null -eq $sourceMap) {
         Write-Host "[failed] Source map file was not found."
         Write-Host "[root]   $PSScriptRoot"
-        Write-Host "[pattern] *\LastFront_KargasIV.scx"
+        Write-Host "[pattern] *\KargasIV.scx"
         exit 1
     }
 

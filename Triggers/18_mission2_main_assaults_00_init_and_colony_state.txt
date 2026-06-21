@@ -268,10 +268,10 @@ Conditions:
 	Switch("Switch37", Not Set);
 	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At least, 1);
 Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
+	Set Resources("Player 1", Add, 3000, ore);
+	Set Resources("Player 2", Add, 3000, ore);
+	Set Resources("Player 3", Add, 3000, ore);
+	Set Resources("Player 4", Add, 3000, ore);
 	Set Resources("Player 1", Add, 1000, gas);
 	Set Resources("Player 2", Add, 1000, gas);
 	Set Resources("Player 3", Add, 1000, gas);
@@ -288,10 +288,10 @@ Conditions:
 	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At most, 0);
 	Bring("Player 7", "Zerg Lair", "P7 MainBase", At least, 1);
 Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
+	Set Resources("Player 1", Add, 3000, ore);
+	Set Resources("Player 2", Add, 3000, ore);
+	Set Resources("Player 3", Add, 3000, ore);
+	Set Resources("Player 4", Add, 3000, ore);
 	Set Resources("Player 1", Add, 1000, gas);
 	Set Resources("Player 2", Add, 1000, gas);
 	Set Resources("Player 3", Add, 1000, gas);
@@ -309,10 +309,10 @@ Conditions:
 	Bring("Player 7", "Zerg Lair", "P7 MainBase", At most, 0);
 	Bring("Player 7", "Zerg Hive", "P7 MainBase", At least, 1);
 Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
+	Set Resources("Player 1", Add, 3000, ore);
+	Set Resources("Player 2", Add, 3000, ore);
+	Set Resources("Player 3", Add, 3000, ore);
+	Set Resources("Player 4", Add, 3000, ore);
 	Set Resources("Player 1", Add, 1000, gas);
 	Set Resources("Player 2", Add, 1000, gas);
 	Set Resources("Player 3", Add, 1000, gas);
@@ -328,10 +328,10 @@ Conditions:
 	Switch("Switch38", Not Set);
 	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At least, 1);
 Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
+	Set Resources("Player 1", Add, 3000, ore);
+	Set Resources("Player 2", Add, 3000, ore);
+	Set Resources("Player 3", Add, 3000, ore);
+	Set Resources("Player 4", Add, 3000, ore);
 	Set Resources("Player 1", Add, 1000, gas);
 	Set Resources("Player 2", Add, 1000, gas);
 	Set Resources("Player 3", Add, 1000, gas);
@@ -348,10 +348,10 @@ Conditions:
 	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At most, 0);
 	Bring("Player 6", "Zerg Lair", "P6 MainBase", At least, 1);
 Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
+	Set Resources("Player 1", Add, 3000, ore);
+	Set Resources("Player 2", Add, 3000, ore);
+	Set Resources("Player 3", Add, 3000, ore);
+	Set Resources("Player 4", Add, 3000, ore);
 	Set Resources("Player 1", Add, 1000, gas);
 	Set Resources("Player 2", Add, 1000, gas);
 	Set Resources("Player 3", Add, 1000, gas);
@@ -369,10 +369,10 @@ Conditions:
 	Bring("Player 6", "Zerg Lair", "P6 MainBase", At most, 0);
 	Bring("Player 6", "Zerg Hive", "P6 MainBase", At least, 1);
 Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
+	Set Resources("Player 1", Add, 3000, ore);
+	Set Resources("Player 2", Add, 3000, ore);
+	Set Resources("Player 3", Add, 3000, ore);
+	Set Resources("Player 4", Add, 3000, ore);
 	Set Resources("Player 1", Add, 1000, gas);
 	Set Resources("Player 2", Add, 1000, gas);
 	Set Resources("Player 3", Add, 1000, gas);
@@ -392,7 +392,7 @@ Actions:
 	Run AI Script("+Vi5");
 	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +3000 / 가스 +1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -408,7 +408,7 @@ Actions:
 	Run AI Script("+Vi5");
 	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +3000 / 가스 +1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -425,7 +425,7 @@ Actions:
 	Run AI Script("+Vi5");
 	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +3000 / 가스 +1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -440,7 +440,7 @@ Actions:
 	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +3000 / 가스 +1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -456,7 +456,7 @@ Actions:
 	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +3000 / 가스 +1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -473,7 +473,7 @@ Actions:
 	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +3000 / 가스 +1000");
 }
 // Reveal a colony once its MainBase tech core collapses.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

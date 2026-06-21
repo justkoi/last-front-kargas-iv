@@ -72,8 +72,14 @@
 //    Zerg Broodling       : mission1 AttackPoint1 정신체 격파 회군 틱 타이머 (12 = 1초)
 //    Zerg Overlord        : mission1 AttackPoint1 정신체 격파 회군 잔여 반복 횟수
 //
-//  Player 1~4 DC roles
-//    Tom Kazansky (Wraith): 종족 마커(시작 3초 스냅샷) 1=Terran, 2=Zerg, 3=Protoss. 13e arsenal handoff 테란 우선 판정용. 미사용 영웅 유닛 슬롯.
+//  Player 1~4 DC roles (승계 전용 비생산 오브젝트; 해당 Beacon을 플레이어 소유로 배치/지급/파괴하지 말 것)
+//    Terran Beacon : 종족 마커(시작 3초 스냅샷) 1=Terran, 2=Zerg, 3=Protoss. 13e arsenal handoff 테란 우선 판정용.
+//    Zerg Beacon   : 접속 heartbeat (활성 플레이어가 매 trigger cycle 1로 설정, P8이 cycle 끝에 0으로 초기화)
+//    Protoss Beacon: 이탈 자산 승계 대상 플래그 (0=미선정, 1=현재 승계 대상)
+//
+//  Player 8 additional DC roles
+//    Zerg Beacon   : 이탈 자산 승계 처리 중인 원 소유자 번호 (0=대기, 1=P1, 2=P2, 3=P3, 4=P4)
+//    Terran Beacon : 이탈 자산 승계 전체 알림 코드 (십의 자리=원 소유자, 일의 자리=승계자)
 //
 //  Player 5 DC roles
 //    Zerg Hatchery        : mission1 P5 Hatchery destroy reward + late-wave acceleration counter
@@ -207,6 +213,11 @@
 //    Switch159     : P7 main assault locked after final scream assault batch 10
 //    Switch160     : unused (was P6 mission2 first main assault latch)
 //    Switch161     : unused (was P7 mission2 first main assault latch)
+//    Switch162~165 : P1~P4 heartbeat 최초 확인(처음부터 빈 슬롯 제외)
+//    Switch166~169 : P1~P4 이탈 처리 대기열 등록 완료
+//    Switch170/171 : 이탈 자산 승계자 2-bit 무작위 선택기
+//    Switch172     : 현재 이탈자와 종족이 다른 생존 후보가 1명 이상 존재
+//    Switch173~176 : P1~P4 heartbeat 1회 누락 확인(2회 연속 누락 때만 이탈 등록)
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:

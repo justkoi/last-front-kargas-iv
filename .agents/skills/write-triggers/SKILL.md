@@ -166,6 +166,7 @@ ground-biased or air-biased wave.
    - DC 조작/메시지/세트피스: `Player 5` (M1) 또는 `Player 6` (M2 변종 적). 컴퓨터 슬롯이 살아있어야 그 owner의 트리거가 돔.
    - 플레이어별로 독립 실행되어야 하는 트리거(개인 선택 보급, 개인 수입, 패배): `Player 1, Player 2, Player 3, Player 4` 명시 + `Current Player` 사용.
    - **공용 오브젝트 보상(자원/유닛 제거/상태 변경)은 `Player 8` 같은 단일 owner가 1회만 처리**한다. 그 단일 트리거 안에서 `Set Resources("Player 1"...)` ~ `Player 4`를 모두 명시하고, 보상 완료 스위치를 세운다. 가스 보관소(`11c_mission1_gas_store_rewards`) 패턴을 따른다.
+   - **빈 사람 슬롯의 owner 트리거는 실행되지 않는다.** 솔로 테스트에서 heartbeat DC만 외부에서 흉내 내도 그 슬롯의 `Trigger("Player N")` 자체가 살아나는 것은 아니다. 따라서 이탈 자산처럼 빈 슬롯도 중간 수령자가 될 수 있는 공용 처리에서 `Current Player` 실행에 의존해 자원을 지급하지 말고, 살아 있는 단일 시스템 owner(P8)가 원 소유자와 수령자를 명시해 처리한다.
    - **공용 보상 메시지/사운드/핑은 별도 `Player 1, Player 2, Player 3, Player 4` 트리거에서 표시만 담당**한다. P8/P5/P6 owner의 Display/Ping/WAV는 사람에게 안 보일 수 있다.
    - 금지 패턴: `Trigger("Player 1", "Player 2", "Player 3", "Player 4")` 안에서 전역 one-shot 스위치(`SwitchXX Not Set`)를 검사하면서 `Set Resources("Current Player", ...)`를 지급하면 첫 평가 플레이어만 받을 수 있다. 반대로 그 안에서 `Set Resources("Player 1"... "Player 4")` 전체 지급을 하면 트리거가 플레이어별로 돌며 x4 지급될 위험이 있다.
    - **`All Players` 는 P1~P8 전부** 포함. P8 owned hyper trigger와 충돌하지 않도록 Wait 사용 금지.
@@ -174,6 +175,7 @@ ground-biased or air-biased wave.
 2. **DC 슬롯 패턴**
    - 각 시스템은 자기 DC 슬롯을 가져야 (공유하면 충돌). 슬롯표는 [00_header.txt](../../Triggers/00_header.txt) 에.
    - 새 P8 DC를 배정하거나 기존 P8 DC를 재사용하기 전에는 `Triggers/`뿐 아니라 `TestTriggers/`, `TestTriggersForBuild/`, 현재 import용 합본에서도 같은 owner+unit DC 사용 여부를 검색한다. 테스트 대시보드가 임시 DC를 매 사이클 초기화/복원할 수 있어 실게임 로직과 충돌할 수 있다.
+   - **실제 생성·지급·사망할 가능성이 있는 영웅 유닛은 가능하면 DC 슬롯으로 사용하지 않는다.** 영웅의 실제 사망 수가 상태값을 오염시킬 수 있으므로, 전용으로 예약한 비생산 오브젝트 DC 또는 Switch를 우선 사용한다. 비생산 오브젝트를 DC로 예약했다면 해당 owner에게 배치·지급·파괴하지 않는다는 제약도 `00_header.txt`에 함께 기록한다.
    - 마스터 틱에 들어있는 DC만 자동 증가 (Civilian/Marine/Firebat/Ghost/Medic/SCV/Goliath/Wraith/Vulture/Battlecruiser).
    - 그 외(Valkyrie, Probe, Zealot, Dropship 등)는 플래그/카운터로 수동 Set만 사용.
 

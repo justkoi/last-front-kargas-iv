@@ -4,7 +4,7 @@
 //  복구했다는 메타포로 P9 소유 배럭/팩토리 소유권을 플레이어 1명에게 이양한다.
 //  무적/파괴 없음 - 순수 소유권 이양(플레이어가 시설을 띄워 입구를 열 수 있음).
 //
-//  종족 마커 DC : Tom Kazansky (Wraith) (P1~P4, 미사용 영웅 유닛 슬롯)
+//  종족 마커 DC : Terran Beacon (P1~P4 승계 시스템 전용 비생산 오브젝트 슬롯)
 //    값 1 = 테란, 2 = 저그, 3 = 프로토스. 시작 3초 시점 일꾼으로 스냅샷.
 //  Switch142     : 군수시설 생존 게이트 — P9 BaseEntrance에 배럭 OR 팩토리 중 1개 이상 (1078~1080 스냅샷)
 //  Switch145/146 : 무작위 선택자 1회 추첨(clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4)
@@ -27,7 +27,7 @@ Conditions:
 	Elapsed Time(At most, 5);
 	Command("Current Player", "Terran SCV", At least, 1); //테란 일꾼 보유 : 테란 종족
 Actions:
-	Set Deaths("Current Player", "Tom Kazansky (Wraith)", Set To, 1); //종족 마커 = 1(테란)
+	Set Deaths("Current Player", "Terran Beacon", Set To, 1); //종족 마커 = 1(테란)
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -36,7 +36,7 @@ Conditions:
 	Elapsed Time(At most, 5);
 	Command("Current Player", "Zerg Drone", At least, 1); //저그 일꾼 보유 : 저그 종족
 Actions:
-	Set Deaths("Current Player", "Tom Kazansky (Wraith)", Set To, 2); //종족 마커 = 2(저그)
+	Set Deaths("Current Player", "Terran Beacon", Set To, 2); //종족 마커 = 2(저그)
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -45,7 +45,7 @@ Conditions:
 	Elapsed Time(At most, 5);
 	Command("Current Player", "Protoss Probe", At least, 1); //프로토스 일꾼 보유 : 프로토스 종족
 Actions:
-	Set Deaths("Current Player", "Tom Kazansky (Wraith)", Set To, 3); //종족 마커 = 3(프로토스)
+	Set Deaths("Current Player", "Terran Beacon", Set To, 3); //종족 마커 = 3(프로토스)
 }
 
 //----- (A-pre) 18:00 직전 군수시설 생존 스냅샷 → Switch142 -----//
@@ -83,7 +83,7 @@ Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);                          //미이양 (값싼 가드 먼저)
 	Elapsed Time(At least, 1080);
-	Deaths("Player 1", "Tom Kazansky (Wraith)", Exactly, 1); //P1 종족 = 테란
+	Deaths("Player 1", "Terran Beacon", Exactly, 1); //P1 종족 = 테란
 	Command("Player 1", "Men", At least, 1);               //P1 생존 확인
 	Switch("Switch142", Set);                              //군수시설 생존 확인 (18:00 직전 스냅샷)
 Actions:
@@ -96,7 +96,7 @@ Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
 	Elapsed Time(At least, 1080);
-	Deaths("Player 2", "Tom Kazansky (Wraith)", Exactly, 1); //P2 종족 = 테란
+	Deaths("Player 2", "Terran Beacon", Exactly, 1); //P2 종족 = 테란
 	Command("Player 2", "Men", At least, 1);
 	Switch("Switch142", Set);                              //군수시설 생존 확인 (18:00 직전 스냅샷)
 Actions:
@@ -109,7 +109,7 @@ Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
 	Elapsed Time(At least, 1080);
-	Deaths("Player 3", "Tom Kazansky (Wraith)", Exactly, 1); //P3 종족 = 테란
+	Deaths("Player 3", "Terran Beacon", Exactly, 1); //P3 종족 = 테란
 	Command("Player 3", "Men", At least, 1);
 	Switch("Switch142", Set);                              //군수시설 생존 확인 (18:00 직전 스냅샷)
 Actions:
@@ -122,7 +122,7 @@ Trigger("Player 8"){
 Conditions:
 	Switch("Switch147", Not Set);
 	Elapsed Time(At least, 1080);
-	Deaths("Player 4", "Tom Kazansky (Wraith)", Exactly, 1); //P4 종족 = 테란
+	Deaths("Player 4", "Terran Beacon", Exactly, 1); //P4 종족 = 테란
 	Command("Player 4", "Men", At least, 1);
 	Switch("Switch142", Set);                              //군수시설 생존 확인 (18:00 직전 스냅샷)
 Actions:
