@@ -1,7 +1,7 @@
 //============================================================
 //  Player leave handoff (P1~P4)
 //  - Active players emit a heartbeat every trigger cycle.
-//  - P8 transfers the leaver's Men, Buildings, ore, and gas to one survivor.
+//  - The engine reassigns departed Men/Buildings to Neutral(P12); P8 transfers them and the leaver's resources to one survivor.
 //  - Survivors with a different starting race are preferred; ties are random.
 //============================================================
 
@@ -6477,8 +6477,12 @@ Conditions:
 	Deaths("Player 2", "Zerg Beacon", At least, 1);
 	Deaths("Player 1", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 1", "Player 2", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 1", "Player 2", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 2", "Zerg Larva", All, "Anywhere"); //Larva is outside Men; transfer it explicitly before its Hatchery/Lair/Hive
+	Give Units to Player("Player 12", "Player 2", "Zerg Egg", All, "Anywhere"); //transfer Zerg morphs that are outside Men
+	Give Units to Player("Player 12", "Player 2", "Cocoon", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 2", "Zerg Lurker Egg", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 2", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 2", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 12);
 	Set Deaths("Player 2", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6492,8 +6496,12 @@ Conditions:
 	Deaths("Player 3", "Zerg Beacon", At least, 1);
 	Deaths("Player 1", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 1", "Player 3", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 1", "Player 3", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 3", "Zerg Larva", All, "Anywhere"); //Larva is outside Men; transfer it explicitly before its Hatchery/Lair/Hive
+	Give Units to Player("Player 12", "Player 3", "Zerg Egg", All, "Anywhere"); //transfer Zerg morphs that are outside Men
+	Give Units to Player("Player 12", "Player 3", "Cocoon", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 3", "Zerg Lurker Egg", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 3", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 3", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 13);
 	Set Deaths("Player 3", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6507,8 +6515,12 @@ Conditions:
 	Deaths("Player 4", "Zerg Beacon", At least, 1);
 	Deaths("Player 1", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 1", "Player 4", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 1", "Player 4", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 4", "Zerg Larva", All, "Anywhere"); //Larva is outside Men; transfer it explicitly before its Hatchery/Lair/Hive
+	Give Units to Player("Player 12", "Player 4", "Zerg Egg", All, "Anywhere"); //transfer Zerg morphs that are outside Men
+	Give Units to Player("Player 12", "Player 4", "Cocoon", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 4", "Zerg Lurker Egg", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 4", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 4", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 14);
 	Set Deaths("Player 4", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6522,8 +6534,12 @@ Conditions:
 	Deaths("Player 1", "Zerg Beacon", At least, 1);
 	Deaths("Player 2", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 2", "Player 1", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 2", "Player 1", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 1", "Zerg Larva", All, "Anywhere"); //Larva is outside Men; transfer it explicitly before its Hatchery/Lair/Hive
+	Give Units to Player("Player 12", "Player 1", "Zerg Egg", All, "Anywhere"); //transfer Zerg morphs that are outside Men
+	Give Units to Player("Player 12", "Player 1", "Cocoon", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 1", "Zerg Lurker Egg", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 1", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 1", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 21);
 	Set Deaths("Player 1", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6537,8 +6553,12 @@ Conditions:
 	Deaths("Player 3", "Zerg Beacon", At least, 1);
 	Deaths("Player 2", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 2", "Player 3", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 2", "Player 3", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 3", "Zerg Larva", All, "Anywhere"); //Larva is outside Men; transfer it explicitly before its Hatchery/Lair/Hive
+	Give Units to Player("Player 12", "Player 3", "Zerg Egg", All, "Anywhere"); //transfer Zerg morphs that are outside Men
+	Give Units to Player("Player 12", "Player 3", "Cocoon", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 3", "Zerg Lurker Egg", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 3", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 3", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 23);
 	Set Deaths("Player 3", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6552,8 +6572,12 @@ Conditions:
 	Deaths("Player 4", "Zerg Beacon", At least, 1);
 	Deaths("Player 2", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 2", "Player 4", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 2", "Player 4", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 4", "Zerg Larva", All, "Anywhere"); //Larva is outside Men; transfer it explicitly before its Hatchery/Lair/Hive
+	Give Units to Player("Player 12", "Player 4", "Zerg Egg", All, "Anywhere"); //transfer Zerg morphs that are outside Men
+	Give Units to Player("Player 12", "Player 4", "Cocoon", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 4", "Zerg Lurker Egg", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 4", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 4", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 24);
 	Set Deaths("Player 4", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6567,8 +6591,12 @@ Conditions:
 	Deaths("Player 1", "Zerg Beacon", At least, 1);
 	Deaths("Player 3", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 3", "Player 1", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 3", "Player 1", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 1", "Zerg Larva", All, "Anywhere"); //Larva is outside Men; transfer it explicitly before its Hatchery/Lair/Hive
+	Give Units to Player("Player 12", "Player 1", "Zerg Egg", All, "Anywhere"); //transfer Zerg morphs that are outside Men
+	Give Units to Player("Player 12", "Player 1", "Cocoon", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 1", "Zerg Lurker Egg", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 1", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 1", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 31);
 	Set Deaths("Player 1", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6582,8 +6610,12 @@ Conditions:
 	Deaths("Player 2", "Zerg Beacon", At least, 1);
 	Deaths("Player 3", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 3", "Player 2", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 3", "Player 2", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 2", "Zerg Larva", All, "Anywhere"); //Larva is outside Men; transfer it explicitly before its Hatchery/Lair/Hive
+	Give Units to Player("Player 12", "Player 2", "Zerg Egg", All, "Anywhere"); //transfer Zerg morphs that are outside Men
+	Give Units to Player("Player 12", "Player 2", "Cocoon", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 2", "Zerg Lurker Egg", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 2", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 2", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 32);
 	Set Deaths("Player 2", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6597,8 +6629,12 @@ Conditions:
 	Deaths("Player 4", "Zerg Beacon", At least, 1);
 	Deaths("Player 3", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 3", "Player 4", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 3", "Player 4", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 4", "Zerg Larva", All, "Anywhere"); //Larva is outside Men; transfer it explicitly before its Hatchery/Lair/Hive
+	Give Units to Player("Player 12", "Player 4", "Zerg Egg", All, "Anywhere"); //transfer Zerg morphs that are outside Men
+	Give Units to Player("Player 12", "Player 4", "Cocoon", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 4", "Zerg Lurker Egg", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 4", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 4", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 34);
 	Set Deaths("Player 4", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6612,8 +6648,12 @@ Conditions:
 	Deaths("Player 1", "Zerg Beacon", At least, 1);
 	Deaths("Player 4", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 4", "Player 1", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 4", "Player 1", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 1", "Zerg Larva", All, "Anywhere"); //Larva is outside Men; transfer it explicitly before its Hatchery/Lair/Hive
+	Give Units to Player("Player 12", "Player 1", "Zerg Egg", All, "Anywhere"); //transfer Zerg morphs that are outside Men
+	Give Units to Player("Player 12", "Player 1", "Cocoon", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 1", "Zerg Lurker Egg", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 1", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 1", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 41);
 	Set Deaths("Player 1", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6627,8 +6667,12 @@ Conditions:
 	Deaths("Player 2", "Zerg Beacon", At least, 1);
 	Deaths("Player 4", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 4", "Player 2", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 4", "Player 2", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 2", "Zerg Larva", All, "Anywhere"); //Larva is outside Men; transfer it explicitly before its Hatchery/Lair/Hive
+	Give Units to Player("Player 12", "Player 2", "Zerg Egg", All, "Anywhere"); //transfer Zerg morphs that are outside Men
+	Give Units to Player("Player 12", "Player 2", "Cocoon", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 2", "Zerg Lurker Egg", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 2", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 2", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 42);
 	Set Deaths("Player 2", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6642,8 +6686,12 @@ Conditions:
 	Deaths("Player 3", "Zerg Beacon", At least, 1);
 	Deaths("Player 4", "Zerg Beacon", Exactly, 0);
 Actions:
-	Give Units to Player("Player 4", "Player 3", "Buildings", All, "Anywhere"); //기지 전체 이양 : 선택된 자원 승계자와 동일
-	Give Units to Player("Player 4", "Player 3", "Men", All, "Anywhere"); //병력 전체 이양 : 시스템 유닛/파워업 제외
+	Give Units to Player("Player 12", "Player 3", "Zerg Larva", All, "Anywhere"); //Larva is outside Men; transfer it explicitly before its Hatchery/Lair/Hive
+	Give Units to Player("Player 12", "Player 3", "Zerg Egg", All, "Anywhere"); //transfer Zerg morphs that are outside Men
+	Give Units to Player("Player 12", "Player 3", "Cocoon", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 3", "Zerg Lurker Egg", All, "Anywhere");
+	Give Units to Player("Player 12", "Player 3", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
+	Give Units to Player("Player 12", "Player 3", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
 	Set Deaths("Player 8", "Terran Beacon", Set To, 43);
 	Set Deaths("Player 3", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
