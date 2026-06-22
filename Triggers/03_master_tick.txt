@@ -22,6 +22,18 @@ Actions:
 	Set Deaths("Player 8", "Protoss Dragoon", Add, 1);
 	Set Deaths("Player 8", "Protoss High Templar", Add, 1);
 	Set Deaths("Player 8", "Terran Science Vessel", Add, 1);
+	Set Deaths("Player 8", "Protoss Gateway", Add, 1); //스캔 페이즈 카운터 : 침입 감지 Bring 분산용 (0→1→2→3 순환)
+	Preserve Trigger();
+}
+
+// 스캔 페이즈 wrap : 4가 되면 0으로 되돌려 0~3을 순환시킨다.
+// master_tick 증가 직후 + base_defense(파일14) 평가 이전에 위치해야
+// 침입 트리거가 한 사이클에 안정된 페이즈 값을 본다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", At least, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Gateway", Set To, 0);
 	Preserve Trigger();
 }
 
