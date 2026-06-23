@@ -27,8 +27,10 @@
 //  Player 8 DC roles
 //    Terran Civilian      : zerg resource supply timer
 //    Terran Marine        : P5 base defense cooldown
-//    Terran Armory        : P6 base defense cooldown
-//    Protoss Zealot       : P7 base defense cooldown
+//    Terran Armory        : P6 ground base defense cooldown
+//    Protoss Forge        : P6 air base defense cooldown
+//    Protoss Zealot       : P7 ground base defense cooldown
+//    Protoss Cybernetics Core: P7 air base defense cooldown
 //    Terran Valkyrie      : mission phase flag (1=M1, 3=M2, 4=clear)
 //    Terran Vulture       : mission2 elapsed timer (756=public/objectives+assault timer start)
 //    Protoss Probe        : P5 scout rotation index

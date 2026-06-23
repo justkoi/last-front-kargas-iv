@@ -567,7 +567,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -593,7 +594,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -619,7 +621,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -645,7 +648,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -671,7 +675,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -697,7 +702,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -723,7 +729,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -749,7 +756,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -775,7 +783,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -801,7 +810,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -827,7 +837,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -853,7 +864,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -879,7 +891,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -905,7 +918,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -931,7 +945,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -957,7 +972,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -983,7 +999,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -1009,7 +1026,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -1035,7 +1053,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -1061,7 +1080,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -1087,7 +1107,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -1113,7 +1134,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -1139,7 +1161,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -1165,7 +1188,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -1191,7 +1215,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -1217,7 +1242,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -1243,7 +1269,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -1269,7 +1296,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -1295,7 +1323,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -1321,7 +1350,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -1347,7 +1377,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -1373,7 +1404,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
