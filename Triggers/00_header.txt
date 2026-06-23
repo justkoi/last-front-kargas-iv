@@ -79,6 +79,12 @@
 //    Terran Command Center: mission2 P7 Hive 분노 후속 메시지 대기열
 //    Terran Physics Lab   : mission2 생산 구조 보상/분노 출력 코드 (0=대기, 1~6=보상 P6 H/L/H,P7 H/L/H, 11~16=해당 분노)
 //    위 7개 P8 DC 예약 건물은 Player 8 소유로 배치/지급/파괴하지 말 것.
+//    Terran Factory       : mission2 군락 분노 리더보드 갱신 타이머 (12틱 = 약 1초)
+//    Terran Starport      : mission2 군락 분노 계산용 P6 원본 DC 백업
+//    Terran Science Facility: mission2 군락 분노 계산용 P6 x100 작업값
+//    Terran Engineering Bay: mission2 군락 분노 계산용 P7 원본 DC 백업
+//    Terran Refinery      : mission2 군락 분노 계산용 P7 x100 작업값
+//    위 5개 리더보드 전용 P8 DC 건물도 Player 8 소유로 배치/지급/파괴하지 말 것.
 //
 //  Player 1~4 DC roles (승계 전용 비생산 오브젝트; 해당 Beacon을 플레이어 소유로 배치/지급/파괴하지 말 것)
 //    Terran Beacon : 종족 마커(시작 3초 스냅샷) 1=Terran, 2=Zerg, 3=Protoss. 13e arsenal handoff 테란 우선 판정용.

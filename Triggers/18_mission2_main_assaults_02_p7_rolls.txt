@@ -230,7 +230,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 22260);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 15479);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 23219);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch131", Set);
@@ -251,7 +251,7 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 22260);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 15479);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 23219);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch131", Set);
@@ -273,7 +273,7 @@ Conditions:
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 22260);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 15479);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 23219);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch131", Set);
@@ -293,7 +293,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 22800);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 15839);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 23759);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch131", Set);
@@ -314,7 +314,7 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 22800);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 15839);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 23759);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch131", Set);
@@ -336,7 +336,7 @@ Conditions:
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 22800);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 15839);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 23759);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch131", Set);
@@ -356,7 +356,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 23340);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 16199);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 24299);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch131", Set);
@@ -377,7 +377,7 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 23340);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 16199);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 24299);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch131", Set);
@@ -399,7 +399,7 @@ Conditions:
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 23340);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 16199);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 24299);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch131", Set);
@@ -419,7 +419,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 7", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 22800);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 15839);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 23759);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch131", Set);
@@ -440,7 +440,7 @@ Conditions:
 	Command("Player 7", "Zerg Hive", At most, 0);
 	Command("Player 7", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 22800);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 15839);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 23759);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch131", Set);
@@ -462,7 +462,7 @@ Conditions:
 	Command("Player 7", "Zerg Lair", At most, 0);
 	Command("Player 7", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Zerg Hydralisk", At least, 22800);
-	Deaths("Player 8", "Zerg Hydralisk", At most, 15839);
+	Deaths("Player 8", "Zerg Hydralisk", At most, 23759);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 	Switch("Switch32", Not Set);
 	Switch("Switch131", Set);

@@ -121,9 +121,9 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 168);
 	Deaths("Player 8", "Terran Vulture", At most, 192);
 Actions:
-	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("Player 12", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

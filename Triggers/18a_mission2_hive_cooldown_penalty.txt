@@ -304,13 +304,25 @@ Actions:
 	Preserve Trigger();
 }
 
-// 분노 단계: 보상 다음 사이클에 구조물 종류별 붉은 메시지만 표시한다.
+// 분노 단계: 보상 다음 사이클에 구조물 종류별 붉은 메시지와 군락 핑을 표시한다.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 군락 가속 시스템 활성 구간
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 11); //P6 해처리 분노 출력 코드
 Actions:
 	Display Text Message(Always Display, "<06>적 군락이 해처리 파괴에 분노합니다.");
+	Minimap Ping("P6 Home"); //갈색 저그 분노 위치 안내 : P6 군락 중심에 핑 표시
+	Preserve Trigger();
+}
+
+// 어려움 이상은 P6 해처리 파괴가 반대 군락도 가속하므로 P7에도 같은 사이클 핑을 표시한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 11); //P6 해처리 분노 출력 코드
+	Deaths("Player 8", "Terran Academy", At least, 3); //어려움/매우 어려움 : 반대 군락 공세도 함께 가속
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+Actions:
+	Minimap Ping("P7 Home"); //동시에 분노한 하얀색 저그 군락 중심 표시
 	Preserve Trigger();
 }
 
@@ -320,6 +332,18 @@ Conditions:
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 12); //P6 레어 분노 출력 코드
 Actions:
 	Display Text Message(Always Display, "<06>적 군락이 레어 파괴에 분노합니다.");
+	Minimap Ping("P6 Home"); //갈색 저그 분노 위치 안내 : P6 군락 중심에 핑 표시
+	Preserve Trigger();
+}
+
+// 어려움 이상은 P6 레어 파괴가 반대 군락도 가속하므로 P7에도 같은 사이클 핑을 표시한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 12); //P6 레어 분노 출력 코드
+	Deaths("Player 8", "Terran Academy", At least, 3); //어려움/매우 어려움 : 반대 군락 공세도 함께 가속
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+Actions:
+	Minimap Ping("P7 Home"); //동시에 분노한 하얀색 저그 군락 중심 표시
 	Preserve Trigger();
 }
 
@@ -329,6 +353,18 @@ Conditions:
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 13); //P6 하이브 분노 출력 코드
 Actions:
 	Display Text Message(Always Display, "<06>적 군락이 하이브 파괴에 분노합니다.");
+	Minimap Ping("P6 Home"); //갈색 저그 분노 위치 안내 : P6 군락 중심에 핑 표시
+	Preserve Trigger();
+}
+
+// 어려움 이상은 P6 하이브 파괴가 반대 군락도 가속하므로 P7에도 같은 사이클 핑을 표시한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 13); //P6 하이브 분노 출력 코드
+	Deaths("Player 8", "Terran Academy", At least, 3); //어려움/매우 어려움 : 반대 군락 공세도 함께 가속
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+Actions:
+	Minimap Ping("P7 Home"); //동시에 분노한 하얀색 저그 군락 중심 표시
 	Preserve Trigger();
 }
 
@@ -338,6 +374,18 @@ Conditions:
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 14); //P7 해처리 분노 출력 코드
 Actions:
 	Display Text Message(Always Display, "<06>적 군락이 해처리 파괴에 분노합니다.");
+	Minimap Ping("P7 Home"); //하얀색 저그 분노 위치 안내 : P7 군락 중심에 핑 표시
+	Preserve Trigger();
+}
+
+// 어려움 이상은 P7 해처리 파괴가 반대 군락도 가속하므로 P6에도 같은 사이클 핑을 표시한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 14); //P7 해처리 분노 출력 코드
+	Deaths("Player 8", "Terran Academy", At least, 3); //어려움/매우 어려움 : 반대 군락 공세도 함께 가속
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+Actions:
+	Minimap Ping("P6 Home"); //동시에 분노한 갈색 저그 군락 중심 표시
 	Preserve Trigger();
 }
 
@@ -347,6 +395,18 @@ Conditions:
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 15); //P7 레어 분노 출력 코드
 Actions:
 	Display Text Message(Always Display, "<06>적 군락이 레어 파괴에 분노합니다.");
+	Minimap Ping("P7 Home"); //하얀색 저그 분노 위치 안내 : P7 군락 중심에 핑 표시
+	Preserve Trigger();
+}
+
+// 어려움 이상은 P7 레어 파괴가 반대 군락도 가속하므로 P6에도 같은 사이클 핑을 표시한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 15); //P7 레어 분노 출력 코드
+	Deaths("Player 8", "Terran Academy", At least, 3); //어려움/매우 어려움 : 반대 군락 공세도 함께 가속
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+Actions:
+	Minimap Ping("P6 Home"); //동시에 분노한 갈색 저그 군락 중심 표시
 	Preserve Trigger();
 }
 
@@ -356,6 +416,18 @@ Conditions:
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 16); //P7 하이브 분노 출력 코드
 Actions:
 	Display Text Message(Always Display, "<06>적 군락이 하이브 파괴에 분노합니다.");
+	Minimap Ping("P7 Home"); //하얀색 저그 분노 위치 안내 : P7 군락 중심에 핑 표시
+	Preserve Trigger();
+}
+
+// 어려움 이상은 P7 하이브 파괴가 반대 군락도 가속하므로 P6에도 같은 사이클 핑을 표시한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 16); //P7 하이브 분노 출력 코드
+	Deaths("Player 8", "Terran Academy", At least, 3); //어려움/매우 어려움 : 반대 군락 공세도 함께 가속
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+Actions:
+	Minimap Ping("P6 Home"); //동시에 분노한 갈색 저그 군락 중심 표시
 	Preserve Trigger();
 }
 
