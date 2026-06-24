@@ -27,8 +27,10 @@
 //  Player 8 DC roles
 //    Terran Civilian      : zerg resource supply timer
 //    Terran Marine        : P5 base defense cooldown
-//    Terran Armory        : P6 base defense cooldown
-//    Protoss Zealot       : P7 base defense cooldown
+//    Terran Armory        : P6 ground base defense cooldown
+//    Protoss Forge        : P6 air base defense cooldown
+//    Protoss Zealot       : P7 ground base defense cooldown
+//    Protoss Cybernetics Core: P7 air base defense cooldown
 //    Terran Valkyrie      : mission phase flag (1=M1, 3=M2, 4=clear)
 //    Terran Vulture       : mission2 elapsed timer (756=public/objectives+assault timer start)
 //    Protoss Probe        : P5 scout rotation index
@@ -1175,8 +1177,10 @@ Actions:
 	Set Deaths("Player 8", "Terran Civilian", Add, 1);
 	Set Deaths("Player 8", "Terran Marine", Add, 1);
 	Set Deaths("Player 8", "Terran Armory", Add, 1);
+	Set Deaths("Player 8", "Protoss Forge", Add, 1);
 	Set Deaths("Player 8", "Terran Barracks", Add, 1);
 	Set Deaths("Player 8", "Protoss Zealot", Add, 1);
+	Set Deaths("Player 8", "Protoss Cybernetics Core", Add, 1);
 	Set Deaths("Player 8", "Terran Firebat", Add, 1);
 	Set Deaths("Player 8", "Protoss Arbiter", Add, 1);
 	Set Deaths("Player 8", "Terran Goliath", Add, 1);
@@ -5611,8 +5615,18 @@ Actions:
 //-----------------------------------------------------------------//
 //  Base defense response
 //
-//  P5: Terran Marine DC, P6: Terran Armory DC, P7: Protoss Zealot DC
-//  P5 cooldown: 10s = 120 ticks. P6/P7 cooldown: 6s = 72 ticks.
+//  P5: Terran Marine DC
+//  P6: Terran Armory (ground) / Protoss Forge (air)
+//  P7: Protoss Zealot (ground) / Protoss Cybernetics Core (air)
+//  P5 cooldown: 10s = 120 ticks. P6/P7 ground/air cooldowns: 5s = 60 ticks.
+//  P6/P7 ground responders: Zergling, Lurker, Ultralisk, Guardian,
+//  Queen, Defiler, Infested Terran. Home defense sends one Overlord to a
+//  ground intruder first, or to an air intruder only when no ground intruder
+//  is present in that colony.
+//  P6/P7 air responders: Hydralisk, Mutalisk, Scourge, Devourer.
+//  Hydralisks and Mutalisks also reinforce ground defense only while both
+//  colony air-defense areas are clear. Any air intruder suppresses that
+//  fallback so simultaneous ground/air alerts cannot overwrite their air order.
 //
 //  P5 uses P5 Area for detection and P5 Intruder as the moving target.
 //  P6/P7 Area Ground/Air locations are map-side filtered. Each response
@@ -5723,15 +5737,13 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
@@ -5744,8 +5756,28 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -5754,8 +5786,20 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
 	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
@@ -5764,39 +5808,37 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Protoss Forge", Set To, 0);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
@@ -5809,8 +5851,28 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -5819,8 +5881,20 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
 	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
@@ -5829,39 +5903,37 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Protoss Forge", Set To, 0);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
@@ -5874,8 +5946,28 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -5884,8 +5976,20 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
 	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
@@ -5894,39 +5998,37 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Protoss Forge", Set To, 0);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
@@ -5939,8 +6041,28 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -5949,8 +6071,20 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
 	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
@@ -5959,24 +6093,24 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Protoss Forge", Set To, 0);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
@@ -5988,16 +6122,14 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
@@ -6008,8 +6140,29 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
@@ -6019,50 +6172,46 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Protoss Forge", Set To, 0);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
@@ -6073,8 +6222,29 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
+	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
@@ -6084,50 +6254,46 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Protoss Forge", Set To, 0);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
@@ -6138,8 +6304,29 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
+	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
@@ -6149,50 +6336,46 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Protoss Forge", Set To, 0);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
@@ -6203,8 +6386,29 @@ Actions:
 
 Trigger("Player 6"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
+	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
@@ -6214,34 +6418,32 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Terran Armory", At least, 72);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Armory", Set To, 0);
-	Set Deaths("Player 8", "Terran Firebat", Set To, 540);
+	Set Deaths("Player 8", "Protoss Forge", Set To, 0);
+	Set Deaths("Player 8", "Terran Firebat", Set To, 600);
 	Preserve Trigger();
 }
 
@@ -6250,15 +6452,13 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
@@ -6271,8 +6471,28 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -6281,8 +6501,20 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
 	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
@@ -6291,39 +6523,37 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Cybernetics Core", Set To, 0);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
@@ -6336,8 +6566,28 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -6346,8 +6596,20 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
 	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
@@ -6356,39 +6618,37 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Cybernetics Core", Set To, 0);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
@@ -6401,8 +6661,28 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -6411,8 +6691,20 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
 	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
@@ -6421,39 +6713,37 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Cybernetics Core", Set To, 0);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
@@ -6466,8 +6756,28 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -6476,8 +6786,20 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
 	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
@@ -6486,24 +6808,24 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Cybernetics Core", Set To, 0);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
@@ -6515,16 +6837,14 @@ Actions:
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
@@ -6535,8 +6855,29 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
@@ -6546,50 +6887,46 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Cybernetics Core", Set To, 0);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
@@ -6600,8 +6937,29 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
+	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
@@ -6611,50 +6969,46 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Cybernetics Core", Set To, 0);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
@@ -6665,8 +7019,29 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
+	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
@@ -6676,50 +7051,46 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Cybernetics Core", Set To, 0);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
@@ -6730,8 +7101,29 @@ Actions:
 
 Trigger("Player 7"){
 Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
+	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
@@ -6741,34 +7133,32 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
-	Deaths("Player 8", "Protoss Zealot", At least, 72);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Protoss Zealot", Set To, 0);
-	Set Deaths("Player 8", "Protoss Arbiter", Set To, 540);
+	Set Deaths("Player 8", "Protoss Cybernetics Core", Set To, 0);
+	Set Deaths("Player 8", "Protoss Arbiter", Set To, 600);
 	Preserve Trigger();
 }
 //-----------------------------------------------------------------//
@@ -17468,7 +17858,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -17494,7 +17885,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -17520,7 +17912,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -17546,7 +17939,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -17572,7 +17966,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -17598,7 +17993,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -17624,7 +18020,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -17650,7 +18047,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 180); //P6 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -17676,7 +18074,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -17702,7 +18101,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -17728,7 +18128,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -17754,7 +18155,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -17780,7 +18182,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -17806,7 +18209,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -17832,7 +18236,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -17858,7 +18263,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 360); //P6 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -17884,7 +18290,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -17910,7 +18317,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -17936,7 +18344,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -17962,7 +18371,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -17988,7 +18398,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -18014,7 +18425,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -18040,7 +18452,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -18066,7 +18479,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 540); //P6 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -18092,7 +18506,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -18118,7 +18533,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -18144,7 +18560,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -18170,7 +18587,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Not Set); //P6 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -18196,7 +18614,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -18222,7 +18641,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Not Set); //P6 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -18248,7 +18668,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Not Set); //P6 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -18274,7 +18695,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Lurker", Exactly, 2); //P6 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Scourge", Exactly, 720); //P6 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Terran Armory", At least, 84); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Terran Armory", At least, 72); //P6 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Forge", At least, 72); //P6 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch14", Set); //P6 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch15", Set); //P6 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch16", Set); //P6 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -18878,7 +19300,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -18904,7 +19327,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -18930,7 +19354,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -18956,7 +19381,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -18982,7 +19408,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19008,7 +19435,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19034,7 +19462,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19060,7 +19489,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 180); //P7 waypoint 창 타이머 : final spawn 후 15초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19086,7 +19516,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -19112,7 +19543,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -19138,7 +19570,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -19164,7 +19597,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -19190,7 +19624,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19216,7 +19651,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19242,7 +19678,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19268,7 +19705,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 360); //P7 waypoint 창 타이머 : final spawn 후 30초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19294,7 +19732,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -19320,7 +19759,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -19346,7 +19786,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -19372,7 +19813,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -19398,7 +19840,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19424,7 +19867,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19450,7 +19894,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19476,7 +19921,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 540); //P7 waypoint 창 타이머 : final spawn 후 45초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19502,7 +19948,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -19528,7 +19975,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -19554,7 +20002,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -19580,7 +20029,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Not Set); //P7 Waypoint 랜덤 비트 3 : Not Set 조합으로 Waypoint1~5 경유지 선택
@@ -19606,7 +20056,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19632,7 +20083,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Not Set); //P7 Waypoint 랜덤 비트 2 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19658,7 +20110,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Not Set); //P7 Waypoint 랜덤 비트 1 : Not Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택
@@ -19684,7 +20137,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 종료 전 게이트 : 클리어 이후 릴레이 중단
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 2); //P7 주공세 상태 : 2일 때 Waypoint -> Hunt 릴레이 단계
 	Deaths("Player 8", "Zerg Guardian", Exactly, 720); //P7 waypoint 창 타이머 : final spawn 후 60초 시점의 본진 잔류병력 재집결
-	Deaths("Player 8", "Protoss Zealot", At least, 84); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Zealot", At least, 72); //P7 본진 방어 쿨다운 여유 : 방어 반응 직후의 재집결 명령 충돌 방지
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 72); //P7 공중 방어 쿨다운 여유 : 공중 방어 직후의 재집결 명령 충돌 방지
 	Switch("Switch17", Set); //P7 Waypoint 랜덤 비트 1 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch18", Set); //P7 Waypoint 랜덤 비트 2 : Set 조합으로 Waypoint1~5 경유지 선택
 	Switch("Switch19", Set); //P7 Waypoint 랜덤 비트 3 : Set 조합으로 Waypoint1~5 경유지 선택

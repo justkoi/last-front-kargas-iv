@@ -5,6 +5,14 @@
 //  P6: Terran Armory (ground) / Protoss Forge (air)
 //  P7: Protoss Zealot (ground) / Protoss Cybernetics Core (air)
 //  P5 cooldown: 10s = 120 ticks. P6/P7 ground/air cooldowns: 5s = 60 ticks.
+//  P6/P7 ground responders: Zergling, Lurker, Ultralisk, Guardian,
+//  Queen, Defiler, Infested Terran. Home defense sends one Overlord to a
+//  ground intruder first, or to an air intruder only when no ground intruder
+//  is present in that colony.
+//  P6/P7 air responders: Hydralisk, Mutalisk, Scourge, Devourer.
+//  Hydralisks and Mutalisks also reinforce ground defense only while both
+//  colony air-defense areas are clear. Any air intruder suppresses that
+//  fallback so simultaneous ground/air alerts cannot overwrite their air order.
 //
 //  P5 uses P5 Area for detection and P5 Intruder as the moving target.
 //  P6/P7 Area Ground/Air locations are map-side filtered. Each response
@@ -121,9 +129,7 @@ Conditions:
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
@@ -131,6 +137,26 @@ Actions:
 	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
 	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
 	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -146,8 +172,20 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
 	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
@@ -186,9 +224,7 @@ Conditions:
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
@@ -196,6 +232,26 @@ Actions:
 	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
 	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
 	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -211,8 +267,20 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
 	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
@@ -251,9 +319,7 @@ Conditions:
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
@@ -261,6 +327,26 @@ Actions:
 	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
 	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
 	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -276,8 +362,20 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
 	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
@@ -316,9 +414,7 @@ Conditions:
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
@@ -326,6 +422,26 @@ Actions:
 	Order("Player 6", "Infested Terran", "East Area", "P6 Intruder", Patrol);
 	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
 	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -341,8 +457,20 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 6", "Zerg Overlord", "P6 MainBase", "P6 Picket");
 	Order("Player 6", "Zerg Overlord", "P6 Picket", "P6 Intruder", Patrol);
 	Preserve Trigger();
@@ -387,14 +515,33 @@ Conditions:
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Infested Terran", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -411,8 +558,6 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -452,14 +597,33 @@ Conditions:
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Infested Terran", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
+	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -476,8 +640,6 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -517,14 +679,33 @@ Conditions:
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Infested Terran", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
+	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -541,8 +722,6 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -582,14 +761,33 @@ Conditions:
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 6", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Infested Terran", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Terran Armory", At least, 60);
+	Switch("Switch84", Not Set);
+	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
+	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -606,8 +804,6 @@ Actions:
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 6", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -648,9 +844,7 @@ Conditions:
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
@@ -658,6 +852,26 @@ Actions:
 	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
 	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
 	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -673,8 +887,20 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
 	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
@@ -713,9 +939,7 @@ Conditions:
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
@@ -723,6 +947,26 @@ Actions:
 	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
 	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
 	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -738,8 +982,20 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
 	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
@@ -778,9 +1034,7 @@ Conditions:
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
@@ -788,6 +1042,26 @@ Actions:
 	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
 	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
 	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -803,8 +1077,20 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
 	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
@@ -843,9 +1129,7 @@ Conditions:
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Ground", "P7 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
@@ -853,6 +1137,26 @@ Actions:
 	Order("Player 7", "Infested Terran", "East Area", "P7 Intruder", Patrol);
 	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
 	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -868,8 +1172,20 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P7 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
+	Bring("Player 1", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Ground", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Ground", At most, 0);
+Actions:
 	Move Location("Player 7", "Zerg Overlord", "P7 MainBase", "P7 Picket");
 	Order("Player 7", "Zerg Overlord", "P7 Picket", "P7 Intruder", Patrol);
 	Preserve Trigger();
@@ -914,14 +1230,33 @@ Conditions:
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Infested Terran", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -938,8 +1273,6 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -979,14 +1312,33 @@ Conditions:
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Infested Terran", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
+	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -1003,8 +1355,6 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -1044,14 +1394,33 @@ Conditions:
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Infested Terran", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
+	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -1068,8 +1437,6 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -1109,14 +1476,33 @@ Conditions:
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Ground", "P6 Intruder");
 	Order("Player 7", "Zerg Zergling", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Lurker", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Ultralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Guardian", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Infested Terran", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Zealot", At least, 60);
+	Switch("Switch85", Not Set);
+	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
+	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
+	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
+	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
+Actions:
+	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
+	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
@@ -1133,8 +1519,6 @@ Actions:
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Queen", "East Area", "P6 Intruder", Patrol);
-	Order("Player 7", "Zerg Defiler", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
 }
 
