@@ -2,26 +2,26 @@
 //  마스터 틱 - 모든 독립 타이머 동시 증가 (12회/초)
 //-----------------------------------------------------------------//
 
-// 최후의 공세 발진 후 생존 P6의 Hunt 총공격 타이머를 3배속으로 진행한다.
+// 최후의 공세 중 P6 기지 방어 명령이 중단된 동안 Hunt 총공격 타이머를 3배속으로 진행한다.
 // 아래 +2와 기본 타이머의 +1을 합쳐 720틱 임계치에 20초(240사이클)마다 도달한다.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch75", Set);
-	Switch("Switch78", Set);
+	Switch("Switch84", Set);
 	Switch("Switch31", Not Set);
 Actions:
 	Set Deaths("Player 8", "Terran Firebat", Add, 2);
 	Preserve Trigger();
 }
 
-// 최후의 공세 발진 후 생존 P7의 Hunt 총공격 타이머를 3배속으로 진행한다.
+// 최후의 공세 중 P7 기지 방어 명령이 중단된 동안 Hunt 총공격 타이머를 3배속으로 진행한다.
 // 아래 +2와 기본 타이머의 +1을 합쳐 720틱 임계치에 20초(240사이클)마다 도달한다.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch74", Set);
-	Switch("Switch78", Set);
+	Switch("Switch85", Set);
 	Switch("Switch32", Not Set);
 Actions:
 	Set Deaths("Player 8", "Protoss Arbiter", Add, 2);

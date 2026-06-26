@@ -141,8 +141,8 @@
 //    Switch52   : P7 mission2 penalty assault relay pulse open
 //    Switch53   : P6 mission2 penalty assault spawn rally pulse open
 //    Switch54   : P7 mission2 penalty assault spawn rally pulse open
-//    Switch55   : P6 AI activation requested (set at mission2 entry)
-//    Switch56   : P7 AI activation requested (set at mission2 entry)
+//    Switch55   : P6 AI activation requested (normally set at mission2 Vulture 756; may activate early if attacked in mission1)
+//    Switch56   : P7 AI activation requested (normally set at mission2 Vulture 756; may activate early if attacked in mission1)
 //    Switch57   : P6 hunt P5 Overlord support fired this cycle
 //    Switch58   : P5 Hive death ground counterattack used (one-shot)
 //    Switch59   : P6 mission2 early alert defense charge ready
@@ -1170,6 +1170,32 @@ Actions:
 //  마스터 틱 - 모든 독립 타이머 동시 증가 (12회/초)
 //-----------------------------------------------------------------//
 
+// 최후의 공세 중 P6 기지 방어 명령이 중단된 동안 Hunt 총공격 타이머를 3배속으로 진행한다.
+// 아래 +2와 기본 타이머의 +1을 합쳐 720틱 임계치에 20초(240사이클)마다 도달한다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Switch("Switch84", Set);
+	Switch("Switch31", Not Set);
+Actions:
+	Set Deaths("Player 8", "Terran Firebat", Add, 2);
+	Preserve Trigger();
+}
+
+// 최후의 공세 중 P7 기지 방어 명령이 중단된 동안 Hunt 총공격 타이머를 3배속으로 진행한다.
+// 아래 +2와 기본 타이머의 +1을 합쳐 720틱 임계치에 20초(240사이클)마다 도달한다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Switch("Switch85", Set);
+	Switch("Switch32", Not Set);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter", Add, 2);
+	Preserve Trigger();
+}
+
 Trigger("Player 8"){
 Conditions:
 	Always();
@@ -1351,7 +1377,8 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6/P7 AI activation is requested at mission2 entry in 12_mission1_to_mission2_transition.txt.
+// P6/P7 AI activation is normally requested at the mission2 title timing (Vulture 756)
+// in 12_mission1_to_mission2_transition.txt. Attacking an outer colony in mission1 can request it early.
 
 Trigger("Player 6"){
 Conditions:
@@ -2516,7 +2543,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 해처리 파괴 보상. 미네랄 +125 / 가스 +25");
+	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 해처리 파괴 보상. 미네랄 +285 / 가스 +25");
 	Preserve Trigger();
 }
 
@@ -2525,10 +2552,10 @@ Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
-	Set Resources("Player 1", Add, 125, ore);
-	Set Resources("Player 2", Add, 125, ore);
-	Set Resources("Player 3", Add, 125, ore);
-	Set Resources("Player 4", Add, 125, ore);
+	Set Resources("Player 1", Add, 285, ore);
+	Set Resources("Player 2", Add, 285, ore);
+	Set Resources("Player 3", Add, 285, ore);
+	Set Resources("Player 4", Add, 285, ore);
 	Set Resources("Player 1", Add, 25, gas);
 	Set Resources("Player 2", Add, 25, gas);
 	Set Resources("Player 3", Add, 25, gas);
@@ -2541,7 +2568,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <11>주황색 저그<04> <19>레어<04> 파괴 보상. 미네랄 +175 / 가스 +25");
+	Display Text Message(Always Display, "<19>상급 보상: <11>주황색 저그<04> <19>레어<04> 파괴 보상. 미네랄 +335 / 가스 +25");
 	Preserve Trigger();
 }
 
@@ -2550,10 +2577,10 @@ Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
-	Set Resources("Player 1", Add, 175, ore);
-	Set Resources("Player 2", Add, 175, ore);
-	Set Resources("Player 3", Add, 175, ore);
-	Set Resources("Player 4", Add, 175, ore);
+	Set Resources("Player 1", Add, 335, ore);
+	Set Resources("Player 2", Add, 335, ore);
+	Set Resources("Player 3", Add, 335, ore);
+	Set Resources("Player 4", Add, 335, ore);
 	Set Resources("Player 1", Add, 25, gas);
 	Set Resources("Player 2", Add, 25, gas);
 	Set Resources("Player 3", Add, 25, gas);
@@ -2566,7 +2593,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <11>주황색 저그<04> <1F>하이브<04> 파괴 보상. 미네랄 +225 / 가스 +25");
+	Display Text Message(Always Display, "<1F>핵심 보상: <11>주황색 저그<04> <1F>하이브<04> 파괴 보상. 미네랄 +385 / 가스 +25");
 	Preserve Trigger();
 }
 
@@ -2575,10 +2602,10 @@ Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
-	Set Resources("Player 1", Add, 225, ore);
-	Set Resources("Player 2", Add, 225, ore);
-	Set Resources("Player 3", Add, 225, ore);
-	Set Resources("Player 4", Add, 225, ore);
+	Set Resources("Player 1", Add, 385, ore);
+	Set Resources("Player 2", Add, 385, ore);
+	Set Resources("Player 3", Add, 385, ore);
+	Set Resources("Player 4", Add, 385, ore);
 	Set Resources("Player 1", Add, 25, gas);
 	Set Resources("Player 2", Add, 25, gas);
 	Set Resources("Player 3", Add, 25, gas);
@@ -4628,8 +4655,6 @@ Actions:
 	Set Switch("Switch59", clear);
 	Set Switch("Switch60", clear);
 	Set Switch("Switch69", clear);
-	Kill Unit At Location("Player 5", "Zerg Sunken Colony", 64, "WestArea");
-	Kill Unit At Location("Player 5", "Zerg Spore Colony", 64, "WestArea");
 	Set Deaths("Player 5", "Zerg Sunken Colony", Set To, 0);
 	Set Deaths("Player 5", "Zerg Spore Colony", Set To, 0);
 	Set Deaths("Player 5", "Terran Marine", Set To, 0);
@@ -4645,8 +4670,19 @@ Actions:
 	Set Switch("Switch142", clear);
 	Set Switch("Switch143", clear);
 	Set Switch("Switch144", clear);
-	Set Switch("Switch55", set);
-	Set Switch("Switch56", set);
+}
+
+// 갈색 군락 절단 표시 시점에 외곽 AI를 가동하고 서쪽 잔존 방어 타워를 제거한다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);   //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Terran Vulture", At least, 756); //미션2 진입 후 약 63초 : 갈색 군락 절단 표시 시점
+	Deaths("Player 8", "Terran Vulture", At most, 780);
+Actions:
+	Kill Unit At Location("Player 5", "Zerg Sunken Colony", 64, "WestArea");
+	Kill Unit At Location("Player 5", "Zerg Spore Colony", 64, "WestArea");
+	Set Switch("Switch55", set); //P6 자원 지급 및 ZSUx AI 가동 요청
+	Set Switch("Switch56", set); //P7 자원 지급 및 ZSUx AI 가동 요청
 }
 
 Trigger("All Players"){
@@ -20430,7 +20466,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 보상/분노 출력 활성 구간
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 1); //P6 해처리 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +550 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -20439,7 +20475,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 2); //P6 레어 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
+	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. 미네랄 +650 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -20448,7 +20484,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 3); //P6 하이브 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
+	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. 미네랄 +750 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -20457,7 +20493,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 4); //P7 해처리 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +550 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -20466,7 +20502,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 5); //P7 레어 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
+	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. 미네랄 +650 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -20475,7 +20511,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 6); //P7 하이브 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
+	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. 미네랄 +750 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -20613,7 +20649,7 @@ Conditions:
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 해처리 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +550 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -20627,10 +20663,10 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1170);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 250, ore);
-	Set Resources("Player 2", Add, 250, ore);
-	Set Resources("Player 3", Add, 250, ore);
-	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 550, ore);
+	Set Resources("Player 2", Add, 550, ore);
+	Set Resources("Player 3", Add, 550, ore);
+	Set Resources("Player 4", Add, 550, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20646,7 +20682,7 @@ Conditions:
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 레어 보상만 직접 표시
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
+	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. 미네랄 +650 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -20660,10 +20696,10 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 4455);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 250, ore);
-	Set Resources("Player 2", Add, 250, ore);
-	Set Resources("Player 3", Add, 250, ore);
-	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 550, ore);
+	Set Resources("Player 2", Add, 550, ore);
+	Set Resources("Player 3", Add, 550, ore);
+	Set Resources("Player 4", Add, 550, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20683,10 +20719,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 4590);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2295);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 250, ore);
-	Set Resources("Player 2", Add, 250, ore);
-	Set Resources("Player 3", Add, 250, ore);
-	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 550, ore);
+	Set Resources("Player 2", Add, 550, ore);
+	Set Resources("Player 3", Add, 550, ore);
+	Set Resources("Player 4", Add, 550, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20705,10 +20741,10 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1170);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 350, ore);
-	Set Resources("Player 2", Add, 350, ore);
-	Set Resources("Player 3", Add, 350, ore);
-	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 650, ore);
+	Set Resources("Player 2", Add, 650, ore);
+	Set Resources("Player 3", Add, 650, ore);
+	Set Resources("Player 4", Add, 650, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20724,7 +20760,7 @@ Conditions:
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 하이브 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
+	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. 미네랄 +750 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -20738,10 +20774,10 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 4455);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 350, ore);
-	Set Resources("Player 2", Add, 350, ore);
-	Set Resources("Player 3", Add, 350, ore);
-	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 650, ore);
+	Set Resources("Player 2", Add, 650, ore);
+	Set Resources("Player 3", Add, 650, ore);
+	Set Resources("Player 4", Add, 650, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20761,10 +20797,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 4590);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2295);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 350, ore);
-	Set Resources("Player 2", Add, 350, ore);
-	Set Resources("Player 3", Add, 350, ore);
-	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 650, ore);
+	Set Resources("Player 2", Add, 650, ore);
+	Set Resources("Player 3", Add, 650, ore);
+	Set Resources("Player 4", Add, 650, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20783,10 +20819,10 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 1170);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 450, ore);
-	Set Resources("Player 2", Add, 450, ore);
-	Set Resources("Player 3", Add, 450, ore);
-	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 750, ore);
+	Set Resources("Player 2", Add, 750, ore);
+	Set Resources("Player 3", Add, 750, ore);
+	Set Resources("Player 4", Add, 750, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20805,10 +20841,10 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 4455);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 450, ore);
-	Set Resources("Player 2", Add, 450, ore);
-	Set Resources("Player 3", Add, 450, ore);
-	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 750, ore);
+	Set Resources("Player 2", Add, 750, ore);
+	Set Resources("Player 3", Add, 750, ore);
+	Set Resources("Player 4", Add, 750, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20828,10 +20864,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 4590);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2295);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 450, ore);
-	Set Resources("Player 2", Add, 450, ore);
-	Set Resources("Player 3", Add, 450, ore);
-	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 750, ore);
+	Set Resources("Player 2", Add, 750, ore);
+	Set Resources("Player 3", Add, 750, ore);
+	Set Resources("Player 4", Add, 750, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20847,7 +20883,7 @@ Conditions:
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 해처리 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +250 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +550 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -20861,10 +20897,10 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1170);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 250, ore);
-	Set Resources("Player 2", Add, 250, ore);
-	Set Resources("Player 3", Add, 250, ore);
-	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 550, ore);
+	Set Resources("Player 2", Add, 550, ore);
+	Set Resources("Player 3", Add, 550, ore);
+	Set Resources("Player 4", Add, 550, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20883,10 +20919,10 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4455);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 250, ore);
-	Set Resources("Player 2", Add, 250, ore);
-	Set Resources("Player 3", Add, 250, ore);
-	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 550, ore);
+	Set Resources("Player 2", Add, 550, ore);
+	Set Resources("Player 3", Add, 550, ore);
+	Set Resources("Player 4", Add, 550, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20906,10 +20942,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4590);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 2295);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 250, ore);
-	Set Resources("Player 2", Add, 250, ore);
-	Set Resources("Player 3", Add, 250, ore);
-	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 550, ore);
+	Set Resources("Player 2", Add, 550, ore);
+	Set Resources("Player 3", Add, 550, ore);
+	Set Resources("Player 4", Add, 550, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20925,7 +20961,7 @@ Conditions:
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 레어 보상만 직접 표시
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. 미네랄 +350 / 가스 +60");
+	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. 미네랄 +650 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -20939,10 +20975,10 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1170);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 350, ore);
-	Set Resources("Player 2", Add, 350, ore);
-	Set Resources("Player 3", Add, 350, ore);
-	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 650, ore);
+	Set Resources("Player 2", Add, 650, ore);
+	Set Resources("Player 3", Add, 650, ore);
+	Set Resources("Player 4", Add, 650, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20961,10 +20997,10 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4455);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 350, ore);
-	Set Resources("Player 2", Add, 350, ore);
-	Set Resources("Player 3", Add, 350, ore);
-	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 650, ore);
+	Set Resources("Player 2", Add, 650, ore);
+	Set Resources("Player 3", Add, 650, ore);
+	Set Resources("Player 4", Add, 650, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -20984,10 +21020,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4590);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 2295);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 350, ore);
-	Set Resources("Player 2", Add, 350, ore);
-	Set Resources("Player 3", Add, 350, ore);
-	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 650, ore);
+	Set Resources("Player 2", Add, 650, ore);
+	Set Resources("Player 3", Add, 650, ore);
+	Set Resources("Player 4", Add, 650, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21003,7 +21039,7 @@ Conditions:
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 하이브 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. 미네랄 +450 / 가스 +60");
+	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. 미네랄 +750 / 가스 +60");
 	Preserve Trigger();
 }
 
@@ -21017,10 +21053,10 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1170);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 450, ore);
-	Set Resources("Player 2", Add, 450, ore);
-	Set Resources("Player 3", Add, 450, ore);
-	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 750, ore);
+	Set Resources("Player 2", Add, 750, ore);
+	Set Resources("Player 3", Add, 750, ore);
+	Set Resources("Player 4", Add, 750, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21039,10 +21075,10 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4455);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 450, ore);
-	Set Resources("Player 2", Add, 450, ore);
-	Set Resources("Player 3", Add, 450, ore);
-	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 750, ore);
+	Set Resources("Player 2", Add, 750, ore);
+	Set Resources("Player 3", Add, 750, ore);
+	Set Resources("Player 4", Add, 750, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21062,10 +21098,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4590);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 2295);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 450, ore);
-	Set Resources("Player 2", Add, 450, ore);
-	Set Resources("Player 3", Add, 450, ore);
-	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 750, ore);
+	Set Resources("Player 2", Add, 750, ore);
+	Set Resources("Player 3", Add, 750, ore);
+	Set Resources("Player 4", Add, 750, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21089,10 +21125,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 250, ore);
-	Set Resources("Player 2", Add, 250, ore);
-	Set Resources("Player 3", Add, 250, ore);
-	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 550, ore);
+	Set Resources("Player 2", Add, 550, ore);
+	Set Resources("Player 3", Add, 550, ore);
+	Set Resources("Player 4", Add, 550, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21112,10 +21148,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 350, ore);
-	Set Resources("Player 2", Add, 350, ore);
-	Set Resources("Player 3", Add, 350, ore);
-	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 650, ore);
+	Set Resources("Player 2", Add, 650, ore);
+	Set Resources("Player 3", Add, 650, ore);
+	Set Resources("Player 4", Add, 650, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21135,10 +21171,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 450, ore);
-	Set Resources("Player 2", Add, 450, ore);
-	Set Resources("Player 3", Add, 450, ore);
-	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 750, ore);
+	Set Resources("Player 2", Add, 750, ore);
+	Set Resources("Player 3", Add, 750, ore);
+	Set Resources("Player 4", Add, 750, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21158,10 +21194,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 250, ore);
-	Set Resources("Player 2", Add, 250, ore);
-	Set Resources("Player 3", Add, 250, ore);
-	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 550, ore);
+	Set Resources("Player 2", Add, 550, ore);
+	Set Resources("Player 3", Add, 550, ore);
+	Set Resources("Player 4", Add, 550, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21181,10 +21217,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 350, ore);
-	Set Resources("Player 2", Add, 350, ore);
-	Set Resources("Player 3", Add, 350, ore);
-	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 650, ore);
+	Set Resources("Player 2", Add, 650, ore);
+	Set Resources("Player 3", Add, 650, ore);
+	Set Resources("Player 4", Add, 650, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21204,10 +21240,10 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 450, ore);
-	Set Resources("Player 2", Add, 450, ore);
-	Set Resources("Player 3", Add, 450, ore);
-	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 750, ore);
+	Set Resources("Player 2", Add, 750, ore);
+	Set Resources("Player 3", Add, 750, ore);
+	Set Resources("Player 4", Add, 750, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21239,10 +21275,10 @@ Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 250, ore);
-	Set Resources("Player 2", Add, 250, ore);
-	Set Resources("Player 3", Add, 250, ore);
-	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 550, ore);
+	Set Resources("Player 2", Add, 550, ore);
+	Set Resources("Player 3", Add, 550, ore);
+	Set Resources("Player 4", Add, 550, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21260,10 +21296,10 @@ Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 350, ore);
-	Set Resources("Player 2", Add, 350, ore);
-	Set Resources("Player 3", Add, 350, ore);
-	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 650, ore);
+	Set Resources("Player 2", Add, 650, ore);
+	Set Resources("Player 3", Add, 650, ore);
+	Set Resources("Player 4", Add, 650, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21281,10 +21317,10 @@ Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 450, ore);
-	Set Resources("Player 2", Add, 450, ore);
-	Set Resources("Player 3", Add, 450, ore);
-	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 750, ore);
+	Set Resources("Player 2", Add, 750, ore);
+	Set Resources("Player 3", Add, 750, ore);
+	Set Resources("Player 4", Add, 750, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21302,10 +21338,10 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 250, ore);
-	Set Resources("Player 2", Add, 250, ore);
-	Set Resources("Player 3", Add, 250, ore);
-	Set Resources("Player 4", Add, 250, ore);
+	Set Resources("Player 1", Add, 550, ore);
+	Set Resources("Player 2", Add, 550, ore);
+	Set Resources("Player 3", Add, 550, ore);
+	Set Resources("Player 4", Add, 550, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21323,10 +21359,10 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 350, ore);
-	Set Resources("Player 2", Add, 350, ore);
-	Set Resources("Player 3", Add, 350, ore);
-	Set Resources("Player 4", Add, 350, ore);
+	Set Resources("Player 1", Add, 650, ore);
+	Set Resources("Player 2", Add, 650, ore);
+	Set Resources("Player 3", Add, 650, ore);
+	Set Resources("Player 4", Add, 650, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21344,10 +21380,10 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 450, ore);
-	Set Resources("Player 2", Add, 450, ore);
-	Set Resources("Player 3", Add, 450, ore);
-	Set Resources("Player 4", Add, 450, ore);
+	Set Resources("Player 1", Add, 750, ore);
+	Set Resources("Player 2", Add, 750, ore);
+	Set Resources("Player 3", Add, 750, ore);
+	Set Resources("Player 4", Add, 750, ore);
 	Set Resources("Player 1", Add, 60, gas);
 	Set Resources("Player 2", Add, 60, gas);
 	Set Resources("Player 3", Add, 60, gas);
@@ -21503,7 +21539,7 @@ Actions:
 //-----------------------------------------------------------------//
 //  Mission 2 - early P6/P7 alert defense
 //
-//  During the first 3 minutes of mission2, each colony gains at most
+//  During the first 4 minutes of mission2, each colony gains at most
 //  one defensive charge after 60 seconds. The charge is only consumed
 //  if a player unit enters that colony's Alert location.
 //-----------------------------------------------------------------//
@@ -21511,7 +21547,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2159);
+	Deaths("Player 8", "Terran Vulture", At most, 2879);
 	Switch("Switch59", Not Set);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 1);
@@ -21521,7 +21557,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2159);
+	Deaths("Player 8", "Terran Vulture", At most, 2879);
 	Deaths("Player 8", "Terran Wraith", At least, 720);
 	Switch("Switch59", Not Set);
 Actions:
@@ -21533,7 +21569,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2159);
+	Deaths("Player 8", "Terran Vulture", At most, 2879);
 	Switch("Switch60", Not Set);
 Actions:
 	Set Deaths("Player 8", "Terran Dropship", Add, 1);
@@ -21543,7 +21579,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2159);
+	Deaths("Player 8", "Terran Vulture", At most, 2879);
 	Deaths("Player 8", "Terran Dropship", At least, 720);
 	Switch("Switch60", Not Set);
 Actions:
@@ -21555,7 +21591,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2159);
+	Deaths("Player 8", "Terran Vulture", At most, 2879);
 	Switch("Switch59", Set);
 	Bring("Current Player", "Men", "P6 Alert", At least, 1);
 Actions:
@@ -21595,7 +21631,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At most, 2159);
+	Deaths("Player 8", "Terran Vulture", At most, 2879);
 	Switch("Switch60", Set);
 	Bring("Current Player", "Men", "P7 Alert", At least, 1);
 Actions:

@@ -141,8 +141,8 @@
 //    Switch52   : P7 mission2 penalty assault relay pulse open
 //    Switch53   : P6 mission2 penalty assault spawn rally pulse open
 //    Switch54   : P7 mission2 penalty assault spawn rally pulse open
-//    Switch55   : P6 AI activation requested (set at mission2 entry)
-//    Switch56   : P7 AI activation requested (set at mission2 entry)
+//    Switch55   : P6 AI activation requested (normally set at mission2 Vulture 756; may activate early if attacked in mission1)
+//    Switch56   : P7 AI activation requested (normally set at mission2 Vulture 756; may activate early if attacked in mission1)
 //    Switch57   : P6 hunt P5 Overlord support fired this cycle
 //    Switch58   : P5 Hive death ground counterattack used (one-shot)
 //    Switch59   : P6 mission2 early alert defense charge ready

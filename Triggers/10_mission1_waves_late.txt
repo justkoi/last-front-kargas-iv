@@ -23,7 +23,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 해처리 파괴 보상. 미네랄 +125 / 가스 +25");
+	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 해처리 파괴 보상. 미네랄 +285 / 가스 +25");
 	Preserve Trigger();
 }
 
@@ -32,10 +32,10 @@ Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
-	Set Resources("Player 1", Add, 125, ore);
-	Set Resources("Player 2", Add, 125, ore);
-	Set Resources("Player 3", Add, 125, ore);
-	Set Resources("Player 4", Add, 125, ore);
+	Set Resources("Player 1", Add, 285, ore);
+	Set Resources("Player 2", Add, 285, ore);
+	Set Resources("Player 3", Add, 285, ore);
+	Set Resources("Player 4", Add, 285, ore);
 	Set Resources("Player 1", Add, 25, gas);
 	Set Resources("Player 2", Add, 25, gas);
 	Set Resources("Player 3", Add, 25, gas);
@@ -48,7 +48,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <11>주황색 저그<04> <19>레어<04> 파괴 보상. 미네랄 +175 / 가스 +25");
+	Display Text Message(Always Display, "<19>상급 보상: <11>주황색 저그<04> <19>레어<04> 파괴 보상. 미네랄 +335 / 가스 +25");
 	Preserve Trigger();
 }
 
@@ -57,10 +57,10 @@ Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
-	Set Resources("Player 1", Add, 175, ore);
-	Set Resources("Player 2", Add, 175, ore);
-	Set Resources("Player 3", Add, 175, ore);
-	Set Resources("Player 4", Add, 175, ore);
+	Set Resources("Player 1", Add, 335, ore);
+	Set Resources("Player 2", Add, 335, ore);
+	Set Resources("Player 3", Add, 335, ore);
+	Set Resources("Player 4", Add, 335, ore);
 	Set Resources("Player 1", Add, 25, gas);
 	Set Resources("Player 2", Add, 25, gas);
 	Set Resources("Player 3", Add, 25, gas);
@@ -73,7 +73,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <11>주황색 저그<04> <1F>하이브<04> 파괴 보상. 미네랄 +225 / 가스 +25");
+	Display Text Message(Always Display, "<1F>핵심 보상: <11>주황색 저그<04> <1F>하이브<04> 파괴 보상. 미네랄 +385 / 가스 +25");
 	Preserve Trigger();
 }
 
@@ -82,10 +82,10 @@ Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
-	Set Resources("Player 1", Add, 225, ore);
-	Set Resources("Player 2", Add, 225, ore);
-	Set Resources("Player 3", Add, 225, ore);
-	Set Resources("Player 4", Add, 225, ore);
+	Set Resources("Player 1", Add, 385, ore);
+	Set Resources("Player 2", Add, 385, ore);
+	Set Resources("Player 3", Add, 385, ore);
+	Set Resources("Player 4", Add, 385, ore);
 	Set Resources("Player 1", Add, 25, gas);
 	Set Resources("Player 2", Add, 25, gas);
 	Set Resources("Player 3", Add, 25, gas);

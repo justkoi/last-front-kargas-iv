@@ -39,8 +39,6 @@ Actions:
 	Set Switch("Switch59", clear);
 	Set Switch("Switch60", clear);
 	Set Switch("Switch69", clear);
-	Kill Unit At Location("Player 5", "Zerg Sunken Colony", 64, "WestArea");
-	Kill Unit At Location("Player 5", "Zerg Spore Colony", 64, "WestArea");
 	Set Deaths("Player 5", "Zerg Sunken Colony", Set To, 0);
 	Set Deaths("Player 5", "Zerg Spore Colony", Set To, 0);
 	Set Deaths("Player 5", "Terran Marine", Set To, 0);
@@ -56,8 +54,19 @@ Actions:
 	Set Switch("Switch142", clear);
 	Set Switch("Switch143", clear);
 	Set Switch("Switch144", clear);
-	Set Switch("Switch55", set);
-	Set Switch("Switch56", set);
+}
+
+// 갈색 군락 절단 표시 시점에 외곽 AI를 가동하고 서쪽 잔존 방어 타워를 제거한다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);   //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Terran Vulture", At least, 756); //미션2 진입 후 약 63초 : 갈색 군락 절단 표시 시점
+	Deaths("Player 8", "Terran Vulture", At most, 780);
+Actions:
+	Kill Unit At Location("Player 5", "Zerg Sunken Colony", 64, "WestArea");
+	Kill Unit At Location("Player 5", "Zerg Spore Colony", 64, "WestArea");
+	Set Switch("Switch55", set); //P6 자원 지급 및 ZSUx AI 가동 요청
+	Set Switch("Switch56", set); //P7 자원 지급 및 ZSUx AI 가동 요청
 }
 
 Trigger("All Players"){

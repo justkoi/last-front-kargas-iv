@@ -68,7 +68,8 @@ Actions:
 	Preserve Trigger();
 }
 
-// P6/P7 AI activation is requested at mission2 entry in 12_mission1_to_mission2_transition.txt.
+// P6/P7 AI activation is normally requested at the mission2 title timing (Vulture 756)
+// in 12_mission1_to_mission2_transition.txt. Attacking an outer colony in mission1 can request it early.
 
 Trigger("Player 6"){
 Conditions:
