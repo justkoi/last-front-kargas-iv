@@ -64,6 +64,12 @@ Recommended palette:
 
 Avoid stacking many colors in one line. Usually color only the prefix or the key phrase.
 
+Reward/resource text:
+
+- In player-facing reward lines, color only the resource labels and keep the numeric amounts white.
+- Use `<1F>미네랄 <04>+N / <07>가스 <04>+N` for mineral/gas rewards.
+- Use `<1F>` for the `미네랄` label because it is the verified sky-blue style used by this project for core rewards. Use `<07>` for the `가스` label. Do not color the `+N` amounts.
+
 Briefing room caution:
 
 - Briefing `Mission Objectives` / `Text Message` color handling is not identical to in-game trigger text. Public references list title/mission briefing colors roughly as `<02>` cyan, `<03>` green, `<04>` light green, `<05>` grey, `<06>` white, and `<07>` red.
@@ -242,6 +248,7 @@ Before finalizing text output, check:
 - Does dialogue obey one-speaker-per-trigger and at least 84-tick spacing between consecutive lines?
 - Are long lines split instead of stacking multiple `Display Text Message` calls in one trigger?
 - Are color codes purposeful and not noisy?
+- Are player-facing resource rewards using `<1F>미네랄` and `<07>가스`, with `+N` amounts in white `<04>`?
 - Are centered headers using `<13>` where possible?
 - Are "신호원", "유닛", and raw "카운트다운" avoided in dialogue unless intentionally system-facing?
 - Are reward/system messages either clearly labeled or dressed as command/logistics messages?

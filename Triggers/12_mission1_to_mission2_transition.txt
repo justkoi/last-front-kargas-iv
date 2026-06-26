@@ -105,7 +105,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 216);
 	Deaths("Player 8", "Terran Vulture", At most, 240);
 Actions:
-	Display Text Message(Always Display, "<07>군수지원: <04>전선 재정비 보급 투입. 미네랄 +500 / 가스 +500");
+	Display Text Message(Always Display, "<07>군수지원: <04>전선 재정비 보급 투입. <1F>미네랄 <04>+500 / <07>가스 <04>+500");
 }
 
 Trigger("Player 8"){

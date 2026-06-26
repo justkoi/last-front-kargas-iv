@@ -40,7 +40,7 @@ Actions:
 	Run AI Script("+Vi5");
 	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<07>작전: <04>동북쪽과 동남쪽 군락 반응 소실. 전선 안정화 확인.");
-	Display Text Message(Always Display, "<07>군수지원: <04>작전 완료 보상. 미네랄 +50000 / 가스 +25000");
+	Display Text Message(Always Display, "<07>군수지원: <04>작전 완료 보상. <1F>미네랄 <04>+50000 / <07>가스 <04>+25000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

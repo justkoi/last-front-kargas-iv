@@ -23,7 +23,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 해처리 파괴 보상. 미네랄 +285 / 가스 +25");
+	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 해처리 파괴 보상. <1F>미네랄 <04>+285 / <07>가스 <04>+25");
 	Preserve Trigger();
 }
 
@@ -48,7 +48,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <11>주황색 저그<04> <19>레어<04> 파괴 보상. 미네랄 +335 / 가스 +25");
+	Display Text Message(Always Display, "<19>상급 보상: <11>주황색 저그<04> <19>레어<04> 파괴 보상. <1F>미네랄 <04>+335 / <07>가스 <04>+25");
 	Preserve Trigger();
 }
 
@@ -73,7 +73,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <11>주황색 저그<04> <1F>하이브<04> 파괴 보상. 미네랄 +385 / 가스 +25");
+	Display Text Message(Always Display, "<1F>핵심 보상: <11>주황색 저그<04> <1F>하이브<04> 파괴 보상. <1F>미네랄 <04>+385 / <07>가스 <04>+25");
 	Preserve Trigger();
 }
 
@@ -338,7 +338,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Switch("Switch154", Set);                              //칭찬 표시 완료 후
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <04>지휘 정신체 제거. 미네랄 +1500 / 가스 +500");
+	Display Text Message(Always Display, "<07>작전 보상: <04>지휘 정신체 제거. <1F>미네랄 <04>+1500 / <07>가스 <04>+500");
 }
 
 // (C phase) 보상 안내 단계 개방 : B 표시 사이클 뒤에 P8이 1회 진행
@@ -404,7 +404,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Switch("Switch150", Set);                              //칭찬 표시 완료 후
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 제거. 미네랄 +2500. 지휘 교란으로 전방 방어 군집이 와해됐습니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 제거. <1F>미네랄 <04>+2500. 지휘 교란으로 전방 방어 군집이 와해됐습니다.");
 }
 
 // (C phase) 보상 안내 단계 개방 : B 표시 사이클 뒤에 P8이 1회 진행

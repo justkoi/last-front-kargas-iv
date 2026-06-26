@@ -392,7 +392,7 @@ Actions:
 	Run AI Script("+Vi5");
 	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. <1F>미네랄 <04>+2000 / <07>가스 <04>+1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -408,7 +408,7 @@ Actions:
 	Run AI Script("+Vi5");
 	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. <1F>미네랄 <04>+2000 / <07>가스 <04>+1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -425,7 +425,7 @@ Actions:
 	Run AI Script("+Vi5");
 	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. <1F>미네랄 <04>+2000 / <07>가스 <04>+1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -440,7 +440,7 @@ Actions:
 	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. <1F>미네랄 <04>+2000 / <07>가스 <04>+1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -456,7 +456,7 @@ Actions:
 	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. <1F>미네랄 <04>+2000 / <07>가스 <04>+1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -473,7 +473,7 @@ Actions:
 	Run AI Script("+Vi6");
 	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. 미네랄 +2000 / 가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. <1F>미네랄 <04>+2000 / <07>가스 <04>+1000");
 }
 // Reveal a colony once its MainBase tech core collapses.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

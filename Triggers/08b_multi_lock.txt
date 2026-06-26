@@ -16,10 +16,10 @@ Actions:
 	Set Invincibility("Player 9", "Buildings", "MultiLock", disabled); //무적 해제 먼저 : Kill은 무적 유닛을 못 죽이므로 선행 필수
 	Kill Unit At Location("Player 5", "Buildings", All, "MultiLock");
 	Kill Unit At Location("Player 9", "Buildings", All, "MultiLock");
-	Set Resources("Player 1", Add, 50, ore);                         //공용 보상 : 모든 플레이어 미네랄 +50
-	Set Resources("Player 2", Add, 50, ore);                         //공용 보상 : 모든 플레이어 미네랄 +50
-	Set Resources("Player 3", Add, 50, ore);                         //공용 보상 : 모든 플레이어 미네랄 +50
-	Set Resources("Player 4", Add, 50, ore);                         //공용 보상 : 모든 플레이어 미네랄 +50
+	Set Resources("Player 1", Add, 100, ore);                        //공용 보상 : 모든 플레이어 미네랄 +100
+	Set Resources("Player 2", Add, 100, ore);                        //공용 보상 : 모든 플레이어 미네랄 +100
+	Set Resources("Player 3", Add, 100, ore);                        //공용 보상 : 모든 플레이어 미네랄 +100
+	Set Resources("Player 4", Add, 100, ore);                        //공용 보상 : 모든 플레이어 미네랄 +100
 }
 
 //작전 보상 안내 : 열쇠 부재 시 1회 — 사운드/메시지는 플레이어 소유 트리거에서만
@@ -28,5 +28,5 @@ Conditions:
 	Bring("Player 8", "Mature Crysalis", "MultiKey", At most, 0); //열쇠 부재 감지 : 비-Preserve라 각 플레이어에게 1회만
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>작전 보상: <04>버려진 자원지대 확보. 미네랄 +50");
+	Display Text Message(Always Display, "<07>작전 보상: <04>버려진 자원지대 확보. <1F>미네랄 <04>+100");
 }
