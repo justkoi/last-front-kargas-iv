@@ -3,7 +3,7 @@
 //
 //  Hatchery/Lair/Hive kills reduce that colony's own main assault
 //  cooldown by difficulty and grant players minerals/gas.
-//  12 DC tick = 1 second: easy 97.5s = 1170, normal 371.25s = 4455, hard 382.5s = 4590, very hard 427.5s = 5130.
+//  12 DC tick = 1 second: easy 198s = 2376, normal 371.25s = 4455, hard 382.5s = 4590, very hard 427.5s = 5130.
 //  Hard also accelerates the opposite colony by 191.25s = 2295; very hard accelerates it by the full 427.5s = 5130.
 //-----------------------------------------------------------------//
 
@@ -255,7 +255,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 보상/분노 출력 활성 구간
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 1); //P6 해처리 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +550 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. <1F>미네랄 <04>+550 / <07>가스 <04>+60");
 	Preserve Trigger();
 }
 
@@ -264,7 +264,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 2); //P6 레어 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. 미네랄 +650 / 가스 +60");
+	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. <1F>미네랄 <04>+650 / <07>가스 <04>+60");
 	Preserve Trigger();
 }
 
@@ -273,7 +273,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 3); //P6 하이브 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. 미네랄 +750 / 가스 +60");
+	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. <1F>미네랄 <04>+750 / <07>가스 <04>+60");
 	Preserve Trigger();
 }
 
@@ -282,7 +282,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 4); //P7 해처리 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +550 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. <1F>미네랄 <04>+550 / <07>가스 <04>+60");
 	Preserve Trigger();
 }
 
@@ -291,7 +291,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 5); //P7 레어 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. 미네랄 +650 / 가스 +60");
+	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. <1F>미네랄 <04>+650 / <07>가스 <04>+60");
 	Preserve Trigger();
 }
 
@@ -300,7 +300,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 6); //P7 하이브 보상 출력 코드
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. 미네랄 +750 / 가스 +60");
+	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. <1F>미네랄 <04>+750 / <07>가스 <04>+60");
 	Preserve Trigger();
 }
 
@@ -438,7 +438,7 @@ Conditions:
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 해처리 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. 미네랄 +550 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <15>갈색 저그<04> 해처리 파괴. <1F>미네랄 <04>+550 / <07>가스 <04>+60");
 	Preserve Trigger();
 }
 
@@ -450,7 +450,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1170);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 2376);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 550, ore);
 	Set Resources("Player 2", Add, 550, ore);
@@ -471,7 +471,7 @@ Conditions:
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 레어 보상만 직접 표시
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. 미네랄 +650 / 가스 +60");
+	Display Text Message(Always Display, "<19>상급 보상: <15>갈색 저그<04> <19>레어<04> 파괴. <1F>미네랄 <04>+650 / <07>가스 <04>+60");
 	Preserve Trigger();
 }
 
@@ -528,7 +528,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1170);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 2376);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 650, ore);
 	Set Resources("Player 2", Add, 650, ore);
@@ -549,7 +549,7 @@ Conditions:
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 하이브 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. 미네랄 +750 / 가스 +60");
+	Display Text Message(Always Display, "<1F>핵심 보상: <15>갈색 저그<04> <1F>하이브<04> 파괴. <1F>미네랄 <04>+750 / <07>가스 <04>+60");
 	Preserve Trigger();
 }
 
@@ -606,7 +606,7 @@ Conditions:
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1170);
+	Set Deaths("Player 8", "Zerg Zergling", Add, 2376);
 	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
 	Set Resources("Player 1", Add, 750, ore);
 	Set Resources("Player 2", Add, 750, ore);
@@ -672,7 +672,7 @@ Conditions:
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 해처리 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. 미네랄 +550 / 가스 +60");
+	Display Text Message(Always Display, "<07>작전 보상: <16>하얀색 저그<04> 해처리 파괴. <1F>미네랄 <04>+550 / <07>가스 <04>+60");
 	Preserve Trigger();
 }
 
@@ -684,7 +684,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1170);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2376);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 550, ore);
 	Set Resources("Player 2", Add, 550, ore);
@@ -750,7 +750,7 @@ Conditions:
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 레어 보상만 직접 표시
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. 미네랄 +650 / 가스 +60");
+	Display Text Message(Always Display, "<19>상급 보상: <16>하얀색 저그<04> <19>레어<04> 파괴. <1F>미네랄 <04>+650 / <07>가스 <04>+60");
 	Preserve Trigger();
 }
 
@@ -762,7 +762,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1170);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2376);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 650, ore);
 	Set Resources("Player 2", Add, 650, ore);
@@ -828,7 +828,7 @@ Conditions:
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 하이브 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. 미네랄 +750 / 가스 +60");
+	Display Text Message(Always Display, "<1F>핵심 보상: <16>하얀색 저그<04> <1F>하이브<04> 파괴. <1F>미네랄 <04>+750 / <07>가스 <04>+60");
 	Preserve Trigger();
 }
 
@@ -840,7 +840,7 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1170);
+	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2376);
 	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
 	Set Resources("Player 1", Add, 750, ore);
 	Set Resources("Player 2", Add, 750, ore);
