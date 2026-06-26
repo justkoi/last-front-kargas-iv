@@ -87,11 +87,15 @@
 //    Terran Engineering Bay: mission2 군락 분노 계산용 P7 원본 DC 백업
 //    Terran Refinery      : mission2 군락 분노 계산용 P7 x100 작업값
 //    위 5개 리더보드 전용 P8 DC 건물도 Player 8 소유로 배치/지급/파괴하지 말 것.
+//    Psi Emitter          : 훈장 시스템 1급 팀 훈장 잔여 수 (시작 시 15)
+//    Data Disc            : 훈장/군락 분노 리더보드 교대 타이머 (미션2 0~359틱, 10초/20초)
+//    위 2개 훈장 시스템 P8 DC 오브젝트도 Player 8 소유로 배치/지급/파괴하지 말 것.
 //
 //  Player 1~4 DC roles (승계 전용 비생산 오브젝트; 해당 Beacon을 플레이어 소유로 배치/지급/파괴하지 말 것)
 //    Terran Beacon : 종족 마커(시작 3초 스냅샷) 1=Terran, 2=Zerg, 3=Protoss. 13e arsenal handoff 테란 우선 판정용.
 //    Zerg Beacon   : 접속 heartbeat (활성 플레이어가 매 trigger cycle 1로 설정, P8이 cycle 끝에 0으로 초기화)
 //    Protoss Beacon: 이탈 자산 승계 대상 플래그 (0=미선정, 1=현재 승계 대상)
+//    Psi Emitter   : 훈장 시스템 개인 수여 훈장 수
 //
 //  Player 8 additional DC roles
 //    Zerg Beacon   : 이탈 자산 승계 처리 중인 원 소유자 번호 (0=대기, 1=P1, 2=P2, 3=P3, 4=P4)
