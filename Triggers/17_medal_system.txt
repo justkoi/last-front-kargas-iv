@@ -6,13 +6,13 @@
 //  P8 Data Disc DC: mission2 leaderboard rotation timer (0~359 ticks).
 //-----------------------------------------------------------------//
 
-// 1급 팀 훈장 풀 초기화 : 게임 시작 직후 한 번만 15로 맞춘다.
+// 1급 팀 훈장 풀 초기화 : 게임 시작 직후 한 번만 20으로 맞춘다.
 Trigger("Player 8"){
 Conditions:
 	Elapsed Time(At most, 1);
 	Deaths("Player 8", "Psi Emitter", Exactly, 0); //남은 1급 팀 훈장 수 미초기화
 Actions:
-	Set Deaths("Player 8", "Psi Emitter", Set To, 15); //남은 1급 팀 훈장 수 초기값
+	Set Deaths("Player 8", "Psi Emitter", Set To, 20); //남은 1급 팀 훈장 수 초기값
 	Preserve Trigger();
 }
 
@@ -26,13 +26,13 @@ Conditions:
 	Deaths("Player 8", "Psi Emitter", At least, 1); //남은 1급 팀 훈장 수
 Actions:
 	Set Score("Current Player", Subtract, 110000, Kills); //훈장 요구 처치 점수 소모
-	Set Resources("Current Player", Add, 500, ore);
-	Set Resources("Current Player", Add, 250, gas);
+	Set Resources("Current Player", Add, 700, ore);
+	Set Resources("Current Player", Add, 350, gas);
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
 	Set Deaths("Player 8", "Psi Emitter", Subtract, 1); //1급 팀 훈장 풀 소모
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <10>1급 카르가스공로장<04>을 수여했습니다.");
-	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 <04>+500 / <07>가스 <04>+250");
+	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 +700  <07>가스 +350");
 	Preserve Trigger();
 }
 
@@ -50,7 +50,7 @@ Actions:
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <0E>2급 무공공로장<04>을 수여했습니다.");
-	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 <04>+400 / <07>가스 <04>+200");
+	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 +400  <07>가스 +200");
 	Preserve Trigger();
 }
 
@@ -68,7 +68,7 @@ Actions:
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <07>3급 특전공로장<04>을 수여했습니다.");
-	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 <04>+300 / <07>가스 <04>+150");
+	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 +300  <07>가스 +150");
 	Preserve Trigger();
 }
 
@@ -86,7 +86,7 @@ Actions:
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <03>4급 전투공로장<04>을 수여했습니다.");
-	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 <04>+200 / <07>가스 <04>+100");
+	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 +200  <07>가스 +100");
 	Preserve Trigger();
 }
 
@@ -104,7 +104,7 @@ Actions:
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <04>5급 <05>전선공로장<04>을 수여했습니다.");
-	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 <04>+100 / <07>가스 <04>+50");
+	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 +100  <07>가스 +50");
 	Preserve Trigger();
 }
 
@@ -340,6 +340,56 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1); //미션 단계 : 미션1 진행 중
+	Deaths("Player 8", "Psi Emitter", Exactly, 20); //남은 1급 팀 훈장 수
+Actions:
+	Leader Board Points("훈장 수 (남은 1급: 20)", Custom);
+	Leaderboard Computer Players(disabled);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1); //미션 단계 : 미션1 진행 중
+	Deaths("Player 8", "Psi Emitter", Exactly, 19); //남은 1급 팀 훈장 수
+Actions:
+	Leader Board Points("훈장 수 (남은 1급: 19)", Custom);
+	Leaderboard Computer Players(disabled);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1); //미션 단계 : 미션1 진행 중
+	Deaths("Player 8", "Psi Emitter", Exactly, 18); //남은 1급 팀 훈장 수
+Actions:
+	Leader Board Points("훈장 수 (남은 1급: 18)", Custom);
+	Leaderboard Computer Players(disabled);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1); //미션 단계 : 미션1 진행 중
+	Deaths("Player 8", "Psi Emitter", Exactly, 17); //남은 1급 팀 훈장 수
+Actions:
+	Leader Board Points("훈장 수 (남은 1급: 17)", Custom);
+	Leaderboard Computer Players(disabled);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1); //미션 단계 : 미션1 진행 중
+	Deaths("Player 8", "Psi Emitter", Exactly, 16); //남은 1급 팀 훈장 수
+Actions:
+	Leader Board Points("훈장 수 (남은 1급: 16)", Custom);
+	Leaderboard Computer Players(disabled);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1); //미션 단계 : 미션1 진행 중
 	Deaths("Player 8", "Psi Emitter", Exactly, 15); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 15)", Custom);
@@ -498,6 +548,61 @@ Actions:
 }
 
 // 미션2 훈장 리더보드 : 30초 주기 중 첫 10초
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Psi Emitter", Exactly, 20); //남은 1급 팀 훈장 수
+Actions:
+	Leader Board Points("훈장 수 (남은 1급: 20)", Custom);
+	Leaderboard Computer Players(disabled);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Psi Emitter", Exactly, 19); //남은 1급 팀 훈장 수
+Actions:
+	Leader Board Points("훈장 수 (남은 1급: 19)", Custom);
+	Leaderboard Computer Players(disabled);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Psi Emitter", Exactly, 18); //남은 1급 팀 훈장 수
+Actions:
+	Leader Board Points("훈장 수 (남은 1급: 18)", Custom);
+	Leaderboard Computer Players(disabled);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Psi Emitter", Exactly, 17); //남은 1급 팀 훈장 수
+Actions:
+	Leader Board Points("훈장 수 (남은 1급: 17)", Custom);
+	Leaderboard Computer Players(disabled);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Psi Emitter", Exactly, 16); //남은 1급 팀 훈장 수
+Actions:
+	Leader Board Points("훈장 수 (남은 1급: 16)", Custom);
+	Leaderboard Computer Players(disabled);
+	Preserve Trigger();
+}
+
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중

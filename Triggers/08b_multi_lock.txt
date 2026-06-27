@@ -28,5 +28,5 @@ Conditions:
 	Bring("Player 8", "Mature Crysalis", "MultiKey", At most, 0); //열쇠 부재 감지 : 비-Preserve라 각 플레이어에게 1회만
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>작전 보상: <04>버려진 자원지대 확보. <1F>미네랄 <04>+100");
+	Display Text Message(Always Display, "<07>작전 보상: <04>버려진 자원지대 확보. <1F>미네랄 +100");
 }

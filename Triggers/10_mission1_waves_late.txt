@@ -19,77 +19,344 @@ Actions:
 	Set Deaths("Player 8", "Terran Wraith", Set To, 10080);
 }
 
+// 해처리계열 파괴 보상 랜더마이즈 : Comsat 굴림(0~19)으로 4등급 추첨. 표시(P1~4)와 지급(P5)이
+// 같은 사이클·같은 버킷을 읽어 색과 지급액이 항상 일치한다. 동시 파괴는 한 사이클에 1건씩 소비.
+//   보라250%(<10>) 0~1 / 파랑120%(<0E>) 2~6 / 연두85%(<07>) 7~13 / 하양55%(<04>) 14~19
+// 해처리 기준 미네랄 285·가스 25 (기댓값 ≈ 101%). 변경 시 docs/해처리 파괴 보상을 흥미롭게.md 동기화.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At most, 1);          //보라 잭팟 250%
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <11>주황색 저그<04> 해처리 파괴 보상. <1F>미네랄 <04>+285 / <07>가스 <04>+25");
+	Display Text Message(Always Display, "<04>[★] 주황색 저그 해처리 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +713  <07>가스 +63");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 5", "Zerg Hatchery", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 2);         //파랑 120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6);
+Actions:
+	Display Text Message(Always Display, "<04>[★] 주황색 저그 해처리 파괴! <0E>값진 물건 발견 - <1F>미네랄 +342  <07>가스 +30");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 5", "Zerg Hatchery", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 7);         //연두 85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13);
+Actions:
+	Display Text Message(Always Display, "<04>[★] 주황색 저그 해처리 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +242  <07>가스 +21");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 5", "Zerg Hatchery", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 14);        //하양 55%
+Actions:
+	Display Text Message(Always Display, "<04>[★] 주황색 저그 해처리 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +157  <07>가스 +14");
 	Preserve Trigger();
 }
 
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At most, 1);          //보라 잭팟 250%
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
-	Set Resources("Player 1", Add, 285, ore);
-	Set Resources("Player 2", Add, 285, ore);
-	Set Resources("Player 3", Add, 285, ore);
-	Set Resources("Player 4", Add, 285, ore);
-	Set Resources("Player 1", Add, 25, gas);
-	Set Resources("Player 2", Add, 25, gas);
-	Set Resources("Player 3", Add, 25, gas);
-	Set Resources("Player 4", Add, 25, gas);
+	Set Resources("Player 1", Add, 713, ore);
+	Set Resources("Player 2", Add, 713, ore);
+	Set Resources("Player 3", Add, 713, ore);
+	Set Resources("Player 4", Add, 713, ore);
+	Set Resources("Player 1", Add, 63, gas);
+	Set Resources("Player 2", Add, 63, gas);
+	Set Resources("Player 3", Add, 63, gas);
+	Set Resources("Player 4", Add, 63, gas);
 	Set Deaths("Player 5", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
 
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 5", "Zerg Hatchery", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 2);         //파랑 120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
+	Set Resources("Player 1", Add, 342, ore);
+	Set Resources("Player 2", Add, 342, ore);
+	Set Resources("Player 3", Add, 342, ore);
+	Set Resources("Player 4", Add, 342, ore);
+	Set Resources("Player 1", Add, 30, gas);
+	Set Resources("Player 2", Add, 30, gas);
+	Set Resources("Player 3", Add, 30, gas);
+	Set Resources("Player 4", Add, 30, gas);
+	Set Deaths("Player 5", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 5", "Zerg Hatchery", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 7);         //연두 85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
+	Set Resources("Player 1", Add, 242, ore);
+	Set Resources("Player 2", Add, 242, ore);
+	Set Resources("Player 3", Add, 242, ore);
+	Set Resources("Player 4", Add, 242, ore);
+	Set Resources("Player 1", Add, 21, gas);
+	Set Resources("Player 2", Add, 21, gas);
+	Set Resources("Player 3", Add, 21, gas);
+	Set Resources("Player 4", Add, 21, gas);
+	Set Deaths("Player 5", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 5", "Zerg Hatchery", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 14);        //하양 55%
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
+	Set Resources("Player 1", Add, 157, ore);
+	Set Resources("Player 2", Add, 157, ore);
+	Set Resources("Player 3", Add, 157, ore);
+	Set Resources("Player 4", Add, 157, ore);
+	Set Resources("Player 1", Add, 14, gas);
+	Set Resources("Player 2", Add, 14, gas);
+	Set Resources("Player 3", Add, 14, gas);
+	Set Resources("Player 4", Add, 14, gas);
+	Set Deaths("Player 5", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+// 레어 기준 미네랄 335·가스 25. 버킷/색 규칙은 위 해처리 블록과 동일.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At most, 1);          //보라 잭팟 250%
 Actions:
-	Display Text Message(Always Display, "<19>상급 보상: <11>주황색 저그<04> <19>레어<04> 파괴 보상. <1F>미네랄 <04>+335 / <07>가스 <04>+25");
+	Display Text Message(Always Display, "<04>[★★] 주황색 저그 레어 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +838  <07>가스 +63");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 5", "Zerg Lair", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 2);         //파랑 120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6);
+Actions:
+	Display Text Message(Always Display, "<04>[★★] 주황색 저그 레어 파괴! <0E>값진 물건 발견 - <1F>미네랄 +402  <07>가스 +30");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 5", "Zerg Lair", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 7);         //연두 85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13);
+Actions:
+	Display Text Message(Always Display, "<04>[★★] 주황색 저그 레어 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +285  <07>가스 +21");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 5", "Zerg Lair", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 14);        //하양 55%
+Actions:
+	Display Text Message(Always Display, "<04>[★★] 주황색 저그 레어 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +184  <07>가스 +14");
 	Preserve Trigger();
 }
 
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At most, 1);          //보라 잭팟 250%
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
-	Set Resources("Player 1", Add, 335, ore);
-	Set Resources("Player 2", Add, 335, ore);
-	Set Resources("Player 3", Add, 335, ore);
-	Set Resources("Player 4", Add, 335, ore);
-	Set Resources("Player 1", Add, 25, gas);
-	Set Resources("Player 2", Add, 25, gas);
-	Set Resources("Player 3", Add, 25, gas);
-	Set Resources("Player 4", Add, 25, gas);
+	Set Resources("Player 1", Add, 838, ore);
+	Set Resources("Player 2", Add, 838, ore);
+	Set Resources("Player 3", Add, 838, ore);
+	Set Resources("Player 4", Add, 838, ore);
+	Set Resources("Player 1", Add, 63, gas);
+	Set Resources("Player 2", Add, 63, gas);
+	Set Resources("Player 3", Add, 63, gas);
+	Set Resources("Player 4", Add, 63, gas);
 	Set Deaths("Player 5", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
 
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 5", "Zerg Lair", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 2);         //파랑 120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
+	Set Resources("Player 1", Add, 402, ore);
+	Set Resources("Player 2", Add, 402, ore);
+	Set Resources("Player 3", Add, 402, ore);
+	Set Resources("Player 4", Add, 402, ore);
+	Set Resources("Player 1", Add, 30, gas);
+	Set Resources("Player 2", Add, 30, gas);
+	Set Resources("Player 3", Add, 30, gas);
+	Set Resources("Player 4", Add, 30, gas);
+	Set Deaths("Player 5", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 5", "Zerg Lair", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 7);         //연두 85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
+	Set Resources("Player 1", Add, 285, ore);
+	Set Resources("Player 2", Add, 285, ore);
+	Set Resources("Player 3", Add, 285, ore);
+	Set Resources("Player 4", Add, 285, ore);
+	Set Resources("Player 1", Add, 21, gas);
+	Set Resources("Player 2", Add, 21, gas);
+	Set Resources("Player 3", Add, 21, gas);
+	Set Resources("Player 4", Add, 21, gas);
+	Set Deaths("Player 5", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 5", "Zerg Lair", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 14);        //하양 55%
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
+	Set Resources("Player 1", Add, 184, ore);
+	Set Resources("Player 2", Add, 184, ore);
+	Set Resources("Player 3", Add, 184, ore);
+	Set Resources("Player 4", Add, 184, ore);
+	Set Resources("Player 1", Add, 14, gas);
+	Set Resources("Player 2", Add, 14, gas);
+	Set Resources("Player 3", Add, 14, gas);
+	Set Resources("Player 4", Add, 14, gas);
+	Set Deaths("Player 5", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+// 하이브 기준 미네랄 385·가스 25. 버킷/색 규칙은 위 해처리 블록과 동일.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At most, 1);          //보라 잭팟 250%
 Actions:
-	Display Text Message(Always Display, "<1F>핵심 보상: <11>주황색 저그<04> <1F>하이브<04> 파괴 보상. <1F>미네랄 <04>+385 / <07>가스 <04>+25");
+	Display Text Message(Always Display, "<04>[★★★] 주황색 저그 하이브 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +963  <07>가스 +63");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 5", "Zerg Hive", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 2);         //파랑 120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6);
+Actions:
+	Display Text Message(Always Display, "<04>[★★★] 주황색 저그 하이브 파괴! <0E>값진 물건 발견 - <1F>미네랄 +462  <07>가스 +30");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 5", "Zerg Hive", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 7);         //연두 85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13);
+Actions:
+	Display Text Message(Always Display, "<04>[★★★] 주황색 저그 하이브 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +327  <07>가스 +21");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 5", "Zerg Hive", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 14);        //하양 55%
+Actions:
+	Display Text Message(Always Display, "<04>[★★★] 주황색 저그 하이브 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +212  <07>가스 +14");
 	Preserve Trigger();
 }
 
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At most, 1);          //보라 잭팟 250%
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
-	Set Resources("Player 1", Add, 385, ore);
-	Set Resources("Player 2", Add, 385, ore);
-	Set Resources("Player 3", Add, 385, ore);
-	Set Resources("Player 4", Add, 385, ore);
-	Set Resources("Player 1", Add, 25, gas);
-	Set Resources("Player 2", Add, 25, gas);
-	Set Resources("Player 3", Add, 25, gas);
-	Set Resources("Player 4", Add, 25, gas);
+	Set Resources("Player 1", Add, 963, ore);
+	Set Resources("Player 2", Add, 963, ore);
+	Set Resources("Player 3", Add, 963, ore);
+	Set Resources("Player 4", Add, 963, ore);
+	Set Resources("Player 1", Add, 63, gas);
+	Set Resources("Player 2", Add, 63, gas);
+	Set Resources("Player 3", Add, 63, gas);
+	Set Resources("Player 4", Add, 63, gas);
+	Set Deaths("Player 5", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 5", "Zerg Hive", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 2);         //파랑 120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
+	Set Resources("Player 1", Add, 462, ore);
+	Set Resources("Player 2", Add, 462, ore);
+	Set Resources("Player 3", Add, 462, ore);
+	Set Resources("Player 4", Add, 462, ore);
+	Set Resources("Player 1", Add, 30, gas);
+	Set Resources("Player 2", Add, 30, gas);
+	Set Resources("Player 3", Add, 30, gas);
+	Set Resources("Player 4", Add, 30, gas);
+	Set Deaths("Player 5", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 5", "Zerg Hive", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 7);         //연두 85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13);
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
+	Set Resources("Player 1", Add, 327, ore);
+	Set Resources("Player 2", Add, 327, ore);
+	Set Resources("Player 3", Add, 327, ore);
+	Set Resources("Player 4", Add, 327, ore);
+	Set Resources("Player 1", Add, 21, gas);
+	Set Resources("Player 2", Add, 21, gas);
+	Set Resources("Player 3", Add, 21, gas);
+	Set Resources("Player 4", Add, 21, gas);
+	Set Deaths("Player 5", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 5", "Zerg Hive", At least, 1);
+	Deaths("Player 8", "Terran Comsat Station", At least, 14);        //하양 55%
+Actions:
+	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
+	Set Resources("Player 1", Add, 212, ore);
+	Set Resources("Player 2", Add, 212, ore);
+	Set Resources("Player 3", Add, 212, ore);
+	Set Resources("Player 4", Add, 212, ore);
+	Set Resources("Player 1", Add, 14, gas);
+	Set Resources("Player 2", Add, 14, gas);
+	Set Resources("Player 3", Add, 14, gas);
+	Set Resources("Player 4", Add, 14, gas);
 	Set Deaths("Player 5", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -338,7 +605,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Switch("Switch154", Set);                              //칭찬 표시 완료 후
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <04>지휘 정신체 제거. <1F>미네랄 <04>+1500 / <07>가스 <04>+500");
+	Display Text Message(Always Display, "<07>작전 보상: <04>지휘 정신체 제거. <1F>미네랄 +1500  <07>가스 +500");
 }
 
 // (C phase) 보상 안내 단계 개방 : B 표시 사이클 뒤에 P8이 1회 진행
@@ -404,7 +671,7 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Switch("Switch150", Set);                              //칭찬 표시 완료 후
 Actions:
-	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 제거. <1F>미네랄 <04>+2500. 지휘 교란으로 전방 방어 군집이 와해됐습니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <04>전방 정신체 제거. <1F>미네랄 +2500<04>. 지휘 교란으로 전방 방어 군집이 와해됐습니다.");
 }
 
 // (C phase) 보상 안내 단계 개방 : B 표시 사이클 뒤에 P8이 1회 진행
@@ -549,16 +816,3 @@ Actions:
 	Set Deaths("Player 8", "Terran Barracks", Set To, 0);
 }
 
-Trigger("Player 8"){
-Conditions:
-	Elapsed Time(At least, 1890);
-	Elapsed Time(At most, 1892);
-Actions:
-	// 정신체(P5 Cerebrate)·자원지대(P5 Base+Multi) 리빌러 일괄 제거.
-	// Map Revealer는 Kill Unit At Location이 듣지 않으므로 플레이어 소유 단위를 Remove Unit으로 제거.
-	// 이 시점(31:30) 활성 리빌러는 정신체·자원지대 둘뿐이라 일괄 제거해도 안전(둘 다 동시 만료 대상).
-	Remove Unit("Player 1", "Map Revealer");
-	Remove Unit("Player 2", "Map Revealer");
-	Remove Unit("Player 3", "Map Revealer");
-	Remove Unit("Player 4", "Map Revealer");
-}

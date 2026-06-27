@@ -218,7 +218,7 @@ Conditions:
 	Bring("Player 6", "Overmind Cocoon", "P6 Overmind", At most, 0);
 Actions:
 	Minimap Ping("P6 Overmind");
-	Display Text Message(Always Display, "<07>작전 보상: <04>오버마인드 고치 파괴. <1F>미네랄 <04>+500 / <07>가스 <04>+250. 이 군락의 다음 주공세 1회가 약화되었습니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <04>오버마인드 고치 파괴. <1F>미네랄 +500  <07>가스 +250<04>. 이 군락의 다음 주공세 1회가 약화되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -230,7 +230,7 @@ Conditions:
 	Bring("Player 7", "Overmind Cocoon", "P7 Overmind", At most, 0);
 Actions:
 	Minimap Ping("P7 Overmind");
-	Display Text Message(Always Display, "<07>작전 보상: <04>오버마인드 고치 파괴. <1F>미네랄 <04>+500 / <07>가스 <04>+250. 이 군락의 다음 주공세 1회가 약화되었습니다.");
+	Display Text Message(Always Display, "<07>작전 보상: <04>오버마인드 고치 파괴. <1F>미네랄 +500  <07>가스 +250<04>. 이 군락의 다음 주공세 1회가 약화되었습니다.");
 }
 
 // Weakened roll: consume the selected side's next main assault cooldown

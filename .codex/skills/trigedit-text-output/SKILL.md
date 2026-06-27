@@ -66,9 +66,11 @@ Avoid stacking many colors in one line. Usually color only the prefix or the key
 
 Reward/resource text:
 
-- In player-facing reward lines, color only the resource labels and keep the numeric amounts white.
-- Use `<1F>미네랄 <04>+N / <07>가스 <04>+N` for mineral/gas rewards.
-- Use `<1F>` for the `미네랄` label because it is the verified sky-blue style used by this project for core rewards. Use `<07>` for the `가스` label. Do not color the `+N` amounts.
+- In player-facing reward lines, color the resource labels and their `+N` numeric amounts together.
+- Use `<1F>미네랄 +N  <07>가스 +N` for mineral/gas rewards.
+- Separate mineral and gas rewards with two spaces, not `/`.
+- If normal explanatory text follows a resource amount, return to white with `<04>` immediately after the amount, e.g. `<1F>미네랄 +150<04> 보급이 지원됩니다.` or `<07>가스 +250<04>. 다음 공세가 약화됩니다.`
+- Use `<1F>` for the `미네랄 +N` segment because it is the verified sky-blue style used by this project for core rewards. Use `<07>` for the `가스 +N` segment.
 
 Briefing room caution:
 
@@ -248,7 +250,7 @@ Before finalizing text output, check:
 - Does dialogue obey one-speaker-per-trigger and at least 84-tick spacing between consecutive lines?
 - Are long lines split instead of stacking multiple `Display Text Message` calls in one trigger?
 - Are color codes purposeful and not noisy?
-- Are player-facing resource rewards using `<1F>미네랄` and `<07>가스`, with `+N` amounts in white `<04>`?
+- Are player-facing resource rewards using `<1F>미네랄 +N` and `<07>가스 +N`, with the `+N` amounts kept in the same color as their resource label?
 - Are centered headers using `<13>` where possible?
 - Are "신호원", "유닛", and raw "카운트다운" avoided in dialogue unless intentionally system-facing?
 - Are reward/system messages either clearly labeled or dressed as command/logistics messages?

@@ -65,7 +65,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("Selector");
-	Display Text Message(Always Display, "<07>난이도를 선택하세요. <04>선택 시민을 <07>쉬움<04>, <11>보통<04>, <08>어려움<04>, <06>매우 어려움<04> 구역으로 이동시키십시오. 선택하지 않으면 <11>보통<04>으로 진행됩니다.");
+	Display Text Message(Always Display, "<07>난이도를 선택하세요. <04>선택 시민을 <07>쉬움<04>, <11>보통<04>, <08>어려움<04>, <06>매우 어려움<04> 구역으로 이동시키십시오. 선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
 }
 
 Trigger("All Players"){
@@ -110,7 +110,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("Selector");
-	Display Text Message(Always Display, "<07>난이도 선택 대기 중: <04>선택하지 않으면 <11>보통<04>으로 진행됩니다.");
+	Display Text Message(Always Display, "<07>난이도 선택 대기 중: <04>선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
 }
 
 Trigger("All Players"){
@@ -121,7 +121,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("Selector");
-	Display Text Message(Always Display, "<07>난이도 선택 대기 중: <04>곧 선택 시간이 종료됩니다. 선택하지 않으면 <11>보통<04>으로 확정됩니다.");
+	Display Text Message(Always Display, "<07>난이도 선택 대기 중: <04>곧 선택 시간이 종료됩니다. 선택하지 않으면 <07>쉬움<04>으로 확정됩니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -162,7 +162,7 @@ Conditions:
 	Elapsed Time(At most, 207);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Terran Academy", Set To, 2);
+	Set Deaths("Player 8", "Terran Academy", Set To, 1);
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -171,7 +171,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<04>선택한 난이도는 <07>쉬움<04>입니다.");
-	Display Text Message(Always Display, "<07>선택 보급: <1F>미네랄 <04>+400 / <07>가스 <04>+150 보급이 지원됩니다.");
+	Display Text Message(Always Display, "<07>선택 보급: <1F>미네랄 +400  <07>가스 +150<04> 보급이 지원됩니다.");
 	Set Resources("Current Player", Add, 400, ore);
 	Set Resources("Current Player", Add, 150, gas);
 }
@@ -183,7 +183,7 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<04>선택한 난이도는 <11>보통<04>입니다.");
 	Display Text Message(Always Display, "<11>보통 효과: <04>적 공세 간격 감소, 적 해처리 추가.");
-	Display Text Message(Always Display, "<11>선택 보급: <1F>미네랄 <04>+150 보급이 지원됩니다.");
+	Display Text Message(Always Display, "<11>선택 보급: <1F>미네랄 +150<04> 보급이 지원됩니다.");
 	Set Resources("Current Player", Add, 150, ore);
 	Display Text Message(Always Display, "<07>행운을 빕니다!");
 }

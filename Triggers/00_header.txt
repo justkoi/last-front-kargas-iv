@@ -87,9 +87,11 @@
 //    Terran Engineering Bay: mission2 군락 분노 계산용 P7 원본 DC 백업
 //    Terran Refinery      : mission2 군락 분노 계산용 P7 x100 작업값
 //    위 5개 리더보드 전용 P8 DC 건물도 Player 8 소유로 배치/지급/파괴하지 말 것.
-//    Psi Emitter          : 훈장 시스템 1급 팀 훈장 잔여 수 (시작 시 15)
+//    Psi Emitter          : 훈장 시스템 1급 팀 훈장 잔여 수 (시작 시 20)
 //    Data Disc            : 훈장/군락 분노 리더보드 교대 타이머 (미션2 0~359틱, 10초/20초)
 //    위 2개 훈장 시스템 P8 DC 오브젝트도 Player 8 소유로 배치/지급/파괴하지 말 것.
+//    Terran Comsat Station: 해처리계열 파괴 보상 등급 굴림 카운터 (0~19, master_tick에서 +7/사이클 순환). 버킷: 0~1 보라250%, 2~6 파랑120%, 7~13 연두85%, 14~19 하양55%.
+//    Terran Control Tower : 미션2 해처리계열 보상 등급 latch (0=미확정, 1=하양 2=연두 3=파랑 4=보라). 코드 발행 시 굴림을 고정해 메시지·지급 등급을 일치시킨다.
 //
 //  Player 1~4 DC roles (승계 전용 비생산 오브젝트; 해당 Beacon을 플레이어 소유로 배치/지급/파괴하지 말 것)
 //    Terran Beacon : 종족 마커(시작 3초 스냅샷) 1=Terran, 2=Zerg, 3=Protoss. 13e arsenal handoff 테란 우선 판정용.

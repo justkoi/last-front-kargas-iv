@@ -157,6 +157,8 @@ ground-biased or air-biased wave.
 - **분리된 파일들** 이 `Triggers/`에 번호순으로 있고, `build_triggers.sh` / `.bat` 가 단순 concat으로 합침.
 - **인코딩** 은 UTF-8 그대로. PowerShell 빌드 스크립트는 byte 단위 concat이라 한글 보존됨.
 - **Hyper Trigger 4개** 가 `Triggers/999_hyper_trigger.txt` 에 있고 **Player 8 단독 소유**. 12 DC tick = 1초 공식이 여기서 나옴.
+- **실제 시간 요청을 `Elapsed Time`에 넣을 때는 1.5배**. 사용자가 "25분", "14:07"처럼 실제 플레이 시간을 말하면 Fastest 기준 `elapsed_game_seconds = real_seconds * 1.5`로 변환해 `Elapsed Time` 조건에 쓴다. 예: 실제 25분 = 1500초 → `Elapsed Time(At least, 2250)`. 반대로 `Elapsed Time` 값을 실제 시간으로 설명할 때는 `/ 1.5`.
+  - corrected example: `Elapsed Time(1890)` is real/play-clock `1890 / 1.5 = 1260s = 21:00`, not 47:15.
 - **마스터 틱** ([03_master_tick.txt](../../Triggers/03_master_tick.txt))이 Player 8의 10개 Terran 유닛 DC를 매 사이클 +1.
 - **Player 8** 은 모든 DC 카운터의 owner (게임 내에서 상시 살아있어야 함).
 
@@ -217,6 +219,7 @@ ground-biased or air-biased wave.
    - 대사와 병행은 **맥락에 맞을 때만**. 예: M2 주공세 보안 타이머(`12d`) 노바 `제한시간을 표시하겠습니다.` + `Set Countdown Timer(Set To, 270);`. 반격·결집 **예고** 이벤트는 UI만 켜도 됨.
    - **DC ↔ Countdown 변환 (별개 시계)**
      - DC(Hyper Trigger, 12 tick = 1초)와 Countdown Timer(화면 UI)는 **다른 시계**. 변환비 **DC : Countdown = 1 : 1.5**.
+     - `Elapsed Time`도 게임 초 기준이므로 실제 플레이 시간 요청을 조건으로 만들 때는 `real_seconds * 1.5`를 사용한다. 예: 실제 14:07 = 847초 → `Elapsed Time` 약 1270.
      - `countdown_seconds = dc_seconds × 1.5` 또는 `countdown_seconds = (dc_ticks / 12) × 1.5`
      - DC prep 시작(Dark Archon reset 등)에 `Set Countdown Timer(Set To, countdown_seconds);`, DC 접촉 milestone에서 `Set Countdown Timer(Set To, 0);`으로 종료 동기화.
      - SC Countdown Timer는 게임 초 1:1 감소 → 30 DC초 예고에 45를 넣으면 접촉 시 화면에 ~15가 남을 수 있으므로 **접촉 시 0 해제**로 맞춘다.

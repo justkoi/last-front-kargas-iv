@@ -199,7 +199,9 @@ Conditions:
 	Elapsed Time(At least, 60);
 	Elapsed Time(At most, 62);
 Actions:
-	Display Text Message(Always Display, "<11>주황색 저그<04> 군락을 치려면 준비가 필요하다.");
+	Play WAV("sound\\Misc\\TRescue.wav", 2000);
+	Minimap Ping("MultiKey");
+	Display Text Message(Always Display, "<1A>노바: <04>그 외에 가까운 곳에 버려진 자원지대가 있습니다. <11>저그 점막 뿌리<04>가 뒤덮고 있어, 뿌리를 파괴해야 차지할 수 있습니다.");
 }
 
 Trigger("All Players"){
@@ -224,17 +226,6 @@ Conditions:
 	Elapsed Time(At most, 83);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>병력을 흩뿌리지 말고 진입로 방어에 집중해라.");
-}
-
-Trigger("All Players"){
-Conditions:
-	Elapsed Time(At least, 243);
-	Elapsed Time(At most, 245);
-Actions:
-	Remove Unit("Player 1", "Map Revealer");
-	Remove Unit("Player 2", "Map Revealer");
-	Remove Unit("Player 3", "Map Revealer");
-	Remove Unit("Player 4", "Map Revealer");
 }
 
 Trigger("All Players"){

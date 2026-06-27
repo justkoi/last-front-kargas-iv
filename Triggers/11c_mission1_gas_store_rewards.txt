@@ -40,7 +40,7 @@ Conditions:
 	Switch("Switch92", Set);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. <07>가스 <04>+1000");
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. <07>가스 +1000");
 }
 
 Trigger("Player 8"){
@@ -61,5 +61,5 @@ Conditions:
 	Switch("Switch94", Set);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. <07>가스 <04>+1000");
+	Display Text Message(Always Display, "<07>작전 보상: <04>저그 가스보관소 파괴 보상. <07>가스 +1000");
 }

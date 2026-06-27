@@ -51,6 +51,17 @@ Actions:
 	Set Deaths("Player 8", "Protoss High Templar", Add, 1);
 	Set Deaths("Player 8", "Terran Science Vessel", Add, 1);
 	Set Deaths("Player 8", "Protoss Gateway", Add, 1); //스캔 페이즈 카운터 : 침입 감지 Bring 분산용 (0→1→2→3 순환)
+	Set Deaths("Player 8", "Terran Comsat Station", Add, 7); //해처리계열 보상 등급 굴림 카운터 : stride 7(20과 서로소)로 0~19 순환, 소비 시점 값이 의사난수
+	Preserve Trigger();
+}
+
+// 보상 굴림 wrap : 20 이상이면 20을 빼 0~19를 순환시킨다 (최대 19+7=26 → 1회 차감으로 0~6).
+// stride가 1이 아니므로 Set To 0이 아니라 Subtract 20으로 오프셋을 보존한다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Comsat Station", At least, 20);
+Actions:
+	Set Deaths("Player 8", "Terran Comsat Station", Subtract, 20);
 	Preserve Trigger();
 }
 

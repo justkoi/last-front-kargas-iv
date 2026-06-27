@@ -43,6 +43,10 @@ Actions:
 	Set Deaths("Player 5", "Zerg Spore Colony", Set To, 0);
 	Set Deaths("Player 5", "Terran Marine", Set To, 0);
 	Set Deaths("Player 5", "Terran Firebat", Set To, 0);
+	Remove Unit("Player 1", "Map Revealer");
+	Remove Unit("Player 2", "Map Revealer");
+	Remove Unit("Player 3", "Map Revealer");
+	Remove Unit("Player 4", "Map Revealer");
 	Set Switch("Switch109", clear);
 	Set Switch("Switch110", clear);
 	Set Switch("Switch111", clear);
@@ -105,7 +109,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 216);
 	Deaths("Player 8", "Terran Vulture", At most, 240);
 Actions:
-	Display Text Message(Always Display, "<07>군수지원: <04>전선 재정비 보급 투입. <1F>미네랄 <04>+500 / <07>가스 <04>+500");
+	Display Text Message(Always Display, "<07>군수지원: <04>전선 재정비 보급 투입. <1F>미네랄 +500  <07>가스 +500");
 }
 
 Trigger("Player 8"){

@@ -123,7 +123,7 @@ Conditions:
 	Deaths("Player 8", "Terran Medic", Exactly, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1800);
-	Display Text Message(Always Display, "<07>작전 보상: <04>전방 집결지 파괴. <1F>미네랄 <04>+1000 / <07>가스 <04>+500");
+	Display Text Message(Always Display, "<07>작전 보상: <04>전방 집결지 파괴. <1F>미네랄 +1000  <07>가스 +500");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
