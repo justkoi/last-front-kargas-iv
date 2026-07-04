@@ -135,8 +135,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 192);
 Actions:
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -146,13 +145,8 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 276);
 Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate1");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute1");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute2");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute3");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute4");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute5");
 	Minimap Ping("Mission2 Gate1");
-	Display Text Message(Always Display, "<1A>노바: <04>주 통로를 확인했습니다. 폭이 넓어 공격에는 유리하지만, 방어선은 쉽게 벌어질 겁니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>첫 번째 진입로를 표시했습니다. 넓은 통로입니다. 전열이 벌어지지 않게 방어선을 잡으십시오.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -161,31 +155,12 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 468);
 	Deaths("Player 8", "Terran Vulture", At most, 492);
 Actions:
-	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate3");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute6");
-	Minimap Ping("Mission2 Gate3");
-	Display Text Message(Always Display, "<1A>노바: <04>좁은 샛길을 확인했습니다. 우회 병력이 스며들 수 있으니 감시를 붙이십시오.");
+	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate2");
+	Minimap Ping("Mission2 Gate2");
+	Center View("Mission2 Gate2");
+	Display Text Message(Always Display, "<03>호크: <04>두 번째 진입로까지 확인했다. 이제 방어선은 이 두 입구에 집중한다.");
 }
 
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 684);
-	Deaths("Player 8", "Terran Vulture", At most, 708);
-Actions:
-	Create Unit("Current Player", "Map Revealer", 1, "DefenseCenter2");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute7");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute8");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute9");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute10");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute11");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute12");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute13");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute14");
-	Minimap Ping("DefenseCenter2");
-	Center View("DefenseCenter2");
-	Display Text Message(Always Display, "<03>호크: <04>본진 핵심 입구를 확인했다. 반드시 단단히 방비해라.");
-}
 
 Trigger("All Players"){
 Conditions:

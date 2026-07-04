@@ -658,8 +658,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -696,8 +695,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -734,8 +732,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -772,8 +769,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -810,8 +806,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -848,8 +843,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }

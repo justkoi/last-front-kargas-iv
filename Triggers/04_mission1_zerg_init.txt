@@ -40,7 +40,25 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 330);
-	Deaths("Player 8", "Terran Academy", At least, 1);
+	Deaths("Player 8", "Terran Academy", Exactly, 1);
+Actions:
+	Run AI Script At Location("ZSUx", "P5 Base");
+}
+
+// Fastest real-time target: normal 3:20 (Elapsed 300).
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 300);
+	Deaths("Player 8", "Terran Academy", Exactly, 2);
+Actions:
+	Run AI Script At Location("ZSUx", "P5 Base");
+}
+
+// Fastest real-time target: hard and very hard 3:00 (Elapsed 270).
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 270);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 Actions:
 	Run AI Script At Location("ZSUx", "P5 Base");
 }

@@ -112,10 +112,18 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 270);
 Actions:
-	Remove Unit("Player 1", "Map Revealer");
-	Remove Unit("Player 2", "Map Revealer");
-	Remove Unit("Player 3", "Map Revealer");
-	Remove Unit("Player 4", "Map Revealer");
+	Kill Unit At Location("Player 1", "Map Revealer", 64, "P5 Spawn1");
+	Kill Unit At Location("Player 1", "Map Revealer", 64, "MainLoad1");
+	Kill Unit At Location("Player 1", "Map Revealer", 64, "MainLoad2");
+	Kill Unit At Location("Player 2", "Map Revealer", 64, "P5 Spawn1");
+	Kill Unit At Location("Player 2", "Map Revealer", 64, "MainLoad1");
+	Kill Unit At Location("Player 2", "Map Revealer", 64, "MainLoad2");
+	Kill Unit At Location("Player 3", "Map Revealer", 64, "P5 Spawn1");
+	Kill Unit At Location("Player 3", "Map Revealer", 64, "MainLoad1");
+	Kill Unit At Location("Player 3", "Map Revealer", 64, "MainLoad2");
+	Kill Unit At Location("Player 4", "Map Revealer", 64, "P5 Spawn1");
+	Kill Unit At Location("Player 4", "Map Revealer", 64, "MainLoad1");
+	Kill Unit At Location("Player 4", "Map Revealer", 64, "MainLoad2");
 }
 
 // AttackPoint1 optional Cerebrate cue - late mission1 pressure relief.

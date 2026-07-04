@@ -9,17 +9,12 @@
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 MiniBase, P6 Spawn1~4, P6 H1~4 (H4 currently unused; very hard = H1~3),
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4, P7 H1~4 (H4 currently unused; very hard = H1~3),
-//                      WestArea, Middle Area, East Area, Gas1, Gas2, Mission2 Gate1, Mission2 Gate3~4, NewRoute1~14, Waypoint1~5,
+//                      WestArea, Middle Area, East Area, Gas1, Gas2, Mission2 Gate1~2, Waypoint1~5,
 //                      Difficulty, Selector, SelectEasy, SelectNormal, SelectHard, SelectVeryHard,
-//                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping,
-//                      DefenseCenter1, DefenseCenter2
+//                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
 //  P6/P7 Overmind locations require preplaced invincible Overmind Cocoons
 //  owned by Player 6 / Player 7. The event disables invincibility on the selected one.
-//  DefenseCenter1/2 likewise require preplaced invincible Player 9 buildings.
-//  Easy/Normal hand off each center to a random living player (invincibility off);
-//  Normal strips Photon Cannons and Pylons at difficulty lock first; Hard+ destroy all.
-//  See 15b_mission2_easy_defense_handoff.txt.
 //
 //  Timer rule: 12 DC tick = 1 second
 //    10s = 120, 60s = 720, 90s = 1080, 3min = 2160, 3min20 = 2400, 4min = 2880, 5min = 3600, 10min = 7200
@@ -208,10 +203,7 @@
 //    Switch131     : P7 main assault coarse (air/ground) warning shown
 //    Switch132     : main assault first-wave seeded at game start (one-shot guard)
 //    Switch133     : AttackPoint1 정신체 격파 P5 회군 윈도우 활성 (15초, 매초 Move 재발급)
-//    Switch134/135 : DefenseCenter1 easy-mode handoff random living-player selector (clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4)
-//    Switch136     : DefenseCenter1 easy-mode handoff completed
-//    Switch137/138 : DefenseCenter2 easy-mode handoff random living-player selector
-//    Switch139     : DefenseCenter2 easy-mode handoff completed
+//    Switch134~139 : unused
 //    Switch140     : mission2 P6 forward rally point revealed (Vulture >= 4080)
 //    Switch141     : mission2 P6 forward rally point reward paid
 //    Switch142     : mission1 arsenal facility alive gate - Barracks OR Factory at BaseEntrance (13e, prescan 1078-1080)
@@ -1361,7 +1353,25 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Elapsed Time(At least, 330);
-	Deaths("Player 8", "Terran Academy", At least, 1);
+	Deaths("Player 8", "Terran Academy", Exactly, 1);
+Actions:
+	Run AI Script At Location("ZSUx", "P5 Base");
+}
+
+// Fastest real-time target: normal 3:20 (Elapsed 300).
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 300);
+	Deaths("Player 8", "Terran Academy", Exactly, 2);
+Actions:
+	Run AI Script At Location("ZSUx", "P5 Base");
+}
+
+// Fastest real-time target: hard and very hard 3:00 (Elapsed 270).
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 270);
+	Deaths("Player 8", "Terran Academy", At least, 3);
 Actions:
 	Run AI Script At Location("ZSUx", "P5 Base");
 }
@@ -1903,10 +1913,18 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 270);
 Actions:
-	Remove Unit("Player 1", "Map Revealer");
-	Remove Unit("Player 2", "Map Revealer");
-	Remove Unit("Player 3", "Map Revealer");
-	Remove Unit("Player 4", "Map Revealer");
+	Kill Unit At Location("Player 1", "Map Revealer", 64, "P5 Spawn1");
+	Kill Unit At Location("Player 1", "Map Revealer", 64, "MainLoad1");
+	Kill Unit At Location("Player 1", "Map Revealer", 64, "MainLoad2");
+	Kill Unit At Location("Player 2", "Map Revealer", 64, "P5 Spawn1");
+	Kill Unit At Location("Player 2", "Map Revealer", 64, "MainLoad1");
+	Kill Unit At Location("Player 2", "Map Revealer", 64, "MainLoad2");
+	Kill Unit At Location("Player 3", "Map Revealer", 64, "P5 Spawn1");
+	Kill Unit At Location("Player 3", "Map Revealer", 64, "MainLoad1");
+	Kill Unit At Location("Player 3", "Map Revealer", 64, "MainLoad2");
+	Kill Unit At Location("Player 4", "Map Revealer", 64, "P5 Spawn1");
+	Kill Unit At Location("Player 4", "Map Revealer", 64, "MainLoad1");
+	Kill Unit At Location("Player 4", "Map Revealer", 64, "MainLoad2");
 }
 
 // AttackPoint1 optional Cerebrate cue - late mission1 pressure relief.
@@ -3532,21 +3550,25 @@ Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi2");
 	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi3");
 	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi4");
+	Create Unit("Player 1", "Map Revealer", 1, "P5 Multi5");
 	Create Unit("Player 2", "Map Revealer", 1, "P5 Base");
 	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi1");
 	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi2");
 	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi3");
 	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi4");
+	Create Unit("Player 2", "Map Revealer", 1, "P5 Multi5");
 	Create Unit("Player 3", "Map Revealer", 1, "P5 Base");
 	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi1");
 	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi2");
 	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi3");
 	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi4");
+	Create Unit("Player 3", "Map Revealer", 1, "P5 Multi5");
 	Create Unit("Player 4", "Map Revealer", 1, "P5 Base");
 	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi1");
 	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi2");
 	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi3");
 	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi4");
+	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi5");
 }
 
 // 궤도스캔 연출 (스캔음 + 핑 + 노바 대사) - 28:00
@@ -5351,8 +5373,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -5389,8 +5410,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -5427,8 +5447,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -5465,8 +5484,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -5503,8 +5521,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -5541,8 +5558,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
 	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -5982,8 +5998,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 192);
 Actions:
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate3");
-	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate4");
+	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -5993,13 +6008,8 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 276);
 Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate1");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute1");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute2");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute3");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute4");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute5");
 	Minimap Ping("Mission2 Gate1");
-	Display Text Message(Always Display, "<1A>노바: <04>주 통로를 확인했습니다. 폭이 넓어 공격에는 유리하지만, 방어선은 쉽게 벌어질 겁니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>첫 번째 진입로를 표시했습니다. 넓은 통로입니다. 전열이 벌어지지 않게 방어선을 잡으십시오.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -6008,31 +6018,12 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 468);
 	Deaths("Player 8", "Terran Vulture", At most, 492);
 Actions:
-	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate3");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute6");
-	Minimap Ping("Mission2 Gate3");
-	Display Text Message(Always Display, "<1A>노바: <04>좁은 샛길을 확인했습니다. 우회 병력이 스며들 수 있으니 감시를 붙이십시오.");
+	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate2");
+	Minimap Ping("Mission2 Gate2");
+	Center View("Mission2 Gate2");
+	Display Text Message(Always Display, "<03>호크: <04>두 번째 진입로까지 확인했다. 이제 방어선은 이 두 입구에 집중한다.");
 }
 
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 684);
-	Deaths("Player 8", "Terran Vulture", At most, 708);
-Actions:
-	Create Unit("Current Player", "Map Revealer", 1, "DefenseCenter2");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute7");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute8");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute9");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute10");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute11");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute12");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute13");
-	Create Unit("Current Player", "Map Revealer", 1, "NewRoute14");
-	Minimap Ping("DefenseCenter2");
-	Center View("DefenseCenter2");
-	Display Text Message(Always Display, "<03>호크: <04>본진 핵심 입구를 확인했다. 반드시 단단히 방비해라.");
-}
 
 Trigger("All Players"){
 Conditions:
@@ -8497,233 +8488,6 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 1368);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>뿌리망이 마를 때까지 깊게 들어가지 마라. 그때까진 아래쪽 방어선을 유지한다.");
-}
-//-----------------------------------------------------------------//
-//  DefenseCenter1/2 방어 거점 인계 (난이도별)
-//
-//  쉬움(Academy DC = 1): 미션2 인트로 시점(Vulture >= 756)에 각 거점의
-//    모든 P9 무적 건물을 무작위 생존 플레이어에게 통제권 이양(센터별 독립 추첨).
-//    이양 시 무적 해제 → 플레이어 방어선으로 활용. 가이드 목적.
-//  보통(Academy DC = 2): 난이도 확정 즉시 포토캐논·파일런만 파괴.
-//    미션2 인트로에 잔존 건물을 쉬움과 동일하게 무작위 생존 플레이어에게 인계.
-//  어려움+(Academy DC >= 3): 난이도 확정 즉시 두 거점 P9 건물 전량 파괴.
-//
-//  DefenseCenter1/2 에는 에디터에서 P9 소유 건물을 무적 상태로 미리 배치해야 함.
-//
-//  Switch134/135 : DefenseCenter1 인계 무작위 생존 플레이어 선택자
-//  Switch136     : DefenseCenter1 인계 완료(가드)
-//  Switch137/138 : DefenseCenter2 인계 무작위 생존 플레이어 선택자
-//  Switch139     : DefenseCenter2 인계 완료(가드)
-//    선택자 조합: clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4
-//    죽은 플레이어 조합이 뽑히면 give가 발동 안 됨 → 다음 사이클 재추첨.
-//-----------------------------------------------------------------//
-
-//----- (A1) 보통 난이도: 난이도 확정 즉시 포토캐논·파일런만 제거 (1회성) -----//
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Academy", Exactly, 2); //보통 난이도 확정
-Actions:
-	Set Invincibility("Player 9", "Protoss Photon Cannon", "DefenseCenter1", disabled); //파괴 대상만 무적 해제
-	Set Invincibility("Player 9", "Protoss Pylon", "DefenseCenter1", disabled);
-	Kill Unit At Location("Player 9", "Protoss Photon Cannon", All, "DefenseCenter1");
-	Kill Unit At Location("Player 9", "Protoss Pylon", All, "DefenseCenter1");
-	Set Invincibility("Player 9", "Protoss Photon Cannon", "DefenseCenter2", disabled);
-	Set Invincibility("Player 9", "Protoss Pylon", "DefenseCenter2", disabled);
-	Kill Unit At Location("Player 9", "Protoss Photon Cannon", All, "DefenseCenter2");
-	Kill Unit At Location("Player 9", "Protoss Pylon", All, "DefenseCenter2");
-}
-
-//----- (A2) 어려움+ 난이도: 난이도 확정 즉시 거점 전량 파괴 (1회성) -----//
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Academy", At least, 3); //어려움/매우 어려움 확정
-Actions:
-	Set Invincibility("Player 9", "Buildings", "DefenseCenter1", disabled); //파괴 전 무적 해제 : 무적 상태면 Kill 불가
-	Set Invincibility("Player 9", "Buildings", "DefenseCenter2", disabled);
-	Kill Unit At Location("Player 9", "Buildings", All, "DefenseCenter1"); //가이드용 거점 제거
-	Kill Unit At Location("Player 9", "Buildings", All, "DefenseCenter2");
-}
-
-//----- (B) DefenseCenter1 추첨 (Preserve, 완료 전까지 매 사이클 재추첨) -----//
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Academy", At least, 1);    //쉬움/보통 : 거점 인계
-	Deaths("Player 8", "Terran Academy", At most, 2);
-	Switch("Switch136", Not Set);                         //DC1 아직 미인계 : 인계 완료 시 단락
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);   //미션2 진행 중 : 미션 단계 플래그 3
-	Deaths("Player 8", "Terran Vulture", At least, 756); //미션2 인트로 시점 : 목표 표시 타이밍
-Actions:
-	Set Switch("Switch134", randomize); //DC1 인계 대상 무작위 재추첨
-	Set Switch("Switch135", randomize);
-	Preserve Trigger();
-}
-
-//----- (C) DefenseCenter1 give x4 (P1~P4) : 추첨 조합 + 생존 확인 시 1회 인계 -----//
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Academy", At least, 1);    //쉬움/보통
-	Deaths("Player 8", "Terran Academy", At most, 2);
-	Switch("Switch136", Not Set);                         //DC1 아직 미인계
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);   //미션2 진행 중
-	Deaths("Player 8", "Terran Vulture", At least, 756); //미션2 인트로 시점
-	Switch("Switch134", Not Set);                         //선택자 조합 : P1 (clear/clear)
-	Switch("Switch135", Not Set);
-	Command("Player 1", "Buildings", At least, 1);       //P1 생존 확인 : 죽었으면 발동X→재추첨
-Actions:
-	Set Invincibility("Player 9", "Buildings", "DefenseCenter1", disabled); //인계 시 무적 해제 : 방어선으로 활용
-	Give Units to Player("Player 9", "Player 1", "Buildings", All, "DefenseCenter1"); //DC1 전체 건물 P1에게 통제권 이양
-	Minimap Ping("DefenseCenter1");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>방어 거점 인계: <04>DefenseCenter1 구역의 방어 건물 통제권을 이양했습니다. 무적이 해제되었으니 방어선으로 활용하십시오.");
-	Set Switch("Switch136", set); //DC1 인계 완료 : roll/give 중단
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Deaths("Player 8", "Terran Academy", At most, 2);
-	Switch("Switch136", Not Set);
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
-	Switch("Switch134", Set);                             //선택자 조합 : P2 (set/clear)
-	Switch("Switch135", Not Set);
-	Command("Player 2", "Buildings", At least, 1);       //P2 생존 확인
-Actions:
-	Set Invincibility("Player 9", "Buildings", "DefenseCenter1", disabled);
-	Give Units to Player("Player 9", "Player 2", "Buildings", All, "DefenseCenter1");
-	Minimap Ping("DefenseCenter1");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>방어 거점 인계: <04>DefenseCenter1 구역의 방어 건물 통제권을 이양했습니다. 무적이 해제되었으니 방어선으로 활용하십시오.");
-	Set Switch("Switch136", set);
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Deaths("Player 8", "Terran Academy", At most, 2);
-	Switch("Switch136", Not Set);
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
-	Switch("Switch134", Not Set);                         //선택자 조합 : P3 (clear/set)
-	Switch("Switch135", Set);
-	Command("Player 3", "Buildings", At least, 1);       //P3 생존 확인
-Actions:
-	Set Invincibility("Player 9", "Buildings", "DefenseCenter1", disabled);
-	Give Units to Player("Player 9", "Player 3", "Buildings", All, "DefenseCenter1");
-	Minimap Ping("DefenseCenter1");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>방어 거점 인계: <04>DefenseCenter1 구역의 방어 건물 통제권을 이양했습니다. 무적이 해제되었으니 방어선으로 활용하십시오.");
-	Set Switch("Switch136", set);
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Deaths("Player 8", "Terran Academy", At most, 2);
-	Switch("Switch136", Not Set);
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
-	Switch("Switch134", Set);                             //선택자 조합 : P4 (set/set)
-	Switch("Switch135", Set);
-	Command("Player 4", "Buildings", At least, 1);       //P4 생존 확인
-Actions:
-	Set Invincibility("Player 9", "Buildings", "DefenseCenter1", disabled);
-	Give Units to Player("Player 9", "Player 4", "Buildings", All, "DefenseCenter1");
-	Minimap Ping("DefenseCenter1");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>방어 거점 인계: <04>DefenseCenter1 구역의 방어 건물 통제권을 이양했습니다. 무적이 해제되었으니 방어선으로 활용하십시오.");
-	Set Switch("Switch136", set);
-}
-
-//----- (D) DefenseCenter2 추첨 (Preserve, 완료 전까지 매 사이클 재추첨) -----//
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Academy", At least, 1);    //쉬움/보통
-	Deaths("Player 8", "Terran Academy", At most, 2);
-	Switch("Switch139", Not Set);                         //DC2 아직 미인계
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);   //미션2 진행 중
-	Deaths("Player 8", "Terran Vulture", At least, 756); //미션2 인트로 시점
-Actions:
-	Set Switch("Switch137", randomize); //DC2 인계 대상 무작위 재추첨 : DC1과 독립
-	Set Switch("Switch138", randomize);
-	Preserve Trigger();
-}
-
-//----- DefenseCenter2 give x4 (P1~P4) -----//
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Deaths("Player 8", "Terran Academy", At most, 2);
-	Switch("Switch139", Not Set);
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
-	Switch("Switch137", Not Set);                         //선택자 조합 : P1 (clear/clear)
-	Switch("Switch138", Not Set);
-	Command("Player 1", "Buildings", At least, 1);       //P1 생존 확인
-Actions:
-	Set Invincibility("Player 9", "Buildings", "DefenseCenter2", disabled);
-	Give Units to Player("Player 9", "Player 1", "Buildings", All, "DefenseCenter2");
-	Minimap Ping("DefenseCenter2");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>방어 거점 인계: <04>DefenseCenter2 구역의 방어 건물 통제권을 이양했습니다. 무적이 해제되었으니 방어선으로 활용하십시오.");
-	Set Switch("Switch139", set); //DC2 인계 완료
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Deaths("Player 8", "Terran Academy", At most, 2);
-	Switch("Switch139", Not Set);
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
-	Switch("Switch137", Set);                             //선택자 조합 : P2 (set/clear)
-	Switch("Switch138", Not Set);
-	Command("Player 2", "Buildings", At least, 1);       //P2 생존 확인
-Actions:
-	Set Invincibility("Player 9", "Buildings", "DefenseCenter2", disabled);
-	Give Units to Player("Player 9", "Player 2", "Buildings", All, "DefenseCenter2");
-	Minimap Ping("DefenseCenter2");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>방어 거점 인계: <04>DefenseCenter2 구역의 방어 건물 통제권을 이양했습니다. 무적이 해제되었으니 방어선으로 활용하십시오.");
-	Set Switch("Switch139", set);
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Deaths("Player 8", "Terran Academy", At most, 2);
-	Switch("Switch139", Not Set);
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
-	Switch("Switch137", Not Set);                         //선택자 조합 : P3 (clear/set)
-	Switch("Switch138", Set);
-	Command("Player 3", "Buildings", At least, 1);       //P3 생존 확인
-Actions:
-	Set Invincibility("Player 9", "Buildings", "DefenseCenter2", disabled);
-	Give Units to Player("Player 9", "Player 3", "Buildings", All, "DefenseCenter2");
-	Minimap Ping("DefenseCenter2");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>방어 거점 인계: <04>DefenseCenter2 구역의 방어 건물 통제권을 이양했습니다. 무적이 해제되었으니 방어선으로 활용하십시오.");
-	Set Switch("Switch139", set);
-}
-
-Trigger("Player 8"){
-Conditions:
-	Deaths("Player 8", "Terran Academy", At least, 1);
-	Deaths("Player 8", "Terran Academy", At most, 2);
-	Switch("Switch139", Not Set);
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 756);
-	Switch("Switch137", Set);                             //선택자 조합 : P4 (set/set)
-	Switch("Switch138", Set);
-	Command("Player 4", "Buildings", At least, 1);       //P4 생존 확인
-Actions:
-	Set Invincibility("Player 9", "Buildings", "DefenseCenter2", disabled);
-	Give Units to Player("Player 9", "Player 4", "Buildings", All, "DefenseCenter2");
-	Minimap Ping("DefenseCenter2");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<07>방어 거점 인계: <04>DefenseCenter2 구역의 방어 건물 통제권을 이양했습니다. 무적이 해제되었으니 방어선으로 활용하십시오.");
-	Set Switch("Switch139", set);
 }
 //-----------------------------------------------------------------//
 //  Mission-independent - dynamic building tracking and random all-out attack
@@ -40586,6 +40350,99 @@ Actions:
 	Set Deaths("Player 3", "Zerg Beacon", Set To, 0);
 	Set Deaths("Player 4", "Zerg Beacon", Set To, 0);
 	Preserve Trigger();
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE / CHEAT] Spawn 2 control groups of Jim Raynor at P1 Start
+//  Included for manual test builds only.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Create Unit("Player 1", "Jim Raynor (Marine)", 24, "P1 Start");
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE / CHEAT] 게임 시작 시 P1에게 톰 카잔스키 36기 지급
+//
+//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
+//  끄는 법: Triggers/ 에서 제거
+//
+//  주의: 36기를 한 location에 몰아 스폰하면 stacking으로 일부 멀리
+//        밀려날 수 있음. 테스트 목적이므로 P1 본진(P1 Start 등) 사용.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Create Unit("Player 1", "Tom Kazansky (Wraith)", 36, "Anywhere");
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE] 플레이어 절대 패배 방지 (스위치 방식)
+//
+//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
+//  끄는 법: Triggers/ 에서 제거
+//
+//  동작 원리:
+//    게임 시작 직후 Switch1 을 set.
+//    12_mission1_to_mission2_transition.txt 의 패배 트리거에 Switch("Switch1", cleared) 조건이
+//    있으므로, 스위치가 set 상태인 한 Defeat()가 발동하지 않음.
+//-----------------------------------------------------------------//
+
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Set Switch("Switch1", set);
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE] 컴퓨터(P5, P6) → 플레이어(P1~P4) 시야 공유
+//  (플레이어가 컴퓨터의 시야를 가진다)
+//
+//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
+//  끄는 법: Triggers/ 에서 제거
+//
+//  사용 스크립트 (AI → 해당 플레이어로 시야 공유):
+//    "Turn ON Shared Vision of current player with Player 1"
+//    "Turn ON Shared Vision of current player with Player 2"
+//    "Turn ON Shared Vision of current player with Player 3"
+//    "Turn ON Shared Vision of current player with Player 4"
+//
+//  주의: 위 스크립트 이름이 SCMDraft 드롭다운에 정확히 그대로 있는지
+//        확인할 것. 표기가 다르면 적절히 교체.
+//        ("of [SHARER] with [RECEIVER]" 패턴으로 추정)
+//-----------------------------------------------------------------//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Elapsed Time(At most, 1);
+Actions:
+	Run AI Script("+Vi4");
+	Run AI Script("+Vi5");
+	Run AI Script("+Vi6");
+	Run AI Script("+Vi7");
+}
+//-----------------------------------------------------------------//
+//  [TEST MODE] Trigger the normal mission 1 clear path
+//
+//  This does not set mission 2 directly. It prepares the same condition
+//  used by Triggers/12_mission1_to_mission2_transition.txt:
+//    - Valkyrie DC = 1
+//    - P5 combat base is removed
+//
+//  Then mission1_to_mission2_transition advances Valkyrie 1 -> 2, grants rewards, and starts
+//  the normal mission 2 phase 1 flow.
+//-----------------------------------------------------------------//
+
+Trigger("Player 8"){
+Conditions:
+	Elapsed Time(At least, 5);
+Actions:
+	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
+	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
+	Kill Unit("Player 5", "Buildings");
+	Kill Unit("Player 5", "Men");
 }
 //-----------------------------------------------------------------//
 //  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유
