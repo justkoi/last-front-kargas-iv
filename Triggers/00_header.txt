@@ -101,6 +101,14 @@
 //    Zerg Beacon   : 이탈 자산 승계 처리 중인 원 소유자 번호 (0=대기, 1=P1, 2=P2, 3=P3, 4=P4)
 //    Terran Beacon : 이탈 자산 승계 전체 알림 코드 (십의 자리=원 소유자, 일의 자리=승계자)
 //
+//    Terran Supply Depot  : wartime rationing 120s timer (Switch177 active only)
+//    Zerg Queen : wartime rationing phase (0=idle, 10=ore draw, 20=gas draw, 30=transfer, 40=message, 50=cleanup)
+//    Zerg Spawning Pool  : wartime rationing ore receiver (0=none, 1~4=P1~P4, random draw)
+//    Zerg Evolution Chamber: wartime rationing gas receiver (0=none, 1~4=P1~P4, random draw)
+//    Protoss Pylon       : wartime rationing ore transfer total for current cycle (summed receive message)
+//    Zerg Hydralisk Den  : wartime rationing gas transfer total for current cycle (summed receive message)
+//    Terran Siege Tank (Tank Mode) : wartime rationing draw try counter (Queen=10/20) + message frame counter (Queen=40)
+//
 //  Player 5 DC roles
 //    Zerg Hatchery        : mission1 P5 Hatchery destroy reward + late-wave acceleration counter
 //    Zerg Lair            : mission1 P5 Lair destroy reward counter
@@ -236,6 +244,18 @@
 //    Switch170/171 : 이탈 자산 승계자 2-bit 무작위 선택기
 //    Switch172     : 현재 이탈자와 종족이 다른 생존 후보가 1명 이상 존재
 //    Switch173~176 : P1~P4 heartbeat 1회 누락 확인(2회 연속 누락 때만 이탈 등록)
+//
+//    Switch177     : wartime rationing active (set by mission2 +90s logistics event)
+//    Switch178~181 : wartime rationing P1~P4 cycle flags (copied from Switch218~221 at cycle start; skip if Switch166~169 departed)
+//    Switch182~197 : wartime rationing P1~P4 ore payment flags tier1-4 (120/300/640/1000) — set only when the transfer really fired (13f v3)
+//    Switch198~201 : wartime rationing P1-P2 ore payment flags tier5-6 (1800/3000)
+//    Switch202~217 : wartime rationing P1~P4 gas payment flags tier1-4 (120/300/640/1000)
+//    Switch222~225 : wartime rationing P3-P4 ore payment flags tier5-6 (1800/3000)
+//    Switch226~233 : wartime rationing P1~P4 gas payment flags tier5-6 (1800/3000)
+//    Switch218~221 : wartime rationing P1~P4 slot registration (latched on first heartbeat; separate from leave-handoff Switch162~165)
+//    Switch234/235 : wartime rationing receiver 2-bit random draw (bit0/bit1, re-randomized each cycle during Queen=10/20)
+//    Switch246     : test-only wartime rationing initialization guard (TestTriggersForBuild/94_test_union_relief_fund)
+//    Switch247     : test-only wartime rationing start message shown once
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:

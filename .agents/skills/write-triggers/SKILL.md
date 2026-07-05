@@ -309,6 +309,18 @@ Switch("Switch1", Not Set);
 - **같은 사이클 내 `Switch` 연쇄 → 같은 프레임 메시지 덮어쓰기** — SC는 한 플레이어의 트리거를 한 사이클에 위→아래로 평가하며, 위 트리거가 set한 `Switch`를 **같은 사이클 아래 트리거가 즉시 본다**. 그래서 `A가 S1 set → B가 S1 조건으로 발동`을 파일 순서 A→B로 두면 둘 다 같은 사이클(같은 프레임)에 발동해, `Display Text Message`가 서로 덮어써 마지막 한 줄만 보인다. **여러 줄을 순차 노출하려면 의존 트리거를 파일상 역순으로 배치**한다(C→B→A로 두면 A는 사이클 N, B는 N+1, C는 N+2에 발동 → 표시 순서는 A,B,C). 비-Preserve 트리거는 조건이 거짓이면 비활성화되지 않고 다음 사이클에 재평가되므로 이 stagger가 성립한다. (2026-06-08, 10_mission1_waves_late 정신체 격파 칭찬 / 13e 개인 메시지)
 - **`.scx`와 프로덕션 합본의 문자열 액션 순서·개수 불일치** — `deploy_map.ps1`은 clean → CP949 string recovery → STRx normalize → protect 순으로 진행한다. recovery 단계에서 `KargasIV_Triggers_Mission1Only.txt`와 `.scx` TRIG의 문자열 액션을 **같은 순서로 1:1 매칭**한다. 텍스트에만 있거나 맵에만 있으면 `String action count differs` / `String encoding recovery failed`가 난다. 예전에 `build_triggers_withTest.ps1`로 임포트한 뒤 프로덕션 합본만 빌드하면, 맵에 `Leader Board Resources` 같은 테스트 잔여가 남을 수 있다. 프로덕션 배포 전 SCMDraft에서 **`build_triggers.ps1` 결과만** 다시 임포트하는 것이 정석이다.
 - **여러 트리거가 같은 사이클에 더하는 누적 DC를 `Exactly`로 게이트하면 값을 건너뛴다** — 한 DC를 **서로 독립된 다수 트리거**가 +1 하는 경우(예: P5 해처리/레어/하이브 파괴를 각각 감지하는 `10_mission1_waves_late.txt`의 3개 Preserve 트리거가 `Terran Medic` +1), 건물 2~3개가 한 사이클에 동시 파괴되면 DC가 `6 → 8/9`처럼 **한 번에 +2~+3 점프**한다. 이 DC를 `Deaths(..., Exactly, N)`으로 마일스톤 게이트하면 N을 정확히 밟지 못하고 건너뛰어 **트리거가 영영 발동 안 할 수 있다**. 마일스톤은 `At least, N` + 래치 스위치(`Switch`)로 1회성을 보장한다. **단일 +1/사이클 경로**(예: `18b_mission2_p6_minibase.txt`의 M2 Medic가 한 트리거로만 증가)에서만 `Exactly` 스태거(`Exactly 1/85/169`)가 안전하다. (2026-06-09, 09c_mission1_colony_rage 무장 조건 `Medic Exactly 8` → `At least 8` 수정)
+- **리더보드(`Leader Board *`)는 활성 플레이어만 표시** — 빈 사람 슬롯(솔로 테스트의 P2~P4)은 트리거로 자원/킬을 넣어도 **리더보드에 절대 안 나온다**. `Leaderboard Computer Players(enabled/disabled)`는 컴퓨터 표시 여부만 바꿀 뿐 빈 슬롯은 어떤 설정으로도 못 띄운다. 비활성 플레이어의 값 검증은 `Accumulate`/`Deaths` 조건 + PASS/FAIL `Display Text Message`로 대신한다 (아래 "테스트 트리거 작성 표준"). 단, `Set Resources`/`Accumulate` 자체는 비활성 슬롯에도 정상 동작한다. (2026-07-05, 94_test_union_relief_fund 리더보드 미표시 사례)
+
+## 테스트 트리거 작성 표준 (자동 검증 스테이지 패턴)
+
+`TestTriggersForBuild/`에 새 테스트를 만들거나 기존 테스트를 손볼 때는 **이 패턴을 기본으로 사용**한다 (사용자 확정 지침, 2026-07-05). 참조 구현: `TestTriggersForBuild/94_test_union_relief_fund.txt` + 생성기 `tools/build_test_rationing_v3.py`.
+
+1. **선형 스크립트 카운터 1개로 전체 테스트를 순차 구동**한다. 테스트 전용 P8 DC(94는 `Zerg Ultralisk Cavern`)를 쓰고, 배정 전에 `Triggers/`·`TestTriggers/`·`TestTriggersForBuild/`에서 미사용을 확인한다. 스테이지 base 값은 60 간격(0/60/120/...)으로 띄워 프레임 여유를 둔다.
+2. **스테이지 생명주기**: `setup`(자원 `Set To`·등록 스위치 set/clear·타이머 강제 arm, base) → `title` 표시(base+1) → 시스템 **개시 감지**(상태 DC 진입, base+1→+2) → **종료 감지**(상태 DC 복귀, +2→+3) → **검증 프레임**(+3부터 1사이클 1줄) → advance 트리거가 다음 base까지 매 사이클 +1.
+3. **검증은 기대값 3트리거 세트**: `Accumulate At least N + At most N` → `PASS: Pn 자원 = N`(초록 `<07>`), `At most N-1` → `FAIL: ... < N (부족)`(빨강 `<08>`), `At least N+1` → `FAIL: ... > N (초과)`. owner는 `Trigger("Player 1", "Player 2", "Player 3", "Player 4")`, 표시 트리거는 **비-Preserve**(1회 출력), P8 로직 트리거는 Preserve.
+4. **시나리오는 다양하게**: 정상 케이스 + 다중 동시 발동 + 경계값(티어 하한 등) + 무작위 분기 반복(3회) + 무효/무산 케이스(변동 없음 검증)를 스테이지로 나눠 넣는다.
+5. **손으로 쓰지 말고 `tools/`에 파이썬 생성기**를 만들어 재생성한다. 생성기 끝에 sanity check(트리거 블록 짝, 문자열 액션 줄 끝 `//주석` 금지, `Wait` 금지)를 넣는다.
+6. **솔로/2인 기준으로 설계**하고 파일 헤더에 명시한다. 3~4인 테스트에서는 하트비트 재래치 등으로 스테이지 격리가 깨질 수 있음을 감안한다.
 
 ## 빌드/배포
 
