@@ -8,7 +8,7 @@ Actions:
 	Display Text Message(Always Display, "<13><03>==========================================");
 	Display Text Message(Always Display, "<13><03>작전 개시: 카르가스 IV");
 	Display Text Message(Always Display, "<13><03>==========================================");
-	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 북서쪽 <11>주황색 저그<04> 군락 섬멸\n- 클리어 조건: 북서쪽 <11>주황색 저그<04> 군락의 해처리 / 레어 / 하이브 모두 파괴");
+	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 북서쪽 <11>주황색 저그<04> 본진 파괴\n- 클리어 조건: 본진의 해처리 / 레어 / 하이브를 하나도 남기지 않고 파괴\n- 주의: 미션1 중 다른 색 저그를 공격하면 그 군락이 깨어남");
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
 	Set Deaths("Player 5", "Zerg Sunken Colony", Set To, 0);
 	Set Deaths("Player 5", "Zerg Spore Colony", Set To, 0);
@@ -34,6 +34,7 @@ Actions:
 	Set Switch("Switch124", clear);
 	Set Switch("Switch125", clear);
 	Set Switch("Switch126", clear);
+	Set Switch("Switch136", clear);
 	Set Switch("Switch142", clear);
 	Set Switch("Switch143", clear);
 	Set Switch("Switch144", clear);
@@ -47,6 +48,9 @@ Actions:
 	Set Switch("Switch152", clear);
 	Set Switch("Switch153", clear);
 	Set Switch("Switch154", clear);
+	Set Deaths("Player 8", "Terran Machine Shop", Set To, 0);
+	Set Deaths("Player 8", "Protoss Templar Archives", Set To, 0);
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Set To, 0);
 }
 
 Trigger("All Players"){

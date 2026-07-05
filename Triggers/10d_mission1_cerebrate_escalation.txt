@@ -11,19 +11,19 @@
 //           스폰/오더는 Player 5 소유. 끝내기 폭주는 스폰/오더 트리거 분할(64액션 제한).
 //
 //  정신체1 = AttackPoint1 (전방 정신체)
-//    17분(1530) 사전경고 / 21분(1890) 1차 인구50 / 24분(2160) 2차 인구100 / 27분(2430) 최후 인구300
+//    16분(1440) 사전경고 / 20분+(1815) 1차 인구50 / 23분(2070) 2차 인구100 / 26분(2340) 최후 인구300
 //  정신체2 = P5 Cerebrate (지휘 정신체)
-//    30분(2700) 사전경고 / 34분(3060) 1차 인구100 / 37분(3330) 2차 인구200 / 40분(3600) 최후 인구600
+//    29분(2610) 사전경고 / 33분(2970) 1차 인구100 / 36분(3240) 2차 인구200 / 39분(3510) 최후 인구600
 //-----------------------------------------------------------------//
 
 
 //================ 정신체1 (AttackPoint1) ================//
 
-// --- 17분(1530) 사전 경고 : 전방 정신체 폭주 시작, 핑은 정신체 위치 ---
+// --- 16분(1440) 사전 경고 : 전방 정신체 폭주 시작, 핑은 정신체 위치 ---
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 1530);                          //17분(x1.5)
+	Elapsed Time(At least, 1440);                          //16분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
 	Minimap Ping("AttackPoint1");
@@ -34,17 +34,17 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 1542);                          //사전경고 후속(약 8초 뒤)
+	Elapsed Time(At least, 1452);                          //사전경고 후속(약 8초 뒤)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>지금 전방 정신체를 끊어라. 늦을수록 감당 못 할 규모로 불어난다.");
 }
 
-// --- 21분(1890) 1차 폭주 : 인구50, 저티어 지상 (저글링/히드라/럴커+소량 뮤탈) ---
+// --- 20분+(1815) 1차 폭주 : 인구50, 저티어 지상 (저글링/히드라/럴커+소량 뮤탈) — 정신체2 공개(1800) 직후 배치 ---
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 1890);                          //21분(x1.5)
+	Elapsed Time(At least, 1815);                          //20분+(정신체2 공개 직후)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn1");   //1차 지상 스웜 분산 생성
@@ -80,7 +80,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 1890);                          //21분(x1.5)
+	Elapsed Time(At least, 1815);                          //20분+(정신체2 공개 직후)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
 	Minimap Ping("P5 Spawn1");
@@ -94,17 +94,17 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 1902);                          //1차 폭주 후속(약 8초 뒤)
+	Elapsed Time(At least, 1827);                          //1차 폭주 후속(약 8초 뒤)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>아직은 견딜 만한 규모예요. 하지만 정신체를 끊지 않으면 폭주는 점점 거세집니다.");
 }
 
-// --- 24분(2160) 2차 폭주 : 인구100, 혼합 + 울트라/디파일러 + 공중 ---
+// --- 23분(2070) 2차 폭주 : 인구100, 혼합 + 울트라/디파일러 + 공중 ---
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 2160);                          //24분(x1.5)
+	Elapsed Time(At least, 2070);                          //23분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn1");   //2차 혼합 돌파 분산 생성
@@ -152,7 +152,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 2160);                          //24분(x1.5)
+	Elapsed Time(At least, 2070);                          //23분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
 	Minimap Ping("P5 Spawn1");
@@ -166,17 +166,17 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 2172);                          //2차 폭주 후속(약 8초 뒤)
+	Elapsed Time(At least, 2082);                          //2차 폭주 후속(약 8초 뒤)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>규모가 눈에 띄게 불었습니다. 이대로면 다음 최후 폭주는 막아낼 수 없어요.");
 }
 
-// --- 27분(2430) 최후 폭주 [끝내기] : 인구300, 가디언+디바우러 다수 (스폰/오더 분할) ---
+// --- 26분(2340) 최후 폭주 [끝내기] : 인구300, 가디언+디바우러 다수 (스폰/오더 분할) ---
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 2430);                          //27분(x1.5)
+	Elapsed Time(At least, 2340);                          //26분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Guardian", 10, "P5 Spawn1");  //최후 폭주 공중 주력
@@ -216,7 +216,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 2430);                          //27분(x1.5) - 위 스폰 트리거와 동일 사이클에 진군
+	Elapsed Time(At least, 2340);                          //26분(x1.5) - 위 스폰 트리거와 동일 사이클에 진군
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
 	Order("Player 5", "Zerg Guardian", "P5 Spawn1", "Player Destination", Patrol);
@@ -256,7 +256,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 2430);                          //27분(x1.5)
+	Elapsed Time(At least, 2340);                          //26분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
 	Minimap Ping("P5 Spawn1");
@@ -270,7 +270,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 2442);                          //최후 폭주 후속(약 8초 뒤)
+	Elapsed Time(At least, 2352);                          //최후 폭주 후속(약 8초 뒤)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>이건 방어선으로 막을 규모가 아니다. 전방 정신체를 부수지 못했다면 여기서 정리된다.");
@@ -279,11 +279,11 @@ Actions:
 
 //================ 정신체2 (P5 Cerebrate) ================//
 
-// --- 30분(2700) 사전 경고 : 지휘 정신체 폭주 시작, 핑은 정신체 위치 ---
+// --- 29분(2610) 사전 경고 : 지휘 정신체 폭주 시작, 핑은 정신체 위치 ---
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 2700);                          //30분(x1.5)
+	Elapsed Time(At least, 2610);                          //29분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Minimap Ping("P5 Cerebrate");
@@ -294,17 +294,17 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 2712);                          //사전경고 후속(약 8초 뒤)
+	Elapsed Time(At least, 2622);                          //사전경고 후속(약 8초 뒤)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>지휘 정신체를 제때 끊지 못하면, 마지막엔 우리가 막을 수 있는 선을 넘는다.");
 }
 
-// --- 34분(3060) 1차 폭주 : 인구100, 저티어 지상 ---
+// --- 33분(2970) 1차 폭주 : 인구100, 저티어 지상 ---
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3060);                          //34분(x1.5)
+	Elapsed Time(At least, 2970);                          //33분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Zergling", 10, "P5 Spawn1");  //1차 대규모 지상
@@ -344,7 +344,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3060);                          //34분(x1.5)
+	Elapsed Time(At least, 2970);                          //33분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Minimap Ping("P5 Spawn1");
@@ -358,17 +358,17 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3072);                          //1차 폭주 후속(약 8초 뒤)
+	Elapsed Time(At least, 2982);                          //1차 폭주 후속(약 8초 뒤)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>지휘 정신체 쪽은 시작부터 물량이 다릅니다. 끊지 않으면 폭주마다 배로 불어요.");
 }
 
-// --- 37분(3330) 2차 폭주 : 인구200, 혼합 + 울트라 + 공중 ---
+// --- 36분(3240) 2차 폭주 : 인구200, 혼합 + 울트라 + 공중 ---
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3330);                          //37분(x1.5)
+	Elapsed Time(At least, 3240);                          //36분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Zergling", 10, "P5 Spawn1");  //2차 혼합 대공세
@@ -402,7 +402,7 @@ Actions:
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3330);                          //37분(x1.5) - 위 스폰과 동일 사이클 진군
+	Elapsed Time(At least, 3240);                          //36분(x1.5) - 위 스폰과 동일 사이클 진군
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
@@ -436,7 +436,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3330);                          //37분(x1.5)
+	Elapsed Time(At least, 3240);                          //36분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Minimap Ping("P5 Spawn1");
@@ -450,22 +450,22 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3342);                          //2차 폭주 후속(약 8초 뒤)
+	Elapsed Time(At least, 3252);                          //2차 폭주 후속(약 8초 뒤)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Display Text Message(Always Display, "<1A>노바: <04>전선이 버티는 한계에 가까워졌습니다. 다음 폭주가 오기 전에 정신체를 끊어야 해요.");
 }
 
-// --- 40분(3600) 최후 폭주 [끝내기] : 인구600, 가디언+디바우러 압도 ---
-//  스폰 포화/블락 방지 : 8개 펄스로 분할(약 8초 간격, 3600~3684), 각 펄스가
+// --- 39분(3510) 최후 폭주 [끝내기] : 인구600, 가디언+디바우러 압도 ---
+//  스폰 포화/블락 방지 : 8개 펄스로 분할(약 8초 간격, 3510~3594), 각 펄스가
 //  자기 배치만 즉시 진군. 펄스당 스폰지점당 ~13유닛 수준으로 누적 생성.
 //  펄스 합계 ≈ 가디언80·디바우러56·뮤탈40·울트라32·히드라64·저글링64·럴커16·디파일러4.
 
-// 최후 펄스 1 (3600)
+// 최후 펄스 1 (3510)
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3600);                          //40분(x1.5)
+	Elapsed Time(At least, 3510);                          //39분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
@@ -524,11 +524,11 @@ Actions:
 	Order("Player 5", "Zerg Defiler", "P5 Spawn1", "Player Destination", Patrol);
 }
 
-// 최후 펄스 2 (3612)
+// 최후 펄스 2 (3522)
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3612);                          //펄스1 +약 8초
+	Elapsed Time(At least, 3522);                          //펄스1 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
@@ -585,11 +585,11 @@ Actions:
 	Order("Player 5", "Zerg Lurker", "P5 Spawn4", "Player Destination", Patrol);
 }
 
-// 최후 펄스 3 (3624)
+// 최후 펄스 3 (3534)
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3624);                          //펄스2 +약 8초
+	Elapsed Time(At least, 3534);                          //펄스2 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
@@ -648,11 +648,11 @@ Actions:
 	Order("Player 5", "Zerg Defiler", "P5 Spawn2", "Player Destination", Patrol);
 }
 
-// 최후 펄스 4 (3636)
+// 최후 펄스 4 (3546)
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3636);                          //펄스3 +약 8초
+	Elapsed Time(At least, 3546);                          //펄스3 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
@@ -709,11 +709,11 @@ Actions:
 	Order("Player 5", "Zerg Lurker", "P5 Spawn4", "Player Destination", Patrol);
 }
 
-// 최후 펄스 5 (3648)
+// 최후 펄스 5 (3558)
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3648);                          //펄스4 +약 8초
+	Elapsed Time(At least, 3558);                          //펄스4 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
@@ -770,11 +770,11 @@ Actions:
 	Order("Player 5", "Zerg Defiler", "P5 Spawn3", "Player Destination", Patrol);
 }
 
-// 최후 펄스 6 (3660)
+// 최후 펄스 6 (3570)
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3660);                          //펄스5 +약 8초
+	Elapsed Time(At least, 3570);                          //펄스5 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
@@ -829,11 +829,11 @@ Actions:
 	Order("Player 5", "Zerg Lurker", "P5 Spawn2", "Player Destination", Patrol);
 }
 
-// 최후 펄스 7 (3672)
+// 최후 펄스 7 (3582)
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3672);                          //펄스6 +약 8초
+	Elapsed Time(At least, 3582);                          //펄스6 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
@@ -888,11 +888,11 @@ Actions:
 	Order("Player 5", "Zerg Defiler", "P5 Spawn4", "Player Destination", Patrol);
 }
 
-// 최후 펄스 8 (3684) - 마지막
+// 최후 펄스 8 (3594) - 마지막
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3684);                          //펄스7 +약 8초
+	Elapsed Time(At least, 3594);                          //펄스7 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
@@ -948,7 +948,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3600);                          //40분(x1.5)
+	Elapsed Time(At least, 3510);                          //39분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Minimap Ping("P5 Spawn1");
@@ -962,7 +962,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 3612);                          //최후 폭주 후속(약 8초 뒤)
+	Elapsed Time(At least, 3522);                          //최후 폭주 후속(약 8초 뒤)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>막을 수 있는 규모가 아니다. 여기까지 정신체를 남겨뒀다면, 이 전선은 무너진다.");

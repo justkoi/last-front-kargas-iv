@@ -93,7 +93,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch158", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 1);
 	Preserve Trigger();
 }
 
@@ -103,7 +103,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch159", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 1);
 	Preserve Trigger();
 }
 
@@ -114,7 +114,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch33", Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 1);
 	Preserve Trigger();
 }
 
@@ -123,7 +123,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch34", Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 1);
 	Preserve Trigger();
 }
 

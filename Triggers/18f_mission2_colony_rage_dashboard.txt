@@ -50,9 +50,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 65536); //원본 공세 DC의 65536 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 65536); //원본 공세 DC의 65536 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 65536); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 65536); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 65536); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 6553600); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -65,9 +65,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 32768); //원본 공세 DC의 32768 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 32768); //원본 공세 DC의 32768 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 32768); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 32768); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 32768); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 3276800); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -80,9 +80,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 16384); //원본 공세 DC의 16384 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 16384); //원본 공세 DC의 16384 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 16384); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 16384); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 16384); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 1638400); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -95,9 +95,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 8192); //원본 공세 DC의 8192 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 8192); //원본 공세 DC의 8192 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 8192); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 8192); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 8192); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 819200); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -110,9 +110,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 4096); //원본 공세 DC의 4096 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 4096); //원본 공세 DC의 4096 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 4096); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 4096); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 4096); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 409600); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -125,9 +125,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 2048); //원본 공세 DC의 2048 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 2048); //원본 공세 DC의 2048 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 2048); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 2048); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 2048); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 204800); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -140,9 +140,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 1024); //원본 공세 DC의 1024 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 1024); //원본 공세 DC의 1024 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 1024); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 1024); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 1024); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 102400); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -155,9 +155,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 512); //원본 공세 DC의 512 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 512); //원본 공세 DC의 512 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 512); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 512); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 512); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 51200); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -170,9 +170,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 256); //원본 공세 DC의 256 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 256); //원본 공세 DC의 256 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 256); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 256); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 256); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 25600); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -185,9 +185,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 128); //원본 공세 DC의 128 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 128); //원본 공세 DC의 128 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 128); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 128); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 128); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 12800); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -200,9 +200,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 64); //원본 공세 DC의 64 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 64); //원본 공세 DC의 64 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 64); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 64); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 64); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 6400); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -215,9 +215,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 32); //원본 공세 DC의 32 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 32); //원본 공세 DC의 32 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 32); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 32); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 32); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 3200); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -230,9 +230,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 16); //원본 공세 DC의 16 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 16); //원본 공세 DC의 16 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 16); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 16); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 16); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 1600); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -245,9 +245,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 8); //원본 공세 DC의 8 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 8); //원본 공세 DC의 8 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 8); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 8); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 8); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 800); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -260,9 +260,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 4); //원본 공세 DC의 4 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 4); //원본 공세 DC의 4 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 4); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 4); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 4); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 400); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -275,9 +275,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 2); //원본 공세 DC의 2 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 2); //원본 공세 DC의 2 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 2); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 2); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 2); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 200); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -290,9 +290,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch158", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Zergling", At least, 1); //원본 공세 DC의 1 비트 추출
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 1); //원본 공세 DC의 1 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 1); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 1); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Starport", Add, 1); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Science Facility", Add, 100); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -307,9 +307,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 65536); //원본 공세 DC의 65536 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 65536); //원본 공세 DC의 65536 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 65536); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 65536); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 65536); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 6553600); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -322,9 +322,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 32768); //원본 공세 DC의 32768 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 32768); //원본 공세 DC의 32768 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 32768); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 32768); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 32768); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 3276800); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -337,9 +337,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 16384); //원본 공세 DC의 16384 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 16384); //원본 공세 DC의 16384 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 16384); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 16384); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 16384); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 1638400); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -352,9 +352,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 8192); //원본 공세 DC의 8192 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 8192); //원본 공세 DC의 8192 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 8192); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 8192); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 8192); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 819200); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -367,9 +367,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 4096); //원본 공세 DC의 4096 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 4096); //원본 공세 DC의 4096 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 4096); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 4096); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 4096); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 409600); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -382,9 +382,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 2048); //원본 공세 DC의 2048 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 2048); //원본 공세 DC의 2048 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 2048); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 2048); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 2048); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 204800); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -397,9 +397,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 1024); //원본 공세 DC의 1024 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 1024); //원본 공세 DC의 1024 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 1024); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 1024); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 1024); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 102400); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -412,9 +412,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 512); //원본 공세 DC의 512 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 512); //원본 공세 DC의 512 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 512); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 512); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 512); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 51200); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -427,9 +427,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 256); //원본 공세 DC의 256 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 256); //원본 공세 DC의 256 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 256); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 256); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 256); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 25600); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -442,9 +442,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 128); //원본 공세 DC의 128 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 128); //원본 공세 DC의 128 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 128); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 128); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 128); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 12800); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -457,9 +457,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 64); //원본 공세 DC의 64 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 64); //원본 공세 DC의 64 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 64); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 64); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 64); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 6400); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -472,9 +472,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 32); //원본 공세 DC의 32 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 32); //원본 공세 DC의 32 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 32); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 32); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 32); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 3200); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -487,9 +487,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 16); //원본 공세 DC의 16 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 16); //원본 공세 DC의 16 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 16); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 16); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 16); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 1600); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -502,9 +502,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 8); //원본 공세 DC의 8 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 8); //원본 공세 DC의 8 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 8); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 8); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 8); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 800); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -517,9 +517,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 4); //원본 공세 DC의 4 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 4); //원본 공세 DC의 4 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 4); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 4); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 4); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 400); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -532,9 +532,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 2); //원본 공세 DC의 2 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 2); //원본 공세 DC의 2 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 2); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 2); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 2); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 200); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -547,9 +547,9 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //군락 생존 : MainBase 주공세 잠금 전
 	Switch("Switch159", Not Set); //주공세 유효 : 최종 절규 이후 잠금 전
-	Deaths("Player 8", "Zerg Hydralisk", At least, 1); //원본 공세 DC의 1 비트 추출
+	Deaths("Player 8", "Terran Bunker", At least, 1); //원본 공세 DC의 1 비트 추출
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Subtract, 1); //원본에서 추출 비트 임시 제거
+	Set Deaths("Player 8", "Terran Bunker", Subtract, 1); //원본에서 추출 비트 임시 제거
 	Set Deaths("Player 8", "Terran Engineering Bay", Add, 1); //원본 복원용 백업에 비트 저장
 	Set Deaths("Player 8", "Terran Refinery", Add, 100); //퍼센트 나눗셈용 current x100 누적
 	Preserve Trigger();
@@ -4308,7 +4308,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 65536); //백업 DC의 65536 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 65536); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 65536); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 65536); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4322,7 +4322,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 32768); //백업 DC의 32768 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 32768); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 32768); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 32768); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4336,7 +4336,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 16384); //백업 DC의 16384 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 16384); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 16384); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 16384); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4350,7 +4350,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 8192); //백업 DC의 8192 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 8192); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 8192); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 8192); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4364,7 +4364,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 4096); //백업 DC의 4096 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 4096); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4096); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 4096); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4378,7 +4378,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 2048); //백업 DC의 2048 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 2048); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2048); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 2048); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4392,7 +4392,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 1024); //백업 DC의 1024 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 1024); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1024); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 1024); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4406,7 +4406,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 512); //백업 DC의 512 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 512); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 512); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 512); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4420,7 +4420,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 256); //백업 DC의 256 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 256); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 256); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 256); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4434,7 +4434,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 128); //백업 DC의 128 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 128); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 128); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 128); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4448,7 +4448,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 64); //백업 DC의 64 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 64); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 64); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 64); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4462,7 +4462,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 32); //백업 DC의 32 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 32); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 32); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 32); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4476,7 +4476,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 16); //백업 DC의 16 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 16); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 16); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 16); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4490,7 +4490,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 8); //백업 DC의 8 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 8); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 8); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 8); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4504,7 +4504,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 4); //백업 DC의 4 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 4); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 4); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4518,7 +4518,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 2); //백업 DC의 2 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 2); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 2); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4532,7 +4532,7 @@ Conditions:
 	Deaths("Player 8", "Terran Starport", At least, 1); //백업 DC의 1 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Starport", Subtract, 1); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Zergling", Add, 1); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 1); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4548,7 +4548,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 65536); //백업 DC의 65536 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 65536); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 65536); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 65536); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4562,7 +4562,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 32768); //백업 DC의 32768 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 32768); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 32768); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 32768); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4576,7 +4576,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 16384); //백업 DC의 16384 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 16384); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 16384); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 16384); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4590,7 +4590,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 8192); //백업 DC의 8192 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 8192); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 8192); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 8192); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4604,7 +4604,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 4096); //백업 DC의 4096 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 4096); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4096); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 4096); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4618,7 +4618,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 2048); //백업 DC의 2048 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 2048); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2048); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 2048); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4632,7 +4632,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 1024); //백업 DC의 1024 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 1024); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1024); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 1024); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4646,7 +4646,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 512); //백업 DC의 512 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 512); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 512); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 512); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4660,7 +4660,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 256); //백업 DC의 256 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 256); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 256); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 256); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4674,7 +4674,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 128); //백업 DC의 128 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 128); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 128); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 128); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4688,7 +4688,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 64); //백업 DC의 64 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 64); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 64); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 64); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4702,7 +4702,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 32); //백업 DC의 32 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 32); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 32); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 32); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4716,7 +4716,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 16); //백업 DC의 16 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 16); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 16); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 16); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4730,7 +4730,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 8); //백업 DC의 8 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 8); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 8); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 8); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4744,7 +4744,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 4); //백업 DC의 4 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 4); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 4); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4758,7 +4758,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 2); //백업 DC의 2 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 2); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 2); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4772,7 +4772,7 @@ Conditions:
 	Deaths("Player 8", "Terran Engineering Bay", At least, 1); //백업 DC의 1 비트 복원
 Actions:
 	Set Deaths("Player 8", "Terran Engineering Bay", Subtract, 1); //복원한 백업 비트 제거
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 1); //원본 공세 DC에 비트 반환
+	Set Deaths("Player 8", "Terran Bunker", Add, 1); //원본 공세 DC에 비트 반환
 	Preserve Trigger();
 }
 
@@ -4794,7 +4794,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At least, 120); //훈장 리더보드 10초 이후 군락의 분노 표시
+	Deaths("Player 8", "Data Disc", At least, 96); //훈장 리더보드 8초 이후 군락의 분노 표시
 Actions:
 	Leader Board Points("군락의 분노 (%)", Custom);
 	Leaderboard Computer Players(enabled);

@@ -3,7 +3,7 @@
 //
 //  P1~P4 Psi Emitter DC: awarded medal count per player.
 //  P8 Psi Emitter DC: remaining shared 1st-grade medal pool.
-//  P8 Data Disc DC: mission2 leaderboard rotation timer (0~359 ticks).
+//  P8 Data Disc DC: mission2 leaderboard rotation timer (0~335 ticks).
 //-----------------------------------------------------------------//
 
 // 1급 팀 훈장 풀 초기화 : 게임 시작 직후 한 번만 20으로 맞춘다.
@@ -108,7 +108,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// 미션2 리더보드 교대 타이머 : 10초 훈장, 20초 군락의 분노.
+// 미션2 리더보드 교대 타이머 : 8초 훈장, 20초 군락의 분노.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
@@ -120,7 +120,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At least, 360); //30초 주기 완료
+	Deaths("Player 8", "Data Disc", At least, 336); //28초 주기 완료
 Actions:
 	Set Deaths("Player 8", "Data Disc", Set To, 0);
 	Preserve Trigger();
@@ -330,7 +330,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At least, 120); //군락의 분노 표시 구간
+	Deaths("Player 8", "Data Disc", At least, 96); //군락의 분노 표시 구간
 Actions:
 	Set Score("Current Player", Set To, 0, Custom);
 	Preserve Trigger();
@@ -547,11 +547,11 @@ Actions:
 	Preserve Trigger();
 }
 
-// 미션2 훈장 리더보드 : 30초 주기 중 첫 10초
+// 미션2 훈장 리더보드 : 28초 주기 중 첫 8초
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 20); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 20)", Custom);
@@ -562,7 +562,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 19); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 19)", Custom);
@@ -573,7 +573,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 18); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 18)", Custom);
@@ -584,7 +584,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 17); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 17)", Custom);
@@ -595,7 +595,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 16); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 16)", Custom);
@@ -606,7 +606,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 15); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 15)", Custom);
@@ -617,7 +617,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 14); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 14)", Custom);
@@ -628,7 +628,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 13); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 13)", Custom);
@@ -639,7 +639,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 12); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 12)", Custom);
@@ -650,7 +650,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 11); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 11)", Custom);
@@ -661,7 +661,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 10); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 10)", Custom);
@@ -672,7 +672,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 9); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 9)", Custom);
@@ -683,7 +683,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 8); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 8)", Custom);
@@ -694,7 +694,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 7); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 7)", Custom);
@@ -705,7 +705,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 6); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 6)", Custom);
@@ -716,7 +716,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 5); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 5)", Custom);
@@ -727,7 +727,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 4); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 4)", Custom);
@@ -738,7 +738,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 3); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 3)", Custom);
@@ -749,7 +749,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 2); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 2)", Custom);
@@ -760,7 +760,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 1); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 1)", Custom);
@@ -771,7 +771,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Data Disc", At most, 119); //훈장 리더보드 표시 구간
+	Deaths("Player 8", "Data Disc", At most, 95); //훈장 리더보드 표시 구간
 	Deaths("Player 8", "Psi Emitter", Exactly, 0); //남은 1급 팀 훈장 수
 Actions:
 	Leader Board Points("훈장 수 (남은 1급: 0)", Custom);

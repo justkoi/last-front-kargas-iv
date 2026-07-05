@@ -12,6 +12,115 @@ Actions:
 }
 
 // 미션1 동안 P6/P7은 잠복 상태로 둔다.
+// Game-start worker tempo bonus: each active player receives 4 workers at their main base.
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Bring("Player 1", "Terran Command Center", "Anywhere", At least, 1);
+Actions:
+	Move Location("Player 1", "Terran Command Center", "Anywhere", "P1 Hunt");
+	Create Unit("Player 1", "Terran SCV", 4, "P1 Hunt");
+}
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Bring("Player 1", "Zerg Hatchery", "Anywhere", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Hatchery", "Anywhere", "P1 Hunt");
+	Create Unit("Player 1", "Zerg Drone", 4, "P1 Hunt");
+}
+
+Trigger("Player 1"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Bring("Player 1", "Protoss Nexus", "Anywhere", At least, 1);
+Actions:
+	Move Location("Player 1", "Protoss Nexus", "Anywhere", "P1 Hunt");
+	Create Unit("Player 1", "Protoss Probe", 4, "P1 Hunt");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Bring("Player 2", "Terran Command Center", "Anywhere", At least, 1);
+Actions:
+	Move Location("Player 2", "Terran Command Center", "Anywhere", "P2 Hunt");
+	Create Unit("Player 2", "Terran SCV", 4, "P2 Hunt");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Bring("Player 2", "Zerg Hatchery", "Anywhere", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Hatchery", "Anywhere", "P2 Hunt");
+	Create Unit("Player 2", "Zerg Drone", 4, "P2 Hunt");
+}
+
+Trigger("Player 2"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Bring("Player 2", "Protoss Nexus", "Anywhere", At least, 1);
+Actions:
+	Move Location("Player 2", "Protoss Nexus", "Anywhere", "P2 Hunt");
+	Create Unit("Player 2", "Protoss Probe", 4, "P2 Hunt");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Bring("Player 3", "Terran Command Center", "Anywhere", At least, 1);
+Actions:
+	Move Location("Player 3", "Terran Command Center", "Anywhere", "P3 Hunt");
+	Create Unit("Player 3", "Terran SCV", 4, "P3 Hunt");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Bring("Player 3", "Zerg Hatchery", "Anywhere", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Hatchery", "Anywhere", "P3 Hunt");
+	Create Unit("Player 3", "Zerg Drone", 4, "P3 Hunt");
+}
+
+Trigger("Player 3"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Bring("Player 3", "Protoss Nexus", "Anywhere", At least, 1);
+Actions:
+	Move Location("Player 3", "Protoss Nexus", "Anywhere", "P3 Hunt");
+	Create Unit("Player 3", "Protoss Probe", 4, "P3 Hunt");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Bring("Player 4", "Terran Command Center", "Anywhere", At least, 1);
+Actions:
+	Move Location("Player 4", "Terran Command Center", "Anywhere", "P4 Hunt");
+	Create Unit("Player 4", "Terran SCV", 4, "P4 Hunt");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Bring("Player 4", "Zerg Hatchery", "Anywhere", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Hatchery", "Anywhere", "P4 Hunt");
+	Create Unit("Player 4", "Zerg Drone", 4, "P4 Hunt");
+}
+
+Trigger("Player 4"){
+Conditions:
+	Elapsed Time(At most, 1);
+	Bring("Player 4", "Protoss Nexus", "Anywhere", At least, 1);
+Actions:
+	Move Location("Player 4", "Protoss Nexus", "Anywhere", "P4 Hunt");
+	Create Unit("Player 4", "Protoss Probe", 4, "P4 Hunt");
+}
+
 Trigger("Player 8"){
 Conditions:
 	Elapsed Time(At most, 2);
@@ -26,7 +135,7 @@ Actions:
 	Set Switch("Switch13", clear);
 	Set Switch("Switch35", clear);
 	Set Switch("Switch36", clear);
-	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 0);
+	Set Deaths("Player 8", "Protoss Shield Battery", Set To, 0);
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
 	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
 	Set Resources("Player 6", Set To, 0, ore);
@@ -37,28 +146,36 @@ Actions:
 
 // 각 저그 진영의 기본 AI 시작
 // P5 AI는 난이도 확정(Terran Academy >= 1) 이후에만 가동한다.
+// 난이도가 높을수록 활성화 시점을 15초씩 앞당긴다. (전체 10초 추가로 앞당김)
+//   쉬움(1)=275(0), 보통(2)=260(-15), 어려움(3)=245(-30), 매우 어려움(4)=230(-45)
 Trigger("Player 5"){
 Conditions:
-	Elapsed Time(At least, 330);
+	Elapsed Time(At least, 275);
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 Actions:
 	Run AI Script At Location("ZSUx", "P5 Base");
 }
 
-// Fastest real-time target: normal 3:20 (Elapsed 300).
 Trigger("Player 5"){
 Conditions:
-	Elapsed Time(At least, 300);
+	Elapsed Time(At least, 260);
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 Actions:
 	Run AI Script At Location("ZSUx", "P5 Base");
 }
 
-// Fastest real-time target: hard and very hard 3:00 (Elapsed 270).
 Trigger("Player 5"){
 Conditions:
-	Elapsed Time(At least, 270);
-	Deaths("Player 8", "Terran Academy", At least, 3);
+	Elapsed Time(At least, 245);
+	Deaths("Player 8", "Terran Academy", Exactly, 3);
+Actions:
+	Run AI Script At Location("ZSUx", "P5 Base");
+}
+
+Trigger("Player 5"){
+Conditions:
+	Elapsed Time(At least, 230);
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
 Actions:
 	Run AI Script At Location("ZSUx", "P5 Base");
 }

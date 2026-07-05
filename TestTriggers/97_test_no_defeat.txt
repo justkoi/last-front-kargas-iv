@@ -15,4 +15,8 @@ Conditions:
 	Elapsed Time(At most, 1);
 Actions:
 	Set Switch("Switch1", set);
+	Set Invincibility("Player 1", "Buildings", "Anywhere", enabled);
+	Set Invincibility("Player 2", "Buildings", "Anywhere", enabled);
+	Set Invincibility("Player 3", "Buildings", "Anywhere", enabled);
+	Set Invincibility("Player 4", "Buildings", "Anywhere", enabled);
 }

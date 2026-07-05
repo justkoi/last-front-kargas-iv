@@ -79,14 +79,18 @@ Actions:
 	Set Switch("Switch119", set);
 	Set Switch("Switch120", clear);
 	Set Switch("Switch121", clear);
+	Set Switch("Switch136", clear);
 	Set Switch("Switch140", clear);
 	Set Switch("Switch141", clear);
 	Set Deaths("Player 8", "Terran Medic", Set To, 0);
 	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Set To, 0);
-	Set Deaths("Player 8", "Zerg Spore Colony", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
+	Set Deaths("Player 8", "Protoss Stargate", Set To, 0);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Set To, 0);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Set To, 0);
+	Set Deaths("Player 8", "Terran Bunker", Set To, 0);
+	Set Deaths("Player 8", "Terran Machine Shop", Set To, 0);
+	Set Deaths("Player 8", "Protoss Templar Archives", Set To, 0);
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Set To, 0);
 }
 
 // Clear P6 assault state only when no P6 penalty assault is already active from mission1.
@@ -128,6 +132,518 @@ Actions:
 	Set Switch("Switch50", set);
 }
 
+// Mission 2 - hive-mind collapse threshold.
+// Counts each colony's Hatchery/Lair/Hive total up to 7; totals above 6 only need to be distinguished as safe.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Set To, 0);
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Set To, 0);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hatchery", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hatchery", At least, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hatchery", At least, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hatchery", At least, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hatchery", At least, 5);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hatchery", At least, 6);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hatchery", At least, 7);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Lair", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Lair", At least, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Lair", At least, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Lair", At least, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Lair", At least, 5);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Lair", At least, 6);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Lair", At least, 7);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hive", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hive", At least, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hive", At least, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hive", At least, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hive", At least, 5);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hive", At least, 6);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 6", "Zerg Hive", At least, 7);
+Actions:
+	Set Deaths("Player 8", "Protoss Templar Archives", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hatchery", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hatchery", At least, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hatchery", At least, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hatchery", At least, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hatchery", At least, 5);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hatchery", At least, 6);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hatchery", At least, 7);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Lair", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Lair", At least, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Lair", At least, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Lair", At least, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Lair", At least, 5);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Lair", At least, 6);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Lair", At least, 7);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hive", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hive", At least, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hive", At least, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hive", At least, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hive", At least, 5);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hive", At least, 6);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Command("Player 7", "Zerg Hive", At least, 7);
+Actions:
+	Set Deaths("Player 8", "Protoss Citadel of Adun", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Deaths("Player 8", "Protoss Templar Archives", At least, 1);
+	Deaths("Player 8", "Protoss Templar Archives", At most, 6);
+	Deaths("Player 8", "Protoss Citadel of Adun", At least, 1);
+	Deaths("Player 8", "Protoss Citadel of Adun", At most, 6);
+Actions:
+	Set Switch("Switch136", set);
+	Set Switch("Switch118", clear);
+	Set Switch("Switch119", clear);
+	Set Switch("Switch120", clear);
+	Set Switch("Switch121", clear);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Set To, 0);
+	Set Deaths("Player 8", "Terran Bunker", Set To, 0);
+	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
+	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
+	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
+	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
+	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
+	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
+	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
+	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
+	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
+	Set Deaths("Player 8", "Terran Machine Shop", Set To, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Set);
+	Deaths("Player 8", "Terran Machine Shop", At least, 1);
+	Deaths("Player 8", "Terran Machine Shop", At most, 264);
+Actions:
+	Set Deaths("Player 8", "Terran Machine Shop", Add, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Set);
+	Deaths("Player 8", "Terran Machine Shop", Exactly, 2);
+Actions:
+	//중앙 정렬 붕괴 강조 헤더
+	Display Text Message(Always Display, "<13><03>[ 군체의식 붕괴 ]");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Set);
+	Deaths("Player 8", "Terran Machine Shop", Exactly, 86);
+Actions:
+	Display Text Message(Always Display, "<1A>노바: <04>양쪽 군락의 생체신호가 임계치 아래로 떨어졌습니다. 군체의식 신호가 서로를 붙잡지 못합니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Set);
+	Deaths("Player 8", "Terran Machine Shop", Exactly, 170);
+Actions:
+	Display Text Message(Always Display, "<03>호크: <04>좋아. 적 전력이 크게 약화됐다. 남은 군락을 밀어붙여 끝낸다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Set);
+	Deaths("Player 8", "Terran Machine Shop", Exactly, 254);
+Actions:
+	Display Text Message(Always Display, "<07>시스템: <04>이제 군락이 해처리 파괴에도 분노하지 않습니다.");
+}
+
 // If a colony's MainBase tech core collapses, lock that colony's main assault.
 Trigger("Player 6"){
 Conditions:
@@ -137,7 +653,7 @@ Conditions:
 	Bring("Player 6", "Zerg Lair", "P6 MainBase", At most, 0);
 	Bring("Player 6", "Zerg Hive", "P6 MainBase", At most, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
@@ -157,7 +673,7 @@ Conditions:
 	Bring("Player 7", "Zerg Lair", "P7 MainBase", At most, 0);
 	Bring("Player 7", "Zerg Hive", "P7 MainBase", At most, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
+	Set Deaths("Player 8", "Terran Bunker", Set To, 0);
 	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
@@ -475,6 +991,23 @@ Actions:
 	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
 	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. <1F>미네랄 +2000  <07>가스 +1000");
 }
+// Reveal a colony once its Hatchery count drops below three.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Command("Player 6", "Zerg Hatchery", At most, 2);
+Actions:
+	Run AI Script("+Vi5");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Command("Player 7", "Zerg Hatchery", At most, 2);
+Actions:
+	Run AI Script("+Vi6");
+}
+
 // Reveal a colony once its MainBase tech core collapses.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:

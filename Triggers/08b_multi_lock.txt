@@ -1,21 +1,22 @@
 //-----------------------------------------------------------------//
 //  Early multi lock — switch-free (Bring presence check, no Switch155~158)
-//  Key: Player 5 "Mature Crysalis" preplaced at MultiKey
+//  Key: Player 8 "Mature Crysalis" preplaced at MultiKey
 //       (SCMDraft unit string is "Mature Crysalis", not "Mature Chrysalis").
 //  Unlock fires when the key is no longer at MultiKey
 //  (Bring At most 0). Non-Preserve one-shot triggers fire exactly once.
-//  MultiLock location must fully cover the P5/P9 blocker building footprints.
+//  MultiLock location must fully cover the P5 blocker and P9 Pylon footprints.
 //-----------------------------------------------------------------//
 
-//잠금 해제 : MultiKey에 멀티 열쇠(P5 Mature Crysalis)가 없어지면 1회 — MultiLock의 P5/P9 건물 제거
+//잠금 해제 : MultiKey에 멀티 열쇠(P8 Mature Crysalis)가 없어지면 1회 — MultiLock의 P5 건물과 P9 파일런 제거
 Trigger("Player 8"){
 Conditions:
 	Bring("Player 8", "Mature Crysalis", "MultiKey", At most, 0); //열쇠 부재 감지 : 파괴되면 영구 참 → 비-Preserve라 1회만 실행
 Actions:
 	Set Invincibility("Player 5", "Buildings", "MultiLock", disabled); //무적 해제 먼저 : Kill은 무적 유닛을 못 죽이므로 선행 필수
-	Set Invincibility("Player 9", "Buildings", "MultiLock", disabled); //무적 해제 먼저 : Kill은 무적 유닛을 못 죽이므로 선행 필수
+	Set Invincibility("Player 8", "Buildings", "MultiLock", disabled); //P8 배치 무적 건물 해제 : P5 방해물 무적 해제와 같은 시점에서 처리
+	Set Invincibility("Player 9", "Protoss Pylon", "MultiLock", disabled); //P9 파일런 무적 해제 : 개별 슬롯 지정 필수 (그룹 액션은 안 먹힘)
 	Kill Unit At Location("Player 5", "Buildings", All, "MultiLock");
-	Kill Unit At Location("Player 9", "Buildings", All, "MultiLock");
+	Kill Unit At Location("Player 9", "Protoss Pylon", All, "MultiLock"); //P9 파일런 제거
 	Set Resources("Player 1", Add, 100, ore);                        //공용 보상 : 모든 플레이어 미네랄 +100
 	Set Resources("Player 2", Add, 100, ore);                        //공용 보상 : 모든 플레이어 미네랄 +100
 	Set Resources("Player 3", Add, 100, ore);                        //공용 보상 : 모든 플레이어 미네랄 +100

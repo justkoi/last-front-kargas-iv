@@ -470,7 +470,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 24300);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 24300);
 }
 
 Trigger("Player 6"){
@@ -480,7 +480,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 24300);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 24300);
 }
 
 Trigger("Player 6"){
@@ -490,7 +490,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 Actions:
 	Set Switch("Switch35", set);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 24300);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 24300);
 }
 
 Trigger("Player 7"){
@@ -500,7 +500,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 24300);
+	Set Deaths("Player 8", "Terran Bunker", Add, 24300);
 }
 
 Trigger("Player 7"){
@@ -510,7 +510,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 24300);
+	Set Deaths("Player 8", "Terran Bunker", Add, 24300);
 }
 
 Trigger("Player 7"){
@@ -520,7 +520,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 Actions:
 	Set Switch("Switch36", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 24300);
+	Set Deaths("Player 8", "Terran Bunker", Add, 24300);
 }
 
 // Count destroyed P6/P7 creep colonies together and warn every 1 kill.
@@ -536,9 +536,9 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Switch("Switch13", Not Set);
-	Deaths("Player 8", "Zerg Creep Colony", At least, 1);
+	Deaths("Player 8", "Protoss Shield Battery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Creep Colony", Subtract, 1);
+	Set Deaths("Player 8", "Protoss Shield Battery", Subtract, 1);
 	Set Switch("Switch13", set);
 	Preserve Trigger();
 }
@@ -559,7 +559,7 @@ Conditions:
 	Deaths("Player 6", "Zerg Creep Colony", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Shield Battery", Add, 1);
 	Set Deaths("Player 6", "Zerg Creep Colony", Subtract, 1);
 	Preserve Trigger();
 }
@@ -569,7 +569,7 @@ Conditions:
 	Deaths("Player 7", "Zerg Creep Colony", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 Actions:
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Shield Battery", Add, 1);
 	Set Deaths("Player 7", "Zerg Creep Colony", Subtract, 1);
 	Preserve Trigger();
 }
@@ -655,8 +655,8 @@ Actions:
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
-	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 6480);
+	Set Deaths("Player 8", "Terran Bunker", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
@@ -692,8 +692,8 @@ Actions:
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
-	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 6480);
+	Set Deaths("Player 8", "Terran Bunker", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
@@ -729,8 +729,8 @@ Actions:
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
-	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 6480);
+	Set Deaths("Player 8", "Terran Bunker", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
@@ -766,8 +766,8 @@ Actions:
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
+	Set Deaths("Player 8", "Terran Bunker", Add, 6480);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
@@ -803,8 +803,8 @@ Actions:
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
+	Set Deaths("Player 8", "Terran Bunker", Add, 6480);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
@@ -840,8 +840,8 @@ Actions:
 	Set Resources("Player 7", Add, 5000, ore);
 	Set Resources("Player 7", Add, 2500, gas);
 	Display Text Message(Always Display, "<06>경고: <04>미션1에는 <11>주황색 저그<04> 군락만 공격해야 합니다.");
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 6480);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 6480);
+	Set Deaths("Player 8", "Terran Bunker", Add, 6480);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 6480);
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);

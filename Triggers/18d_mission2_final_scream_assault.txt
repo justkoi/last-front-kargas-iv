@@ -13,7 +13,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch31", Set);
 	Switch("Switch32", Not Set);
-	Deaths("Player 8", "Zerg Spore Colony", At least, 8);
+	Deaths("Player 8", "Protoss Fleet Beacon", At least, 8);
 	Switch("Switch74", Not Set);
 	Switch("Switch75", Not Set);
 Actions:
@@ -42,7 +42,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Switch("Switch32", Set);
 	Switch("Switch31", Not Set);
-	Deaths("Player 8", "Zerg Sunken Colony", At least, 8);
+	Deaths("Player 8", "Protoss Stargate", At least, 8);
 	Switch("Switch74", Not Set);
 	Switch("Switch75", Not Set);
 Actions:
@@ -117,7 +117,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 남은 동남쪽 <16>하얀색 저그<04> 군락 섬멸\n- 클리어 조건: 남은 군락의 해처리 / 레어 / 하이브 모두 파괴");
+	Set Mission Objectives("<03>미션 2: 마지막 군락\n\n<04>- 목표: 동남쪽 <16>하얀색 저그<04> 본진 파괴\n- 클리어 조건: 본진의 해처리 / 레어 / 하이브를 하나도 남기지 않고 파괴\n- 경고: 최후 공세 임박. 전선을 사수할 것");
 	Display Text Message(Always Display, "<13><06>[비상] 남은 군락 반응 급상승");
 	Display Text Message(Always Display, "<1A>노바: <04>잠깐... 무너진 군락의 신경파가 반대편으로 역류합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>전선 유지. 흩어지지 마라. 남은 군락이 마지막 병력을 긁어모은다.");
@@ -134,7 +134,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Set Mission Objectives("<03>미션 2: 잔존 군락 섬멸\n\n<04>- 목표: 남은 동북쪽 <15>갈색 저그<04> 군락 섬멸\n- 클리어 조건: 남은 군락의 해처리 / 레어 / 하이브 모두 파괴");
+	Set Mission Objectives("<03>미션 2: 마지막 군락\n\n<04>- 목표: 동북쪽 <15>갈색 저그<04> 본진 파괴\n- 클리어 조건: 본진의 해처리 / 레어 / 하이브를 하나도 남기지 않고 파괴\n- 경고: 최후 공세 임박. 전선을 사수할 것");
 	Display Text Message(Always Display, "<13><06>[비상] 남은 군락 반응 급상승");
 	Display Text Message(Always Display, "<1A>노바: <04>잠깐... 무너진 군락의 신경파가 반대편으로 역류합니다.");
 	Display Text Message(Always Display, "<03>호크: <04>전선 유지. 흩어지지 마라. 남은 군락이 마지막 병력을 긁어모은다.");
@@ -908,7 +908,7 @@ Actions:
 	Order("Player 7", "Zerg Guardian", "P7 Spawn4", "P4 Hunt", Patrol);
 	Set Switch("Switch90", set);
 	Set Switch("Switch159", set);
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
+	Set Deaths("Player 8", "Terran Bunker", Set To, 0);
 	Set Switch("Switch65", clear);
 	Set Switch("Switch66", clear);
 	Set Switch("Switch67", clear);
@@ -936,13 +936,63 @@ Actions:
 	Order("Player 6", "Zerg Guardian", "P6 Spawn4", "P4 Hunt", Patrol);
 	Set Switch("Switch90", set);
 	Set Switch("Switch158", set);
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Set To, 0);
 	Set Switch("Switch61", clear);
 	Set Switch("Switch62", clear);
 	Set Switch("Switch63", clear);
 	Set Switch("Switch64", clear);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
+}
+
+// All waves spawned: share the remaining colony's vision with players for 30 DC seconds.
+// Batch 10 latches Switch90, so the share starts the moment the last wave spawns.
+// +Vi# is 0-indexed and runs for the trigger owner: P6 = "+Vi5", P7 = "+Vi6".
+// P7 remains (Switch74): players gain P7's vision.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 미션 단계 DC가 정확히 3
+	Switch("Switch74", Set); //P7 최후 공세 분기 : P6 붕괴 후 P7이 최후 공세 준비
+	Switch("Switch90", Set); //전 웨이브 스폰 완료 : batch 10까지 모두 생성됨
+	Deaths("Player 8", "Protoss Dark Archon", At least, 792); //최후 공세 발사 66초 경과 : batch 10 스폰 시점
+Actions:
+	Run AI Script("+Vi6"); //현재 플레이어가 P7의 시야를 공유받음
+	Minimap Ping("P7 Base"); //남은 군락 위치 강조
+	Display Text Message(Always Display, "<1A>노바: <04>군락이 마지막 예비 병력까지 모두 방출했습니다. 군락의 감각망을 역추적해 30초간 시야를 공유합니다.");
+}
+
+// P6 remains (Switch75): players gain P6's vision.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 미션 단계 DC가 정확히 3
+	Switch("Switch75", Set); //P6 최후 공세 분기 : P7 붕괴 후 P6이 최후 공세 준비
+	Switch("Switch90", Set); //전 웨이브 스폰 완료 : batch 10까지 모두 생성됨
+	Deaths("Player 8", "Protoss Dark Archon", At least, 792); //최후 공세 발사 66초 경과 : batch 10 스폰 시점
+Actions:
+	Run AI Script("+Vi5"); //현재 플레이어가 P6의 시야를 공유받음
+	Minimap Ping("P6 Base"); //남은 군락 위치 강조
+	Display Text Message(Always Display, "<1A>노바: <04>군락이 마지막 예비 병력까지 모두 방출했습니다. 군락의 감각망을 역추적해 30초간 시야를 공유합니다.");
+}
+
+// Share expiry 30 DC seconds (360 ticks) after batch 10: 792 + 360 = 1152.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 미션 단계 DC가 정확히 3
+	Switch("Switch74", Set); //P7 최후 공세 분기
+	Switch("Switch90", Set); //전 웨이브 스폰 완료
+	Deaths("Player 8", "Protoss Dark Archon", At least, 1152); //시야 공유 시작 30 DC초 경과 : 공유 해제
+Actions:
+	Run AI Script("-Vi6"); //현재 플레이어의 P7 시야 공유 해제
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 미션 단계 DC가 정확히 3
+	Switch("Switch75", Set); //P6 최후 공세 분기
+	Switch("Switch90", Set); //전 웨이브 스폰 완료
+	Deaths("Player 8", "Protoss Dark Archon", At least, 1152); //시야 공유 시작 30 DC초 경과 : 공유 해제
+Actions:
+	Run AI Script("-Vi5"); //현재 플레이어의 P6 시야 공유 해제
 }
 
 // Keep P6 main-assault cooldown at 0 while locked and no assault is active.
@@ -952,7 +1002,7 @@ Conditions:
 	Switch("Switch158", Set);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Set To, 0);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Set To, 0);
 	Preserve Trigger();
 }
 
@@ -963,6 +1013,6 @@ Conditions:
 	Switch("Switch159", Set);
 	Deaths("Player 8", "Zerg Mutalisk", Exactly, 0);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Set To, 0);
+	Set Deaths("Player 8", "Terran Bunker", Set To, 0);
 	Preserve Trigger();
 }

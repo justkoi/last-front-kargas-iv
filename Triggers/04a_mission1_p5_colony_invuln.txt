@@ -12,3 +12,12 @@ Actions:
 	Set Invincibility("Player 5", "Zerg Sunken Colony", "East Area", enabled);
 	Set Invincibility("Player 5", "Zerg Spore Colony", "East Area", enabled);
 }
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 8);
+Actions:
+	Set Invincibility("Player 6", "Buildings", "Anywhere", enabled);
+	Set Invincibility("Player 7", "Buildings", "Anywhere", enabled);
+}

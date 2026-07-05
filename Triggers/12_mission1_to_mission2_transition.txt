@@ -14,6 +14,11 @@ Actions:
 	Set Invincibility("Player 5", "Zerg Spore Colony", "Middle Area", disabled);
 	Set Invincibility("Player 5", "Zerg Sunken Colony", "East Area", disabled);
 	Set Invincibility("Player 5", "Zerg Spore Colony", "East Area", disabled);
+	Set Invincibility("Player 8", "Buildings", "Anywhere", disabled);
+	Set Invincibility("Player 6", "Buildings", "Anywhere", disabled);
+	Set Invincibility("Player 7", "Buildings", "Anywhere", disabled);
+	Set Invincibility("Player 6", "Overmind Cocoon", "P6 Overmind", enabled); //오버마인드 고치 무적 재설정 : 위 전체 건물 무적 해제에 휩쓸리지 않게, 12:00 고치 이벤트(18_00b)에서만 해제
+	Set Invincibility("Player 7", "Overmind Cocoon", "P7 Overmind", enabled); //오버마인드 고치 무적 재설정 : P7 대칭본
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 3);
 	Set Deaths("Player 8", "Terran Vulture", Set To, 0);
 	Set Deaths("Player 8", "Protoss Shuttle", Set To, 0);
@@ -168,7 +173,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 1680);
 	Deaths("Player 8", "Terran Vulture", At most, 2424);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>점막 뿌리망 붕괴 확인. 주황색 저그 방어기관이 고사했습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>서쪽 진입로 관측을 유지하고 있습니다. 갈색 군락의 병력이 모이기 전에 공격 준비를 마쳐야 합니다.");
 }
 
 Trigger("All Players"){
@@ -177,7 +182,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 2472);
 	Deaths("Player 8", "Terran Vulture", At most, 2496);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>길이 열렸다. 모두 전력을 모아 동북쪽 <15>갈색 저그<04> 군락부터 고립시켜 무너뜨린다.");
+	Display Text Message(Always Display, "<03>호크: <04>길은 확보됐다. 모두 전력을 모아 동북쪽 <15>갈색 저그<04> 군락부터 고립시켜 무너뜨린다.");
 }
 
 Trigger("All Players"){
@@ -204,8 +209,6 @@ Actions:
 	Set Switch("Switch114", clear);
 	Set Switch("Switch115", clear);
 	Set Switch("Switch116", clear);
-	Kill Unit("Player 5", "Zerg Sunken Colony");
-	Kill Unit("Player 5", "Zerg Spore Colony");
 }
 
 //-----------------------------------------------------------------//

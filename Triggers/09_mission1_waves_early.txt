@@ -130,7 +130,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 1260);
+	Elapsed Time(At least, 1080);
 Actions:
 	Create Unit("Player 1", "Map Revealer", 1, "AttackPoint1");
 	Create Unit("Player 2", "Map Revealer", 1, "AttackPoint1");
@@ -141,7 +141,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 1260);
+	Elapsed Time(At least, 1080);
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
@@ -152,18 +152,18 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 1265);
+	Elapsed Time(At least, 1085);
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<03>호크: <04>좋다. 타격대를 보내라. 방어선 숨통이 트일 거다.");
 }
 
-// 21:10 공개 안내 - 전방 정신체 제거 시 자원 확보 가능함을 알림 (호크 대사 이후, 정신체 존재 시 1회)
+// 18:10 공개 안내 - 전방 정신체 제거 시 자원 확보 가능함을 알림 (호크 대사 이후, 정신체 존재 시 1회)
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Switch("Switch148", Not Set);                          //자원 안내 미표시 (값싼 가드 먼저)
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 1270);                          //21:10 시점 (호크 대사 5초 후)
+	Elapsed Time(At least, 1090);                          //18:10 시점 (호크 대사 5초 후)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 존재 시 (스캔, 마지막)
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>전방의 저그 정신체를 제거하면 지휘 교란과 함께 상당한 자원을 확보할 수 있습니다.");
@@ -173,8 +173,8 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
-	Elapsed Time(At least, 1320);
-	Elapsed Time(At most, 1322);
+	Elapsed Time(At least, 1140);
+	Elapsed Time(At most, 1142);
 Actions:
 	Kill Unit At Location("Player 1", "Map Revealer", 64, "AttackPoint1");
 	Kill Unit At Location("Player 2", "Map Revealer", 64, "AttackPoint1");

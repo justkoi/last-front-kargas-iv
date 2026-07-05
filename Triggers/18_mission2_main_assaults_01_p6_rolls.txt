@@ -13,7 +13,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 21180);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 21180);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch128", Not Set);
@@ -31,7 +31,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 21180);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 21180);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch128", Not Set);
@@ -50,7 +50,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 21180);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 21180);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch128", Not Set);
@@ -67,7 +67,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 21720);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 21720);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch128", Not Set);
@@ -85,7 +85,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 21720);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 21720);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch128", Not Set);
@@ -104,7 +104,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 21720);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 21720);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch128", Not Set);
@@ -121,7 +121,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 22260);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22260);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch128", Not Set);
@@ -139,7 +139,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 22260);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22260);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch128", Not Set);
@@ -158,7 +158,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 22260);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22260);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch128", Not Set);
@@ -175,7 +175,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 21720);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 21720);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch128", Not Set);
@@ -193,7 +193,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 21720);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 21720);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch128", Not Set);
@@ -212,7 +212,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 21720);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 21720);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch128", Not Set);
@@ -229,8 +229,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 22260);
-	Deaths("Player 8", "Zerg Zergling", At most, 23219);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22260);
+	Deaths("Player 8", "Protoss Photon Cannon", At most, 23219);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch129", Set);
@@ -250,8 +250,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 22260);
-	Deaths("Player 8", "Zerg Zergling", At most, 23219);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22260);
+	Deaths("Player 8", "Protoss Photon Cannon", At most, 23219);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch129", Set);
@@ -272,8 +272,8 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 22260);
-	Deaths("Player 8", "Zerg Zergling", At most, 23219);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22260);
+	Deaths("Player 8", "Protoss Photon Cannon", At most, 23219);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch129", Set);
@@ -292,8 +292,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
-	Deaths("Player 8", "Zerg Zergling", At most, 23759);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At most, 23759);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch129", Set);
@@ -313,8 +313,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
-	Deaths("Player 8", "Zerg Zergling", At most, 23759);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At most, 23759);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch129", Set);
@@ -335,8 +335,8 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
-	Deaths("Player 8", "Zerg Zergling", At most, 23759);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At most, 23759);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch129", Set);
@@ -355,8 +355,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23340);
-	Deaths("Player 8", "Zerg Zergling", At most, 24299);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23340);
+	Deaths("Player 8", "Protoss Photon Cannon", At most, 24299);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch129", Set);
@@ -376,8 +376,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23340);
-	Deaths("Player 8", "Zerg Zergling", At most, 24299);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23340);
+	Deaths("Player 8", "Protoss Photon Cannon", At most, 24299);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch129", Set);
@@ -398,8 +398,8 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23340);
-	Deaths("Player 8", "Zerg Zergling", At most, 24299);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23340);
+	Deaths("Player 8", "Protoss Photon Cannon", At most, 24299);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch129", Set);
@@ -418,8 +418,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
-	Deaths("Player 8", "Zerg Zergling", At most, 23759);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At most, 23759);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch129", Set);
@@ -439,8 +439,8 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
-	Deaths("Player 8", "Zerg Zergling", At most, 23759);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At most, 23759);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch129", Set);
@@ -461,8 +461,8 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
-	Deaths("Player 8", "Zerg Zergling", At most, 23759);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At most, 23759);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch129", Set);
@@ -482,7 +482,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 22260);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22260);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Not Set);
@@ -499,7 +499,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 22260);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22260);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Set);
@@ -516,7 +516,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 22260);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22260);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Not Set);
@@ -533,7 +533,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 22260);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22260);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Set);
@@ -550,7 +550,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Not Set);
@@ -567,7 +567,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Set);
@@ -584,7 +584,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Not Set);
@@ -601,7 +601,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Set);
@@ -618,7 +618,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 23340);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23340);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Not Set);
@@ -635,7 +635,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 23340);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23340);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Set);
@@ -652,7 +652,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 23340);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23340);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Not Set);
@@ -669,7 +669,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 23340);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23340);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Set);
@@ -686,7 +686,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Not Set);
@@ -703,7 +703,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Set);
@@ -720,7 +720,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Not Set);
@@ -737,7 +737,7 @@ Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
-	Deaths("Player 8", "Zerg Zergling", At least, 22800);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 22800);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch61", Set);
@@ -757,7 +757,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23220);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23220);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -773,7 +773,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23220);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23220);
 	Set Switch("Switch61", randomize);
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
@@ -789,7 +789,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23220);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23220);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -805,7 +805,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23220);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23220);
 	Set Switch("Switch61", randomize);
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
@@ -822,7 +822,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23220);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23220);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -838,7 +838,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23220);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23220);
 	Set Switch("Switch61", randomize);
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
@@ -853,7 +853,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23760);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -869,7 +869,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23760);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23760);
 	Set Switch("Switch61", randomize);
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
@@ -885,7 +885,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23760);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -901,7 +901,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23760);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23760);
 	Set Switch("Switch61", randomize);
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
@@ -918,7 +918,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23760);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -934,7 +934,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23760);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23760);
 	Set Switch("Switch61", randomize);
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
@@ -949,7 +949,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 24300);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 24300);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -965,7 +965,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 24300);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 24300);
 	Set Switch("Switch61", randomize);
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
@@ -981,7 +981,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 24300);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 24300);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -997,7 +997,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 24300);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 24300);
 	Set Switch("Switch61", randomize);
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
@@ -1014,7 +1014,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 24300);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 24300);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -1030,7 +1030,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 24300);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 24300);
 	Set Switch("Switch61", randomize);
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
@@ -1045,7 +1045,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23760);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -1061,7 +1061,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23760);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23760);
 	Set Switch("Switch61", randomize);
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
@@ -1077,7 +1077,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23760);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -1093,7 +1093,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23760);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23760);
 	Set Switch("Switch61", randomize);
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
@@ -1110,7 +1110,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23760);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Set);
@@ -1126,7 +1126,7 @@ Actions:
 	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
 	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
 	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23760);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23760);
 	Set Switch("Switch61", randomize);
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
@@ -1143,7 +1143,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23220);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23220);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -1163,7 +1163,7 @@ Actions:
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23220);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23220);
 	Preserve Trigger();
 }
 // P6 fallback consume - cooldown 32m15s - Lair active
@@ -1173,7 +1173,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23220);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23220);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -1193,7 +1193,7 @@ Actions:
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23220);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23220);
 	Preserve Trigger();
 }
 // P6 fallback consume - cooldown 32m15s - Hatchery active
@@ -1204,7 +1204,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23220);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23220);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -1224,7 +1224,7 @@ Actions:
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23220);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23220);
 	Preserve Trigger();
 }
 // P6 fallback consume - cooldown 33m - Hive active
@@ -1233,7 +1233,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23760);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -1253,7 +1253,7 @@ Actions:
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23760);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23760);
 	Preserve Trigger();
 }
 // P6 fallback consume - cooldown 33m - Lair active
@@ -1263,7 +1263,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23760);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -1283,7 +1283,7 @@ Actions:
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23760);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23760);
 	Preserve Trigger();
 }
 // P6 fallback consume - cooldown 33m - Hatchery active
@@ -1294,7 +1294,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23760);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -1314,7 +1314,7 @@ Actions:
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23760);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23760);
 	Preserve Trigger();
 }
 // P6 fallback consume - cooldown 33m45s - Hive active
@@ -1323,7 +1323,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 24300);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 24300);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -1343,7 +1343,7 @@ Actions:
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 24300);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 24300);
 	Preserve Trigger();
 }
 // P6 fallback consume - cooldown 33m45s - Lair active
@@ -1353,7 +1353,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 24300);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 24300);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -1373,7 +1373,7 @@ Actions:
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 24300);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 24300);
 	Preserve Trigger();
 }
 // P6 fallback consume - cooldown 33m45s - Hatchery active
@@ -1384,7 +1384,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 24300);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 24300);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -1404,7 +1404,7 @@ Actions:
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 24300);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 24300);
 	Preserve Trigger();
 }
 // P6 fallback consume - cooldown 33m - Hive active
@@ -1413,7 +1413,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1);
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23760);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -1433,7 +1433,7 @@ Actions:
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23760);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23760);
 	Preserve Trigger();
 }
 // P6 fallback consume - cooldown 33m - Lair active
@@ -1443,7 +1443,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At most, 3);
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23760);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -1463,7 +1463,7 @@ Actions:
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23760);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23760);
 	Preserve Trigger();
 }
 // P6 fallback consume - cooldown 33m - Hatchery active
@@ -1474,7 +1474,7 @@ Conditions:
 	Command("Player 6", "Zerg Hive", At most, 0);
 	Command("Player 6", "Zerg Lair", At most, 0);
 	Command("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Zerg Zergling", At least, 23760);
+	Deaths("Player 8", "Protoss Photon Cannon", At least, 23760);
 	Deaths("Player 8", "Zerg Lurker", Exactly, 0);
 	Switch("Switch31", Not Set);
 	Switch("Switch63", Not Set);
@@ -1494,6 +1494,6 @@ Actions:
 	Set Switch("Switch62", randomize);
 	Set Switch("Switch128", clear);
 	Set Switch("Switch129", clear);
-	Set Deaths("Player 8", "Zerg Zergling", Subtract, 23760);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Subtract, 23760);
 	Preserve Trigger();
 }

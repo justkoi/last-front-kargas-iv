@@ -60,6 +60,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Data Disc", At least, 96); //훈장 리더보드 8초 이후 군락의 분노 표시
 Actions:
 	Leader Board Points("군락의 분노 (%)", Custom);
 	Leaderboard Computer Players(enabled);

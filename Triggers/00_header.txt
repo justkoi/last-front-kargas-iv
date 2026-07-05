@@ -3,13 +3,13 @@
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
 //                      P5 Spawn1~4, P5 H1~4, P1~P4 Hunt, Player Destination, AttackPoint1, EarlyTower,
 //                      MD1~MD6, BaseEntrance, BaseScan1~13, MultiKey, MultiLock, MainLoad1~2, Player Destination,
-//                      MultiKey: P5 Mature Crysalis preplaced (unlock key; SCMDraft name, not Chrysalis). MultiLock: P5/P9 invincible blockers.
+//                      MultiKey: P8 Mature Crysalis preplaced (unlock key; SCMDraft name, not Chrysalis). MultiLock: P5 blockers + P9 Pylon.
 //                      BaseScan12~13: orbital scan slots at game start (01_briefing_intro, 32s).
 //                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
 //                      P6 Scout, P6 Intruder, P6 Overmind, P6 MiniBase, P6 Spawn1~4, P6 H1~4 (H4 currently unused; very hard = H1~3),
 //                      P7 Base, P7 Home, P7 Area, P7 Area Ground, P7 Area Air,
 //                      P7 Scout, P7 Intruder, P7 Overmind, P7 Spawn1~4, P7 H1~4 (H4 currently unused; very hard = H1~3),
-//                      WestArea, Middle Area, East Area, Gas1, Gas2, Mission2 Gate1~2, Waypoint1~5,
+//                      WestArea, Westonia, Middle Area, East Area, Gas1, Gas2, Mission2 Gate1~2, Waypoint1~5,
 //                      Difficulty, Selector, SelectEasy, SelectNormal, SelectHard, SelectVeryHard,
 //                      P6 Alert, P7 Alert, P6 Alert Ping, P7 Alert Ping
 //
@@ -48,11 +48,11 @@
 //    Terran Medic         : mission2 P6 minibase destroy reward message spacing timer
 //    Terran Dropship      : mission1 late-wave variant index / P7 mission2 early alert defense recharge timer
 //    Protoss Corsair      : mission1 outer colony warning cooldown timer
-//    Zerg Creep Colony    : mission1 P6/P7 creep colony warning counter
-//    Zerg Sunken Colony   : P6 Hatchery/Lair/Hive losses for final scream assault
-//    Zerg Spore Colony    : P7 Hatchery/Lair/Hive losses for final scream assault
-//    Zerg Zergling        : P6 mission2 penalty assault cooldown
-//    Zerg Hydralisk       : P7 mission2 penalty assault cooldown
+//    Protoss Shield Battery: mission1 P6/P7 creep colony warning counter
+//    Protoss Stargate     : P6 Hatchery/Lair/Hive losses for final scream assault
+//    Protoss Fleet Beacon : P7 Hatchery/Lair/Hive losses for final scream assault
+//    Protoss Photon Cannon: P6 mission2 penalty assault cooldown
+//    Terran Bunker        : P7 mission2 penalty assault cooldown
 //    Zerg Lurker          : P6 mission2 penalty assault ready flag (0=idle, 1=spawning, 2=relay, 3=warning, 4=weakened warning, 5=weakened spawning, 6=unused, 7=weakened pre-analysis queued)
 //    Zerg Mutalisk        : P7 mission2 penalty assault ready flag (0=idle, 1=spawning, 2=relay, 3=warning, 4=weakened warning, 5=weakened spawning, 6=unused, 7=weakened pre-analysis queued)
 //    Zerg Ultralisk       : P6 mission2 penalty assault spawn step timer / pre-roll cue pulse while ready flag is idle
@@ -76,7 +76,10 @@
 //    Terran Command Center: mission2 P7 Hive 분노 후속 메시지 대기열
 //    Terran Physics Lab   : mission2 생산 구조 보상/분노 출력 코드 (0=대기, 1~6=보상 P6 H/L/H,P7 H/L/H, 11~16=해당 분노)
 //    위 7개 P8 DC 예약 건물은 Player 8 소유로 배치/지급/파괴하지 말 것.
-//    Terran Factory       : mission2 군락 분노 리더보드 갱신 타이머 (12틱 = 약 1초)
+//    Terran Machine Shop  : mission2 군체의식 붕괴 대사 타이머
+//    Protoss Templar Archives: mission2 P6 Hatchery/Lair/Hive current total scratch
+//    Protoss Citadel of Adun : mission2 P7 Hatchery/Lair/Hive current total scratch
+//    Terran Factory       : mission2 colony rage leaderboard refresh timer (12 ticks = about 1 second)
 //    Terran Starport      : mission2 군락 분노 계산용 P6 원본 DC 백업
 //    Terran Science Facility: mission2 군락 분노 계산용 P6 x100 작업값
 //    Terran Engineering Bay: mission2 군락 분노 계산용 P7 원본 DC 백업
@@ -102,8 +105,8 @@
 //    Zerg Hatchery        : mission1 P5 Hatchery destroy reward + late-wave acceleration counter
 //    Zerg Lair            : mission1 P5 Lair destroy reward counter
 //    Zerg Hive            : mission1 P5 Hive destroy reward counter
-//    Terran Marine        : P5 mission2 early Sunken Colony loss warning progress / 1000+=shown latch
-//    Terran Firebat       : P5 mission2 early Spore Colony loss warning progress / 1000+=shown latch
+//    Terran Marine        : unused (was P5 mission2 early Sunken Colony decay warning progress)
+//    Terran Firebat       : unused (was P5 mission2 early Spore Colony decay warning progress)
 //
 //  Switch roles
 //    Switch1 : defeat guard
@@ -184,8 +187,7 @@
 //    Switch97~100  : P1~P4 P5 first Mutalisk warning shown
 //    Switch101~104 : P1~P4 P5 first Guardian warning shown
 //    Switch105~108 : P1~P4 P5 first Devourer warning shown
-//    Switch109~112 : P1~P4 P5 early Sunken Colony decay warning queued
-//    Switch113~116 : P1~P4 P5 early Spore Colony decay warning queued
+//    Switch109~116 : unused (was P5 early colony decay warning queue)
 //    Switch117     : difficulty selector spawned / selection window active
 //    Switch118     : P6 mission2 difficulty cooldown adjustment enabled from mission2 entry
 //    Switch119     : P7 mission2 difficulty cooldown adjustment enabled from mission2 entry
@@ -203,7 +205,10 @@
 //    Switch131     : P7 main assault coarse (air/ground) warning shown
 //    Switch132     : main assault first-wave seeded at game start (one-shot guard)
 //    Switch133     : AttackPoint1 정신체 격파 P5 회군 윈도우 활성 (15초, 매초 Move 재발급)
-//    Switch134~139 : unused
+//    Switch134     : P6 hunt all-out Westonia target-group selector
+//    Switch135     : P7 hunt all-out Westonia target-group selector
+//    Switch136     : mission2 군체의식 붕괴 발생 latch
+//    Switch137~139 : unused
 //    Switch140     : mission2 P6 forward rally point revealed (Vulture >= 4080)
 //    Switch141     : mission2 P6 forward rally point reward paid
 //    Switch142     : mission1 arsenal facility alive gate - Barracks OR Factory at BaseEntrance (13e, prescan 1078-1080)
@@ -221,7 +226,7 @@
 //    Switch155     : P6 mission2 offense-window 대사 바리에이션 bit1 (18e)
 //    Switch156     : P7 mission2 offense-window 대사 바리에이션 bit0 (18e)
 //    Switch157     : P7 mission2 offense-window 대사 바리에이션 bit1 (18e)
-//                    (early multi lock은 switch-free, Bring("Player 5","Mature Crysalis","MultiKey",At most,0) 사용 (08b))
+//                    (early multi lock은 switch-free, Bring("Player 8","Mature Crysalis","MultiKey",At most,0) 사용 (08b))
 //    Switch158     : P6 main assault locked after final scream assault batch 10
 //    Switch159     : P7 main assault locked after final scream assault batch 10
 //    Switch160     : unused (was P6 mission2 first main assault latch)

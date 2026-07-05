@@ -142,16 +142,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 1);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라250%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라185%
 Actions:
-	Set Resources("Player 1", Add, 1375, ore);
-	Set Resources("Player 2", Add, 1375, ore);
-	Set Resources("Player 3", Add, 1375, ore);
-	Set Resources("Player 4", Add, 1375, ore);
-	Set Resources("Player 1", Add, 150, gas);
-	Set Resources("Player 2", Add, 150, gas);
-	Set Resources("Player 3", Add, 150, gas);
-	Set Resources("Player 4", Add, 150, gas);
+	Set Resources("Player 1", Add, 2035, ore);
+	Set Resources("Player 2", Add, 2035, ore);
+	Set Resources("Player 3", Add, 2035, ore);
+	Set Resources("Player 4", Add, 2035, ore);
+	Set Resources("Player 1", Add, 1018, gas);
+	Set Resources("Player 2", Add, 1018, gas);
+	Set Resources("Player 3", Add, 1018, gas);
+	Set Resources("Player 4", Add, 1018, gas);
 	Preserve Trigger();
 }
 
@@ -159,16 +159,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 1);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑120%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑115%
 Actions:
-	Set Resources("Player 1", Add, 660, ore);
-	Set Resources("Player 2", Add, 660, ore);
-	Set Resources("Player 3", Add, 660, ore);
-	Set Resources("Player 4", Add, 660, ore);
-	Set Resources("Player 1", Add, 72, gas);
-	Set Resources("Player 2", Add, 72, gas);
-	Set Resources("Player 3", Add, 72, gas);
-	Set Resources("Player 4", Add, 72, gas);
+	Set Resources("Player 1", Add, 1265, ore);
+	Set Resources("Player 2", Add, 1265, ore);
+	Set Resources("Player 3", Add, 1265, ore);
+	Set Resources("Player 4", Add, 1265, ore);
+	Set Resources("Player 1", Add, 633, gas);
+	Set Resources("Player 2", Add, 633, gas);
+	Set Resources("Player 3", Add, 633, gas);
+	Set Resources("Player 4", Add, 633, gas);
 	Preserve Trigger();
 }
 
@@ -176,16 +176,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 1);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두85%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두90%
 Actions:
-	Set Resources("Player 1", Add, 468, ore);
-	Set Resources("Player 2", Add, 468, ore);
-	Set Resources("Player 3", Add, 468, ore);
-	Set Resources("Player 4", Add, 468, ore);
-	Set Resources("Player 1", Add, 51, gas);
-	Set Resources("Player 2", Add, 51, gas);
-	Set Resources("Player 3", Add, 51, gas);
-	Set Resources("Player 4", Add, 51, gas);
+	Set Resources("Player 1", Add, 990, ore);
+	Set Resources("Player 2", Add, 990, ore);
+	Set Resources("Player 3", Add, 990, ore);
+	Set Resources("Player 4", Add, 990, ore);
+	Set Resources("Player 1", Add, 495, gas);
+	Set Resources("Player 2", Add, 495, gas);
+	Set Resources("Player 3", Add, 495, gas);
+	Set Resources("Player 4", Add, 495, gas);
 	Preserve Trigger();
 }
 
@@ -193,16 +193,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 1);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양55%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양75%
 Actions:
-	Set Resources("Player 1", Add, 303, ore);
-	Set Resources("Player 2", Add, 303, ore);
-	Set Resources("Player 3", Add, 303, ore);
-	Set Resources("Player 4", Add, 303, ore);
-	Set Resources("Player 1", Add, 33, gas);
-	Set Resources("Player 2", Add, 33, gas);
-	Set Resources("Player 3", Add, 33, gas);
-	Set Resources("Player 4", Add, 33, gas);
+	Set Resources("Player 1", Add, 825, ore);
+	Set Resources("Player 2", Add, 825, ore);
+	Set Resources("Player 3", Add, 825, ore);
+	Set Resources("Player 4", Add, 825, ore);
+	Set Resources("Player 1", Add, 413, gas);
+	Set Resources("Player 2", Add, 413, gas);
+	Set Resources("Player 3", Add, 413, gas);
+	Set Resources("Player 4", Add, 413, gas);
 	Preserve Trigger();
 }
 
@@ -210,16 +210,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 2);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라250%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라185%
 Actions:
-	Set Resources("Player 1", Add, 1625, ore);
-	Set Resources("Player 2", Add, 1625, ore);
-	Set Resources("Player 3", Add, 1625, ore);
-	Set Resources("Player 4", Add, 1625, ore);
-	Set Resources("Player 1", Add, 150, gas);
-	Set Resources("Player 2", Add, 150, gas);
-	Set Resources("Player 3", Add, 150, gas);
-	Set Resources("Player 4", Add, 150, gas);
+	Set Resources("Player 1", Add, 2405, ore);
+	Set Resources("Player 2", Add, 2405, ore);
+	Set Resources("Player 3", Add, 2405, ore);
+	Set Resources("Player 4", Add, 2405, ore);
+	Set Resources("Player 1", Add, 1203, gas);
+	Set Resources("Player 2", Add, 1203, gas);
+	Set Resources("Player 3", Add, 1203, gas);
+	Set Resources("Player 4", Add, 1203, gas);
 	Preserve Trigger();
 }
 
@@ -227,16 +227,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 2);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑120%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑115%
 Actions:
-	Set Resources("Player 1", Add, 780, ore);
-	Set Resources("Player 2", Add, 780, ore);
-	Set Resources("Player 3", Add, 780, ore);
-	Set Resources("Player 4", Add, 780, ore);
-	Set Resources("Player 1", Add, 72, gas);
-	Set Resources("Player 2", Add, 72, gas);
-	Set Resources("Player 3", Add, 72, gas);
-	Set Resources("Player 4", Add, 72, gas);
+	Set Resources("Player 1", Add, 1495, ore);
+	Set Resources("Player 2", Add, 1495, ore);
+	Set Resources("Player 3", Add, 1495, ore);
+	Set Resources("Player 4", Add, 1495, ore);
+	Set Resources("Player 1", Add, 748, gas);
+	Set Resources("Player 2", Add, 748, gas);
+	Set Resources("Player 3", Add, 748, gas);
+	Set Resources("Player 4", Add, 748, gas);
 	Preserve Trigger();
 }
 
@@ -244,16 +244,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 2);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두85%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두90%
 Actions:
-	Set Resources("Player 1", Add, 553, ore);
-	Set Resources("Player 2", Add, 553, ore);
-	Set Resources("Player 3", Add, 553, ore);
-	Set Resources("Player 4", Add, 553, ore);
-	Set Resources("Player 1", Add, 51, gas);
-	Set Resources("Player 2", Add, 51, gas);
-	Set Resources("Player 3", Add, 51, gas);
-	Set Resources("Player 4", Add, 51, gas);
+	Set Resources("Player 1", Add, 1170, ore);
+	Set Resources("Player 2", Add, 1170, ore);
+	Set Resources("Player 3", Add, 1170, ore);
+	Set Resources("Player 4", Add, 1170, ore);
+	Set Resources("Player 1", Add, 585, gas);
+	Set Resources("Player 2", Add, 585, gas);
+	Set Resources("Player 3", Add, 585, gas);
+	Set Resources("Player 4", Add, 585, gas);
 	Preserve Trigger();
 }
 
@@ -261,16 +261,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 2);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양55%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양75%
 Actions:
-	Set Resources("Player 1", Add, 358, ore);
-	Set Resources("Player 2", Add, 358, ore);
-	Set Resources("Player 3", Add, 358, ore);
-	Set Resources("Player 4", Add, 358, ore);
-	Set Resources("Player 1", Add, 33, gas);
-	Set Resources("Player 2", Add, 33, gas);
-	Set Resources("Player 3", Add, 33, gas);
-	Set Resources("Player 4", Add, 33, gas);
+	Set Resources("Player 1", Add, 975, ore);
+	Set Resources("Player 2", Add, 975, ore);
+	Set Resources("Player 3", Add, 975, ore);
+	Set Resources("Player 4", Add, 975, ore);
+	Set Resources("Player 1", Add, 488, gas);
+	Set Resources("Player 2", Add, 488, gas);
+	Set Resources("Player 3", Add, 488, gas);
+	Set Resources("Player 4", Add, 488, gas);
 	Preserve Trigger();
 }
 
@@ -278,16 +278,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 3);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라250%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라185%
 Actions:
-	Set Resources("Player 1", Add, 1875, ore);
-	Set Resources("Player 2", Add, 1875, ore);
-	Set Resources("Player 3", Add, 1875, ore);
-	Set Resources("Player 4", Add, 1875, ore);
-	Set Resources("Player 1", Add, 150, gas);
-	Set Resources("Player 2", Add, 150, gas);
-	Set Resources("Player 3", Add, 150, gas);
-	Set Resources("Player 4", Add, 150, gas);
+	Set Resources("Player 1", Add, 2775, ore);
+	Set Resources("Player 2", Add, 2775, ore);
+	Set Resources("Player 3", Add, 2775, ore);
+	Set Resources("Player 4", Add, 2775, ore);
+	Set Resources("Player 1", Add, 1388, gas);
+	Set Resources("Player 2", Add, 1388, gas);
+	Set Resources("Player 3", Add, 1388, gas);
+	Set Resources("Player 4", Add, 1388, gas);
 	Preserve Trigger();
 }
 
@@ -295,16 +295,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 3);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑120%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑115%
 Actions:
-	Set Resources("Player 1", Add, 900, ore);
-	Set Resources("Player 2", Add, 900, ore);
-	Set Resources("Player 3", Add, 900, ore);
-	Set Resources("Player 4", Add, 900, ore);
-	Set Resources("Player 1", Add, 72, gas);
-	Set Resources("Player 2", Add, 72, gas);
-	Set Resources("Player 3", Add, 72, gas);
-	Set Resources("Player 4", Add, 72, gas);
+	Set Resources("Player 1", Add, 1725, ore);
+	Set Resources("Player 2", Add, 1725, ore);
+	Set Resources("Player 3", Add, 1725, ore);
+	Set Resources("Player 4", Add, 1725, ore);
+	Set Resources("Player 1", Add, 863, gas);
+	Set Resources("Player 2", Add, 863, gas);
+	Set Resources("Player 3", Add, 863, gas);
+	Set Resources("Player 4", Add, 863, gas);
 	Preserve Trigger();
 }
 
@@ -312,16 +312,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 3);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두85%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두90%
 Actions:
-	Set Resources("Player 1", Add, 638, ore);
-	Set Resources("Player 2", Add, 638, ore);
-	Set Resources("Player 3", Add, 638, ore);
-	Set Resources("Player 4", Add, 638, ore);
-	Set Resources("Player 1", Add, 51, gas);
-	Set Resources("Player 2", Add, 51, gas);
-	Set Resources("Player 3", Add, 51, gas);
-	Set Resources("Player 4", Add, 51, gas);
+	Set Resources("Player 1", Add, 1350, ore);
+	Set Resources("Player 2", Add, 1350, ore);
+	Set Resources("Player 3", Add, 1350, ore);
+	Set Resources("Player 4", Add, 1350, ore);
+	Set Resources("Player 1", Add, 675, gas);
+	Set Resources("Player 2", Add, 675, gas);
+	Set Resources("Player 3", Add, 675, gas);
+	Set Resources("Player 4", Add, 675, gas);
 	Preserve Trigger();
 }
 
@@ -329,16 +329,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 3);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양55%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양75%
 Actions:
-	Set Resources("Player 1", Add, 413, ore);
-	Set Resources("Player 2", Add, 413, ore);
-	Set Resources("Player 3", Add, 413, ore);
-	Set Resources("Player 4", Add, 413, ore);
-	Set Resources("Player 1", Add, 33, gas);
-	Set Resources("Player 2", Add, 33, gas);
-	Set Resources("Player 3", Add, 33, gas);
-	Set Resources("Player 4", Add, 33, gas);
+	Set Resources("Player 1", Add, 1125, ore);
+	Set Resources("Player 2", Add, 1125, ore);
+	Set Resources("Player 3", Add, 1125, ore);
+	Set Resources("Player 4", Add, 1125, ore);
+	Set Resources("Player 1", Add, 563, gas);
+	Set Resources("Player 2", Add, 563, gas);
+	Set Resources("Player 3", Add, 563, gas);
+	Set Resources("Player 4", Add, 563, gas);
 	Preserve Trigger();
 }
 
@@ -346,16 +346,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 4);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라250%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라185%
 Actions:
-	Set Resources("Player 1", Add, 1375, ore);
-	Set Resources("Player 2", Add, 1375, ore);
-	Set Resources("Player 3", Add, 1375, ore);
-	Set Resources("Player 4", Add, 1375, ore);
-	Set Resources("Player 1", Add, 150, gas);
-	Set Resources("Player 2", Add, 150, gas);
-	Set Resources("Player 3", Add, 150, gas);
-	Set Resources("Player 4", Add, 150, gas);
+	Set Resources("Player 1", Add, 2035, ore);
+	Set Resources("Player 2", Add, 2035, ore);
+	Set Resources("Player 3", Add, 2035, ore);
+	Set Resources("Player 4", Add, 2035, ore);
+	Set Resources("Player 1", Add, 1018, gas);
+	Set Resources("Player 2", Add, 1018, gas);
+	Set Resources("Player 3", Add, 1018, gas);
+	Set Resources("Player 4", Add, 1018, gas);
 	Preserve Trigger();
 }
 
@@ -363,16 +363,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 4);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑120%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑115%
 Actions:
-	Set Resources("Player 1", Add, 660, ore);
-	Set Resources("Player 2", Add, 660, ore);
-	Set Resources("Player 3", Add, 660, ore);
-	Set Resources("Player 4", Add, 660, ore);
-	Set Resources("Player 1", Add, 72, gas);
-	Set Resources("Player 2", Add, 72, gas);
-	Set Resources("Player 3", Add, 72, gas);
-	Set Resources("Player 4", Add, 72, gas);
+	Set Resources("Player 1", Add, 1265, ore);
+	Set Resources("Player 2", Add, 1265, ore);
+	Set Resources("Player 3", Add, 1265, ore);
+	Set Resources("Player 4", Add, 1265, ore);
+	Set Resources("Player 1", Add, 633, gas);
+	Set Resources("Player 2", Add, 633, gas);
+	Set Resources("Player 3", Add, 633, gas);
+	Set Resources("Player 4", Add, 633, gas);
 	Preserve Trigger();
 }
 
@@ -380,16 +380,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 4);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두85%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두90%
 Actions:
-	Set Resources("Player 1", Add, 468, ore);
-	Set Resources("Player 2", Add, 468, ore);
-	Set Resources("Player 3", Add, 468, ore);
-	Set Resources("Player 4", Add, 468, ore);
-	Set Resources("Player 1", Add, 51, gas);
-	Set Resources("Player 2", Add, 51, gas);
-	Set Resources("Player 3", Add, 51, gas);
-	Set Resources("Player 4", Add, 51, gas);
+	Set Resources("Player 1", Add, 990, ore);
+	Set Resources("Player 2", Add, 990, ore);
+	Set Resources("Player 3", Add, 990, ore);
+	Set Resources("Player 4", Add, 990, ore);
+	Set Resources("Player 1", Add, 495, gas);
+	Set Resources("Player 2", Add, 495, gas);
+	Set Resources("Player 3", Add, 495, gas);
+	Set Resources("Player 4", Add, 495, gas);
 	Preserve Trigger();
 }
 
@@ -397,16 +397,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 4);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양55%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양75%
 Actions:
-	Set Resources("Player 1", Add, 303, ore);
-	Set Resources("Player 2", Add, 303, ore);
-	Set Resources("Player 3", Add, 303, ore);
-	Set Resources("Player 4", Add, 303, ore);
-	Set Resources("Player 1", Add, 33, gas);
-	Set Resources("Player 2", Add, 33, gas);
-	Set Resources("Player 3", Add, 33, gas);
-	Set Resources("Player 4", Add, 33, gas);
+	Set Resources("Player 1", Add, 825, ore);
+	Set Resources("Player 2", Add, 825, ore);
+	Set Resources("Player 3", Add, 825, ore);
+	Set Resources("Player 4", Add, 825, ore);
+	Set Resources("Player 1", Add, 413, gas);
+	Set Resources("Player 2", Add, 413, gas);
+	Set Resources("Player 3", Add, 413, gas);
+	Set Resources("Player 4", Add, 413, gas);
 	Preserve Trigger();
 }
 
@@ -414,16 +414,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 5);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라250%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라185%
 Actions:
-	Set Resources("Player 1", Add, 1625, ore);
-	Set Resources("Player 2", Add, 1625, ore);
-	Set Resources("Player 3", Add, 1625, ore);
-	Set Resources("Player 4", Add, 1625, ore);
-	Set Resources("Player 1", Add, 150, gas);
-	Set Resources("Player 2", Add, 150, gas);
-	Set Resources("Player 3", Add, 150, gas);
-	Set Resources("Player 4", Add, 150, gas);
+	Set Resources("Player 1", Add, 2405, ore);
+	Set Resources("Player 2", Add, 2405, ore);
+	Set Resources("Player 3", Add, 2405, ore);
+	Set Resources("Player 4", Add, 2405, ore);
+	Set Resources("Player 1", Add, 1203, gas);
+	Set Resources("Player 2", Add, 1203, gas);
+	Set Resources("Player 3", Add, 1203, gas);
+	Set Resources("Player 4", Add, 1203, gas);
 	Preserve Trigger();
 }
 
@@ -431,16 +431,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 5);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑120%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑115%
 Actions:
-	Set Resources("Player 1", Add, 780, ore);
-	Set Resources("Player 2", Add, 780, ore);
-	Set Resources("Player 3", Add, 780, ore);
-	Set Resources("Player 4", Add, 780, ore);
-	Set Resources("Player 1", Add, 72, gas);
-	Set Resources("Player 2", Add, 72, gas);
-	Set Resources("Player 3", Add, 72, gas);
-	Set Resources("Player 4", Add, 72, gas);
+	Set Resources("Player 1", Add, 1495, ore);
+	Set Resources("Player 2", Add, 1495, ore);
+	Set Resources("Player 3", Add, 1495, ore);
+	Set Resources("Player 4", Add, 1495, ore);
+	Set Resources("Player 1", Add, 748, gas);
+	Set Resources("Player 2", Add, 748, gas);
+	Set Resources("Player 3", Add, 748, gas);
+	Set Resources("Player 4", Add, 748, gas);
 	Preserve Trigger();
 }
 
@@ -448,16 +448,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 5);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두85%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두90%
 Actions:
-	Set Resources("Player 1", Add, 553, ore);
-	Set Resources("Player 2", Add, 553, ore);
-	Set Resources("Player 3", Add, 553, ore);
-	Set Resources("Player 4", Add, 553, ore);
-	Set Resources("Player 1", Add, 51, gas);
-	Set Resources("Player 2", Add, 51, gas);
-	Set Resources("Player 3", Add, 51, gas);
-	Set Resources("Player 4", Add, 51, gas);
+	Set Resources("Player 1", Add, 1170, ore);
+	Set Resources("Player 2", Add, 1170, ore);
+	Set Resources("Player 3", Add, 1170, ore);
+	Set Resources("Player 4", Add, 1170, ore);
+	Set Resources("Player 1", Add, 585, gas);
+	Set Resources("Player 2", Add, 585, gas);
+	Set Resources("Player 3", Add, 585, gas);
+	Set Resources("Player 4", Add, 585, gas);
 	Preserve Trigger();
 }
 
@@ -465,16 +465,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 5);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양55%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양75%
 Actions:
-	Set Resources("Player 1", Add, 358, ore);
-	Set Resources("Player 2", Add, 358, ore);
-	Set Resources("Player 3", Add, 358, ore);
-	Set Resources("Player 4", Add, 358, ore);
-	Set Resources("Player 1", Add, 33, gas);
-	Set Resources("Player 2", Add, 33, gas);
-	Set Resources("Player 3", Add, 33, gas);
-	Set Resources("Player 4", Add, 33, gas);
+	Set Resources("Player 1", Add, 975, ore);
+	Set Resources("Player 2", Add, 975, ore);
+	Set Resources("Player 3", Add, 975, ore);
+	Set Resources("Player 4", Add, 975, ore);
+	Set Resources("Player 1", Add, 488, gas);
+	Set Resources("Player 2", Add, 488, gas);
+	Set Resources("Player 3", Add, 488, gas);
+	Set Resources("Player 4", Add, 488, gas);
 	Preserve Trigger();
 }
 
@@ -482,16 +482,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 6);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라250%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라185%
 Actions:
-	Set Resources("Player 1", Add, 1875, ore);
-	Set Resources("Player 2", Add, 1875, ore);
-	Set Resources("Player 3", Add, 1875, ore);
-	Set Resources("Player 4", Add, 1875, ore);
-	Set Resources("Player 1", Add, 150, gas);
-	Set Resources("Player 2", Add, 150, gas);
-	Set Resources("Player 3", Add, 150, gas);
-	Set Resources("Player 4", Add, 150, gas);
+	Set Resources("Player 1", Add, 2775, ore);
+	Set Resources("Player 2", Add, 2775, ore);
+	Set Resources("Player 3", Add, 2775, ore);
+	Set Resources("Player 4", Add, 2775, ore);
+	Set Resources("Player 1", Add, 1388, gas);
+	Set Resources("Player 2", Add, 1388, gas);
+	Set Resources("Player 3", Add, 1388, gas);
+	Set Resources("Player 4", Add, 1388, gas);
 	Preserve Trigger();
 }
 
@@ -499,16 +499,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 6);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑120%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑115%
 Actions:
-	Set Resources("Player 1", Add, 900, ore);
-	Set Resources("Player 2", Add, 900, ore);
-	Set Resources("Player 3", Add, 900, ore);
-	Set Resources("Player 4", Add, 900, ore);
-	Set Resources("Player 1", Add, 72, gas);
-	Set Resources("Player 2", Add, 72, gas);
-	Set Resources("Player 3", Add, 72, gas);
-	Set Resources("Player 4", Add, 72, gas);
+	Set Resources("Player 1", Add, 1725, ore);
+	Set Resources("Player 2", Add, 1725, ore);
+	Set Resources("Player 3", Add, 1725, ore);
+	Set Resources("Player 4", Add, 1725, ore);
+	Set Resources("Player 1", Add, 863, gas);
+	Set Resources("Player 2", Add, 863, gas);
+	Set Resources("Player 3", Add, 863, gas);
+	Set Resources("Player 4", Add, 863, gas);
 	Preserve Trigger();
 }
 
@@ -516,16 +516,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 6);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두85%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두90%
 Actions:
-	Set Resources("Player 1", Add, 638, ore);
-	Set Resources("Player 2", Add, 638, ore);
-	Set Resources("Player 3", Add, 638, ore);
-	Set Resources("Player 4", Add, 638, ore);
-	Set Resources("Player 1", Add, 51, gas);
-	Set Resources("Player 2", Add, 51, gas);
-	Set Resources("Player 3", Add, 51, gas);
-	Set Resources("Player 4", Add, 51, gas);
+	Set Resources("Player 1", Add, 1350, ore);
+	Set Resources("Player 2", Add, 1350, ore);
+	Set Resources("Player 3", Add, 1350, ore);
+	Set Resources("Player 4", Add, 1350, ore);
+	Set Resources("Player 1", Add, 675, gas);
+	Set Resources("Player 2", Add, 675, gas);
+	Set Resources("Player 3", Add, 675, gas);
+	Set Resources("Player 4", Add, 675, gas);
 	Preserve Trigger();
 }
 
@@ -533,16 +533,16 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 6);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양55%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양75%
 Actions:
-	Set Resources("Player 1", Add, 413, ore);
-	Set Resources("Player 2", Add, 413, ore);
-	Set Resources("Player 3", Add, 413, ore);
-	Set Resources("Player 4", Add, 413, ore);
-	Set Resources("Player 1", Add, 33, gas);
-	Set Resources("Player 2", Add, 33, gas);
-	Set Resources("Player 3", Add, 33, gas);
-	Set Resources("Player 4", Add, 33, gas);
+	Set Resources("Player 1", Add, 1125, ore);
+	Set Resources("Player 2", Add, 1125, ore);
+	Set Resources("Player 3", Add, 1125, ore);
+	Set Resources("Player 4", Add, 1125, ore);
+	Set Resources("Player 1", Add, 563, gas);
+	Set Resources("Player 2", Add, 563, gas);
+	Set Resources("Player 3", Add, 563, gas);
+	Set Resources("Player 4", Add, 563, gas);
 	Preserve Trigger();
 }
 
@@ -623,7 +623,7 @@ Conditions:
 	Deaths("Player 8", "Terran Control Tower", Exactly, 0);
 	Deaths("Player 8", "Terran Comsat Station", At most, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Control Tower", Set To, 4); //보라250% 등급 latch
+	Set Deaths("Player 8", "Terran Control Tower", Set To, 4); //보라185% 등급 latch
 	Preserve Trigger();
 }
 
@@ -635,7 +635,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
 	Deaths("Player 8", "Terran Comsat Station", At most, 6);
 Actions:
-	Set Deaths("Player 8", "Terran Control Tower", Set To, 3); //파랑120% 등급 latch
+	Set Deaths("Player 8", "Terran Control Tower", Set To, 3); //파랑115% 등급 latch
 	Preserve Trigger();
 }
 
@@ -647,7 +647,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
 	Deaths("Player 8", "Terran Comsat Station", At most, 13);
 Actions:
-	Set Deaths("Player 8", "Terran Control Tower", Set To, 2); //연두85% 등급 latch
+	Set Deaths("Player 8", "Terran Control Tower", Set To, 2); //연두90% 등급 latch
 	Preserve Trigger();
 }
 
@@ -658,7 +658,7 @@ Conditions:
 	Deaths("Player 8", "Terran Control Tower", Exactly, 0);
 	Deaths("Player 8", "Terran Comsat Station", At least, 14);
 Actions:
-	Set Deaths("Player 8", "Terran Control Tower", Set To, 1); //하양55% 등급 latch
+	Set Deaths("Player 8", "Terran Control Tower", Set To, 1); //하양75% 등급 latch
 	Preserve Trigger();
 }
 
@@ -668,9 +668,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 1);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라250%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라185%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +1375  <07>가스 +150  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2035  <07>가스 +1018  <06>군락 격분");
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
 }
@@ -679,9 +680,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 1);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑120%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑115%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <0E>값진 물건 발견 - <1F>미네랄 +660  <07>가스 +72  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1265  <07>가스 +633  <06>군락 격분");
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
 }
@@ -690,9 +692,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 1);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두85%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두90%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +468  <07>가스 +51  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +990  <07>가스 +495  <06>군락 격분");
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
 }
@@ -701,9 +704,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 1);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양55%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양75%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +303  <07>가스 +33  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +825  <07>가스 +413  <06>군락 격분");
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
 }
@@ -712,9 +716,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 2);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라250%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라185%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +1625  <07>가스 +150  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2405  <07>가스 +1203  <06>군락 격분");
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
 }
@@ -723,9 +728,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 2);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑120%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑115%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <0E>값진 물건 발견 - <1F>미네랄 +780  <07>가스 +72  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1495  <07>가스 +748  <06>군락 격분");
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
 }
@@ -734,9 +740,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 2);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두85%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두90%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +553  <07>가스 +51  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +1170  <07>가스 +585  <06>군락 격분");
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
 }
@@ -745,9 +752,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 2);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양55%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양75%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +358  <07>가스 +33  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +975  <07>가스 +488  <06>군락 격분");
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
 }
@@ -756,9 +764,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 3);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라250%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라185%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +1875  <07>가스 +150  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2775  <07>가스 +1388  <06>군락 격분");
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
 }
@@ -767,9 +776,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 3);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑120%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑115%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <0E>값진 물건 발견 - <1F>미네랄 +900  <07>가스 +72  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1725  <07>가스 +863  <06>군락 격분");
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
 }
@@ -778,9 +788,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 3);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두85%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두90%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +638  <07>가스 +51  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +1350  <07>가스 +675  <06>군락 격분");
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
 }
@@ -789,9 +800,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 3);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양55%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양75%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +413  <07>가스 +33  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +1125  <07>가스 +563  <06>군락 격분");
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
 }
@@ -800,9 +812,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 4);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라250%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라185%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +1375  <07>가스 +150  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2035  <07>가스 +1018  <06>군락 격분");
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
 }
@@ -811,9 +824,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 4);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑120%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑115%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <0E>값진 물건 발견 - <1F>미네랄 +660  <07>가스 +72  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1265  <07>가스 +633  <06>군락 격분");
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
 }
@@ -822,9 +836,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 4);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두85%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두90%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +468  <07>가스 +51  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +990  <07>가스 +495  <06>군락 격분");
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
 }
@@ -833,9 +848,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 4);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양55%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양75%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +303  <07>가스 +33  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +825  <07>가스 +413  <06>군락 격분");
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
 }
@@ -844,9 +860,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 5);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라250%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라185%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +1625  <07>가스 +150  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2405  <07>가스 +1203  <06>군락 격분");
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
 }
@@ -855,9 +872,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 5);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑120%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑115%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <0E>값진 물건 발견 - <1F>미네랄 +780  <07>가스 +72  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1495  <07>가스 +748  <06>군락 격분");
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
 }
@@ -866,9 +884,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 5);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두85%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두90%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +553  <07>가스 +51  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +1170  <07>가스 +585  <06>군락 격분");
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
 }
@@ -877,9 +896,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 5);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양55%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양75%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +358  <07>가스 +33  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +975  <07>가스 +488  <06>군락 격분");
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
 }
@@ -888,9 +908,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 6);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라250%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4); //보라185%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +1875  <07>가스 +150  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2775  <07>가스 +1388  <06>군락 격분");
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
 }
@@ -899,9 +920,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 6);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑120%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3); //파랑115%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <0E>값진 물건 발견 - <1F>미네랄 +900  <07>가스 +72  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1725  <07>가스 +863  <06>군락 격분");
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
 }
@@ -910,9 +932,10 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 6);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두85%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2); //연두90%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +638  <07>가스 +51  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +1350  <07>가스 +675  <06>군락 격분");
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
 }
@@ -921,12 +944,279 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 6);
-	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양55%
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1); //하양75%
+	Switch("Switch136", Not Set);
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +413  <07>가스 +33  <06>군락 격분");
+	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +1125  <07>가스 +563  <06>군락 격분");
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
 }
+
+// Hive-mind collapse reward display: rewards stay on, colony rage text/pings stay off.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 1);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2035  <07>가스 +1018");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 1);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1265  <07>가스 +633");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 1);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +990  <07>가스 +495");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 1);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +825  <07>가스 +413");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 2);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2405  <07>가스 +1203");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 2);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1495  <07>가스 +748");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 2);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +1170  <07>가스 +585");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 2);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +975  <07>가스 +488");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 3);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2775  <07>가스 +1388");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 3);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1725  <07>가스 +863");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 3);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +1350  <07>가스 +675");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 3);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +1125  <07>가스 +563");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 4);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2035  <07>가스 +1018");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 4);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1265  <07>가스 +633");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 4);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +990  <07>가스 +495");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 4);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +825  <07>가스 +413");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 5);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2405  <07>가스 +1203");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 5);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1495  <07>가스 +748");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 5);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +1170  <07>가스 +585");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 5);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +975  <07>가스 +488");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 6);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 4);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2775  <07>가스 +1388");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 6);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 3);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1725  <07>가스 +863");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 6);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 2);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +1350  <07>가스 +675");
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Physics Lab", Exactly, 6);
+	Deaths("Player 8", "Terran Control Tower", Exactly, 1);
+	Switch("Switch136", Set);
+Actions:
+	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +1125  <07>가스 +563");
+	Preserve Trigger();
+}
+
 
 // 어려움 이상에서는 반대쪽 군락도 함께 격분하므로 보조 핑만 같은 보상 사이클에 추가한다.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -934,6 +1224,7 @@ Conditions:
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 1); //P6 해처리 보상/분노 출력
 	Deaths("Player 8", "Terran Academy", At least, 3); //어려움 이상 : 반대 군락 보조 핑도 표시
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
 Actions:
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
@@ -944,6 +1235,7 @@ Conditions:
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 2); //P6 레어 보상/분노 출력
 	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
 Actions:
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
@@ -954,6 +1246,7 @@ Conditions:
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 3); //P6 하이브 보상/분노 출력
 	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
 Actions:
 	Minimap Ping("P7 Home");
 	Preserve Trigger();
@@ -964,6 +1257,7 @@ Conditions:
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 4); //P7 해처리 보상/분노 출력
 	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
 Actions:
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
@@ -974,6 +1268,7 @@ Conditions:
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 5); //P7 레어 보상/분노 출력
 	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
 Actions:
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
@@ -984,6 +1279,7 @@ Conditions:
 	Deaths("Player 8", "Terran Physics Lab", Exactly, 6); //P7 하이브 보상/분노 출력
 	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch136", Not Set);
 Actions:
 	Minimap Ping("P6 Home");
 	Preserve Trigger();
@@ -995,9 +1291,9 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 해처리 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라250%
+	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라185%
 Actions:
-	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +1375  <07>가스 +150");
+	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2035  <07>가스 +1018");
 	Preserve Trigger();
 }
 
@@ -1008,9 +1304,9 @@ Conditions:
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 해처리 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
-	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑115%
 Actions:
-	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <0E>값진 물건 발견 - <1F>미네랄 +660  <07>가스 +72");
+	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1265  <07>가스 +633");
 	Preserve Trigger();
 }
 
@@ -1021,9 +1317,9 @@ Conditions:
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 해처리 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
-	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두90%
 Actions:
-	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +468  <07>가스 +51");
+	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +990  <07>가스 +495");
 	Preserve Trigger();
 }
 
@@ -1033,9 +1329,9 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 해처리 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양55%
+	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양75%
 Actions:
-	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +303  <07>가스 +33");
+	Display Text Message(Always Display, "<04>[★] 갈색 저그 해처리 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +825  <07>가스 +413");
 	Preserve Trigger();
 }
 
@@ -1046,9 +1342,10 @@ Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2376);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 2376);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1059,9 +1356,9 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 레어 보상만 직접 표시
 	Deaths("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라250%
+	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라185%
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +1625  <07>가스 +150");
+	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2405  <07>가스 +1203");
 	Preserve Trigger();
 }
 
@@ -1072,9 +1369,9 @@ Conditions:
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 레어 보상만 직접 표시
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
-	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑115%
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <0E>값진 물건 발견 - <1F>미네랄 +780  <07>가스 +72");
+	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1495  <07>가스 +748");
 	Preserve Trigger();
 }
 
@@ -1085,9 +1382,9 @@ Conditions:
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 레어 보상만 직접 표시
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
-	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두90%
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +553  <07>가스 +51");
+	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +1170  <07>가스 +585");
 	Preserve Trigger();
 }
 
@@ -1097,9 +1394,9 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 레어 보상만 직접 표시
 	Deaths("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양55%
+	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양75%
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +358  <07>가스 +33");
+	Display Text Message(Always Display, "<04>[★★] 갈색 저그 레어 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +975  <07>가스 +488");
 	Preserve Trigger();
 }
 
@@ -1110,9 +1407,10 @@ Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4455);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 4455);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1124,10 +1422,11 @@ Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4590);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2295);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 4590);
+	Set Deaths("Player 8", "Terran Bunker", Add, 2295);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1139,9 +1438,10 @@ Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2376);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 2376);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1152,9 +1452,9 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 하이브 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라250%
+	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라185%
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +1875  <07>가스 +150");
+	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2775  <07>가스 +1388");
 	Preserve Trigger();
 }
 
@@ -1165,9 +1465,9 @@ Conditions:
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 하이브 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
-	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑115%
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <0E>값진 물건 발견 - <1F>미네랄 +900  <07>가스 +72");
+	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1725  <07>가스 +863");
 	Preserve Trigger();
 }
 
@@ -1178,9 +1478,9 @@ Conditions:
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 하이브 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
-	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두90%
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +638  <07>가스 +51");
+	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +1350  <07>가스 +675");
 	Preserve Trigger();
 }
 
@@ -1190,9 +1490,9 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch32", Set); //P7 군락 제거 후 : 가속 없이 지급되는 P6 하이브 보상만 직접 표시
 	Deaths("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양55%
+	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양75%
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +413  <07>가스 +33");
+	Display Text Message(Always Display, "<04>[★★★] 갈색 저그 하이브 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +1125  <07>가스 +563");
 	Preserve Trigger();
 }
 
@@ -1203,9 +1503,10 @@ Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4455);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 4455);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1217,10 +1518,11 @@ Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4590);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2295);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 4590);
+	Set Deaths("Player 8", "Terran Bunker", Add, 2295);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1232,9 +1534,10 @@ Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2376);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 2376);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1246,9 +1549,10 @@ Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4455);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 4455);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1260,10 +1564,11 @@ Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 4590);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2295);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 4590);
+	Set Deaths("Player 8", "Terran Bunker", Add, 2295);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1274,9 +1579,9 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 해처리 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라250%
+	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라185%
 Actions:
-	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +1375  <07>가스 +150");
+	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2035  <07>가스 +1018");
 	Preserve Trigger();
 }
 
@@ -1287,9 +1592,9 @@ Conditions:
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 해처리 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
-	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑115%
 Actions:
-	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <0E>값진 물건 발견 - <1F>미네랄 +660  <07>가스 +72");
+	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1265  <07>가스 +633");
 	Preserve Trigger();
 }
 
@@ -1300,9 +1605,9 @@ Conditions:
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 해처리 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
-	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두90%
 Actions:
-	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +468  <07>가스 +51");
+	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +990  <07>가스 +495");
 	Preserve Trigger();
 }
 
@@ -1312,9 +1617,9 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 해처리 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양55%
+	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양75%
 Actions:
-	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +303  <07>가스 +33");
+	Display Text Message(Always Display, "<04>[★] 하얀색 저그 해처리 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +825  <07>가스 +413");
 	Preserve Trigger();
 }
 
@@ -1325,9 +1630,10 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2376);
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 2376);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1339,9 +1645,10 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4455);
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 4455);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1353,10 +1660,11 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4590);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2295);
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 4590);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 2295);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1367,9 +1675,9 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 레어 보상만 직접 표시
 	Deaths("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라250%
+	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라185%
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +1625  <07>가스 +150");
+	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2405  <07>가스 +1203");
 	Preserve Trigger();
 }
 
@@ -1380,9 +1688,9 @@ Conditions:
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 레어 보상만 직접 표시
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
-	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑115%
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <0E>값진 물건 발견 - <1F>미네랄 +780  <07>가스 +72");
+	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1495  <07>가스 +748");
 	Preserve Trigger();
 }
 
@@ -1393,9 +1701,9 @@ Conditions:
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 레어 보상만 직접 표시
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
-	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두90%
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +553  <07>가스 +51");
+	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +1170  <07>가스 +585");
 	Preserve Trigger();
 }
 
@@ -1405,9 +1713,9 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 레어 보상만 직접 표시
 	Deaths("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양55%
+	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양75%
 Actions:
-	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +358  <07>가스 +33");
+	Display Text Message(Always Display, "<04>[★★] 하얀색 저그 레어 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +975  <07>가스 +488");
 	Preserve Trigger();
 }
 
@@ -1418,9 +1726,10 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2376);
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 2376);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1432,9 +1741,10 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4455);
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 4455);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1446,10 +1756,11 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4590);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2295);
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 4590);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 2295);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1460,9 +1771,9 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 하이브 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라250%
+	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라185%
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +1875  <07>가스 +150");
+	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <10>진귀한 보물 확보 - <1F>미네랄 +2775  <07>가스 +1388");
 	Preserve Trigger();
 }
 
@@ -1473,9 +1784,9 @@ Conditions:
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 하이브 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
-	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑115%
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <0E>값진 물건 발견 - <1F>미네랄 +900  <07>가스 +72");
+	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <0E>값진 물건 발견 - <1F>미네랄 +1725  <07>가스 +863");
 	Preserve Trigger();
 }
 
@@ -1486,9 +1797,9 @@ Conditions:
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 하이브 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
-	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두90%
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +638  <07>가스 +51");
+	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <07>쓸 만한 물건 발견 - <1F>미네랄 +1350  <07>가스 +675");
 	Preserve Trigger();
 }
 
@@ -1498,9 +1809,9 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch31", Set); //P6 군락 제거 후 : 가속 없이 지급되는 P7 하이브 보상만 직접 표시
 	Deaths("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양55%
+	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양75%
 Actions:
-	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +413  <07>가스 +33");
+	Display Text Message(Always Display, "<04>[★★★] 하얀색 저그 하이브 파괴! <04>자잘한 물건 회수 - <1F>미네랄 +1125  <07>가스 +563");
 	Preserve Trigger();
 }
 
@@ -1511,9 +1822,10 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 2376);
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 2376);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1525,9 +1837,10 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4455);
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 4455);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1539,10 +1852,92 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 4590);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 2295);
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 4590);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 2295);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+//-----------------------------------------------------------------//
+//  Hive-mind collapse no-rage consumption.
+//
+//  After Switch136, Hatchery/Lair/Hive deaths still feed the reward queue
+//  above, but these triggers consume the death counters without adding main
+//  assault cooldown. This keeps rewards and final-scream tallies while turning
+//  off colony rage escalation.
+//-----------------------------------------------------------------//
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch136", Set);
+	Deaths("Player 6", "Zerg Hatchery", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch136", Set);
+	Deaths("Player 6", "Zerg Lair", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch136", Set);
+	Deaths("Player 6", "Zerg Hive", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch136", Set);
+	Deaths("Player 7", "Zerg Hatchery", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch136", Set);
+	Deaths("Player 7", "Zerg Lair", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Academy", At least, 1);
+	Switch("Switch136", Set);
+	Deaths("Player 7", "Zerg Hive", At least, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1558,10 +1953,11 @@ Conditions:
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 5130);
+	Set Deaths("Player 8", "Terran Bunker", Add, 5130);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1573,10 +1969,11 @@ Conditions:
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 5130);
+	Set Deaths("Player 8", "Terran Bunker", Add, 5130);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1588,10 +1985,11 @@ Conditions:
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Switch("Switch32", Not Set);
 	Switch("Switch158", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 5130);
+	Set Deaths("Player 8", "Terran Bunker", Add, 5130);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1603,10 +2001,11 @@ Conditions:
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 5130);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 5130);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1618,10 +2017,11 @@ Conditions:
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 5130);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 5130);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1633,10 +2033,11 @@ Conditions:
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Switch("Switch31", Not Set);
 	Switch("Switch159", Not Set);
+	Switch("Switch136", Not Set);
 Actions:
-	Set Deaths("Player 8", "Zerg Hydralisk", Add, 5130);
-	Set Deaths("Player 8", "Zerg Zergling", Add, 5130);
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
+	Set Deaths("Player 8", "Terran Bunker", Add, 5130);
+	Set Deaths("Player 8", "Protoss Photon Cannon", Add, 5130);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1662,17 +2063,17 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch32", Set);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라250%
+	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라185%
 Actions:
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 1375, ore);
-	Set Resources("Player 2", Add, 1375, ore);
-	Set Resources("Player 3", Add, 1375, ore);
-	Set Resources("Player 4", Add, 1375, ore);
-	Set Resources("Player 1", Add, 150, gas);
-	Set Resources("Player 2", Add, 150, gas);
-	Set Resources("Player 3", Add, 150, gas);
-	Set Resources("Player 4", Add, 150, gas);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Resources("Player 1", Add, 2035, ore);
+	Set Resources("Player 2", Add, 2035, ore);
+	Set Resources("Player 3", Add, 2035, ore);
+	Set Resources("Player 4", Add, 2035, ore);
+	Set Resources("Player 1", Add, 1018, gas);
+	Set Resources("Player 2", Add, 1018, gas);
+	Set Resources("Player 3", Add, 1018, gas);
+	Set Resources("Player 4", Add, 1018, gas);
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1684,17 +2085,17 @@ Conditions:
 	Switch("Switch32", Set);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
-	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑115%
 Actions:
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 660, ore);
-	Set Resources("Player 2", Add, 660, ore);
-	Set Resources("Player 3", Add, 660, ore);
-	Set Resources("Player 4", Add, 660, ore);
-	Set Resources("Player 1", Add, 72, gas);
-	Set Resources("Player 2", Add, 72, gas);
-	Set Resources("Player 3", Add, 72, gas);
-	Set Resources("Player 4", Add, 72, gas);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Resources("Player 1", Add, 1265, ore);
+	Set Resources("Player 2", Add, 1265, ore);
+	Set Resources("Player 3", Add, 1265, ore);
+	Set Resources("Player 4", Add, 1265, ore);
+	Set Resources("Player 1", Add, 633, gas);
+	Set Resources("Player 2", Add, 633, gas);
+	Set Resources("Player 3", Add, 633, gas);
+	Set Resources("Player 4", Add, 633, gas);
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1706,17 +2107,17 @@ Conditions:
 	Switch("Switch32", Set);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
-	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두90%
 Actions:
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 468, ore);
-	Set Resources("Player 2", Add, 468, ore);
-	Set Resources("Player 3", Add, 468, ore);
-	Set Resources("Player 4", Add, 468, ore);
-	Set Resources("Player 1", Add, 51, gas);
-	Set Resources("Player 2", Add, 51, gas);
-	Set Resources("Player 3", Add, 51, gas);
-	Set Resources("Player 4", Add, 51, gas);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Resources("Player 1", Add, 990, ore);
+	Set Resources("Player 2", Add, 990, ore);
+	Set Resources("Player 3", Add, 990, ore);
+	Set Resources("Player 4", Add, 990, ore);
+	Set Resources("Player 1", Add, 495, gas);
+	Set Resources("Player 2", Add, 495, gas);
+	Set Resources("Player 3", Add, 495, gas);
+	Set Resources("Player 4", Add, 495, gas);
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1727,17 +2128,17 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch32", Set);
 	Deaths("Player 6", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양55%
+	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양75%
 Actions:
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 303, ore);
-	Set Resources("Player 2", Add, 303, ore);
-	Set Resources("Player 3", Add, 303, ore);
-	Set Resources("Player 4", Add, 303, ore);
-	Set Resources("Player 1", Add, 33, gas);
-	Set Resources("Player 2", Add, 33, gas);
-	Set Resources("Player 3", Add, 33, gas);
-	Set Resources("Player 4", Add, 33, gas);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Resources("Player 1", Add, 825, ore);
+	Set Resources("Player 2", Add, 825, ore);
+	Set Resources("Player 3", Add, 825, ore);
+	Set Resources("Player 4", Add, 825, ore);
+	Set Resources("Player 1", Add, 413, gas);
+	Set Resources("Player 2", Add, 413, gas);
+	Set Resources("Player 3", Add, 413, gas);
+	Set Resources("Player 4", Add, 413, gas);
 	Set Deaths("Player 6", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1749,17 +2150,17 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch32", Set);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라250%
+	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라185%
 Actions:
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 1625, ore);
-	Set Resources("Player 2", Add, 1625, ore);
-	Set Resources("Player 3", Add, 1625, ore);
-	Set Resources("Player 4", Add, 1625, ore);
-	Set Resources("Player 1", Add, 150, gas);
-	Set Resources("Player 2", Add, 150, gas);
-	Set Resources("Player 3", Add, 150, gas);
-	Set Resources("Player 4", Add, 150, gas);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Resources("Player 1", Add, 2405, ore);
+	Set Resources("Player 2", Add, 2405, ore);
+	Set Resources("Player 3", Add, 2405, ore);
+	Set Resources("Player 4", Add, 2405, ore);
+	Set Resources("Player 1", Add, 1203, gas);
+	Set Resources("Player 2", Add, 1203, gas);
+	Set Resources("Player 3", Add, 1203, gas);
+	Set Resources("Player 4", Add, 1203, gas);
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1771,17 +2172,17 @@ Conditions:
 	Switch("Switch32", Set);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
-	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑115%
 Actions:
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 780, ore);
-	Set Resources("Player 2", Add, 780, ore);
-	Set Resources("Player 3", Add, 780, ore);
-	Set Resources("Player 4", Add, 780, ore);
-	Set Resources("Player 1", Add, 72, gas);
-	Set Resources("Player 2", Add, 72, gas);
-	Set Resources("Player 3", Add, 72, gas);
-	Set Resources("Player 4", Add, 72, gas);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Resources("Player 1", Add, 1495, ore);
+	Set Resources("Player 2", Add, 1495, ore);
+	Set Resources("Player 3", Add, 1495, ore);
+	Set Resources("Player 4", Add, 1495, ore);
+	Set Resources("Player 1", Add, 748, gas);
+	Set Resources("Player 2", Add, 748, gas);
+	Set Resources("Player 3", Add, 748, gas);
+	Set Resources("Player 4", Add, 748, gas);
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1793,17 +2194,17 @@ Conditions:
 	Switch("Switch32", Set);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
-	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두90%
 Actions:
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 553, ore);
-	Set Resources("Player 2", Add, 553, ore);
-	Set Resources("Player 3", Add, 553, ore);
-	Set Resources("Player 4", Add, 553, ore);
-	Set Resources("Player 1", Add, 51, gas);
-	Set Resources("Player 2", Add, 51, gas);
-	Set Resources("Player 3", Add, 51, gas);
-	Set Resources("Player 4", Add, 51, gas);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Resources("Player 1", Add, 1170, ore);
+	Set Resources("Player 2", Add, 1170, ore);
+	Set Resources("Player 3", Add, 1170, ore);
+	Set Resources("Player 4", Add, 1170, ore);
+	Set Resources("Player 1", Add, 585, gas);
+	Set Resources("Player 2", Add, 585, gas);
+	Set Resources("Player 3", Add, 585, gas);
+	Set Resources("Player 4", Add, 585, gas);
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1814,17 +2215,17 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch32", Set);
 	Deaths("Player 6", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양55%
+	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양75%
 Actions:
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 358, ore);
-	Set Resources("Player 2", Add, 358, ore);
-	Set Resources("Player 3", Add, 358, ore);
-	Set Resources("Player 4", Add, 358, ore);
-	Set Resources("Player 1", Add, 33, gas);
-	Set Resources("Player 2", Add, 33, gas);
-	Set Resources("Player 3", Add, 33, gas);
-	Set Resources("Player 4", Add, 33, gas);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Resources("Player 1", Add, 975, ore);
+	Set Resources("Player 2", Add, 975, ore);
+	Set Resources("Player 3", Add, 975, ore);
+	Set Resources("Player 4", Add, 975, ore);
+	Set Resources("Player 1", Add, 488, gas);
+	Set Resources("Player 2", Add, 488, gas);
+	Set Resources("Player 3", Add, 488, gas);
+	Set Resources("Player 4", Add, 488, gas);
 	Set Deaths("Player 6", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1836,17 +2237,17 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch32", Set);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라250%
+	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라185%
 Actions:
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 1875, ore);
-	Set Resources("Player 2", Add, 1875, ore);
-	Set Resources("Player 3", Add, 1875, ore);
-	Set Resources("Player 4", Add, 1875, ore);
-	Set Resources("Player 1", Add, 150, gas);
-	Set Resources("Player 2", Add, 150, gas);
-	Set Resources("Player 3", Add, 150, gas);
-	Set Resources("Player 4", Add, 150, gas);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Resources("Player 1", Add, 2775, ore);
+	Set Resources("Player 2", Add, 2775, ore);
+	Set Resources("Player 3", Add, 2775, ore);
+	Set Resources("Player 4", Add, 2775, ore);
+	Set Resources("Player 1", Add, 1388, gas);
+	Set Resources("Player 2", Add, 1388, gas);
+	Set Resources("Player 3", Add, 1388, gas);
+	Set Resources("Player 4", Add, 1388, gas);
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1858,17 +2259,17 @@ Conditions:
 	Switch("Switch32", Set);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
-	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑115%
 Actions:
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 900, ore);
-	Set Resources("Player 2", Add, 900, ore);
-	Set Resources("Player 3", Add, 900, ore);
-	Set Resources("Player 4", Add, 900, ore);
-	Set Resources("Player 1", Add, 72, gas);
-	Set Resources("Player 2", Add, 72, gas);
-	Set Resources("Player 3", Add, 72, gas);
-	Set Resources("Player 4", Add, 72, gas);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Resources("Player 1", Add, 1725, ore);
+	Set Resources("Player 2", Add, 1725, ore);
+	Set Resources("Player 3", Add, 1725, ore);
+	Set Resources("Player 4", Add, 1725, ore);
+	Set Resources("Player 1", Add, 863, gas);
+	Set Resources("Player 2", Add, 863, gas);
+	Set Resources("Player 3", Add, 863, gas);
+	Set Resources("Player 4", Add, 863, gas);
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1880,17 +2281,17 @@ Conditions:
 	Switch("Switch32", Set);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
-	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두90%
 Actions:
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 638, ore);
-	Set Resources("Player 2", Add, 638, ore);
-	Set Resources("Player 3", Add, 638, ore);
-	Set Resources("Player 4", Add, 638, ore);
-	Set Resources("Player 1", Add, 51, gas);
-	Set Resources("Player 2", Add, 51, gas);
-	Set Resources("Player 3", Add, 51, gas);
-	Set Resources("Player 4", Add, 51, gas);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Resources("Player 1", Add, 1350, ore);
+	Set Resources("Player 2", Add, 1350, ore);
+	Set Resources("Player 3", Add, 1350, ore);
+	Set Resources("Player 4", Add, 1350, ore);
+	Set Resources("Player 1", Add, 675, gas);
+	Set Resources("Player 2", Add, 675, gas);
+	Set Resources("Player 3", Add, 675, gas);
+	Set Resources("Player 4", Add, 675, gas);
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1901,17 +2302,17 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch32", Set);
 	Deaths("Player 6", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양55%
+	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양75%
 Actions:
-	Set Deaths("Player 8", "Zerg Sunken Colony", Add, 1);
-	Set Resources("Player 1", Add, 413, ore);
-	Set Resources("Player 2", Add, 413, ore);
-	Set Resources("Player 3", Add, 413, ore);
-	Set Resources("Player 4", Add, 413, ore);
-	Set Resources("Player 1", Add, 33, gas);
-	Set Resources("Player 2", Add, 33, gas);
-	Set Resources("Player 3", Add, 33, gas);
-	Set Resources("Player 4", Add, 33, gas);
+	Set Deaths("Player 8", "Protoss Stargate", Add, 1);
+	Set Resources("Player 1", Add, 1125, ore);
+	Set Resources("Player 2", Add, 1125, ore);
+	Set Resources("Player 3", Add, 1125, ore);
+	Set Resources("Player 4", Add, 1125, ore);
+	Set Resources("Player 1", Add, 563, gas);
+	Set Resources("Player 2", Add, 563, gas);
+	Set Resources("Player 3", Add, 563, gas);
+	Set Resources("Player 4", Add, 563, gas);
 	Set Deaths("Player 6", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1923,17 +2324,17 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch31", Set);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라250%
+	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라185%
 Actions:
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 1375, ore);
-	Set Resources("Player 2", Add, 1375, ore);
-	Set Resources("Player 3", Add, 1375, ore);
-	Set Resources("Player 4", Add, 1375, ore);
-	Set Resources("Player 1", Add, 150, gas);
-	Set Resources("Player 2", Add, 150, gas);
-	Set Resources("Player 3", Add, 150, gas);
-	Set Resources("Player 4", Add, 150, gas);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Resources("Player 1", Add, 2035, ore);
+	Set Resources("Player 2", Add, 2035, ore);
+	Set Resources("Player 3", Add, 2035, ore);
+	Set Resources("Player 4", Add, 2035, ore);
+	Set Resources("Player 1", Add, 1018, gas);
+	Set Resources("Player 2", Add, 1018, gas);
+	Set Resources("Player 3", Add, 1018, gas);
+	Set Resources("Player 4", Add, 1018, gas);
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1945,17 +2346,17 @@ Conditions:
 	Switch("Switch31", Set);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
-	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑115%
 Actions:
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 660, ore);
-	Set Resources("Player 2", Add, 660, ore);
-	Set Resources("Player 3", Add, 660, ore);
-	Set Resources("Player 4", Add, 660, ore);
-	Set Resources("Player 1", Add, 72, gas);
-	Set Resources("Player 2", Add, 72, gas);
-	Set Resources("Player 3", Add, 72, gas);
-	Set Resources("Player 4", Add, 72, gas);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Resources("Player 1", Add, 1265, ore);
+	Set Resources("Player 2", Add, 1265, ore);
+	Set Resources("Player 3", Add, 1265, ore);
+	Set Resources("Player 4", Add, 1265, ore);
+	Set Resources("Player 1", Add, 633, gas);
+	Set Resources("Player 2", Add, 633, gas);
+	Set Resources("Player 3", Add, 633, gas);
+	Set Resources("Player 4", Add, 633, gas);
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1967,17 +2368,17 @@ Conditions:
 	Switch("Switch31", Set);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
-	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두90%
 Actions:
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 468, ore);
-	Set Resources("Player 2", Add, 468, ore);
-	Set Resources("Player 3", Add, 468, ore);
-	Set Resources("Player 4", Add, 468, ore);
-	Set Resources("Player 1", Add, 51, gas);
-	Set Resources("Player 2", Add, 51, gas);
-	Set Resources("Player 3", Add, 51, gas);
-	Set Resources("Player 4", Add, 51, gas);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Resources("Player 1", Add, 990, ore);
+	Set Resources("Player 2", Add, 990, ore);
+	Set Resources("Player 3", Add, 990, ore);
+	Set Resources("Player 4", Add, 990, ore);
+	Set Resources("Player 1", Add, 495, gas);
+	Set Resources("Player 2", Add, 495, gas);
+	Set Resources("Player 3", Add, 495, gas);
+	Set Resources("Player 4", Add, 495, gas);
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -1988,17 +2389,17 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch31", Set);
 	Deaths("Player 7", "Zerg Hatchery", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양55%
+	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양75%
 Actions:
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 303, ore);
-	Set Resources("Player 2", Add, 303, ore);
-	Set Resources("Player 3", Add, 303, ore);
-	Set Resources("Player 4", Add, 303, ore);
-	Set Resources("Player 1", Add, 33, gas);
-	Set Resources("Player 2", Add, 33, gas);
-	Set Resources("Player 3", Add, 33, gas);
-	Set Resources("Player 4", Add, 33, gas);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Resources("Player 1", Add, 825, ore);
+	Set Resources("Player 2", Add, 825, ore);
+	Set Resources("Player 3", Add, 825, ore);
+	Set Resources("Player 4", Add, 825, ore);
+	Set Resources("Player 1", Add, 413, gas);
+	Set Resources("Player 2", Add, 413, gas);
+	Set Resources("Player 3", Add, 413, gas);
+	Set Resources("Player 4", Add, 413, gas);
 	Set Deaths("Player 7", "Zerg Hatchery", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2010,17 +2411,17 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch31", Set);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라250%
+	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라185%
 Actions:
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 1625, ore);
-	Set Resources("Player 2", Add, 1625, ore);
-	Set Resources("Player 3", Add, 1625, ore);
-	Set Resources("Player 4", Add, 1625, ore);
-	Set Resources("Player 1", Add, 150, gas);
-	Set Resources("Player 2", Add, 150, gas);
-	Set Resources("Player 3", Add, 150, gas);
-	Set Resources("Player 4", Add, 150, gas);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Resources("Player 1", Add, 2405, ore);
+	Set Resources("Player 2", Add, 2405, ore);
+	Set Resources("Player 3", Add, 2405, ore);
+	Set Resources("Player 4", Add, 2405, ore);
+	Set Resources("Player 1", Add, 1203, gas);
+	Set Resources("Player 2", Add, 1203, gas);
+	Set Resources("Player 3", Add, 1203, gas);
+	Set Resources("Player 4", Add, 1203, gas);
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2032,17 +2433,17 @@ Conditions:
 	Switch("Switch31", Set);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
-	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑115%
 Actions:
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 780, ore);
-	Set Resources("Player 2", Add, 780, ore);
-	Set Resources("Player 3", Add, 780, ore);
-	Set Resources("Player 4", Add, 780, ore);
-	Set Resources("Player 1", Add, 72, gas);
-	Set Resources("Player 2", Add, 72, gas);
-	Set Resources("Player 3", Add, 72, gas);
-	Set Resources("Player 4", Add, 72, gas);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Resources("Player 1", Add, 1495, ore);
+	Set Resources("Player 2", Add, 1495, ore);
+	Set Resources("Player 3", Add, 1495, ore);
+	Set Resources("Player 4", Add, 1495, ore);
+	Set Resources("Player 1", Add, 748, gas);
+	Set Resources("Player 2", Add, 748, gas);
+	Set Resources("Player 3", Add, 748, gas);
+	Set Resources("Player 4", Add, 748, gas);
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2054,17 +2455,17 @@ Conditions:
 	Switch("Switch31", Set);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
-	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두90%
 Actions:
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 553, ore);
-	Set Resources("Player 2", Add, 553, ore);
-	Set Resources("Player 3", Add, 553, ore);
-	Set Resources("Player 4", Add, 553, ore);
-	Set Resources("Player 1", Add, 51, gas);
-	Set Resources("Player 2", Add, 51, gas);
-	Set Resources("Player 3", Add, 51, gas);
-	Set Resources("Player 4", Add, 51, gas);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Resources("Player 1", Add, 1170, ore);
+	Set Resources("Player 2", Add, 1170, ore);
+	Set Resources("Player 3", Add, 1170, ore);
+	Set Resources("Player 4", Add, 1170, ore);
+	Set Resources("Player 1", Add, 585, gas);
+	Set Resources("Player 2", Add, 585, gas);
+	Set Resources("Player 3", Add, 585, gas);
+	Set Resources("Player 4", Add, 585, gas);
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2075,17 +2476,17 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch31", Set);
 	Deaths("Player 7", "Zerg Lair", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양55%
+	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양75%
 Actions:
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 358, ore);
-	Set Resources("Player 2", Add, 358, ore);
-	Set Resources("Player 3", Add, 358, ore);
-	Set Resources("Player 4", Add, 358, ore);
-	Set Resources("Player 1", Add, 33, gas);
-	Set Resources("Player 2", Add, 33, gas);
-	Set Resources("Player 3", Add, 33, gas);
-	Set Resources("Player 4", Add, 33, gas);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Resources("Player 1", Add, 975, ore);
+	Set Resources("Player 2", Add, 975, ore);
+	Set Resources("Player 3", Add, 975, ore);
+	Set Resources("Player 4", Add, 975, ore);
+	Set Resources("Player 1", Add, 488, gas);
+	Set Resources("Player 2", Add, 488, gas);
+	Set Resources("Player 3", Add, 488, gas);
+	Set Resources("Player 4", Add, 488, gas);
 	Set Deaths("Player 7", "Zerg Lair", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2097,17 +2498,17 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch31", Set);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라250%
+	Deaths("Player 8", "Terran Comsat Station", At most, 1); //보라185%
 Actions:
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 1875, ore);
-	Set Resources("Player 2", Add, 1875, ore);
-	Set Resources("Player 3", Add, 1875, ore);
-	Set Resources("Player 4", Add, 1875, ore);
-	Set Resources("Player 1", Add, 150, gas);
-	Set Resources("Player 2", Add, 150, gas);
-	Set Resources("Player 3", Add, 150, gas);
-	Set Resources("Player 4", Add, 150, gas);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Resources("Player 1", Add, 2775, ore);
+	Set Resources("Player 2", Add, 2775, ore);
+	Set Resources("Player 3", Add, 2775, ore);
+	Set Resources("Player 4", Add, 2775, ore);
+	Set Resources("Player 1", Add, 1388, gas);
+	Set Resources("Player 2", Add, 1388, gas);
+	Set Resources("Player 3", Add, 1388, gas);
+	Set Resources("Player 4", Add, 1388, gas);
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2119,17 +2520,17 @@ Conditions:
 	Switch("Switch31", Set);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);
-	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑120%
+	Deaths("Player 8", "Terran Comsat Station", At most, 6); //파랑115%
 Actions:
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 900, ore);
-	Set Resources("Player 2", Add, 900, ore);
-	Set Resources("Player 3", Add, 900, ore);
-	Set Resources("Player 4", Add, 900, ore);
-	Set Resources("Player 1", Add, 72, gas);
-	Set Resources("Player 2", Add, 72, gas);
-	Set Resources("Player 3", Add, 72, gas);
-	Set Resources("Player 4", Add, 72, gas);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Resources("Player 1", Add, 1725, ore);
+	Set Resources("Player 2", Add, 1725, ore);
+	Set Resources("Player 3", Add, 1725, ore);
+	Set Resources("Player 4", Add, 1725, ore);
+	Set Resources("Player 1", Add, 863, gas);
+	Set Resources("Player 2", Add, 863, gas);
+	Set Resources("Player 3", Add, 863, gas);
+	Set Resources("Player 4", Add, 863, gas);
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2141,17 +2542,17 @@ Conditions:
 	Switch("Switch31", Set);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);
-	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두85%
+	Deaths("Player 8", "Terran Comsat Station", At most, 13); //연두90%
 Actions:
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 638, ore);
-	Set Resources("Player 2", Add, 638, ore);
-	Set Resources("Player 3", Add, 638, ore);
-	Set Resources("Player 4", Add, 638, ore);
-	Set Resources("Player 1", Add, 51, gas);
-	Set Resources("Player 2", Add, 51, gas);
-	Set Resources("Player 3", Add, 51, gas);
-	Set Resources("Player 4", Add, 51, gas);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Resources("Player 1", Add, 1350, ore);
+	Set Resources("Player 2", Add, 1350, ore);
+	Set Resources("Player 3", Add, 1350, ore);
+	Set Resources("Player 4", Add, 1350, ore);
+	Set Resources("Player 1", Add, 675, gas);
+	Set Resources("Player 2", Add, 675, gas);
+	Set Resources("Player 3", Add, 675, gas);
+	Set Resources("Player 4", Add, 675, gas);
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }
@@ -2162,17 +2563,17 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 1);
 	Switch("Switch31", Set);
 	Deaths("Player 7", "Zerg Hive", At least, 1);
-	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양55%
+	Deaths("Player 8", "Terran Comsat Station", At least, 14); //하양75%
 Actions:
-	Set Deaths("Player 8", "Zerg Spore Colony", Add, 1);
-	Set Resources("Player 1", Add, 413, ore);
-	Set Resources("Player 2", Add, 413, ore);
-	Set Resources("Player 3", Add, 413, ore);
-	Set Resources("Player 4", Add, 413, ore);
-	Set Resources("Player 1", Add, 33, gas);
-	Set Resources("Player 2", Add, 33, gas);
-	Set Resources("Player 3", Add, 33, gas);
-	Set Resources("Player 4", Add, 33, gas);
+	Set Deaths("Player 8", "Protoss Fleet Beacon", Add, 1);
+	Set Resources("Player 1", Add, 1125, ore);
+	Set Resources("Player 2", Add, 1125, ore);
+	Set Resources("Player 3", Add, 1125, ore);
+	Set Resources("Player 4", Add, 1125, ore);
+	Set Resources("Player 1", Add, 563, gas);
+	Set Resources("Player 2", Add, 563, gas);
+	Set Resources("Player 3", Add, 563, gas);
+	Set Resources("Player 4", Add, 563, gas);
 	Set Deaths("Player 7", "Zerg Hive", Subtract, 1);
 	Preserve Trigger();
 }

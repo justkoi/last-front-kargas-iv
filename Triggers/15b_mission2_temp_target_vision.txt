@@ -1,0 +1,75 @@
+//-----------------------------------------------------------------//
+//  Mission 2 temporary target vision.
+//  AI starts at Vulture 756; players gain P6/P7 vision 60s later
+//  and lose it after another 60s unless that colony has collapsed.
+//-----------------------------------------------------------------//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 1476);
+	Deaths("Player 8", "Terran Vulture", At most, 1500);
+Actions:
+	Run AI Script("+Vi5"); //P6 temporary target vision : current player sees the brown Zerg colony
+	Run AI Script("+Vi6"); //P7 temporary target vision : current player sees the white Zerg colony
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2196);
+	Deaths("Player 8", "Terran Vulture", At most, 2220);
+	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At least, 1);
+Actions:
+	Run AI Script("-Vi5"); //P6 temporary target vision end : keep vision only if the colony has collapsed
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2196);
+	Deaths("Player 8", "Terran Vulture", At most, 2220);
+	Bring("Player 6", "Zerg Lair", "P6 MainBase", At least, 1);
+Actions:
+	Run AI Script("-Vi5"); //P6 temporary target vision end : Lair still alive, so hide it again
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2196);
+	Deaths("Player 8", "Terran Vulture", At most, 2220);
+	Bring("Player 6", "Zerg Hive", "P6 MainBase", At least, 1);
+Actions:
+	Run AI Script("-Vi5"); //P6 temporary target vision end : Hive still alive, so hide it again
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2196);
+	Deaths("Player 8", "Terran Vulture", At most, 2220);
+	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At least, 1);
+Actions:
+	Run AI Script("-Vi6"); //P7 temporary target vision end : keep vision only if the colony has collapsed
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2196);
+	Deaths("Player 8", "Terran Vulture", At most, 2220);
+	Bring("Player 7", "Zerg Lair", "P7 MainBase", At least, 1);
+Actions:
+	Run AI Script("-Vi6"); //P7 temporary target vision end : Lair still alive, so hide it again
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 2196);
+	Deaths("Player 8", "Terran Vulture", At most, 2220);
+	Bring("Player 7", "Zerg Hive", "P7 MainBase", At least, 1);
+Actions:
+	Run AI Script("-Vi6"); //P7 temporary target vision end : Hive still alive, so hide it again
+}

@@ -11,7 +11,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 780);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Set Mission Objectives("<03>미션 2: 갈색 군락 절단\n\n<04>- 1차 목표: 동북쪽 <15>갈색 저그<04> 군락 파괴\n- 보조 목표: 갈색 저그 <03>전방 집결지<04> 차단\n- 방어 지침: 아래쪽 전선은 방어 유지\n- 최종 목표: 잔존 저그 군락 모두 섬멸");
+	Set Mission Objectives("<03>미션 2: 갈색 군락 절단\n\n<04>- 1차 목표: 동북쪽 <15>갈색 저그<04> 본진의 해처리 / 레어 / 하이브 모두 파괴\n- 최종 목표: 동남쪽 <16>하얀색 저그<04> 본진의 해처리 / 레어 / 하이브 모두 파괴\n- 보조 목표: 갈색 저그 <03>전방 집결지<04> 차단\n- 방어 지침: 아래쪽 전선은 방어 유지");
 	Create Unit("Current Player", "Map Revealer", 1, "P6 Home");
 	Minimap Ping("P6 Base");
 	Display Text Message(Always Display, "<13><03>==========================================");
@@ -53,7 +53,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 1260);
 	Deaths("Player 8", "Terran Vulture", At most, 1284);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: 하지만 <04>점막 뿌리망이 남아 접근로 방어기관을 아직 유지하고 있습니다.");
+	Display Text Message(Always Display, "<1A>노바: <04>새 접근로는 확보됐지만 적 주력은 곧 반응할 겁니다. 아래쪽 전선을 비워두면 후방이 먼저 무너집니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -62,5 +62,5 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 1344);
 	Deaths("Player 8", "Terran Vulture", At most, 1368);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>뿌리망이 마를 때까지 깊게 들어가지 마라. 그때까진 아래쪽 방어선을 유지한다.");
+	Display Text Message(Always Display, "<03>호크: <04>성급하게 깊게 들어가지 마라. 방어선을 세운 뒤 동북쪽 <15>갈색 저그<04> 군락을 친다.");
 }

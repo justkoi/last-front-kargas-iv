@@ -723,6 +723,8 @@ Actions:
 	Set Resources("Player 3", Add, 2500, ore);             //정신체 처치 보상 : 모든 플레이어 미네랄 +2500
 	Set Resources("Player 4", Add, 2500, ore);             //정신체 처치 보상 : 모든 플레이어 미네랄 +2500
 	Kill Unit At Location("Player 5", "Zerg Sunken Colony", All, "EarlyTower"); //별개 보상 : EarlyTower P5 성큰 전멸
+	Kill Unit At Location("Player 8", "Zerg Sunken Colony", All, "EarlyTower"); //별개 보상 : EarlyTower P8 성큰 전멸
+	Kill Unit At Location("Player 8", "Zerg Spore Colony", All, "EarlyTower");  //별개 보상 : EarlyTower P8 스포어 전멸
 	Set Switch("Switch144", set);                          //보상 지급 완료
 }
 

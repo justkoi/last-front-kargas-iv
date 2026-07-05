@@ -208,6 +208,35 @@ Actions:
 	Display Text Message(Always Display, "<07>행운을 빕니다!");
 }
 
+// Difficulty viewer mineral fields show the selected difficulty after the selector is resolved.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 1);
+Actions:
+	Modify Unit Resource Amount("Player 8", 1111, 2, "DifficultyViewer");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 2);
+Actions:
+	Modify Unit Resource Amount("Player 8", 2222, 2, "DifficultyViewer");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 3);
+Actions:
+	Modify Unit Resource Amount("Player 8", 3333, 2, "DifficultyViewer");
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Academy", Exactly, 4);
+Actions:
+	Modify Unit Resource Amount("Player 8", 4444, 2, "DifficultyViewer");
+}
+
 // Mission 2 difficulty Hatcheries are spawned immediately after difficulty is locked.
 // P6/P7 scale by one Hatchery per difficulty step: Normal 1, Hard 2, Very Hard 3.
 Trigger("Player 8"){

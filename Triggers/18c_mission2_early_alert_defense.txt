@@ -2,8 +2,8 @@
 //  Mission 2 - early P6/P7 alert defense
 //
 //  During the first 4 minutes of mission2, each colony gains at most
-//  one defensive charge after 60 seconds. The charge is only consumed
-//  if a player unit enters that colony's Alert location.
+//  one defensive charge after 40 seconds. The charge is only consumed
+//  if a player unit enters that colony's Area location.
 //-----------------------------------------------------------------//
 
 Trigger("Player 8"){
@@ -20,7 +20,7 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 2879);
-	Deaths("Player 8", "Terran Wraith", At least, 720);
+	Deaths("Player 8", "Terran Wraith", At least, 480);
 	Switch("Switch59", Not Set);
 Actions:
 	Set Deaths("Player 8", "Terran Wraith", Set To, 0);
@@ -42,7 +42,7 @@ Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 2879);
-	Deaths("Player 8", "Terran Dropship", At least, 720);
+	Deaths("Player 8", "Terran Dropship", At least, 480);
 	Switch("Switch60", Not Set);
 Actions:
 	Set Deaths("Player 8", "Terran Dropship", Set To, 0);
@@ -55,7 +55,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 2879);
 	Switch("Switch59", Set);
-	Bring("Current Player", "Men", "P6 Alert", At least, 1);
+	Bring("Current Player", "Men", "P6 Area", At least, 1);
 Actions:
 	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn1");
 	Create Unit("Player 6", "Zerg Zergling", 6, "P6 Spawn2");
@@ -95,7 +95,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
 	Deaths("Player 8", "Terran Vulture", At most, 2879);
 	Switch("Switch60", Set);
-	Bring("Current Player", "Men", "P7 Alert", At least, 1);
+	Bring("Current Player", "Men", "P7 Area", At least, 1);
 Actions:
 	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn1");
 	Create Unit("Player 7", "Zerg Zergling", 6, "P7 Spawn2");

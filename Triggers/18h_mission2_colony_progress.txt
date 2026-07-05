@@ -2,7 +2,7 @@
 //  Mission 2 - colony production-web milestone reports (생산망 마일스톤)
 //
 //  18a가 누적하는 군락별 Hatchery/Lair/Hive 손실 카운터
-//  (P6 = P8 Zerg Sunken Colony, P7 = P8 Zerg Spore Colony)를 읽어
+//  (P6 = P8 Protoss Stargate, P7 = P8 Protoss Fleet Beacon)를 읽어
 //  누적 5 / 10 / 15에서 1회성 진행 보고를 띄운다.
 //  기준: 군락당 해처리 기본 15 + 난이도 보너스 1/2/3 + AI 멀티 최대 3.
 //  공격이 누적되고 있다는 피드백으로 유효타 반복을 독려한다.
@@ -15,7 +15,7 @@
 // P6 누적 5 - 균열 보고
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Zerg Sunken Colony", At least, 5); //P6 생산시설 누적 손실 5 이상
+	Deaths("Player 8", "Protoss Stargate", At least, 5); //P6 생산시설 누적 손실 5 이상
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //P6 군락 생존 중일 때만
 Actions:
@@ -25,7 +25,7 @@ Actions:
 // P6 누적 10 - 절반 붕괴 보고
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Zerg Sunken Colony", At least, 10); //P6 생산시설 누적 손실 10 이상
+	Deaths("Player 8", "Protoss Stargate", At least, 10); //P6 생산시설 누적 손실 10 이상
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //P6 군락 생존 중일 때만
 Actions:
@@ -35,7 +35,7 @@ Actions:
 // P6 누적 15 - 한계 임박, 마무리 독려
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Zerg Sunken Colony", At least, 15); //P6 생산시설 누적 손실 15 이상
+	Deaths("Player 8", "Protoss Stargate", At least, 15); //P6 생산시설 누적 손실 15 이상
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //P6 군락 생존 중일 때만
 Actions:
@@ -47,7 +47,7 @@ Actions:
 // P7 누적 5 - 균열 보고
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Zerg Spore Colony", At least, 5); //P7 생산시설 누적 손실 5 이상
+	Deaths("Player 8", "Protoss Fleet Beacon", At least, 5); //P7 생산시설 누적 손실 5 이상
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //P7 군락 생존 중일 때만
 Actions:
@@ -57,7 +57,7 @@ Actions:
 // P7 누적 10 - 절반 붕괴 보고
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Zerg Spore Colony", At least, 10); //P7 생산시설 누적 손실 10 이상
+	Deaths("Player 8", "Protoss Fleet Beacon", At least, 10); //P7 생산시설 누적 손실 10 이상
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //P7 군락 생존 중일 때만
 Actions:
@@ -67,7 +67,7 @@ Actions:
 // P7 누적 15 - 한계 임박, 마무리 독려
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Deaths("Player 8", "Zerg Spore Colony", At least, 15); //P7 생산시설 누적 손실 15 이상
+	Deaths("Player 8", "Protoss Fleet Beacon", At least, 15); //P7 생산시설 누적 손실 15 이상
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //P7 군락 생존 중일 때만
 Actions:

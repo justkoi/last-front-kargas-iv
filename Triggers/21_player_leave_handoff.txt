@@ -6483,6 +6483,7 @@ Actions:
 	Give Units to Player("Player 12", "Player 2", "Zerg Lurker Egg", All, "Anywhere");
 	Give Units to Player("Player 12", "Player 2", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
 	Give Units to Player("Player 12", "Player 2", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
+	Give Units to Player("Player 2", "Player 12", "Khaydarin Crystal Formation", All, "Anywhere"); //중립 산맥 유닛은 이양 직후 P12로 반환
 	Set Deaths("Player 8", "Terran Beacon", Set To, 12);
 	Set Deaths("Player 2", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6502,6 +6503,7 @@ Actions:
 	Give Units to Player("Player 12", "Player 3", "Zerg Lurker Egg", All, "Anywhere");
 	Give Units to Player("Player 12", "Player 3", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
 	Give Units to Player("Player 12", "Player 3", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
+	Give Units to Player("Player 3", "Player 12", "Khaydarin Crystal Formation", All, "Anywhere"); //중립 산맥 유닛은 이양 직후 P12로 반환
 	Set Deaths("Player 8", "Terran Beacon", Set To, 13);
 	Set Deaths("Player 3", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6521,6 +6523,7 @@ Actions:
 	Give Units to Player("Player 12", "Player 4", "Zerg Lurker Egg", All, "Anywhere");
 	Give Units to Player("Player 12", "Player 4", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
 	Give Units to Player("Player 12", "Player 4", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
+	Give Units to Player("Player 4", "Player 12", "Khaydarin Crystal Formation", All, "Anywhere"); //중립 산맥 유닛은 이양 직후 P12로 반환
 	Set Deaths("Player 8", "Terran Beacon", Set To, 14);
 	Set Deaths("Player 4", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6540,6 +6543,7 @@ Actions:
 	Give Units to Player("Player 12", "Player 1", "Zerg Lurker Egg", All, "Anywhere");
 	Give Units to Player("Player 12", "Player 1", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
 	Give Units to Player("Player 12", "Player 1", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
+	Give Units to Player("Player 1", "Player 12", "Khaydarin Crystal Formation", All, "Anywhere"); //중립 산맥 유닛은 이양 직후 P12로 반환
 	Set Deaths("Player 8", "Terran Beacon", Set To, 21);
 	Set Deaths("Player 1", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6559,6 +6563,7 @@ Actions:
 	Give Units to Player("Player 12", "Player 3", "Zerg Lurker Egg", All, "Anywhere");
 	Give Units to Player("Player 12", "Player 3", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
 	Give Units to Player("Player 12", "Player 3", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
+	Give Units to Player("Player 3", "Player 12", "Khaydarin Crystal Formation", All, "Anywhere"); //중립 산맥 유닛은 이양 직후 P12로 반환
 	Set Deaths("Player 8", "Terran Beacon", Set To, 23);
 	Set Deaths("Player 3", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6578,6 +6583,7 @@ Actions:
 	Give Units to Player("Player 12", "Player 4", "Zerg Lurker Egg", All, "Anywhere");
 	Give Units to Player("Player 12", "Player 4", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
 	Give Units to Player("Player 12", "Player 4", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
+	Give Units to Player("Player 4", "Player 12", "Khaydarin Crystal Formation", All, "Anywhere"); //중립 산맥 유닛은 이양 직후 P12로 반환
 	Set Deaths("Player 8", "Terran Beacon", Set To, 24);
 	Set Deaths("Player 4", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6597,6 +6603,7 @@ Actions:
 	Give Units to Player("Player 12", "Player 1", "Zerg Lurker Egg", All, "Anywhere");
 	Give Units to Player("Player 12", "Player 1", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
 	Give Units to Player("Player 12", "Player 1", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
+	Give Units to Player("Player 1", "Player 12", "Khaydarin Crystal Formation", All, "Anywhere"); //중립 산맥 유닛은 이양 직후 P12로 반환
 	Set Deaths("Player 8", "Terran Beacon", Set To, 31);
 	Set Deaths("Player 1", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6616,6 +6623,7 @@ Actions:
 	Give Units to Player("Player 12", "Player 2", "Zerg Lurker Egg", All, "Anywhere");
 	Give Units to Player("Player 12", "Player 2", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
 	Give Units to Player("Player 12", "Player 2", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
+	Give Units to Player("Player 2", "Player 12", "Khaydarin Crystal Formation", All, "Anywhere"); //중립 산맥 유닛은 이양 직후 P12로 반환
 	Set Deaths("Player 8", "Terran Beacon", Set To, 32);
 	Set Deaths("Player 2", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6635,6 +6643,7 @@ Actions:
 	Give Units to Player("Player 12", "Player 4", "Zerg Lurker Egg", All, "Anywhere");
 	Give Units to Player("Player 12", "Player 4", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
 	Give Units to Player("Player 12", "Player 4", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
+	Give Units to Player("Player 4", "Player 12", "Khaydarin Crystal Formation", All, "Anywhere"); //중립 산맥 유닛은 이양 직후 P12로 반환
 	Set Deaths("Player 8", "Terran Beacon", Set To, 34);
 	Set Deaths("Player 4", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6654,6 +6663,7 @@ Actions:
 	Give Units to Player("Player 12", "Player 1", "Zerg Lurker Egg", All, "Anywhere");
 	Give Units to Player("Player 12", "Player 1", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
 	Give Units to Player("Player 12", "Player 1", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
+	Give Units to Player("Player 1", "Player 12", "Khaydarin Crystal Formation", All, "Anywhere"); //중립 산맥 유닛은 이양 직후 P12로 반환
 	Set Deaths("Player 8", "Terran Beacon", Set To, 41);
 	Set Deaths("Player 1", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6673,6 +6683,7 @@ Actions:
 	Give Units to Player("Player 12", "Player 2", "Zerg Lurker Egg", All, "Anywhere");
 	Give Units to Player("Player 12", "Player 2", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
 	Give Units to Player("Player 12", "Player 2", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
+	Give Units to Player("Player 2", "Player 12", "Khaydarin Crystal Formation", All, "Anywhere"); //중립 산맥 유닛은 이양 직후 P12로 반환
 	Set Deaths("Player 8", "Terran Beacon", Set To, 42);
 	Set Deaths("Player 2", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
@@ -6692,6 +6703,7 @@ Actions:
 	Give Units to Player("Player 12", "Player 3", "Zerg Lurker Egg", All, "Anywhere");
 	Give Units to Player("Player 12", "Player 3", "Buildings", All, "Anywhere"); //departed assets are Neutral-owned; transfer all buildings to the selected recipient
 	Give Units to Player("Player 12", "Player 3", "Men", All, "Anywhere"); //departed assets are Neutral-owned; transfer all men to the same selected recipient
+	Give Units to Player("Player 3", "Player 12", "Khaydarin Crystal Formation", All, "Anywhere"); //중립 산맥 유닛은 이양 직후 P12로 반환
 	Set Deaths("Player 8", "Terran Beacon", Set To, 43);
 	Set Deaths("Player 3", "Protoss Beacon", Set To, 0);
 	Set Deaths("Player 8", "Zerg Beacon", Set To, 0);
