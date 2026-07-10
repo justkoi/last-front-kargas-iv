@@ -14,11 +14,13 @@
 // Zerg Spire / Greater Spire  : 발렌/엘리아 행동불능 복귀 타이머(0~3601)
 // Zerg Creep Colony / Hive   : 로크/세딘 행동불능 복귀 타이머(0~3601)
 // Zerg Hatchery / Lair        : 로크/세딘 합류 연출 타이머(0~168)
+// Switch236/237               : 발렌/엘리아 최초 배속 안내 표시 완료(소유권 상태 아님)
 // Switch238/239               : 발렌/엘리아 행동불능
 // Switch240~243               : 발렌/엘리아 2비트 무작위 대상
 // Switch244                   : 선배치 영웅 상태 초기화 완료
 // Switch245                   : 전방 정신체 파괴 후 로크 합류 요청
 // Switch157                   : 지휘 정신체 파괴 후 세딘 합류 요청
+// Switch248                   : 로크 합류 P9 일반 벌처 이양 대기
 // Switch250/251               : 로크/세딘 행동불능
 // Switch252~255               : 로크/세딘 2비트 무작위 대상
 // Switch256                   : 현재 합류 영웅의 미배속 생존 후보 존재
@@ -39,12 +41,15 @@ Actions:
 	Set Deaths("Player 8", "Zerg Hive", Set To, 0); //세딘 복귀 타이머 초기화
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //로크 합류 연출 타이머 초기화
 	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //세딘 합류 연출 타이머 초기화
+	Set Switch("Switch236", clear); //발렌 최초 배속 안내 상태 초기화
+	Set Switch("Switch237", clear); //엘리아 최초 배속 안내 상태 초기화
 	Set Switch("Switch238", clear); //발렌 활동 상태 초기화
 	Set Switch("Switch239", clear); //엘리아 활동 상태 초기화
 	Set Switch("Switch250", clear); //로크 활동 상태 초기화
 	Set Switch("Switch251", clear); //세딘 활동 상태 초기화
 	Set Switch("Switch245", clear); //로크 합류 요청 초기화
 	Set Switch("Switch157", clear); //세딘 합류 요청 초기화
+	Set Switch("Switch248", clear); //로크 일반 벌처 이양 대기 초기화
 	Set Switch("Switch252", clear); //로크 추첨 bit0 초기화
 	Set Switch("Switch253", clear); //로크 추첨 bit1 초기화
 	Set Switch("Switch254", clear); //세딘 추첨 bit0 초기화
@@ -307,33 +312,114 @@ Actions:
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
 }
 
-//----- 최초 배속 개인 안내: 두 시작 영웅 배속 완료 후 각 소유자에게 1회 -----//
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+//----- 최초 배속 개인 안내: 소유자 DC와 안내 완료 래치로 복귀 시 재표시 차단 -----//
+Trigger("Player 1"){
 Conditions:
-	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
-	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
-	Command("Current Player", "Jim Raynor (Marine)", At least, 1);
-	Command("Current Player", "Sarah Kerrigan (Ghost)", At least, 1);
+	Switch("Switch236", Not Set);
+	Switch("Switch237", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>과 <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
+	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
 }
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Trigger("Player 2"){
 Conditions:
-	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
-	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
-	Command("Current Player", "Jim Raynor (Marine)", At least, 1);
-	Command("Current Player", "Sarah Kerrigan (Ghost)", At most, 0);
+	Switch("Switch236", Not Set);
+	Switch("Switch237", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>과 <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
+	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch236", Not Set);
+	Switch("Switch237", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>과 <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
+	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch236", Not Set);
+	Switch("Switch237", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>과 <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
+	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
+}
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch236", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>이 귀관의 지휘에 합류했습니다.");
+	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
 }
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Trigger("Player 2"){
 Conditions:
-	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
-	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
-	Command("Current Player", "Jim Raynor (Marine)", At most, 0);
-	Command("Current Player", "Sarah Kerrigan (Ghost)", At least, 1);
+	Switch("Switch236", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>이 귀관의 지휘에 합류했습니다.");
+	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch236", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>이 귀관의 지휘에 합류했습니다.");
+	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch236", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>이 귀관의 지휘에 합류했습니다.");
+	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
+}
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch237", Not Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
+}
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch237", Not Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 배속] <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch237", Not Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 배속] <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch237", Not Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 배속] <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
 }
 
 //----- 정신체 부재 독립 감지 : 난이도 선택 및 미션 진행 단계와 무관 -----//
@@ -354,6 +440,48 @@ Conditions:
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At most, 0);
 Actions:
 	Set Switch("Switch157", set); //영웅 초기화 뒤 정신체 부재를 독립 감지 : 난이도/미션 단계와 무관하게 합류 요청 보존
+}
+
+//----- 로크 이온 추진기 선물: 생성 다음 사이클에 P9 일반 벌처 확인 후 이양 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch248", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Bring("Player 9", "Terran Vulture", "HeroCJoin", At least, 1);
+Actions:
+	Give Units to Player("Player 9", "Player 1", "Terran Vulture", 1, "HeroCJoin"); //생성 완료된 P9 벌처를 로크 소유자에게 이양
+	Move Unit("Player 1", "Terran Vulture", 1, "HeroCJoin", "HeroCJoinExit"); //선물 벌처를 출구로 분리해 로크와 겹침 방지
+	Set Switch("Switch248", clear); //일반 벌처 이양 완료
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch248", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Bring("Player 9", "Terran Vulture", "HeroCJoin", At least, 1);
+Actions:
+	Give Units to Player("Player 9", "Player 2", "Terran Vulture", 1, "HeroCJoin"); //생성 완료된 P9 벌처를 로크 소유자에게 이양
+	Move Unit("Player 2", "Terran Vulture", 1, "HeroCJoin", "HeroCJoinExit"); //선물 벌처를 출구로 분리해 로크와 겹침 방지
+	Set Switch("Switch248", clear); //일반 벌처 이양 완료
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch248", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Bring("Player 9", "Terran Vulture", "HeroCJoin", At least, 1);
+Actions:
+	Give Units to Player("Player 9", "Player 3", "Terran Vulture", 1, "HeroCJoin"); //생성 완료된 P9 벌처를 로크 소유자에게 이양
+	Move Unit("Player 3", "Terran Vulture", 1, "HeroCJoin", "HeroCJoinExit"); //선물 벌처를 출구로 분리해 로크와 겹침 방지
+	Set Switch("Switch248", clear); //일반 벌처 이양 완료
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch248", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Bring("Player 9", "Terran Vulture", "HeroCJoin", At least, 1);
+Actions:
+	Give Units to Player("Player 9", "Player 4", "Terran Vulture", 1, "HeroCJoin"); //생성 완료된 P9 벌처를 로크 소유자에게 이양
+	Move Unit("Player 4", "Terran Vulture", 1, "HeroCJoin", "HeroCJoinExit"); //선물 벌처를 출구로 분리해 로크와 겹침 방지
+	Set Switch("Switch248", clear); //일반 벌처 이양 완료
 }
 
 //----- 로크 현장 합류 및 공정 배속 -----//
@@ -536,11 +664,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 1", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 1", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 1", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 1); //현재 소유자 기록 : 로크 소유자=P1
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -562,11 +691,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 2", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 2", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 2", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //현재 소유자 기록 : 로크 소유자=P2
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -588,11 +718,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 2", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 2", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 2", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //현재 소유자 기록 : 로크 소유자=P2
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -614,11 +745,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 2", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 2", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 2", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //현재 소유자 기록 : 로크 소유자=P2
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -640,11 +772,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 2", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 2", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 2", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //현재 소유자 기록 : 로크 소유자=P2
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -666,11 +799,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 3", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 3", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 3", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //현재 소유자 기록 : 로크 소유자=P3
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -692,11 +826,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 3", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 3", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 3", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //현재 소유자 기록 : 로크 소유자=P3
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -718,11 +853,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 3", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 3", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 3", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //현재 소유자 기록 : 로크 소유자=P3
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -744,11 +880,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 3", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 3", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 3", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //현재 소유자 기록 : 로크 소유자=P3
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -770,11 +907,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 4", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 4", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 4", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 4); //현재 소유자 기록 : 로크 소유자=P4
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -794,11 +932,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 1", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 1", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 1", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 1); //현재 소유자 기록 : 로크 소유자=P1
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -818,11 +957,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 2", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 2", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 2", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //현재 소유자 기록 : 로크 소유자=P2
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -842,11 +982,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 3", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 3", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 3", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //현재 소유자 기록 : 로크 소유자=P3
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }
@@ -866,11 +1007,12 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
 	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
 	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
-	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
-	Give Units to Player("Player 9", "Player 4", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 4", "Terran Vulture", 1, "HeroCJoin"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성
+	Give Units to Player("Player 4", "Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환
 	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
 	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 4); //현재 소유자 기록 : 로크 소유자=P4
 	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch248", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약
 	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
 	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
 }

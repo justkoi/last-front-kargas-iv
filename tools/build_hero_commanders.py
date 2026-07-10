@@ -9,6 +9,9 @@ OUT = ROOT / "Triggers" / "01d_hero_commanders.txt"
 PLAYERS = range(1, 5)
 RESPAWN_MINERALS = 100
 ELIGIBLE_SWITCH = "Switch256"
+VALEN_NOTICE_SWITCH = "Switch236"
+ELIA_NOTICE_SWITCH = "Switch237"
+ROCK_VULTURE_GIFT_PENDING = "Switch248"
 HEROES = {
     "valen": {
         "unit": "Jim Raynor (Marine)",
@@ -186,13 +189,14 @@ def join_actions(hero_key: str, hero: dict, player: int) -> list[str]:
     ]
     if hero_key == "rock":
         actions.extend([
-            f'Create Unit("Player 9", "Terran Vulture", 1, "{hero["join"]}"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성',
-            f'Give Units to Player("Player 9", "Player {player}", "Terran Vulture", 1, "{hero["join"]}"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양',
+            f'Create Unit("Player {player}", "Terran Vulture", 1, "{hero["join"]}"); //P9 직접 생성 불가 우회 : 로크 배속 플레이어 소유 일반 벌처 생성',
+            f'Give Units to Player("Player {player}", "Player 9", "Terran Vulture", 1, "{hero["join"]}"); //이온 추진기 선물 준비 : 생성된 일반 벌처를 P9 소유로 전환',
         ])
     actions.extend([
         f'Create Unit("Player {player}", "{hero["unit"]}", 1, "{hero["join"]}"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성',
         f'Set Deaths("Player 8", "{hero["holder"]}", Set To, {player}); //현재 소유자 기록 : {hero["name"]} 소유자=P{player}',
         f'Set Deaths("Player 8", "{hero["intro_timer"]}", Set To, 0); //합류 연출 타이머 시작점',
+        *([f'Set Switch("{ROCK_VULTURE_GIFT_PENDING}", set); //다음 트리거 사이클에 생성된 P9 벌처 이양 예약'] if hero_key == "rock" else []),
         f'Set Switch("{ELIGIBLE_SWITCH}", clear); //후보 탐색 임시 상태 정리',
         f'Set Switch("{hero["unlock_switch"]}", clear); //{hero["name"]} 합류 요청 소비 : 배속 뒤 재실행 방지',
     ])
@@ -385,11 +389,13 @@ def build() -> str:
         "// Zerg Spire / Greater Spire  : 발렌/엘리아 행동불능 복귀 타이머(0~3601)",
         "// Zerg Creep Colony / Hive   : 로크/세딘 행동불능 복귀 타이머(0~3601)",
         "// Zerg Hatchery / Lair        : 로크/세딘 합류 연출 타이머(0~168)",
+        "// Switch236/237               : 발렌/엘리아 최초 배속 안내 표시 완료(소유권 상태 아님)",
         "// Switch238/239               : 발렌/엘리아 행동불능",
         "// Switch240~243               : 발렌/엘리아 2비트 무작위 대상",
         "// Switch244                   : 선배치 영웅 상태 초기화 완료",
         "// Switch245                   : 전방 정신체 파괴 후 로크 합류 요청",
         "// Switch157                   : 지휘 정신체 파괴 후 세딘 합류 요청",
+        "// Switch248                   : 로크 합류 P9 일반 벌처 이양 대기",
         "// Switch250/251               : 로크/세딘 행동불능",
         "// Switch252~255               : 로크/세딘 2비트 무작위 대상",
         "// Switch256                   : 현재 합류 영웅의 미배속 생존 후보 존재",
@@ -403,9 +409,12 @@ def build() -> str:
                 *[f'Set Deaths("Player 8", "{hero["timer"]}", Set To, 0); //{hero["name"]} 복귀 타이머 초기화' for hero in all_heroes],
                 f'Set Deaths("Player 8", "{r["intro_timer"]}", Set To, 0); //로크 합류 연출 타이머 초기화',
                 f'Set Deaths("Player 8", "{s["intro_timer"]}", Set To, 0); //세딘 합류 연출 타이머 초기화',
+                f'Set Switch("{VALEN_NOTICE_SWITCH}", clear); //발렌 최초 배속 안내 상태 초기화',
+                f'Set Switch("{ELIA_NOTICE_SWITCH}", clear); //엘리아 최초 배속 안내 상태 초기화',
                 *[f'Set Switch("{hero["down"]}", clear); //{hero["name"]} 활동 상태 초기화' for hero in all_heroes],
                 'Set Switch("Switch245", clear); //로크 합류 요청 초기화',
                 'Set Switch("Switch157", clear); //세딘 합류 요청 초기화',
+                f'Set Switch("{ROCK_VULTURE_GIFT_PENDING}", clear); //로크 일반 벌처 이양 대기 초기화',
                 'Set Switch("Switch252", clear); //로크 추첨 bit0 초기화',
                 'Set Switch("Switch253", clear); //로크 추첨 bit1 초기화',
                 'Set Switch("Switch254", clear); //세딘 추첨 bit0 초기화',
@@ -449,25 +458,40 @@ def build() -> str:
             if alternative != owner:
                 parts.append(collision_repair(owner, alternative))
 
-    parts.extend([
-        "",
-        "//----- 최초 배속 개인 안내: 두 시작 영웅 배속 완료 후 각 소유자에게 1회 -----//",
-        trigger(
-            'Player 1", "Player 2", "Player 3", "Player 4',
-            [f'Deaths("Player 8", "{v["holder"]}", At least, 1);', f'Deaths("Player 8", "{e["holder"]}", At least, 1);', f'Command("Current Player", "{v["unit"]}", At least, 1);', f'Command("Current Player", "{e["unit"]}", At least, 1);'],
-            ['Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>과 <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");'],
-        ),
-        trigger(
-            'Player 1", "Player 2", "Player 3", "Player 4',
-            [f'Deaths("Player 8", "{v["holder"]}", At least, 1);', f'Deaths("Player 8", "{e["holder"]}", At least, 1);', f'Command("Current Player", "{v["unit"]}", At least, 1);', f'Command("Current Player", "{e["unit"]}", At most, 0);'],
-            ['Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>이 귀관의 지휘에 합류했습니다.");'],
-        ),
-        trigger(
-            'Player 1", "Player 2", "Player 3", "Player 4',
-            [f'Deaths("Player 8", "{v["holder"]}", At least, 1);', f'Deaths("Player 8", "{e["holder"]}", At least, 1);', f'Command("Current Player", "{v["unit"]}", At most, 0);', f'Command("Current Player", "{e["unit"]}", At least, 1);'],
-            ['Display Text Message(Always Display, "<07>[영웅 배속] <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");'],
-        ),
-    ])
+    parts.extend(["", "//----- 최초 배속 개인 안내: 소유자 DC와 안내 완료 래치로 복귀 시 재표시 차단 -----//"])
+    for player in PLAYERS:
+        parts.append(trigger(
+            f"Player {player}",
+            [
+                f'Switch("{VALEN_NOTICE_SWITCH}", Not Set);',
+                f'Switch("{ELIA_NOTICE_SWITCH}", Not Set);',
+                f'Deaths("Player 8", "{v["holder"]}", Exactly, {player});',
+                f'Deaths("Player 8", "{e["holder"]}", Exactly, {player});',
+            ],
+            [
+                'Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>과 <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");',
+                f'Set Switch("{VALEN_NOTICE_SWITCH}", set); //발렌 최초 배속 안내 완료',
+                f'Set Switch("{ELIA_NOTICE_SWITCH}", set); //엘리아 최초 배속 안내 완료',
+            ],
+        ))
+    for player in PLAYERS:
+        parts.append(trigger(
+            f"Player {player}",
+            [f'Switch("{VALEN_NOTICE_SWITCH}", Not Set);', f'Deaths("Player 8", "{v["holder"]}", Exactly, {player});'],
+            [
+                'Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>이 귀관의 지휘에 합류했습니다.");',
+                f'Set Switch("{VALEN_NOTICE_SWITCH}", set); //발렌 최초 배속 안내 완료',
+            ],
+        ))
+    for player in PLAYERS:
+        parts.append(trigger(
+            f"Player {player}",
+            [f'Switch("{ELIA_NOTICE_SWITCH}", Not Set);', f'Deaths("Player 8", "{e["holder"]}", Exactly, {player});'],
+            [
+                'Display Text Message(Always Display, "<07>[영웅 배속] <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");',
+                f'Set Switch("{ELIA_NOTICE_SWITCH}", set); //엘리아 최초 배속 안내 완료',
+            ],
+        ))
 
     parts.extend([
         "",
@@ -475,6 +499,22 @@ def build() -> str:
         unlock_request(r),
         unlock_request(s),
     ])
+
+    parts.extend(["", "//----- 로크 이온 추진기 선물: 생성 다음 사이클에 P9 일반 벌처 확인 후 이양 -----//"])
+    for player in PLAYERS:
+        parts.append(trigger(
+            "Player 8",
+            [
+                f'Switch("{ROCK_VULTURE_GIFT_PENDING}", Set);',
+                f'Deaths("Player 8", "{r["holder"]}", Exactly, {player});',
+                'Bring("Player 9", "Terran Vulture", "HeroCJoin", At least, 1);',
+            ],
+            [
+                f'Give Units to Player("Player 9", "Player {player}", "Terran Vulture", 1, "HeroCJoin"); //생성 완료된 P9 벌처를 로크 소유자에게 이양',
+                f'Move Unit("Player {player}", "Terran Vulture", 1, "HeroCJoin", "HeroCJoinExit"); //선물 벌처를 출구로 분리해 로크와 겹침 방지',
+                f'Set Switch("{ROCK_VULTURE_GIFT_PENDING}", clear); //일반 벌처 이양 완료',
+            ],
+        ))
 
     append_late_hero(parts, "rock", ["valen", "elia"])
     append_late_hero(parts, "sedin", ["valen", "elia", "rock"])
@@ -565,8 +605,18 @@ def build() -> str:
             assert not line.rstrip().endswith("//") and "); //" not in line
     for location in ("HeroCJoin", "HeroCJoinExit", "HeroDJoin", "HeroDJoinExit"):
         assert location in text
-    assert text.count('Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin");') == text.count('Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "HeroCJoin");') + text.count('Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "HeroCJoin");') + text.count('Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "HeroCJoin");') + text.count('Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "HeroCJoin");')
-    assert text.count('Give Units to Player("Player 9", "Player ') >= text.count('Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin");')
+    rock_create_count = sum(text.count(f'Create Unit("Player {player}", "Jim Raynor (Vulture)", 1, "HeroCJoin");') for player in PLAYERS)
+    relay_create_count = sum(text.count(f'Create Unit("Player {player}", "Terran Vulture", 1, "HeroCJoin");') for player in PLAYERS)
+    relay_to_p9_count = sum(text.count(f'Give Units to Player("Player {player}", "Player 9", "Terran Vulture", 1, "HeroCJoin");') for player in PLAYERS)
+    assert 'Create Unit("Player 9", "Terran Vulture"' not in text
+    assert relay_create_count == rock_create_count
+    assert relay_to_p9_count == rock_create_count
+    assert text.count('Give Units to Player("Player 9", "Player 1", "Terran Vulture", 1, "HeroCJoin");') == 1
+    assert text.count('Give Units to Player("Player 9", "Player 2", "Terran Vulture", 1, "HeroCJoin");') == 1
+    assert text.count('Give Units to Player("Player 9", "Player 3", "Terran Vulture", 1, "HeroCJoin");') == 1
+    assert text.count('Give Units to Player("Player 9", "Player 4", "Terran Vulture", 1, "HeroCJoin");') == 1
+    assert 'Command("Current Player", "Jim Raynor (Marine)"' not in text
+    assert 'Command("Current Player", "Sarah Kerrigan (Ghost)"' not in text
     return text
 
 
