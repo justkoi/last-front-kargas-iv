@@ -1,0 +1,108 @@
+//-----------------------------------------------------------------//
+//  극초반 입구 견제
+//  실제 0:05부터 15초 간격으로 총 8회, P5 Spawn1 -> Player Destination
+//-----------------------------------------------------------------//
+
+// 1회차 - 실제 약 0:05 (Elapsed 8)
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1); //미션 1 진행 중일 때만 극초반 견제를 보냄
+	Elapsed Time(At least, 8); //실제 5초에 가장 가까운 게임 시간(8 / 1.5 = 약 5.3초)
+	Command("Player 5", "Buildings", At least, 1); //P5 군락이 살아 있을 때만 병력을 생성
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1"); //극초반 근접 견제 3기 생성
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1"); //영웅과 공중 유닛을 압박할 원거리 병력 1기 생성
+	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol); //저글링을 플레이어 진영으로 즉시 공격 진군
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol); //히드라리스크를 플레이어 진영으로 즉시 공격 진군
+}
+
+// 2회차 - 실제 0:20 (Elapsed 30)
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 30);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
+	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+}
+
+// 3회차 - 실제 약 0:35 (Elapsed 53)
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 53);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
+	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+}
+
+// 4회차 - 실제 0:50 (Elapsed 75)
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 75);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
+	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+}
+
+// 5회차 - 실제 약 1:05 (Elapsed 98)
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 98);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
+	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+}
+
+// 6회차 - 실제 1:20 (Elapsed 120)
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 120);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
+	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+}
+
+// 7회차 - 실제 약 1:35 (Elapsed 143)
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 143);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
+	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+}
+
+// 8회차 - 실제 1:50 (Elapsed 165)
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Elapsed Time(At least, 165);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
+	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
+}

@@ -31,8 +31,7 @@ Actions:
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
 	Set Deaths("Player 8", "Psi Emitter", Subtract, 1); //1급 팀 훈장 풀 소모
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <10>1급 카르가스공로장<04>을 수여했습니다.");
-	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 +700  <07>가스 +350");
+	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <10>1급 카르가스공로장<04>을 수여했습니다.\n<07>보상: <1F>미네랄 +700  <07>가스 +350");
 	Preserve Trigger();
 }
 
@@ -49,8 +48,7 @@ Actions:
 	Set Resources("Current Player", Add, 200, gas);
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <0E>2급 무공공로장<04>을 수여했습니다.");
-	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 +400  <07>가스 +200");
+	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <0E>2급 무공공로장<04>을 수여했습니다.\n<07>보상: <1F>미네랄 +400  <07>가스 +200");
 	Preserve Trigger();
 }
 
@@ -67,8 +65,7 @@ Actions:
 	Set Resources("Current Player", Add, 150, gas);
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <07>3급 특전공로장<04>을 수여했습니다.");
-	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 +300  <07>가스 +150");
+	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <07>3급 특전공로장<04>을 수여했습니다.\n<07>보상: <1F>미네랄 +300  <07>가스 +150");
 	Preserve Trigger();
 }
 
@@ -85,8 +82,7 @@ Actions:
 	Set Resources("Current Player", Add, 100, gas);
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <03>4급 전투공로장<04>을 수여했습니다.");
-	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 +200  <07>가스 +100");
+	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <03>4급 전투공로장<04>을 수여했습니다.\n<07>보상: <1F>미네랄 +200  <07>가스 +100");
 	Preserve Trigger();
 }
 
@@ -103,8 +99,7 @@ Actions:
 	Set Resources("Current Player", Add, 50, gas);
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <04>5급 <05>전선공로장<04>을 수여했습니다.");
-	Display Text Message(Always Display, "<07>                보상: <1F>미네랄 +100  <07>가스 +50");
+	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <04>5급 <05>전선공로장<04>을 수여했습니다.\n<07>보상: <1F>미네랄 +100  <07>가스 +50");
 	Preserve Trigger();
 }
 
@@ -130,7 +125,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 Actions:
 	Set Score("Current Player", Set To, 0, Custom);
 	Preserve Trigger();
@@ -139,7 +134,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 1); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 1, Custom);
@@ -149,7 +144,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 2); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 2, Custom);
@@ -159,7 +154,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 3); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 3, Custom);
@@ -169,7 +164,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 4); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 4, Custom);
@@ -179,7 +174,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 5); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 5, Custom);
@@ -189,7 +184,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 6); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 6, Custom);
@@ -199,7 +194,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 7); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 7, Custom);
@@ -209,7 +204,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 8); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 8, Custom);
@@ -219,7 +214,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 9); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 9, Custom);
@@ -229,7 +224,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 10); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 10, Custom);
@@ -239,7 +234,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 11); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 11, Custom);
@@ -249,7 +244,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 12); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 12, Custom);
@@ -259,7 +254,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 13); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 13, Custom);
@@ -269,7 +264,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 14); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 14, Custom);
@@ -279,7 +274,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 15); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 15, Custom);
@@ -289,7 +284,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 16); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 16, Custom);
@@ -299,7 +294,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 17); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 17, Custom);
@@ -309,7 +304,7 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 18); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 18, Custom);
@@ -319,10 +314,70 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
-	Deaths("Player 8", "Terran Valkyrie", At most, 3); //미션 완료 전
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
 	Deaths("Current Player", "Psi Emitter", Exactly, 19); //개인 훈장 수
 Actions:
 	Set Score("Current Player", Set To, 19, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
+	Deaths("Current Player", "Psi Emitter", Exactly, 20); //개인 훈장 수
+Actions:
+	Set Score("Current Player", Set To, 20, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
+	Deaths("Current Player", "Psi Emitter", Exactly, 21); //개인 훈장 수
+Actions:
+	Set Score("Current Player", Set To, 21, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
+	Deaths("Current Player", "Psi Emitter", Exactly, 22); //개인 훈장 수
+Actions:
+	Set Score("Current Player", Set To, 22, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
+	Deaths("Current Player", "Psi Emitter", Exactly, 23); //개인 훈장 수
+Actions:
+	Set Score("Current Player", Set To, 23, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
+	Deaths("Current Player", "Psi Emitter", Exactly, 24); //개인 훈장 수
+Actions:
+	Set Score("Current Player", Set To, 24, Custom);
+	Preserve Trigger();
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", At least, 1); //미션 진행 중
+	Deaths("Player 8", "Terran Valkyrie", At most, 4); //미션 진행 및 클리어 결과 표시 중
+	Deaths("Current Player", "Psi Emitter", Exactly, 25); //개인 훈장 수
+Actions:
+	Set Score("Current Player", Set To, 25, Custom);
 	Preserve Trigger();
 }
 

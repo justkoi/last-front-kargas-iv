@@ -13,7 +13,7 @@ Actions:
 	Center View("P5 Lab Beacon");
 	Create Unit("Current Player", "Map Revealer", 1, "P5 Lab Vision");
 	Display Text Message(Always Display, "<06>TEST: <04>미션2 70% 총공세 테스트 시작.");
-	Display Text Message(Always Display, "<03>호크: <04>테스트 교전이다. 비콘 주변으로 밀려오는 흐름을 확인해라.");
+	Display Text Message(Always Display, "<03>발렌: <04>테스트 교전이다. 비콘 주변으로 밀려오는 흐름을 확인해라.");
 }
 
 // 70% 총공세 첫 파도 - 시작 5초

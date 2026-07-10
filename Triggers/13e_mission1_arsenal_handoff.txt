@@ -247,7 +247,7 @@ Conditions:
 Actions:
 	Minimap Ping("BaseEntrance");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<03>호크: <04>입구 군수시설 복구를 마쳤다. 통제권은 한 지휘관에게 넘긴다.");
+	Display Text Message(Always Display, "<03>발렌: <04>입구 군수시설 복구를 마쳤다. 통제권은 한 지휘관에게 넘긴다.");
 }
 
 //----- (G) 받은 사람 개인 메시지 : Switch147(이양) 이후 사이클에 1회 출력 -----//
@@ -258,7 +258,7 @@ Conditions:
 	Switch("Switch151", Not Set);                          //개인 메시지 미표시
 	Bring("Current Player", "Terran Barracks", "BaseEntrance", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Display Text Message(Always Display, "<07>군수 복구: <04>귀관이 군수시설 통제권을 확보했습니다.");
 	Set Switch("Switch151", set);
 }
 
@@ -268,7 +268,7 @@ Conditions:
 	Switch("Switch151", Not Set);
 	Bring("Current Player", "Terran Barracks", "BaseEntrance", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Display Text Message(Always Display, "<07>군수 복구: <04>귀관이 군수시설 통제권을 확보했습니다.");
 	Set Switch("Switch151", set);
 }
 
@@ -278,7 +278,7 @@ Conditions:
 	Switch("Switch151", Not Set);
 	Bring("Current Player", "Terran Barracks", "BaseEntrance", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Display Text Message(Always Display, "<07>군수 복구: <04>귀관이 군수시설 통제권을 확보했습니다.");
 	Set Switch("Switch151", set);
 }
 
@@ -288,7 +288,7 @@ Conditions:
 	Switch("Switch151", Not Set);
 	Bring("Current Player", "Terran Barracks", "BaseEntrance", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Display Text Message(Always Display, "<07>군수 복구: <04>귀관이 군수시설 통제권을 확보했습니다.");
 	Set Switch("Switch151", set);
 }
 
@@ -299,7 +299,7 @@ Conditions:
 	Bring("Current Player", "Terran Barracks", "BaseEntrance", At most, 0);
 	Bring("Current Player", "Terran Factory", "BaseEntrance", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Display Text Message(Always Display, "<07>군수 복구: <04>귀관이 군수시설 통제권을 확보했습니다.");
 	Set Switch("Switch151", set);
 }
 
@@ -310,7 +310,7 @@ Conditions:
 	Bring("Current Player", "Terran Barracks", "BaseEntrance", At most, 0);
 	Bring("Current Player", "Terran Factory", "BaseEntrance", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Display Text Message(Always Display, "<07>군수 복구: <04>귀관이 군수시설 통제권을 확보했습니다.");
 	Set Switch("Switch151", set);
 }
 
@@ -321,7 +321,7 @@ Conditions:
 	Bring("Current Player", "Terran Barracks", "BaseEntrance", At most, 0);
 	Bring("Current Player", "Terran Factory", "BaseEntrance", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Display Text Message(Always Display, "<07>군수 복구: <04>귀관이 군수시설 통제권을 확보했습니다.");
 	Set Switch("Switch151", set);
 }
 
@@ -332,6 +332,6 @@ Conditions:
 	Bring("Current Player", "Terran Barracks", "BaseEntrance", At most, 0);
 	Bring("Current Player", "Terran Factory", "BaseEntrance", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<07>군수 복구: <04>당신이 군수시설 통제권을 확보했습니다.");
+	Display Text Message(Always Display, "<07>군수 복구: <04>귀관이 군수시설 통제권을 확보했습니다.");
 	Set Switch("Switch151", set);
 }

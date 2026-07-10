@@ -3,17 +3,19 @@
 //  각 웨이브는 30초 전 P5 Spawn 집결을 보여준 뒤 출발 시 MainLoad1~2를 보여준다.
 //-----------------------------------------------------------------//
 
-// 웨이브 1 - 4분 후 (정찰조)
+// 웨이브 1 - 정찰조 (Elapsed 210 집결 / 240 출발, 실제 약 2:20 / 2:40)
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 210);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1"); //1차 정찰조 : 네 경로에 저글링을 균등 배치
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1"); //1차부터 최소 대공 대응력을 포함
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
 }
 Trigger("All Players"){
@@ -23,7 +25,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Spawn1");
-	Display Text Message(Always Display, "<1A>노바: <04>빠른 소형 생체신호가 움직입니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>북서쪽 군락 선발대 접근.");
 }
 Trigger("All Players"){
 Conditions:
@@ -33,7 +35,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("BaseEntrance");
-	Display Text Message(Always Display, "<03>호크: <04>적이 진입로로 접근한다. 표시한 지점에서 막아라.");
+	Display Text Message(Always Display, "<03>발렌: <04>첫 접촉이다. 표시한 지점에서 막고 입구 뒤로 흘리지 마라.");
 }
 Trigger("Player 1"){
 Conditions:
@@ -69,11 +71,14 @@ Conditions:
 	Elapsed Time(At least, 240);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Order("Player 5", "Zerg Ultralisk", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn3", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn4", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol); //정찰조 히드라 : 저글링과 함께 플레이어 전선으로 진군
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Hydralisk", "P5 Spawn4", "Player Destination", Patrol);
 }
 Trigger("Player 1"){
 Conditions:
@@ -146,7 +151,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("AttackPoint1");
-	Display Text Message(Always Display, "<1A>노바: <04>전방에서 작은 지휘 신호가 잡힙니다. 저 개체를 끊으면 군락 반응이 흔들릴 겁니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>전방에서 공세를 묶는 지휘 신호가 잡힙니다. 저 정신체를 끊으면 북서쪽 압박이 약해집니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -155,15 +160,15 @@ Conditions:
 	Elapsed Time(At least, 1085);
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>좋다. 타격대를 보내라. 방어선 숨통이 트일 거다.");
+	Display Text Message(Always Display, "<03>발렌: <04>버티기만 하면 다시 밀린다. 타격대를 보내 첫 전선을 앞으로 옮긴다.");
 }
 
-// 18:10 공개 안내 - 전방 정신체 제거 시 자원 확보 가능함을 알림 (호크 대사 이후, 정신체 존재 시 1회)
+// 18:10 공개 안내 - 전방 정신체 제거 시 자원 확보 가능함을 알림 (발렌 대사 이후, 정신체 존재 시 1회)
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Switch("Switch148", Not Set);                          //자원 안내 미표시 (값싼 가드 먼저)
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
-	Elapsed Time(At least, 1090);                          //18:10 시점 (호크 대사 5초 후)
+	Elapsed Time(At least, 1090);                          //18:10 시점 (발렌 대사 5초 후)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 존재 시 (스캔, 마지막)
 Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>전방의 저그 정신체를 제거하면 지휘 교란과 함께 상당한 자원을 확보할 수 있습니다.");
@@ -182,21 +187,23 @@ Actions:
 	Kill Unit At Location("Player 4", "Map Revealer", 64, "AttackPoint1");
 }
 
-// 웨이브 2 - 8분 후
+// 웨이브 2 - 정면/공중 혼합 공세 (Elapsed 450 집결 / 480 출발, 실제 약 5:00 / 5:20)
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 450);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1"); //2차 지상 전위 : 네 경로에 3기씩 배치
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1"); //2차 지상/대공 화력 : 네 경로에 2기씩 배치
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn1"); //2차 공중 우회 압박 : 전 난이도 공통 2기
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
 }
 Trigger("All Players"){
@@ -206,14 +213,14 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Spawn1");
-	Display Text Message(Always Display, "<1A>노바: <04>신호가 다시 움직입니다. 수와 속도가 늘었습니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>북서쪽 군락 2차 공세. 소수 뮤탈리스크 혼입.");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 455);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>압박이 올라간다. 첫 방어선이 버틸 수 있게 미리 보강해라.");
+	Display Text Message(Always Display, "<03>발렌: <04>규모가 커졌다. 화력을 입구 한 점에 모아라. 부서진 건 바로 수리해서 전선을 유지한다.");
 }
 Trigger("Player 1"){
 Conditions:
@@ -257,6 +264,8 @@ Actions:
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn3", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn4", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn1", "Player Destination", Patrol); //소수 뮤탈리스크 : 입구를 넘어 후방 인프라까지 압박
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn2", "Player Destination", Patrol);
 }
 Trigger("Player 1"){
 Conditions:
@@ -301,25 +310,29 @@ Actions:
 	Remove Unit("Player 4", "Map Revealer");
 }
 
-// 웨이브 3 - 11분 후
+// 웨이브 3 - 잠복/공중 복합 공세 (Elapsed 630 집결 / 660 출발, 실제 약 7:00 / 7:20)
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 630);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1"); //3차 전위 : 네 경로에 저글링 2기씩 배치
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn1"); //3차 주력 화력 : 총 10기 분산 배치
+	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn1"); //탐지 요구 병력 : 총 3기
+	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn1"); //후방 우회 압박 : 전 난이도 기본 2기
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Scourge", 2, "P5 Spawn1"); //플레이어 공중 병력 억제 : 전 난이도 기본 4기
+	Create Unit("Player 5", "Zerg Scourge", 2, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Guardian", 1, "P5 Spawn1"); //차기 공세 대비 압박 : 장거리 가디언은 정확히 1기만 포함
 	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
 }
 Trigger("All Players"){
@@ -329,14 +342,14 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Spawn1");
-	Display Text Message(Always Display, "<1A>노바: <04>지하 진동 감지. 잠복형 개체가 섞였습니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>잠복형 개체와 가디언 혼입. 탐지와 대공 화력 필요.");
 }
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Elapsed Time(At least, 635);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>전선을 좁게 보지 마라. 탐지를 갖추고 병력 간격을 유지해라.");
+	Display Text Message(Always Display, "<03>발렌: <04>탐지를 유지하고 병력 간격을 벌려라. 한 번에 휩쓸리지 마라.");
 }
 Trigger("Player 1"){
 Conditions:
@@ -384,6 +397,15 @@ Actions:
 	Order("Player 5", "Zerg Lurker", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Lurker", "P5 Spawn3", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Lurker", "P5 Spawn4", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn1", "Player Destination", Patrol); //뮤탈리스크 : 지상 주력과 동시에 후방으로 진입
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Mutalisk", "P5 Spawn4", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Scourge", "P5 Spawn1", "Player Destination", Patrol); //스커지 : 플레이어 공중 병력 요격
+	Order("Player 5", "Zerg Scourge", "P5 Spawn2", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Scourge", "P5 Spawn3", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Scourge", "P5 Spawn4", "Player Destination", Patrol);
+	Order("Player 5", "Zerg Guardian", "P5 Spawn1", "Player Destination", Patrol); //가디언 1기 : 방어 인프라 사거리 밖에서 장거리 압박
 	Order("Player 5", "Zerg Overlord", "P5 Scout", "Player Destination", Move);
 }
 Trigger("Player 1"){

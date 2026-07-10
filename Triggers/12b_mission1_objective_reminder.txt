@@ -26,8 +26,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Home");
-	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 <11>주황색 저그<04> 군락 신호가 여전히 강합니다. 핵심 구조물이 남아 있습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>방어선만 붙잡고 있으면 자원이 말라간다. 여력이 생기면 북서쪽 <11>주황색 저그<04> 군락을 압박해라.");
+	Display Text Message(Always Display, "<07>[현재 목표] <04>북서쪽 <11>주황색 저그<04> 군락의 핵심 생산 구조를 파괴하십시오.");
 }
 
 Trigger("Player 8"){
@@ -64,8 +63,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Home");
-	Display Text Message(Always Display, "<1A>노바: <04>북서쪽 <11>주황색 저그<04> 군락의 지휘 구조가 아직 살아 있습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>전선을 넓히려면 자원이 필요하다. 북서쪽 <11>주황색 저그<04> 군락을 무너뜨려 자원 지대를 확보해라.");
+	Display Text Message(Always Display, "<07>[현재 목표] <04>북서쪽 <11>주황색 저그<04> 군락을 무너뜨려 첫 점령지와 자원 지대를 확보하십시오.");
 }
 
 Trigger("Player 8"){

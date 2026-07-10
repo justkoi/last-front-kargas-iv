@@ -14,8 +14,7 @@ Actions:
 	Minimap Ping("P2 Multi");
 	Minimap Ping("P3 Multi");
 	Minimap Ping("P4 Multi");
-	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 갱신. 각 전선 외곽에 아직 확보하지 않은 자원이 있습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>본진 자원만으론 오래 못 버틴다. 여력이 생기면 추가 자원을 확보해라.");
+	Display Text Message(Always Display, "<07>작전 정보: <04>전선 외곽의 버려진 자원 지대를 확보하면 장기 진격에 필요한 보급을 보충할 수 있습니다.");
 }
 Trigger("Player 8"){
 Conditions:

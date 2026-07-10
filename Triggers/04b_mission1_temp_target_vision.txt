@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------//
 //  Mission 1 temporary target vision.
-//  P5 AI starts at Elapsed Time 285; on fastest, 60 real seconds
-//  equals 90 elapsed seconds, so the reveal window is 375 to 465.
+//  P5 AI now starts by difficulty at Elapsed Time 240/190/175/160.
+//  This reveal remains a fixed 60-real-second window from 375 to 465.
 //-----------------------------------------------------------------//
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

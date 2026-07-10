@@ -13,7 +13,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>뮤탈리스크 출현 확인. 기동성이 좋으니 기습에 대비하는 것이 좋겠습니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>뮤탈리스크 출현 확인. 기동성이 높습니다. 대공 기습에 대비하십시오.");
 	Set Switch("Switch97", set);
 	Preserve Trigger();
 }
@@ -26,7 +26,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>뮤탈리스크 출현 확인. 기동성이 좋으니 기습에 대비하는 것이 좋겠습니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>뮤탈리스크 출현 확인. 기동성이 높습니다. 대공 기습에 대비하십시오.");
 	Set Switch("Switch98", set);
 	Preserve Trigger();
 }
@@ -39,7 +39,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>뮤탈리스크 출현 확인. 기동성이 좋으니 기습에 대비하는 것이 좋겠습니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>뮤탈리스크 출현 확인. 기동성이 높습니다. 대공 기습에 대비하십시오.");
 	Set Switch("Switch99", set);
 	Preserve Trigger();
 }
@@ -52,7 +52,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>뮤탈리스크 출현 확인. 기동성이 좋으니 기습에 대비하는 것이 좋겠습니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>뮤탈리스크 출현 확인. 기동성이 높습니다. 대공 기습에 대비하십시오.");
 	Set Switch("Switch100", set);
 	Preserve Trigger();
 }
@@ -65,7 +65,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하는 것이 좋겠습니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하십시오.");
 	Set Switch("Switch101", set);
 	Preserve Trigger();
 }
@@ -78,7 +78,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하는 것이 좋겠습니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하십시오.");
 	Set Switch("Switch102", set);
 	Preserve Trigger();
 }
@@ -91,7 +91,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하는 것이 좋겠습니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하십시오.");
 	Set Switch("Switch103", set);
 	Preserve Trigger();
 }
@@ -104,7 +104,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하는 것이 좋겠습니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>가디언 출현 확인. 느리지만 지상 포격이 강력합니다. 대공 화력을 보강하십시오.");
 	Set Switch("Switch104", set);
 	Preserve Trigger();
 }
@@ -117,7 +117,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>디바우러 출현 확인. 산성 포자가 아군 공중 전력을 약화시킵니다. 지상 대공 화력으로 상대하십시오.");
 	Set Switch("Switch105", set);
 	Preserve Trigger();
 }
@@ -130,7 +130,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>디바우러 출현 확인. 산성 포자가 아군 공중 전력을 약화시킵니다. 지상 대공 화력으로 상대하십시오.");
 	Set Switch("Switch106", set);
 	Preserve Trigger();
 }
@@ -143,7 +143,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>디바우러 출현 확인. 산성 포자가 아군 공중 전력을 약화시킵니다. 지상 대공 화력으로 상대하십시오.");
 	Set Switch("Switch107", set);
 	Preserve Trigger();
 }
@@ -156,7 +156,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>디바우러 출현 확인. 산성 포자로 공중 전력을 약화시킵니다. 공중 유닛으로 상대하기는 어려워 보입니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>디바우러 출현 확인. 산성 포자가 아군 공중 전력을 약화시킵니다. 지상 대공 화력으로 상대하십시오.");
 	Set Switch("Switch108", set);
 	Preserve Trigger();
 }

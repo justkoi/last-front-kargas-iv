@@ -19,84 +19,84 @@ Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 12);
 Actions:
-	Display Text Message(Always Display, "<07>[병력 승계] <08>플레이어 1<04>의 유닛이 -> <0E>플레이어 2<04>에게 이양되었습니다.");
+	Display Text Message(Always Display, "<07>[병력 승계] <08>적색 지휘관<04>의 잔존 병력이 <0E>청색 지휘관<04> 휘하로 편입되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 13);
 Actions:
-	Display Text Message(Always Display, "<07>[병력 승계] <08>플레이어 1<04>의 유닛이 -> <0F>플레이어 3<04>에게 이양되었습니다.");
+	Display Text Message(Always Display, "<07>[병력 승계] <08>적색 지휘관<04>의 잔존 병력이 <0F>청록색 지휘관<04> 휘하로 편입되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 14);
 Actions:
-	Display Text Message(Always Display, "<07>[병력 승계] <08>플레이어 1<04>의 유닛이 -> <10>플레이어 4<04>에게 이양되었습니다.");
+	Display Text Message(Always Display, "<07>[병력 승계] <08>적색 지휘관<04>의 잔존 병력이 <10>보라색 지휘관<04> 휘하로 편입되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 21);
 Actions:
-	Display Text Message(Always Display, "<07>[병력 승계] <0E>플레이어 2<04>의 유닛이 -> <08>플레이어 1<04>에게 이양되었습니다.");
+	Display Text Message(Always Display, "<07>[병력 승계] <0E>청색 지휘관<04>의 잔존 병력이 <08>적색 지휘관<04> 휘하로 편입되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 23);
 Actions:
-	Display Text Message(Always Display, "<07>[병력 승계] <0E>플레이어 2<04>의 유닛이 -> <0F>플레이어 3<04>에게 이양되었습니다.");
+	Display Text Message(Always Display, "<07>[병력 승계] <0E>청색 지휘관<04>의 잔존 병력이 <0F>청록색 지휘관<04> 휘하로 편입되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 24);
 Actions:
-	Display Text Message(Always Display, "<07>[병력 승계] <0E>플레이어 2<04>의 유닛이 -> <10>플레이어 4<04>에게 이양되었습니다.");
+	Display Text Message(Always Display, "<07>[병력 승계] <0E>청색 지휘관<04>의 잔존 병력이 <10>보라색 지휘관<04> 휘하로 편입되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 31);
 Actions:
-	Display Text Message(Always Display, "<07>[병력 승계] <0F>플레이어 3<04>의 유닛이 -> <08>플레이어 1<04>에게 이양되었습니다.");
+	Display Text Message(Always Display, "<07>[병력 승계] <0F>청록색 지휘관<04>의 잔존 병력이 <08>적색 지휘관<04> 휘하로 편입되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 32);
 Actions:
-	Display Text Message(Always Display, "<07>[병력 승계] <0F>플레이어 3<04>의 유닛이 -> <0E>플레이어 2<04>에게 이양되었습니다.");
+	Display Text Message(Always Display, "<07>[병력 승계] <0F>청록색 지휘관<04>의 잔존 병력이 <0E>청색 지휘관<04> 휘하로 편입되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 34);
 Actions:
-	Display Text Message(Always Display, "<07>[병력 승계] <0F>플레이어 3<04>의 유닛이 -> <10>플레이어 4<04>에게 이양되었습니다.");
+	Display Text Message(Always Display, "<07>[병력 승계] <0F>청록색 지휘관<04>의 잔존 병력이 <10>보라색 지휘관<04> 휘하로 편입되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 41);
 Actions:
-	Display Text Message(Always Display, "<07>[병력 승계] <10>플레이어 4<04>의 유닛이 -> <08>플레이어 1<04>에게 이양되었습니다.");
+	Display Text Message(Always Display, "<07>[병력 승계] <10>보라색 지휘관<04>의 잔존 병력이 <08>적색 지휘관<04> 휘하로 편입되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 42);
 Actions:
-	Display Text Message(Always Display, "<07>[병력 승계] <10>플레이어 4<04>의 유닛이 -> <0E>플레이어 2<04>에게 이양되었습니다.");
+	Display Text Message(Always Display, "<07>[병력 승계] <10>보라색 지휘관<04>의 잔존 병력이 <0E>청색 지휘관<04> 휘하로 편입되었습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 43);
 Actions:
-	Display Text Message(Always Display, "<07>[병력 승계] <10>플레이어 4<04>의 유닛이 -> <0F>플레이어 3<04>에게 이양되었습니다.");
+	Display Text Message(Always Display, "<07>[병력 승계] <10>보라색 지휘관<04>의 잔존 병력이 <0F>청록색 지휘관<04> 휘하로 편입되었습니다.");
 }
 
 //----- Register only slots that have actually emitted a heartbeat -----//

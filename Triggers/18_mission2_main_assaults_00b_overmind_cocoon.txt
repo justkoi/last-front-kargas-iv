@@ -113,7 +113,7 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Overmind");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>군락 변이 속도가 비정상적으로 상승합니다. 오버마인드 계열 조직이 직접 촉진하고 있습니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>군락 변이 속도가 비정상적으로 상승합니다. 오버마인드 계열 조직이 직접 촉진하고 있습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -127,7 +127,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Overmind");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>군락 변이 속도가 비정상적으로 상승합니다. 오버마인드 계열 조직이 직접 촉진하고 있습니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>군락 변이 속도가 비정상적으로 상승합니다. 오버마인드 계열 조직이 직접 촉진하고 있습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -137,10 +137,10 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 8772);
 	Switch("Switch40", Set);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>그 고치를 끊으면 다음 공세가 흐트러진다. 타격대를 보내라.");
+	Display Text Message(Always Display, "<03>발렌: <04>그 고치를 끊으면 다음 공세가 흐트러진다. 타격대를 보내라.");
 }
 
-//호크 명령 7초(84틱) 후 별도 트리거로 분리 표시 (같은 프레임 덮어쓰기 방지)
+//발렌 명령 7초(84틱) 후 별도 트리거로 분리 표시 (같은 프레임 덮어쓰기 방지)
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -151,7 +151,7 @@ Actions:
 	Display Text Message(Always Display, "<07>작전 정보: <04>오버마인드 고치를 파괴하면 해당 군락의 다음 주공세 1회가 약화됩니다.");
 }
 
-//약화 공세 직후가 진격 기회라는 교리 안내 - 다시 7초(84틱) 후
+//고치 파괴 = 격분 반격에 대한 보험이라는 교리 안내 - 다시 7초(84틱) 후
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -159,7 +159,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 8940);
 	Switch("Switch40", Set);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>약화된 공세는 쉽게 막힙니다. 그 직후가 진격 기회입니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>고치가 사라지면 다음 반격은 절반 규모로 옵니다. 군락을 건드리기 전에 끊어 둘 가치가 있습니다.");
 }
 
 // Destruction reward and one-shot weakening flag.
@@ -797,7 +797,7 @@ Actions:
 	Preserve Trigger();
 }
 
-// Weakened warning and 10-second spawn delay.
+// Weakened single-line assault alert and 10-second spawn delay.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -809,7 +809,7 @@ Actions:
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>경보: <04>동북쪽 군락 공세 접근. <07>오버마인드 고치 파괴로 규모가 약화되었습니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>동북쪽 군락 공세 접근. <07>오버마인드 고치 파괴로 규모가 약화되었습니다.");
 	Preserve Trigger();
 }
 
@@ -824,7 +824,7 @@ Actions:
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>경보: <04>동남쪽 군락 공세 접근. <07>오버마인드 고치 파괴로 규모가 약화되었습니다.");
+	Display Text Message(Always Display, "<06>[경보] <04>동남쪽 군락 공세 접근. <07>오버마인드 고치 파괴로 규모가 약화되었습니다.");
 	Preserve Trigger();
 }
 

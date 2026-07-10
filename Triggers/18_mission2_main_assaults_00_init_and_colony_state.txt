@@ -39,6 +39,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 12);
 	Switch("Switch50", Not Set);
 Actions:
+	Set Switch("Switch26", clear);
 	Set Switch("Switch27", randomize);
 	Set Switch("Switch28", randomize);
 	Set Switch("Switch29", randomize);
@@ -88,6 +89,7 @@ Actions:
 	Set Deaths("Player 8", "Protoss Fleet Beacon", Set To, 0);
 	Set Deaths("Player 8", "Protoss Photon Cannon", Set To, 0);
 	Set Deaths("Player 8", "Terran Bunker", Set To, 0);
+	Set Deaths("Player 8", "Terran Missile Turret", Set To, 0);
 	Set Deaths("Player 8", "Terran Machine Shop", Set To, 0);
 	Set Deaths("Player 8", "Protoss Templar Archives", Set To, 0);
 	Set Deaths("Player 8", "Protoss Citadel of Adun", Set To, 0);
@@ -623,7 +625,7 @@ Conditions:
 	Switch("Switch136", Set);
 	Deaths("Player 8", "Terran Machine Shop", Exactly, 86);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>양쪽 군락의 생체신호가 임계치 아래로 떨어졌습니다. 군체의식 신호가 서로를 붙잡지 못합니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>양쪽 군락의 생체신호가 임계치 아래로 떨어졌습니다. 군체의식 신호가 서로를 붙잡지 못합니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -632,7 +634,7 @@ Conditions:
 	Switch("Switch136", Set);
 	Deaths("Player 8", "Terran Machine Shop", Exactly, 170);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>좋아. 적 전력이 크게 약화됐다. 남은 군락을 밀어붙여 끝낸다.");
+	Display Text Message(Always Display, "<03>발렌: <04>좋아. 적 전력이 크게 약화됐다. 남은 군락을 밀어붙여 끝낸다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -641,7 +643,7 @@ Conditions:
 	Switch("Switch136", Set);
 	Deaths("Player 8", "Terran Machine Shop", Exactly, 254);
 Actions:
-	Display Text Message(Always Display, "<07>시스템: <04>이제 군락이 해처리 파괴에도 분노하지 않습니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>군체 반응이 안정됐습니다. 이제 해처리 붕괴만으로는 군락이 격분하지 않습니다.");
 }
 
 // If a colony's MainBase tech core collapses, lock that colony's main assault.
@@ -855,6 +857,40 @@ Actions:
 	Set Switch("Switch38", set);
 }
 
+// 첫 군락 붕괴 보상이 확정된 뒤 팀 공통 칭찬 화자를 50:50으로 한 번만 추첨한다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Switch("Switch37", Set); //동북쪽 군락 붕괴 보상 지급 완료
+	Switch("Switch38", Not Set); //동남쪽 군락은 아직 생존
+	Deaths("Player 8", "Terran Missile Turret", Exactly, 0); //칭찬/보상 표시 시퀀스 미시작
+Actions:
+	Set Switch("Switch26", randomize); //칭찬 화자 1회 추첨 : clear=엘리아, set=발렌
+	Set Deaths("Player 8", "Terran Missile Turret", Set To, 1); //칭찬 표시 시퀀스 시작
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Switch("Switch38", Set); //동남쪽 군락 붕괴 보상 지급 완료
+	Switch("Switch37", Not Set); //동북쪽 군락은 아직 생존
+	Deaths("Player 8", "Terran Missile Turret", Exactly, 0); //칭찬/보상 표시 시퀀스 미시작
+Actions:
+	Set Switch("Switch26", randomize); //칭찬 화자 1회 추첨 : clear=엘리아, set=발렌
+	Set Deaths("Player 8", "Terran Missile Turret", Set To, 1); //칭찬 표시 시퀀스 시작
+}
+
+// 칭찬 후 84틱(7초)이 지나면 별도 군수지원 보상 문구를 표시한다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Terran Missile Turret", At least, 1); //첫 군락 붕괴 표시 시퀀스 진행 중
+	Deaths("Player 8", "Terran Missile Turret", At most, 108); //보상 표시가 끝날 때까지만 증가
+Actions:
+	Set Deaths("Player 8", "Terran Missile Turret", Add, 1); //12틱=1초 기준 표시 간격 누적
+	Preserve Trigger();
+}
+
 Trigger("Player 7"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -906,9 +942,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi5");
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. <1F>미네랄 +2000  <07>가스 +1000");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동북쪽 전선: 확보\n- 최종 목표: 동남쪽 <16>하얀색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +2000  <07>가스 +1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -922,9 +956,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi5");
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. <1F>미네랄 +2000  <07>가스 +1000");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동북쪽 전선: 확보\n- 최종 목표: 동남쪽 <16>하얀색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +2000  <07>가스 +1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -939,9 +971,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi5");
-	Display Text Message(Always Display, "<1A>노바: <04>동북쪽 <15>갈색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. <1F>미네랄 +2000  <07>가스 +1000");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동북쪽 전선: 확보\n- 최종 목표: 동남쪽 <16>하얀색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +2000  <07>가스 +1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -954,9 +984,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi6");
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. <1F>미네랄 +2000  <07>가스 +1000");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동남쪽 전선: 확보\n- 최종 목표: 동북쪽 <15>갈색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +2000  <07>가스 +1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -970,9 +998,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi6");
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
-	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. <1F>미네랄 +2000  <07>가스 +1000");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동남쪽 전선: 확보\n- 최종 목표: 동북쪽 <15>갈색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +2000  <07>가스 +1000");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -987,8 +1013,79 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi6");
-	Display Text Message(Always Display, "<1A>노바: <04>동남쪽 <16>하얀색 저그<04> 군락의 핵심 반응 소실. 생산망은 완전히 끊겼습니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 전선이 버티고 있다. 잔여 병력을 정리해라.");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동남쪽 전선: 확보\n- 최종 목표: 동북쪽 <15>갈색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +2000  <07>가스 +1000");
+}
+
+// Switch26 clear: 엘리아가 붕괴를 분석하며 칭찬한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Terran Missile Turret", At least, 1); //화자 추첨 완료 뒤 즉시 표시
+	Deaths("Player 8", "Terran Missile Turret", At most, 24); //초기 2초 표시 창
+	Switch("Switch37", Set); //동북쪽 군락 붕괴
+	Switch("Switch38", Not Set); //첫 군락 붕괴 보상만 표시
+	Switch("Switch26", Not Set); //무작위 화자 : 엘리아
+Actions:
+	Display Text Message(Always Display, "<03>[전선 확보 2/3] <1B>엘리아: <04>동북쪽 군락의 생산 반응이 완전히 소실됐습니다. 잘하셨습니다, 사령관.");
+}
+
+// Switch26 set: 발렌이 전과를 확인하고 다음 진격을 명령한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Terran Missile Turret", At least, 1); //화자 추첨 완료 뒤 즉시 표시
+	Deaths("Player 8", "Terran Missile Turret", At most, 24); //초기 2초 표시 창
+	Switch("Switch37", Set); //동북쪽 군락 붕괴
+	Switch("Switch38", Not Set); //첫 군락 붕괴 보상만 표시
+	Switch("Switch26", Set); //무작위 화자 : 발렌
+Actions:
+	Display Text Message(Always Display, "<03>[전선 확보 2/3] <03>발렌: <04>잘했다, 선봉대. 동북쪽 군락은 끝났다. 남은 군락까지 그대로 밀어붙인다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Terran Missile Turret", At least, 1); //화자 추첨 완료 뒤 즉시 표시
+	Deaths("Player 8", "Terran Missile Turret", At most, 24); //초기 2초 표시 창
+	Switch("Switch38", Set); //동남쪽 군락 붕괴
+	Switch("Switch37", Not Set); //첫 군락 붕괴 보상만 표시
+	Switch("Switch26", Not Set); //무작위 화자 : 엘리아
+Actions:
+	Display Text Message(Always Display, "<03>[전선 확보 2/3] <1B>엘리아: <04>동남쪽 군락의 생산 반응이 완전히 소실됐습니다. 잘하셨습니다, 사령관.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Terran Missile Turret", At least, 1); //화자 추첨 완료 뒤 즉시 표시
+	Deaths("Player 8", "Terran Missile Turret", At most, 24); //초기 2초 표시 창
+	Switch("Switch38", Set); //동남쪽 군락 붕괴
+	Switch("Switch37", Not Set); //첫 군락 붕괴 보상만 표시
+	Switch("Switch26", Set); //무작위 화자 : 발렌
+Actions:
+	Display Text Message(Always Display, "<03>[전선 확보 2/3] <03>발렌: <04>잘했다, 선봉대. 동남쪽 군락은 끝났다. 남은 군락까지 그대로 밀어붙인다.");
+}
+
+// 칭찬 84틱(7초) 후 실제 지급된 자원을 별도 시스템 문구로 확인시킨다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Terran Missile Turret", At least, 86); //칭찬 표시 뒤 84틱 경과
+	Deaths("Player 8", "Terran Missile Turret", At most, 108); //2초 보상 표시 창
+	Switch("Switch37", Set); //동북쪽 군락 붕괴 보상
+	Switch("Switch38", Not Set); //첫 군락 붕괴 보상만 표시
+Actions:
+	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. <1F>미네랄 +2000  <07>가스 +1000");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
+	Deaths("Player 8", "Terran Missile Turret", At least, 86); //칭찬 표시 뒤 84틱 경과
+	Deaths("Player 8", "Terran Missile Turret", At most, 108); //2초 보상 표시 창
+	Switch("Switch38", Set); //동남쪽 군락 붕괴 보상
+	Switch("Switch37", Not Set); //첫 군락 붕괴 보상만 표시
+Actions:
 	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. <1F>미네랄 +2000  <07>가스 +1000");
 }
 // Reveal a colony once its Hatchery count drops below three.

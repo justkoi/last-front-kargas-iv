@@ -41,7 +41,7 @@ Actions:
 	Create Unit("Player 4", "Map Revealer", 1, "P5 Multi5");
 }
 
-// 궤도스캔 연출 (스캔음 + 핑 + 노바 대사) - 28:00
+// 궤도스캔 연출 (스캔음 + 핑 + 엘리아 대사) - 28:00
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
@@ -51,6 +51,5 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("P5 Base");
-	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 갱신. 북서쪽에서 미개발 대형 자원 지대를 포착했습니다.");
-	Display Text Message(Always Display, "<1A>노바: <04>지금은 <11>주황색 저그<04>가 통째로 빨아들이고 있군요. ...전선이 길어지면 우리에게도 저만한 자원이 필요할 텐데요.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>북서쪽 대형 자원 지대를 확인했습니다. 주황색 군락을 무너뜨리면 장기 진격에 필요한 보급을 확보할 수 있습니다.");
 }

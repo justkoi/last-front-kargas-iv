@@ -117,10 +117,7 @@ Conditions:
 Actions:
 	Minimap Ping("P7 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Set Mission Objectives("<03>미션 2: 마지막 군락\n\n<04>- 목표: 동남쪽 <16>하얀색 저그<04> 본진 파괴\n- 클리어 조건: 본진의 해처리 / 레어 / 하이브를 하나도 남기지 않고 파괴\n- 경고: 최후 공세 임박. 전선을 사수할 것");
-	Display Text Message(Always Display, "<13><06>[비상] 남은 군락 반응 급상승");
-	Display Text Message(Always Display, "<1A>노바: <04>잠깐... 무너진 군락의 신경파가 반대편으로 역류합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>전선 유지. 흩어지지 마라. 남은 군락이 마지막 병력을 긁어모은다.");
+	Display Text Message(Always Display, "<06>[최후 공세] <04>남은 동남쪽 군락의 예비 병력 반응 급상승.");
 	Set Switch("Switch76", set);
 }
 
@@ -134,11 +131,29 @@ Conditions:
 Actions:
 	Minimap Ping("P6 Base");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Set Mission Objectives("<03>미션 2: 마지막 군락\n\n<04>- 목표: 동북쪽 <15>갈색 저그<04> 본진 파괴\n- 클리어 조건: 본진의 해처리 / 레어 / 하이브를 하나도 남기지 않고 파괴\n- 경고: 최후 공세 임박. 전선을 사수할 것");
-	Display Text Message(Always Display, "<13><06>[비상] 남은 군락 반응 급상승");
-	Display Text Message(Always Display, "<1A>노바: <04>잠깐... 무너진 군락의 신경파가 반대편으로 역류합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>전선 유지. 흩어지지 마라. 남은 군락이 마지막 병력을 긁어모은다.");
+	Display Text Message(Always Display, "<06>[최후 공세] <04>남은 동북쪽 군락의 예비 병력 반응 급상승.");
 	Set Switch("Switch76", set);
+}
+
+// 붕괴 헤더 7초 후: 남은 군락의 최후 반응을 엘리아가 분석한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 204);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 228);
+Actions:
+	Display Text Message(Always Display, "<1B>엘리아: <04>무너진 군락의 잔존 신호가 반대편으로 몰립니다. 남은 군락이 예비 병력을 전부 깨우고 있습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 204);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 228);
+Actions:
+	Display Text Message(Always Display, "<1B>엘리아: <04>무너진 군락의 잔존 신호가 반대편으로 몰립니다. 남은 군락이 예비 병력을 전부 깨우고 있습니다.");
 }
 
 // 15-second warning.
@@ -154,7 +169,6 @@ Actions:
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근까지 15초.");
 	Set Switch("Switch77", set);
 }
 
@@ -170,7 +184,6 @@ Actions:
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근까지 15초.");
 	Set Switch("Switch77", set);
 }
 
@@ -234,8 +247,7 @@ Actions:
 	Minimap Ping("P7 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Set Countdown Timer(Set To, 0);
-	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근.");
-	Display Text Message(Always Display, "<03>호크: <04>각 전선은 자기 구역을 붙잡아라. 밀리면 중앙까지 한 번에 무너진다.");
+	Display Text Message(Always Display, "<06>[최후 공세] <04>동남쪽 군락 전 병력 접근.");
 	Set Switch("Switch78", set);
 }
 
@@ -252,9 +264,29 @@ Actions:
 	Minimap Ping("P6 Spawn4");
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Set Countdown Timer(Set To, 0);
-	Display Text Message(Always Display, "<06>경보: <04>최후 공세 접근.");
-	Display Text Message(Always Display, "<03>호크: <04>각 전선은 자기 구역을 붙잡아라. 밀리면 중앙까지 한 번에 무너진다.");
+	Display Text Message(Always Display, "<06>[최후 공세] <04>동북쪽 군락 전 병력 접근.");
 	Set Switch("Switch78", set);
+}
+
+// 최후 공세 발진 7초 후: 발렌이 확보한 전선을 지키도록 명령한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 444);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 468);
+Actions:
+	Display Text Message(Always Display, "<03>발렌: <04>진격 중지. 지금 확보한 전선을 지킨다. 여기서 밀리면 행성 절반을 다시 내준다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 444);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 468);
+Actions:
+	Display Text Message(Always Display, "<03>발렌: <04>진격 중지. 지금 확보한 전선을 지킨다. 여기서 밀리면 행성 절반을 다시 내준다.");
 }
 
 // P7 batch 1 at 30s: 3 Ultra, 6 Zergling, 1 Defiler, 1 Overlord per front.
@@ -958,7 +990,7 @@ Conditions:
 Actions:
 	Run AI Script("+Vi6"); //현재 플레이어가 P7의 시야를 공유받음
 	Minimap Ping("P7 Base"); //남은 군락 위치 강조
-	Display Text Message(Always Display, "<1A>노바: <04>군락이 마지막 예비 병력까지 모두 방출했습니다. 군락의 감각망을 역추적해 30초간 시야를 공유합니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>남은 군락이 예비 병력을 전부 방출했습니다. 재집결 반응도 없습니다. 사령관, 지금 전군을 진격시켜야 합니다.");
 }
 
 // P6 remains (Switch75): players gain P6's vision.
@@ -971,7 +1003,30 @@ Conditions:
 Actions:
 	Run AI Script("+Vi5"); //현재 플레이어가 P6의 시야를 공유받음
 	Minimap Ping("P6 Base"); //남은 군락 위치 강조
-	Display Text Message(Always Display, "<1A>노바: <04>군락이 마지막 예비 병력까지 모두 방출했습니다. 군락의 감각망을 역추적해 30초간 시야를 공유합니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>남은 군락이 예비 병력을 전부 방출했습니다. 재집결 반응도 없습니다. 사령관, 지금 전군을 진격시켜야 합니다.");
+}
+
+// 엘리아의 최종 판단 7초 후: 발렌이 분석을 즉시 신뢰하고 총진격을 명령한다.
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch74", Set);
+	Switch("Switch90", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 876);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 900);
+Actions:
+	Display Text Message(Always Display, "<03>발렌: <04>좋다. 엘리아의 판단대로 간다. 전군 진격. 오늘 이 전선을 행성 끝까지 밀어붙인다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch75", Set);
+	Switch("Switch90", Set);
+	Deaths("Player 8", "Protoss Dark Archon", At least, 876);
+	Deaths("Player 8", "Protoss Dark Archon", At most, 900);
+Actions:
+	Display Text Message(Always Display, "<03>발렌: <04>좋다. 엘리아의 판단대로 간다. 전군 진격. 오늘 이 전선을 행성 끝까지 밀어붙인다.");
 }
 
 // Share expiry 30 DC seconds (360 ticks) after batch 10: 792 + 360 = 1152.

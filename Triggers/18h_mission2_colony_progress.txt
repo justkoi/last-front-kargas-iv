@@ -19,7 +19,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //P6 군락 생존 중일 때만
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04><15>갈색 저그<04> 군락 생산망에 균열이 보입니다. 타격이 누적되고 있어요.");
+	Display Text Message(Always Display, "<03>[동북쪽 전선] <04>갈색 군락 외곽 생산망 붕괴.");
 }
 
 // P6 누적 10 - 절반 붕괴 보고
@@ -29,7 +29,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //P6 군락 생존 중일 때만
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04><15>갈색 저그<04> 군락 생산망 절반 붕괴. 회복 속도가 눈에 띄게 느려졌습니다.");
+	Display Text Message(Always Display, "<03>[동북쪽 전선] <04>갈색 군락 생산망 절반 붕괴.");
 }
 
 // P6 누적 15 - 한계 임박, 마무리 독려
@@ -39,7 +39,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch31", Not Set); //P6 군락 생존 중일 때만
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04><15>갈색 저그<04> 군락이 한계다. 다음 한 방이면 무너진다 - 몰아쳐라.");
+	Display Text Message(Always Display, "<03>발렌: <04>동북쪽 군락이 한계다. 다음 타격으로 저 전선을 완전히 가져온다.");
 }
 
 //==================== P7 (하얀색 저그) ====================//
@@ -51,7 +51,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //P7 군락 생존 중일 때만
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04><16>하얀색 저그<04> 군락 생산망에 균열이 보입니다. 타격이 누적되고 있어요.");
+	Display Text Message(Always Display, "<03>[동남쪽 전선] <04>하얀색 군락 외곽 생산망 붕괴.");
 }
 
 // P7 누적 10 - 절반 붕괴 보고
@@ -61,7 +61,7 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //P7 군락 생존 중일 때만
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04><16>하얀색 저그<04> 군락 생산망 절반 붕괴. 회복 속도가 눈에 띄게 느려졌습니다.");
+	Display Text Message(Always Display, "<03>[동남쪽 전선] <04>하얀색 군락 생산망 절반 붕괴.");
 }
 
 // P7 누적 15 - 한계 임박, 마무리 독려
@@ -71,5 +71,5 @@ Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션 단계 : 미션2 진행 중
 	Switch("Switch32", Not Set); //P7 군락 생존 중일 때만
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04><16>하얀색 저그<04> 군락이 한계다. 다음 한 방이면 무너진다 - 몰아쳐라.");
+	Display Text Message(Always Display, "<03>발렌: <04>동남쪽 군락이 한계다. 다음 타격으로 저 전선을 완전히 가져온다.");
 }

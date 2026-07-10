@@ -12,7 +12,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 864);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04>군락에서 대규모 병력 결집이 시작됐습니다. 첫 공세 전까지 대비를 끝내야 합니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>북서쪽 군락의 붕괴에 남은 두 군락이 반응하고 있습니다. 첫 공세 전까지 대비를 끝내야 합니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -21,5 +21,5 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 924);
 	Deaths("Player 8", "Terran Vulture", At most, 948);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>주공세에 대비해라. 지금부터 수리·집결·방어선 재정비를 마쳐라.");
+	Display Text Message(Always Display, "<03>발렌: <04>주공세에 대비해라. 지금부터 수리·집결·방어선 재정비를 마쳐라.");
 }

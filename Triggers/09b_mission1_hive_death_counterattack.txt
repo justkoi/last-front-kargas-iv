@@ -15,8 +15,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Minimap Ping("P5 Home");
-	Display Text Message(Always Display, "<1A>노바: <04>하이브 붕괴 확인. 잠깐... 군락 내부 신호가 역류합니다.");
-	Display Text Message(Always Display, "<03>호크: <04>잔존 지상군이 한꺼번에 깨어난다. 전선을 유지해라.");
+	Display Text Message(Always Display, "<06>[반격] <04>하이브 붕괴와 함께 잔존 지상군이 일제히 전선으로 이동합니다.");
 }
 
 Trigger("Player 5"){

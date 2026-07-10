@@ -4,11 +4,8 @@ Conditions:
 	Elapsed Time(At most, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
-	Display Text Message(Always Display, " ");
-	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<13><03>작전 개시: 카르가스 IV");
-	Display Text Message(Always Display, "<13><03>==========================================");
-	Set Mission Objectives("<03>미션 1: 첫 전선\n\n<04>- 목표: 북서쪽 <11>주황색 저그<04> 본진 파괴\n- 클리어 조건: 본진의 해처리 / 레어 / 하이브를 하나도 남기지 않고 파괴\n- 주의: 미션1 중 다른 색 저그를 공격하면 그 군락이 깨어남");
+	Display Text Message(Always Display, "<13><03>[작전 개시] 카르가스 IV 첫 전선");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 0/3\n\n<04>- 현재 전선: 착륙지 진입로\n- 목표: 북서쪽 <11>주황색 저그<04> 군락의 해처리 / 레어 / 하이브 전멸\n- 주의: 다른 군락을 공격하면 해당 전선도 활성화됨");
 	Set Deaths("Player 8", "Terran Valkyrie", Set To, 1);
 	Set Deaths("Player 5", "Zerg Sunken Colony", Set To, 0);
 	Set Deaths("Player 5", "Zerg Spore Colony", Set To, 0);
@@ -58,7 +55,7 @@ Conditions:
 	Elapsed Time(At least, 4);
 	Elapsed Time(At most, 6);
 Actions:
-	Display Text Message(Always Display, "<03>카르가스 IV 작전사령관 호크: <04>현장 지휘관들, 교신 확인.");
+	Display Text Message(Always Display, "<03>작전사령관 발렌: <04>현장 지휘관들, 교신 확인.");
 }
 
 Trigger("All Players"){
@@ -66,7 +63,7 @@ Conditions:
 	Elapsed Time(At least, 11);
 	Elapsed Time(At most, 13);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>카르가스 전선은 이미 무너졌다. 우리가 온 이유는 하나다.");
+	Display Text Message(Always Display, "<03>발렌: <04>지킬 수 있는 땅은 입구 하나뿐이다. 여기서 첫 전선을 세운다.");
 }
 
 Trigger("All Players"){
@@ -74,7 +71,7 @@ Conditions:
 	Elapsed Time(At least, 18);
 	Elapsed Time(At most, 20);
 Actions:
-	Display Text Message(Always Display, "<04>여기에 새 거점을 세우고, 카르가스 IV의 전세를 다시 뒤집는 것이다.");
+	Display Text Message(Always Display, "<03>발렌: <04>방어가 끝이 아니다. 적이 흔들리면 한 선씩 앞으로 밀어낸다.");
 }
 
 Trigger("All Players"){
@@ -82,7 +79,7 @@ Conditions:
 	Elapsed Time(At least, 25);
 	Elapsed Time(At most, 27);
 Actions:
-	Display Text Message(Always Display, "<1A>작전 정보장교 노바: <04>사령관님, 주변 정찰이 필요합니다. 궤도 스캔을 올리겠습니다.");
+	Display Text Message(Always Display, "<1B>전선분석장교 엘리아: <04>공세 경로부터 확인하겠습니다. 잠시만... 궤도 스캔은 정상입니다.");
 }
 
 Trigger("Player 1"){
@@ -175,7 +172,7 @@ Conditions:
 	Elapsed Time(At most, 34);
 Actions:
 	Minimap Ping("BaseEntrance");
-	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 완료. 우리 거점으로 들어오는 길은 하나뿐입니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>스캔 완료. 우리 거점으로 들어오는 길은 하나뿐입니다.");
 }
 
 Trigger("All Players"){
@@ -183,7 +180,7 @@ Conditions:
 	Elapsed Time(At least, 39);
 	Elapsed Time(At most, 41);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>저 입구는 반드시 사수해야 한다. 방어를 준비해라.");
+	Display Text Message(Always Display, "<03>발렌: <04>저 입구가 지금 우리 전선의 전부다. 방어를 준비해라.");
 }
 
 Trigger("All Players"){
@@ -191,7 +188,7 @@ Conditions:
 	Elapsed Time(At least, 46);
 	Elapsed Time(At most, 48);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>정찰 보고에 따르면, 북서쪽 자원 지대를 <11>주황색 저그<04> 군락이 점령 중입니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>북서쪽 자원 지대와 진출로는 <11>주황색 저그<04> 군락이 장악하고 있습니다.");
 }
 
 Trigger("All Players"){
@@ -199,7 +196,7 @@ Conditions:
 	Elapsed Time(At least, 53);
 	Elapsed Time(At most, 55);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>우리에게 남은 자원이 얼마 없다. 북서쪽 자원 지대를 확보해야 한다.");
+	Display Text Message(Always Display, "<03>발렌: <04>방어선을 굳힌 뒤 북서쪽 군락을 친다. 저곳이 첫 점령지다.");
 }
 
 Trigger("All Players"){
@@ -209,7 +206,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Minimap Ping("MultiKey");
-	Display Text Message(Always Display, "<1A>노바: <04>그 외에 가까운 곳에 버려진 자원지대가 있습니다. <11>저그 점막 뿌리<04>가 뒤덮고 있어, 뿌리를 파괴해야 차지할 수 있습니다.");
+	Display Text Message(Always Display, "<07>작전 정보: <04>주변의 <11>저그 점막 뿌리<04>를 제거하면 버려진 자원 지대를 확보할 수 있습니다.");
 }
 
 Trigger("All Players"){
@@ -217,7 +214,7 @@ Conditions:
 	Elapsed Time(At least, 67);
 	Elapsed Time(At most, 69);
 Actions:
-	Display Text Message(Always Display, "<04>먼저 방어를 단단히 한다. 진출은 그 다음이다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>현재 전력으로는 방어가 우선입니다. 공세가 비는 순간을 찾겠습니다.");
 }
 
 Trigger("All Players"){
@@ -225,7 +222,7 @@ Conditions:
 	Elapsed Time(At least, 74);
 	Elapsed Time(At most, 76);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>적이 우리 위치를 파악한 것 같습니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>적 선발대가 우리 위치를 포착했습니다. 첫 접촉이 곧 시작됩니다.");
 }
 
 Trigger("All Players"){
@@ -233,7 +230,7 @@ Conditions:
 	Elapsed Time(At least, 81);
 	Elapsed Time(At most, 83);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>병력을 흩뿌리지 말고 진입로 방어에 집중해라.");
+	Display Text Message(Always Display, "<03>발렌: <04>병력을 흩뜨리지 마라. 첫 공세는 입구에서 받아낸다.");
 }
 
 Trigger("All Players"){
@@ -243,7 +240,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Minimap Ping("BaseEntrance");
-	Display Text Message(Always Display, "<1A>노바: <04>거점 입구에 버려진 군수시설이 있습니다. 배럭과 팩토리 같군요.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>입구의 버려진 군수시설은 복구할 수 있습니다. 전선을 유지하면 통제권을 회수하겠습니다.");
 }
 
 Trigger("All Players"){
@@ -251,5 +248,5 @@ Conditions:
 	Elapsed Time(At least, 95);
 	Elapsed Time(At most, 97);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>복구하려면 시간이 걸리겠지만, 그동안은 입구를 막는 방어벽으로도 쓸 수 있겠군.");
+	Display Text Message(Always Display, "<03>발렌: <04>좋다. 지금은 방벽으로 쓰고, 복구가 끝나면 다음 진격의 발판으로 삼는다.");
 }

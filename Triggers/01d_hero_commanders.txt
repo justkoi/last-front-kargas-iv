@@ -1,0 +1,1234 @@
+//=================================================================//
+//  발렌/엘리아 영웅 지휘 시스템
+//  - 시작: P9가 두 영웅 생성 후 활성 P1~P4에 완전 무작위 배속
+//  - 2명 이상: 서로 다른 플레이어가 소유 / 1명: 한 플레이어가 둘 다 소유
+//  - 행동불능: 사망 감지 후 3600틱(12틱=1초, 5분) 뒤 미네랄 100을 소모해 본진 건물에서 복귀
+//  - 이탈: 21_player_leave_handoff의 승계 코드와 소유자 상태를 동기화
+//=================================================================//
+
+//----- P8 상태 슬롯 -----//
+// Protoss Arbiter Tribunal   : 발렌 현재 소유자(0=미배속, 1~4=P1~P4)
+// Protoss Robotics Support Bay: 엘리아 현재 소유자(0=미배속, 1~4=P1~P4)
+// Zerg Spire                 : 발렌 행동불능 복귀 타이머(0~3601)
+// Zerg Greater Spire         : 엘리아 행동불능 복귀 타이머(0~3601)
+// Switch236/237              : 발렌/엘리아 배속 완료
+// Switch238/239              : 발렌/엘리아 행동불능
+// Switch240/241              : 발렌 2비트 무작위 대상
+// Switch242/243              : 엘리아 2비트 무작위 대상
+// Switch244                  : P9 영웅 생성 완료
+
+//----- P9 대기 영웅 생성 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch244", Not Set);
+	Elapsed Time(At least, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 0); //발렌 소유자 초기화
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 초기화
+	Set Deaths("Player 8", "Zerg Spire", Set To, 0); //발렌 복귀 타이머 초기화
+	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //엘리아 복귀 타이머 초기화
+	Set Switch("Switch236", clear); //발렌 배속 상태 초기화
+	Set Switch("Switch237", clear); //엘리아 배속 상태 초기화
+	Set Switch("Switch238", clear); //발렌 활동 상태 초기화
+	Set Switch("Switch239", clear); //엘리아 활동 상태 초기화
+	Create Unit("Player 9", "Jim Raynor (Marine)", 1, "BaseEntrance"); //발렌 대기 : P9 소유로 입구 거점에 생성
+	Create Unit("Player 9", "Sarah Kerrigan (Ghost)", 1, "BaseEntrance"); //엘리아 대기 : P9 소유로 입구 거점에 생성
+	Set Switch("Switch244", set); //영웅 중복 생성 방지
+}
+
+//----- 발렌 무작위 배속 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch244", Set);
+	Switch("Switch236", Not Set);
+	Elapsed Time(At least, 5);
+Actions:
+	Set Switch("Switch240", randomize); //발렌 대상 추첨 bit0
+	Set Switch("Switch241", randomize); //발렌 대상 추첨 bit1
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch236", Not Set);
+	Switch("Switch240", Not Set);
+	Switch("Switch241", Not Set);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+Actions:
+	Give Units to Player("Player 9", "Player 1", "Jim Raynor (Marine)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 1); //현재 소유자 기록 : 발렌 소유자=P1
+	Set Switch("Switch236", set); //배속 완료 : 재추첨 중단
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch236", Not Set);
+	Switch("Switch240", Set);
+	Switch("Switch241", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+Actions:
+	Give Units to Player("Player 9", "Player 2", "Jim Raynor (Marine)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 2); //현재 소유자 기록 : 발렌 소유자=P2
+	Set Switch("Switch236", set); //배속 완료 : 재추첨 중단
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch236", Not Set);
+	Switch("Switch240", Not Set);
+	Switch("Switch241", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+Actions:
+	Give Units to Player("Player 9", "Player 3", "Jim Raynor (Marine)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 3); //현재 소유자 기록 : 발렌 소유자=P3
+	Set Switch("Switch236", set); //배속 완료 : 재추첨 중단
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch236", Not Set);
+	Switch("Switch240", Set);
+	Switch("Switch241", Set);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+Actions:
+	Give Units to Player("Player 9", "Player 4", "Jim Raynor (Marine)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 4); //현재 소유자 기록 : 발렌 소유자=P4
+	Set Switch("Switch236", set); //배속 완료 : 재추첨 중단
+}
+
+//----- 엘리아 무작위 배속 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch236", Set);
+	Switch("Switch237", Not Set);
+	Elapsed Time(At least, 5);
+Actions:
+	Set Switch("Switch242", randomize); //엘리아 대상 추첨 bit0
+	Set Switch("Switch243", randomize); //엘리아 대상 추첨 bit1
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Not Set);
+	Switch("Switch242", Not Set);
+	Switch("Switch243", Not Set);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+Actions:
+	Give Units to Player("Player 9", "Player 1", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 1); //현재 소유자 기록 : 엘리아 소유자=P1
+	Set Switch("Switch237", set); //배속 완료 : 재추첨 중단
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Not Set);
+	Switch("Switch242", Set);
+	Switch("Switch243", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+Actions:
+	Give Units to Player("Player 9", "Player 2", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 2); //현재 소유자 기록 : 엘리아 소유자=P2
+	Set Switch("Switch237", set); //배속 완료 : 재추첨 중단
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Not Set);
+	Switch("Switch242", Not Set);
+	Switch("Switch243", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+Actions:
+	Give Units to Player("Player 9", "Player 3", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 3); //현재 소유자 기록 : 엘리아 소유자=P3
+	Set Switch("Switch237", set); //배속 완료 : 재추첨 중단
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Not Set);
+	Switch("Switch242", Set);
+	Switch("Switch243", Set);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+Actions:
+	Give Units to Player("Player 9", "Player 4", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 4); //현재 소유자 기록 : 엘리아 소유자=P4
+	Set Switch("Switch237", set); //배속 완료 : 재추첨 중단
+}
+
+//----- 2명 이상인데 두 영웅이 같은 플레이어에게 모이면 엘리아 재추첨 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+Actions:
+	Give Units to Player("Player 1", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
+	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+Actions:
+	Give Units to Player("Player 1", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
+	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+Actions:
+	Give Units to Player("Player 1", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
+	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+Actions:
+	Give Units to Player("Player 2", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
+	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+Actions:
+	Give Units to Player("Player 2", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
+	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+Actions:
+	Give Units to Player("Player 2", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
+	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+Actions:
+	Give Units to Player("Player 3", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
+	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+Actions:
+	Give Units to Player("Player 3", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
+	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+Actions:
+	Give Units to Player("Player 3", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
+	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+Actions:
+	Give Units to Player("Player 4", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
+	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+Actions:
+	Give Units to Player("Player 4", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
+	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+Actions:
+	Give Units to Player("Player 4", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
+	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
+}
+
+//----- 최초 배속 개인 안내: 두 영웅 배속 완료 후 각 소유자에게 1회 -----//
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch236", Set);
+	Switch("Switch237", Set);
+	Command("Current Player", "Jim Raynor (Marine)", At least, 1);
+	Command("Current Player", "Sarah Kerrigan (Ghost)", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>과 <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch236", Set);
+	Switch("Switch237", Set);
+	Command("Current Player", "Jim Raynor (Marine)", At least, 1);
+	Command("Current Player", "Sarah Kerrigan (Ghost)", At most, 0);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>이 귀관의 지휘에 합류했습니다.");
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch236", Set);
+	Switch("Switch237", Set);
+	Command("Current Player", "Jim Raynor (Marine)", At most, 0);
+	Command("Current Player", "Sarah Kerrigan (Ghost)", At least, 1);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 배속] <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+}
+
+//----- 이탈 승계 코드 동기화: 21 파일이 코드를 지우기 전 P8이 먼저 읽음 -----//
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 12);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 2); //이탈 승계 연동 : 발렌 소유자 P1->P2
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 12);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 2); //이탈 승계 연동 : 엘리아 소유자 P1->P2
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 13);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 3); //이탈 승계 연동 : 발렌 소유자 P1->P3
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 13);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 3); //이탈 승계 연동 : 엘리아 소유자 P1->P3
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 14);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 4); //이탈 승계 연동 : 발렌 소유자 P1->P4
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 14);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 4); //이탈 승계 연동 : 엘리아 소유자 P1->P4
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 21);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 1); //이탈 승계 연동 : 발렌 소유자 P2->P1
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 21);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 1); //이탈 승계 연동 : 엘리아 소유자 P2->P1
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 23);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 3); //이탈 승계 연동 : 발렌 소유자 P2->P3
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 23);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 3); //이탈 승계 연동 : 엘리아 소유자 P2->P3
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 24);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 4); //이탈 승계 연동 : 발렌 소유자 P2->P4
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 24);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 4); //이탈 승계 연동 : 엘리아 소유자 P2->P4
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 31);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 1); //이탈 승계 연동 : 발렌 소유자 P3->P1
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 31);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 1); //이탈 승계 연동 : 엘리아 소유자 P3->P1
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 32);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 2); //이탈 승계 연동 : 발렌 소유자 P3->P2
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 32);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 2); //이탈 승계 연동 : 엘리아 소유자 P3->P2
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 34);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 4); //이탈 승계 연동 : 발렌 소유자 P3->P4
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 34);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 4); //이탈 승계 연동 : 엘리아 소유자 P3->P4
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 41);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 1); //이탈 승계 연동 : 발렌 소유자 P4->P1
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 41);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 1); //이탈 승계 연동 : 엘리아 소유자 P4->P1
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 42);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 2); //이탈 승계 연동 : 발렌 소유자 P4->P2
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 42);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 2); //이탈 승계 연동 : 엘리아 소유자 P4->P2
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 43);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 3); //이탈 승계 연동 : 발렌 소유자 P4->P3
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 43);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+Actions:
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 3); //이탈 승계 연동 : 엘리아 소유자 P4->P3
+}
+
+//----- 행동불능 감지 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch236", Set);
+	Switch("Switch238", Not Set);
+	Deaths("Player 1", "Jim Raynor (Marine)", At least, 1);
+Actions:
+	Set Deaths("Player 1", "Jim Raynor (Marine)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 1); //행동불능 당시 소유자 보존 : 복귀 위치 결정
+	Set Deaths("Player 8", "Zerg Spire", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch238", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch236", Set);
+	Switch("Switch238", Not Set);
+	Deaths("Player 2", "Jim Raynor (Marine)", At least, 1);
+Actions:
+	Set Deaths("Player 2", "Jim Raynor (Marine)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 2); //행동불능 당시 소유자 보존 : 복귀 위치 결정
+	Set Deaths("Player 8", "Zerg Spire", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch238", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch236", Set);
+	Switch("Switch238", Not Set);
+	Deaths("Player 3", "Jim Raynor (Marine)", At least, 1);
+Actions:
+	Set Deaths("Player 3", "Jim Raynor (Marine)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 3); //행동불능 당시 소유자 보존 : 복귀 위치 결정
+	Set Deaths("Player 8", "Zerg Spire", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch238", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch236", Set);
+	Switch("Switch238", Not Set);
+	Deaths("Player 4", "Jim Raynor (Marine)", At least, 1);
+Actions:
+	Set Deaths("Player 4", "Jim Raynor (Marine)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 4); //행동불능 당시 소유자 보존 : 복귀 위치 결정
+	Set Deaths("Player 8", "Zerg Spire", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch238", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Switch("Switch239", Not Set);
+	Deaths("Player 1", "Sarah Kerrigan (Ghost)", At least, 1);
+Actions:
+	Set Deaths("Player 1", "Sarah Kerrigan (Ghost)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 1); //행동불능 당시 소유자 보존 : 복귀 위치 결정
+	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch239", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Switch("Switch239", Not Set);
+	Deaths("Player 2", "Sarah Kerrigan (Ghost)", At least, 1);
+Actions:
+	Set Deaths("Player 2", "Sarah Kerrigan (Ghost)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 2); //행동불능 당시 소유자 보존 : 복귀 위치 결정
+	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch239", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Switch("Switch239", Not Set);
+	Deaths("Player 3", "Sarah Kerrigan (Ghost)", At least, 1);
+Actions:
+	Set Deaths("Player 3", "Sarah Kerrigan (Ghost)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 3); //행동불능 당시 소유자 보존 : 복귀 위치 결정
+	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch239", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch237", Set);
+	Switch("Switch239", Not Set);
+	Deaths("Player 4", "Sarah Kerrigan (Ghost)", At least, 1);
+Actions:
+	Set Deaths("Player 4", "Sarah Kerrigan (Ghost)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 4); //행동불능 당시 소유자 보존 : 복귀 위치 결정
+	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch239", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+
+//----- 행동불능/복귀 메시지: Exactly 펄스로 반복 사망에도 1회씩만 표시 -----//
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Zerg Spire", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <03>발렌<04>이 후송되었습니다. 5분 후 미네랄 100을 소모해 배속된 지휘관의 본진에서 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1B>엘리아<04>가 후송되었습니다. 5분 후 미네랄 100을 소모해 배속된 지휘관의 본진에서 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <03>발렌<04>이 배속된 지휘관의 본진에서 복귀했습니다. <1F>(미네랄 -100)");
+	Preserve Trigger();
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1B>엘리아<04>가 배속된 지휘관의 본진에서 복귀했습니다. <1F>(미네랄 -100)");
+	Preserve Trigger();
+}
+
+//----- 복귀 완료 상태 정리: 파일상 생성 트리거보다 위에 두어 3601을 한 사이클 유지 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
+Actions:
+	Set Switch("Switch238", clear); //복귀 완료 : 활동 상태 복원
+	Set Deaths("Player 8", "Zerg Spire", Set To, 0); //다음 행동불능을 위해 타이머 초기화
+	Preserve Trigger(); //반복 수명주기 : 매 복귀마다 상태를 다시 초기화
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
+Actions:
+	Set Switch("Switch239", clear); //복귀 완료 : 활동 상태 복원
+	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //다음 행동불능을 위해 타이머 초기화
+	Preserve Trigger(); //반복 수명주기 : 매 복귀마다 상태를 다시 초기화
+}
+
+//----- 5분 복귀 타이머: 행동불능 동안 0~3600까지만 증가 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Zerg Spire", At most, 3599);
+Actions:
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //12틱=1초, 3600틱=5분
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Zerg Greater Spire", At most, 3599);
+Actions:
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //12틱=1초, 3600틱=5분
+	Preserve Trigger();
+}
+
+//----- 본진 건물 복귀: CC > Hatchery > Lair > Hive > Nexus 우선 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 1", "Terran Command Center", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Jim Raynor (Marine)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Hatchery", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Jim Raynor (Marine)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Lair", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Jim Raynor (Marine)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Hive", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Jim Raynor (Marine)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 1", "Protoss Nexus", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Jim Raynor (Marine)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 2", "Terran Command Center", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Jim Raynor (Marine)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Hatchery", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Jim Raynor (Marine)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Lair", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Jim Raynor (Marine)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Hive", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Jim Raynor (Marine)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 2", "Protoss Nexus", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Jim Raynor (Marine)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 3", "Terran Command Center", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Jim Raynor (Marine)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Hatchery", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Jim Raynor (Marine)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Lair", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Jim Raynor (Marine)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Hive", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Jim Raynor (Marine)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 3", "Protoss Nexus", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Jim Raynor (Marine)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 4", "Terran Command Center", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Jim Raynor (Marine)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Hatchery", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Jim Raynor (Marine)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Lair", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Jim Raynor (Marine)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Hive", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Jim Raynor (Marine)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 4", "Protoss Nexus", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Jim Raynor (Marine)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 1", "Terran Command Center", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Sarah Kerrigan (Ghost)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Hatchery", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Sarah Kerrigan (Ghost)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Lair", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Sarah Kerrigan (Ghost)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Hive", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Sarah Kerrigan (Ghost)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 1", "Protoss Nexus", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Sarah Kerrigan (Ghost)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 2", "Terran Command Center", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Sarah Kerrigan (Ghost)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Hatchery", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Sarah Kerrigan (Ghost)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Lair", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Sarah Kerrigan (Ghost)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Hive", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Sarah Kerrigan (Ghost)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 2", "Protoss Nexus", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Sarah Kerrigan (Ghost)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 3", "Terran Command Center", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Sarah Kerrigan (Ghost)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Hatchery", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Sarah Kerrigan (Ghost)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Lair", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Sarah Kerrigan (Ghost)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Hive", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Sarah Kerrigan (Ghost)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 3", "Protoss Nexus", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Sarah Kerrigan (Ghost)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 4", "Terran Command Center", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Sarah Kerrigan (Ghost)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Hatchery", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Sarah Kerrigan (Ghost)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Lair", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Sarah Kerrigan (Ghost)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Hive", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Sarah Kerrigan (Ghost)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 4", "Protoss Nexus", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Sarah Kerrigan (Ghost)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}

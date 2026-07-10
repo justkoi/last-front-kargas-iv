@@ -65,11 +65,11 @@ Actions:
 	Set Switch("Switch144", clear);
 }
 
-// 갈색 군락 절단 표시 시점에 외곽 AI를 가동하고 서쪽 잔존 방어 타워를 제거한다.
+// 미션2 목표 공개 시점에 외곽 AI를 가동하고 서쪽 잔존 방어 타워를 제거한다.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);   //미션 단계 : 미션2 진행 중
-	Deaths("Player 8", "Terran Vulture", At least, 756); //미션2 진입 후 약 63초 : 갈색 군락 절단 표시 시점
+	Deaths("Player 8", "Terran Vulture", At least, 756); //미션2 진입 후 약 63초 : 미션2 목표 공개 시점(15 파일 헤더와 동일 창)
 	Deaths("Player 8", "Terran Vulture", At most, 780);
 Actions:
 	Kill Unit At Location("Player 5", "Zerg Sunken Colony", 64, "WestArea");
@@ -84,44 +84,42 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At most, 24);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<13><03>미션 1 완료: 첫 군락 붕괴");
-	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<1A>노바: <04>주황색 군락 붕괴 확인. 지형 차단 신호가 약해지고 있습니다.");
+	Display Text Message(Always Display, "<13><03>[전선 확보 1/3] 북서쪽 군락 붕괴");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 1/3\n\n<04>- 북서쪽 <11>주황색 저그<04> 군락: 확보\n- 동북쪽 <15>갈색 저그<04> 군락: 적 점령\n- 동남쪽 <16>하얀색 저그<04> 군락: 적 점령\n- 현재 목표: 새로 열린 두 진입로에 방어선 구축");
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 60);
-	Deaths("Player 8", "Terran Vulture", At most, 84);
+	Deaths("Player 8", "Terran Vulture", At least, 84);
+	Deaths("Player 8", "Terran Vulture", At most, 108);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 첫 군락을 잘라냈다.");
+	Display Text Message(Always Display, "<03>발렌: <04>북서쪽 전선 확보. 처음 지킨 입구는 이제 후방이다. 열린 길에 다음 방어선을 세운다.");
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 144);
-	Deaths("Player 8", "Terran Vulture", At most, 156);
+	Deaths("Player 8", "Terran Vulture", At least, 168);
+	Deaths("Player 8", "Terran Vulture", At most, 192);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>새 진입로가 열리고 있습니다. 전술 지도에 순차 표시하겠습니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>전선이 두 갈래로 늘어났습니다. 진격 전에 두 입구의 방어를 나눠야 합니다.");
 }
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 216);
-	Deaths("Player 8", "Terran Vulture", At most, 240);
+	Deaths("Player 8", "Terran Vulture", At least, 252);
+	Deaths("Player 8", "Terran Vulture", At most, 276);
 Actions:
-	Display Text Message(Always Display, "<07>군수지원: <04>전선 재정비 보급 투입. <1F>미네랄 +500  <07>가스 +500");
+	Display Text Message(Always Display, "<07>[미션 1 완료 보상] <04>북서쪽 군락 확보. <1F>미네랄 +500  <07>가스 +500");
 }
 
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 216);
-	Deaths("Player 8", "Terran Vulture", At most, 240);
+	Deaths("Player 8", "Terran Vulture", At least, 252);
+	Deaths("Player 8", "Terran Vulture", At most, 276);
 Actions:
 	Set Resources("Player 1", Add, 500, ore);
 	Set Resources("Player 2", Add, 500, ore);
@@ -136,62 +134,62 @@ Actions:
 Trigger("Player 6"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 168);
-	Deaths("Player 8", "Terran Vulture", At most, 192);
+	Deaths("Player 8", "Terran Vulture", At least, 336);
+	Deaths("Player 8", "Terran Vulture", At most, 360);
 Actions:
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate1");
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Deaths("Player 8", "Terran Vulture", At least, 504);
+	Deaths("Player 8", "Terran Vulture", At most, 528);
+Actions:
 	Kill Unit At Location("All Players", "Khaydarin Crystal Formation", 64, "Mission2 Gate2");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 252);
-	Deaths("Player 8", "Terran Vulture", At most, 276);
+	Deaths("Player 8", "Terran Vulture", At least, 336);
+	Deaths("Player 8", "Terran Vulture", At most, 360);
 Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate1");
 	Minimap Ping("Mission2 Gate1");
-	Display Text Message(Always Display, "<1A>노바: <04>첫 번째 진입로를 표시했습니다. 넓은 통로입니다. 전열이 벌어지지 않게 방어선을 잡으십시오.");
+	Display Text Message(Always Display, "<07>[새 전선] <04>첫 번째 진입로 개방. 넓은 통로에 방어선을 구축하십시오.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 468);
-	Deaths("Player 8", "Terran Vulture", At most, 492);
+	Deaths("Player 8", "Terran Vulture", At least, 504);
+	Deaths("Player 8", "Terran Vulture", At most, 528);
 Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "Mission2 Gate2");
 	Minimap Ping("Mission2 Gate2");
 	Center View("Mission2 Gate2");
-	Display Text Message(Always Display, "<03>호크: <04>두 번째 진입로까지 확인했다. 이제 방어선은 이 두 입구에 집중한다.");
+	Display Text Message(Always Display, "<07>[새 전선] <04>두 번째 진입로 개방. 두 입구의 방어를 분담하십시오.");
 }
 
 
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 1680);
-	Deaths("Player 8", "Terran Vulture", At most, 2424);
+	Deaths("Player 8", "Terran Vulture", At least, 1428);
+	Deaths("Player 8", "Terran Vulture", At most, 1452);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>서쪽 진입로 관측을 유지하고 있습니다. 갈색 군락의 병력이 모이기 전에 공격 준비를 마쳐야 합니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>두 군락의 생산망은 분리돼 있습니다. 둘 중 한쪽의 해처리 계열을 모두 제거하면 다음 전선이 열립니다.");
 }
 
+// 미션2 전체 설명의 마지막 줄. 이 창의 상한 1536에서 1080틱(90초) 뒤인 2616부터 13f 배급 안내가 시작된다.
 Trigger("All Players"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 2472);
-	Deaths("Player 8", "Terran Vulture", At most, 2496);
+	Deaths("Player 8", "Terran Vulture", At least, 1512);
+	Deaths("Player 8", "Terran Vulture", At most, 1536);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>길은 확보됐다. 모두 전력을 모아 동북쪽 <15>갈색 저그<04> 군락부터 고립시켜 무너뜨린다.");
-}
-
-Trigger("All Players"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Deaths("Player 8", "Terran Vulture", At least, 2556);
-	Deaths("Player 8", "Terran Vulture", At most, 2580);
-Actions:
-	Display Text Message(Always Display, "<03>호크: <04>각개격파 당하지 않도록 힘을 합쳐라.");
+	Display Text Message(Always Display, "<03>발렌: <04>좋다. 먼저 칠 군락을 정하고 전군을 그쪽으로 집결시켜라.");
 }
 
 Trigger("Player 8"){
@@ -221,7 +219,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 10248);
 	Deaths("Player 8", "Terran Vulture", At most, 10272);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>궤도 스캔 장치에 과부하가 걸렸습니다. 새 진입로 관측 신호가 끊깁니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>궤도 스캔 장치에 과부하가 걸렸습니다. 새 진입로 관측 신호가 끊깁니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -230,7 +228,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 10332);
 	Deaths("Player 8", "Terran Vulture", At most, 10356);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>전술 표시는 여기까지다. 이후 경로 확인은 현장 정찰로 보완해라.");
+	Display Text Message(Always Display, "<03>발렌: <04>전술 표시는 여기까지다. 이후 경로 확인은 현장 정찰로 보완해라.");
 }
 
 Trigger("Player 1"){
@@ -282,10 +280,7 @@ Conditions:
 	Switch("Switch1", Not Set);
 Actions:
 	Play WAV("sound\\Misc\\OutOfGas.wav", 2000);
-	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<13><03>작전 실패: 전선 붕괴");
-	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<03>호크: <04>무너진 건 방어선이지, 부대가 아니다. 교신 유지하고 잔존 병력은 후방으로 빠져라.");
+	Display Text Message(Always Display, "<03>발렌: <04>무너진 건 방어선이지, 부대가 아니다. 교신 유지하고 잔존 병력은 후방으로 빠져라.");
 	Wait(1500);
 	Defeat();
 }

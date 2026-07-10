@@ -65,7 +65,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Minimap Ping("Selector");
-	Display Text Message(Always Display, "<07>난이도를 선택하세요. <04>선택 시민을 <07>쉬움<04>, <11>보통<04>, <08>어려움<04>, <06>매우 어려움<04> 구역으로 이동시키십시오. 선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
+	Display Text Message(Always Display, "<07>난이도를 선택하십시오. <04>선택 시민을 <07>쉬움<04>, <11>보통<04>, <08>어려움<04>, <06>매우 어려움<04> 구역으로 이동시키십시오. 선택하지 않으면 <07>쉬움<04>으로 진행됩니다.");
 }
 
 Trigger("All Players"){
@@ -74,11 +74,7 @@ Conditions:
 	Elapsed Time(At most, 115);
 	Deaths("Player 8", "Terran Academy", Exactly, 0);
 Actions:
-	Display Text Message(Always Display, "<13><03>[난이도 차이]");
-	Display Text Message(Always Display, "<07>쉬움 : <04>추가 자원 지원.");
-	Display Text Message(Always Display, "<11>보통 : <04>공세 간격 감소, 해처리 추가.");
-	Display Text Message(Always Display, "<08>어려움 : <04>공세와 병력 강화, 해처리 추가 증가.");
-	Display Text Message(Always Display, "<06>매우 어려움 : <04>한쪽 군락을 파괴해도 양쪽 공세가 앞당겨집니다.");
+	Display Text Message(Always Display, "<13><03>[난이도 차이]\n<07>쉬움 : <04>추가 자원 지원.\n<11>보통 : <04>공세 간격 감소, 해처리 추가.\n<08>어려움 : <04>공세와 병력 강화, 해처리 추가 증가.\n<06>매우 어려움 : <04>해처리 계열 파괴 시 양쪽 군락이 함께 격분합니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -170,8 +166,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<04>선택한 난이도는 <07>쉬움<04>입니다.");
-	Display Text Message(Always Display, "<07>선택 보급: <1F>미네랄 +400  <07>가스 +150<04> 보급이 지원됩니다.");
+	Display Text Message(Always Display, "<04>선택한 난이도는 <07>쉬움<04>입니다.\n<07>선택 보급: <1F>미네랄 +400  <07>가스 +150<04> 보급이 지원됩니다.\n<07>행운을 빕니다!");
 	Set Resources("Current Player", Add, 400, ore);
 	Set Resources("Current Player", Add, 150, gas);
 }
@@ -181,11 +176,8 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<04>선택한 난이도는 <11>보통<04>입니다.");
-	Display Text Message(Always Display, "<11>보통 효과: <04>적 공세 간격 감소, 적 해처리 추가.");
-	Display Text Message(Always Display, "<11>선택 보급: <1F>미네랄 +150<04> 보급이 지원됩니다.");
+	Display Text Message(Always Display, "<04>선택한 난이도는 <11>보통<04>입니다.\n<11>보통 효과: <04>적 공세 간격 감소, 적 해처리 추가.\n<11>선택 보급: <1F>미네랄 +150<04> 보급이 지원됩니다.\n<07>행운을 빕니다!");
 	Set Resources("Current Player", Add, 150, ore);
-	Display Text Message(Always Display, "<07>행운을 빕니다!");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -193,9 +185,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<04>선택한 난이도는 <08>어려움<04>입니다.");
-	Display Text Message(Always Display, "<08>어려움 효과: <04>적 공세 간격 추가 감소, 적 병력과 해처리 증가.");
-	Display Text Message(Always Display, "<07>행운을 빕니다!");
+	Display Text Message(Always Display, "<04>선택한 난이도는 <08>어려움<04>입니다.\n<08>어려움 효과: <04>적 공세 간격 추가 감소, 적 병력과 해처리 증가.\n<07>행운을 빕니다!");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -203,9 +193,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<04>선택한 난이도는 <06>매우 어려움<04>입니다.");
-	Display Text Message(Always Display, "<06>매우 어려움 효과: <04>공세와 병력이 강화되며, 군락 파괴 시 양쪽 공세가 가속됩니다.");
-	Display Text Message(Always Display, "<07>행운을 빕니다!");
+	Display Text Message(Always Display, "<04>선택한 난이도는 <06>매우 어려움<04>입니다.\n<06>매우 어려움 효과: <04>공세와 병력이 강화되며, 해처리 계열 파괴 시 양쪽 군락이 함께 격분합니다.\n<07>행운을 빕니다!");
 }
 
 // Difficulty viewer mineral fields show the selected difficulty after the selector is resolved.

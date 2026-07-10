@@ -29,6 +29,47 @@ Actions:
 	Set Resources("Player 2", Add, 25000, gas);
 	Set Resources("Player 3", Add, 25000, gas);
 	Set Resources("Player 4", Add, 25000, gas);
+	Set Score("Player 5", Set To, 0, Custom); //최고 플레이어 판정 준비 : 컴퓨터의 군락 분노 표시 점수 제거
+	Set Score("Player 6", Set To, 0, Custom); //최고 플레이어 판정 준비 : 갈색 저그의 잔여 표시 점수 제거
+	Set Score("Player 7", Set To, 0, Custom); //최고 플레이어 판정 준비 : 하얀색 저그의 잔여 표시 점수 제거
+	Set Score("Player 8", Set To, 0, Custom); //최고 플레이어 판정 준비 : 시스템 슬롯의 잔여 표시 점수 제거
+}
+
+// 클리어 전에 이탈한 사람 슬롯의 훈장 점수는 최고 플레이어 비교에서 제외한다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4); //미션 단계 : 클리어 결과 표시 중
+	Deaths("Player 8", "Terran Vulture", At most, 24); //최고 플레이어 판정 준비 시간창
+	Switch("Switch166", Set); //Player 1 이탈 처리 등록 완료
+Actions:
+	Set Score("Player 1", Set To, 0, Custom); //이탈한 Player 1의 훈장 비교 점수 제외
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4); //미션 단계 : 클리어 결과 표시 중
+	Deaths("Player 8", "Terran Vulture", At most, 24); //최고 플레이어 판정 준비 시간창
+	Switch("Switch167", Set); //Player 2 이탈 처리 등록 완료
+Actions:
+	Set Score("Player 2", Set To, 0, Custom); //이탈한 Player 2의 훈장 비교 점수 제외
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4); //미션 단계 : 클리어 결과 표시 중
+	Deaths("Player 8", "Terran Vulture", At most, 24); //최고 플레이어 판정 준비 시간창
+	Switch("Switch168", Set); //Player 3 이탈 처리 등록 완료
+Actions:
+	Set Score("Player 3", Set To, 0, Custom); //이탈한 Player 3의 훈장 비교 점수 제외
+}
+
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4); //미션 단계 : 클리어 결과 표시 중
+	Deaths("Player 8", "Terran Vulture", At most, 24); //최고 플레이어 판정 준비 시간창
+	Switch("Switch169", Set); //Player 4 이탈 처리 등록 완료
+Actions:
+	Set Score("Player 4", Set To, 0, Custom); //이탈한 Player 4의 훈장 비교 점수 제외
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -39,8 +80,57 @@ Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Run AI Script("+Vi5");
 	Run AI Script("+Vi6");
-	Display Text Message(Always Display, "<07>작전: <04>동북쪽과 동남쪽 군락 반응 소실. 전선 안정화 확인.");
-	Display Text Message(Always Display, "<07>군수지원: <04>작전 완료 보상. <1F>미네랄 +50000  <07>가스 +25000");
+	Display Text Message(Always Display, "<13><03>[전선 확보 3/3] 마지막 군락 붕괴");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 3/3\n\n<04>- 북서쪽 전선: 확보\n- 동북쪽 전선: 확보\n- 동남쪽 전선: 확보\n- 최종 상태: 전역의 저그 생산망과 조직적 반격 능력 소실");
+}
+
+// 훈장 수가 같은 경우 활성 상태인 낮은 플레이어 슬롯을 우선해 한 명만 선정한다.
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4); //미션 단계 : 클리어 결과 표시 중
+	Deaths("Player 8", "Terran Vulture", At least, 60); //훈장 Custom Score 최종 반영 대기 완료
+	Deaths("Player 8", "Terran Vulture", At most, 84); //최고 플레이어 선정 시간창
+	Switch("Switch156", Not Set); //최고 플레이어 미선정
+	Highest Score(Custom); //현재 플레이어의 훈장 수가 가장 높음
+Actions:
+	Set Switch("Switch137", set); //Player 1 최고 플레이어 표시 예약
+	Set Switch("Switch156", set); //최고 플레이어 선정 완료
+}
+
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4); //미션 단계 : 클리어 결과 표시 중
+	Deaths("Player 8", "Terran Vulture", At least, 60); //훈장 Custom Score 최종 반영 대기 완료
+	Deaths("Player 8", "Terran Vulture", At most, 84); //최고 플레이어 선정 시간창
+	Switch("Switch156", Not Set); //최고 플레이어 미선정
+	Highest Score(Custom); //현재 플레이어의 훈장 수가 가장 높음
+Actions:
+	Set Switch("Switch138", set); //Player 2 최고 플레이어 표시 예약
+	Set Switch("Switch156", set); //최고 플레이어 선정 완료
+}
+
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4); //미션 단계 : 클리어 결과 표시 중
+	Deaths("Player 8", "Terran Vulture", At least, 60); //훈장 Custom Score 최종 반영 대기 완료
+	Deaths("Player 8", "Terran Vulture", At most, 84); //최고 플레이어 선정 시간창
+	Switch("Switch156", Not Set); //최고 플레이어 미선정
+	Highest Score(Custom); //현재 플레이어의 훈장 수가 가장 높음
+Actions:
+	Set Switch("Switch139", set); //Player 3 최고 플레이어 표시 예약
+	Set Switch("Switch156", set); //최고 플레이어 선정 완료
+}
+
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4); //미션 단계 : 클리어 결과 표시 중
+	Deaths("Player 8", "Terran Vulture", At least, 60); //훈장 Custom Score 최종 반영 대기 완료
+	Deaths("Player 8", "Terran Vulture", At most, 84); //최고 플레이어 선정 시간창
+	Switch("Switch156", Not Set); //최고 플레이어 미선정
+	Highest Score(Custom); //현재 플레이어의 훈장 수가 가장 높음
+Actions:
+	Set Switch("Switch155", set); //Player 4 최고 플레이어 표시 예약
+	Set Switch("Switch156", set); //최고 플레이어 선정 완료
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -49,94 +139,122 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 60);
 	Deaths("Player 8", "Terran Vulture", At most, 84);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>잘했다, 선봉대. 이제 이 전선의 저그 생산망은 끊겼다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04>세 군락의 생산 반응이 모두 소실됐습니다. 카르가스 IV 전역에서 조직적인 저항은 더 이상 감지되지 않습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 120);
-	Deaths("Player 8", "Terran Vulture", At most, 144);
+	Deaths("Player 8", "Terran Vulture", At least, 144);
+	Deaths("Player 8", "Terran Vulture", At most, 168);
 Actions:
-	Display Text Message(Always Display, "<1A>노바: <04>잔존 생체 반응은 흩어지고 있습니다. 조직적인 반격 신호도 사라졌습니다.");
+	Display Text Message(Always Display, "<03>발렌: <04>정확한 판단이었다, 엘리아. 마지막 진격로는 자네가 열었다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 180);
-	Deaths("Player 8", "Terran Vulture", At most, 204);
+	Deaths("Player 8", "Terran Vulture", At least, 228);
+	Deaths("Player 8", "Terran Vulture", At most, 252);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>방어선 재편을 시작한다. 카르가스 IV의 첫 전선은 성공적으로 구축됐다.");
+	Display Text Message(Always Display, "<03>발렌: <04>우리가 처음 내려왔을 때 지킬 수 있던 건 입구 하나뿐이었다. 이제 카르가스 IV 전역이 우리 전선이다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 240);
-	Deaths("Player 8", "Terran Vulture", At most, 264);
+	Deaths("Player 8", "Terran Vulture", At least, 312);
+	Deaths("Player 8", "Terran Vulture", At most, 336);
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
-	Display Text Message(Always Display, "<13><03>==========================================");
-	Display Text Message(Always Display, "<13><03>작전 완료: 카르가스 IV 전선 안정화");
-	Display Text Message(Always Display, "<13><03>==========================================");
-	Set Mission Objectives("<03>[작전 완료] 카르가스 IV 전선 안정화\n\n<04>- 북서쪽 <11>주황색 저그<04> 본진 파괴: 완료\n- 동북쪽 <15>갈색 저그<04> 본진 파괴: 완료\n- 동남쪽 <16>하얀색 저그<04> 본진 파괴: 완료\n- 아군 전선 유지: 성공\n\n선봉대는 임무를 완수했다. 이 전장은 끝났다.");
+	Display Text Message(Always Display, "<13><03>[작전 완료] 카르가스 IV 전역 확보");
+	Set Mission Objectives("<03>[작전 완료] 카르가스 IV 전역 확보\n\n<04>- 북서쪽 <11>주황색 저그<04> 군락: 섬멸\n- 동북쪽 <15>갈색 저그<04> 군락: 섬멸\n- 동남쪽 <16>하얀색 저그<04> 군락: 섬멸\n- 확보 현황: 3/3\n\n입구 하나에서 시작된 첫 전선은 카르가스 IV 전역으로 확장됐다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 300);
-	Deaths("Player 8", "Terran Vulture", At most, 324);
+	Deaths("Player 8", "Terran Vulture", At least, 396);
+	Deaths("Player 8", "Terran Vulture", At most, 420);
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 Actions:
-	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <07>쉬움<04>입니다.");
+	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <07>쉬움<04>입니다.\n<04>전체 난이도: <07>쉬움<04> / <11>보통<04> / <08>어려움<04> / <06>매우 어려움<04>");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 300);
-	Deaths("Player 8", "Terran Vulture", At most, 324);
+	Deaths("Player 8", "Terran Vulture", At least, 396);
+	Deaths("Player 8", "Terran Vulture", At most, 420);
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 Actions:
-	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <11>보통<04>입니다.");
+	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <11>보통<04>입니다.\n<04>전체 난이도: <07>쉬움<04> / <11>보통<04> / <08>어려움<04> / <06>매우 어려움<04>");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 300);
-	Deaths("Player 8", "Terran Vulture", At most, 324);
+	Deaths("Player 8", "Terran Vulture", At least, 396);
+	Deaths("Player 8", "Terran Vulture", At most, 420);
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 Actions:
-	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <08>어려움<04>입니다.");
+	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <08>어려움<04>입니다.\n<04>전체 난이도: <07>쉬움<04> / <11>보통<04> / <08>어려움<04> / <06>매우 어려움<04>");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 300);
-	Deaths("Player 8", "Terran Vulture", At most, 324);
+	Deaths("Player 8", "Terran Vulture", At least, 396);
+	Deaths("Player 8", "Terran Vulture", At most, 420);
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 Actions:
-	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <06>매우 어려움<04>입니다.");
+	Display Text Message(Always Display, "<07>축하합니다! <04>클리어 난이도는 <06>매우 어려움<04>입니다.\n<04>전체 난이도: <07>쉬움<04> / <11>보통<04> / <08>어려움<04> / <06>매우 어려움<04>");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4); //미션 단계 : 클리어 결과 표시 중
+	Deaths("Player 8", "Terran Vulture", At least, 432); //난이도 결과 다음 표시 시점
+	Deaths("Player 8", "Terran Vulture", At most, 456); //승리 처리 전 최고 플레이어 표시 시간창
+	Switch("Switch137", Set); //최고 플레이어 : Player 1
+Actions:
+	Display Text Message(Always Display, "<04>최고의 플레이어: <08>Player 1<04>");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4); //미션 단계 : 클리어 결과 표시 중
+	Deaths("Player 8", "Terran Vulture", At least, 432); //난이도 결과 다음 표시 시점
+	Deaths("Player 8", "Terran Vulture", At most, 456); //승리 처리 전 최고 플레이어 표시 시간창
+	Switch("Switch138", Set); //최고 플레이어 : Player 2
+Actions:
+	Display Text Message(Always Display, "<04>최고의 플레이어: <0E>Player 2<04>");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4); //미션 단계 : 클리어 결과 표시 중
+	Deaths("Player 8", "Terran Vulture", At least, 432); //난이도 결과 다음 표시 시점
+	Deaths("Player 8", "Terran Vulture", At most, 456); //승리 처리 전 최고 플레이어 표시 시간창
+	Switch("Switch139", Set); //최고 플레이어 : Player 3
+Actions:
+	Display Text Message(Always Display, "<04>최고의 플레이어: <0F>Player 3<04>");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 4); //미션 단계 : 클리어 결과 표시 중
+	Deaths("Player 8", "Terran Vulture", At least, 432); //난이도 결과 다음 표시 시점
+	Deaths("Player 8", "Terran Vulture", At most, 456); //승리 처리 전 최고 플레이어 표시 시간창
+	Switch("Switch155", Set); //최고 플레이어 : Player 4
+Actions:
+	Display Text Message(Always Display, "<04>최고의 플레이어: <10>Player 4<04>");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 300);
-	Deaths("Player 8", "Terran Vulture", At most, 324);
+	Deaths("Player 8", "Terran Vulture", At least, 480);
 Actions:
-	Display Text Message(Always Display, "<04>난이도 목록: <07>쉬움<04> / <11>보통<04> / <08>어려움<04> / <06>매우 어려움<04>");
-}
-
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 4);
-	Deaths("Player 8", "Terran Vulture", At least, 360);
-Actions:
-	Wait(1000);
 	Victory();
 }

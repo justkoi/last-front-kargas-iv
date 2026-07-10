@@ -191,8 +191,21 @@ def convert_value(value: bytes, index: int) -> tuple[bytes, bool]:
         text = value.decode("utf-8")
     except UnicodeDecodeError:
         return value, False
+    # Some editor-created, unreferenced STRx entries already contain the
+    # literal UTF-8 replacement character (EF BF BD).  That data cannot be
+    # reconstructed and U+FFFD is not representable in CP949.  Referenced
+    # trigger strings are replaced from the TrigEdit source before this path,
+    # so preserve only these otherwise-unrecoverable raw entries instead of
+    # aborting the whole deployment.
+    if "\ufffd" in text:
+        print(f"Warning: preserving unrecoverable UTF-8 bytes in string {index}")
+        return value, False
     text = normalize_text(text)
-    converted = encode_starcraft_text(text, f"String {index}")
+    try:
+        converted = encode_starcraft_text(text, f"String {index}")
+    except ValueError:
+        print(f"Warning: preserving non-CP949 bytes in unreferenced string {index}")
+        return value, False
     return converted, converted != value
 
 

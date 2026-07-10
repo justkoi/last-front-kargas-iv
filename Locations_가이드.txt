@@ -113,6 +113,13 @@
 - P7: Protoss
 - P8: Terran (또는 자유 - 어차피 미리 배치한 보스만 사용)
 
+[영웅 Unit Settings]
+- Jim Raynor (Marine) 커스텀 이름: 발렌
+- Sarah Kerrigan (Ghost) 커스텀 이름: 엘리아
+- 영웅은 트리거가 게임 시작 2초에 BaseEntrance에 P9 소유로 생성하므로 수동 선배치하지 않음
+- 시작 5초 이후 활성 P1-P4에 무작위 이양. 2명 이상이면 서로 다른 플레이어, 1명이면 둘 다 같은 플레이어가 소유
+- 행동불능 시 5분 후 소유자의 Command Center / Hatchery / Lair / Hive / Nexus에서 복귀
+
 [컴 본진 미리 배치할 유닛/건물]
 P5 (저그):
   - Hatchery x1, Spawning Pool x1, Hydralisk Den x1

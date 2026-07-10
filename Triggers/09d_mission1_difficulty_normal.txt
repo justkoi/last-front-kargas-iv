@@ -1,11 +1,24 @@
 //-----------------------------------------------------------------//
 //  Mission 1 difficulty adjustment - Normal
 //
-//  Player 8 / Terran Academy = 2 normal, 3 hard.
-//  Normal adjustment also applies to hard unless noted otherwise.
+//  Player 8 / Terran Academy = 2 normal, 3 hard, 4 very hard.
+//  Normal reinforcement is the first cumulative difficulty layer.
 //-----------------------------------------------------------------//
 
-// Wave 2 normal reinforcement - 8:00 launch group.
+// Wave 1 normal reinforcement - +2 Zerglings / +1 Hydralisk over easy.
+Trigger("Player 5"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
+	Deaths("Player 8", "Terran Academy", At least, 2);
+	Elapsed Time(At least, 210);
+	Command("Player 5", "Buildings", At least, 1);
+Actions:
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn2"); //보통 이상 1차 증원 : 중앙 경로 저글링 보강
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn2"); //보통 이상 1차 대공 화력 보강
+}
+
+// Wave 2 normal reinforcement - +2 Zerglings / +1 Hydralisk over easy.
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
@@ -13,13 +26,12 @@ Conditions:
 	Elapsed Time(At least, 450);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
 }
 
-// Wave 3 normal reinforcement - 11:00 launch group.
+// Wave 3 normal reinforcement - one full mixed-force tier over easy.
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
@@ -27,11 +39,12 @@ Conditions:
 	Elapsed Time(At least, 630);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Scourge", 2, "P5 Spawn3");
 }
 
 // Colony destruction penalty: +5.5 seconds beyond easy (66 = +10% over the old 60).

@@ -48,7 +48,7 @@ Actions:
 	Create Unit("Current Player", "Map Revealer", 1, "P6 MiniBase");
 	Minimap Ping("P6 MiniBase");
 	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<1A>노바: <04><15>갈색 저그<04> 전방 집결지 확인. 본체보다 반응 밀도가 낮습니다.");
+	Display Text Message(Always Display, "<1B>엘리아: <04><15>갈색 저그<04> 전방 집결지 확인. 본체보다 반응 밀도가 낮습니다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -58,7 +58,7 @@ Conditions:
 	Deaths("Player 8", "Terran Vulture", At least, 4164);
 	Deaths("Player 8", "Terran Vulture", At most, 4188);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>저 집결지를 끊어라. 갈색 군락의 다음 대공세를 늦출 수 있다.");
+	Display Text Message(Always Display, "<03>발렌: <04>저 집결지를 끊어라. 갈색 군락의 다음 대공세를 늦출 수 있다.");
 }
 
 Trigger("Player 6"){
@@ -132,7 +132,7 @@ Conditions:
 	Switch("Switch141", Set);
 	Deaths("Player 8", "Terran Medic", Exactly, 85);
 Actions:
-	Display Text Message(Always Display, "<03>호크: <04>전방 집결지를 잘라냈다. 정확한 타격이다.");
+	Display Text Message(Always Display, "<03>발렌: <04>전방 집결지를 잘라냈다. 정확한 타격이다.");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

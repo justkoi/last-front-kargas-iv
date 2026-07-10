@@ -29,10 +29,9 @@ Actions:
 	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn3");
 }
 
-// Wave 3 very hard reinforcement - added over hard.
+// Wave 3 very hard reinforcement - one full mixed-force tier over hard.
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
@@ -40,10 +39,12 @@ Conditions:
 	Elapsed Time(At least, 630);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Scourge", 2, "P5 Spawn1");
 }
 
 // Colony destruction penalty: +5.5 seconds beyond hard (66 = +10% over the old 60).
