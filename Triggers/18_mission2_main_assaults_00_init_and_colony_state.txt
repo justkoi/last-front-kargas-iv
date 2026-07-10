@@ -83,7 +83,14 @@ Actions:
 	Set Switch("Switch136", clear);
 	Set Switch("Switch140", clear);
 	Set Switch("Switch141", clear);
+	Set Switch("Switch109", clear); //분산 공격 경고 초기화 : 1/1 경고 미출력
+	Set Switch("Switch110", clear); //분산 공격 경고 초기화 : 2/2 경고 미출력
+	Set Switch("Switch111", clear); //분산 공격 경고 초기화 : 3/3 경고 미출력
+	Set Switch("Switch112", clear); //분산 공격 경고 초기화 : 플레이어 출력 신호 닫기
+	Set Switch("Switch113", clear); //분산 공격 경고 초기화 : 화자 추첨 bit0
+	Set Switch("Switch114", clear); //분산 공격 경고 초기화 : 화자 추첨 bit1
 	Set Deaths("Player 8", "Terran Medic", Set To, 0);
+	Set Deaths("Player 8", "Terran SCV", Set To, 84); //첫 경고 즉시 허용 : 7초 간격 타이머를 준비 완료값으로 시작
 	Set Deaths("Player 8", "Protoss Dark Archon", Set To, 0);
 	Set Deaths("Player 8", "Protoss Stargate", Set To, 0);
 	Set Deaths("Player 8", "Protoss Fleet Beacon", Set To, 0);

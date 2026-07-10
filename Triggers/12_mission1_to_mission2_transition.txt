@@ -52,12 +52,6 @@ Actions:
 	Remove Unit("Player 2", "Map Revealer");
 	Remove Unit("Player 3", "Map Revealer");
 	Remove Unit("Player 4", "Map Revealer");
-	Set Switch("Switch109", clear);
-	Set Switch("Switch110", clear);
-	Set Switch("Switch111", clear);
-	Set Switch("Switch112", clear);
-	Set Switch("Switch113", clear);
-	Set Switch("Switch114", clear);
 	Set Switch("Switch115", clear);
 	Set Switch("Switch116", clear);
 	Set Switch("Switch142", clear);
@@ -199,12 +193,6 @@ Conditions:
 Actions:
 	Set Deaths("Player 5", "Terran Marine", Set To, 0);
 	Set Deaths("Player 5", "Terran Firebat", Set To, 0);
-	Set Switch("Switch109", clear);
-	Set Switch("Switch110", clear);
-	Set Switch("Switch111", clear);
-	Set Switch("Switch112", clear);
-	Set Switch("Switch113", clear);
-	Set Switch("Switch114", clear);
 	Set Switch("Switch115", clear);
 	Set Switch("Switch116", clear);
 }

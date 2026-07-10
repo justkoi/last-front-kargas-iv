@@ -15,7 +15,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2500);
 	Minimap Ping("P5 Home");
-	Display Text Message(Always Display, "<06>[반격] <04>하이브 붕괴와 함께 잔존 지상군이 일제히 전선으로 이동합니다.");
+	Display Text Message(Always Display, "<06>[비상 경보] <04>하이브의 최후 신호가 군락 전역에 퍼졌습니다. 잔존 지상군이 아군 본진으로 쇄도합니다.");
 }
 
 Trigger("Player 5"){

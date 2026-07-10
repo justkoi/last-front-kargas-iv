@@ -3,6 +3,7 @@
 //  Required Locations: P1~P4 Start, P5 Base, P5 Home, P5 Cerebrate, P5 Area, P5 Scout, P5 Intruder,
 //                      P5 Spawn1~4, P5 H1~4, P1~P4 Hunt, Player Destination, AttackPoint1, EarlyTower,
 //                      MD1~MD6, BaseEntrance, BaseScan1~13, MultiKey, MultiLock, MainLoad1~2, Player Destination,
+//                      HeroCJoin, HeroCJoinExit, HeroDJoin, HeroDJoinExit,
 //                      MultiKey: P8 Mature Crysalis preplaced (unlock key; SCMDraft name, not Chrysalis). MultiLock: P5 blockers + P9 Pylon.
 //                      BaseScan12~13: orbital scan slots at game start (01_briefing_intro, 32s).
 //                      P6 Base, P6 Home, P6 Area, P6 Area Ground, P6 Area Air,
@@ -64,7 +65,7 @@
 //    Protoss Reaver       : P6 mission2 penalty assault spawn stage index
 //    Protoss Observer     : P7 mission2 penalty assault spawn stage index
 //    Protoss Dark Archon : mission2 final scream assault preparation timer
-//    Terran SCV           : (미사용 - 구 18e offense-window 폐기로 해제, 재사용 가능)
+//    Terran SCV           : mission2 분산 공격 경고 간격 타이머 (0~84, 12 ticks = 1 second)
 //    Terran Missile Turret: mission2 첫 군락 붕괴 칭찬/보상 표시 간격 타이머 (1~109, 12 ticks = 1 second)
 //    위 DC 예약으로 Player 8 소유 Terran Missile Turret는 배치/지급/파괴하지 말 것. Player 9 방어시설은 무관.
 //    Zerg Broodling       : mission1 AttackPoint1 정신체 격파 회군 틱 타이머 (12 = 1초)
@@ -89,7 +90,13 @@
 //    Protoss Robotics Support Bay: 엘리아 현재 소유자(0=미배속, 1~4=P1~P4)
 //    Zerg Spire            : 발렌 행동불능 5분 복귀 타이머(0~3601)
 //    Zerg Greater Spire    : 엘리아 행동불능 5분 복귀 타이머(0~3601)
-//    위 5개 리더보드 전용 P8 DC 건물도 Player 8 소유로 배치/지급/파괴하지 말 것.
+//    Zerg Nydus Canal      : 로크 현재 소유자(0=미배속, 1~4=P1~P4)
+//    Zerg Queen's Nest     : 세딘 현재 소유자(0=미배속, 1~4=P1~P4)
+//    Zerg Creep Colony     : 로크 행동불능 5분 복귀 타이머(0~3601)
+//    Zerg Hive             : 세딘 행동불능 5분 복귀 타이머(0~3601)
+//    Zerg Hatchery         : 로크 합류 연출 타이머(0~168)
+//    Zerg Lair             : 세딘 합류 연출 타이머(0~168)
+//    위 영웅 시스템 전용 P8 DC 건물은 Player 8 소유로 배치/지급/파괴하지 말 것.
 //    Psi Emitter          : 훈장 시스템 1급 팀 훈장 잔여 수 (시작 시 20)
 //    Data Disc            : 훈장/군락 분노 리더보드 교대 타이머 (미션2 0~359틱, 10초/20초)
 //    위 2개 훈장 시스템 P8 DC 오브젝트도 Player 8 소유로 배치/지급/파괴하지 말 것.
@@ -200,7 +207,10 @@
 //    Switch97~100  : P1~P4 P5 first Mutalisk warning shown
 //    Switch101~104 : P1~P4 P5 first Guardian warning shown
 //    Switch105~108 : P1~P4 P5 first Devourer warning shown
-//    Switch109~116 : unused (was P5 early colony decay warning queue)
+//    Switch109~111 : mission2 분산 공격 1/1·2/2·3/3 경고 완료 래치
+//    Switch112     : mission2 분산 공격 경고 플레이어 출력 신호
+//    Switch113/114 : mission2 분산 공격 경고 화자 2-bit 추첨 (00 발렌, 01 엘리아, 10 로크, 11 세딘)
+//    Switch115/116 : unused (was P5 early colony decay warning queue)
 //    Switch117     : difficulty selector spawned / selection window active
 //    Switch118     : P6 mission2 difficulty cooldown adjustment enabled from mission2 entry
 //    Switch119     : P7 mission2 difficulty cooldown adjustment enabled from mission2 entry
@@ -238,7 +248,7 @@
 //    Switch154     : P5 Cerebrate destroy hawk praise(B) display phase completed
 //    Switch155     : 클리어 최고 플레이어 표시 예약 (P4)
 //    Switch156     : 클리어 최고 플레이어 선정 완료 latch
-//    Switch157     : (미사용 - 구 18e offense-window 폐기로 해제, 재사용 가능)
+//    Switch157     : 지휘 정신체 파괴 후 세딘 합류 요청
 //                    (early multi lock은 switch-free, Bring("Player 8","Mature Crysalis","MultiKey",At most,0) 사용 (08b))
 //    Switch158     : P6 main assault locked after final scream assault batch 10
 //    Switch159     : P7 main assault locked after final scream assault batch 10
@@ -259,20 +269,33 @@
 //    Switch226~233 : wartime rationing P1~P4 gas payment flags tier5-6 (1800/3000)
 //    Switch218~221 : wartime rationing P1~P4 slot registration (latched on first heartbeat; separate from leave-handoff Switch162~165)
 //    Switch234/235 : wartime rationing receiver 2-bit random draw (bit0/bit1, re-randomized each cycle during Queen=10/20)
-//    Switch236/237 : 발렌/엘리아 영웅 배속 완료
+//    Switch236/237 : 미사용 (발렌/엘리아 소유자 P8 DC가 배속 상태를 겸함)
 //    Switch238/239 : 발렌/엘리아 행동불능 상태
 //    Switch240/241 : 발렌 소유자 2비트 무작위 추첨
 //    Switch242/243 : 엘리아 소유자 2비트 무작위 추첨
-//    Switch244     : P9 영웅 생성 완료
+//    Switch244     : 선배치 영웅 상태 초기화 완료
+//    Switch245     : 전방 정신체 파괴 후 로크 합류 요청
 //    Switch246     : test-only wartime rationing initialization guard (TestTriggersForBuild/94_test_union_relief_fund)
 //    Switch247     : test-only wartime rationing start message shown once
+//    Switch248/249 : 미사용 (로크/세딘 소유자 P8 DC가 배속 상태를 겸함)
+//    Switch250/251 : 로크/세딘 행동불능 상태
+//    Switch252/253 : 로크 소유자 2비트 무작위 추첨
+//    Switch254/255 : 세딘 소유자 2비트 무작위 추첨
+//    Switch256     : 현재 합류 영웅의 미배속 생존 후보 존재
 //
 //  Map editor settings
 //    Player 5/6/7 Overlord upgrades must be configured in SCMDraft:
 //    Pneumatized Carapace and Antennae = Level 1 + Researched.
+//    Player 9 Vulture upgrade must be configured in SCMDraft:
+//    Ion Thrusters = Researched (로크 합류 때 생성·이양하는 일반 벌처의 이동속도 상태 전달용).
 //    Unit Settings custom names:
 //      Jim Raynor (Marine)    = 발렌
 //      Sarah Kerrigan (Ghost) = 엘리아
+//      Jim Raynor (Vulture)   = 로크
+//      Alan Schezar (Goliath) = 세딘
+//    Preplaced hero units:
+//      Player 9 Jim Raynor (Marine) x1, Sarah Kerrigan (Ghost) x1
+//      시작 트리거는 두 유닛을 추가 생성하지 않고 소유권만 P1~P4로 이양한다.
 //
 //  Note: avoid Order("...", "Men", ...) for broad combat orders.
 //============================================================

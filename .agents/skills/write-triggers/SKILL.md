@@ -298,6 +298,7 @@ Switch("Switch1", Not Set);
 - **`sound\Misc\Bell.wav` 존재 안 함** — 대신 `sound\Misc\TRescue.wav` 등 SCMDraft Sound Editor의 Available 목록에서 확인된 것 사용. 등록 안 하면 Play WAV 무시됨.
 - **Defeat 트리거 owner를 "All Players"로 두면 P5 컴퓨터까지 잡힘** → P5가 패배 상태 되면 P5 owned 트리거 멈춤. owner를 `Player 1~4`로 한정.
 - **트리거 ownership 인 컴퓨터 플레이어가 모든 유닛/건물 잃으면 트리거 정지** 가능. 미션 전환 시 P5/P6에 더미 유닛이 필요할 수 있음.
+- **카르가스 IV의 발렌·엘리아는 P9 소유로 이미 맵에 선배치됨** — 현재 맵에는 `Jim Raynor (Marine)`과 `Sarah Kerrigan (Ghost)`가 P9 소유로 각각 정확히 1기씩 있다. 시작 초기화 트리거에서 이 둘을 다시 `Create Unit`하지 말고 기존 유닛의 소유권만 넘긴다. 배속 여부는 Player 8의 소유자 DC 하나로 관리한다(`0=미배속`, `1~4=P1~P4`). 별도의 `배속 완료 Switch`를 병행하면 실제 유닛·소유자 DC와 값이 어긋나 합류, 사망 감지, 복귀가 막힐 수 있다. (2026-07-10, 영웅 합류 진단)
 - **`Wait()` 액션은 Hyper Trigger 부담** — 1회성 종결 트리거 외엔 `Wait` 대신 DC 카운터 사용.
 - **트리거 owner `Player 6`가 SCMDraft에서 활성화 안 돼있으면 실행 안 됨** — Player Settings에서 P6 슬롯 확인 필수.
 - **`Bring`의 location은 정밀하게** — Beacon 유닛 위 1×1 location은 유닛이 들어갈 수 없음. 3×3 이상 빈 땅 덮도록.
@@ -308,6 +309,7 @@ Switch("Switch1", Not Set);
 - **바닐라 `Minimap Ping`은 색상을 지정할 수 없음** — TrigEdit 액션은 `Minimap Ping("Location");`처럼 위치만 받고, 현재 트리거 플레이어의 미니맵에 엔진 기본 핑을 표시한다. `<06>` 같은 문자열 색상 코드는 핑에 적용되지 않는다. 빨간색 P1 소유 트리거로 우회하면 P1에게만 보이고 P2~P4에게 전달되지 않으므로, 전 플레이어 알림은 `Player 1~4` 소유로 각각 실행하고 기본 핑 색상을 받아들여야 한다. (2026-06-21, TL.net StarCraft mapping guide 확인)
 - **같은 사이클 내 `Switch` 연쇄 → 같은 프레임 메시지 덮어쓰기** — SC는 한 플레이어의 트리거를 한 사이클에 위→아래로 평가하며, 위 트리거가 set한 `Switch`를 **같은 사이클 아래 트리거가 즉시 본다**. 그래서 `A가 S1 set → B가 S1 조건으로 발동`을 파일 순서 A→B로 두면 둘 다 같은 사이클(같은 프레임)에 발동해, `Display Text Message`가 서로 덮어써 마지막 한 줄만 보인다. **여러 줄을 순차 노출하려면 의존 트리거를 파일상 역순으로 배치**한다(C→B→A로 두면 A는 사이클 N, B는 N+1, C는 N+2에 발동 → 표시 순서는 A,B,C). 비-Preserve 트리거는 조건이 거짓이면 비활성화되지 않고 다음 사이클에 재평가되므로 이 stagger가 성립한다. (2026-06-08, 10_mission1_waves_late 정신체 격파 칭찬 / 13e 개인 메시지)
 - **`.scx`와 프로덕션 합본의 문자열 액션 순서·개수 불일치** — `deploy_map.ps1`은 clean → CP949 string recovery → STRx normalize → protect 순으로 진행한다. recovery 단계에서 `KargasIV_Triggers_Mission1Only.txt`와 `.scx` TRIG의 문자열 액션을 **같은 순서로 1:1 매칭**한다. 텍스트에만 있거나 맵에만 있으면 `String action count differs` / `String encoding recovery failed`가 난다. 예전에 `build_triggers_withTest.ps1`로 임포트한 뒤 프로덕션 합본만 빌드하면, 맵에 `Leader Board Resources` 같은 테스트 잔여가 남을 수 있다. 프로덕션 배포 전 SCMDraft에서 **`build_triggers.ps1` 결과만** 다시 임포트하는 것이 정석이다.
+- **SCMDraft 저장 직후 브리핑 한글은 `MBRF`에서 이미 손실될 수 있음** — `KargasIV_Briefing.txt`의 정상 UTF-8 한글도 SCMDraft 저장 과정에서 CP949 바이트가 UTF-8로 잘못 해석되어 `U+FFFD(�)`로 바뀔 수 있다. `TRIG`만 복구해서는 되살아나지 않는다. `deploy_map.ps1`은 반드시 `recover_map_strings_cp949.py --briefing-text KargasIV_Briefing.txt`를 실행해 `MBRF`의 `Mission Objectives`와 `Text Message`를 원문 순서대로 CP949 복원해야 한다. 브리핑을 바꾼 뒤에는 SCMDraft에 다시 임포트·저장해서 `.scx`의 `MBRF` 액션 개수와 순서를 원문에 맞춘다. (2026-07-10, 브리핑 저장 깨짐 진단)
 - **여러 트리거가 같은 사이클에 더하는 누적 DC를 `Exactly`로 게이트하면 값을 건너뛴다** — 한 DC를 **서로 독립된 다수 트리거**가 +1 하는 경우(예: P5 해처리/레어/하이브 파괴를 각각 감지하는 `10_mission1_waves_late.txt`의 3개 Preserve 트리거가 `Terran Medic` +1), 건물 2~3개가 한 사이클에 동시 파괴되면 DC가 `6 → 8/9`처럼 **한 번에 +2~+3 점프**한다. 이 DC를 `Deaths(..., Exactly, N)`으로 마일스톤 게이트하면 N을 정확히 밟지 못하고 건너뛰어 **트리거가 영영 발동 안 할 수 있다**. 마일스톤은 `At least, N` + 래치 스위치(`Switch`)로 1회성을 보장한다. **단일 +1/사이클 경로**(예: `18b_mission2_p6_minibase.txt`의 M2 Medic가 한 트리거로만 증가)에서만 `Exactly` 스태거(`Exactly 1/85/169`)가 안전하다. (2026-06-09, 09c_mission1_colony_rage 무장 조건 `Medic Exactly 8` → `At least 8` 수정)
 - **리더보드(`Leader Board *`)는 활성 플레이어만 표시** — 빈 사람 슬롯(솔로 테스트의 P2~P4)은 트리거로 자원/킬을 넣어도 **리더보드에 절대 안 나온다**. `Leaderboard Computer Players(enabled/disabled)`는 컴퓨터 표시 여부만 바꿀 뿐 빈 슬롯은 어떤 설정으로도 못 띄운다. 비활성 플레이어의 값 검증은 `Accumulate`/`Deaths` 조건 + PASS/FAIL `Display Text Message`로 대신한다 (아래 "테스트 트리거 작성 표준"). 단, `Set Resources`/`Accumulate` 자체는 비활성 슬롯에도 정상 동작한다. (2026-07-05, 94_test_union_relief_fund 리더보드 미표시 사례)
 
@@ -333,10 +335,11 @@ Switch("Switch1", Not Set);
 
 ### deploy_map string recovery (CP949)
 
-`recover_map_strings_cp949.py`가 담당한다. TrigEdit UTF-8 텍스트의 한글/제어코드를 맵 STRx에 CP949로 되돌린다.
+`recover_map_strings_cp949.py`가 담당한다. TrigEdit/브리핑 UTF-8 텍스트의 한글/제어코드를 맵 STRx에 CP949로 되돌린다.
 
-- **파싱 대상 문자열 액션:** `Display Text Message`, `Play WAV`, `Set Mission Objectives`, `Transmission`, `Comment`, `Leader Board Control`, `Leader Board Resources`, `Leader Board Kills`, `Leader Board Points`, `Leaderboard Goal*`, `Set Next Scenario` 등 (`recover_map_strings_cp949.py`의 `TEXT_ACTION_FIELDS` 참고)
+- **파싱 대상 문자열 액션:** `Display Text Message`, `Play WAV`, `Set Mission Objectives`, `Transmission`, `Comment`, `Leader Board Control`, `Leader Board Resources`, `Leader Board Kills`, `Leader Board Points`, `Leaderboard Goal*`, `Set Next Scenario` 등 (`recover_map_strings_cp949.py`의 `TRIGGER_TEXT_ACTION_FIELDS` 참고)
 - **매칭 규칙:** 위 액션을 `KargasIV_Triggers_Mission1Only.txt`와 `.scx` TRIG에서 **등장 순서대로** 짝지음. 한 쌍이라도 액션 종류가 다르면 즉시 실패.
+- **브리핑 매칭:** `KargasIV_Briefing.txt`의 `Mission Objectives`/`Text Message`를 `.scx` MBRF에서 **등장 순서대로** 짝지어 복구한다. 문자열 액션 개수·종류·순서가 하나라도 다르면 즉시 실패한다.
 - **텍스트 > 맵:** 실패 (텍스트에 있는 문자열 액션이 맵에 없음 → SCMDraft 재임포트 필요)
 - **맵 > 텍스트:** 접두사까지 일치하면 **경고만 내고 진행** (맵에만 남은 테스트/잔여 문자열 액션). unmapped 문자열은 기존 STRx 값에 UTF-8→CP949 변환만 적용.
 - **흔한 실패 원인**

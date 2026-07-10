@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------//
 //  [TEST MODE / CHEAT] 발렌을 중복 생성하지 않고 P1에게 강제 이양
-//  프로덕션 01d 영웅 시스템이 만든 유일한 Jim Raynor (Marine)을 회수한다.
+//  맵에 P9 소유로 선배치된 유일한 Jim Raynor (Marine)을 회수한다.
 //-----------------------------------------------------------------//
 
 Trigger("Player 8"){
@@ -13,5 +13,4 @@ Actions:
 	Give Units to Player("Player 3", "Player 1", "Jim Raynor (Marine)", All, "Anywhere"); //P3 배속 결과 회수
 	Give Units to Player("Player 4", "Player 1", "Jim Raynor (Marine)", All, "Anywhere"); //P4 배속 결과 회수
 	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 1); //발렌 현재 소유자=P1
-	Set Switch("Switch236", set); //발렌 배속 완료 유지
 }

@@ -1,0 +1,278 @@
+//-----------------------------------------------------------------//
+//  Mission 2 - split-attack concentration warnings
+//
+//  P6/P7 Hatchery/Lair/Hive cumulative losses are stored in P8
+//  Protoss Stargate / Protoss Fleet Beacon. When both sides reach
+//  1/1, 2/2, and 3/3, one of four heroes warns the team to focus.
+//  Terran SCV spaces queued warnings by 84 ticks = 7 seconds.
+//-----------------------------------------------------------------//
+
+// 경고 간격 타이머 : 미션2에서만 84틱까지 증가하고 이후 포화 상태를 유지한다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 미션 단계 DC가 정확히 3
+	Deaths("Player 8", "Terran SCV", At most, 83); //경고 간격 대기 중 : 아직 7초가 지나지 않음
+Actions:
+	Set Deaths("Player 8", "Terran SCV", Add, 1); //경고 간격 진행 : 12틱을 1초로 누적
+	Preserve Trigger();
+}
+
+// P1~P4가 직전 사이클에 출력한 경고 신호를 닫는다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 미션 단계 DC가 정확히 3
+	Deaths("Player 8", "Terran SCV", At least, 1); //출력 다음 사이클 : 경고 발행 뒤 타이머가 다시 움직임
+	Switch("Switch112", Set); //플레이어 출력 신호 열림 : P1~P4가 같은 화자 대사를 처리함
+Actions:
+	Set Switch("Switch112", clear); //경고 출력 종료 : 다음 단계 발행 전까지 신호 닫기
+	Preserve Trigger();
+}
+
+// 1/1 경고 발행 : 양쪽 군락이 처음 한 채씩 손실했을 때 4명 중 한 화자를 추첨한다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran SCV", At least, 84); //첫 경고 준비 완료 : 이전 경고 이후 최소 7초 경과
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 미션 단계 DC가 정확히 3
+	Switch("Switch31", Not Set); //P6 군락 생존 : 이미 붕괴한 전선에는 분산 경고 불필요
+	Switch("Switch32", Not Set); //P7 군락 생존 : 양쪽 군락이 모두 남아 있을 때만 경고
+	Switch("Switch109", Not Set); //1/1 경고 미발행 : 단계별 1회 보장
+	Switch("Switch112", Not Set); //출력 신호 대기 : 이전 경고가 처리된 상태
+	Deaths("Player 8", "Protoss Stargate", At least, 1); //P6 해처리 계열 누적 파괴 1 이상
+	Deaths("Player 8", "Protoss Fleet Beacon", At least, 1); //P7 해처리 계열 누적 파괴 1 이상
+Actions:
+	Set Switch("Switch113", randomize); //화자 추첨 bit0 : 두 비트로 4명을 동일 확률 선택
+	Set Switch("Switch114", randomize); //화자 추첨 bit1 : 00 발렌, 01 엘리아, 10 로크, 11 세딘
+	Set Switch("Switch109", set); //1/1 경고 완료 : 이후 같은 단계 재발행 차단
+	Set Switch("Switch112", set); //플레이어 출력 요청 : 다음 사이클 P1~P4에 동일 대사 표시
+	Set Deaths("Player 8", "Terran SCV", Set To, 0); //다음 경고 간격 시작 : 84틱을 다시 대기
+	Preserve Trigger();
+}
+
+// 2/2 경고 발행 : 1/1 경고 후 최소 7초를 보장하고 두 번째 단계를 큐에서 꺼낸다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran SCV", At least, 84); //경고 간격 준비 완료 : 이전 경고 이후 최소 7초 경과
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 미션 단계 DC가 정확히 3
+	Switch("Switch31", Not Set); //P6 군락 생존 : 붕괴 뒤 남은 분산 경고 취소
+	Switch("Switch32", Not Set); //P7 군락 생존 : 양쪽 군락이 모두 남아 있음
+	Switch("Switch109", Set); //선행 단계 완료 : 1/1 경고가 먼저 발행됨
+	Switch("Switch110", Not Set); //2/2 경고 미발행 : 단계별 1회 보장
+	Switch("Switch112", Not Set); //출력 신호 대기 : 이전 경고 처리 완료
+	Deaths("Player 8", "Protoss Stargate", At least, 2); //P6 해처리 계열 누적 파괴 2 이상
+	Deaths("Player 8", "Protoss Fleet Beacon", At least, 2); //P7 해처리 계열 누적 파괴 2 이상
+Actions:
+	Set Switch("Switch113", randomize); //화자 재추첨 bit0 : 단계마다 독립 추첨
+	Set Switch("Switch114", randomize); //화자 재추첨 bit1 : 네 영웅 각각 25% 확률
+	Set Switch("Switch110", set); //2/2 경고 완료 : 이후 같은 단계 재발행 차단
+	Set Switch("Switch112", set); //플레이어 출력 요청 : 다음 사이클 P1~P4에 동일 대사 표시
+	Set Deaths("Player 8", "Terran SCV", Set To, 0); //다음 경고 간격 시작 : 84틱을 다시 대기
+	Preserve Trigger();
+}
+
+// 3/3 경고 발행 : 마지막 분산 공격 경고를 발행하고 추가 경고는 만들지 않는다.
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran SCV", At least, 84); //경고 간격 준비 완료 : 이전 경고 이후 최소 7초 경과
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 미션 단계 DC가 정확히 3
+	Switch("Switch31", Not Set); //P6 군락 생존 : 붕괴 뒤 남은 분산 경고 취소
+	Switch("Switch32", Not Set); //P7 군락 생존 : 양쪽 군락이 모두 남아 있음
+	Switch("Switch110", Set); //선행 단계 완료 : 2/2 경고가 먼저 발행됨
+	Switch("Switch111", Not Set); //3/3 경고 미발행 : 마지막 단계 1회 보장
+	Switch("Switch112", Not Set); //출력 신호 대기 : 이전 경고 처리 완료
+	Deaths("Player 8", "Protoss Stargate", At least, 3); //P6 해처리 계열 누적 파괴 3 이상
+	Deaths("Player 8", "Protoss Fleet Beacon", At least, 3); //P7 해처리 계열 누적 파괴 3 이상
+Actions:
+	Set Switch("Switch113", randomize); //화자 재추첨 bit0 : 마지막 경고도 독립 추첨
+	Set Switch("Switch114", randomize); //화자 재추첨 bit1 : 네 영웅 각각 25% 확률
+	Set Switch("Switch111", set); //3/3 경고 완료 : 최대 세 차례 제한 확정
+	Set Switch("Switch112", set); //플레이어 출력 요청 : 다음 사이클 P1~P4에 동일 대사 표시
+	Set Deaths("Player 8", "Terran SCV", Set To, 0); //출력 신호 정리를 위한 타이머 재시작
+	Preserve Trigger();
+}
+
+//-----------------------------------------------------------------//
+//  Player-facing dialogue. Each stage has four mutually exclusive
+//  2-bit speaker branches. No Preserve: each branch can display once.
+//-----------------------------------------------------------------//
+
+//----- 1/1 경고 -----//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch112", Set);
+	Switch("Switch109", Set);
+	Switch("Switch110", Not Set);
+	Switch("Switch113", Not Set);
+	Switch("Switch114", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<03>발렌: <04>공격대가 둘로 갈렸다. 한쪽 군락을 정하고 전력을 집중해라.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch112", Set);
+	Switch("Switch109", Set);
+	Switch("Switch110", Not Set);
+	Switch("Switch113", Set);
+	Switch("Switch114", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1B>엘리아: <04>양쪽 군락이 동시에 피해를 입고 있습니다. 한쪽에 화력을 집중해야 붕괴를 앞당길 수 있습니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch112", Set);
+	Switch("Switch109", Set);
+	Switch("Switch110", Not Set);
+	Switch("Switch113", Not Set);
+	Switch("Switch114", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>로크: <04>타격대가 양쪽으로 갈렸군. 한 군락을 골라 화력을 몰아붙여.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch112", Set);
+	Switch("Switch109", Set);
+	Switch("Switch110", Not Set);
+	Switch("Switch113", Set);
+	Switch("Switch114", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1F>세딘: <04>양쪽 전선에 병력이 분산됐습니다. 한쪽 군락부터 정리해야 손실을 줄일 수 있습니다.");
+}
+
+//----- 2/2 경고 -----//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch112", Set);
+	Switch("Switch110", Set);
+	Switch("Switch111", Not Set);
+	Switch("Switch113", Not Set);
+	Switch("Switch114", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<03>발렌: <04>두 전선을 조금씩 갉아서는 끝이 없다. 먼저 한쪽 군락부터 무너뜨려라.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch112", Set);
+	Switch("Switch110", Set);
+	Switch("Switch111", Not Set);
+	Switch("Switch113", Set);
+	Switch("Switch114", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1B>엘리아: <04>피해가 양쪽에 분산되고 있습니다. 공격 목표를 하나로 통일하십시오.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch112", Set);
+	Switch("Switch110", Set);
+	Switch("Switch111", Not Set);
+	Switch("Switch113", Not Set);
+	Switch("Switch114", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>로크: <04>이렇게 흩어져선 어느 쪽도 못 끝내. 한곳에 모여 생산망부터 끊어.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch112", Set);
+	Switch("Switch110", Set);
+	Switch("Switch111", Not Set);
+	Switch("Switch113", Set);
+	Switch("Switch114", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1F>세딘: <04>분산 공격이 계속되면 보급 소모만 커집니다. 공격 목표를 하나로 통일하십시오.");
+}
+
+//----- 3/3 경고 -----//
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch112", Set);
+	Switch("Switch111", Set);
+	Switch("Switch113", Not Set);
+	Switch("Switch114", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<03>발렌: <04>병력을 다시 합쳐라. 이번에는 한쪽 군락을 완전히 끝낸다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch112", Set);
+	Switch("Switch111", Set);
+	Switch("Switch113", Set);
+	Switch("Switch114", Not Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1B>엘리아: <04>양쪽 군락이 계속 버티고 있습니다. 지금 병력을 모아 한쪽 생산망부터 끊어야 합니다.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch112", Set);
+	Switch("Switch111", Set);
+	Switch("Switch113", Not Set);
+	Switch("Switch114", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1A>로크: <04>이제 선택해. 전군을 한쪽에 박아 넣고 군락 하나를 끝장내.");
+}
+
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
+	Switch("Switch31", Not Set);
+	Switch("Switch32", Not Set);
+	Switch("Switch112", Set);
+	Switch("Switch111", Set);
+	Switch("Switch113", Set);
+	Switch("Switch114", Set);
+Actions:
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Display Text Message(Always Display, "<1F>세딘: <04>양쪽 군락이 아직 생산력을 유지하고 있습니다. 전력을 합쳐 한쪽부터 완전히 제거하십시오.");
+}

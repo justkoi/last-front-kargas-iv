@@ -22,7 +22,7 @@ TEXT_REPLACEMENTS = {
     "\u201c": '"',
     "\u201d": '"',
 }
-STRING_ACTION_FIELDS = {
+TRIGGER_STRING_ACTION_FIELDS = {
     7: (1, 2),
     8: (2,),
     9: (1,),
@@ -40,7 +40,7 @@ STRING_ACTION_FIELDS = {
     41: (1,),
     47: (1,),
 }
-STRING_ACTION_NAMES = {
+TRIGGER_STRING_ACTION_NAMES = {
     7: "Transmission",
     8: "Play WAV",
     9: "Display Text Message",
@@ -58,7 +58,7 @@ STRING_ACTION_NAMES = {
     41: "Set Next Scenario",
     47: "Comment",
 }
-TEXT_ACTION_FIELDS = {
+TRIGGER_TEXT_ACTION_FIELDS = {
     "Transmission": (("str", 3), ("wav", 6)),
     "Play WAV": (("wav", 0),),
     "Display Text Message": (("str", 1),),
@@ -75,6 +75,18 @@ TEXT_ACTION_FIELDS = {
     "Leaderboard Goal Points": (("str", 0),),
     "Set Next Scenario": (("str", 0),),
     "Comment": (("str", 0),),
+}
+BRIEFING_STRING_ACTION_FIELDS = {
+    3: (1,),
+    4: (1,),
+}
+BRIEFING_STRING_ACTION_NAMES = {
+    3: "Text Message",
+    4: "Mission Objectives",
+}
+BRIEFING_TEXT_ACTION_FIELDS = {
+    "Text Message": (("str", 0),),
+    "Mission Objectives": (("str", 0),),
 }
 FORCE_NAME_RE = re.compile(r"^\s*Force\s*([1-4])\s*:\s*(.*?)\s*$", re.IGNORECASE)
 
@@ -299,23 +311,34 @@ def literal_to_bytes(value: str, line_number: int) -> bytes:
     return bytes(out)
 
 
-def parse_trigger_text_string_calls(path: Path) -> list[dict[str, object]]:
+def parse_text_string_calls(
+    path: Path,
+    action_fields: dict[str, tuple[tuple[str, int], ...]],
+) -> list[dict[str, object]]:
     calls: list[dict[str, object]] = []
     for line_number, line in enumerate(path.read_text(encoding="utf-8-sig").splitlines(), start=1):
         match = re.match(r"\s*;?\s*([^()]+)\((.*)\);\s*$", line)
         if not match:
             continue
         name = match.group(1).strip()
-        if name not in TEXT_ACTION_FIELDS:
+        if name not in action_fields:
             continue
         args = split_args(match.group(2))
         call: dict[str, object] = {"line": line_number, "name": name}
-        for key, index in TEXT_ACTION_FIELDS[name]:
+        for key, index in action_fields[name]:
             if index >= len(args):
                 raise ValueError(f"{path}:{line_number}: missing {key} argument for {name}")
             call[key] = literal_to_bytes(unquote_arg(args[index]), line_number)
         calls.append(call)
     return calls
+
+
+def parse_trigger_text_string_calls(path: Path) -> list[dict[str, object]]:
+    return parse_text_string_calls(path, TRIGGER_TEXT_ACTION_FIELDS)
+
+
+def parse_briefing_text_string_calls(path: Path) -> list[dict[str, object]]:
+    return parse_text_string_calls(path, BRIEFING_TEXT_ACTION_FIELDS)
 
 
 def parse_force_names(path: Path | None) -> dict[int, bytes]:
@@ -344,15 +367,19 @@ def unpack_action(data: bytes) -> tuple[int, ...]:
     return struct.unpack("<IIIIIIHBBBBH", data)
 
 
-def collect_target_string_actions(trig: bytes) -> list[dict[str, object]]:
+def collect_target_string_actions(
+    trigger_data: bytes,
+    action_names: dict[int, str],
+    action_fields: dict[int, tuple[int, ...]],
+) -> list[dict[str, object]]:
     calls: list[dict[str, object]] = []
-    for trigger_index in range(len(trig) // 2400):
-        trigger = trig[trigger_index * 2400 : (trigger_index + 1) * 2400]
+    for trigger_index in range(len(trigger_data) // 2400):
+        trigger = trigger_data[trigger_index * 2400 : (trigger_index + 1) * 2400]
         action_start = 16 * 20
         for action_index in range(64):
             action = unpack_action(trigger[action_start + action_index * 32 : action_start + action_index * 32 + 32])
             action_type = action[7]
-            name = STRING_ACTION_NAMES.get(action_type)
+            name = action_names.get(action_type)
             if not name:
                 continue
             call: dict[str, object] = {
@@ -360,7 +387,7 @@ def collect_target_string_actions(trig: bytes) -> list[dict[str, object]]:
                 "action": action_index,
                 "name": name,
             }
-            for field_index in STRING_ACTION_FIELDS[action_type]:
+            for field_index in action_fields[action_type]:
                 if field_index == 1:
                     call["str_id"] = action[field_index]
                 elif field_index == 2:
@@ -369,29 +396,44 @@ def collect_target_string_actions(trig: bytes) -> list[dict[str, object]]:
     return calls
 
 
-def string_map_from_trigger_text(trigger_text: Path, sections: dict[bytes, bytes]) -> dict[int, bytes]:
-    source_calls = parse_trigger_text_string_calls(trigger_text)
-    target_trig = sections.get(b"TRIG")
-    if not target_trig:
-        raise ValueError("TRIG section not found in target map")
-    if len(target_trig) % 2400:
-        raise ValueError("TRIG size is not a multiple of 2400")
-    target_calls = collect_target_string_actions(target_trig)
+def string_map_from_text(
+    text_path: Path,
+    sections: dict[bytes, bytes],
+    section_name: bytes,
+    source_calls: list[dict[str, object]],
+    action_names: dict[int, str],
+    action_fields: dict[int, tuple[int, ...]],
+    allow_target_extras: bool = False,
+) -> dict[int, bytes]:
+    target_data = sections.get(section_name)
+    section_label = section_name.decode("ascii")
+    source_label = text_path.name
+    if not target_data:
+        raise ValueError(f"{section_label} section not found in target map")
+    if len(target_data) % 2400:
+        raise ValueError(f"{section_label} size is not a multiple of 2400")
+    target_calls = collect_target_string_actions(target_data, action_names, action_fields)
     if len(source_calls) > len(target_calls):
-        raise ValueError(f"String action count differs: trigger_text={len(source_calls)} target_map={len(target_calls)}")
+        raise ValueError(
+            f"{section_label} string action count differs: "
+            f"{source_label}={len(source_calls)} target_map={len(target_calls)}"
+        )
     if len(source_calls) < len(target_calls):
         extra = len(target_calls) - len(source_calls)
         first_extra = target_calls[len(source_calls)]
-        print(
-            f"Warning: map has {extra} extra string action(s) not present in trigger_text; "
+        message = (
+            f"{section_label} has {extra} extra string action(s) not present in {source_label}; "
             f"first extra is trigger {first_extra['trigger']} action {first_extra['action']} {first_extra['name']}"
         )
+        if not allow_target_extras:
+            raise ValueError(message)
+        print(f"Warning: {message}")
 
     string_map: dict[int, bytes] = {}
     for index, (source_call, target_call) in enumerate(zip(source_calls, target_calls, strict=False)):
         if source_call["name"] != target_call["name"]:
             raise ValueError(
-                f"String action order differs at {index}: "
+                f"{section_label} string action order differs at {index}: "
                 f"text line {source_call['line']} {source_call['name']} vs "
                 f"target trigger {target_call['trigger']} action {target_call['action']} {target_call['name']}"
             )
@@ -409,6 +451,37 @@ def string_map_from_trigger_text(trigger_text: Path, sections: dict[bytes, bytes
                 raise ValueError(f"Target string {string_id} maps to multiple source strings")
             string_map[string_id] = desired  # type: ignore[assignment]
     return string_map
+
+
+def string_map_from_trigger_text(trigger_text: Path, sections: dict[bytes, bytes]) -> dict[int, bytes]:
+    return string_map_from_text(
+        trigger_text,
+        sections,
+        b"TRIG",
+        parse_trigger_text_string_calls(trigger_text),
+        TRIGGER_STRING_ACTION_NAMES,
+        TRIGGER_STRING_ACTION_FIELDS,
+        allow_target_extras=True,
+    )
+
+
+def string_map_from_briefing_text(briefing_text: Path, sections: dict[bytes, bytes]) -> dict[int, bytes]:
+    return string_map_from_text(
+        briefing_text,
+        sections,
+        b"MBRF",
+        parse_briefing_text_string_calls(briefing_text),
+        BRIEFING_STRING_ACTION_NAMES,
+        BRIEFING_STRING_ACTION_FIELDS,
+    )
+
+
+def merge_string_maps(target: dict[int, bytes], incoming: dict[int, bytes], source_label: str) -> None:
+    for string_id, desired in incoming.items():
+        previous = target.get(string_id)
+        if previous is not None and previous != desired:
+            raise ValueError(f"Target string {string_id} maps to conflicting source strings in {source_label}")
+        target[string_id] = desired
 
 
 def get_force_name_ids(data: bytes) -> list[int]:
@@ -431,11 +504,18 @@ def rebuild_chk_with_strings(
     repair,
     chk: bytes,
     trigger_text: Path | None,
+    briefing_text: Path | None,
     force_names_path: Path | None,
 ) -> tuple[bytes, int, int, bytes, int]:
     sections = repair.parse_chk(chk)
     section_data = {name: data for name, data, _off in sections}
     string_map = string_map_from_trigger_text(trigger_text, section_data) if trigger_text else {}
+    if briefing_text:
+        merge_string_maps(
+            string_map,
+            string_map_from_briefing_text(briefing_text, section_data),
+            briefing_text.name,
+        )
     force_names = parse_force_names(force_names_path)
     force_name_ids = get_force_name_ids(section_data[b"FORC"]) if force_names else []
     string_section = b"STRx" if any(name == b"STRx" for name, _data, _off in sections) else b"STR "
@@ -485,6 +565,7 @@ def recover_map_strings(
     stormlib: str | None,
     work_dir: Path,
     trigger_text: Path | None,
+    briefing_text: Path | None,
     force_names: Path | None,
 ) -> None:
     repair = load_repair_tool(repair_tool)
@@ -500,6 +581,7 @@ def recover_map_strings(
         repair,
         chk,
         trigger_text,
+        briefing_text,
         force_names,
     )
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -509,7 +591,8 @@ def recover_map_strings(
         storm.pack_chk(chk_path, output.resolve())
 
     print(f"Read scenario.chk using locale 0x{locale:X}")
-    source_label = f" from {trigger_text}" if trigger_text else ""
+    source_paths = [path for path in (trigger_text, briefing_text) if path]
+    source_label = f" from {', '.join(str(path) for path in source_paths)}" if source_paths else ""
     print(f"Recovered {changed}/{total} {section_name.decode('ascii').strip()} string entries to CP949{source_label}")
     if force_names:
         print(f"Updated {force_changed} force name entries from {force_names}")
@@ -524,6 +607,7 @@ def main() -> int:
     parser.add_argument("--stormlib")
     parser.add_argument("--work-dir", type=Path, default=Path(r"E:\SCX_WORK"))
     parser.add_argument("--trigger-text", type=Path, help="TrigEdit text source used to restore imported strings")
+    parser.add_argument("--briefing-text", type=Path, help="Briefing text source used to restore MBRF strings")
     parser.add_argument("--force-names", type=Path, help="ForceNames.md file used to update FORC display names")
     args = parser.parse_args()
 
@@ -534,6 +618,7 @@ def main() -> int:
         args.stormlib,
         args.work_dir,
         args.trigger_text,
+        args.briefing_text,
         args.force_names,
     )
     return 0

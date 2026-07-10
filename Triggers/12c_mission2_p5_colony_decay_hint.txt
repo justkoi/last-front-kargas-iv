@@ -14,12 +14,6 @@ Actions:
 	Set Deaths("Player 5", "Zerg Spore Colony", Set To, 0);
 	Set Deaths("Player 5", "Terran Marine", Set To, 0);
 	Set Deaths("Player 5", "Terran Firebat", Set To, 0);
-	Set Switch("Switch109", clear);
-	Set Switch("Switch110", clear);
-	Set Switch("Switch111", clear);
-	Set Switch("Switch112", clear);
-	Set Switch("Switch113", clear);
-	Set Switch("Switch114", clear);
 	Set Switch("Switch115", clear);
 	Set Switch("Switch116", clear);
 	Preserve Trigger();
@@ -34,12 +28,6 @@ Actions:
 	Set Deaths("Player 5", "Zerg Spore Colony", Set To, 0);
 	Set Deaths("Player 5", "Terran Marine", Set To, 0);
 	Set Deaths("Player 5", "Terran Firebat", Set To, 0);
-	Set Switch("Switch109", clear);
-	Set Switch("Switch110", clear);
-	Set Switch("Switch111", clear);
-	Set Switch("Switch112", clear);
-	Set Switch("Switch113", clear);
-	Set Switch("Switch114", clear);
 	Set Switch("Switch115", clear);
 	Set Switch("Switch116", clear);
 }

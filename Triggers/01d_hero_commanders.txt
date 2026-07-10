@@ -1,23 +1,29 @@
 //=================================================================//
-//  발렌/엘리아 영웅 지휘 시스템
-//  - 시작: P9가 두 영웅 생성 후 활성 P1~P4에 완전 무작위 배속
-//  - 2명 이상: 서로 다른 플레이어가 소유 / 1명: 한 플레이어가 둘 다 소유
+//  발렌/엘리아/로크/세딘 영웅 지휘 시스템
+//  - 시작: 맵에 P9 소유로 선배치된 발렌/엘리아를 활성 P1~P4에 무작위 배속
+//  - 전방/지휘 정신체 파괴: 로크/세딘을 아직 영웅이 없는 생존자에게 우선 배속
+//  - 현장 합류: 전용 Join의 모든 Men/Buildings를 Exit으로 옮긴 뒤 같은 트리거에서 생성
 //  - 행동불능: 사망 감지 후 3600틱(12틱=1초, 5분) 뒤 미네랄 100을 소모해 본진 건물에서 복귀
-//  - 이탈: 21_player_leave_handoff의 승계 코드와 소유자 상태를 동기화
+//  - 이탈: 21_player_leave_handoff의 승계 코드와 실제/행동불능 영웅 소유자 상태를 동기화
 //=================================================================//
 
 //----- P8 상태 슬롯 -----//
-// Protoss Arbiter Tribunal   : 발렌 현재 소유자(0=미배속, 1~4=P1~P4)
+// Protoss Arbiter Tribunal    : 발렌 현재 소유자(0=미배속, 1~4=P1~P4)
 // Protoss Robotics Support Bay: 엘리아 현재 소유자(0=미배속, 1~4=P1~P4)
-// Zerg Spire                 : 발렌 행동불능 복귀 타이머(0~3601)
-// Zerg Greater Spire         : 엘리아 행동불능 복귀 타이머(0~3601)
-// Switch236/237              : 발렌/엘리아 배속 완료
-// Switch238/239              : 발렌/엘리아 행동불능
-// Switch240/241              : 발렌 2비트 무작위 대상
-// Switch242/243              : 엘리아 2비트 무작위 대상
-// Switch244                  : P9 영웅 생성 완료
+// Zerg Nydus Canal / Queen's Nest: 로크/세딘 현재 소유자(0=미배속, 1~4=P1~P4)
+// Zerg Spire / Greater Spire  : 발렌/엘리아 행동불능 복귀 타이머(0~3601)
+// Zerg Creep Colony / Hive   : 로크/세딘 행동불능 복귀 타이머(0~3601)
+// Zerg Hatchery / Lair        : 로크/세딘 합류 연출 타이머(0~168)
+// Switch238/239               : 발렌/엘리아 행동불능
+// Switch240~243               : 발렌/엘리아 2비트 무작위 대상
+// Switch244                   : 선배치 영웅 상태 초기화 완료
+// Switch245                   : 전방 정신체 파괴 후 로크 합류 요청
+// Switch157                   : 지휘 정신체 파괴 후 세딘 합류 요청
+// Switch250/251               : 로크/세딘 행동불능
+// Switch252~255               : 로크/세딘 2비트 무작위 대상
+// Switch256                   : 현재 합류 영웅의 미배속 생존 후보 존재
 
-//----- P9 대기 영웅 생성 -----//
+//----- P9 선배치 영웅 사용 및 네 영웅 상태 초기화 -----//
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch244", Not Set);
@@ -25,22 +31,33 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 0); //발렌 소유자 초기화
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 초기화
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 0); //로크 소유자 초기화
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 0); //세딘 소유자 초기화
 	Set Deaths("Player 8", "Zerg Spire", Set To, 0); //발렌 복귀 타이머 초기화
 	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //엘리아 복귀 타이머 초기화
-	Set Switch("Switch236", clear); //발렌 배속 상태 초기화
-	Set Switch("Switch237", clear); //엘리아 배속 상태 초기화
+	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 0); //로크 복귀 타이머 초기화
+	Set Deaths("Player 8", "Zerg Hive", Set To, 0); //세딘 복귀 타이머 초기화
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //로크 합류 연출 타이머 초기화
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //세딘 합류 연출 타이머 초기화
 	Set Switch("Switch238", clear); //발렌 활동 상태 초기화
 	Set Switch("Switch239", clear); //엘리아 활동 상태 초기화
-	Create Unit("Player 9", "Jim Raynor (Marine)", 1, "BaseEntrance"); //발렌 대기 : P9 소유로 입구 거점에 생성
-	Create Unit("Player 9", "Sarah Kerrigan (Ghost)", 1, "BaseEntrance"); //엘리아 대기 : P9 소유로 입구 거점에 생성
-	Set Switch("Switch244", set); //영웅 중복 생성 방지
+	Set Switch("Switch250", clear); //로크 활동 상태 초기화
+	Set Switch("Switch251", clear); //세딘 활동 상태 초기화
+	Set Switch("Switch245", clear); //로크 합류 요청 초기화
+	Set Switch("Switch157", clear); //세딘 합류 요청 초기화
+	Set Switch("Switch252", clear); //로크 추첨 bit0 초기화
+	Set Switch("Switch253", clear); //로크 추첨 bit1 초기화
+	Set Switch("Switch254", clear); //세딘 추첨 bit0 초기화
+	Set Switch("Switch255", clear); //세딘 추첨 bit1 초기화
+	Set Switch("Switch256", clear); //합류 후보 임시 상태 초기화
+	Set Switch("Switch244", set); //선배치 영웅 상태 초기화 완료
 }
 
 //----- 발렌 무작위 배속 -----//
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch244", Set);
-	Switch("Switch236", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 0);
 	Elapsed Time(At least, 5);
 Actions:
 	Set Switch("Switch240", randomize); //발렌 대상 추첨 bit0
@@ -49,58 +66,62 @@ Actions:
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch236", Not Set);
+	Switch("Switch244", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 0);
+	Elapsed Time(At least, 5);
 	Switch("Switch240", Not Set);
 	Switch("Switch241", Not Set);
 	Switch("Switch162", Set);
 	Switch("Switch166", Not Set);
 Actions:
-	Give Units to Player("Player 9", "Player 1", "Jim Raynor (Marine)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Give Units to Player("Player 9", "Player 1", "Jim Raynor (Marine)", 1, "Anywhere"); //영웅 무작위 배속 : P9 선배치 영웅을 활성 플레이어에게 이양
 	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 1); //현재 소유자 기록 : 발렌 소유자=P1
-	Set Switch("Switch236", set); //배속 완료 : 재추첨 중단
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch236", Not Set);
+	Switch("Switch244", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 0);
+	Elapsed Time(At least, 5);
 	Switch("Switch240", Set);
 	Switch("Switch241", Not Set);
 	Switch("Switch163", Set);
 	Switch("Switch167", Not Set);
 Actions:
-	Give Units to Player("Player 9", "Player 2", "Jim Raynor (Marine)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Give Units to Player("Player 9", "Player 2", "Jim Raynor (Marine)", 1, "Anywhere"); //영웅 무작위 배속 : P9 선배치 영웅을 활성 플레이어에게 이양
 	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 2); //현재 소유자 기록 : 발렌 소유자=P2
-	Set Switch("Switch236", set); //배속 완료 : 재추첨 중단
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch236", Not Set);
+	Switch("Switch244", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 0);
+	Elapsed Time(At least, 5);
 	Switch("Switch240", Not Set);
 	Switch("Switch241", Set);
 	Switch("Switch164", Set);
 	Switch("Switch168", Not Set);
 Actions:
-	Give Units to Player("Player 9", "Player 3", "Jim Raynor (Marine)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Give Units to Player("Player 9", "Player 3", "Jim Raynor (Marine)", 1, "Anywhere"); //영웅 무작위 배속 : P9 선배치 영웅을 활성 플레이어에게 이양
 	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 3); //현재 소유자 기록 : 발렌 소유자=P3
-	Set Switch("Switch236", set); //배속 완료 : 재추첨 중단
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch236", Not Set);
+	Switch("Switch244", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 0);
+	Elapsed Time(At least, 5);
 	Switch("Switch240", Set);
 	Switch("Switch241", Set);
 	Switch("Switch165", Set);
 	Switch("Switch169", Not Set);
 Actions:
-	Give Units to Player("Player 9", "Player 4", "Jim Raynor (Marine)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Give Units to Player("Player 9", "Player 4", "Jim Raynor (Marine)", 1, "Anywhere"); //영웅 무작위 배속 : P9 선배치 영웅을 활성 플레이어에게 이양
 	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 4); //현재 소유자 기록 : 발렌 소유자=P4
-	Set Switch("Switch236", set); //배속 완료 : 재추첨 중단
 }
 
 //----- 엘리아 무작위 배속 -----//
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch236", Set);
-	Switch("Switch237", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 0);
 	Elapsed Time(At least, 5);
 Actions:
 	Set Switch("Switch242", randomize); //엘리아 대상 추첨 bit0
@@ -109,57 +130,64 @@ Actions:
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Not Set);
+	Switch("Switch244", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 0);
+	Elapsed Time(At least, 5);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
 	Switch("Switch242", Not Set);
 	Switch("Switch243", Not Set);
 	Switch("Switch162", Set);
 	Switch("Switch166", Not Set);
 Actions:
-	Give Units to Player("Player 9", "Player 1", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Give Units to Player("Player 9", "Player 1", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //영웅 무작위 배속 : P9 선배치 영웅을 활성 플레이어에게 이양
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 1); //현재 소유자 기록 : 엘리아 소유자=P1
-	Set Switch("Switch237", set); //배속 완료 : 재추첨 중단
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Not Set);
+	Switch("Switch244", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 0);
+	Elapsed Time(At least, 5);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
 	Switch("Switch242", Set);
 	Switch("Switch243", Not Set);
 	Switch("Switch163", Set);
 	Switch("Switch167", Not Set);
 Actions:
-	Give Units to Player("Player 9", "Player 2", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Give Units to Player("Player 9", "Player 2", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //영웅 무작위 배속 : P9 선배치 영웅을 활성 플레이어에게 이양
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 2); //현재 소유자 기록 : 엘리아 소유자=P2
-	Set Switch("Switch237", set); //배속 완료 : 재추첨 중단
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Not Set);
+	Switch("Switch244", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 0);
+	Elapsed Time(At least, 5);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
 	Switch("Switch242", Not Set);
 	Switch("Switch243", Set);
 	Switch("Switch164", Set);
 	Switch("Switch168", Not Set);
 Actions:
-	Give Units to Player("Player 9", "Player 3", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Give Units to Player("Player 9", "Player 3", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //영웅 무작위 배속 : P9 선배치 영웅을 활성 플레이어에게 이양
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 3); //현재 소유자 기록 : 엘리아 소유자=P3
-	Set Switch("Switch237", set); //배속 완료 : 재추첨 중단
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Not Set);
+	Switch("Switch244", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 0);
+	Elapsed Time(At least, 5);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
 	Switch("Switch242", Set);
 	Switch("Switch243", Set);
 	Switch("Switch165", Set);
 	Switch("Switch169", Not Set);
 Actions:
-	Give Units to Player("Player 9", "Player 4", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //영웅 무작위 배속 : P9 대기 영웅을 활성 플레이어에게 이양
+	Give Units to Player("Player 9", "Player 4", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //영웅 무작위 배속 : P9 선배치 영웅을 활성 플레이어에게 이양
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 4); //현재 소유자 기록 : 엘리아 소유자=P4
-	Set Switch("Switch237", set); //배속 완료 : 재추첨 중단
 }
 
-//----- 2명 이상인데 두 영웅이 같은 플레이어에게 모이면 엘리아 재추첨 -----//
+//----- 2명 이상인데 두 시작 영웅이 같은 플레이어에게 모이면 엘리아 재추첨 -----//
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
 	Switch("Switch163", Set);
@@ -167,11 +195,9 @@ Conditions:
 Actions:
 	Give Units to Player("Player 1", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
-	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
 	Switch("Switch164", Set);
@@ -179,11 +205,9 @@ Conditions:
 Actions:
 	Give Units to Player("Player 1", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
-	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
 	Switch("Switch165", Set);
@@ -191,11 +215,9 @@ Conditions:
 Actions:
 	Give Units to Player("Player 1", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
-	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
 	Switch("Switch162", Set);
@@ -203,11 +225,9 @@ Conditions:
 Actions:
 	Give Units to Player("Player 2", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
-	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
 	Switch("Switch164", Set);
@@ -215,11 +235,9 @@ Conditions:
 Actions:
 	Give Units to Player("Player 2", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
-	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
 	Switch("Switch165", Set);
@@ -227,11 +245,9 @@ Conditions:
 Actions:
 	Give Units to Player("Player 2", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
-	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
 	Switch("Switch162", Set);
@@ -239,11 +255,9 @@ Conditions:
 Actions:
 	Give Units to Player("Player 3", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
-	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
 	Switch("Switch163", Set);
@@ -251,11 +265,9 @@ Conditions:
 Actions:
 	Give Units to Player("Player 3", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
-	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
 	Switch("Switch165", Set);
@@ -263,11 +275,9 @@ Conditions:
 Actions:
 	Give Units to Player("Player 3", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
-	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
 	Switch("Switch162", Set);
@@ -275,11 +285,9 @@ Conditions:
 Actions:
 	Give Units to Player("Player 4", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
-	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
 	Switch("Switch163", Set);
@@ -287,11 +295,9 @@ Conditions:
 Actions:
 	Give Units to Player("Player 4", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
-	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
 	Switch("Switch164", Set);
@@ -299,14 +305,13 @@ Conditions:
 Actions:
 	Give Units to Player("Player 4", "Player 9", "Sarah Kerrigan (Ghost)", 1, "Anywhere"); //중복 소유 해소 : 엘리아를 P9 대기 상태로 회수
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 0); //엘리아 소유자 재추첨 준비
-	Set Switch("Switch237", clear); //활성 플레이어가 2명 이상이면 발렌과 다른 소유자를 다시 추첨
 }
 
-//----- 최초 배속 개인 안내: 두 영웅 배속 완료 후 각 소유자에게 1회 -----//
+//----- 최초 배속 개인 안내: 두 시작 영웅 배속 완료 후 각 소유자에게 1회 -----//
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Switch("Switch236", Set);
-	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
 	Command("Current Player", "Jim Raynor (Marine)", At least, 1);
 	Command("Current Player", "Sarah Kerrigan (Ghost)", At least, 1);
 Actions:
@@ -314,8 +319,8 @@ Actions:
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Switch("Switch236", Set);
-	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
 	Command("Current Player", "Jim Raynor (Marine)", At least, 1);
 	Command("Current Player", "Sarah Kerrigan (Ghost)", At most, 0);
 Actions:
@@ -323,12 +328,2288 @@ Actions:
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Switch("Switch236", Set);
-	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
 	Command("Current Player", "Jim Raynor (Marine)", At most, 0);
 	Command("Current Player", "Sarah Kerrigan (Ghost)", At least, 1);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+}
+
+//----- 정신체 부재 독립 감지 : 난이도 선택 및 미션 진행 단계와 무관 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch244", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch245", Not Set);
+	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At most, 0);
+Actions:
+	Set Switch("Switch245", set); //영웅 초기화 뒤 정신체 부재를 독립 감지 : 난이도/미션 단계와 무관하게 합류 요청 보존
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch244", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch157", Not Set);
+	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At most, 0);
+Actions:
+	Set Switch("Switch157", set); //영웅 초기화 뒤 정신체 부재를 독립 감지 : 난이도/미션 단계와 무관하게 합류 요청 보존
+}
+
+//----- 로크 현장 합류 및 공정 배속 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+Actions:
+	Set Switch("Switch256", clear); //매 추첨 사이클마다 미배속 생존 후보를 다시 계산
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 2);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P1은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 1);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P2은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 3);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P2은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 1);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P2은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 3);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P2은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 2);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P3은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 4);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P3은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 2);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P3은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 4);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P3은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 3);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P4은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+Actions:
+	Set Switch("Switch252", randomize); //로크 대상 추첨 bit0
+	Set Switch("Switch253", randomize); //로크 대상 추첨 bit1
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch252", Not Set);
+	Switch("Switch253", Not Set);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 2);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 1", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 1); //현재 소유자 기록 : 로크 소유자=P1
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch252", Set);
+	Switch("Switch253", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 1);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 2", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //현재 소유자 기록 : 로크 소유자=P2
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch252", Set);
+	Switch("Switch253", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 3);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 2", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //현재 소유자 기록 : 로크 소유자=P2
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch252", Set);
+	Switch("Switch253", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 1);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 2", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //현재 소유자 기록 : 로크 소유자=P2
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch252", Set);
+	Switch("Switch253", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 3);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 2", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //현재 소유자 기록 : 로크 소유자=P2
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch252", Not Set);
+	Switch("Switch253", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 2);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 3", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //현재 소유자 기록 : 로크 소유자=P3
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch252", Not Set);
+	Switch("Switch253", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 4);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 3", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //현재 소유자 기록 : 로크 소유자=P3
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch252", Not Set);
+	Switch("Switch253", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 2);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 3", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //현재 소유자 기록 : 로크 소유자=P3
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch252", Not Set);
+	Switch("Switch253", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 4);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 3", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //현재 소유자 기록 : 로크 소유자=P3
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch252", Set);
+	Switch("Switch253", Set);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 3);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 4", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 4); //현재 소유자 기록 : 로크 소유자=P4
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Switch("Switch252", Not Set);
+	Switch("Switch253", Not Set);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 1", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 1); //현재 소유자 기록 : 로크 소유자=P1
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Switch("Switch252", Set);
+	Switch("Switch253", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 2", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //현재 소유자 기록 : 로크 소유자=P2
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Switch("Switch252", Not Set);
+	Switch("Switch253", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 3", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //현재 소유자 기록 : 로크 소유자=P3
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch245", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Switch("Switch252", Set);
+	Switch("Switch253", Set);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroCJoin", "HeroCJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 9", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : P9 연구 상태를 가진 일반 벌처 생성
+	Give Units to Player("Player 9", "Player 4", "Terran Vulture", 1, "HeroCJoin"); //이온 추진기 선물 : 로크 배속 플레이어에게 P9 벌처 이양
+	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "HeroCJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 4); //현재 소유자 기록 : 로크 소유자=P4
+	Set Deaths("Player 8", "Zerg Hatchery", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch245", clear); //로크 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+
+//----- 세딘 현장 합류 및 공정 배속 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+Actions:
+	Set Switch("Switch256", clear); //매 추첨 사이클마다 미배속 생존 후보를 다시 계산
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 2);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 2);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P1은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 1);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P2은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 3);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P2은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 3);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 1);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P2은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 3);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 3);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P2은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 1);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P2은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 3);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P2은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 3);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 1);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P2은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 3);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 3);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P2은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 2);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 2);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P3은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 2);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 4);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P3은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 4);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 2);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P3은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 4);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 4);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P3은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 2);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 2);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P3은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 2);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 4);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P3은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 4);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 2);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P3은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 4);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 4);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P3은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 3);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 3);
+Actions:
+	Set Switch("Switch256", set); //우선 배속 후보 확인 : P4은 생존 중이며 기존 영웅 미배속
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+Actions:
+	Set Switch("Switch254", randomize); //세딘 대상 추첨 bit0
+	Set Switch("Switch255", randomize); //세딘 대상 추첨 bit1
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Not Set);
+	Switch("Switch255", Not Set);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 2);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 2);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //현재 소유자 기록 : 세딘 소유자=P1
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Set);
+	Switch("Switch255", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 1);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Set);
+	Switch("Switch255", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 3);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Set);
+	Switch("Switch255", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 3);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 1);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Set);
+	Switch("Switch255", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 1);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 3);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 3);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Set);
+	Switch("Switch255", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 1);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Set);
+	Switch("Switch255", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 1);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 3);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Set);
+	Switch("Switch255", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 3);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 1);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Set);
+	Switch("Switch255", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 3);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 3);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Not Set);
+	Switch("Switch255", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 2);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 2);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Not Set);
+	Switch("Switch255", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 2);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 4);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Not Set);
+	Switch("Switch255", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 4);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 2);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Not Set);
+	Switch("Switch255", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 2);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 4);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 4);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Not Set);
+	Switch("Switch255", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 2);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 2);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Not Set);
+	Switch("Switch255", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 2);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 4);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Not Set);
+	Switch("Switch255", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 4);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 2);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Not Set);
+	Switch("Switch255", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At least, 4);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At least, 4);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 4);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Set);
+	Switch("Switch254", Set);
+	Switch("Switch255", Set);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", At most, 3);
+	Deaths("Player 8", "Protoss Robotics Support Bay", At most, 3);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 3);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //현재 소유자 기록 : 세딘 소유자=P4
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Switch("Switch254", Not Set);
+	Switch("Switch255", Not Set);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 2);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //현재 소유자 기록 : 세딘 소유자=P1
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Switch("Switch254", Set);
+	Switch("Switch255", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 1);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Switch("Switch254", Set);
+	Switch("Switch255", Not Set);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 3);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Switch("Switch254", Not Set);
+	Switch("Switch255", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 2);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Switch("Switch254", Not Set);
+	Switch("Switch255", Set);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 4);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Switch("Switch254", Set);
+	Switch("Switch255", Set);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At most, 3);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //현재 소유자 기록 : 세딘 소유자=P4
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Switch("Switch163", Not Set);
+	Switch("Switch164", Not Set);
+	Switch("Switch165", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //현재 소유자 기록 : 세딘 소유자=P1
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Switch("Switch163", Not Set);
+	Switch("Switch164", Not Set);
+	Switch("Switch169", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //현재 소유자 기록 : 세딘 소유자=P1
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Switch("Switch163", Not Set);
+	Switch("Switch168", Set);
+	Switch("Switch165", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //현재 소유자 기록 : 세딘 소유자=P1
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Switch("Switch163", Not Set);
+	Switch("Switch168", Set);
+	Switch("Switch169", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //현재 소유자 기록 : 세딘 소유자=P1
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Switch("Switch167", Set);
+	Switch("Switch164", Not Set);
+	Switch("Switch165", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //현재 소유자 기록 : 세딘 소유자=P1
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Switch("Switch167", Set);
+	Switch("Switch164", Not Set);
+	Switch("Switch169", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //현재 소유자 기록 : 세딘 소유자=P1
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Switch("Switch167", Set);
+	Switch("Switch168", Set);
+	Switch("Switch165", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //현재 소유자 기록 : 세딘 소유자=P1
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Switch("Switch162", Set);
+	Switch("Switch166", Not Set);
+	Switch("Switch167", Set);
+	Switch("Switch168", Set);
+	Switch("Switch169", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //현재 소유자 기록 : 세딘 소유자=P1
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Switch("Switch162", Not Set);
+	Switch("Switch164", Not Set);
+	Switch("Switch165", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Switch("Switch162", Not Set);
+	Switch("Switch164", Not Set);
+	Switch("Switch169", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Switch("Switch162", Not Set);
+	Switch("Switch168", Set);
+	Switch("Switch165", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Switch("Switch162", Not Set);
+	Switch("Switch168", Set);
+	Switch("Switch169", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Switch("Switch166", Set);
+	Switch("Switch164", Not Set);
+	Switch("Switch165", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Switch("Switch166", Set);
+	Switch("Switch164", Not Set);
+	Switch("Switch169", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Switch("Switch166", Set);
+	Switch("Switch168", Set);
+	Switch("Switch165", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Switch("Switch163", Set);
+	Switch("Switch167", Not Set);
+	Switch("Switch166", Set);
+	Switch("Switch168", Set);
+	Switch("Switch169", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //현재 소유자 기록 : 세딘 소유자=P2
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Switch("Switch162", Not Set);
+	Switch("Switch163", Not Set);
+	Switch("Switch165", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Switch("Switch162", Not Set);
+	Switch("Switch163", Not Set);
+	Switch("Switch169", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Switch("Switch162", Not Set);
+	Switch("Switch167", Set);
+	Switch("Switch165", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Switch("Switch162", Not Set);
+	Switch("Switch167", Set);
+	Switch("Switch169", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Switch("Switch166", Set);
+	Switch("Switch163", Not Set);
+	Switch("Switch165", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Switch("Switch166", Set);
+	Switch("Switch163", Not Set);
+	Switch("Switch169", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Switch("Switch166", Set);
+	Switch("Switch167", Set);
+	Switch("Switch165", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Switch("Switch164", Set);
+	Switch("Switch168", Not Set);
+	Switch("Switch166", Set);
+	Switch("Switch167", Set);
+	Switch("Switch169", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //현재 소유자 기록 : 세딘 소유자=P3
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Switch("Switch162", Not Set);
+	Switch("Switch163", Not Set);
+	Switch("Switch164", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //현재 소유자 기록 : 세딘 소유자=P4
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Switch("Switch162", Not Set);
+	Switch("Switch163", Not Set);
+	Switch("Switch168", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //현재 소유자 기록 : 세딘 소유자=P4
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Switch("Switch162", Not Set);
+	Switch("Switch167", Set);
+	Switch("Switch164", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //현재 소유자 기록 : 세딘 소유자=P4
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Switch("Switch162", Not Set);
+	Switch("Switch167", Set);
+	Switch("Switch168", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //현재 소유자 기록 : 세딘 소유자=P4
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Switch("Switch166", Set);
+	Switch("Switch163", Not Set);
+	Switch("Switch164", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //현재 소유자 기록 : 세딘 소유자=P4
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Switch("Switch166", Set);
+	Switch("Switch163", Not Set);
+	Switch("Switch168", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //현재 소유자 기록 : 세딘 소유자=P4
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Switch("Switch166", Set);
+	Switch("Switch167", Set);
+	Switch("Switch164", Not Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //현재 소유자 기록 : 세딘 소유자=P4
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch157", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 0);
+	Switch("Switch256", Not Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Switch("Switch165", Set);
+	Switch("Switch169", Not Set);
+	Switch("Switch166", Set);
+	Switch("Switch167", Set);
+	Switch("Switch168", Set);
+Actions:
+	Move Unit("All Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 유닛을 출구로 이동
+	Move Unit("All Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 사람/컴퓨터 소유 건물을 출구로 이동
+	Move Unit("Neutral Players", "Men", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 유닛을 출구로 이동
+	Move Unit("Neutral Players", "Buildings", 64, "HeroDJoin", "HeroDJoinExit"); //합류 지점 정리 : 중립 소유 건물을 출구로 이동
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "HeroDJoin"); //현장 합류 : 비워 둔 전용 지점에 신규 영웅 생성
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //현재 소유자 기록 : 세딘 소유자=P4
+	Set Deaths("Player 8", "Zerg Lair", Set To, 0); //합류 연출 타이머 시작점
+	Set Switch("Switch256", clear); //후보 탐색 임시 상태 정리
+	Set Switch("Switch157", clear); //세딘 합류 요청 소비 : 배속 뒤 재실행 방지
+}
+
+//----- 신규 영웅 합류 연출: 84틱(7초) 대사, 168틱(14초) 개인 안내 -----//
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 84);
+Actions:
+	Display Text Message(Always Display, "<1A>특수작전장교 로크: <04>교란망이 꺼졌군. 그 틈을 기다렸다. 이 전선은 지금부터 내가 맡겠다.");
+}
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 합류] <1A>로크<04>가 귀관의 지휘에 합류했습니다.");
+}
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 합류] <1A>로크<04>가 귀관의 지휘에 합류했습니다.");
+}
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 합류] <1A>로크<04>가 귀관의 지휘에 합류했습니다.");
+}
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 합류] <1A>로크<04>가 귀관의 지휘에 합류했습니다.");
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Nydus Canal", At least, 1);
+	Deaths("Player 8", "Zerg Hatchery", At most, 167);
+Actions:
+	Set Deaths("Player 8", "Zerg Hatchery", Add, 1); //12틱=1초, 84틱 대사/168틱 개인 안내까지 진행
+	Preserve Trigger();
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Deaths("Player 8", "Zerg Queen's Nest", At least, 1);
+	Deaths("Player 8", "Zerg Lair", Exactly, 84);
+Actions:
+	Display Text Message(Always Display, "<1F>병참감찰관 세딘: <04>방해 신호가 사라졌습니다. 잔존 기갑대를 수습해 현 위치에서 합류하겠습니다.");
+}
+Trigger("Player 1"){
+Conditions:
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+	Deaths("Player 8", "Zerg Lair", Exactly, 168);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 합류] <1F>세딘<04>이 귀관의 지휘에 합류했습니다.");
+}
+Trigger("Player 2"){
+Conditions:
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+	Deaths("Player 8", "Zerg Lair", Exactly, 168);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 합류] <1F>세딘<04>이 귀관의 지휘에 합류했습니다.");
+}
+Trigger("Player 3"){
+Conditions:
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+	Deaths("Player 8", "Zerg Lair", Exactly, 168);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 합류] <1F>세딘<04>이 귀관의 지휘에 합류했습니다.");
+}
+Trigger("Player 4"){
+Conditions:
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+	Deaths("Player 8", "Zerg Lair", Exactly, 168);
+Actions:
+	Display Text Message(Always Display, "<07>[영웅 합류] <1F>세딘<04>이 귀관의 지휘에 합류했습니다.");
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Queen's Nest", At least, 1);
+	Deaths("Player 8", "Zerg Lair", At most, 167);
+Actions:
+	Set Deaths("Player 8", "Zerg Lair", Add, 1); //12틱=1초, 84틱 대사/168틱 개인 안내까지 진행
+	Preserve Trigger();
 }
 
 //----- 이탈 승계 코드 동기화: 21 파일이 코드를 지우기 전 P8이 먼저 읽음 -----//
@@ -348,6 +2629,20 @@ Actions:
 }
 Trigger("Player 8"){
 Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 12);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //이탈 승계 연동 : 로크 소유자 P1->P2
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 12);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //이탈 승계 연동 : 세딘 소유자 P1->P2
+}
+Trigger("Player 8"){
+Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 13);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
 Actions:
@@ -359,6 +2654,20 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
 Actions:
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 3); //이탈 승계 연동 : 엘리아 소유자 P1->P3
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 13);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //이탈 승계 연동 : 로크 소유자 P1->P3
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 13);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //이탈 승계 연동 : 세딘 소유자 P1->P3
 }
 Trigger("Player 8"){
 Conditions:
@@ -376,6 +2685,20 @@ Actions:
 }
 Trigger("Player 8"){
 Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 14);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 4); //이탈 승계 연동 : 로크 소유자 P1->P4
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 14);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+Actions:
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //이탈 승계 연동 : 세딘 소유자 P1->P4
+}
+Trigger("Player 8"){
+Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 21);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
 Actions:
@@ -387,6 +2710,20 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
 Actions:
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 1); //이탈 승계 연동 : 엘리아 소유자 P2->P1
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 21);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+Actions:
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 1); //이탈 승계 연동 : 로크 소유자 P2->P1
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 21);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+Actions:
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //이탈 승계 연동 : 세딘 소유자 P2->P1
 }
 Trigger("Player 8"){
 Conditions:
@@ -404,6 +2741,20 @@ Actions:
 }
 Trigger("Player 8"){
 Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 23);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+Actions:
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //이탈 승계 연동 : 로크 소유자 P2->P3
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 23);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+Actions:
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //이탈 승계 연동 : 세딘 소유자 P2->P3
+}
+Trigger("Player 8"){
+Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 24);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
 Actions:
@@ -415,6 +2766,20 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
 Actions:
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 4); //이탈 승계 연동 : 엘리아 소유자 P2->P4
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 24);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+Actions:
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 4); //이탈 승계 연동 : 로크 소유자 P2->P4
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 24);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+Actions:
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //이탈 승계 연동 : 세딘 소유자 P2->P4
 }
 Trigger("Player 8"){
 Conditions:
@@ -432,6 +2797,20 @@ Actions:
 }
 Trigger("Player 8"){
 Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 31);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 1); //이탈 승계 연동 : 로크 소유자 P3->P1
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 31);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //이탈 승계 연동 : 세딘 소유자 P3->P1
+}
+Trigger("Player 8"){
+Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 32);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
 Actions:
@@ -443,6 +2822,20 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
 Actions:
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 2); //이탈 승계 연동 : 엘리아 소유자 P3->P2
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 32);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //이탈 승계 연동 : 로크 소유자 P3->P2
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 32);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //이탈 승계 연동 : 세딘 소유자 P3->P2
 }
 Trigger("Player 8"){
 Conditions:
@@ -460,6 +2853,20 @@ Actions:
 }
 Trigger("Player 8"){
 Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 34);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 4); //이탈 승계 연동 : 로크 소유자 P3->P4
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 34);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+Actions:
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 4); //이탈 승계 연동 : 세딘 소유자 P3->P4
+}
+Trigger("Player 8"){
+Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 41);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
 Actions:
@@ -471,6 +2878,20 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
 Actions:
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 1); //이탈 승계 연동 : 엘리아 소유자 P4->P1
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 41);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+Actions:
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 1); //이탈 승계 연동 : 로크 소유자 P4->P1
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 41);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+Actions:
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 1); //이탈 승계 연동 : 세딘 소유자 P4->P1
 }
 Trigger("Player 8"){
 Conditions:
@@ -488,6 +2909,20 @@ Actions:
 }
 Trigger("Player 8"){
 Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 42);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+Actions:
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 2); //이탈 승계 연동 : 로크 소유자 P4->P2
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 42);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+Actions:
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 2); //이탈 승계 연동 : 세딘 소유자 P4->P2
+}
+Trigger("Player 8"){
+Conditions:
 	Deaths("Player 8", "Terran Beacon", Exactly, 43);
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
 Actions:
@@ -500,102 +2935,196 @@ Conditions:
 Actions:
 	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 3); //이탈 승계 연동 : 엘리아 소유자 P4->P3
 }
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 43);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+Actions:
+	Set Deaths("Player 8", "Zerg Nydus Canal", Set To, 3); //이탈 승계 연동 : 로크 소유자 P4->P3
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Terran Beacon", Exactly, 43);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+Actions:
+	Set Deaths("Player 8", "Zerg Queen's Nest", Set To, 3); //이탈 승계 연동 : 세딘 소유자 P4->P3
+}
 
 //----- 행동불능 감지 -----//
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch236", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
 	Switch("Switch238", Not Set);
 	Deaths("Player 1", "Jim Raynor (Marine)", At least, 1);
 Actions:
 	Set Deaths("Player 1", "Jim Raynor (Marine)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
-	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 1); //행동불능 당시 소유자 보존 : 복귀 위치 결정
 	Set Deaths("Player 8", "Zerg Spire", Set To, 0); //5분 복귀 타이머 시작점
 	Set Switch("Switch238", set); //행동불능 상태 진입
 	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch236", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
 	Switch("Switch238", Not Set);
 	Deaths("Player 2", "Jim Raynor (Marine)", At least, 1);
 Actions:
 	Set Deaths("Player 2", "Jim Raynor (Marine)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
-	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 2); //행동불능 당시 소유자 보존 : 복귀 위치 결정
 	Set Deaths("Player 8", "Zerg Spire", Set To, 0); //5분 복귀 타이머 시작점
 	Set Switch("Switch238", set); //행동불능 상태 진입
 	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch236", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
 	Switch("Switch238", Not Set);
 	Deaths("Player 3", "Jim Raynor (Marine)", At least, 1);
 Actions:
 	Set Deaths("Player 3", "Jim Raynor (Marine)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
-	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 3); //행동불능 당시 소유자 보존 : 복귀 위치 결정
 	Set Deaths("Player 8", "Zerg Spire", Set To, 0); //5분 복귀 타이머 시작점
 	Set Switch("Switch238", set); //행동불능 상태 진입
 	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch236", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
 	Switch("Switch238", Not Set);
 	Deaths("Player 4", "Jim Raynor (Marine)", At least, 1);
 Actions:
 	Set Deaths("Player 4", "Jim Raynor (Marine)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
-	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 4); //행동불능 당시 소유자 보존 : 복귀 위치 결정
 	Set Deaths("Player 8", "Zerg Spire", Set To, 0); //5분 복귀 타이머 시작점
 	Set Switch("Switch238", set); //행동불능 상태 진입
 	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
 	Switch("Switch239", Not Set);
 	Deaths("Player 1", "Sarah Kerrigan (Ghost)", At least, 1);
 Actions:
 	Set Deaths("Player 1", "Sarah Kerrigan (Ghost)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
-	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 1); //행동불능 당시 소유자 보존 : 복귀 위치 결정
 	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //5분 복귀 타이머 시작점
 	Set Switch("Switch239", set); //행동불능 상태 진입
 	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
 	Switch("Switch239", Not Set);
 	Deaths("Player 2", "Sarah Kerrigan (Ghost)", At least, 1);
 Actions:
 	Set Deaths("Player 2", "Sarah Kerrigan (Ghost)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
-	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 2); //행동불능 당시 소유자 보존 : 복귀 위치 결정
 	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //5분 복귀 타이머 시작점
 	Set Switch("Switch239", set); //행동불능 상태 진입
 	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
 	Switch("Switch239", Not Set);
 	Deaths("Player 3", "Sarah Kerrigan (Ghost)", At least, 1);
 Actions:
 	Set Deaths("Player 3", "Sarah Kerrigan (Ghost)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
-	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 3); //행동불능 당시 소유자 보존 : 복귀 위치 결정
 	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //5분 복귀 타이머 시작점
 	Set Switch("Switch239", set); //행동불능 상태 진입
 	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
 }
 Trigger("Player 8"){
 Conditions:
-	Switch("Switch237", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
 	Switch("Switch239", Not Set);
 	Deaths("Player 4", "Sarah Kerrigan (Ghost)", At least, 1);
 Actions:
 	Set Deaths("Player 4", "Sarah Kerrigan (Ghost)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
-	Set Deaths("Player 8", "Protoss Robotics Support Bay", Set To, 4); //행동불능 당시 소유자 보존 : 복귀 위치 결정
 	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //5분 복귀 타이머 시작점
 	Set Switch("Switch239", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Switch("Switch250", Not Set);
+	Deaths("Player 1", "Jim Raynor (Vulture)", At least, 1);
+Actions:
+	Set Deaths("Player 1", "Jim Raynor (Vulture)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch250", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Switch("Switch250", Not Set);
+	Deaths("Player 2", "Jim Raynor (Vulture)", At least, 1);
+Actions:
+	Set Deaths("Player 2", "Jim Raynor (Vulture)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch250", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Switch("Switch250", Not Set);
+	Deaths("Player 3", "Jim Raynor (Vulture)", At least, 1);
+Actions:
+	Set Deaths("Player 3", "Jim Raynor (Vulture)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch250", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Switch("Switch250", Not Set);
+	Deaths("Player 4", "Jim Raynor (Vulture)", At least, 1);
+Actions:
+	Set Deaths("Player 4", "Jim Raynor (Vulture)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch250", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+	Switch("Switch251", Not Set);
+	Deaths("Player 1", "Alan Schezar (Goliath)", At least, 1);
+Actions:
+	Set Deaths("Player 1", "Alan Schezar (Goliath)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Zerg Hive", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch251", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+	Switch("Switch251", Not Set);
+	Deaths("Player 2", "Alan Schezar (Goliath)", At least, 1);
+Actions:
+	Set Deaths("Player 2", "Alan Schezar (Goliath)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Zerg Hive", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch251", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+	Switch("Switch251", Not Set);
+	Deaths("Player 3", "Alan Schezar (Goliath)", At least, 1);
+Actions:
+	Set Deaths("Player 3", "Alan Schezar (Goliath)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Zerg Hive", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch251", set); //행동불능 상태 진입
+	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
+}
+Trigger("Player 8"){
+Conditions:
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+	Switch("Switch251", Not Set);
+	Deaths("Player 4", "Alan Schezar (Goliath)", At least, 1);
+Actions:
+	Set Deaths("Player 4", "Alan Schezar (Goliath)", Set To, 0); //사망 카운터 정리 : 다음 행동불능도 다시 감지
+	Set Deaths("Player 8", "Zerg Hive", Set To, 0); //5분 복귀 타이머 시작점
+	Set Switch("Switch251", set); //행동불능 상태 진입
 	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
 }
 
@@ -610,14 +3139,6 @@ Actions:
 }
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
-	Switch("Switch239", Set);
-	Deaths("Player 8", "Zerg Greater Spire", Exactly, 1);
-Actions:
-	Display Text Message(Always Display, "<06>[행동 불능] <1B>엘리아<04>가 후송되었습니다. 5분 후 미네랄 100을 소모해 배속된 지휘관의 본진에서 복귀합니다.");
-	Preserve Trigger();
-}
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
-Conditions:
 	Switch("Switch238", Set);
 	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
 Actions:
@@ -627,9 +3148,49 @@ Actions:
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
 Conditions:
 	Switch("Switch239", Set);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1B>엘리아<04>가 후송되었습니다. 5분 후 미네랄 100을 소모해 배속된 지휘관의 본진에서 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch239", Set);
 	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
 Actions:
 	Display Text Message(Always Display, "<07>[전선 복귀] <1B>엘리아<04>가 배속된 지휘관의 본진에서 복귀했습니다. <1F>(미네랄 -100)");
+	Preserve Trigger();
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1A>로크<04>가 후송되었습니다. 5분 후 미네랄 100을 소모해 배속된 지휘관의 본진에서 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3601);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1A>로크<04>가 배속된 지휘관의 본진에서 복귀했습니다. <1F>(미네랄 -100)");
+	Preserve Trigger();
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Hive", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1F>세딘<04>이 후송되었습니다. 5분 후 미네랄 100을 소모해 배속된 지휘관의 본진에서 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3601);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1F>세딘<04>이 배속된 지휘관의 본진에서 복귀했습니다. <1F>(미네랄 -100)");
 	Preserve Trigger();
 }
 
@@ -652,6 +3213,24 @@ Actions:
 	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //다음 행동불능을 위해 타이머 초기화
 	Preserve Trigger(); //반복 수명주기 : 매 복귀마다 상태를 다시 초기화
 }
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3601);
+Actions:
+	Set Switch("Switch250", clear); //복귀 완료 : 활동 상태 복원
+	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 0); //다음 행동불능을 위해 타이머 초기화
+	Preserve Trigger(); //반복 수명주기 : 매 복귀마다 상태를 다시 초기화
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3601);
+Actions:
+	Set Switch("Switch251", clear); //복귀 완료 : 활동 상태 복원
+	Set Deaths("Player 8", "Zerg Hive", Set To, 0); //다음 행동불능을 위해 타이머 초기화
+	Preserve Trigger(); //반복 수명주기 : 매 복귀마다 상태를 다시 초기화
+}
 
 //----- 5분 복귀 타이머: 행동불능 동안 0~3600까지만 증가 -----//
 Trigger("Player 8"){
@@ -668,6 +3247,22 @@ Conditions:
 	Deaths("Player 8", "Zerg Greater Spire", At most, 3599);
 Actions:
 	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //12틱=1초, 3600틱=5분
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Creep Colony", At most, 3599);
+Actions:
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //12틱=1초, 3600틱=5분
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Hive", At most, 3599);
+Actions:
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //12틱=1초, 3600틱=5분
 	Preserve Trigger();
 }
 
@@ -1230,5 +3825,565 @@ Actions:
 	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Sarah Kerrigan (Ghost)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
 	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 1", "Terran Command Center", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Hatchery", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Lair", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Hive", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 1", "Protoss Nexus", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 2", "Terran Command Center", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Hatchery", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Lair", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Hive", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 2", "Protoss Nexus", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 3", "Terran Command Center", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Hatchery", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Lair", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Hive", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 3", "Protoss Nexus", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 4", "Terran Command Center", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Hatchery", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Lair", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Hive", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 4", "Protoss Nexus", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 1", "Terran Command Center", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Hatchery", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Lair", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 1", "Zerg Hive", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 1", At least, 100, ore);
+	Command("Player 1", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 1", "Protoss Nexus", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 2", "Terran Command Center", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Hatchery", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Lair", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 2", "Zerg Hive", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 2", At least, 100, ore);
+	Command("Player 2", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 2", "Protoss Nexus", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 3", "Terran Command Center", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Hatchery", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Lair", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 3", "Zerg Hive", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 3", At least, 100, ore);
+	Command("Player 3", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 3", "Protoss Nexus", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Terran Command Center", At least, 1);
+Actions:
+	Move Location("Player 4", "Terran Command Center", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Zerg Hatchery", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Hatchery", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Zerg Lair", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Lair", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Zerg Hive", At least, 1);
+Actions:
+	Move Location("Player 4", "Zerg Hive", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3600);
+	Accumulate("Player 4", At least, 100, ore);
+	Command("Player 4", "Protoss Nexus", At least, 1);
+Actions:
+	Move Location("Player 4", "Protoss Nexus", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
+	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
+	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }

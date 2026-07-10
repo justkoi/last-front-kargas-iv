@@ -18,6 +18,7 @@ $repairTool = "C:\Users\justk\.codex\skills\repair-starcraft-map\scripts\repair_
 $protectTool = Join-Path $PSScriptRoot "protect_scx.py"
 $stringRecoveryTool = Join-Path $PSScriptRoot "recover_map_strings_cp949.py"
 $triggerTextPath = Join-Path $PSScriptRoot "KargasIV_Triggers_Mission1Only.txt"
+$briefingTextPath = Join-Path $PSScriptRoot "KargasIV_Briefing.txt"
 $forceNamesPath = Join-Path $PSScriptRoot "ForceNames.md"
 
 function Resolve-Python {
@@ -88,6 +89,10 @@ function Assert-BuildTools {
         throw "Trigger text not found. Run build_triggers.ps1 first: $triggerTextPath"
     }
 
+    if (-not (Test-Path -LiteralPath $briefingTextPath)) {
+        throw "Briefing text not found: $briefingTextPath"
+    }
+
     if (-not (Test-Path -LiteralPath $forceNamesPath)) {
         throw "Force names file not found: $forceNamesPath"
     }
@@ -144,10 +149,10 @@ function Invoke-Repair([string]$Python, [string]$SourceMap, [string]$CleanOut) {
 
 function Invoke-StringRecovery([string]$Python, [string]$MapPath) {
     $recoveredOut = Join-Path $WorkDir "kargas_strings_cp949_recovered.scx"
-    Write-Host "[strings] Recover UTF-8 trigger strings to CP949"
+    Write-Host "[strings] Recover UTF-8 trigger and briefing strings to CP949"
     Write-Host "[strings] $MapPath"
     Write-Host "[strings] -> $recoveredOut"
-    & $Python $stringRecoveryTool $MapPath --out $recoveredOut --work-dir $WorkDir --trigger-text $triggerTextPath --force-names $forceNamesPath
+    & $Python $stringRecoveryTool $MapPath --out $recoveredOut --work-dir $WorkDir --trigger-text $triggerTextPath --briefing-text $briefingTextPath --force-names $forceNamesPath
     if ($LASTEXITCODE -ne 0) {
         throw "String encoding recovery failed."
     }
