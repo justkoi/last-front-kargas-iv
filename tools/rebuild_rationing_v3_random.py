@@ -18,7 +18,7 @@ Design changes vs v2 (6-tier rebuild):
   5. The third system announcement is shortened.
 
 Phase machine (P8 "Zerg Queen" DC):
-  0  idle          : "Terran Supply Depot" +1 per cycle; 1440 ticks = 120s.
+  0  idle          : "Terran Supply Depot" +1 per cycle; 1080 ticks = 90s.
   10 ore draw      : randomize Switch234/235 each cycle, pick eligible player.
   20 gas draw      : same for gas.
   30 transfer      : all eligible donors pay the drawn receiver(s), 1 cycle.
@@ -157,7 +157,7 @@ def tier_cond(player, lo, hi, res):
 w("//-----------------------------------------------------------------//")
 w("//  Wartime rationing (v3: random receiver draw)")
 w("//  Switch177 : rationing active after the mission 2 logistics event.")
-w("//  Mission 2 +90s unlock, then every 120s = 1440 DC ticks while Switch177 is set.")
+w("//  Mission 2 +90s unlock, then every 90s = 1080 DC ticks while Switch177 is set.")
 w("//  Receiver: resource At most 4000; drawn RANDOMLY among eligible players")
 w("//  (Switch234/235 2-bit retry, deterministic P1-priority fallback at Tank>=25).")
 w("//  Donors: 4001-5999 -> 120, 6000-7999 -> 300, 8000-10000 -> 640,")
@@ -196,7 +196,7 @@ trig("All Players", "활성화 안내 3: 시스템 규칙 요약 (틱 1272~1296 
      [dc("Terran Valkyrie", "Exactly", 3),
       dc("Terran Vulture", "At least", 1272),
       dc("Terran Vulture", "At most", 1296)],
-     ['Display Text Message(Always Display, "<03>[전시 배급소] <04>120초마다 자원 4000 이하 지휘관 중 한 명에게 잉여 물자를 배급합니다. 미네랄과 가스는 따로 배정됩니다.");'],
+     ['Display Text Message(Always Display, "<03>[전시 배급소] <04>90초마다 자원 4000 이하 지휘관 중 한 명에게 잉여 물자를 배급합니다. 미네랄과 가스는 따로 배정됩니다.");'],
      preserve=False)
 
 # ----------------------------------------------------------- registration
@@ -212,13 +212,13 @@ for pnum in PLAYERS:
 # ------------------------------------------------- pre-activation upkeep
 p8("비활성 유지보수: 배급제 꺼져 있는 동안 작업 변수 상시 청소",
    [sw(177, "Not Set")],
-   [set_dc(DEPOT, "Set To", 0) + " //120초 타이머 리셋",
+   [set_dc(DEPOT, "Set To", 0) + " //90초 타이머 리셋",
     set_dc(QUEEN, "Set To", 0) + " //단계 리셋"]
    + clear_all_work_state()
    + [set_sw(PART_SW[pnum], "clear") for pnum in PLAYERS])
 
 # ------------------------------------------------------------ idle timer
-p8("120초 타이머: 대기(Queen=0) 중에만 매 사이클 +1 (1440틱 = 120초)",
+p8("90초 타이머: 대기(Queen=0) 중에만 매 사이클 +1 (1080틱 = 90초)",
    [sw(177, "Set"),
     dc(QUEEN, "Exactly", 0) + " //대기 단계"],
    [set_dc(DEPOT, "Add", 1)])
@@ -230,7 +230,7 @@ for pnum in PLAYERS:
     p8("P%d 참가 플래그 복사 (이탈자 제외)" % pnum,
        [sw(177, "Set"),
         dc(QUEEN, "Exactly", 0),
-        dc(DEPOT, "At least", 1440) + " //120초 경과",
+        dc(DEPOT, "At least", 1080) + " //90초 경과",
         sw(REG_SW[pnum], "Set") + " //P%d 등록됨" % pnum,
         sw(DEP_SW[pnum], "Not Set") + " //P%d 이탈 아님" % pnum],
        [set_sw(PART_SW[pnum], "set") + " //이번 사이클 참가"])
@@ -238,7 +238,7 @@ for pnum in PLAYERS:
 p8("사이클 개시: 타이머 소모 후 미네랄 수령자 추첨 단계로",
    [sw(177, "Set"),
     dc(QUEEN, "Exactly", 0),
-    dc(DEPOT, "At least", 1440)],
+    dc(DEPOT, "At least", 1080)],
    [set_dc(DEPOT, "Set To", 0),
     set_dc(POOL, "Set To", 0),
     set_dc(EVO, "Set To", 0),

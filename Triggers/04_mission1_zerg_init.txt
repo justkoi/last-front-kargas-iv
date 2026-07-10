@@ -146,11 +146,11 @@ Actions:
 
 // 각 저그 진영의 기본 AI 시작
 // P5 AI는 난이도 확정(Terran Academy >= 1) 이후에만 가동한다.
-// 난이도가 높을수록 활성화 시점을 15초씩 앞당긴다. (전체 10초 추가로 앞당김)
-//   쉬움(1)=275(0), 보통(2)=260(-15), 어려움(3)=245(-30), 매우 어려움(4)=230(-45)
+// 난이도별 활성화 시점: 쉬움 245초, 보통 이상은 15초 간격으로 더 앞당긴다.
+//   쉬움(1)=245, 보통(2)=200, 어려움(3)=185, 매우 어려움(4)=170
 Trigger("Player 5"){
 Conditions:
-	Elapsed Time(At least, 275);
+	Elapsed Time(At least, 245);
 	Deaths("Player 8", "Terran Academy", Exactly, 1);
 Actions:
 	Run AI Script At Location("ZSUx", "P5 Base");
@@ -158,7 +158,7 @@ Actions:
 
 Trigger("Player 5"){
 Conditions:
-	Elapsed Time(At least, 260);
+	Elapsed Time(At least, 200);
 	Deaths("Player 8", "Terran Academy", Exactly, 2);
 Actions:
 	Run AI Script At Location("ZSUx", "P5 Base");
@@ -166,7 +166,7 @@ Actions:
 
 Trigger("Player 5"){
 Conditions:
-	Elapsed Time(At least, 245);
+	Elapsed Time(At least, 185);
 	Deaths("Player 8", "Terran Academy", Exactly, 3);
 Actions:
 	Run AI Script At Location("ZSUx", "P5 Base");
@@ -174,7 +174,7 @@ Actions:
 
 Trigger("Player 5"){
 Conditions:
-	Elapsed Time(At least, 230);
+	Elapsed Time(At least, 170);
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 Actions:
 	Run AI Script At Location("ZSUx", "P5 Base");

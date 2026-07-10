@@ -101,7 +101,7 @@
 //    Zerg Beacon   : 이탈 자산 승계 처리 중인 원 소유자 번호 (0=대기, 1=P1, 2=P2, 3=P3, 4=P4)
 //    Terran Beacon : 이탈 자산 승계 전체 알림 코드 (십의 자리=원 소유자, 일의 자리=승계자)
 //
-//    Terran Supply Depot  : wartime rationing 120s timer (Switch177 active only)
+//    Terran Supply Depot  : wartime rationing 90s timer (1080 ticks, Switch177 active only)
 //    Zerg Queen : wartime rationing phase (0=idle, 10=ore draw, 20=gas draw, 30=transfer, 40=message, 50=cleanup)
 //    Zerg Spawning Pool  : wartime rationing ore receiver (0=none, 1~4=P1~P4, random draw)
 //    Zerg Evolution Chamber: wartime rationing gas receiver (0=none, 1~4=P1~P4, random draw)

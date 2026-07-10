@@ -2,27 +2,29 @@
 //  마스터 틱 - 모든 독립 타이머 동시 증가 (12회/초)
 //-----------------------------------------------------------------//
 
-// 최후의 공세 중 P6 기지 방어 명령이 중단된 동안 Hunt 총공격 타이머를 3배속으로 진행한다.
+// 최후의 공세 발사 이후 P6 Hunt 총공격 타이머를 영구히 3배속으로 진행한다.
 // 아래 +2와 기본 타이머의 +1을 합쳐 720틱 임계치에 20초(240사이클)마다 도달한다.
+// Switch84(기지 방어 중단)는 150 DC초 뒤 해제되지만 가속은 여기서 계속 유지된다.
 Trigger("Player 8"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch75", Set);
-	Switch("Switch84", Set);
-	Switch("Switch31", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 미션 단계 DC가 정확히 3
+	Switch("Switch75", Set); //P6 최후 공세 분기 : P7 붕괴 후 P6이 최후 공세 주체
+	Deaths("Player 8", "Protoss Dark Archon", At least, 360); //최후 공세 발사 이후 : prep 타이머 30 DC초(발사) 경과부터 영구 (DA는 2161에서 멈추므로 항상 참 유지)
+	Switch("Switch31", Not Set); //P6 미붕괴 : P6 본진 테크가 붕괴하면 가속 중단
 Actions:
 	Set Deaths("Player 8", "Terran Firebat", Add, 2);
 	Preserve Trigger();
 }
 
-// 최후의 공세 중 P7 기지 방어 명령이 중단된 동안 Hunt 총공격 타이머를 3배속으로 진행한다.
+// 최후의 공세 발사 이후 P7 Hunt 총공격 타이머를 영구히 3배속으로 진행한다.
 // 아래 +2와 기본 타이머의 +1을 합쳐 720틱 임계치에 20초(240사이클)마다 도달한다.
+// Switch85(기지 방어 중단)는 150 DC초 뒤 해제되지만 가속은 여기서 계속 유지된다.
 Trigger("Player 8"){
 Conditions:
-	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
-	Switch("Switch74", Set);
-	Switch("Switch85", Set);
-	Switch("Switch32", Not Set);
+	Deaths("Player 8", "Terran Valkyrie", Exactly, 3); //미션2 진행 중 : 미션 단계 DC가 정확히 3
+	Switch("Switch74", Set); //P7 최후 공세 분기 : P6 붕괴 후 P7이 최후 공세 주체
+	Deaths("Player 8", "Protoss Dark Archon", At least, 360); //최후 공세 발사 이후 : prep 타이머 30 DC초(발사) 경과부터 영구 (DA는 2161에서 멈추므로 항상 참 유지)
+	Switch("Switch32", Not Set); //P7 미붕괴 : P7 본진 테크가 붕괴하면 가속 중단
 Actions:
 	Set Deaths("Player 8", "Protoss Arbiter", Add, 2);
 	Preserve Trigger();

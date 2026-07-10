@@ -38,7 +38,7 @@ Actions:
 	Set Resources("Player 3", Set To, 0, gas);
 	Set Resources("Player 4", Set To, 0, ore);
 	Set Resources("Player 4", Set To, 0, gas);
-	Set Deaths("Player 8", "Terran Supply Depot", Set To, 1439); //다음 사이클에 1440 도달, 즉시 배급 개시
+	Set Deaths("Player 8", "Terran Supply Depot", Set To, 1079); //다음 사이클에 1080 도달, 즉시 배급 개시
 	Set Deaths("Player 8", "Zerg Ultralisk Cavern", Set To, 1);
 	Preserve Trigger();
 }
@@ -215,7 +215,7 @@ Actions:
 	Set Resources("Player 3", Set To, 15001, gas);
 	Set Resources("Player 4", Set To, 25000, ore);
 	Set Resources("Player 4", Set To, 20001, gas);
-	Set Deaths("Player 8", "Terran Supply Depot", Set To, 1439); //다음 사이클에 1440 도달, 즉시 배급 개시
+	Set Deaths("Player 8", "Terran Supply Depot", Set To, 1079); //다음 사이클에 1080 도달, 즉시 배급 개시
 	Set Deaths("Player 8", "Zerg Ultralisk Cavern", Set To, 61);
 	Preserve Trigger();
 }
@@ -508,7 +508,7 @@ Actions:
 	Set Resources("Player 3", Set To, 0, gas);
 	Set Resources("Player 4", Set To, 0, ore);
 	Set Resources("Player 4", Set To, 0, gas);
-	Set Deaths("Player 8", "Terran Supply Depot", Set To, 1439); //다음 사이클에 1440 도달, 즉시 배급 개시
+	Set Deaths("Player 8", "Terran Supply Depot", Set To, 1079); //다음 사이클에 1080 도달, 즉시 배급 개시
 	Set Deaths("Player 8", "Zerg Ultralisk Cavern", Set To, 121);
 	Preserve Trigger();
 }
@@ -651,7 +651,7 @@ Actions:
 	Set Resources("Player 3", Set To, 0, gas);
 	Set Resources("Player 4", Set To, 0, ore);
 	Set Resources("Player 4", Set To, 0, gas);
-	Set Deaths("Player 8", "Terran Supply Depot", Set To, 1439); //다음 사이클에 1440 도달, 즉시 배급 개시
+	Set Deaths("Player 8", "Terran Supply Depot", Set To, 1079); //다음 사이클에 1080 도달, 즉시 배급 개시
 	Set Deaths("Player 8", "Zerg Ultralisk Cavern", Set To, 181);
 	Preserve Trigger();
 }
@@ -794,7 +794,7 @@ Actions:
 	Set Resources("Player 3", Set To, 0, gas);
 	Set Resources("Player 4", Set To, 0, ore);
 	Set Resources("Player 4", Set To, 0, gas);
-	Set Deaths("Player 8", "Terran Supply Depot", Set To, 1439); //다음 사이클에 1440 도달, 즉시 배급 개시
+	Set Deaths("Player 8", "Terran Supply Depot", Set To, 1079); //다음 사이클에 1080 도달, 즉시 배급 개시
 	Set Deaths("Player 8", "Zerg Ultralisk Cavern", Set To, 241);
 	Preserve Trigger();
 }
@@ -937,7 +937,7 @@ Actions:
 	Set Resources("Player 3", Set To, 8000, gas);
 	Set Resources("Player 4", Set To, 8000, ore);
 	Set Resources("Player 4", Set To, 8000, gas);
-	Set Deaths("Player 8", "Terran Supply Depot", Set To, 1439); //다음 사이클에 1440 도달, 즉시 배급 개시
+	Set Deaths("Player 8", "Terran Supply Depot", Set To, 1079); //다음 사이클에 1080 도달, 즉시 배급 개시
 	Set Deaths("Player 8", "Zerg Ultralisk Cavern", Set To, 301);
 	Preserve Trigger();
 }

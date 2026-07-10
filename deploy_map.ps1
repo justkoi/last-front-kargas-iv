@@ -93,6 +93,46 @@ function Assert-BuildTools {
     }
 }
 
+function Get-IncludedTestTriggerParts {
+    $testTriggerDir = Join-Path $PSScriptRoot "TestTriggersForBuild"
+    if (-not (Test-Path -LiteralPath $testTriggerDir)) {
+        return @()
+    }
+
+    if (-not (Test-Path -LiteralPath $triggerTextPath)) {
+        return @()
+    }
+
+    $builtTriggers = [System.IO.File]::ReadAllText($triggerTextPath)
+    $testTriggerParts = @(Get-ChildItem -LiteralPath $testTriggerDir -Filter "*.txt" -File)
+
+    return @($testTriggerParts | Where-Object {
+        $testText = [System.IO.File]::ReadAllText($_.FullName)
+        -not [string]::IsNullOrWhiteSpace($testText) -and
+            $builtTriggers.IndexOf($testText, [System.StringComparison]::Ordinal) -ge 0
+    })
+}
+
+function Get-TestTriggerPartCount {
+    $testTriggerDir = Join-Path $PSScriptRoot "TestTriggersForBuild"
+    if (-not (Test-Path -LiteralPath $testTriggerDir)) {
+        return 0
+    }
+
+    return @(Get-ChildItem -LiteralPath $testTriggerDir -Filter "*.txt" -File).Count
+}
+
+function Add-TestSuffixToMapName([string]$MapName) {
+    $extension = [System.IO.Path]::GetExtension($MapName)
+    $baseName = [System.IO.Path]::GetFileNameWithoutExtension($MapName)
+
+    if ($baseName.EndsWith("_T", [System.StringComparison]::OrdinalIgnoreCase)) {
+        return $MapName
+    }
+
+    return "$baseName`_T$extension"
+}
+
 function Invoke-Repair([string]$Python, [string]$SourceMap, [string]$CleanOut) {
     Write-Host "[clean]  $SourceMap"
     Write-Host "[clean]  -> $CleanOut"
@@ -173,11 +213,25 @@ if ($sourceMap.Extension -notmatch "^\.(scx|scm)$") {
 
 $cleanOut = Join-Path $sourceMap.DirectoryName ($sourceMap.BaseName + "_clean.scx")
 $protectedOut = Join-Path $sourceMap.DirectoryName ($sourceMap.BaseName + "_clean_protected.scx")
-$destination = Join-Path $DestinationDir $DestinationName
+$includedTestTriggerParts = Get-IncludedTestTriggerParts
+$deployName = if ($includedTestTriggerParts.Count -gt 0) {
+    Add-TestSuffixToMapName $DestinationName
+}
+else {
+    $DestinationName
+}
+$destination = Join-Path $DestinationDir $deployName
 
 Write-Host "[source]    $($sourceMap.FullName)"
 Write-Host "[clean]     $cleanOut"
 Write-Host "[protected] $protectedOut"
+$testTriggerPartCount = Get-TestTriggerPartCount
+if ($includedTestTriggerParts.Count -gt 0) {
+    Write-Host "[test]      $($includedTestTriggerParts.Count) of $testTriggerPartCount test trigger part(s) included; deploy name gets _T suffix."
+}
+elseif ($testTriggerPartCount -gt 0) {
+    Write-Host "[test]      0 of $testTriggerPartCount test trigger part(s) included; deploy name stays normal."
+}
 Write-Host "[deploy]    $destination"
 Write-Host ""
 

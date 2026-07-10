@@ -112,7 +112,7 @@ def stage_setup(base, comment, regs, resources, extra_conds=None, extra_acts=Non
     for pnum, ore, gas in resources:
         acts.append(set_res(pnum, ore, "ore"))
         acts.append(set_res(pnum, gas, "gas"))
-    acts.append(set_dc(DEPOT, "Set To", 1439) + " //다음 사이클에 1440 도달, 즉시 배급 개시")
+    acts.append(set_dc(DEPOT, "Set To", 1079) + " //다음 사이클에 1080 도달, 즉시 배급 개시")
     acts.append(set_dc(SCRIPT, "Set To", base + 1))
     p8(comment, conds, acts)
 
