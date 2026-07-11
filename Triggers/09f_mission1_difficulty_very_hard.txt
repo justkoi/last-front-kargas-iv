@@ -47,14 +47,14 @@ Actions:
 	Create Unit("Player 5", "Zerg Scourge", 2, "P5 Spawn1");
 }
 
-// Colony destruction penalty: +5.5 seconds beyond hard (66 = +10% over the old 60).
+// Colony destruction penalty: +5 seconds beyond hard (60 ticks after the -10% late-resistance reduction).
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 66);
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
 	Preserve Trigger();
 }
 
@@ -64,7 +64,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 66);
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
 	Preserve Trigger();
 }
 
@@ -74,7 +74,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 66);
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
 	Preserve Trigger();
 }
 

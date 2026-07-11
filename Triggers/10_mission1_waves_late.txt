@@ -9,7 +9,7 @@
 //  변형 D: 공성 공중 (가디언/디바우러/뮤탈)
 //-----------------------------------------------------------------//
 
-// 군락 테크 건물 붕괴 반격 보정 (Hatchery +1584 / Lair +2376 / Hive +3168틱, 기존 대비 +10%)
+// 군락 테크 건물 붕괴 반격 보정 (Hatchery +1428 / Lair +2136 / Hive +2856틱, 후반 저항 완화 -10%)
 // Seed enough cooldown for four late-wave variants when late waves begin.
 Trigger("Player 5"){
 Conditions:
@@ -66,7 +66,7 @@ Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At most, 1);          //보라 잭팟 250%
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
+	Set Deaths("Player 8", "Terran Wraith", Add, 1428);
 	Set Resources("Player 1", Add, 321, ore);
 	Set Resources("Player 2", Add, 321, ore);
 	Set Resources("Player 3", Add, 321, ore);
@@ -85,7 +85,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);         //파랑 120%
 	Deaths("Player 8", "Terran Comsat Station", At most, 6);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
+	Set Deaths("Player 8", "Terran Wraith", Add, 1428);
 	Set Resources("Player 1", Add, 154, ore);
 	Set Resources("Player 2", Add, 154, ore);
 	Set Resources("Player 3", Add, 154, ore);
@@ -104,7 +104,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);         //연두 85%
 	Deaths("Player 8", "Terran Comsat Station", At most, 13);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
+	Set Deaths("Player 8", "Terran Wraith", Add, 1428);
 	Set Resources("Player 1", Add, 109, ore);
 	Set Resources("Player 2", Add, 109, ore);
 	Set Resources("Player 3", Add, 109, ore);
@@ -122,7 +122,7 @@ Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 14);        //하양 55%
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
+	Set Deaths("Player 8", "Terran Wraith", Add, 1428);
 	Set Resources("Player 1", Add, 71, ore);
 	Set Resources("Player 2", Add, 71, ore);
 	Set Resources("Player 3", Add, 71, ore);
@@ -179,7 +179,7 @@ Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At most, 1);          //보라 잭팟 250%
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2136);
 	Set Resources("Player 1", Add, 754, ore);
 	Set Resources("Player 2", Add, 754, ore);
 	Set Resources("Player 3", Add, 754, ore);
@@ -198,7 +198,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);         //파랑 120%
 	Deaths("Player 8", "Terran Comsat Station", At most, 6);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2136);
 	Set Resources("Player 1", Add, 362, ore);
 	Set Resources("Player 2", Add, 362, ore);
 	Set Resources("Player 3", Add, 362, ore);
@@ -217,7 +217,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);         //연두 85%
 	Deaths("Player 8", "Terran Comsat Station", At most, 13);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2136);
 	Set Resources("Player 1", Add, 257, ore);
 	Set Resources("Player 2", Add, 257, ore);
 	Set Resources("Player 3", Add, 257, ore);
@@ -235,7 +235,7 @@ Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 14);        //하양 55%
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2136);
 	Set Resources("Player 1", Add, 166, ore);
 	Set Resources("Player 2", Add, 166, ore);
 	Set Resources("Player 3", Add, 166, ore);
@@ -292,7 +292,7 @@ Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At most, 1);          //보라 잭팟 250%
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2856);
 	Set Resources("Player 1", Add, 867, ore);
 	Set Resources("Player 2", Add, 867, ore);
 	Set Resources("Player 3", Add, 867, ore);
@@ -311,7 +311,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);         //파랑 120%
 	Deaths("Player 8", "Terran Comsat Station", At most, 6);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2856);
 	Set Resources("Player 1", Add, 416, ore);
 	Set Resources("Player 2", Add, 416, ore);
 	Set Resources("Player 3", Add, 416, ore);
@@ -330,7 +330,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);         //연두 85%
 	Deaths("Player 8", "Terran Comsat Station", At most, 13);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2856);
 	Set Resources("Player 1", Add, 294, ore);
 	Set Resources("Player 2", Add, 294, ore);
 	Set Resources("Player 3", Add, 294, ore);
@@ -348,7 +348,7 @@ Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 14);        //하양 55%
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2856);
 	Set Resources("Player 1", Add, 191, ore);
 	Set Resources("Player 2", Add, 191, ore);
 	Set Resources("Player 3", Add, 191, ore);

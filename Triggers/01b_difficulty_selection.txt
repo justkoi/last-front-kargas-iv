@@ -264,14 +264,9 @@ Actions:
 	Move Unit("All Players", "Buildings", 64, "P5 H3", "P5 Spawn1");
 	Move Unit("Neutral Players", "Men", 64, "P5 H3", "P5 Spawn1");
 	Move Unit("Neutral Players", "Buildings", 64, "P5 H3", "P5 Spawn1");
-	Move Unit("All Players", "Men", 64, "P5 H4", "P5 Spawn1");
-	Move Unit("All Players", "Buildings", 64, "P5 H4", "P5 Spawn1");
-	Move Unit("Neutral Players", "Men", 64, "P5 H4", "P5 Spawn1");
-	Move Unit("Neutral Players", "Buildings", 64, "P5 H4", "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hatchery", 1, "P5 H1");
 	Create Unit("Player 5", "Zerg Hatchery", 1, "P5 H2");
 	Create Unit("Player 5", "Zerg Hatchery", 1, "P5 H3");
-	Create Unit("Player 5", "Zerg Hatchery", 1, "P5 H4");
 	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H1");
 	Create Unit("Player 6", "Zerg Hatchery", 1, "P6 H2");
 	Create Unit("Player 7", "Zerg Hatchery", 1, "P7 H1");

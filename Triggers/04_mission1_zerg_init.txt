@@ -12,14 +12,14 @@ Actions:
 }
 
 // 미션1 동안 P6/P7은 잠복 상태로 둔다.
-// Game-start worker tempo bonus: each active player receives 4 workers at their main base.
+// Game-start worker tempo bonus: each active player receives 2 workers at their main base.
 Trigger("Player 1"){
 Conditions:
 	Elapsed Time(At most, 1);
 	Bring("Player 1", "Terran Command Center", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 1", "Terran Command Center", "Anywhere", "P1 Hunt");
-	Create Unit("Player 1", "Terran SCV", 4, "P1 Hunt");
+	Create Unit("Player 1", "Terran SCV", 2, "P1 Hunt");
 }
 
 Trigger("Player 1"){
@@ -28,7 +28,7 @@ Conditions:
 	Bring("Player 1", "Zerg Hatchery", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Hatchery", "Anywhere", "P1 Hunt");
-	Create Unit("Player 1", "Zerg Drone", 4, "P1 Hunt");
+	Create Unit("Player 1", "Zerg Drone", 2, "P1 Hunt");
 }
 
 Trigger("Player 1"){
@@ -37,7 +37,7 @@ Conditions:
 	Bring("Player 1", "Protoss Nexus", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 1", "Protoss Nexus", "Anywhere", "P1 Hunt");
-	Create Unit("Player 1", "Protoss Probe", 4, "P1 Hunt");
+	Create Unit("Player 1", "Protoss Probe", 2, "P1 Hunt");
 }
 
 Trigger("Player 2"){
@@ -46,7 +46,7 @@ Conditions:
 	Bring("Player 2", "Terran Command Center", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 2", "Terran Command Center", "Anywhere", "P2 Hunt");
-	Create Unit("Player 2", "Terran SCV", 4, "P2 Hunt");
+	Create Unit("Player 2", "Terran SCV", 2, "P2 Hunt");
 }
 
 Trigger("Player 2"){
@@ -55,7 +55,7 @@ Conditions:
 	Bring("Player 2", "Zerg Hatchery", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Hatchery", "Anywhere", "P2 Hunt");
-	Create Unit("Player 2", "Zerg Drone", 4, "P2 Hunt");
+	Create Unit("Player 2", "Zerg Drone", 2, "P2 Hunt");
 }
 
 Trigger("Player 2"){
@@ -64,7 +64,7 @@ Conditions:
 	Bring("Player 2", "Protoss Nexus", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 2", "Protoss Nexus", "Anywhere", "P2 Hunt");
-	Create Unit("Player 2", "Protoss Probe", 4, "P2 Hunt");
+	Create Unit("Player 2", "Protoss Probe", 2, "P2 Hunt");
 }
 
 Trigger("Player 3"){
@@ -73,7 +73,7 @@ Conditions:
 	Bring("Player 3", "Terran Command Center", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 3", "Terran Command Center", "Anywhere", "P3 Hunt");
-	Create Unit("Player 3", "Terran SCV", 4, "P3 Hunt");
+	Create Unit("Player 3", "Terran SCV", 2, "P3 Hunt");
 }
 
 Trigger("Player 3"){
@@ -82,7 +82,7 @@ Conditions:
 	Bring("Player 3", "Zerg Hatchery", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Hatchery", "Anywhere", "P3 Hunt");
-	Create Unit("Player 3", "Zerg Drone", 4, "P3 Hunt");
+	Create Unit("Player 3", "Zerg Drone", 2, "P3 Hunt");
 }
 
 Trigger("Player 3"){
@@ -91,7 +91,7 @@ Conditions:
 	Bring("Player 3", "Protoss Nexus", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 3", "Protoss Nexus", "Anywhere", "P3 Hunt");
-	Create Unit("Player 3", "Protoss Probe", 4, "P3 Hunt");
+	Create Unit("Player 3", "Protoss Probe", 2, "P3 Hunt");
 }
 
 Trigger("Player 4"){
@@ -100,7 +100,7 @@ Conditions:
 	Bring("Player 4", "Terran Command Center", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 4", "Terran Command Center", "Anywhere", "P4 Hunt");
-	Create Unit("Player 4", "Terran SCV", 4, "P4 Hunt");
+	Create Unit("Player 4", "Terran SCV", 2, "P4 Hunt");
 }
 
 Trigger("Player 4"){
@@ -109,7 +109,7 @@ Conditions:
 	Bring("Player 4", "Zerg Hatchery", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Hatchery", "Anywhere", "P4 Hunt");
-	Create Unit("Player 4", "Zerg Drone", 4, "P4 Hunt");
+	Create Unit("Player 4", "Zerg Drone", 2, "P4 Hunt");
 }
 
 Trigger("Player 4"){
@@ -118,7 +118,7 @@ Conditions:
 	Bring("Player 4", "Protoss Nexus", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 4", "Protoss Nexus", "Anywhere", "P4 Hunt");
-	Create Unit("Player 4", "Protoss Probe", 4, "P4 Hunt");
+	Create Unit("Player 4", "Protoss Probe", 2, "P4 Hunt");
 }
 
 Trigger("Player 8"){

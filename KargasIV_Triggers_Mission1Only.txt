@@ -6701,14 +6701,14 @@ Actions:
 }
 
 // 미션1 동안 P6/P7은 잠복 상태로 둔다.
-// Game-start worker tempo bonus: each active player receives 4 workers at their main base.
+// Game-start worker tempo bonus: each active player receives 2 workers at their main base.
 Trigger("Player 1"){
 Conditions:
 	Elapsed Time(At most, 1);
 	Bring("Player 1", "Terran Command Center", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 1", "Terran Command Center", "Anywhere", "P1 Hunt");
-	Create Unit("Player 1", "Terran SCV", 4, "P1 Hunt");
+	Create Unit("Player 1", "Terran SCV", 2, "P1 Hunt");
 }
 
 Trigger("Player 1"){
@@ -6717,7 +6717,7 @@ Conditions:
 	Bring("Player 1", "Zerg Hatchery", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Hatchery", "Anywhere", "P1 Hunt");
-	Create Unit("Player 1", "Zerg Drone", 4, "P1 Hunt");
+	Create Unit("Player 1", "Zerg Drone", 2, "P1 Hunt");
 }
 
 Trigger("Player 1"){
@@ -6726,7 +6726,7 @@ Conditions:
 	Bring("Player 1", "Protoss Nexus", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 1", "Protoss Nexus", "Anywhere", "P1 Hunt");
-	Create Unit("Player 1", "Protoss Probe", 4, "P1 Hunt");
+	Create Unit("Player 1", "Protoss Probe", 2, "P1 Hunt");
 }
 
 Trigger("Player 2"){
@@ -6735,7 +6735,7 @@ Conditions:
 	Bring("Player 2", "Terran Command Center", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 2", "Terran Command Center", "Anywhere", "P2 Hunt");
-	Create Unit("Player 2", "Terran SCV", 4, "P2 Hunt");
+	Create Unit("Player 2", "Terran SCV", 2, "P2 Hunt");
 }
 
 Trigger("Player 2"){
@@ -6744,7 +6744,7 @@ Conditions:
 	Bring("Player 2", "Zerg Hatchery", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Hatchery", "Anywhere", "P2 Hunt");
-	Create Unit("Player 2", "Zerg Drone", 4, "P2 Hunt");
+	Create Unit("Player 2", "Zerg Drone", 2, "P2 Hunt");
 }
 
 Trigger("Player 2"){
@@ -6753,7 +6753,7 @@ Conditions:
 	Bring("Player 2", "Protoss Nexus", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 2", "Protoss Nexus", "Anywhere", "P2 Hunt");
-	Create Unit("Player 2", "Protoss Probe", 4, "P2 Hunt");
+	Create Unit("Player 2", "Protoss Probe", 2, "P2 Hunt");
 }
 
 Trigger("Player 3"){
@@ -6762,7 +6762,7 @@ Conditions:
 	Bring("Player 3", "Terran Command Center", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 3", "Terran Command Center", "Anywhere", "P3 Hunt");
-	Create Unit("Player 3", "Terran SCV", 4, "P3 Hunt");
+	Create Unit("Player 3", "Terran SCV", 2, "P3 Hunt");
 }
 
 Trigger("Player 3"){
@@ -6771,7 +6771,7 @@ Conditions:
 	Bring("Player 3", "Zerg Hatchery", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Hatchery", "Anywhere", "P3 Hunt");
-	Create Unit("Player 3", "Zerg Drone", 4, "P3 Hunt");
+	Create Unit("Player 3", "Zerg Drone", 2, "P3 Hunt");
 }
 
 Trigger("Player 3"){
@@ -6780,7 +6780,7 @@ Conditions:
 	Bring("Player 3", "Protoss Nexus", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 3", "Protoss Nexus", "Anywhere", "P3 Hunt");
-	Create Unit("Player 3", "Protoss Probe", 4, "P3 Hunt");
+	Create Unit("Player 3", "Protoss Probe", 2, "P3 Hunt");
 }
 
 Trigger("Player 4"){
@@ -6789,7 +6789,7 @@ Conditions:
 	Bring("Player 4", "Terran Command Center", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 4", "Terran Command Center", "Anywhere", "P4 Hunt");
-	Create Unit("Player 4", "Terran SCV", 4, "P4 Hunt");
+	Create Unit("Player 4", "Terran SCV", 2, "P4 Hunt");
 }
 
 Trigger("Player 4"){
@@ -6798,7 +6798,7 @@ Conditions:
 	Bring("Player 4", "Zerg Hatchery", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Hatchery", "Anywhere", "P4 Hunt");
-	Create Unit("Player 4", "Zerg Drone", 4, "P4 Hunt");
+	Create Unit("Player 4", "Zerg Drone", 2, "P4 Hunt");
 }
 
 Trigger("Player 4"){
@@ -6807,7 +6807,7 @@ Conditions:
 	Bring("Player 4", "Protoss Nexus", "Anywhere", At least, 1);
 Actions:
 	Move Location("Player 4", "Protoss Nexus", "Anywhere", "P4 Hunt");
-	Create Unit("Player 4", "Protoss Probe", 4, "P4 Hunt");
+	Create Unit("Player 4", "Protoss Probe", 2, "P4 Hunt");
 }
 
 Trigger("Player 8"){
@@ -7328,7 +7328,7 @@ Actions:
 //-----------------------------------------------------------------//
 //  극초반 입구 견제
 //  실제 0:05부터 15초 간격으로 총 8회, P5 Spawn1 -> Player Destination
-//  전체 전투 보급량 20 -> 18 (-10%): 짝수 회차 저글링을 3기에서 2기로 감축
+//  전체 전투 보급량 24: 매 회차 저글링 4기 + 히드라리스크 1기
 //-----------------------------------------------------------------//
 
 // 1회차 - 실제 약 0:05 (Elapsed 8)
@@ -7338,7 +7338,7 @@ Conditions:
 	Elapsed Time(At least, 8); //실제 5초에 가장 가까운 게임 시간(8 / 1.5 = 약 5.3초)
 	Command("Player 5", "Buildings", At least, 1); //P5 군락이 살아 있을 때만 병력을 생성
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1"); //극초반 근접 견제 3기 생성
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn1"); //극초반 근접 견제 4기 생성
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1"); //영웅과 공중 유닛을 압박할 원거리 병력 1기 생성
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol); //저글링을 플레이어 진영으로 즉시 공격 진군
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol); //히드라리스크를 플레이어 진영으로 즉시 공격 진군
@@ -7351,7 +7351,7 @@ Conditions:
 	Elapsed Time(At least, 30);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
@@ -7364,7 +7364,7 @@ Conditions:
 	Elapsed Time(At least, 53);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
@@ -7377,7 +7377,7 @@ Conditions:
 	Elapsed Time(At least, 75);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
@@ -7390,7 +7390,7 @@ Conditions:
 	Elapsed Time(At least, 98);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
@@ -7403,7 +7403,7 @@ Conditions:
 	Elapsed Time(At least, 120);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
@@ -7416,7 +7416,7 @@ Conditions:
 	Elapsed Time(At least, 143);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
@@ -7429,7 +7429,7 @@ Conditions:
 	Elapsed Time(At least, 165);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
@@ -7988,14 +7988,14 @@ Actions:
 	Create Unit("Player 5", "Zerg Scourge", 2, "P5 Spawn3");
 }
 
-// Colony destruction penalty: +5.5 seconds beyond easy (66 = +10% over the old 60).
+// Colony destruction penalty: +5 seconds beyond easy (60 ticks after the -10% late-resistance reduction).
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 8", "Terran Academy", At least, 2);
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 66);
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
 	Preserve Trigger();
 }
 
@@ -8005,7 +8005,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 2);
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 66);
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
 	Preserve Trigger();
 }
 
@@ -8015,7 +8015,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 2);
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 66);
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
 	Preserve Trigger();
 }
 
@@ -8078,14 +8078,14 @@ Actions:
 	Create Unit("Player 5", "Zerg Scourge", 2, "P5 Spawn4");
 }
 
-// Colony destruction penalty: +5.5 seconds beyond normal (66 = +10% over the old 60).
+// Colony destruction penalty: +5 seconds beyond normal (60 ticks after the -10% late-resistance reduction).
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 66);
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
 	Preserve Trigger();
 }
 
@@ -8095,7 +8095,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 66);
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
 	Preserve Trigger();
 }
 
@@ -8105,7 +8105,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", At least, 3);
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 66);
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
 	Preserve Trigger();
 }
 
@@ -8168,14 +8168,14 @@ Actions:
 	Create Unit("Player 5", "Zerg Scourge", 2, "P5 Spawn1");
 }
 
-// Colony destruction penalty: +5.5 seconds beyond hard (66 = +10% over the old 60).
+// Colony destruction penalty: +5 seconds beyond hard (60 ticks after the -10% late-resistance reduction).
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 66);
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
 	Preserve Trigger();
 }
 
@@ -8185,7 +8185,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 66);
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
 	Preserve Trigger();
 }
 
@@ -8195,7 +8195,7 @@ Conditions:
 	Deaths("Player 8", "Terran Academy", Exactly, 4);
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 66);
+	Set Deaths("Player 8", "Terran Wraith", Add, 60);
 	Preserve Trigger();
 }
 
@@ -8220,7 +8220,7 @@ Actions:
 //  변형 D: 공성 공중 (가디언/디바우러/뮤탈)
 //-----------------------------------------------------------------//
 
-// 군락 테크 건물 붕괴 반격 보정 (Hatchery +1584 / Lair +2376 / Hive +3168틱, 기존 대비 +10%)
+// 군락 테크 건물 붕괴 반격 보정 (Hatchery +1428 / Lair +2136 / Hive +2856틱, 후반 저항 완화 -10%)
 // Seed enough cooldown for four late-wave variants when late waves begin.
 Trigger("Player 5"){
 Conditions:
@@ -8277,7 +8277,7 @@ Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At most, 1);          //보라 잭팟 250%
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
+	Set Deaths("Player 8", "Terran Wraith", Add, 1428);
 	Set Resources("Player 1", Add, 321, ore);
 	Set Resources("Player 2", Add, 321, ore);
 	Set Resources("Player 3", Add, 321, ore);
@@ -8296,7 +8296,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);         //파랑 120%
 	Deaths("Player 8", "Terran Comsat Station", At most, 6);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
+	Set Deaths("Player 8", "Terran Wraith", Add, 1428);
 	Set Resources("Player 1", Add, 154, ore);
 	Set Resources("Player 2", Add, 154, ore);
 	Set Resources("Player 3", Add, 154, ore);
@@ -8315,7 +8315,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);         //연두 85%
 	Deaths("Player 8", "Terran Comsat Station", At most, 13);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
+	Set Deaths("Player 8", "Terran Wraith", Add, 1428);
 	Set Resources("Player 1", Add, 109, ore);
 	Set Resources("Player 2", Add, 109, ore);
 	Set Resources("Player 3", Add, 109, ore);
@@ -8333,7 +8333,7 @@ Conditions:
 	Deaths("Player 5", "Zerg Hatchery", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 14);        //하양 55%
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 1584);
+	Set Deaths("Player 8", "Terran Wraith", Add, 1428);
 	Set Resources("Player 1", Add, 71, ore);
 	Set Resources("Player 2", Add, 71, ore);
 	Set Resources("Player 3", Add, 71, ore);
@@ -8390,7 +8390,7 @@ Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At most, 1);          //보라 잭팟 250%
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2136);
 	Set Resources("Player 1", Add, 754, ore);
 	Set Resources("Player 2", Add, 754, ore);
 	Set Resources("Player 3", Add, 754, ore);
@@ -8409,7 +8409,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);         //파랑 120%
 	Deaths("Player 8", "Terran Comsat Station", At most, 6);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2136);
 	Set Resources("Player 1", Add, 362, ore);
 	Set Resources("Player 2", Add, 362, ore);
 	Set Resources("Player 3", Add, 362, ore);
@@ -8428,7 +8428,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);         //연두 85%
 	Deaths("Player 8", "Terran Comsat Station", At most, 13);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2136);
 	Set Resources("Player 1", Add, 257, ore);
 	Set Resources("Player 2", Add, 257, ore);
 	Set Resources("Player 3", Add, 257, ore);
@@ -8446,7 +8446,7 @@ Conditions:
 	Deaths("Player 5", "Zerg Lair", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 14);        //하양 55%
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 2376);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2136);
 	Set Resources("Player 1", Add, 166, ore);
 	Set Resources("Player 2", Add, 166, ore);
 	Set Resources("Player 3", Add, 166, ore);
@@ -8503,7 +8503,7 @@ Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At most, 1);          //보라 잭팟 250%
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2856);
 	Set Resources("Player 1", Add, 867, ore);
 	Set Resources("Player 2", Add, 867, ore);
 	Set Resources("Player 3", Add, 867, ore);
@@ -8522,7 +8522,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 2);         //파랑 120%
 	Deaths("Player 8", "Terran Comsat Station", At most, 6);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2856);
 	Set Resources("Player 1", Add, 416, ore);
 	Set Resources("Player 2", Add, 416, ore);
 	Set Resources("Player 3", Add, 416, ore);
@@ -8541,7 +8541,7 @@ Conditions:
 	Deaths("Player 8", "Terran Comsat Station", At least, 7);         //연두 85%
 	Deaths("Player 8", "Terran Comsat Station", At most, 13);
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2856);
 	Set Resources("Player 1", Add, 294, ore);
 	Set Resources("Player 2", Add, 294, ore);
 	Set Resources("Player 3", Add, 294, ore);
@@ -8559,7 +8559,7 @@ Conditions:
 	Deaths("Player 5", "Zerg Hive", At least, 1);
 	Deaths("Player 8", "Terran Comsat Station", At least, 14);        //하양 55%
 Actions:
-	Set Deaths("Player 8", "Terran Wraith", Add, 3168);
+	Set Deaths("Player 8", "Terran Wraith", Add, 2856);
 	Set Resources("Player 1", Add, 191, ore);
 	Set Resources("Player 2", Add, 191, ore);
 	Set Resources("Player 3", Add, 191, ore);
@@ -66800,61 +66800,6 @@ Actions:
 	Set Deaths("Player 3", "Zerg Beacon", Set To, 0);
 	Set Deaths("Player 4", "Zerg Beacon", Set To, 0);
 	Preserve Trigger();
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE / CHEAT] 발렌을 중복 생성하지 않고 P1에게 강제 이양
-//  맵에 P9 소유로 선배치된 유일한 Jim Raynor (Marine)을 회수한다.
-//-----------------------------------------------------------------//
-
-Trigger("Player 8"){
-Conditions:
-	Elapsed Time(At least, 10);
-	Elapsed Time(At most, 12);
-Actions:
-	Give Units to Player("Player 9", "Player 1", "Jim Raynor (Marine)", All, "Anywhere"); //P9 대기 중이면 P1으로 이양
-	Give Units to Player("Player 2", "Player 1", "Jim Raynor (Marine)", All, "Anywhere"); //P2 배속 결과 회수
-	Give Units to Player("Player 3", "Player 1", "Jim Raynor (Marine)", All, "Anywhere"); //P3 배속 결과 회수
-	Give Units to Player("Player 4", "Player 1", "Jim Raynor (Marine)", All, "Anywhere"); //P4 배속 결과 회수
-	Set Invincibility("Player 1", "Jim Raynor (Marine)", "Anywhere", enabled); //P1으로 회수한 짐 레이너를 무적으로 설정
-	Set Deaths("Player 8", "Protoss Arbiter Tribunal", Set To, 1); //발렌 현재 소유자=P1
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE / CHEAT] 게임 시작 시 P1에게 톰 카잔스키 36기 지급
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  주의: 36기를 한 location에 몰아 스폰하면 stacking으로 일부 멀리
-//        밀려날 수 있음. 테스트 목적이므로 P1 본진(P1 Start 등) 사용.
-//-----------------------------------------------------------------//
-
-Trigger("Player 1"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Create Unit("Player 1", "Tom Kazansky (Wraith)", 36, "Anywhere");
-}
-//-----------------------------------------------------------------//
-//  [TEST MODE] 플레이어 절대 패배 방지 (스위치 방식)
-//
-//  켜는 법: 이 파일을 Triggers/ 폴더로 복사
-//  끄는 법: Triggers/ 에서 제거
-//
-//  동작 원리:
-//    게임 시작 직후 Switch1 을 set.
-//    12_mission1_to_mission2_transition.txt 의 패배 트리거에 Switch("Switch1", cleared) 조건이
-//    있으므로, 스위치가 set 상태인 한 Defeat()가 발동하지 않음.
-//-----------------------------------------------------------------//
-
-Trigger("Player 5"){
-Conditions:
-	Elapsed Time(At most, 1);
-Actions:
-	Set Switch("Switch1", set);
-	Set Invincibility("Player 1", "Buildings", "Anywhere", enabled);
-	Set Invincibility("Player 2", "Buildings", "Anywhere", enabled);
-	Set Invincibility("Player 3", "Buildings", "Anywhere", enabled);
-	Set Invincibility("Player 4", "Buildings", "Anywhere", enabled);
 }
 //-----------------------------------------------------------------//
 //  터보 트리거 (Hyper Trigger) × 4 - Player 8 소유
