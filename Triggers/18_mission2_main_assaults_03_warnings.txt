@@ -128,8 +128,7 @@ Actions:
 	Minimap Ping("P6 Spawn2");
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>[경보] <15>갈색 저그<04> 군락, 대규모 집결 신호 포착. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
+	Display Text Message(Always Display, "<11>[공세 예보] <15>갈색 저그<04> 군락, 대규모 집결 신호 포착. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
 	Preserve Trigger();
 }
 
@@ -149,8 +148,7 @@ Actions:
 	Minimap Ping("P6 Spawn2");
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>[경보] <15>갈색 저그<04> 군락, 공중 개체 분리 집결. 아군 비행 전력을 노리는 패턴입니다.");
+	Display Text Message(Always Display, "<11>[공세 예보] <15>갈색 저그<04> 군락, 공중 개체 분리 집결. 아군 비행 전력을 노리는 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -170,8 +168,7 @@ Actions:
 	Minimap Ping("P6 Spawn2");
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>[경보] <15>갈색 저그<04> 군락, 가시형 개체 밀집. 좁은 입구를 노리는 대열입니다.");
+	Display Text Message(Always Display, "<11>[공세 예보] <15>갈색 저그<04> 군락, 가시형 개체 밀집. 좁은 입구를 노리는 대열입니다.");
 	Preserve Trigger();
 }
 
@@ -191,8 +188,7 @@ Actions:
 	Minimap Ping("P6 Spawn2");
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>[경보] <15>갈색 저그<04> 군락, 느린 비행 반응 감지. 장거리 공성형 접근 패턴입니다.");
+	Display Text Message(Always Display, "<11>[공세 예보] <15>갈색 저그<04> 군락, 느린 비행 반응 감지. 장거리 공성형 접근 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -212,8 +208,7 @@ Actions:
 	Minimap Ping("P7 Spawn2");
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>[경보] <16>하얀색 저그<04> 군락, 대규모 집결 신호 포착. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
+	Display Text Message(Always Display, "<11>[공세 예보] <16>하얀색 저그<04> 군락, 대규모 집결 신호 포착. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
 	Preserve Trigger();
 }
 
@@ -233,8 +228,7 @@ Actions:
 	Minimap Ping("P7 Spawn2");
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>[경보] <16>하얀색 저그<04> 군락, 공중 개체 분리 집결. 아군 비행 전력을 노리는 패턴입니다.");
+	Display Text Message(Always Display, "<11>[공세 예보] <16>하얀색 저그<04> 군락, 공중 개체 분리 집결. 아군 비행 전력을 노리는 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -254,8 +248,7 @@ Actions:
 	Minimap Ping("P7 Spawn2");
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>[경보] <16>하얀색 저그<04> 군락, 가시형 개체 밀집. 좁은 입구를 노리는 대열입니다.");
+	Display Text Message(Always Display, "<11>[공세 예보] <16>하얀색 저그<04> 군락, 가시형 개체 밀집. 좁은 입구를 노리는 대열입니다.");
 	Preserve Trigger();
 }
 
@@ -275,8 +268,7 @@ Actions:
 	Minimap Ping("P7 Spawn2");
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>[경보] <16>하얀색 저그<04> 군락, 느린 비행 반응 감지. 장거리 공성형 접근 패턴입니다.");
+	Display Text Message(Always Display, "<11>[공세 예보] <16>하얀색 저그<04> 군락, 느린 비행 반응 감지. 장거리 공성형 접근 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -291,8 +283,7 @@ Actions:
 	Minimap Ping("P6 Spawn2");
 	Minimap Ping("P6 Spawn3");
 	Minimap Ping("P6 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>[경보] <15>갈색 저그<04> 군락, 집결 신호 포착. 고치 파괴 여파로 반응 밀도는 낮습니다.");
+	Display Text Message(Always Display, "<11>[공세 예보] <15>갈색 저그<04> 군락, 집결 신호 포착. 고치 파괴 여파로 반응 밀도는 낮습니다.");
 	Preserve Trigger();
 }
 
@@ -306,8 +297,7 @@ Actions:
 	Minimap Ping("P7 Spawn2");
 	Minimap Ping("P7 Spawn3");
 	Minimap Ping("P7 Spawn4");
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<06>[경보] <16>하얀색 저그<04> 군락, 집결 신호 포착. 고치 파괴 여파로 반응 밀도는 낮습니다.");
+	Display Text Message(Always Display, "<11>[공세 예보] <16>하얀색 저그<04> 군락, 집결 신호 포착. 고치 파괴 여파로 반응 밀도는 낮습니다.");
 	Preserve Trigger();
 }
 
@@ -338,7 +328,7 @@ Conditions:
 	Switch("Switch9", Not Set);
 	Switch("Switch10", Not Set);
 Actions:
-	Display Text Message(Always Display, "<06>[경보] <15>갈색 저그<04> 군락 대규모 공세 접근. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
+	Display Text Message(Always Display, "<06>[공세 경보] <15>갈색 저그<04> 군락 대규모 공세 접근. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
 	Preserve Trigger();
 }
 
@@ -352,7 +342,7 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Not Set);
 Actions:
-	Display Text Message(Always Display, "<06>[경보] <15>갈색 저그<04> 군락 대규모 공세 접근. 아군 비행 전력을 노리는 패턴입니다.");
+	Display Text Message(Always Display, "<06>[공세 경보] <15>갈색 저그<04> 군락 대규모 공세 접근. 아군 비행 전력을 노리는 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -366,7 +356,7 @@ Conditions:
 	Switch("Switch9", Not Set);
 	Switch("Switch10", Set);
 Actions:
-	Display Text Message(Always Display, "<06>[경보] <15>갈색 저그<04> 군락 대규모 공세 접근. 좁은 입구를 노리는 대열입니다.");
+	Display Text Message(Always Display, "<06>[공세 경보] <15>갈색 저그<04> 군락 대규모 공세 접근. 좁은 입구를 노리는 대열입니다.");
 	Preserve Trigger();
 }
 
@@ -380,7 +370,7 @@ Conditions:
 	Switch("Switch9", Set);
 	Switch("Switch10", Set);
 Actions:
-	Display Text Message(Always Display, "<06>[경보] <15>갈색 저그<04> 군락 대규모 공세 접근. 장거리 공성형 접근 패턴입니다.");
+	Display Text Message(Always Display, "<06>[공세 경보] <15>갈색 저그<04> 군락 대규모 공세 접근. 장거리 공성형 접근 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -409,7 +399,7 @@ Conditions:
 	Switch("Switch11", Not Set);
 	Switch("Switch12", Not Set);
 Actions:
-	Display Text Message(Always Display, "<06>[경보] <16>하얀색 저그<04> 군락 대규모 공세 접근. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
+	Display Text Message(Always Display, "<06>[공세 경보] <16>하얀색 저그<04> 군락 대규모 공세 접근. 소형 무리 뒤에 중장갑 돌파체가 붙습니다.");
 	Preserve Trigger();
 }
 
@@ -423,7 +413,7 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Not Set);
 Actions:
-	Display Text Message(Always Display, "<06>[경보] <16>하얀색 저그<04> 군락 대규모 공세 접근. 아군 비행 전력을 노리는 패턴입니다.");
+	Display Text Message(Always Display, "<06>[공세 경보] <16>하얀색 저그<04> 군락 대규모 공세 접근. 아군 비행 전력을 노리는 패턴입니다.");
 	Preserve Trigger();
 }
 
@@ -437,7 +427,7 @@ Conditions:
 	Switch("Switch11", Not Set);
 	Switch("Switch12", Set);
 Actions:
-	Display Text Message(Always Display, "<06>[경보] <16>하얀색 저그<04> 군락 대규모 공세 접근. 좁은 입구를 노리는 대열입니다.");
+	Display Text Message(Always Display, "<06>[공세 경보] <16>하얀색 저그<04> 군락 대규모 공세 접근. 좁은 입구를 노리는 대열입니다.");
 	Preserve Trigger();
 }
 
@@ -451,6 +441,6 @@ Conditions:
 	Switch("Switch11", Set);
 	Switch("Switch12", Set);
 Actions:
-	Display Text Message(Always Display, "<06>[경보] <16>하얀색 저그<04> 군락 대규모 공세 접근. 장거리 공성형 접근 패턴입니다.");
+	Display Text Message(Always Display, "<06>[공세 경보] <16>하얀색 저그<04> 군락 대규모 공세 접근. 장거리 공성형 접근 패턴입니다.");
 	Preserve Trigger();
 }

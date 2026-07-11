@@ -75,9 +75,7 @@ Actions:
 	Create Unit("Player 7", "Zerg Scourge", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Devourer", 2, "P7 Spawn3");
 	Create Unit("Player 7", "Zerg Mutalisk", 2, "P7 Spawn3");
-	Create Unit("Player 7", "Zerg Scourge", 2, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Devourer", 1, "P7 Spawn4");
-	Create Unit("Player 7", "Zerg Mutalisk", 1, "P7 Spawn4");
+	Create Unit("Player 7", "Zerg Scourge", 1, "P7 Spawn4");
 	Set Switch("Switch29", randomize);
 	Set Switch("Switch30", randomize);
 	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 2);

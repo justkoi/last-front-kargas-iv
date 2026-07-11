@@ -26,12 +26,11 @@ Conditions:
 	Deaths("Player 8", "Psi Emitter", At least, 1); //남은 1급 팀 훈장 수
 Actions:
 	Set Score("Current Player", Subtract, 110000, Kills); //훈장 요구 처치 점수 소모
-	Set Resources("Current Player", Add, 700, ore);
-	Set Resources("Current Player", Add, 350, gas);
+	Set Resources("Current Player", Add, 600, ore);
+	Set Resources("Current Player", Add, 300, gas);
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
 	Set Deaths("Player 8", "Psi Emitter", Subtract, 1); //1급 팀 훈장 풀 소모
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
-	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <10>1급 카르가스공로장<04>을 수여했습니다.\n<07>보상: <1F>미네랄 +700  <07>가스 +350");
+	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <10>1급 카르가스공로장<04>을 수여했습니다.\n<07>보상: <1F>미네랄 +600  <07>가스 +300");
 	Preserve Trigger();
 }
 
@@ -47,7 +46,6 @@ Actions:
 	Set Resources("Current Player", Add, 400, ore);
 	Set Resources("Current Player", Add, 200, gas);
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <0E>2급 무공공로장<04>을 수여했습니다.\n<07>보상: <1F>미네랄 +400  <07>가스 +200");
 	Preserve Trigger();
 }
@@ -64,7 +62,6 @@ Actions:
 	Set Resources("Current Player", Add, 300, ore);
 	Set Resources("Current Player", Add, 150, gas);
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <07>3급 특전공로장<04>을 수여했습니다.\n<07>보상: <1F>미네랄 +300  <07>가스 +150");
 	Preserve Trigger();
 }
@@ -81,7 +78,6 @@ Actions:
 	Set Resources("Current Player", Add, 200, ore);
 	Set Resources("Current Player", Add, 100, gas);
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <03>4급 전투공로장<04>을 수여했습니다.\n<07>보상: <1F>미네랄 +200  <07>가스 +100");
 	Preserve Trigger();
 }
@@ -98,7 +94,6 @@ Actions:
 	Set Resources("Current Player", Add, 100, ore);
 	Set Resources("Current Player", Add, 50, gas);
 	Set Deaths("Current Player", "Psi Emitter", Add, 1); //개인 훈장 수 증가
-	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Display Text Message(Always Display, "<03>[훈장 수여] <04>사령부가 귀관의 전공을 인정하여 <04>5급 <05>전선공로장<04>을 수여했습니다.\n<07>보상: <1F>미네랄 +100  <07>가스 +50");
 	Preserve Trigger();
 }

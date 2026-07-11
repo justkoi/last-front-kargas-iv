@@ -88,12 +88,12 @@
 //    Terran Refinery      : mission2 군락 분노 계산용 P7 x100 작업값
 //    Protoss Arbiter Tribunal   : 발렌 현재 소유자(0=미배속, 1~4=P1~P4)
 //    Protoss Robotics Support Bay: 엘리아 현재 소유자(0=미배속, 1~4=P1~P4)
-//    Zerg Spire            : 발렌 행동불능 5분 복귀 타이머(0~3601)
-//    Zerg Greater Spire    : 엘리아 행동불능 5분 복귀 타이머(0~3601)
+//    Zerg Spire            : 발렌 행동불능 5분 복귀 타이머(0~3602)
+//    Zerg Greater Spire    : 엘리아 행동불능 5분 복귀 타이머(0~3602)
 //    Zerg Nydus Canal      : 로크 현재 소유자(0=미배속, 1~4=P1~P4)
 //    Zerg Queen's Nest     : 세딘 현재 소유자(0=미배속, 1~4=P1~P4)
-//    Zerg Creep Colony     : 로크 행동불능 5분 복귀 타이머(0~3601)
-//    Zerg Hive             : 세딘 행동불능 5분 복귀 타이머(0~3601)
+//    Zerg Creep Colony     : 로크 행동불능 5분 복귀 타이머(0~3602)
+//    Zerg Hive             : 세딘 행동불능 5분 복귀 타이머(0~3602)
 //    Zerg Hatchery         : 로크 합류 연출 타이머(0~168)
 //    Zerg Lair             : 세딘 합류 연출 타이머(0~168)
 //    위 영웅 시스템 전용 P8 DC 건물은 Player 8 소유로 배치/지급/파괴하지 말 것.
@@ -108,6 +108,8 @@
 //    Zerg Beacon   : 접속 heartbeat (활성 플레이어가 매 trigger cycle 1로 설정, P8이 cycle 끝에 0으로 초기화)
 //    Protoss Beacon: 이탈 자산 승계 대상 플래그 (0=미선정, 1=현재 승계 대상)
 //    Psi Emitter   : 훈장 시스템 개인 수여 훈장 수
+//    Terran Physics Lab: 전시 배급 미네랄 수금 티어 (0=없음, 1~7=60/120/300/640/1000/1800/3000; 실제 소유 금지)
+//    Terran Covert Ops : 전시 배급 가스 수금 티어 (0=없음, 1~7=60/120/300/640/1000/1800/3000; 실제 소유 금지)
 //
 //  Player 8 additional DC roles
 //    Zerg Beacon   : 이탈 자산 승계 처리 중인 원 소유자 번호 (0=대기, 1=P1, 2=P2, 3=P3, 4=P4)
@@ -203,14 +205,16 @@
 //    Switch92   : Gas1 P5 Overmind Cocoon gas reward paid
 //    Switch93   : Gas2 P5 Overmind Cocoon confirmed
 //    Switch94   : Gas2 P5 Overmind Cocoon gas reward paid
-//    Switch95/96: unused (was P6/P7 mission2 tech-structure acceleration info shown)
+//    Switch95   : P6 home ground intruder present during current base-defense scan phase
+//    Switch96   : P6 home air intruder present during current base-defense scan phase
 //    Switch97~100  : P1~P4 P5 first Mutalisk warning shown
 //    Switch101~104 : P1~P4 P5 first Guardian warning shown
 //    Switch105~108 : P1~P4 P5 first Devourer warning shown
 //    Switch109~111 : mission2 분산 공격 1/1·2/2·3/3 경고 완료 래치
 //    Switch112     : mission2 분산 공격 경고 플레이어 출력 신호
 //    Switch113/114 : mission2 분산 공격 경고 화자 2-bit 추첨 (00 발렌, 01 엘리아, 10 로크, 11 세딘)
-//    Switch115/116 : unused (was P5 early colony decay warning queue)
+//    Switch115  : P7 home ground intruder present during current base-defense scan phase
+//    Switch116  : P7 home air intruder present during current base-defense scan phase
 //    Switch117     : difficulty selector spawned / selection window active
 //    Switch118     : P6 mission2 difficulty cooldown adjustment enabled from mission2 entry
 //    Switch119     : P7 mission2 difficulty cooldown adjustment enabled from mission2 entry
@@ -236,14 +240,14 @@
 //    Switch141     : mission2 P6 forward rally point reward paid
 //    Switch142     : mission1 arsenal facility alive gate - Barracks OR Factory at BaseEntrance (13e, prescan 1078-1080)
 //    Switch143     : AttackPoint1 cerebrate destroy P5 Hunt delay applied (one-shot)
-//    Switch144     : AttackPoint1 cerebrate destroy reward mechanics paid (자원 +2500 / EarlyTower 성큰 전멸) (one-shot)
+//    Switch144     : AttackPoint1 cerebrate destroy reward mechanics paid (자원 +1250 / EarlyTower 성큰 전멸) (one-shot)
 //    Switch145/146 : mission1 arsenal handoff random selector (clear/clear=P1, set/clear=P2, clear/set=P3, set/set=P4) (13e)
 //    Switch147     : mission1 arsenal handoff completed (13e)
 //    Switch148     : AttackPoint1 정신체 자원 확보 안내(21:10, 발렌 대사 이후) shown (one-shot)
 //    Switch149     : AttackPoint1 정신체 처치 격파 헤더(A) display phase completed
 //    Switch150     : AttackPoint1 정신체 처치 칭찬(B) display phase completed
 //    Switch151     : mission1 arsenal handoff personal message shown (one-shot) (13e)
-//    Switch152     : P5 Cerebrate destroy reward mechanics paid (자원 +1500/+500) (one-shot)
+//    Switch152     : P5 Cerebrate destroy reward mechanics paid (자원 +750/+250) (one-shot)
 //    Switch153     : P5 Cerebrate destroy operation info(A) display phase completed
 //    Switch154     : P5 Cerebrate destroy hawk praise(B) display phase completed
 //    Switch155     : 클리어 최고 플레이어 표시 예약 (P4)
@@ -262,11 +266,8 @@
 //
 //    Switch177     : wartime rationing active (mission2 전체 설명 종료 뒤 안내 2줄 완료, Vulture 2784에서 첫 배급과 함께 set)
 //    Switch178~181 : wartime rationing P1~P4 cycle flags (copied from Switch218~221 at cycle start; skip if Switch166~169 departed)
-//    Switch182~197 : wartime rationing P1~P4 ore payment flags tier1-4 (120/300/640/1000) — set only when the transfer really fired (13f v3)
-//    Switch198~201 : wartime rationing P1-P2 ore payment flags tier5-6 (1800/3000)
-//    Switch202~217 : wartime rationing P1~P4 gas payment flags tier1-4 (120/300/640/1000)
-//    Switch222~225 : wartime rationing P3-P4 ore payment flags tier5-6 (1800/3000)
-//    Switch226~233 : wartime rationing P1~P4 gas payment flags tier5-6 (1800/3000)
+//    Switch182~217 : unused (wartime rationing payment flags replaced by per-player tier DCs)
+//    Switch222~233 : unused (wartime rationing payment flags replaced by per-player tier DCs)
 //    Switch218~221 : wartime rationing P1~P4 slot registration (latched on first heartbeat; separate from leave-handoff Switch162~165)
 //    Switch234/235 : wartime rationing receiver 2-bit random draw (bit0/bit1, re-randomized each cycle during Queen=10/20)
 //    Switch236/237 : 발렌/엘리아 최초 배속 안내 표시 완료 (소유권 상태가 아닌 UI 중복 방지 래치)

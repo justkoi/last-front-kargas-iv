@@ -2,19 +2,17 @@
 """Rebuild Triggers/13f_union_relief_fund.txt (wartime rationing) v3.
 
 Design changes vs v2 (6-tier rebuild):
-  1. Receiver is drawn RANDOMLY among all eligible players (<=4000) using a
-     2-bit randomize retry loop (Switch234/235), with a deterministic
-     P1-priority fallback after 24 failed draws (Tank >= 25).
+  1. Receiver draw has two priority bands: <=2000 first, then <=4000 only
+     when the first band has no participant. Each band uses the 2-bit retry
+     loop (Switch234/235) and deterministic fallback after 24 misses.
   2. Donor tier selection and resource transfer are merged into ONE trigger
-     per (donor, tier, receiver, resource). The tier switch is only set when
-     a real transfer happened -> the false "self-donor" confirmation message
-     bug is structurally impossible.
+     per (donor, tier, receiver, resource). Per-player tier DCs are written
+     only when transfer actions fire. A receiver may also contribute.
   3. Receive messages show ONE summed line per resource: every reachable
-     multi-donor total (1..3 donors) is enumerated against the Pylon/Den
-     running-total DCs, so combined donations no longer suppress messages.
+     external-donor total (1..3 donors) is enumerated against the Pylon/Den
+     running-total DCs. A receiver's net-zero self contribution is excluded.
   4. Donor confirmation is ONE combined line (ore and/or gas) per donor.
-     Tier switches are set only by real transfers and tier bands are
-     exclusive, so each combo needs at most a handful of guards.
+     Tier DCs are set only by real transfers and tier bands are exclusive.
   5. The third system announcement is shortened.
 
 Phase machine (P8 "Zerg Queen" DC):
@@ -27,6 +25,7 @@ Phase machine (P8 "Zerg Queen" DC):
 """
 
 import io
+import itertools
 import os
 
 OUT_PATH = os.path.join(os.path.dirname(__file__), "..", "Triggers", "13f_union_relief_fund.txt")
@@ -36,6 +35,7 @@ HUMAN_OWNERS = 'Player 1", "Player 2", "Player 3", "Player 4'
 
 # (lower, upper or None, amount)
 TIERS = [
+    (2001, 4000, 60),
     (4001, 5999, 120),
     (6000, 7999, 300),
     (8000, 10000, 640),
@@ -44,11 +44,9 @@ TIERS = [
     (20001, None, 3000),
 ]
 
-# Existing switch allocation is kept (00_header.txt).
-ORE_SW = {1: [182, 183, 184, 185, 198, 199], 2: [186, 187, 188, 189, 200, 201],
-          3: [190, 191, 192, 193, 222, 223], 4: [194, 195, 196, 197, 224, 225]}
-GAS_SW = {1: [202, 203, 204, 205, 226, 227], 2: [206, 207, 208, 209, 228, 229],
-          3: [210, 211, 212, 213, 230, 231], 4: [214, 215, 216, 217, 232, 233]}
+# Per-player tier codes replace the old 48 tier switches. 0=none, 1..7=tier.
+ORE_TIER_DC = "Terran Physics Lab"
+GAS_TIER_DC = "Terran Covert Ops"
 PART_SW = {1: 178, 2: 179, 3: 180, 4: 181}   # this-cycle participant flags
 REG_SW = {1: 218, 2: 219, 3: 220, 4: 221}    # slot registration latch
 DEP_SW = {1: 166, 2: 167, 3: 168, 4: 169}    # leave-handoff departed marks
@@ -75,22 +73,14 @@ END_TANK = 12           # Queen=40 ends when Tank >= 12
 AMOUNTS = [t[2] for t in TIERS]
 
 def reachable_totals():
-    """Distinct sums of 1..3 donor amounts (a receiver has at most 3 donors)."""
+    """Distinct net aid sums from the receiver's 1..3 other participants."""
     sums = set()
-    n = len(AMOUNTS)
-    for i in range(n):
-        sums.add(AMOUNTS[i])
-        for j in range(i, n):
-            sums.add(AMOUNTS[i] + AMOUNTS[j])
-            for k in range(j, n):
-                sums.add(AMOUNTS[i] + AMOUNTS[j] + AMOUNTS[k])
+    for count in range(1, len(PLAYERS)):
+        for combo in itertools.combinations_with_replacement(AMOUNTS, count):
+            sums.add(sum(combo))
     return sorted(sums)
 
 TOTALS = reachable_totals()
-
-ALL_TIER_SWITCHES = sorted(
-    {s for sws in ORE_SW.values() for s in sws} |
-    {s for sws in GAS_SW.values() for s in sws})
 
 L = []          # output lines
 def w(line=""):
@@ -144,7 +134,9 @@ def clear_all_work_state():
         set_sw(RAND_B0, "clear"),
         set_sw(RAND_B1, "clear"),
     ]
-    acts += [set_sw(s, "clear") for s in ALL_TIER_SWITCHES]
+    for pnum in PLAYERS:
+        acts.append(set_dc(ORE_TIER_DC, "Set To", 0, player=pnum))
+        acts.append(set_dc(GAS_TIER_DC, "Set To", 0, player=pnum))
     return acts
 
 def tier_cond(player, lo, hi, res):
@@ -160,13 +152,14 @@ w("//  Wartime rationing (v3: random receiver draw)")
 w("//  Switch177 : rationing active after the delayed mission 2 logistics briefing.")
 w("//  Mission 2 briefing ends at tick 1536; logistics notice starts at 2616 (+90s),")
 w("//  first transfer starts at 2784, then repeats every 90s = 1080 DC ticks.")
-w("//  Receiver: resource At most 4000; drawn RANDOMLY among eligible players")
+w("//  Receiver priority: draw resource <=2000 first; if none, draw <=4000.")
 w("//  (Switch234/235 2-bit retry, deterministic P1-priority fallback at Tank>=25).")
-w("//  Donors: 4001-5999 -> 120, 6000-7999 -> 300, 8000-10000 -> 640,")
+w("//  Donors: 2001-4000 -> 60, 4001-5999 -> 120, 6000-7999 -> 300,")
+w("//          8000-10000 -> 640,")
 w("//          10001-15000 -> 1000, 15001-20000 -> 1800, 20001+ -> 3000.")
-w("//  Ore and gas are judged separately. Tier switches are set ONLY when a")
+w("//  Ore and gas are judged separately. Tier DCs are set ONLY when a")
 w("//  real transfer fired. Receiver sees ONE summed line per resource")
-w("//  (Pylon/Den totals, all 1..3-donor sums enumerated); donor sees ONE")
+w("//  (Pylon/Den totals, all 1..3 external-donor sums); donor sees ONE")
 w("//  combined ore/gas line.")
 w("//  Queen phase: 0 idle / 10 ore draw / 20 gas draw / 30 transfer / 40 message / 50 cleanup.")
 w("//  Generated by tools/rebuild_rationing_v3_random.py -- edit the script, not this file.")
@@ -194,7 +187,7 @@ trig(HUMAN_OWNERS, "활성화 안내 2: 시스템 규칙 요약 (틱 2700~2724 �
      [dc("Terran Valkyrie", "Exactly", 3),
       dc("Terran Vulture", "At least", 2700),
       dc("Terran Vulture", "At most", 2724)],
-     ['Display Text Message(Always Display, "<03>[전시 배급소] <04>여유 물자를 모아 자원 4000 이하 지휘관 한 명에게 우선 배급합니다. 미네랄과 가스는 90초마다 따로 배정됩니다.");'],
+     ['Display Text Message(Always Display, "<03>[전시 배급소] <04>전선별 보급 현황을 분석해 여유 물자를 가장 부족한 지휘부에 우선 배정합니다.");'],
      preserve=False)
 
 # ----------------------------------------------------------- registration
@@ -244,7 +237,7 @@ p8("사이클 개시: 타이머 소모 후 미네랄 수령자 추첨 단계로"
     set_dc(QUEEN, "Set To", 10) + " //미네랄 수령자 추첨 단계"])
 
 # -------------------------------------------------------- receiver draws
-def draw_phase(phase, res, recv_dc, next_phase, label):
+def legacy_single_band_draw_phase(phase, res, recv_dc, next_phase, label):
     w("// %s receiver draw (Queen=%d). Random 2-bit retry, P1-priority fallback at Tank>=%d." % (label, phase, TRY_LIMIT))
     w()
     p8("%s 추첨 굴림: 매 사이클 2비트 재굴림 + 시도 횟수 +1" % label,
@@ -283,6 +276,58 @@ def draw_phase(phase, res, recv_dc, next_phase, label):
        [set_dc(TANK, "Set To", 0),
         set_dc(QUEEN, "Set To", next_phase)])
 
+# Two-band priority receiver policy.
+def draw_phase(phase, res, recv_dc, next_phase, label):
+    w("// %s receiver draw (Queen=%d). Priority: <=2000, then <=4000." % (label, phase))
+    w()
+    p8("%s 수령자 추첨: 2비트 무작위 + 시도 횟수" % label,
+       [sw(177, "Set"), dc(QUEEN, "Exactly", phase)],
+       [set_sw(RAND_B0, "randomize"), set_sw(RAND_B1, "randomize"),
+        set_dc(TANK, "Add", 1)])
+
+    # Band 1: <=2000. A direct hit advances immediately.
+    for pnum in PLAYERS:
+        b1, b0 = RAND_COMBO[pnum]
+        p8("%s 1순위 추첨: P%d, 2000 이하" % (label, pnum),
+           [sw(177, "Set"), dc(QUEEN, "Exactly", phase),
+            sw(RAND_B1, b1), sw(RAND_B0, b0), sw(PART_SW[pnum], "Set"),
+            acc(pnum, "At most", 2000, res)],
+           [set_dc(recv_dc, "Set To", pnum), set_dc(TANK, "Set To", 0),
+            set_dc(QUEEN, "Set To", next_phase)])
+
+    # After 24 misses, find whether band 1 has any eligible participant.
+    for pnum in reversed(PLAYERS):
+        p8("%s 1순위 보정: 2000 이하 참가자 확인" % label if pnum == 4 else None,
+           [sw(177, "Set"), dc(QUEEN, "Exactly", phase),
+            dc(TANK, "At least", TRY_LIMIT), sw(PART_SW[pnum], "Set"),
+            acc(pnum, "At most", 2000, res)],
+           [set_dc(recv_dc, "Set To", pnum)])
+    p8("%s 1순위 확정" % label,
+       [sw(177, "Set"), dc(QUEEN, "Exactly", phase),
+        dc(TANK, "At least", TRY_LIMIT), dc(recv_dc, "At least", 1)],
+       [set_dc(TANK, "Set To", 0), set_dc(QUEEN, "Set To", next_phase)])
+
+    # Band 2: only reached when nobody in band 1 exists.
+    for pnum in PLAYERS:
+        b1, b0 = RAND_COMBO[pnum]
+        p8("%s 2순위 추첨: P%d, 4000 이하" % (label, pnum),
+           [sw(177, "Set"), dc(QUEEN, "Exactly", phase),
+            dc(TANK, "At least", TRY_LIMIT), sw(RAND_B1, b1), sw(RAND_B0, b0),
+            sw(PART_SW[pnum], "Set"), acc(pnum, "At most", 4000, res)],
+           [set_dc(recv_dc, "Set To", pnum), set_dc(TANK, "Set To", 0),
+            set_dc(QUEEN, "Set To", next_phase)])
+
+    for pnum in reversed(PLAYERS):
+        p8("%s 2순위 보정: 4000 이하 참가자 확인" % label if pnum == 4 else None,
+           [sw(177, "Set"), dc(QUEEN, "Exactly", phase),
+            dc(TANK, "At least", TRY_LIMIT * 2), sw(PART_SW[pnum], "Set"),
+            acc(pnum, "At most", 4000, res)],
+           [set_dc(recv_dc, "Set To", pnum)])
+    p8("%s 추첨 마감: 적격자 없으면 수령자 0 유지" % label,
+       [sw(177, "Set"), dc(QUEEN, "Exactly", phase),
+        dc(TANK, "At least", TRY_LIMIT * 2)],
+       [set_dc(TANK, "Set To", 0), set_dc(QUEEN, "Set To", next_phase)])
+
 draw_phase(10, "ore", POOL, 20, "미네랄")
 draw_phase(20, "gas", EVO, 30, "가스")
 
@@ -297,14 +342,21 @@ p8("수령자 전무: 미네랄·가스 모두 수령자 없으면 사이클 무
     dc(EVO, "Exactly", 0)],
    [set_dc(QUEEN, "Set To", 50) + " //정리 단계로"])
 
-for res, recv_dc, sw_map, total_dc, res_kor in (("ore", POOL, ORE_SW, ORE_TOTAL, "미네랄"),
-                                                ("gas", EVO, GAS_SW, GAS_TOTAL, "가스")):
+for res, recv_dc, tier_dc, total_dc, res_kor in (("ore", POOL, ORE_TIER_DC, ORE_TOTAL, "미네랄"),
+                                                 ("gas", EVO, GAS_TIER_DC, GAS_TOTAL, "가스")):
     for recv in PLAYERS:
         for donor in PLAYERS:
-            if donor == recv:
-                continue
             for t, (lo, hi, amt) in enumerate(TIERS):
                 hi_txt = "%d" % hi if hi is not None else "20001+"
+                acts = [res_act(donor, "Subtract", amt, res),
+                        res_act(recv, "Add", amt, res)]
+                # A receiver may be taxed too, but its own contribution is
+                # net-zero and is excluded from the displayed received aid.
+                if donor != recv:
+                    acts.append(set_dc(total_dc, "Add", amt)
+                                + " //%s 순수 이전 총액 누적(수령 메시지용)" % res_kor)
+                acts.append(set_dc(tier_dc, "Set To", t + 1, player=donor)
+                            + " //P%d %s %d티어 수금 기록" % (donor, res_kor, t + 1))
                 p8("배급 이전: P%d(%s %d~%s, %d티어) -> P%d %d" %
                    (donor, res_kor, lo, hi_txt, t + 1, recv, amt),
                    [sw(177, "Set"),
@@ -312,10 +364,7 @@ for res, recv_dc, sw_map, total_dc, res_kor in (("ore", POOL, ORE_SW, ORE_TOTAL,
                     dc(recv_dc, "Exactly", recv) + " //%s 수령자 = P%d" % (res_kor, recv),
                     sw(PART_SW[donor], "Set") + " //P%d 참가" % donor]
                    + tier_cond(donor, lo, hi, res),
-                   [res_act(donor, "Subtract", amt, res),
-                    res_act(recv, "Add", amt, res),
-                    set_dc(total_dc, "Add", amt) + " //%s 이전 총액 누적(수령 메시지용)" % res_kor,
-                    set_sw(sw_map[donor][t], "set") + " //P%d %s %d티어 기부 기록(기부 메시지용)" % (donor, res_kor, t + 1)])
+                   acts)
 
 p8("이전 완료: 메시지 단계로",
    [sw(177, "Set"),
@@ -326,7 +375,7 @@ p8("이전 완료: 메시지 단계로",
 # --------------------------------------------------------------- messages
 w("// Message phase (Queen=40). Tank frame stagger so lines never share a frame:")
 w("//   recv ore total -> Tank %d, recv gas total -> Tank %d (one summed line each," % (FRAME_RECV_ORE, FRAME_RECV_GAS))
-w("//   every reachable 1..3-donor total enumerated), combined donor line -> Tank %d," % FRAME_DONOR)
+w("//   every reachable 1..3 external-donor total enumerated), combined donor line -> Tank %d," % FRAME_DONOR)
 w("//   end at %d. Tier bands are exclusive, so a donor has at most one ore and" % END_TANK)
 w("//   one gas tier switch set -> combined line needs few Not Set guards.")
 w()
@@ -361,17 +410,17 @@ for donor in PLAYERS:
                      dc(TANK, "Exactly", FRAME_DONOR) + " //기부 확인 표시 프레임"]
             parts = []
             if t_ore is not None:
-                conds.append(sw(ORE_SW[donor][t_ore], "Set")
+                conds.append(dc(ORE_TIER_DC, "Exactly", t_ore + 1, player=donor)
                              + " //P%d 미네랄 %d티어 기부 발생" % (donor, t_ore + 1))
                 parts.append("<1F>미네랄 -%d" % TIERS[t_ore][2])
             else:
-                conds += [sw(s, "Not Set") for s in ORE_SW[donor]]
+                conds.append(dc(ORE_TIER_DC, "Exactly", 0, player=donor))
             if t_gas is not None:
-                conds.append(sw(GAS_SW[donor][t_gas], "Set")
+                conds.append(dc(GAS_TIER_DC, "Exactly", t_gas + 1, player=donor)
                              + " //P%d 가스 %d티어 기부 발생" % (donor, t_gas + 1))
                 parts.append("<07>가스 -%d" % TIERS[t_gas][2])
             else:
-                conds += [sw(s, "Not Set") for s in GAS_SW[donor]]
+                conds.append(dc(GAS_TIER_DC, "Exactly", 0, player=donor))
             trig("Player %d" % donor,
                  "기부 확인: P%d %s (프레임 %d)" %
                  (donor, " / ".join(p.replace("<1F>", "").replace("<07>", "") for p in parts), FRAME_DONOR),
@@ -396,7 +445,7 @@ p8("대기 중 참가 플래그 청소: 다음 사이클 개시 때 새로 복�
    [set_sw(PART_SW[pnum], "clear") for pnum in PLAYERS])
 
 # -------------------------------------------------------------------- out
-text = "\n".join(L) + "\n"
+text = "\n".join(L).rstrip() + "\n"
 
 # sanity checks
 n_open = sum(1 for line in text.splitlines() if line.startswith('Trigger("'))

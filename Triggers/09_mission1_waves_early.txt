@@ -10,10 +10,10 @@ Conditions:
 	Elapsed Time(At least, 210);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1"); //1차 정찰조 : 네 경로에 저글링을 균등 배치
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1"); //1차 정찰조 : 저글링 총 7기를 네 경로에 분산 배치
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1"); //1차부터 최소 대공 대응력을 포함
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
@@ -194,14 +194,14 @@ Conditions:
 	Elapsed Time(At least, 450);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1"); //2차 지상 전위 : 네 경로에 3기씩 배치
+	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1"); //2차 지상 전위 : 저글링 총 11기를 네 경로에 분산 배치
 	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1"); //2차 지상/대공 화력 : 네 경로에 2기씩 배치
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1"); //2차 지상/대공 화력 : 히드라 총 7기를 네 경로에 분산 배치
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn1"); //2차 공중 우회 압박 : 전 난이도 공통 2기
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Overlord", 1, "P5 Scout");
@@ -317,21 +317,21 @@ Conditions:
 	Elapsed Time(At least, 630);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1"); //3차 전위 : 네 경로에 저글링 2기씩 배치
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1"); //3차 전위 : 저글링 총 7기를 네 경로에 분산 배치
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn1"); //3차 주력 화력 : 총 10기 분산 배치
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn1"); //3차 주력 화력 : 총 8기 분산 배치
 	Create Unit("Player 5", "Zerg Hydralisk", 3, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn1"); //탐지 요구 병력 : 총 3기
 	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn1"); //후방 우회 압박 : 전 난이도 기본 2기
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Scourge", 2, "P5 Spawn1"); //플레이어 공중 병력 억제 : 전 난이도 기본 4기
-	Create Unit("Player 5", "Zerg Scourge", 2, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Scourge", 2, "P5 Spawn1"); //플레이어 공중 병력 억제 : 전 난이도 기본 3기
+	Create Unit("Player 5", "Zerg Scourge", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Guardian", 1, "P5 Spawn1"); //차기 공세 대비 압박 : 장거리 가디언은 정확히 1기만 포함
 	Create Unit("Player 5", "Zerg Overlord", 2, "P5 Scout");
 }

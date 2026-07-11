@@ -24,6 +24,60 @@ Actions:
 	Preserve Trigger();
 }
 
+// P7 next-wave rejection sampling: keep re-rolling while the next regular wave matches the last one.
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 3); //공세 소비 직후 : 다음 일반 공세 후보를 확정하는 준비 상태
+	Switch("Switch11", Not Set); //직전 일반 공세 bit0 : 실제 스폰에 사용한 구성 기록
+	Switch("Switch12", Not Set); //직전 일반 공세 bit1 : 실제 스폰에 사용한 구성 기록
+	Switch("Switch65", Not Set); //다음 일반 공세 bit0 : 직전 구성과 같은 후보
+	Switch("Switch66", Not Set); //다음 일반 공세 bit1 : 직전 구성과 같은 후보
+Actions:
+	Set Switch("Switch65", randomize); //연속 중복 거부 : 다음 후보 bit0 재추첨
+	Set Switch("Switch66", randomize); //연속 중복 거부 : 다음 후보 bit1 재추첨
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 3); //공세 소비 직후 : 다음 일반 공세 후보를 확정하는 준비 상태
+	Switch("Switch11", Set); //직전 일반 공세 bit0 : 실제 스폰에 사용한 구성 기록
+	Switch("Switch12", Not Set); //직전 일반 공세 bit1 : 실제 스폰에 사용한 구성 기록
+	Switch("Switch65", Set); //다음 일반 공세 bit0 : 직전 구성과 같은 후보
+	Switch("Switch66", Not Set); //다음 일반 공세 bit1 : 직전 구성과 같은 후보
+Actions:
+	Set Switch("Switch65", randomize); //연속 중복 거부 : 다음 후보 bit0 재추첨
+	Set Switch("Switch66", randomize); //연속 중복 거부 : 다음 후보 bit1 재추첨
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 3); //공세 소비 직후 : 다음 일반 공세 후보를 확정하는 준비 상태
+	Switch("Switch11", Not Set); //직전 일반 공세 bit0 : 실제 스폰에 사용한 구성 기록
+	Switch("Switch12", Set); //직전 일반 공세 bit1 : 실제 스폰에 사용한 구성 기록
+	Switch("Switch65", Not Set); //다음 일반 공세 bit0 : 직전 구성과 같은 후보
+	Switch("Switch66", Set); //다음 일반 공세 bit1 : 직전 구성과 같은 후보
+Actions:
+	Set Switch("Switch65", randomize); //연속 중복 거부 : 다음 후보 bit0 재추첨
+	Set Switch("Switch66", randomize); //연속 중복 거부 : 다음 후보 bit1 재추첨
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Zerg Mutalisk", Exactly, 3); //공세 소비 직후 : 다음 일반 공세 후보를 확정하는 준비 상태
+	Switch("Switch11", Set); //직전 일반 공세 bit0 : 실제 스폰에 사용한 구성 기록
+	Switch("Switch12", Set); //직전 일반 공세 bit1 : 실제 스폰에 사용한 구성 기록
+	Switch("Switch65", Set); //다음 일반 공세 bit0 : 직전 구성과 같은 후보
+	Switch("Switch66", Set); //다음 일반 공세 bit1 : 직전 구성과 같은 후보
+Actions:
+	Set Switch("Switch65", randomize); //연속 중복 거부 : 다음 후보 bit0 재추첨
+	Set Switch("Switch66", randomize); //연속 중복 거부 : 다음 후보 bit1 재추첨
+	Preserve Trigger();
+}
+
 // P7 coarse warning roll - cooldown 32m15s - Lair active
 Trigger("Player 7"){
 Conditions:

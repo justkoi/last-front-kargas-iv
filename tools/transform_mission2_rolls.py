@@ -7,6 +7,44 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def build_nonrepeat_rerolls(colony: str, phase_dc: str, wave_s1: str, wave_s2: str,
+                            spawn_s1: str, spawn_s2: str) -> str:
+    """Reject a next-wave roll that matches this colony's last regular wave."""
+    owner = "Player 6" if colony == "P6" else "Player 7"
+    bits = (("Not Set", "Not Set"), ("Set", "Not Set"),
+            ("Not Set", "Set"), ("Set", "Set"))
+    blocks: list[str] = [
+        f"// {colony} next-wave rejection sampling: keep re-rolling while the next regular wave matches the last one."
+    ]
+    for bit1, bit2 in bits:
+        blocks.append(
+            f'Trigger("{owner}"){{\n'
+            f'Conditions:\n'
+            f'\tDeaths("Player 8", "{phase_dc}", Exactly, 3); //공세 소비 직후 : 다음 일반 공세 후보를 확정하는 준비 상태\n'
+            f'\tSwitch("{spawn_s1}", {bit1}); //직전 일반 공세 bit0 : 실제 스폰에 사용한 구성 기록\n'
+            f'\tSwitch("{spawn_s2}", {bit2}); //직전 일반 공세 bit1 : 실제 스폰에 사용한 구성 기록\n'
+            f'\tSwitch("{wave_s1}", {bit1}); //다음 일반 공세 bit0 : 직전 구성과 같은 후보\n'
+            f'\tSwitch("{wave_s2}", {bit2}); //다음 일반 공세 bit1 : 직전 구성과 같은 후보\n'
+            f'Actions:\n'
+            f'\tSet Switch("{wave_s1}", randomize); //연속 중복 거부 : 다음 후보 bit0 재추첨\n'
+            f'\tSet Switch("{wave_s2}", randomize); //연속 중복 거부 : 다음 후보 bit1 재추첨\n'
+            f'\tPreserve Trigger();\n'
+            f'}}'
+        )
+    return "\n\n".join(blocks) + "\n"
+
+
+def append_nonrepeat_rerolls(content: str, colony: str, phase_dc: str,
+                             wave_s1: str, wave_s2: str,
+                             spawn_s1: str, spawn_s2: str) -> str:
+    marker = f"// {colony} next-wave rejection sampling:"
+    if marker in content:
+        return content
+    return content.rstrip() + "\n\n" + build_nonrepeat_rerolls(
+        colony, phase_dc, wave_s1, wave_s2, spawn_s1, spawn_s2
+    )
+
+
 def jitter_thresholds(label: str, conds: str) -> tuple[int, str, str]:
     if "cooldown 21m -" in label:
         return 13080, "Not Set", "Not Set"
@@ -199,6 +237,9 @@ def main() -> None:
         switch_coarse_roll="Switch128",
         switch_coarse_shown="Switch129",
     )
+    p6 = append_nonrepeat_rerolls(
+        p6, "P6", "Zerg Lurker", "Switch61", "Switch62", "Switch9", "Switch10"
+    )
     p6_path.write_text(p6, encoding="utf-8")
 
     p7 = transform_rolls(
@@ -219,12 +260,18 @@ def main() -> None:
         switch_coarse_roll="Switch130",
         switch_coarse_shown="Switch131",
     )
+    p7 = append_nonrepeat_rerolls(
+        p7, "P7", "Zerg Mutalisk", "Switch65", "Switch66", "Switch11", "Switch12"
+    )
     p7_path.write_text(p7, encoding="utf-8")
 
     for name, text in [("P6", p6), ("P7", p7)]:
         assert "coarse warning roll" in text
         assert 'Switch9", randomize' not in text
         assert 'Switch11", randomize' not in text
+        assert text.count(f"// {name} next-wave rejection sampling:") == 1
+        assert text.count("//연속 중복 거부 : 다음 후보 bit0 재추첨") == 4
+        assert text.count("//연속 중복 거부 : 다음 후보 bit1 재추첨") == 4
         print(f"{name}: ok ({len(text)} bytes)")
 
 

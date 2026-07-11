@@ -1,6 +1,7 @@
 //-----------------------------------------------------------------//
 //  극초반 입구 견제
 //  실제 0:05부터 15초 간격으로 총 8회, P5 Spawn1 -> Player Destination
+//  전체 전투 보급량 20 -> 18 (-10%): 짝수 회차 저글링을 3기에서 2기로 감축
 //-----------------------------------------------------------------//
 
 // 1회차 - 실제 약 0:05 (Elapsed 8)
@@ -23,7 +24,7 @@ Conditions:
 	Elapsed Time(At least, 30);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
@@ -49,7 +50,7 @@ Conditions:
 	Elapsed Time(At least, 75);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
@@ -75,7 +76,7 @@ Conditions:
 	Elapsed Time(At least, 120);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
@@ -101,7 +102,7 @@ Conditions:
 	Elapsed Time(At least, 165);
 	Command("Player 5", "Buildings", At least, 1);
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);

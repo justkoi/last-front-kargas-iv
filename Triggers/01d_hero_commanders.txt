@@ -11,8 +11,8 @@
 // Protoss Arbiter Tribunal    : 발렌 현재 소유자(0=미배속, 1~4=P1~P4)
 // Protoss Robotics Support Bay: 엘리아 현재 소유자(0=미배속, 1~4=P1~P4)
 // Zerg Nydus Canal / Queen's Nest: 로크/세딘 현재 소유자(0=미배속, 1~4=P1~P4)
-// Zerg Spire / Greater Spire  : 발렌/엘리아 행동불능 복귀 타이머(0~3601)
-// Zerg Creep Colony / Hive   : 로크/세딘 행동불능 복귀 타이머(0~3601)
+// Zerg Spire / Greater Spire  : 발렌/엘리아 행동불능 복귀 타이머(0~3602)
+// Zerg Creep Colony / Hive   : 로크/세딘 행동불능 복귀 타이머(0~3602)
 // Zerg Hatchery / Lair        : 로크/세딘 합류 연출 타이머(0~168)
 // Switch236/237               : 발렌/엘리아 최초 배속 안내 표시 완료(소유권 상태 아님)
 // Switch238/239               : 발렌/엘리아 행동불능
@@ -321,6 +321,11 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>과 <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 1", "Jim Raynor (Marine)", "Anywhere", "P1 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P1 Hunt"); //영웅 획득/복귀 위치 안내
+	Move Location("Player 1", "Sarah Kerrigan (Ghost)", "Anywhere", "P1 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P1 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
 	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
 }
@@ -332,6 +337,11 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>과 <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 2", "Jim Raynor (Marine)", "Anywhere", "P2 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P2 Hunt"); //영웅 획득/복귀 위치 안내
+	Move Location("Player 2", "Sarah Kerrigan (Ghost)", "Anywhere", "P2 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P2 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
 	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
 }
@@ -343,6 +353,11 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>과 <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 3", "Jim Raynor (Marine)", "Anywhere", "P3 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P3 Hunt"); //영웅 획득/복귀 위치 안내
+	Move Location("Player 3", "Sarah Kerrigan (Ghost)", "Anywhere", "P3 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P3 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
 	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
 }
@@ -354,6 +369,11 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>과 <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 4", "Jim Raynor (Marine)", "Anywhere", "P4 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P4 Hunt"); //영웅 획득/복귀 위치 안내
+	Move Location("Player 4", "Sarah Kerrigan (Ghost)", "Anywhere", "P4 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P4 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
 	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
 }
@@ -363,6 +383,9 @@ Conditions:
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>이 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 1", "Jim Raynor (Marine)", "Anywhere", "P1 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P1 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
 }
 Trigger("Player 2"){
@@ -371,6 +394,9 @@ Conditions:
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>이 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 2", "Jim Raynor (Marine)", "Anywhere", "P2 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P2 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
 }
 Trigger("Player 3"){
@@ -379,6 +405,9 @@ Conditions:
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>이 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 3", "Jim Raynor (Marine)", "Anywhere", "P3 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P3 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
 }
 Trigger("Player 4"){
@@ -387,6 +416,9 @@ Conditions:
 	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <03>발렌<04>이 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 4", "Jim Raynor (Marine)", "Anywhere", "P4 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P4 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Switch("Switch236", set); //발렌 최초 배속 안내 완료
 }
 Trigger("Player 1"){
@@ -395,6 +427,9 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 1", "Sarah Kerrigan (Ghost)", "Anywhere", "P1 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P1 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
 }
 Trigger("Player 2"){
@@ -403,6 +438,9 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 2", "Sarah Kerrigan (Ghost)", "Anywhere", "P2 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P2 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
 }
 Trigger("Player 3"){
@@ -411,6 +449,9 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 3", "Sarah Kerrigan (Ghost)", "Anywhere", "P3 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P3 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
 }
 Trigger("Player 4"){
@@ -419,6 +460,9 @@ Conditions:
 	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 배속] <1B>엘리아<04>가 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 4", "Sarah Kerrigan (Ghost)", "Anywhere", "P4 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P4 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Set Switch("Switch237", set); //엘리아 최초 배속 안내 완료
 }
 
@@ -2680,6 +2724,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 합류] <1A>로크<04>가 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 1", "Jim Raynor (Vulture)", "Anywhere", "P1 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P1 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 }
 Trigger("Player 2"){
 Conditions:
@@ -2687,6 +2734,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 합류] <1A>로크<04>가 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 2", "Jim Raynor (Vulture)", "Anywhere", "P2 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P2 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 }
 Trigger("Player 3"){
 Conditions:
@@ -2694,6 +2744,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 합류] <1A>로크<04>가 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 3", "Jim Raynor (Vulture)", "Anywhere", "P3 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P3 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 }
 Trigger("Player 4"){
 Conditions:
@@ -2701,6 +2754,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Hatchery", Exactly, 168);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 합류] <1A>로크<04>가 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 4", "Jim Raynor (Vulture)", "Anywhere", "P4 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P4 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 }
 Trigger("Player 8"){
 Conditions:
@@ -2723,6 +2779,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Lair", Exactly, 168);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 합류] <1F>세딘<04>이 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 1", "Alan Schezar (Goliath)", "Anywhere", "P1 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P1 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 }
 Trigger("Player 2"){
 Conditions:
@@ -2730,6 +2789,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Lair", Exactly, 168);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 합류] <1F>세딘<04>이 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 2", "Alan Schezar (Goliath)", "Anywhere", "P2 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P2 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 }
 Trigger("Player 3"){
 Conditions:
@@ -2737,6 +2799,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Lair", Exactly, 168);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 합류] <1F>세딘<04>이 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 3", "Alan Schezar (Goliath)", "Anywhere", "P3 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P3 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 }
 Trigger("Player 4"){
 Conditions:
@@ -2744,6 +2809,9 @@ Conditions:
 	Deaths("Player 8", "Zerg Lair", Exactly, 168);
 Actions:
 	Display Text Message(Always Display, "<07>[영웅 합류] <1F>세딘<04>이 귀관의 지휘에 합류했습니다.");
+	Move Location("Player 4", "Alan Schezar (Goliath)", "Anywhere", "P4 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P4 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 }
 Trigger("Player 8"){
 Conditions:
@@ -3270,77 +3338,352 @@ Actions:
 	Preserve Trigger(); //반복 수명주기 : 복귀 후 다음 사망도 다시 감지
 }
 
-//----- 행동불능/복귀 메시지: Exactly 펄스로 반복 사망에도 1회씩만 표시 -----//
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+//----- 행동불능/복귀 메시지: 영웅 소유자 DC와 Exactly 펄스로 배속 플레이어에게만 1회씩 표시 -----//
+Trigger("Player 1"){
 Conditions:
 	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
 	Deaths("Player 8", "Zerg Spire", Exactly, 1);
 Actions:
-	Display Text Message(Always Display, "<06>[행동 불능] <03>발렌<04>이 후송되었습니다. 5분 후 미네랄 100을 소모해 배속된 지휘관의 본진에서 복귀합니다.");
+	Display Text Message(Always Display, "<06>[행동 불능] <03>발렌<04>이 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
 	Preserve Trigger();
 }
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Trigger("Player 2"){
 Conditions:
 	Switch("Switch238", Set);
-	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Zerg Spire", Exactly, 1);
 Actions:
-	Display Text Message(Always Display, "<07>[전선 복귀] <03>발렌<04>이 배속된 지휘관의 본진에서 복귀했습니다. <1F>(미네랄 -100)");
+	Display Text Message(Always Display, "<06>[행동 불능] <03>발렌<04>이 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
 	Preserve Trigger();
 }
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Trigger("Player 3"){
 Conditions:
-	Switch("Switch239", Set);
-	Deaths("Player 8", "Zerg Greater Spire", Exactly, 1);
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Zerg Spire", Exactly, 1);
 Actions:
-	Display Text Message(Always Display, "<06>[행동 불능] <1B>엘리아<04>가 후송되었습니다. 5분 후 미네랄 100을 소모해 배속된 지휘관의 본진에서 복귀합니다.");
+	Display Text Message(Always Display, "<06>[행동 불능] <03>발렌<04>이 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
 	Preserve Trigger();
 }
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Trigger("Player 4"){
 Conditions:
-	Switch("Switch239", Set);
-	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Zerg Spire", Exactly, 1);
 Actions:
-	Display Text Message(Always Display, "<07>[전선 복귀] <1B>엘리아<04>가 배속된 지휘관의 본진에서 복귀했습니다. <1F>(미네랄 -100)");
+	Display Text Message(Always Display, "<06>[행동 불능] <03>발렌<04>이 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
 	Preserve Trigger();
 }
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Trigger("Player 1"){
 Conditions:
-	Switch("Switch250", Set);
-	Deaths("Player 8", "Zerg Creep Colony", Exactly, 1);
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3602);
 Actions:
-	Display Text Message(Always Display, "<06>[행동 불능] <1A>로크<04>가 후송되었습니다. 5분 후 미네랄 100을 소모해 배속된 지휘관의 본진에서 복귀합니다.");
+	Display Text Message(Always Display, "<07>[전선 복귀] <03>발렌<04>이 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 1", "Jim Raynor (Marine)", "Anywhere", "P1 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P1 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Preserve Trigger();
 }
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Trigger("Player 2"){
 Conditions:
-	Switch("Switch250", Set);
-	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3601);
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3602);
 Actions:
-	Display Text Message(Always Display, "<07>[전선 복귀] <1A>로크<04>가 배속된 지휘관의 본진에서 복귀했습니다. <1F>(미네랄 -100)");
+	Display Text Message(Always Display, "<07>[전선 복귀] <03>발렌<04>이 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 2", "Jim Raynor (Marine)", "Anywhere", "P2 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P2 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Preserve Trigger();
 }
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Trigger("Player 3"){
 Conditions:
-	Switch("Switch251", Set);
-	Deaths("Player 8", "Zerg Hive", Exactly, 1);
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3602);
 Actions:
-	Display Text Message(Always Display, "<06>[행동 불능] <1F>세딘<04>이 후송되었습니다. 5분 후 미네랄 100을 소모해 배속된 지휘관의 본진에서 복귀합니다.");
+	Display Text Message(Always Display, "<07>[전선 복귀] <03>발렌<04>이 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 3", "Jim Raynor (Marine)", "Anywhere", "P3 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P3 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Preserve Trigger();
 }
-Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
+Trigger("Player 4"){
 Conditions:
-	Switch("Switch251", Set);
-	Deaths("Player 8", "Zerg Hive", Exactly, 3601);
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3602);
 Actions:
-	Display Text Message(Always Display, "<07>[전선 복귀] <1F>세딘<04>이 배속된 지휘관의 본진에서 복귀했습니다. <1F>(미네랄 -100)");
+	Display Text Message(Always Display, "<07>[전선 복귀] <03>발렌<04>이 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 4", "Jim Raynor (Marine)", "Anywhere", "P4 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P4 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
 	Preserve Trigger();
 }
 
-//----- 복귀 완료 상태 정리: 파일상 생성 트리거보다 위에 두어 3601을 한 사이클 유지 -----//
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1B>엘리아<04>가 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1B>엘리아<04>가 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1B>엘리아<04>가 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1B>엘리아<04>가 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3602);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1B>엘리아<04>가 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 1", "Sarah Kerrigan (Ghost)", "Anywhere", "P1 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P1 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3602);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1B>엘리아<04>가 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 2", "Sarah Kerrigan (Ghost)", "Anywhere", "P2 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P2 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3602);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1B>엘리아<04>가 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 3", "Sarah Kerrigan (Ghost)", "Anywhere", "P3 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P3 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3602);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1B>엘리아<04>가 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 4", "Sarah Kerrigan (Ghost)", "Anywhere", "P4 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P4 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1A>로크<04>가 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1A>로크<04>가 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1A>로크<04>가 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1A>로크<04>가 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3602);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1A>로크<04>가 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 1", "Jim Raynor (Vulture)", "Anywhere", "P1 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P1 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3602);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1A>로크<04>가 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 2", "Jim Raynor (Vulture)", "Anywhere", "P2 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P2 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3602);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1A>로크<04>가 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 3", "Jim Raynor (Vulture)", "Anywhere", "P3 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P3 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3602);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1A>로크<04>가 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 4", "Jim Raynor (Vulture)", "Anywhere", "P4 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P4 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+	Deaths("Player 8", "Zerg Hive", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1F>세딘<04>이 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+	Deaths("Player 8", "Zerg Hive", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1F>세딘<04>이 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+	Deaths("Player 8", "Zerg Hive", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1F>세딘<04>이 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+	Deaths("Player 8", "Zerg Hive", Exactly, 1);
+Actions:
+	Display Text Message(Always Display, "<06>[행동 불능] <1F>세딘<04>이 전투 중 쓰러졌습니다. 5분간 휴식을 취한 뒤 귀관의 본진으로 복귀합니다.");
+	Preserve Trigger();
+}
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3602);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1F>세딘<04>이 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 1", "Alan Schezar (Goliath)", "Anywhere", "P1 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P1 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3602);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1F>세딘<04>이 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 2", "Alan Schezar (Goliath)", "Anywhere", "P2 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P2 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3602);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1F>세딘<04>이 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 3", "Alan Schezar (Goliath)", "Anywhere", "P3 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P3 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3602);
+Actions:
+	Display Text Message(Always Display, "<07>[전선 복귀] <1F>세딘<04>이 휴식을 마치고 귀관의 본진으로 복귀했습니다. <1F>(미네랄 -100)");
+	Move Location("Player 4", "Alan Schezar (Goliath)", "Anywhere", "P4 Hunt"); //영웅 알림 위치 갱신 : 현재 영웅 위치 추적
+	Minimap Ping("P4 Hunt"); //영웅 획득/복귀 위치 안내
+	Play WAV("sound\\Misc\\TRescue.wav", 1500);
+	Preserve Trigger();
+}
+
+//----- 복귀 완료 상태 정리: Player 8 검증 트리거보다 위에 두어 3602를 한 사이클 유지 -----//
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch238", Set);
-	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3602);
 Actions:
 	Set Switch("Switch238", clear); //복귀 완료 : 활동 상태 복원
 	Set Deaths("Player 8", "Zerg Spire", Set To, 0); //다음 행동불능을 위해 타이머 초기화
@@ -3349,7 +3692,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch239", Set);
-	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3602);
 Actions:
 	Set Switch("Switch239", clear); //복귀 완료 : 활동 상태 복원
 	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 0); //다음 행동불능을 위해 타이머 초기화
@@ -3358,7 +3701,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch250", Set);
-	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3601);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3602);
 Actions:
 	Set Switch("Switch250", clear); //복귀 완료 : 활동 상태 복원
 	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 0); //다음 행동불능을 위해 타이머 초기화
@@ -3367,7 +3710,7 @@ Actions:
 Trigger("Player 8"){
 Conditions:
 	Switch("Switch251", Set);
-	Deaths("Player 8", "Zerg Hive", Exactly, 3601);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3602);
 Actions:
 	Set Switch("Switch251", clear); //복귀 완료 : 활동 상태 복원
 	Set Deaths("Player 8", "Zerg Hive", Set To, 0); //다음 행동불능을 위해 타이머 초기화
@@ -3408,6 +3751,504 @@ Actions:
 	Preserve Trigger();
 }
 
+//----- 복귀 생성 결과 검증: Player 8이 상태를 판정하고 해당 플레이어가 안내 출력 -----//
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
+	Command("Player 1", "Jim Raynor (Marine)", At least, 1);
+Actions:
+	Set Resources("Player 1", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
+	Command("Player 1", "Jim Raynor (Marine)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Spire", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 1);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <03>발렌<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P1 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
+	Command("Player 2", "Jim Raynor (Marine)", At least, 1);
+Actions:
+	Set Resources("Player 2", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
+	Command("Player 2", "Jim Raynor (Marine)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Spire", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 2);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <03>발렌<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P2 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
+	Command("Player 3", "Jim Raynor (Marine)", At least, 1);
+Actions:
+	Set Resources("Player 3", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
+	Command("Player 3", "Jim Raynor (Marine)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Spire", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 3);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <03>발렌<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P3 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
+	Command("Player 4", "Jim Raynor (Marine)", At least, 1);
+Actions:
+	Set Resources("Player 4", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3601);
+	Command("Player 4", "Jim Raynor (Marine)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Spire", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch238", Set);
+	Deaths("Player 8", "Protoss Arbiter Tribunal", Exactly, 4);
+	Deaths("Player 8", "Zerg Spire", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <03>발렌<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P4 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
+	Command("Player 1", "Sarah Kerrigan (Ghost)", At least, 1);
+Actions:
+	Set Resources("Player 1", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
+	Command("Player 1", "Sarah Kerrigan (Ghost)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 1);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <1B>엘리아<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P1 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
+	Command("Player 2", "Sarah Kerrigan (Ghost)", At least, 1);
+Actions:
+	Set Resources("Player 2", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
+	Command("Player 2", "Sarah Kerrigan (Ghost)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 2);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <1B>엘리아<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P2 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
+	Command("Player 3", "Sarah Kerrigan (Ghost)", At least, 1);
+Actions:
+	Set Resources("Player 3", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
+	Command("Player 3", "Sarah Kerrigan (Ghost)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 3);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <1B>엘리아<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P3 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
+	Command("Player 4", "Sarah Kerrigan (Ghost)", At least, 1);
+Actions:
+	Set Resources("Player 4", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3601);
+	Command("Player 4", "Sarah Kerrigan (Ghost)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Greater Spire", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch239", Set);
+	Deaths("Player 8", "Protoss Robotics Support Bay", Exactly, 4);
+	Deaths("Player 8", "Zerg Greater Spire", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <1B>엘리아<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P4 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3601);
+	Command("Player 1", "Jim Raynor (Vulture)", At least, 1);
+Actions:
+	Set Resources("Player 1", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3601);
+	Command("Player 1", "Jim Raynor (Vulture)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 1);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <1A>로크<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P1 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3601);
+	Command("Player 2", "Jim Raynor (Vulture)", At least, 1);
+Actions:
+	Set Resources("Player 2", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3601);
+	Command("Player 2", "Jim Raynor (Vulture)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 2);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <1A>로크<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P2 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3601);
+	Command("Player 3", "Jim Raynor (Vulture)", At least, 1);
+Actions:
+	Set Resources("Player 3", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3601);
+	Command("Player 3", "Jim Raynor (Vulture)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 3);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <1A>로크<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P3 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3601);
+	Command("Player 4", "Jim Raynor (Vulture)", At least, 1);
+Actions:
+	Set Resources("Player 4", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3601);
+	Command("Player 4", "Jim Raynor (Vulture)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Creep Colony", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch250", Set);
+	Deaths("Player 8", "Zerg Nydus Canal", Exactly, 4);
+	Deaths("Player 8", "Zerg Creep Colony", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <1A>로크<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P4 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3601);
+	Command("Player 1", "Alan Schezar (Goliath)", At least, 1);
+Actions:
+	Set Resources("Player 1", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3601);
+	Command("Player 1", "Alan Schezar (Goliath)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Hive", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 1"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 1);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <1F>세딘<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P1 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3601);
+	Command("Player 2", "Alan Schezar (Goliath)", At least, 1);
+Actions:
+	Set Resources("Player 2", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3601);
+	Command("Player 2", "Alan Schezar (Goliath)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Hive", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 2"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 2);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <1F>세딘<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P2 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3601);
+	Command("Player 3", "Alan Schezar (Goliath)", At least, 1);
+Actions:
+	Set Resources("Player 3", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3601);
+	Command("Player 3", "Alan Schezar (Goliath)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Hive", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 3"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 3);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <1F>세딘<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P3 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3601);
+	Command("Player 4", "Alan Schezar (Goliath)", At least, 1);
+Actions:
+	Set Resources("Player 4", Subtract, 100, ore); //생성 성공 확인 뒤 복귀 비용 지불
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 성공 펄스 3602 : 다음 사이클 메시지 및 상태 정리
+	Preserve Trigger();
+}
+Trigger("Player 8"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3601);
+	Command("Player 4", "Alan Schezar (Goliath)", At most, 0);
+Actions:
+	Set Deaths("Player 8", "Zerg Hive", Set To, 3360); //생성 실패 : 240틱(20초) 추가 휴식 뒤 재시도
+	Preserve Trigger();
+}
+Trigger("Player 4"){
+Conditions:
+	Switch("Switch251", Set);
+	Deaths("Player 8", "Zerg Queen's Nest", Exactly, 4);
+	Deaths("Player 8", "Zerg Hive", Exactly, 3360);
+Actions:
+	Display Text Message(Always Display, "<06>[복귀 지연] <1F>세딘<04>의 복귀 지점을 확보하지 못했습니다. 20초 후 다시 시도합니다. 복귀 비용은 차감되지 않았습니다.");
+	Minimap Ping("P4 Hunt"); //생성에 실패한 본진 복귀 지점 안내
+	Preserve Trigger(); //실패 직후 3360 펄스에서 해당 플레이어에게 1회 안내
+}
+
 //----- 본진 건물 복귀: CC > Hatchery > Lair > Hive > Nexus 우선 -----//
 Trigger("Player 8"){
 Conditions:
@@ -3418,9 +4259,8 @@ Conditions:
 	Command("Player 1", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 1", "Terran Command Center", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Jim Raynor (Marine)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3432,9 +4272,8 @@ Conditions:
 	Command("Player 1", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Hatchery", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Jim Raynor (Marine)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3446,9 +4285,8 @@ Conditions:
 	Command("Player 1", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Lair", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Jim Raynor (Marine)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3460,9 +4298,8 @@ Conditions:
 	Command("Player 1", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Hive", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Jim Raynor (Marine)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3474,9 +4311,8 @@ Conditions:
 	Command("Player 1", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 1", "Protoss Nexus", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Jim Raynor (Marine)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3488,9 +4324,8 @@ Conditions:
 	Command("Player 2", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 2", "Terran Command Center", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Jim Raynor (Marine)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3502,9 +4337,8 @@ Conditions:
 	Command("Player 2", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Hatchery", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Jim Raynor (Marine)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3516,9 +4350,8 @@ Conditions:
 	Command("Player 2", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Lair", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Jim Raynor (Marine)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3530,9 +4363,8 @@ Conditions:
 	Command("Player 2", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Hive", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Jim Raynor (Marine)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3544,9 +4376,8 @@ Conditions:
 	Command("Player 2", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 2", "Protoss Nexus", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Jim Raynor (Marine)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3558,9 +4389,8 @@ Conditions:
 	Command("Player 3", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 3", "Terran Command Center", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Jim Raynor (Marine)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3572,9 +4402,8 @@ Conditions:
 	Command("Player 3", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Hatchery", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Jim Raynor (Marine)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3586,9 +4415,8 @@ Conditions:
 	Command("Player 3", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Lair", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Jim Raynor (Marine)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3600,9 +4428,8 @@ Conditions:
 	Command("Player 3", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Hive", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Jim Raynor (Marine)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3614,9 +4441,8 @@ Conditions:
 	Command("Player 3", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 3", "Protoss Nexus", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Jim Raynor (Marine)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3628,9 +4454,8 @@ Conditions:
 	Command("Player 4", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 4", "Terran Command Center", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Jim Raynor (Marine)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3642,9 +4467,8 @@ Conditions:
 	Command("Player 4", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Hatchery", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Jim Raynor (Marine)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3656,9 +4480,8 @@ Conditions:
 	Command("Player 4", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Lair", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Jim Raynor (Marine)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3670,9 +4493,8 @@ Conditions:
 	Command("Player 4", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Hive", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Jim Raynor (Marine)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3684,9 +4506,8 @@ Conditions:
 	Command("Player 4", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 4", "Protoss Nexus", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Jim Raynor (Marine)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3698,9 +4519,8 @@ Conditions:
 	Command("Player 1", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 1", "Terran Command Center", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Sarah Kerrigan (Ghost)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3712,9 +4532,8 @@ Conditions:
 	Command("Player 1", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Hatchery", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Sarah Kerrigan (Ghost)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3726,9 +4545,8 @@ Conditions:
 	Command("Player 1", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Lair", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Sarah Kerrigan (Ghost)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3740,9 +4558,8 @@ Conditions:
 	Command("Player 1", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Hive", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Sarah Kerrigan (Ghost)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3754,9 +4571,8 @@ Conditions:
 	Command("Player 1", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 1", "Protoss Nexus", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Sarah Kerrigan (Ghost)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3768,9 +4584,8 @@ Conditions:
 	Command("Player 2", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 2", "Terran Command Center", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Sarah Kerrigan (Ghost)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3782,9 +4597,8 @@ Conditions:
 	Command("Player 2", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Hatchery", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Sarah Kerrigan (Ghost)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3796,9 +4610,8 @@ Conditions:
 	Command("Player 2", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Lair", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Sarah Kerrigan (Ghost)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3810,9 +4623,8 @@ Conditions:
 	Command("Player 2", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Hive", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Sarah Kerrigan (Ghost)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3824,9 +4636,8 @@ Conditions:
 	Command("Player 2", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 2", "Protoss Nexus", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Sarah Kerrigan (Ghost)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3838,9 +4649,8 @@ Conditions:
 	Command("Player 3", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 3", "Terran Command Center", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Sarah Kerrigan (Ghost)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3852,9 +4662,8 @@ Conditions:
 	Command("Player 3", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Hatchery", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Sarah Kerrigan (Ghost)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3866,9 +4675,8 @@ Conditions:
 	Command("Player 3", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Lair", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Sarah Kerrigan (Ghost)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3880,9 +4688,8 @@ Conditions:
 	Command("Player 3", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Hive", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Sarah Kerrigan (Ghost)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3894,9 +4701,8 @@ Conditions:
 	Command("Player 3", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 3", "Protoss Nexus", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Sarah Kerrigan (Ghost)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3908,9 +4714,8 @@ Conditions:
 	Command("Player 4", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 4", "Terran Command Center", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Sarah Kerrigan (Ghost)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3922,9 +4727,8 @@ Conditions:
 	Command("Player 4", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Hatchery", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Sarah Kerrigan (Ghost)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3936,9 +4740,8 @@ Conditions:
 	Command("Player 4", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Lair", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Sarah Kerrigan (Ghost)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3950,9 +4753,8 @@ Conditions:
 	Command("Player 4", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Hive", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Sarah Kerrigan (Ghost)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3964,9 +4766,8 @@ Conditions:
 	Command("Player 4", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 4", "Protoss Nexus", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Sarah Kerrigan (Ghost)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Greater Spire", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3978,9 +4779,8 @@ Conditions:
 	Command("Player 1", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 1", "Terran Command Center", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -3992,9 +4792,8 @@ Conditions:
 	Command("Player 1", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Hatchery", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4006,9 +4805,8 @@ Conditions:
 	Command("Player 1", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Lair", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4020,9 +4818,8 @@ Conditions:
 	Command("Player 1", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Hive", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4034,9 +4831,8 @@ Conditions:
 	Command("Player 1", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 1", "Protoss Nexus", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Jim Raynor (Vulture)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4048,9 +4844,8 @@ Conditions:
 	Command("Player 2", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 2", "Terran Command Center", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4062,9 +4857,8 @@ Conditions:
 	Command("Player 2", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Hatchery", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4076,9 +4870,8 @@ Conditions:
 	Command("Player 2", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Lair", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4090,9 +4883,8 @@ Conditions:
 	Command("Player 2", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Hive", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4104,9 +4896,8 @@ Conditions:
 	Command("Player 2", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 2", "Protoss Nexus", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Jim Raynor (Vulture)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4118,9 +4909,8 @@ Conditions:
 	Command("Player 3", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 3", "Terran Command Center", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4132,9 +4922,8 @@ Conditions:
 	Command("Player 3", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Hatchery", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4146,9 +4935,8 @@ Conditions:
 	Command("Player 3", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Lair", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4160,9 +4948,8 @@ Conditions:
 	Command("Player 3", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Hive", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4174,9 +4961,8 @@ Conditions:
 	Command("Player 3", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 3", "Protoss Nexus", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Jim Raynor (Vulture)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4188,9 +4974,8 @@ Conditions:
 	Command("Player 4", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 4", "Terran Command Center", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4202,9 +4987,8 @@ Conditions:
 	Command("Player 4", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Hatchery", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4216,9 +5000,8 @@ Conditions:
 	Command("Player 4", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Lair", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4230,9 +5013,8 @@ Conditions:
 	Command("Player 4", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Hive", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4244,9 +5026,8 @@ Conditions:
 	Command("Player 4", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 4", "Protoss Nexus", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Jim Raynor (Vulture)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Creep Colony", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4258,9 +5039,8 @@ Conditions:
 	Command("Player 1", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 1", "Terran Command Center", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4272,9 +5052,8 @@ Conditions:
 	Command("Player 1", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Hatchery", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4286,9 +5065,8 @@ Conditions:
 	Command("Player 1", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Lair", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4300,9 +5078,8 @@ Conditions:
 	Command("Player 1", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 1", "Zerg Hive", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4314,9 +5091,8 @@ Conditions:
 	Command("Player 1", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 1", "Protoss Nexus", "Anywhere", "P1 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 1", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 1", "Alan Schezar (Goliath)", 1, "P1 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4328,9 +5104,8 @@ Conditions:
 	Command("Player 2", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 2", "Terran Command Center", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4342,9 +5117,8 @@ Conditions:
 	Command("Player 2", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Hatchery", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4356,9 +5130,8 @@ Conditions:
 	Command("Player 2", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Lair", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4370,9 +5143,8 @@ Conditions:
 	Command("Player 2", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 2", "Zerg Hive", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4384,9 +5156,8 @@ Conditions:
 	Command("Player 2", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 2", "Protoss Nexus", "Anywhere", "P2 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 2", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 2", "Alan Schezar (Goliath)", 1, "P2 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4398,9 +5169,8 @@ Conditions:
 	Command("Player 3", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 3", "Terran Command Center", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4412,9 +5182,8 @@ Conditions:
 	Command("Player 3", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Hatchery", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4426,9 +5195,8 @@ Conditions:
 	Command("Player 3", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Lair", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4440,9 +5208,8 @@ Conditions:
 	Command("Player 3", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 3", "Zerg Hive", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4454,9 +5221,8 @@ Conditions:
 	Command("Player 3", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 3", "Protoss Nexus", "Anywhere", "P3 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 3", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 3", "Alan Schezar (Goliath)", 1, "P3 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4468,9 +5234,8 @@ Conditions:
 	Command("Player 4", "Terran Command Center", At least, 1);
 Actions:
 	Move Location("Player 4", "Terran Command Center", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4482,9 +5247,8 @@ Conditions:
 	Command("Player 4", "Zerg Hatchery", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Hatchery", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4496,9 +5260,8 @@ Conditions:
 	Command("Player 4", "Zerg Lair", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Lair", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4510,9 +5273,8 @@ Conditions:
 	Command("Player 4", "Zerg Hive", At least, 1);
 Actions:
 	Move Location("Player 4", "Zerg Hive", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }
 Trigger("Player 8"){
@@ -4524,8 +5286,7 @@ Conditions:
 	Command("Player 4", "Protoss Nexus", At least, 1);
 Actions:
 	Move Location("Player 4", "Protoss Nexus", "Anywhere", "P4 Hunt"); //복귀 지점 갱신 : 현재 소유자의 본진 건물 위로 이동
-	Set Resources("Player 4", Subtract, 100, ore); //복귀 비용 지불 : 미네랄 100 소모
 	Create Unit("Player 4", "Alan Schezar (Goliath)", 1, "P4 Hunt"); //5분 후 복귀 : 같은 플레이어 소유로 영웅 재배치
-	Set Deaths("Player 8", "Zerg Hive", Add, 1); //복귀 완료 펄스 3601 : 다음 사이클 메시지 후 상태 정리
+	Set Deaths("Player 8", "Zerg Hive", Add, 1); //생성 결과 확인 대기 3601 : 다음 사이클에 실제 영웅 존재 여부 검증
 	Preserve Trigger(); //반복 수명주기 : 같은 건물 종류에서도 계속 복귀 가능
 }

@@ -142,7 +142,7 @@ Actions:
 }
 
 // Mission 2 - hive-mind collapse threshold.
-// Counts each colony's Hatchery/Lair/Hive total up to 7; totals above 6 only need to be distinguished as safe.
+// Counts each colony's Hatchery/Lair/Hive total up to 7; collapse begins when both totals are 5 or lower.
 Trigger("Player 8"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 3);
@@ -580,27 +580,11 @@ Conditions:
 	Switch("Switch31", Not Set);
 	Switch("Switch32", Not Set);
 	Deaths("Player 8", "Protoss Templar Archives", At least, 1);
-	Deaths("Player 8", "Protoss Templar Archives", At most, 6);
+	Deaths("Player 8", "Protoss Templar Archives", At most, 5);
 	Deaths("Player 8", "Protoss Citadel of Adun", At least, 1);
-	Deaths("Player 8", "Protoss Citadel of Adun", At most, 6);
+	Deaths("Player 8", "Protoss Citadel of Adun", At most, 5);
 Actions:
 	Set Switch("Switch136", set);
-	Set Switch("Switch118", clear);
-	Set Switch("Switch119", clear);
-	Set Switch("Switch120", clear);
-	Set Switch("Switch121", clear);
-	Set Deaths("Player 8", "Protoss Photon Cannon", Set To, 0);
-	Set Deaths("Player 8", "Terran Bunker", Set To, 0);
-	Set Deaths("Player 8", "Zerg Lurker", Set To, 0);
-	Set Deaths("Player 8", "Zerg Mutalisk", Set To, 0);
-	Set Deaths("Player 8", "Zerg Ultralisk", Set To, 0);
-	Set Deaths("Player 8", "Zerg Devourer", Set To, 0);
-	Set Deaths("Player 8", "Zerg Scourge", Set To, 0);
-	Set Deaths("Player 8", "Zerg Guardian", Set To, 0);
-	Set Deaths("Player 8", "Zerg Drone", Set To, 0);
-	Set Deaths("Player 8", "Zerg Defiler", Set To, 0);
-	Set Deaths("Player 8", "Protoss Reaver", Set To, 0);
-	Set Deaths("Player 8", "Protoss Observer", Set To, 0);
 	Set Deaths("Player 8", "Terran Machine Shop", Set To, 1);
 	Preserve Trigger();
 }
@@ -793,14 +777,14 @@ Conditions:
 	Switch("Switch37", Not Set);
 	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At least, 1);
 Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
-	Set Resources("Player 1", Add, 1000, gas);
-	Set Resources("Player 2", Add, 1000, gas);
-	Set Resources("Player 3", Add, 1000, gas);
-	Set Resources("Player 4", Add, 1000, gas);
+	Set Resources("Player 1", Add, 1600, ore);
+	Set Resources("Player 2", Add, 1600, ore);
+	Set Resources("Player 3", Add, 1600, ore);
+	Set Resources("Player 4", Add, 1600, ore);
+	Set Resources("Player 1", Add, 800, gas);
+	Set Resources("Player 2", Add, 800, gas);
+	Set Resources("Player 3", Add, 800, gas);
+	Set Resources("Player 4", Add, 800, gas);
 	Set Switch("Switch37", set);
 }
 
@@ -813,14 +797,14 @@ Conditions:
 	Bring("Player 7", "Zerg Hatchery", "P7 MainBase", At most, 0);
 	Bring("Player 7", "Zerg Lair", "P7 MainBase", At least, 1);
 Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
-	Set Resources("Player 1", Add, 1000, gas);
-	Set Resources("Player 2", Add, 1000, gas);
-	Set Resources("Player 3", Add, 1000, gas);
-	Set Resources("Player 4", Add, 1000, gas);
+	Set Resources("Player 1", Add, 1600, ore);
+	Set Resources("Player 2", Add, 1600, ore);
+	Set Resources("Player 3", Add, 1600, ore);
+	Set Resources("Player 4", Add, 1600, ore);
+	Set Resources("Player 1", Add, 800, gas);
+	Set Resources("Player 2", Add, 800, gas);
+	Set Resources("Player 3", Add, 800, gas);
+	Set Resources("Player 4", Add, 800, gas);
 	Set Switch("Switch37", set);
 }
 
@@ -834,14 +818,14 @@ Conditions:
 	Bring("Player 7", "Zerg Lair", "P7 MainBase", At most, 0);
 	Bring("Player 7", "Zerg Hive", "P7 MainBase", At least, 1);
 Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
-	Set Resources("Player 1", Add, 1000, gas);
-	Set Resources("Player 2", Add, 1000, gas);
-	Set Resources("Player 3", Add, 1000, gas);
-	Set Resources("Player 4", Add, 1000, gas);
+	Set Resources("Player 1", Add, 1600, ore);
+	Set Resources("Player 2", Add, 1600, ore);
+	Set Resources("Player 3", Add, 1600, ore);
+	Set Resources("Player 4", Add, 1600, ore);
+	Set Resources("Player 1", Add, 800, gas);
+	Set Resources("Player 2", Add, 800, gas);
+	Set Resources("Player 3", Add, 800, gas);
+	Set Resources("Player 4", Add, 800, gas);
 	Set Switch("Switch37", set);
 }
 
@@ -853,14 +837,14 @@ Conditions:
 	Switch("Switch38", Not Set);
 	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At least, 1);
 Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
-	Set Resources("Player 1", Add, 1000, gas);
-	Set Resources("Player 2", Add, 1000, gas);
-	Set Resources("Player 3", Add, 1000, gas);
-	Set Resources("Player 4", Add, 1000, gas);
+	Set Resources("Player 1", Add, 1600, ore);
+	Set Resources("Player 2", Add, 1600, ore);
+	Set Resources("Player 3", Add, 1600, ore);
+	Set Resources("Player 4", Add, 1600, ore);
+	Set Resources("Player 1", Add, 800, gas);
+	Set Resources("Player 2", Add, 800, gas);
+	Set Resources("Player 3", Add, 800, gas);
+	Set Resources("Player 4", Add, 800, gas);
 	Set Switch("Switch38", set);
 }
 
@@ -907,14 +891,14 @@ Conditions:
 	Bring("Player 6", "Zerg Hatchery", "P6 MainBase", At most, 0);
 	Bring("Player 6", "Zerg Lair", "P6 MainBase", At least, 1);
 Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
-	Set Resources("Player 1", Add, 1000, gas);
-	Set Resources("Player 2", Add, 1000, gas);
-	Set Resources("Player 3", Add, 1000, gas);
-	Set Resources("Player 4", Add, 1000, gas);
+	Set Resources("Player 1", Add, 1600, ore);
+	Set Resources("Player 2", Add, 1600, ore);
+	Set Resources("Player 3", Add, 1600, ore);
+	Set Resources("Player 4", Add, 1600, ore);
+	Set Resources("Player 1", Add, 800, gas);
+	Set Resources("Player 2", Add, 800, gas);
+	Set Resources("Player 3", Add, 800, gas);
+	Set Resources("Player 4", Add, 800, gas);
 	Set Switch("Switch38", set);
 }
 
@@ -928,14 +912,14 @@ Conditions:
 	Bring("Player 6", "Zerg Lair", "P6 MainBase", At most, 0);
 	Bring("Player 6", "Zerg Hive", "P6 MainBase", At least, 1);
 Actions:
-	Set Resources("Player 1", Add, 2000, ore);
-	Set Resources("Player 2", Add, 2000, ore);
-	Set Resources("Player 3", Add, 2000, ore);
-	Set Resources("Player 4", Add, 2000, ore);
-	Set Resources("Player 1", Add, 1000, gas);
-	Set Resources("Player 2", Add, 1000, gas);
-	Set Resources("Player 3", Add, 1000, gas);
-	Set Resources("Player 4", Add, 1000, gas);
+	Set Resources("Player 1", Add, 1600, ore);
+	Set Resources("Player 2", Add, 1600, ore);
+	Set Resources("Player 3", Add, 1600, ore);
+	Set Resources("Player 4", Add, 1600, ore);
+	Set Resources("Player 1", Add, 800, gas);
+	Set Resources("Player 2", Add, 800, gas);
+	Set Resources("Player 3", Add, 800, gas);
+	Set Resources("Player 4", Add, 800, gas);
 	Set Switch("Switch38", set);
 }
 
@@ -949,7 +933,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi5");
-	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동북쪽 전선: 확보\n- 최종 목표: 동남쪽 <16>하얀색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +2000  <07>가스 +1000");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동북쪽 전선: 확보\n- 최종 목표: 동남쪽 <16>하얀색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +1600  <07>가스 +800");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -963,7 +947,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi5");
-	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동북쪽 전선: 확보\n- 최종 목표: 동남쪽 <16>하얀색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +2000  <07>가스 +1000");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동북쪽 전선: 확보\n- 최종 목표: 동남쪽 <16>하얀색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +1600  <07>가스 +800");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -978,7 +962,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi5");
-	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동북쪽 전선: 확보\n- 최종 목표: 동남쪽 <16>하얀색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +2000  <07>가스 +1000");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동북쪽 전선: 확보\n- 최종 목표: 동남쪽 <16>하얀색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +1600  <07>가스 +800");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -991,7 +975,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi6");
-	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동남쪽 전선: 확보\n- 최종 목표: 동북쪽 <15>갈색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +2000  <07>가스 +1000");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동남쪽 전선: 확보\n- 최종 목표: 동북쪽 <15>갈색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +1600  <07>가스 +800");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -1005,7 +989,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi6");
-	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동남쪽 전선: 확보\n- 최종 목표: 동북쪽 <15>갈색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +2000  <07>가스 +1000");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동남쪽 전선: 확보\n- 최종 목표: 동북쪽 <15>갈색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +1600  <07>가스 +800");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -1020,7 +1004,7 @@ Conditions:
 Actions:
 	Play WAV("sound\\Misc\\TRescue.wav", 2000);
 	Run AI Script("+Vi6");
-	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동남쪽 전선: 확보\n- 최종 목표: 동북쪽 <15>갈색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +2000  <07>가스 +1000");
+	Set Mission Objectives("<03>[카르가스 IV 확보 현황] 2/3\n\n<04>- 북서쪽 전선: 확보\n- 동남쪽 전선: 확보\n- 최종 목표: 동북쪽 <15>갈색 저그<04> 군락 생산망 파괴\n- 보상: <1F>미네랄 +1600  <07>가스 +800");
 }
 
 // Switch26 clear: 엘리아가 붕괴를 분석하며 칭찬한다.
@@ -1082,7 +1066,7 @@ Conditions:
 	Switch("Switch37", Set); //동북쪽 군락 붕괴 보상
 	Switch("Switch38", Not Set); //첫 군락 붕괴 보상만 표시
 Actions:
-	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. <1F>미네랄 +2000  <07>가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동북쪽 군락 잔여 자원 회수. <1F>미네랄 +1600  <07>가스 +800");
 }
 
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){
@@ -1093,7 +1077,7 @@ Conditions:
 	Switch("Switch38", Set); //동남쪽 군락 붕괴 보상
 	Switch("Switch37", Not Set); //첫 군락 붕괴 보상만 표시
 Actions:
-	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. <1F>미네랄 +2000  <07>가스 +1000");
+	Display Text Message(Always Display, "<07>군수지원: <04>동남쪽 군락 잔여 자원 회수. <1F>미네랄 +1600  <07>가스 +800");
 }
 // Reveal a colony once its Hatchery count drops below three.
 Trigger("Player 1", "Player 2", "Player 3", "Player 4"){

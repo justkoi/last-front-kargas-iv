@@ -10,9 +10,10 @@
 //  ground intruder first, or to an air intruder only when no ground intruder
 //  is present in that colony.
 //  P6/P7 air responders: Hydralisk, Mutalisk, Scourge, Devourer.
-//  Hydralisks and Mutalisks also reinforce ground defense only while both
-//  colony air-defense areas are clear. Any air intruder suppresses that
-//  fallback so simultaneous ground/air alerts cannot overwrite their air order.
+//  Hydralisks and Mutalisks are dual-role responders. Home ground defense ignores
+//  allied-base air alerts and yields only to a home air alert. Allied support uses
+//  them only while their own ground/air areas are both clear; ground-only and
+//  air-only responders may still help on their independently clear channel.
 //
 //  P5 uses P5 Area for detection and P5 Intruder as the moving target.
 //  P6/P7 Area Ground/Air locations are map-side filtered. Each response
@@ -150,10 +151,6 @@ Conditions:
 	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
-	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
-	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
-	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
 Actions:
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
@@ -245,10 +242,6 @@ Conditions:
 	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
-	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
-	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
-	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
 Actions:
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
@@ -340,10 +333,6 @@ Conditions:
 	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
-	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
-	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
-	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
 Actions:
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
@@ -435,10 +424,6 @@ Conditions:
 	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
-	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
-	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
-	Bring("Player 4", "Men", "P7 Area Air", At most, 0);
 Actions:
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
@@ -500,8 +485,92 @@ Actions:
 	Preserve Trigger();
 }
 
+// Refresh P6 ground/air home-threat latches after all P6 self-defense triggers.
+// Allied support uses these per-channel latches to keep capable units at home.
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : P6 방어 판정 사이클
+Actions:
+	Set Switch("Switch95", clear); //P6 자기 기지 지상 위협 래치 초기화
+	Set Switch("Switch96", clear); //P6 자기 기지 공중 위협 래치 초기화
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
+Actions:
+	Set Switch("Switch95", set); //P6 자기 기지 지상 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
+Actions:
+	Set Switch("Switch95", set); //P6 자기 기지 지상 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
+Actions:
+	Set Switch("Switch95", set); //P6 자기 기지 지상 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
+Actions:
+	Set Switch("Switch95", set); //P6 자기 기지 지상 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
+Actions:
+	Set Switch("Switch96", set); //P6 자기 기지 공중 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
+Actions:
+	Set Switch("Switch96", set); //P6 자기 기지 공중 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
+Actions:
+	Set Switch("Switch96", set); //P6 자기 기지 공중 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
+Actions:
+	Set Switch("Switch96", set); //P6 자기 기지 공중 위협 감지
+	Preserve Trigger();
+}
+
 // P6 allied-base support: after all P6 self-defense triggers so P6 home defense
-// consumes the shared cooldown first when both bases are under attack.
+// consumes the shared cooldown first when both bases are under attack. Ground-only,
+// air-only, and dual-role responders consult the matching home-threat channels.
 // Only support an allied base while that base area still contains at least one building.
 // Allied-base support does not issue Overlord patrol orders.
 
@@ -510,6 +579,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch95", Not Set); //P6 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -529,12 +599,10 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
 	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch95", Not Set); //P6 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
+	Switch("Switch96", Not Set); //P6 양용 전력 우선 : 자기 기지 공중 위협도 없어야 지원 허용
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
-	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
@@ -550,12 +618,27 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch96", Not Set); //P6 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
+	Switch("Switch95", Not Set); //P6 양용 전력 우선 : 자기 기지 지상 위협도 없어야 히드라/뮤탈 지원 허용
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P7 Area Air", "P7 Intruder");
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
+	Switch("Switch84", Not Set);
+	Switch("Switch96", Not Set); //P6 공중 전용 전력 우선 : 자기 기지 공중 위협이 없을 때만 지원
+	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
+Actions:
+	Move Location("Player 1", "Men", "P7 Area Air", "P7 Intruder");
 	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
@@ -566,6 +649,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch95", Not Set); //P6 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -579,6 +663,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch96", Not Set); //P6 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -592,6 +677,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch95", Not Set); //P6 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -611,12 +697,10 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
 	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch95", Not Set); //P6 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
+	Switch("Switch96", Not Set); //P6 양용 전력 우선 : 자기 기지 공중 위협도 없어야 지원 허용
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
-	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
@@ -632,12 +716,27 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch96", Not Set); //P6 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
+	Switch("Switch95", Not Set); //P6 양용 전력 우선 : 자기 기지 지상 위협도 없어야 히드라/뮤탈 지원 허용
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P7 Area Air", "P7 Intruder");
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
+	Switch("Switch84", Not Set);
+	Switch("Switch96", Not Set); //P6 공중 전용 전력 우선 : 자기 기지 공중 위협이 없을 때만 지원
+	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
+	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
+Actions:
+	Move Location("Player 2", "Men", "P7 Area Air", "P7 Intruder");
 	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
@@ -648,6 +747,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch95", Not Set); //P6 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -661,6 +761,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch96", Not Set); //P6 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -674,6 +775,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch95", Not Set); //P6 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -693,12 +795,10 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
 	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch95", Not Set); //P6 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
+	Switch("Switch96", Not Set); //P6 양용 전력 우선 : 자기 기지 공중 위협도 없어야 지원 허용
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
-	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
@@ -714,12 +814,27 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch96", Not Set); //P6 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
+	Switch("Switch95", Not Set); //P6 양용 전력 우선 : 자기 기지 지상 위협도 없어야 히드라/뮤탈 지원 허용
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P7 Area Air", "P7 Intruder");
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
+	Switch("Switch84", Not Set);
+	Switch("Switch96", Not Set); //P6 공중 전용 전력 우선 : 자기 기지 공중 위협이 없을 때만 지원
+	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
+	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
+Actions:
+	Move Location("Player 3", "Men", "P7 Area Air", "P7 Intruder");
 	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
@@ -730,6 +845,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch95", Not Set); //P6 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -743,6 +859,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch96", Not Set); //P6 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -756,6 +873,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch95", Not Set); //P6 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -775,12 +893,10 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
 	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch95", Not Set); //P6 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
+	Switch("Switch96", Not Set); //P6 양용 전력 우선 : 자기 기지 공중 위협도 없어야 지원 허용
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
-	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
@@ -796,12 +912,27 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch96", Not Set); //P6 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
+	Switch("Switch95", Not Set); //P6 양용 전력 우선 : 자기 기지 지상 위협도 없어야 히드라/뮤탈 지원 허용
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P7 Area Air", "P7 Intruder");
 	Order("Player 6", "Zerg Hydralisk", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Mutalisk", "East Area", "P7 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 6"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 1);
+	Deaths("Player 8", "Protoss Forge", At least, 60);
+	Switch("Switch84", Not Set);
+	Switch("Switch96", Not Set); //P6 공중 전용 전력 우선 : 자기 기지 공중 위협이 없을 때만 지원
+	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
+	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
+Actions:
+	Move Location("Player 4", "Men", "P7 Area Air", "P7 Intruder");
 	Order("Player 6", "Zerg Scourge", "East Area", "P7 Intruder", Patrol);
 	Order("Player 6", "Zerg Devourer", "East Area", "P7 Intruder", Patrol);
 	Preserve Trigger();
@@ -812,6 +943,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Terran Armory", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch95", Not Set); //P6 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
 Actions:
@@ -825,6 +957,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 1); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Forge", At least, 60);
 	Switch("Switch84", Not Set);
+	Switch("Switch96", Not Set); //P6 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
 	Bring("Player 7", "Buildings", "P7 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
 Actions:
@@ -861,10 +994,6 @@ Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
-	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
@@ -956,10 +1085,6 @@ Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
-	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
@@ -1051,10 +1176,6 @@ Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
-	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
@@ -1146,10 +1267,6 @@ Conditions:
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
 	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
-	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 2", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 3", "Men", "P6 Area Air", At most, 0);
-	Bring("Player 4", "Men", "P6 Area Air", At most, 0);
 	Bring("Player 1", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 2", "Men", "P7 Area Air", At most, 0);
 	Bring("Player 3", "Men", "P7 Area Air", At most, 0);
@@ -1215,8 +1332,92 @@ Actions:
 	Preserve Trigger();
 }
 
+// Refresh P7 ground/air home-threat latches after all P7 self-defense triggers.
+// Allied support uses these per-channel latches to keep capable units at home.
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : P7 방어 판정 사이클
+Actions:
+	Set Switch("Switch115", clear); //P7 자기 기지 지상 위협 래치 초기화
+	Set Switch("Switch116", clear); //P7 자기 기지 공중 위협 래치 초기화
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Bring("Player 1", "Men", "P7 Area Ground", At least, 1);
+Actions:
+	Set Switch("Switch115", set); //P7 자기 기지 지상 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Bring("Player 2", "Men", "P7 Area Ground", At least, 1);
+Actions:
+	Set Switch("Switch115", set); //P7 자기 기지 지상 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Bring("Player 3", "Men", "P7 Area Ground", At least, 1);
+Actions:
+	Set Switch("Switch115", set); //P7 자기 기지 지상 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Bring("Player 4", "Men", "P7 Area Ground", At least, 1);
+Actions:
+	Set Switch("Switch115", set); //P7 자기 기지 지상 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Bring("Player 1", "Men", "P7 Area Air", At least, 1);
+Actions:
+	Set Switch("Switch116", set); //P7 자기 기지 공중 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Bring("Player 2", "Men", "P7 Area Air", At least, 1);
+Actions:
+	Set Switch("Switch116", set); //P7 자기 기지 공중 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Bring("Player 3", "Men", "P7 Area Air", At least, 1);
+Actions:
+	Set Switch("Switch116", set); //P7 자기 기지 공중 위협 감지
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Bring("Player 4", "Men", "P7 Area Air", At least, 1);
+Actions:
+	Set Switch("Switch116", set); //P7 자기 기지 공중 위협 감지
+	Preserve Trigger();
+}
+
 // P7 allied-base support: after all P7 self-defense triggers so P7 home defense
-// consumes the shared cooldown first when both bases are under attack.
+// consumes the shared cooldown first when both bases are under attack. Ground-only,
+// air-only, and dual-role responders consult the matching home-threat channels.
 // Only support an allied base while that base area still contains at least one building.
 // Allied-base support does not issue Overlord patrol orders.
 
@@ -1225,6 +1426,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch115", Not Set); //P7 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -1244,6 +1446,8 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch115", Not Set); //P7 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
+	Switch("Switch116", Not Set); //P7 양용 전력 우선 : 자기 기지 공중 위협도 없어야 지원 허용
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
@@ -1265,12 +1469,27 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch116", Not Set); //P7 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
+	Switch("Switch115", Not Set); //P7 양용 전력 우선 : 자기 기지 지상 위협도 없어야 히드라/뮤탈 지원 허용
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 1", "Men", "P6 Area Air", "P6 Intruder");
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
+	Switch("Switch85", Not Set);
+	Switch("Switch116", Not Set); //P7 공중 전용 전력 우선 : 자기 기지 공중 위협이 없을 때만 지원
+	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
+	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
+Actions:
+	Move Location("Player 1", "Men", "P6 Area Air", "P6 Intruder");
 	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
@@ -1281,6 +1500,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch115", Not Set); //P7 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -1294,6 +1514,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch116", Not Set); //P7 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -1307,6 +1528,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch115", Not Set); //P7 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -1326,6 +1548,8 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch115", Not Set); //P7 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
+	Switch("Switch116", Not Set); //P7 양용 전력 우선 : 자기 기지 공중 위협도 없어야 지원 허용
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
@@ -1347,12 +1571,27 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch116", Not Set); //P7 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
+	Switch("Switch115", Not Set); //P7 양용 전력 우선 : 자기 기지 지상 위협도 없어야 히드라/뮤탈 지원 허용
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 2", "Men", "P6 Area Air", "P6 Intruder");
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
+	Switch("Switch85", Not Set);
+	Switch("Switch116", Not Set); //P7 공중 전용 전력 우선 : 자기 기지 공중 위협이 없을 때만 지원
+	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
+	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
+Actions:
+	Move Location("Player 2", "Men", "P6 Area Air", "P6 Intruder");
 	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
@@ -1363,6 +1602,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch115", Not Set); //P7 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -1376,6 +1616,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch116", Not Set); //P7 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 2", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -1389,6 +1630,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch115", Not Set); //P7 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -1408,6 +1650,8 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch115", Not Set); //P7 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
+	Switch("Switch116", Not Set); //P7 양용 전력 우선 : 자기 기지 공중 위협도 없어야 지원 허용
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
@@ -1429,12 +1673,27 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch116", Not Set); //P7 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
+	Switch("Switch115", Not Set); //P7 양용 전력 우선 : 자기 기지 지상 위협도 없어야 히드라/뮤탈 지원 허용
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 3", "Men", "P6 Area Air", "P6 Intruder");
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
+	Switch("Switch85", Not Set);
+	Switch("Switch116", Not Set); //P7 공중 전용 전력 우선 : 자기 기지 공중 위협이 없을 때만 지원
+	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
+	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
+Actions:
+	Move Location("Player 3", "Men", "P6 Area Air", "P6 Intruder");
 	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
@@ -1445,6 +1704,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch115", Not Set); //P7 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -1458,6 +1718,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch116", Not Set); //P7 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 3", "Men", "P6 Area Air", At least, 1);
 Actions:
@@ -1471,6 +1732,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch115", Not Set); //P7 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -1490,6 +1752,8 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch115", Not Set); //P7 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
+	Switch("Switch116", Not Set); //P7 양용 전력 우선 : 자기 기지 공중 위협도 없어야 지원 허용
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 	Bring("Player 1", "Men", "P6 Area Air", At most, 0);
@@ -1511,12 +1775,27 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch116", Not Set); //P7 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
+	Switch("Switch115", Not Set); //P7 양용 전력 우선 : 자기 기지 지상 위협도 없어야 히드라/뮤탈 지원 허용
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:
 	Move Location("Player 4", "Men", "P6 Area Air", "P6 Intruder");
 	Order("Player 7", "Zerg Hydralisk", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Mutalisk", "East Area", "P6 Intruder", Patrol);
+	Preserve Trigger();
+}
+
+Trigger("Player 7"){
+Conditions:
+	Deaths("Player 8", "Protoss Gateway", Exactly, 2);
+	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
+	Switch("Switch85", Not Set);
+	Switch("Switch116", Not Set); //P7 공중 전용 전력 우선 : 자기 기지 공중 위협이 없을 때만 지원
+	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
+	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
+Actions:
+	Move Location("Player 4", "Men", "P6 Area Air", "P6 Intruder");
 	Order("Player 7", "Zerg Scourge", "East Area", "P6 Intruder", Patrol);
 	Order("Player 7", "Zerg Devourer", "East Area", "P6 Intruder", Patrol);
 	Preserve Trigger();
@@ -1527,6 +1806,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Zealot", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch115", Not Set); //P7 지상 전력 우선 : 자기 기지 지상 위협이 있으면 지상 지원 금지
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Ground", At least, 1);
 Actions:
@@ -1540,6 +1820,7 @@ Conditions:
 	Deaths("Player 8", "Protoss Gateway", Exactly, 2); //스캔 페이즈 게이트 : Bring 평가를 1/4 빈도로 분산 (P5=0,P6=1,P7=2)
 	Deaths("Player 8", "Protoss Cybernetics Core", At least, 60);
 	Switch("Switch85", Not Set);
+	Switch("Switch116", Not Set); //P7 공중 전력 우선 : 자기 기지 공중 위협이 있으면 공중 지원 금지
 	Bring("Player 6", "Buildings", "P6 Area Ground", At least, 1);
 	Bring("Player 4", "Men", "P6 Area Air", At least, 1);
 Actions:

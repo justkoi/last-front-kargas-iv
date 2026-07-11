@@ -11,9 +11,9 @@
 //           스폰/오더는 Player 5 소유. 끝내기 폭주는 스폰/오더 트리거 분할(64액션 제한).
 //
 //  정신체1 = AttackPoint1 (전방 정신체)
-//    14분(1260) 사전경고 / 18분 10초(1635) 1차 인구50 / 21분(1890) 2차 인구100 / 24분(2160) 최후 인구300
+//    14분(1260) 사전경고 / 18분 10초(1635) 1차 인구45 / 21분(1890) 2차 인구90 / 24분(2160) 최후 인구271
 //  정신체2 = P5 Cerebrate (지휘 정신체)
-//    25분(2250) 사전경고 / 29분(2610) 1차 인구100 / 32분(2880) 2차 인구200 / 35분(3150) 최후 인구600
+//    25분(2250) 사전경고 / 29분(2610) 1차 인구90 / 32분(2880) 2차 인구180 / 35분(3150) 최후 인구535
 //-----------------------------------------------------------------//
 
 
@@ -40,20 +40,20 @@ Actions:
 	Display Text Message(Always Display, "<03>발렌: <04>지금 전방 정신체를 끊어라. 늦을수록 감당 못 할 규모로 불어난다.");
 }
 
-// --- 18분 10초(1635) 1차 폭주 : 인구50, 저티어 지상 (저글링/히드라/럴커+소량 뮤탈) ---
+// --- 18분 10초(1635) 1차 폭주 : 인구45, 저티어 지상 (저글링/히드라/럴커+소량 뮤탈) ---
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
 	Elapsed Time(At least, 1635);                          //18분 10초(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn1");   //1차 지상 스웜 분산 생성
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 5, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 5, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 5, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn1");   //1차 지상 스웜 분산 생성
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 4, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 4, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 5, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn2");
@@ -100,29 +100,29 @@ Actions:
 	Display Text Message(Always Display, "<1B>엘리아: <04>아직은 견딜 만한 규모입니다. 하지만 정신체를 끊지 않으면 폭주는 점점 거세집니다.");
 }
 
-// --- 21분(1890) 2차 폭주 : 인구100, 혼합 + 울트라/디파일러 + 공중 ---
+// --- 21분(1890) 2차 폭주 : 인구90, 혼합 + 울트라/디파일러 + 공중 ---
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
 	Elapsed Time(At least, 1890);                          //21분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn1");   //2차 혼합 돌파 분산 생성
-	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn1");   //2차 혼합 돌파 분산 생성
+	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 5, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Ultralisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Mutalisk", 3, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Mutalisk", 3, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn4");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn1", 1); //다크스웜용 에너지 보유
@@ -172,41 +172,41 @@ Actions:
 	Display Text Message(Always Display, "<1B>엘리아: <04>규모가 눈에 띄게 불었습니다. 이대로면 다음 최후 폭주는 막아낼 수 없습니다.");
 }
 
-// --- 24분(2160) 최후 폭주 [끝내기] : 인구300, 가디언+디바우러 다수 (스폰/오더 분할) ---
+// --- 24분(2160) 최후 폭주 [끝내기] : 인구271, 가디언+디바우러 다수 (스폰/오더 분할) ---
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
 	Elapsed Time(At least, 2160);                          //24분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "AttackPoint1", At least, 1); //전방 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Guardian", 10, "P5 Spawn1");  //최후 폭주 공중 주력
-	Create Unit("Player 5", "Zerg Guardian", 10, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Guardian", 10, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Guardian", 10, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Devourer", 7, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Devourer", 7, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Devourer", 7, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Guardian", 9, "P5 Spawn1");  //최후 폭주 공중 주력
+	Create Unit("Player 5", "Zerg Guardian", 9, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Guardian", 9, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Guardian", 9, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Devourer", 6, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Devourer", 6, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Devourer", 6, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Devourer", 7, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Mutalisk", 5, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Mutalisk", 5, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Mutalisk", 4, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Mutalisk", 4, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Mutalisk", 5, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Mutalisk", 5, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Ultralisk", 4, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Ultralisk", 3, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Ultralisk", 4, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 3, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Ultralisk", 3, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 8, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Zergling", 8, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Zergling", 8, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Zergling", 7, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 7, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 7, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 6, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Zergling", 7, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 7, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 6, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Lurker", 1, "P5 Spawn4");
 	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn1", 1);
 	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn2", 1);
 	Create Unit with Properties("Player 5", "Zerg Defiler", 1, "P5 Spawn3", 1);
@@ -300,29 +300,29 @@ Actions:
 	Display Text Message(Always Display, "<03>발렌: <04>지휘 정신체를 제때 끊지 못하면, 마지막엔 우리가 막을 수 있는 선을 넘는다.");
 }
 
-// --- 29분(2610) 1차 폭주 : 인구100, 저티어 지상 ---
+// --- 29분(2610) 1차 폭주 : 인구90, 저티어 지상 ---
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
 	Elapsed Time(At least, 2610);                          //29분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 10, "P5 Spawn1");  //1차 대규모 지상
-	Create Unit("Player 5", "Zerg Zergling", 10, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Zergling", 10, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 10, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 10, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 10, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 10, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 10, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Zergling", 9, "P5 Spawn1");  //1차 대규모 지상
+	Create Unit("Player 5", "Zerg Zergling", 9, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 9, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 9, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 9, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 9, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 9, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 9, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn4");
 	Order("Player 5", "Zerg Zergling", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Zergling", "P5 Spawn3", "Player Destination", Patrol);
@@ -364,33 +364,33 @@ Actions:
 	Display Text Message(Always Display, "<1B>엘리아: <04>지휘 정신체 쪽은 시작부터 물량이 다릅니다. 끊지 않으면 폭주마다 배로 불어납니다.");
 }
 
-// --- 32분(2880) 2차 폭주 : 인구200, 혼합 + 울트라 + 공중 ---
+// --- 32분(2880) 2차 폭주 : 인구180, 혼합 + 울트라 + 공중 ---
 Trigger("Player 5"){
 Conditions:
 	Deaths("Player 8", "Terran Valkyrie", Exactly, 1);     //미션1 진행 중
 	Elapsed Time(At least, 2880);                          //32분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Zergling", 10, "P5 Spawn1");  //2차 혼합 대공세
-	Create Unit("Player 5", "Zerg Zergling", 10, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Zergling", 10, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Zergling", 10, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 12, "P5 Spawn1");
-	Create Unit("Player 5", "Zerg Hydralisk", 12, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Hydralisk", 12, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 12, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Zergling", 9, "P5 Spawn1");  //2차 혼합 대공세
+	Create Unit("Player 5", "Zerg Zergling", 9, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Zergling", 9, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Zergling", 9, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Hydralisk", 11, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 11, "P5 Spawn2");
+	Create Unit("Player 5", "Zerg Hydralisk", 11, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Hydralisk", 11, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Lurker", 3, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Lurker", 2, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Ultralisk", 4, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Ultralisk", 4, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Ultralisk", 4, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Ultralisk", 4, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Ultralisk", 3, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Ultralisk", 3, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Mutalisk", 4, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Mutalisk", 4, "P5 Spawn2");
-	Create Unit("Player 5", "Zerg Mutalisk", 4, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Mutalisk", 4, "P5 Spawn4");
+	Create Unit("Player 5", "Zerg Mutalisk", 3, "P5 Spawn3");
+	Create Unit("Player 5", "Zerg Mutalisk", 3, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Guardian", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Guardian", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Guardian", 1, "P5 Spawn3");
@@ -456,10 +456,10 @@ Actions:
 	Display Text Message(Always Display, "<1B>엘리아: <04>전선이 버티는 한계에 가까워졌습니다. 다음 폭주가 오기 전에 정신체를 끊어야 합니다.");
 }
 
-// --- 35분(3150) 최후 폭주 [끝내기] : 인구600, 가디언+디바우러 압도 ---
+// --- 35분(3150) 최후 폭주 [끝내기] : 인구535, 가디언+디바우러 압도 ---
 //  스폰 포화/블락 방지 : 8개 펄스로 분할(약 8초 간격, 3150~3234), 각 펄스가
 //  자기 배치만 즉시 진군. 펄스당 스폰지점당 ~13유닛 수준으로 누적 생성.
-//  펄스 합계 ≈ 가디언80·디바우러56·뮤탈40·울트라32·히드라64·저글링64·럴커16·디파일러4.
+//  펄스 합계 = 가디언72·디바우러50·뮤탈36·울트라27·히드라52·저글링54·럴커12·디파일러4 (535 보급).
 
 // 최후 펄스 1 (3150)
 Trigger("Player 5"){
@@ -468,15 +468,15 @@ Conditions:
 	Elapsed Time(At least, 3150);                          //35분(x1.5)
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn4");
@@ -484,11 +484,11 @@ Actions:
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn4");
@@ -531,11 +531,11 @@ Conditions:
 	Elapsed Time(At least, 3162);                          //펄스1 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn4");
@@ -546,12 +546,11 @@ Actions:
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn4");
@@ -572,7 +571,6 @@ Actions:
 	Order("Player 5", "Zerg Ultralisk", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Ultralisk", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Ultralisk", "P5 Spawn3", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Ultralisk", "P5 Spawn4", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn3", "Player Destination", Patrol);
@@ -592,15 +590,15 @@ Conditions:
 	Elapsed Time(At least, 3174);                          //펄스2 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn4");
@@ -608,11 +606,11 @@ Actions:
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn4");
@@ -655,11 +653,11 @@ Conditions:
 	Elapsed Time(At least, 3186);                          //펄스3 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn4");
@@ -670,12 +668,11 @@ Actions:
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn4");
@@ -696,7 +693,6 @@ Actions:
 	Order("Player 5", "Zerg Ultralisk", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Ultralisk", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Ultralisk", "P5 Spawn3", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Ultralisk", "P5 Spawn4", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn3", "Player Destination", Patrol);
@@ -716,15 +712,15 @@ Conditions:
 	Elapsed Time(At least, 3198);                          //펄스4 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn4");
@@ -732,11 +728,11 @@ Actions:
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn4");
@@ -777,11 +773,11 @@ Conditions:
 	Elapsed Time(At least, 3210);                          //펄스5 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn4");
@@ -792,12 +788,11 @@ Actions:
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Zergling", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Zergling", 1, "P5 Spawn4");
@@ -817,7 +812,6 @@ Actions:
 	Order("Player 5", "Zerg Ultralisk", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Ultralisk", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Ultralisk", "P5 Spawn3", "Player Destination", Patrol);
-	Order("Player 5", "Zerg Ultralisk", "P5 Spawn4", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn1", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn2", "Player Destination", Patrol);
 	Order("Player 5", "Zerg Hydralisk", "P5 Spawn3", "Player Destination", Patrol);
@@ -836,7 +830,7 @@ Conditions:
 	Elapsed Time(At least, 3222);                          //펄스6 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn4");
@@ -844,14 +838,14 @@ Actions:
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Devourer", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Devourer", 1, "P5 Spawn4");
-	Create Unit("Player 5", "Zerg Mutalisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Mutalisk", 1, "P5 Spawn4");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
@@ -895,7 +889,7 @@ Conditions:
 	Elapsed Time(At least, 3234);                          //펄스7 +약 8초
 	Bring("Player 5", "Zerg Cerebrate", "P5 Cerebrate", At least, 1); //지휘 정신체 생존 시에만
 Actions:
-	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Guardian", 3, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Guardian", 2, "P5 Spawn4");
@@ -910,7 +904,7 @@ Actions:
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Ultralisk", 1, "P5 Spawn3");
-	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn1");
+	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn1");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn2");
 	Create Unit("Player 5", "Zerg Hydralisk", 2, "P5 Spawn3");
 	Create Unit("Player 5", "Zerg Hydralisk", 1, "P5 Spawn4");
